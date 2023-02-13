@@ -1,0 +1,204 @@
+# Copyright (C) 2023 Shalin Shah
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Movie Library 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/movie-library\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2023-02-13T19:11:01+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: movie-library\n"
+
+#. Plugin Name of the plugin
+msgid "Movie Library"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "https://learn.rtcamp.com"
+msgstr ""
+
+#. Description of the plugin
+msgid "This plugin provides features to create movie library."
+msgstr ""
+
+#. Author of the plugin
+msgid "Shalin Shah"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:27
+msgctxt "Post type general name"
+msgid "Movies"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:28
+msgctxt "Post type singular name"
+msgid "Movie"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:29
+msgctxt "Admin Menu text"
+msgid "Movies"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:30
+msgctxt "Add New on Toolbar"
+msgid "Movie"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:31
+#: admin/class-movie-library-post-type.php:71
+msgid "Add New"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:32
+msgid "Add New Movie"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:33
+msgid "New Movie"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:34
+msgid "Edit Movie"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:35
+msgid "View Movie"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:36
+msgid "All Movies"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:37
+msgid "Search Movies"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:38
+msgid "Parent Movies:"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:39
+msgid "No movies found."
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:40
+msgid "No movies found in Trash."
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:41
+msgctxt "movie"
+msgid "Movie Poster"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:42
+msgctxt "movie"
+msgid "Set Movie Poster"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:43
+msgctxt "movie"
+msgid "Remove Movie Poster"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:44
+msgctxt "movie"
+msgid "Use as Movie Poster"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:45
+msgctxt "The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4"
+msgid "Movie archives"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:47
+#: admin/class-movie-library-post-type.php:87
+msgid "Description."
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:67
+msgctxt "Post type general name"
+msgid "People"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:68
+msgctxt "Post type singular name"
+msgid "Person"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:69
+msgctxt "Admin Menu text"
+msgid "People"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:70
+msgctxt "Add New on Toolbar"
+msgid "Person"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:72
+msgid "Add New Person"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:73
+msgid "New Person"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:74
+msgid "Edit Person"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:75
+msgid "View Person"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:76
+msgid "All People"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:77
+msgid "Search People"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:78
+msgid "Parent People:"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:79
+msgid "No people found."
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:80
+msgid "No people found in Trash."
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:81
+msgctxt "person"
+msgid "Person Photo"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:82
+msgctxt "person"
+msgid "Set Person Photo"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:83
+msgctxt "person"
+msgid "Remove Person Photo"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:84
+msgctxt "person"
+msgid "Use as Person Photo"
+msgstr ""
+
+#: admin/class-movie-library-post-type.php:85
+msgctxt "The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4"
+msgid "Person archives"
+msgstr ""
