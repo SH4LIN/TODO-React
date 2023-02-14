@@ -28,7 +28,6 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 		 */
 		protected static $instance = null;
 
-
 		/**
 		 * Main Movie_Library Instance.
 		 * Ensures only one instance of Movie_Library is loaded or can be loaded.
@@ -59,27 +58,29 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 			$taxonomy->register_custom_taxonomy();
 		}
 
-
 		/**
 		 * Include required core files used in admin and on the frontend.
 		 */
 		private function includes(): void {
+			require_once MLB_PLUGIN_DIR . 'admin/class-movie-library-activation.php';
+			require_once MLB_PLUGIN_DIR . 'admin/class-movie-library-deactivation.php';
 			require_once MLB_PLUGIN_DIR . 'admin/class-movie-library-post-type.php';
 			require_once MLB_PLUGIN_DIR . 'admin/class-movie-library-taxonomy.php';
 			/*include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-metabox.php';
 			include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-shortcode.php';
 			include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-widget.php';
 			include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-settings.php';
-			include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-activation.php';
-			include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-deactivation.php';*/
+			*/
 		}
 
 		/**
 		 * Attaching callbacks into actions and filters.
 		 */
 		private function init_hooks(): void {
-			register_activation_hook( __FILE__, [ 'MovieLibraryActivation', 'activate' ] );
-			register_deactivation_hook( __FILE__, [ 'MovieLibraryDeactivation', 'deactivate' ] );
+			$movie_library_activation   = new Movie_Library_Activation();
+			$movie_library_deactivation = new Movie_Library_Deactivation();
+			register_activation_hook( __FILE__, [ $movie_library_activation, 'activate' ] );
+			register_deactivation_hook( __FILE__, [ $movie_library_deactivation, 'deactivate' ] );
 
 			//add_action( 'plugins_loaded', [ $this, 'load_plugin_text_domain' ] );
 			add_action( 'init', [ $this, 'init' ] );
