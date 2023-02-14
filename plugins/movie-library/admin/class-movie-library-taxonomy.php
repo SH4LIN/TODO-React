@@ -209,10 +209,10 @@ if ( ! class_exists( 'MovieLib\Movie_Library_Taxonomy' ) ) {
 						'show_admin_column'  => true,
 						'show_in_quick_edit' => true,
 						'show_in_rest'       => true,
-						'query_var'          => true,
+						'query_var'          => false,
 						'public'             => false,
 						'publicly_queryable' => false,
-						'rewrite'            => array( 'slug' => 'rt-movie-tag' ),
+						'rewrite'            => false,
 					),
 				),
 				array(

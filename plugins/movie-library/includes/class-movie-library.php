@@ -43,19 +43,11 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 
 		/**
 		 * Movie_Library Constructor.
+		 * This constructor will include all the required files and will register activation and deactivation hooks.
 		 */
 		private function __construct() {
 			$this->includes();
-			$this->init_hooks();
-		}
-
-		private function setup_environment(): void {
-			// Set up localisation.
-			$this->load_plugin_text_domain();
-			$post_type = new Movie_Library_Post_type();
-			$post_type->register_custom_post_type();
-			$taxonomy = new Movie_Library_Taxonomy();
-			$taxonomy->register_custom_taxonomy();
+			$this->register_activation_deactivation_hooks();
 		}
 
 		/**
@@ -64,8 +56,6 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 		private function includes(): void {
 			require_once MLB_PLUGIN_DIR . 'admin/class-movie-library-activation.php';
 			require_once MLB_PLUGIN_DIR . 'admin/class-movie-library-deactivation.php';
-			require_once MLB_PLUGIN_DIR . 'admin/class-movie-library-post-type.php';
-			require_once MLB_PLUGIN_DIR . 'admin/class-movie-library-taxonomy.php';
 			/*include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-metabox.php';
 			include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-shortcode.php';
 			include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-widget.php';
@@ -76,46 +66,13 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 		/**
 		 * Attaching callbacks into actions and filters.
 		 */
-		private function init_hooks(): void {
+		private function register_activation_deactivation_hooks(): void {
 			$movie_library_activation   = new Movie_Library_Activation();
 			$movie_library_deactivation = new Movie_Library_Deactivation();
 			register_activation_hook( __FILE__, [ $movie_library_activation, 'activate' ] );
 			register_deactivation_hook( __FILE__, [ $movie_library_deactivation, 'deactivate' ] );
-
-			//add_action( 'plugins_loaded', [ $this, 'load_plugin_text_domain' ] );
-			add_action( 'init', [ $this, 'init' ] );
-			//add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ] );
-			//add_action( 'wp_enqueue_scripts', [ $this, 'wp_enqueue_scripts' ] );
 		}
 
-		/**
-		 * Init MovieLibrary when WordPress Initialises.
-		 */
-		public function init(): void {
-			//Setup the environment.
-			$this->setup_environment();
-		}
-
-		/**
-		 * Load Localisation files.
-		 */
-		private function load_plugin_text_domain(): void {
-			load_plugin_textdomain( 'movie-library', false, MLB_PLUGIN_RELATIVE_PATH . '/languages' );
-		}
-
-		/**
-		 * Enqueue admin scripts.
-		 */
-		private function admin_enqueue_scripts(): void {
-			wp_enqueue_style( 'movie-library-admin', MLB_PLUGIN_URL . 'assets/css/admin.css', [], MLB_PLUGIN_VERSION );
-		}
-
-		/**
-		 * Enqueue frontend scripts.
-		 */
-		private function wp_enqueue_scripts(): void {
-			wp_enqueue_style( 'movie-library-frontend', MLB_PLUGIN_URL . 'assets/css/frontend.css', [], MLB_PLUGIN_VERSION );
-		}
 	}
 }
 	
