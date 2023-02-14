@@ -102,8 +102,7 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 			add_action( 'wp_enqueue_scripts', [ $this, 'wp_enqueue_scripts' ] );
 
 			add_filter( 'enter_title_here', [ $this, 'change_title_text' ] );
-			add_filter( 'write_your_story', [ $this, 'change_post_content_text' ], 10,2);
-
+			add_filter( 'write_your_story', [ $this, 'change_post_content_text' ], 10, 2 );
 		}
 
 		/**
