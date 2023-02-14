@@ -55,6 +55,8 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 			$this->load_plugin_text_domain();
 			$post_type = new Movie_Library_Post_type();
 			$post_type->register_custom_post_type();
+			$taxonomy = new Movie_Library_Taxonomy();
+			$taxonomy->register_custom_taxonomy();
 		}
 
 
@@ -63,8 +65,8 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 		 */
 		private function includes(): void {
 			require_once MLB_PLUGIN_DIR . 'admin/class-movie-library-post-type.php';
-			/*include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-taxonomy.php';
-			include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-metabox.php';
+			require_once MLB_PLUGIN_DIR . 'admin/class-movie-library-taxonomy.php';
+			/*include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-metabox.php';
 			include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-shortcode.php';
 			include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-widget.php';
 			include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-settings.php';
