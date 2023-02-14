@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Core plugin class.
  *
@@ -97,10 +96,48 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 			register_activation_hook( MLB_PLUGIN_FILE, [ $movie_library_activation, 'activate' ] );
 			register_deactivation_hook( MLB_PLUGIN_FILE, [ $movie_library_deactivation, 'deactivate' ] );
 			add_action( 'init', [ $this, 'load_plugin_text_domain' ] );
-			add_action( 'init', [ $this, 'setup_environment' ]);
-			/*add_action( 'plugins_loaded', [ $this, 'load_plugin_text_domain' ] );
+			add_action( 'init', [ $this, 'setup_environment' ] );
+			add_action( 'plugins_loaded', [ $this, 'load_plugin_text_domain' ] );
 			add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ] );
-			add_action( 'wp_enqueue_scripts', [ $this, 'wp_enqueue_scripts' ] );*/
+			add_action( 'wp_enqueue_scripts', [ $this, 'wp_enqueue_scripts' ] );
+
+			add_filter( 'enter_title_here', [ $this, 'change_title_text' ] );
+			add_filter( 'write_your_story', [ $this, 'change_post_content_text' ], 10,2);
+
+		}
+
+		/**
+		 * @param $string
+		 * @param $post
+		 * This function is used to change the post content text for the post type.
+		 * It will change the post content text to "Plot" for the post type "rt-movie".
+		 * It will not change the post content text for any other post type.
+		 * It will return the original post content text for any other post type.
+		 *
+		 * @return string
+		 */
+		public function change_post_content_text( $string, $post ): string {
+			if ( 'rt-movie' == $post->post_type ) {
+				$string = 'Plot';
+			}
+			return $string;
+		}
+
+		/**
+		 * @param $title
+		 * This function is used to change the title text for the post type.
+		 * It will change the title text to "Title" for the post type "rt-movie".
+		 * It will not change the title text for any other post type.
+		 * It will return the original title text for any other post type.
+		 *
+		 * @return mixed|string
+		 */
+		public function change_title_text( $title ): mixed {
+			$screen = get_current_screen();
+			if ( 'rt-movie' == $screen->post_type ) {
+				$title = 'Title';
+			}
+			return $title;
 		}
 
 		/**
@@ -131,7 +168,8 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 		 * @return void
 		 */
 		public function admin_enqueue_scripts(): void {
-			wp_enqueue_style( 'movie-library-admin', MLB_PLUGIN_URL . 'assets/css/admin.css', [], MLB_PLUGIN_VERSION );
+			//wp_enqueue_style( 'movie-library', MLB_PLUGIN_URL . 'assets/css/admin.css', [], MLB_PLUGIN_VERSION );
+			wp_enqueue_script( 'movie-library-change-default-labels', MLB_PLUGIN_URL . 'admin/js/movie-library-change-default-labels.js', [ 'wp-i18n' ], MLB_PLUGIN_VERSION );
 		}
 
 		/**
@@ -140,9 +178,8 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 		 * @return void
 		 */
 		public function wp_enqueue_scripts(): void {
-			wp_enqueue_style( 'movie-library-frontend', MLB_PLUGIN_URL . 'assets/css/frontend.css', [], MLB_PLUGIN_VERSION );
+			//wp_enqueue_style( 'movie-library-frontend', MLB_PLUGIN_URL . 'assets/css/frontend.css', [], MLB_PLUGIN_VERSION );
 		}
 
 	}
 }
-	
