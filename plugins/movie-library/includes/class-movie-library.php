@@ -168,7 +168,7 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 		 */
 		public function admin_enqueue_scripts(): void {
 			//wp_enqueue_style( 'movie-library', MLB_PLUGIN_URL . 'assets/css/admin.css', [], MLB_PLUGIN_VERSION );
-			wp_enqueue_script( 'movie-library-change-default-labels', MLB_PLUGIN_URL . 'admin/js/movie-library-change-default-labels.js', [ 'wp-i18n' ], MLB_PLUGIN_VERSION );
+			wp_enqueue_script( 'movie-library-admin', MLB_PLUGIN_URL . 'admin/js/movie-library-admin.js', [ 'wp-i18n' ], MLB_PLUGIN_VERSION );
 		}
 
 		/**
