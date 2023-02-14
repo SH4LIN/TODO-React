@@ -109,15 +109,17 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 		 * @param $string
 		 * @param $post
 		 * This function is used to change the post content text for the post type.
-		 * It will change the post content text to "Plot" for the post type "rt-movie".
+		 * It will change the post content text to "Plot" for the post type "rt-movie" and "Biography" for the post type "rt-person".
 		 * It will not change the post content text for any other post type.
 		 * It will return the original post content text for any other post type.
 		 *
 		 * @return string
 		 */
 		public function change_post_content_text( $string, $post ): string {
-			if ( 'rt-movie' == $post->post_type ) {
+			if ( 'rt-movie' === $post->post_type ) {
 				$string = 'Plot';
+			} elseif ( 'rt-person' === $post->post_type ) {
+				$string = 'Biography';
 			}
 			return $string;
 		}
@@ -125,16 +127,19 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 		/**
 		 * @param $title
 		 * This function is used to change the title text for the post type.
-		 * It will change the title text to "Title" for the post type "rt-movie".
+		 * It will change the title text to "Title" for the post type "rt-movie" and "Name" for the post type "rt-person".
 		 * It will not change the title text for any other post type.
 		 * It will return the original title text for any other post type.
+		 *
 		 *
 		 * @return mixed|string
 		 */
 		public function change_title_text( $title ): mixed {
 			$screen = get_current_screen();
-			if ( 'rt-movie' == $screen->post_type ) {
+			if ( 'rt-movie' === $screen->post_type ) {
 				$title = 'Title';
+			} elseif ( 'rt-person' === $screen->post_type ) {
+				$title = 'Name';
 			}
 			return $title;
 		}
