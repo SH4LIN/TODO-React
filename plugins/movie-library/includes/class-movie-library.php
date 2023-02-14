@@ -73,7 +73,7 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 		}
 
 		/**
-		 * Hook into actions and filters.
+		 * Attaching callbacks into actions and filters.
 		 */
 		private function init_hooks(): void {
 			register_activation_hook( __FILE__, [ 'MovieLibraryActivation', 'activate' ] );
