@@ -19,13 +19,15 @@
  * Domain Path:       /languages
  */
 
+namespace MovieLib;
+
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
 
 /**
- * It Defines constants about the plugin directory plugin url plugin relative path plugin basename, plugin file, plugin
+ * Defining constants about the plugin directory plugin url plugin relative path plugin basename, plugin file, plugin
  * slug, plugin name, plugin version.
  */
 
@@ -76,9 +78,8 @@ const MLB_NAME = 'Movie Library';
 
 require_once MLB_PLUGIN_DIR . 'includes/class-movie-library.php';
 
-use MovieLib\Movie_Library;
-
-movie_library();
+// Global for backwards compatibility.
+$GLOBALS[ 'movie-library' ] = movie_library();
 
 /**
  * @function movie_library()
@@ -91,8 +92,7 @@ function movie_library(): Movie_Library {
 	return Movie_Library::instance();
 }
 
-// Global for backwards compatibility.
-$GLOBALS[ 'movie-library' ] = movie_library();
+
 
 
 

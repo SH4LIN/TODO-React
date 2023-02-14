@@ -37,9 +37,18 @@ if ( ! class_exists( 'MovieLib\Movie_Library_Post_type' ) ) {
 		/**
 		 * @function get_custom_post_types.
 		 * This function is used to return the custom post type array.
+		 * Custom post types created
+		 * 1. rt-movie
+		 * 2. rt-person
 		 * @return array
 		 */
 		private function get_custom_post_types(): array {
+			/**
+			 * Below array contains the custom post type array.
+			 * Custom post types created
+			 * 1. rt-movie
+			 * 2. rt-person
+			 */
 			$custom_post_types_array = array(
 				array(
 					'post_type' => 'rt-movie',
