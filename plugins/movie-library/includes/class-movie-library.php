@@ -72,6 +72,7 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 		/**
 		 * @function includes
 		 * Include required core files used in admin and on the frontend.
+		 * @return void
 		 */
 		private function includes(): void {
 			require_once MLB_PLUGIN_DIR . 'admin/class-movie-library-activation.php';
@@ -88,6 +89,7 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 		/**
 		 * @function register_activation_deactivation_hooks
 		 * Attaching callbacks into actions and filters.
+		 * @return void
 		 */
 		private function register_hooks(): void {
 			$movie_library_activation   = new Movie_Library_Activation();
@@ -115,21 +117,27 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 		}
 
 		/**
+		 * @function load_plugin_text_domain
 		 * Load Localisation files.
+		 * @return void
 		 */
 		public function load_plugin_text_domain(): void {
 			load_plugin_textdomain( 'movie-library', false, MLB_PLUGIN_RELATIVE_PATH . '/languages' );
 		}
 
 		/**
+		 * @function admin_enqueue_scripts
 		 * Enqueue admin scripts.
+		 * @return void
 		 */
 		public function admin_enqueue_scripts(): void {
 			wp_enqueue_style( 'movie-library-admin', MLB_PLUGIN_URL . 'assets/css/admin.css', [], MLB_PLUGIN_VERSION );
 		}
 
 		/**
+		 * @function wp_enqueue_scripts
 		 * Enqueue frontend scripts.
+		 * @return void
 		 */
 		public function wp_enqueue_scripts(): void {
 			wp_enqueue_style( 'movie-library-frontend', MLB_PLUGIN_URL . 'assets/css/frontend.css', [], MLB_PLUGIN_VERSION );
