@@ -1,7 +1,5 @@
 <?php
-
-/**
- * uninstall.php
- * This file Provide uninstallation functionality for the plugin.
+/** This file Provide uninstallation functionality for the plugin.
+ *
+ * @package MovieLib
  */
-

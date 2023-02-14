@@ -1,7 +1,8 @@
 <?php
-
 /**
  * This file is used to perform the deactivation functionality for the plugin.
+ *
+ * @package MovieLib
  */
 
 namespace MovieLib;

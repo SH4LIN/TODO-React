@@ -1,8 +1,9 @@
 <?php
-
-/**
+/** Main plugin file.
+ *
  * @package           MovieLib
  * @author            Shalin Shah
+ *
  * @wordPress-Plugin
  * Plugin Name:       Movie Library
  * Plugin URI:        https://learn.rtcamp.com

@@ -1,6 +1,8 @@
 <?php
 /**
  * This file is used to create the taxonomy for the plugin.
+ *
+ * @package MovieLib
  */
 
 namespace MovieLib;

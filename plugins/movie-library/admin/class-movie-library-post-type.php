@@ -1,7 +1,8 @@
 <?php
-
 /**
  * This file is used to create the Custom post type for the plugin.
+ *
+ * @package MovieLib
  */
 
 namespace MovieLib;

@@ -1,6 +1,8 @@
 <?php
 /**
  * This file is used to perform the activation functionality for the plugin.
+ *
+ * @package MovieLib
  */
 
 namespace MovieLib;

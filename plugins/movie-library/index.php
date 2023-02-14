@@ -1,5 +1,5 @@
 <?php
-
-/**
- * Index file for the plugin.
+/** Index file for the plugin.
+ *
+ * @package MovieLib
  */
