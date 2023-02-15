@@ -2,17 +2,17 @@
 /**
  * This file is used to create the Custom post type for the plugin.
  *
- * @package MovieLib
+ * @package admin\classes
  */
 
-namespace MovieLib;
+namespace admin\classes;
 
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'MovieLib\Movie_Library_Post_type' ) ) {
+if ( ! class_exists( 'admin\classes\Movie_Library_Post_type' ) ) {
 	/**
 	 * @class   Custom_Post_type.
 	 * This class contains the functions to register the custom post type.

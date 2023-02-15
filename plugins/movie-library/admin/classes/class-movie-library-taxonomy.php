@@ -2,13 +2,17 @@
 /**
  * This file is used to create the taxonomy for the plugin.
  *
- * @package MovieLib
+ * @package admin\classes
  */
 
-namespace MovieLib;
+namespace admin\classes;
 
+/**
+ * This is a security measure to prevent direct access to the file.
+ */
 defined( 'ABSPATH' ) || exit;
-if ( ! class_exists( 'MovieLib\Movie_Library_Taxonomy' ) ) {
+
+if ( ! class_exists( 'admin\classes\Movie_Library_Taxonomy' ) ) {
 	/**
 	 * @class Movie_Library_Taxonomy
 	 * This class contains all the functions to create the taxonomy for the plugin.

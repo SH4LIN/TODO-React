@@ -3,7 +3,6 @@
  *
  * @package           MovieLib
  * @author            Shalin Shah
- *
  * @wordPress-Plugin
  * Plugin Name:       Movie Library
  * Plugin URI:        https://learn.rtcamp.com
@@ -19,8 +18,6 @@
  * Text Domain:       movie-library
  * Domain Path:       /languages
  */
-
-namespace MovieLib;
 
 /**
  * This is a security measure to prevent direct access to the file.
@@ -77,7 +74,9 @@ const MLB_SLUG = 'movie-library';
  */
 const MLB_NAME = 'Movie Library';
 
-require_once MLB_PLUGIN_DIR . 'includes/class-movie-library.php';
+require_once MLB_PLUGIN_DIR . 'includes/class-movie-library-autoloader.php';
+
+use includes\Movie_Library;
 
 // Global for backwards compatibility.
 $GLOBALS[ 'movie-library' ] = movie_library();
@@ -86,7 +85,6 @@ $GLOBALS[ 'movie-library' ] = movie_library();
  * @function movie_library()
  * Main instance of Movie_Library.
  * Returns the main instance of Movie_Library to prevent the need to use globals.
- *
  * @return Movie_Library
  */
 function movie_library(): Movie_Library {

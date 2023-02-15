@@ -8,36 +8,40 @@
  * @version  1.0.0
  */
 
-namespace MovieLib;
+namespace includes;
 
+/**
+ * This is a security measure to prevent direct access to the file.
+ */
 defined( 'ABSPATH' ) || exit;
-if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
+
+require_once MLB_PLUGIN_DIR . 'includes/class-movie-library-autoloader.php';
+
+use admin\classes\Movie_Library_Activation;
+use admin\classes\Movie_Library_Deactivation;
+use admin\classes\Movie_Library_Post_type;
+use admin\classes\Movie_Library_Taxonomy;
+
+if ( ! class_exists( 'includes\Movie_Library' ) ) {
 	/**
 	 * @class   Movie_Library
 	 *          This is the main class of the plugin. It is used to initialize the plugin.
 	 *          It will include all the required files and will register activation and deactivation hooks.
-	 *
 	 * @function @public instance()
 	 *           This function is used to get the single instance of the class.
 	 *           It will create a new instance if it is not already created.
-	 *
 	 * @function @private __construct()
 	 *           This function is used to initialize the class.
 	 *           It will include all the required files and will register activation and deactivation hooks.
-	 *
 	 * @function @private includes()
 	 *           This function is used to include all the required files.
-	 *
 	 * @function @private register_activation_deactivation_hooks()
 	 *           This function is used to register activation and deactivation hooks.
-	 *
-	 *
 	 * @version 1.0.0
 	 */
 	class Movie_Library {
 
 		/**
-		 *
 		 * The single instance of the class.
 		 *
 		 * @var $instance
@@ -48,7 +52,6 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 		 * @function instance
 		 * Main Movie_Library Instance.
 		 * Ensures only one instance of Movie_Library is loaded or can be loaded.
-		 *
 		 * @return Movie_Library - Main instance.
 		 */
 		public static function instance(): Movie_Library {
@@ -64,16 +67,15 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 		 * This constructor will include all the required files and will register activation and deactivation hooks.
 		 */
 		private function __construct() {
-			$this->includes();
+			//$this->includes();
 			$this->register_scripts();
 			$this->register_hooks();
 		}
 
 		private function register_scripts(): void {
 			wp_register_script( 'movie-library-admin', MLB_PLUGIN_URL . 'admin/js/movie-library-admin.js', [ 'wp-hooks', 'wp-i18n' ], MLB_PLUGIN_VERSION );
-			wp_set_script_translations('movie-library-admin', 'movie-library', MLB_PLUGIN_RELATIVE_PATH . '/languages');
+			wp_set_script_translations( 'movie-library-admin', 'movie-library', MLB_PLUGIN_RELATIVE_PATH . '/languages' );
 		}
-
 
 		/**
 		 * @function includes
@@ -81,10 +83,10 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 		 * @return void
 		 */
 		private function includes(): void {
-			require_once MLB_PLUGIN_DIR . 'admin/class-movie-library-activation.php';
-			require_once MLB_PLUGIN_DIR . 'admin/class-movie-library-deactivation.php';
-			require_once MLB_PLUGIN_DIR . 'admin/class-movie-library-post-type.php';
-			require_once MLB_PLUGIN_DIR . 'admin/class-movie-library-taxonomy.php';
+			require_once MLB_PLUGIN_DIR . 'admin/classes/class-movie-library-activation.php';
+			require_once MLB_PLUGIN_DIR . 'admin/classes/class-movie-library-deactivation.php';
+			require_once MLB_PLUGIN_DIR . 'admin/classes/class-movie-library-post-type.php';
+			require_once MLB_PLUGIN_DIR . 'admin/classes/class-movie-library-taxonomy.php';
 			/*include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-metabox.php';
 			include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-shortcode.php';
 			include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-widget.php';
@@ -108,7 +110,7 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 			add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ] );
 			add_action( 'wp_enqueue_scripts', [ $this, 'wp_enqueue_scripts' ] );
 
-			add_filter( 'enter_title_here', [ $this, 'change_title_text' ],10,2 );
+			add_filter( 'enter_title_here', [ $this, 'change_title_text' ], 10, 2 );
 			add_filter( 'write_your_story', [ $this, 'change_post_content_text' ], 10, 2 );
 		}
 
@@ -119,14 +121,13 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 		 * It will not change the title text for any other post type.
 		 * It will return the original title text for any other post type.
 		 *
-		 *
 		 * @return mixed|string
 		 */
 		public function change_title_text( $title, $post ): mixed {
 			if ( 'rt-movie' === $post->post_type ) {
-				$title = __('Title');
+				$title = __( 'Title' );
 			} elseif ( 'rt-person' === $post->post_type ) {
-				$title = __('Name');
+				$title = __( 'Name' );
 			}
 			return $title;
 		}
@@ -143,9 +144,9 @@ if ( ! class_exists( 'MovieLib\Movie_Library' ) ) {
 		 */
 		public function change_post_content_text( $title, $post ): string {
 			if ( 'rt-movie' === $post->post_type ) {
-				$title = __('Plot');
+				$title = __( 'Plot' );
 			} elseif ( 'rt-person' === $post->post_type ) {
-				$title = __('Biography');
+				$title = __( 'Biography' );
 			}
 			return $title;
 		}

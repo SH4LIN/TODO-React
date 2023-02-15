@@ -2,14 +2,17 @@
 /**
  * This file is used to perform the activation functionality for the plugin.
  *
- * @package MovieLib
+ * @package admin\classes
  */
 
-namespace MovieLib;
+namespace admin\classes;
 
+/**
+ * This is a security measure to prevent direct access to the file.
+ */
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'Movie_Library_Activation' ) ) {
+if ( ! class_exists( 'admin\classes\Movie_Library_Activation' ) ) {
 
 	/**
 	 * @class Movie_Library_Activation
