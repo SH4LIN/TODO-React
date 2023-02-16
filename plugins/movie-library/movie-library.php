@@ -76,7 +76,7 @@ const MLB_NAME = 'Movie Library';
 
 require_once MLB_PLUGIN_DIR . 'includes/class-movie-library-autoloader.php';
 
-use includes\Movie_Library;
+use MovieLib\includes\Movie_Library;
 
 // Global for backwards compatibility.
 $GLOBALS[ 'movie-library' ] = movie_library();

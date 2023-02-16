@@ -3,24 +3,27 @@
  * Core plugin class.
  *
  * @class    Movie_Library
- * @package  MovieLib
+ * @package  MovieLib\includes
  * @since    1.0.0
  * @version  1.0.0
  */
 
-namespace includes;
+namespace MovieLib\includes;
 
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
 
-use admin\classes\Movie_Library_Activation;
-use admin\classes\Movie_Library_Deactivation;
-use admin\classes\Movie_Library_Post_type;
-use admin\classes\Movie_Library_Taxonomy;
 
-if ( ! class_exists( 'includes\Movie_Library' ) ) {
+use MovieLib\admin\classes\Movie_Library_Activation;
+use MovieLib\admin\classes\Movie_Library_Deactivation;
+use MovieLib\admin\classes\Movie_Library_Post_type;
+use MovieLib\admin\classes\Movie_Library_Taxonomy;
+use MovieLib\admin\classes\Movie_Library_Meta_Boxes;
+
+
+if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 	/**
 	 * @class   Movie_Library
 	 *          This is the main class of the plugin. It is used to initialize the plugin.
@@ -70,8 +73,8 @@ if ( ! class_exists( 'includes\Movie_Library' ) ) {
 		}
 
 		private function register_scripts(): void {
-			wp_register_script( 'movie-library-admin', MLB_PLUGIN_URL . 'admin/js/movie-library-admin.js', [ 'wp-hooks', 'wp-i18n' ], MLB_PLUGIN_VERSION );
-			wp_set_script_translations( 'movie-library-admin', 'movie-library', MLB_PLUGIN_RELATIVE_PATH . '/languages' );
+			//wp_register_script( 'movie-library-admin', MLB_PLUGIN_URL . 'admin/js/movie-library-admin.js', [ 'wp-hooks', 'wp-i18n' ], MLB_PLUGIN_VERSION );
+			//wp_set_script_translations( 'movie-library-admin', 'movie-library', MLB_PLUGIN_RELATIVE_PATH . '/languages' );
 		}
 
 		/**
@@ -82,6 +85,7 @@ if ( ! class_exists( 'includes\Movie_Library' ) ) {
 		private function register_hooks(): void {
 			$movie_library_activation   = new Movie_Library_Activation();
 			$movie_library_deactivation = new Movie_Library_Deactivation();
+			$movie_library_meta_boxes   = new Movie_Library_Meta_Boxes();
 			register_activation_hook( MLB_PLUGIN_FILE, [ $movie_library_activation, 'activate' ] );
 			register_deactivation_hook( MLB_PLUGIN_FILE, [ $movie_library_deactivation, 'deactivate' ] );
 			add_action( 'init', [ $this, 'load_plugin_text_domain' ] );
@@ -89,6 +93,7 @@ if ( ! class_exists( 'includes\Movie_Library' ) ) {
 			add_action( 'plugins_loaded', [ $this, 'load_plugin_text_domain' ] );
 			add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ] );
 			add_action( 'wp_enqueue_scripts', [ $this, 'wp_enqueue_scripts' ] );
+			//add_action('add_meta_boxes', [ $this, 'add_meta_boxes' ] );
 
 			add_filter( 'enter_title_here', [ $this, 'change_title_text' ], 10, 2 );
 			add_filter( 'write_your_story', [ $this, 'change_post_content_text' ], 10, 2 );

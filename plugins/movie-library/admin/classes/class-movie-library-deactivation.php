@@ -2,17 +2,17 @@
 /**
  * This file is used to perform the deactivation functionality for the plugin.
  *
- * @package admin\classes
+ * @package MovieLib\admin\classes
  */
 
-namespace admin\classes;
+namespace MovieLib\admin\classes;
 
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'admin\classes\Movie_Library_Deactivation' ) ) {
+if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Deactivation' ) ) {
 
 	/**
 	 * @class Movie_Library_Deactivation

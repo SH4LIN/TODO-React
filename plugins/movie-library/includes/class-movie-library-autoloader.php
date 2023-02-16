@@ -2,10 +2,10 @@
 /**
  * This file is used to autoload the classes of the plugin.
  *
- * @package includes
+ * @package MovieLib\includes
  */
 
-namespace includes;
+namespace MovieLib\includes;
 
 /**
  * This is a security measure to prevent direct access to the file.
@@ -50,9 +50,13 @@ class Movie_Library_Autoloader {
 		$class                             = str_replace( '_', '-', $class );
 		$class                             = explode( '\\', $class );
 		$class[ array_key_last( $class ) ] = 'class-' . $class[ array_key_last( $class ) ];
+		if( $class[0] === 'movielib' ) {
+			unset( $class[0]);
+		}
 		$class                             = implode( '\\', $class );
 		$file                              = MLB_PLUGIN_DIR . $class . '.php';
 		$file                              = str_replace( '\\', DIRECTORY_SEPARATOR, $file );
+
 		if ( file_exists( $file ) ) {
 			require_once $file;
 			return true;
