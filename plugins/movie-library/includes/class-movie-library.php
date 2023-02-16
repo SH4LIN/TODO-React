@@ -73,8 +73,8 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		}
 
 		private function register_scripts(): void {
-			//wp_register_script( 'movie-library-admin', MLB_PLUGIN_URL . 'admin/js/movie-library-admin.js', [ 'wp-hooks', 'wp-i18n' ], MLB_PLUGIN_VERSION );
-			//wp_set_script_translations( 'movie-library-admin', 'movie-library', MLB_PLUGIN_RELATIVE_PATH . '/languages' );
+			wp_register_script( 'movie-library-admin', MLB_PLUGIN_URL . 'admin/js/movie-library-admin.js', [ 'wp-hooks', 'wp-i18n' ], MLB_PLUGIN_VERSION );
+			wp_set_script_translations( 'movie-library-admin', 'movie-library', MLB_PLUGIN_RELATIVE_PATH . '/languages' );
 		}
 
 		/**
