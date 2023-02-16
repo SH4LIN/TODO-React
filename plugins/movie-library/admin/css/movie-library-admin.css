@@ -1,0 +1,21 @@
+.rt-movie-meta-basic-field {
+	display: block;
+	width: 100%;
+	margin: 10px 0 10px 0;
+	padding: 0;
+}
+
+.rt-movie-meta-basic-container {
+	margin: 10px 0 0 0;
+}
+
+.rt-movie-meta-crew-field {
+	display: block;
+	width: 85%;
+	margin: 10px 0 10px 0;
+	padding: 0;
+}
+
+.rt-movie-meta-label {
+	font-weight: 700;
+}

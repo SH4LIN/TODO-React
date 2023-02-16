@@ -28,24 +28,37 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 		public function add_meta_boxes(): void {
 			$screens = array( 'rt-movie' );
 			foreach ( $screens as $screen ) {
-				add_meta_box(
-					'rt-movie-meta-basic',
-					__( 'Basic', 'movie-library' ),
-					array( $this, 'rt_movie_meta_basic' ),
-					$screen,
-					'side',
-					'high'
-				);
-
-				add_meta_box(
-					'rt-movie-meta-crew',
-					__( 'Crew', 'movie-library' ),
-					array( $this, 'rt_movie_meta_crew' ),
-					$screen,
-					'side',
-					'high'
-				);
+				$meta_boxes_args = $this->get_meta_boxes_args( $screen );
+				foreach ( $meta_boxes_args as $meta_box_id => $meta_box_args ) {
+					add_meta_box(
+						$meta_box_id,
+						$meta_box_args[ 'title' ],
+						$meta_box_args[ 'callback' ],
+						$meta_box_args[ 'screen' ],
+						$meta_box_args[ 'context' ],
+						$meta_box_args[ 'priority' ]
+					);
+				}
 			}
+		}
+
+		private function get_meta_boxes_args( $screen ): array {
+			return array(
+				'rt-movie-meta-basic' => array(
+					'title'    => __( 'Basic', 'movie-library' ),
+					'callback' => array( $this, 'rt_movie_meta_basic' ),
+					'screen'   => $screen,
+					'context'  => 'side',
+					'priority' => 'high',
+				),
+				'rt-movie-meta-crew'  => array(
+					'title'    => __( 'Crew', 'movie-library' ),
+					'callback' => array( $this, 'rt_movie_meta_crew' ),
+					'screen'   => $screen,
+					'context'  => 'side',
+					'priority' => 'high',
+				),
+			);
 		}
 
 		/**
@@ -64,30 +77,41 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 			wp_nonce_field( 'rt_movie_meta_nonce', 'rt_movie_meta_nonce' );
 			?>
 
-			<div class="rt-movie-meta-basic-fields">
-				<div class="rt-movie-meta-basic-rating-container">
-					<label for="<?php
-					echo esc_attr( $rt_movie_meta_basic_key[ 'rating' ] ); ?>"><?php
-						esc_html_e( 'Rating', 'movie-library' ); ?></label>
-					<input type="number" value="<?php echo esc_attr($rt_movie_meta_basic_data[$rt_movie_meta_basic_key['rating']][0]) ?>" class="widefat" name="<?php
-					echo esc_attr( $rt_movie_meta_basic_key[ 'rating' ] ); ?>" id="<?php
-					echo esc_attr( $rt_movie_meta_basic_key[ 'rating' ] ); ?>"/>
+			<div class="rt-movie-meta-fields rt-movie-meta-basic-fields">
+				<div class="rt-movie-meta-container rt-movie-meta-basic-container rt-movie-meta-basic-rating-container">
+					<label class="rt-movie-meta-label rt-movie-meta-basic-label rt-movie-meta-basic-rating-label" for="<?php echo esc_attr( $rt_movie_meta_basic_key[ 'rating' ] ); ?>">
+						<?php esc_html_e( 'Rating', 'movie-library' ); ?>
+					</label>
+					<input type="number"
+							value="<?php echo esc_attr( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key[ 'rating' ] ][ 0 ] ) ?>"
+							class="rt-movie-meta-basic-field rt-movie-meta-basic-rating-field"
+							name="<?php echo esc_attr( $rt_movie_meta_basic_key[ 'rating' ] ); ?>"
+							id="<?php echo esc_attr( $rt_movie_meta_basic_key[ 'rating' ] ); ?>"
+							max="5"
+							min="1"/>
 				</div>
-				<div class="rt-movie-meta-basic-runtime-container">
-					<label for="<?php
-					echo esc_attr( $rt_movie_meta_basic_key[ 'runtime' ] ); ?>"><?php
-						esc_html_e( 'Runtime', 'movie-library' ); ?></label>
-					<input type="number" value="<?php echo esc_attr($rt_movie_meta_basic_data[$rt_movie_meta_basic_key['runtime']][0]) ?>" class="widefat" name="<?php
-					echo esc_attr( $rt_movie_meta_basic_key[ 'runtime' ] ); ?>" id="<?php
-					echo esc_attr( $rt_movie_meta_basic_key[ 'runtime' ] ); ?>"/>
+				<div class="rt-movie-meta-container rt-movie-meta-basic-container rt-movie-meta-basic-runtime-container">
+					<label class="rt-movie-meta-label rt-movie-meta-basic-label rt-movie-meta-basic-runtime-label" for="<?php echo esc_attr( $rt_movie_meta_basic_key[ 'runtime' ] ); ?>">
+						<?php esc_html_e( 'Runtime (Minutes)', 'movie-library' ); ?>
+					</label>
+					<input type="number"
+							value="<?php echo esc_attr( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key[ 'runtime' ] ][ 0 ] ) ?>"
+							class="rt-movie-meta-basic-field rt-movie-meta-basic-runtime-field"
+							name="<?php echo esc_attr( $rt_movie_meta_basic_key[ 'runtime' ] ); ?>"
+							id="<?php echo esc_attr( $rt_movie_meta_basic_key[ 'runtime' ] ); ?>"
+							min="1"
+							max="1000"/>
+
 				</div>
-				<div class="rt-movie-meta-basic-release-date-container">
-					<label for="<?php
-					echo esc_attr( $rt_movie_meta_basic_key[ 'release-date' ] ); ?>"><?php
-						esc_html_e( 'Release Date', 'movie-library' ); ?></label>
-					<input type="date" value="<?php echo esc_attr($rt_movie_meta_basic_data[$rt_movie_meta_basic_key['release-date']][0]) ?>" class="widefat" name="<?php
-					echo esc_attr( $rt_movie_meta_basic_key[ 'release-date' ] ); ?>" id="<?php
-					echo esc_attr( $rt_movie_meta_basic_key[ 'release-date' ] ); ?>"/>
+				<div class="rt-movie-meta-container rt-movie-meta-basic-container rt-movie-meta-basic-release-date-container">
+					<label class="rt-movie-meta-label rt-movie-meta-basic-label rt-movie-meta-basic-release-date-label" for="<?php echo esc_attr( $rt_movie_meta_basic_key[ 'release-date' ] ); ?>">
+						<?php esc_html_e( 'Release Date', 'movie-library' ); ?>
+					</label>
+					<input type="date"
+							value="<?php echo esc_attr( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key[ 'release-date' ] ][ 0 ] ) ?>"
+							class="rt-movie-meta-basic-field rt-movie-meta-basic-release-date-field"
+							name="<?php echo esc_attr( $rt_movie_meta_basic_key[ 'release-date' ] ); ?>"
+							id="<?php echo esc_attr( $rt_movie_meta_basic_key[ 'release-date' ] ); ?>"/>
 				</div>
 
 			</div>
@@ -142,26 +166,25 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 			?>
 
 
-			<div class="rt-movie-meta-crew-fields">
+			<div class="rt-movie-meta-fields rt-movie-meta-crew-fields">
 				<?php
 				foreach ( $rt_people_data as $key => $data ) {
 					if ( empty( $data ) ) {
 						continue;
 					}
 					?>
-					<div class="<?php
-					echo esc_attr( strtolower( 'rt-movie-meta-crew-' . $key . '-container' ) ) ?>">
-						<label for="<?php
-						echo esc_attr( strtolower( str_replace( '-', '_', 'rt-movie-meta-crew-' . $key ) ) ) ?>"><?php
-							esc_html_e( $key, 'movie-library' ); ?></label>
-						<select class="widefat" name="<?php
-						echo esc_attr( strtolower( 'rt-movie-meta-crew-' . $key ) ); ?>" id="<?php
-						echo esc_attr( strtolower( str_replace( '-', '_', 'rt-movie-meta-crew-' . $key ) ) ) ?>">
+					<div class="rt-movie-meta-container rt-movie-meta-crew-container <?php echo esc_attr( strtolower( 'rt-movie-meta-crew-' . $key . '-container' ) ) ?>">
+						<label class="rt-movie-meta-label rt-movie-meta-crew-label <?php echo esc_attr( strtolower( 'rt-movie-meta-crew-' . $key . '-label' ) ) ?>" for="<?php echo esc_attr( strtolower( str_replace( '-', '_', 'rt-movie-meta-crew-' . $key ) ) ) ?>">
+							<?php esc_html_e( $key, 'movie-library' ); ?>
+						</label>
+						<select class="rt-movie-meta-crew-field <?php echo esc_attr( strtolower( 'rt-movie-meta-crew-' . $key . '-field' ) ) ?>"
+								name="<?php echo esc_attr( strtolower( 'rt-movie-meta-crew-' . $key ) ); ?>"
+								id="<?php echo esc_attr( strtolower( str_replace( '-', '_', 'rt-movie-meta-crew-' . $key ) ) ) ?>">
 							<?php
 							foreach ( $data as $rt_p ) { ?>
-								<option value="<?php
-								echo esc_attr( $rt_p[ 'id' ].'-'.$rt_p[ 'name' ] ); ?>"><?php
-									echo esc_html( $rt_p[ 'name' ] ); ?></option>
+								<option value="<?php echo esc_attr( $rt_p[ 'id' ] . '-' . $rt_p[ 'name' ] ); ?>">
+									<?php echo esc_html( $rt_p[ 'name' ] ); ?>
+								</option>
 								<?php
 							} ?>
 						</select>

@@ -67,29 +67,28 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 			// Make sure that it is set.
 			if ( isset( $_POST['rt-movie-meta-basic-rating'] ) ) {
 				// Sanitize user input.
-				$rt_movie_meta_basic = sanitize_text_field( $_POST['rt-movie-meta-basic-rating'] );
+				$rt_movie_meta_basic_rating = sanitize_text_field( $_POST['rt-movie-meta-basic-rating'] );
 				//Validate user input.
-				if (  is_numeric( $rt_movie_meta_basic ) ) {
-					update_post_meta( $post_id, 'rt-movie-meta-basic-rating', $rt_movie_meta_basic );
-				}else{
-					$rt_movie_meta_basic = (int) $rt_movie_meta_basic;
-					update_post_meta( $post_id, 'rt-movie-meta-basic-rating', $rt_movie_meta_basic );
+				if ( ! is_numeric( $rt_movie_meta_basic_rating ) ) {
+					$rt_movie_meta_basic_rating = (int)$rt_movie_meta_basic_rating;
 				}
+				if($rt_movie_meta_basic_rating > 5){
+					$rt_movie_meta_basic_rating = 5;
+				}elseif ($rt_movie_meta_basic_rating < 0){
+					$rt_movie_meta_basic_rating = 0;
+				}
+				update_post_meta( $post_id, 'rt-movie-meta-basic-rating', $rt_movie_meta_basic_rating );
 				// Update the meta field in the database.
 			}
 
 			if ( isset( $_POST['rt-movie-meta-basic-runtime'] ) ) {
 				// Sanitize user input.
-				$rt_movie_meta_basic = sanitize_text_field( $_POST['rt-movie-meta-basic-runtime'] );
+				$rt_movie_meta_basic_runtime = sanitize_text_field( $_POST['rt-movie-meta-basic-runtime'] );
 				//Validate user input.
-				if (  is_numeric( $rt_movie_meta_basic ) ) {
-					update_post_meta( $post_id, 'rt-movie-meta-basic-runtime', $rt_movie_meta_basic );
-				}else{
-					$rt_movie_meta_basic = (int) $rt_movie_meta_basic;
-					update_post_meta( $post_id, 'rt-movie-meta-basic-runtime', $rt_movie_meta_basic );
+				if ( ! is_numeric( $rt_movie_meta_basic_runtime ) ) {
+					$rt_movie_meta_basic_runtime = (int)$rt_movie_meta_basic_runtime;
 				}
-				// Update the meta field in the database.
-				update_post_meta( $post_id, 'rt-movie-meta-basic-runtime', $rt_movie_meta_basic );
+				update_post_meta( $post_id, 'rt-movie-meta-basic-runtime', $rt_movie_meta_basic_runtime );
 			}
 
 			if ( isset( $_POST['rt-movie-meta-basic-release-date'] ) ) {
