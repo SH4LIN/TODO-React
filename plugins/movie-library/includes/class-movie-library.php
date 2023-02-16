@@ -15,8 +15,6 @@ namespace includes;
  */
 defined( 'ABSPATH' ) || exit;
 
-require_once MLB_PLUGIN_DIR . 'includes/class-movie-library-autoloader.php';
-
 use admin\classes\Movie_Library_Activation;
 use admin\classes\Movie_Library_Deactivation;
 use admin\classes\Movie_Library_Post_type;
@@ -67,7 +65,6 @@ if ( ! class_exists( 'includes\Movie_Library' ) ) {
 		 * This constructor will include all the required files and will register activation and deactivation hooks.
 		 */
 		private function __construct() {
-			//$this->includes();
 			$this->register_scripts();
 			$this->register_hooks();
 		}
@@ -75,23 +72,6 @@ if ( ! class_exists( 'includes\Movie_Library' ) ) {
 		private function register_scripts(): void {
 			wp_register_script( 'movie-library-admin', MLB_PLUGIN_URL . 'admin/js/movie-library-admin.js', [ 'wp-hooks', 'wp-i18n' ], MLB_PLUGIN_VERSION );
 			wp_set_script_translations( 'movie-library-admin', 'movie-library', MLB_PLUGIN_RELATIVE_PATH . '/languages' );
-		}
-
-		/**
-		 * @function includes
-		 * Include required core files used in admin and on the frontend.
-		 * @return void
-		 */
-		private function includes(): void {
-			require_once MLB_PLUGIN_DIR . 'admin/classes/class-movie-library-activation.php';
-			require_once MLB_PLUGIN_DIR . 'admin/classes/class-movie-library-deactivation.php';
-			require_once MLB_PLUGIN_DIR . 'admin/classes/class-movie-library-post-type.php';
-			require_once MLB_PLUGIN_DIR . 'admin/classes/class-movie-library-taxonomy.php';
-			/*include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-metabox.php';
-			include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-shortcode.php';
-			include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-widget.php';
-			include_once MLB_PLUGIN_DIR . 'includes/class-movie-library-settings.php';
-			*/
 		}
 
 		/**
@@ -133,7 +113,7 @@ if ( ! class_exists( 'includes\Movie_Library' ) ) {
 		}
 
 		/**
-		 * @param $string
+		 * @param $title
 		 * @param $post
 		 * This function is used to change the post content text for the post type.
 		 * It will change the post content text to "Plot" for the post type "rt-movie" and "Biography" for the post type "rt-person".
