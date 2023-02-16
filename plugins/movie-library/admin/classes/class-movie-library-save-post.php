@@ -57,11 +57,26 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 			foreach ($keys as $key){
 				$exp = '/^rt-movie-meta-crew/';
 				if (preg_match($exp, $key) === 1){
-					// Sanitize user input.
-					$rt_movie_meta_crew = sanitize_text_field( $_POST[$key] );
-					// Update the meta field in the database.
-					update_post_meta( $post_id, $key, $rt_movie_meta_crew );
-					wp_set_object_terms($post_id, $rt_movie_meta_crew,'_rt-movie-person',true);
+					$rt_movie_meta_crew = $_POST[$key];
+					if(is_array($rt_movie_meta_crew) && count($rt_movie_meta_crew) > 0){
+						$d = array();
+						foreach ($rt_movie_meta_crew as $crew){
+							// Sanitize user input.
+							$crew = sanitize_text_field($crew);
+							//If value is empty than delete the term
+							if(empty($crew)){
+
+								wp_delete_object_term_relationships( $post_id, '_rt-movie-person' );
+							}else{
+								// Update the meta field in the database.
+								$d[] = $crew;
+
+							}
+							update_post_meta( $post_id, $key, $d );
+							wp_set_object_terms($post_id, $d,'_rt-movie-person', true);
+						}
+					}
+
 				}
 			}
 			// Make sure that it is set.
@@ -93,9 +108,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 
 			if ( isset( $_POST['rt-movie-meta-basic-release-date'] ) ) {
 				// Sanitize user input.
-				$rt_movie_meta_basic = sanitize_text_field( $_POST['rt-movie-meta-basic-release-date'] );
+				$rt_movie_meta_basic_release_date = sanitize_text_field( $_POST['rt-movie-meta-basic-release-date'] );
 				// Update the meta field in the database.
-				update_post_meta( $post_id, 'rt-movie-meta-basic-release-date', $rt_movie_meta_basic );
+				update_post_meta( $post_id, 'rt-movie-meta-basic-release-date', $rt_movie_meta_basic_release_date );
 			}
 
 		}

@@ -80,7 +80,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 			<div class="rt-movie-meta-fields rt-movie-meta-basic-fields">
 				<div class="rt-movie-meta-container rt-movie-meta-basic-container rt-movie-meta-basic-rating-container">
 					<label class="rt-movie-meta-label rt-movie-meta-basic-label rt-movie-meta-basic-rating-label" for="<?php echo esc_attr( $rt_movie_meta_basic_key[ 'rating' ] ); ?>">
-						<?php esc_html_e( 'Rating', 'movie-library' ); ?>
+						<?php esc_html_e( 'Rating (Between 1-5)', 'movie-library' ); ?>
 					</label>
 					<input type="number"
 							value="<?php echo esc_attr( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key[ 'rating' ] ][ 0 ] ) ?>"
@@ -124,6 +124,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 			$rt_person_query = new WP_Query(
 				[
 					'post_type' => 'rt-person',
+					'per_page'  => 10,
 					'tax_query' => array(
 						array(
 							'taxonomy' => 'rt-person-career',
@@ -157,7 +158,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 			);
 
 			$rt_people_data = array();
+			$rt_movie_meta_crew_data = array();
 			foreach ( $rt_career_terms as $rt_career_term ) {
+				$key = 'rt-movie-meta-crew-' . $rt_career_term->slug;
+				$crew_data = get_post_meta( $post->ID, $key );
+				$rt_movie_meta_crew_data[ $key ] = $crew_data;
 				$rt_person_data                          = $this->get_person_data( $rt_career_term );
 				$rt_people_data[ $rt_career_term->name ] = $rt_person_data;
 			}
@@ -178,14 +183,16 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 							<?php esc_html_e( $key, 'movie-library' ); ?>
 						</label>
 						<select class="rt-movie-meta-crew-field <?php echo esc_attr( strtolower( 'rt-movie-meta-crew-' . $key . '-field' ) ) ?>"
-								name="<?php echo esc_attr( strtolower( 'rt-movie-meta-crew-' . $key ) ); ?>"
-								id="<?php echo esc_attr( strtolower( str_replace( '-', '_', 'rt-movie-meta-crew-' . $key ) ) ) ?>">
+								name="<?php echo esc_attr( strtolower( 'rt-movie-meta-crew-' . $key ).'[]' ); ?>"
+								id="<?php echo esc_attr( strtolower( str_replace( '-', '_', 'rt-movie-meta-crew-' . $key ) ) ) ?>" multiple="multiple">
 							<?php
-							foreach ( $data as $rt_p ) { ?>
-								<option value="<?php echo esc_attr( $rt_p[ 'id' ] . '-' . $rt_p[ 'name' ] ); ?>">
-									<?php echo esc_html( $rt_p[ 'name' ] ); ?>
-								</option>
-								<?php
+							foreach ( $data as $rt_p ) {
+								printf(
+									'<option value="%1$d" %2$s>%3$s</option>',
+									esc_attr( $rt_p[ 'id' ] ),
+									selected( true, in_array( $rt_p[ 'id' ], $rt_movie_meta_crew_data[ strtolower( 'rt-movie-meta-crew-' . $key ) ][0]), false ),
+									esc_html( $rt_p[ 'name' ] )
+								);
 							} ?>
 						</select>
 					</div>
