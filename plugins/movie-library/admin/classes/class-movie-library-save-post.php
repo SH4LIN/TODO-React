@@ -43,14 +43,14 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 				// Check is post type is rt-movie or rt-person.
 				if ( $_POST[ 'post_type' ] === 'rt-movie' ) {
 					// Check the user's permissions.
-					if ( ! current_user_can( 'edit_page', $post_id ) ) {
+					if ( ! current_user_can( 'edit_post', $post_id ) ) {
 						return;
 					} else {
 						$this->save_rt_movie_post( $post_id, $post, $update );
 					}
 				} elseif ( $_POST[ 'post_type' ] === 'rt-person' ) {
 					// Check the user's permissions.
-					if ( ! current_user_can( 'edit_page', $post_id ) ) {
+					if ( ! current_user_can( 'edit_post', $post_id ) ) {
 						return;
 					} else {
 						$this->save_rt_person_post( $post_id, $post, $update );

@@ -78,7 +78,81 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 					'context'  => 'side',
 					'priority' => 'high',
 				),
+				'rt-media-meta-images' => array(
+					'title'    => __( 'Photos', 'movie-library' ),
+					'callback' => array( $this, 'rt_media_meta_images' ),
+					'screen'   => [ 'rt-movie', 'rt-person' ],
+					'context'  => 'side',
+					'priority' => 'high',
+				),
+				'rt-media-meta-videos' => array(
+					'title'    => __( 'Videos', 'movie-library' ),
+					'callback' => array( $this, 'rt_media_meta_videos' ),
+					'screen'   => [ 'rt-movie', 'rt-person' ],
+					'context'  => 'side',
+					'priority' => 'high',
+				),
 			);
+		}
+
+		public function rt_media_meta_images( WP_Post $post ): void {
+			$rt_media_meta_images_data = get_post_meta( $post->ID );
+
+			$rt_media_meta_images_key = array(
+				'images' => 'rt-media-meta-images',
+			);
+			wp_nonce_field( 'rt_media_meta_nonce', 'rt_media_meta_nonce' );
+			?>
+
+			<div class="rt-media-meta-fields rt-media-meta-images">
+				<div class="rt-media-meta-images-container">
+					<?php
+					if ( isset( $rt_media_meta_images_data[ $rt_media_meta_images_key[ 'images' ] ] ) ) {
+						$rt_media_meta_images = unserialize( $rt_media_meta_images_data[ $rt_media_meta_images_key[ 'images' ] ][0] );
+						foreach ( $rt_media_meta_images as $rt_media_meta_image ) {
+							?>
+							<div class="rt-media-meta-image">
+								<img src="<?php echo esc_url( $rt_media_meta_image ); ?>" alt="">
+								<button class="rt-media-meta-image-remove" type="button">Remove</button>
+							</div>
+							<?php
+						}
+					}
+					?>
+				</div>
+				<button class="rt-media-meta-images-add" type="button">Add</button>
+			</div>
+			<?php
+		}
+
+		public function rt_media_meta_videos( WP_Post $post ): void {
+			$rt_media_meta_videos_data = get_post_meta( $post->ID );
+
+			$rt_media_meta_videos_key = array(
+				'videos' => 'rt-media-meta-videos',
+			);
+			wp_nonce_field( 'rt_media_meta_nonce', 'rt_media_meta_nonce' );
+			?>
+
+			<div class="rt-media-meta-fields rt-media-meta-videos">
+				<div class="rt-media-meta-videos-container">
+					<?php
+					if ( isset( $rt_media_meta_videos_data[ $rt_media_meta_videos_key[ 'videos' ] ] ) ) {
+						$rt_media_meta_videos = unserialize( $rt_media_meta_videos_data[ $rt_media_meta_videos_key[ 'videos' ] ][0] );
+						foreach ( $rt_media_meta_videos as $rt_media_meta_video ) {
+							?>
+							<div class="rt-media-meta-video">
+								<input type="text" name="rt-media-meta-videos[]" value="<?php echo esc_url( $rt_media_meta_video ); ?>">
+								<button class="rt-media-meta-video-remove" type="button">Remove</button>
+							</div>
+							<?php
+						}
+					}
+					?>
+				</div>
+				<button class="rt-media-meta-videos-add" type="button">Add</button>
+			</div>
+			<?php
 		}
 
 		/**
@@ -313,7 +387,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 								} else {
 									$selected = in_array( $rt_p[ 'id' ], $rt_movie_meta_crew_data[ strtolower( 'rt-movie-meta-crew-' . $key ) ][ 0 ] ) ? 'selected' : '';
 									printf(
-										'<option value="%1$d" "%2$s">%3$s</option>',
+										'<option value="%1$d" %2$s>%3$s</option>',
 										esc_attr( $rt_p[ 'id' ] ),
 										$selected,
 										esc_html( $rt_p[ 'name' ] ),
