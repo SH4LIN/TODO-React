@@ -19,12 +19,14 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 
 	/**
 	 * @class Movie_Library_Meta_Boxes
-	 * This class is used to create the meta boxes for the plugin.
+	 *        This class is used to create the meta boxes for the plugin.
 	 */
 	class Movie_Library_Meta_Boxes {
 
 		/**
-		 * This function is used to add the meta boxes for the plugin.
+		 * @function add_meta_boxes
+		 *           This function is used to add the meta boxes for the plugin.
+		 * @return void
 		 */
 		public function add_meta_boxes(): void {
 
@@ -41,6 +43,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 			}
 		}
 
+		/**
+		 * @function get_meta_boxes_args
+		 *           This function is used to get the meta boxes arguments.
+		 * @return array The meta boxes arguments.
+		 */
 		private function get_meta_boxes_args(): array {
 			return array(
 				'rt-movie-meta-basic'   => array(
@@ -74,6 +81,14 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 			);
 		}
 
+		/**
+		 * @function rt_movie_meta_basic
+		 *           This function is used to create the meta box for the person social details.
+		 *
+		 * @param WP_Post $post The post object.
+		 *
+		 * @return void
+		 */
 		public function rt_person_meta_social( WP_Post $post ): void {
 			$rt_person_meta_social_data = get_post_meta( $post->ID );
 
@@ -136,9 +151,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 
 		/**
 		 * @function rt_movie_meta_crew
-		 * This function is used to display the meta box for the movie crew.
+		 *           This function is used to display the meta box for the person basic details.
 		 *
 		 * @param WP_Post $post The post object.
+		 *
+		 * @return void
 		 */
 		public function rt_person_meta_basic( WP_Post $post ): void {
 			$rt_person_meta_basic_data = get_post_meta( $post->ID );
@@ -180,9 +197,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 
 		/**
 		 * @function rt_movie_meta_basic
-		 * This function is used to display the meta box for the movie details.
+		 *           This function is used to display the meta box for the movie details.
 		 *
 		 * @param WP_Post $post The post object.
+		 *
+		 * @return void
 		 */
 		public function rt_movie_meta_basic( WP_Post $post ): void {
 			$rt_movie_meta_basic_data = get_post_meta( $post->ID );
@@ -239,9 +258,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 
 		/**
 		 * @function rt_movie_meta_crew
-		 * This function is used to display the meta box for the movie crew.
+		 *           This function is used to display the meta box for the movie crew.
 		 *
 		 * @param WP_Post $post The post object.
+		 *
+		 * @return void
 		 */
 		public function rt_movie_meta_crew( WP_Post $post ): void {
 			$rt_career_terms = get_terms(
@@ -312,7 +333,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 
 		/**
 		 * @function get_person_data
-		 * This function is used to get the person data.
+		 *           This function is used to get the person data.
 		 *
 		 * @param object $rt_career_term The career term object.
 		 *

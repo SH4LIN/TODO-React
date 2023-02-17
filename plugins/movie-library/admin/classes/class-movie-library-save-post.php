@@ -21,25 +21,42 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 	 * This class is used to handle all the operation while saving the post.
 	 */
 	class Movie_Library_Save_Post {
+		/**
+		 * @function save_post
+		 *           This function is used to save the post.
+		 *           It also checks the user's permission to save the post.
+		 *           If the user has the permission to save the post then it calls the respective function to save the post.
+		 *           It also checks if the post is an autosave or a revision.
+		 *           If the post is an autosave or a revision then it returns.
+		 *
+		 * @param int      $post_id
+		 * @param \WP_Post $post
+		 * @param bool     $update
+		 *
+		 * @return void
+		 */
 		public function save_post( int $post_id, WP_Post $post, bool $update ): void {
 			if ( wp_is_post_autosave( $post_id ) || wp_is_post_revision( $post_id ) ) {
 				return;
 			}
-			// Check the user's permissions.
 			if ( isset( $_POST[ 'post_type' ] ) ) {
+				// Check is post type is rt-movie or rt-person.
 				if ( $_POST[ 'post_type' ] === 'rt-movie' ) {
+					// Check the user's permissions.
 					if ( ! current_user_can( 'edit_page', $post_id ) ) {
 						return;
 					} else {
 						$this->save_rt_movie_post( $post_id, $post, $update );
 					}
 				} elseif ( $_POST[ 'post_type' ] === 'rt-person' ) {
+					// Check the user's permissions.
 					if ( ! current_user_can( 'edit_page', $post_id ) ) {
 						return;
 					} else {
 						$this->save_rt_person_post( $post_id, $post, $update );
 					}
 				} else {
+					// Check the user's permissions.
 					if ( ! current_user_can( 'edit_post', $post_id ) ) {
 						return;
 					}
@@ -48,7 +65,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 		}
 
 		/**
-		 * This function is used to save the rt-person post.
+		 * @function save_rt_person_post
+		 *           This function is used to save the rt-person post.
+		 *           First it will verify the nonce if it is set or not.
+		 *           If the nonce is set then it will verify the nonce.
+		 *           If the nonce is verified then it will check the expected fields are set or not.
+		 *           If the expected fields are set then it will sanitize the data, validate data and save the data.
 		 *
 		 * @param int     $post_id The post ID.
 		 * @param WP_Post $post    The post object.
@@ -59,8 +81,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 			if ( ! isset( $_POST[ 'rt_person_meta_nonce' ] ) ) {
 				return;
 			}
+
 			//Sanitize nonce
 			$rt_person_meta_nonce = sanitize_text_field( $_POST[ 'rt_person_meta_nonce' ] );
+
 			// Verify that the nonce is valid.
 			if ( ! wp_verify_nonce( $rt_person_meta_nonce, 'rt_person_meta_nonce' ) ) {
 				return;
@@ -68,11 +92,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 
 			/** OK, it's safe for us to save the data now. */
 
+			// Check if rt-person-meta-basic-birth-date is set. If it is set then sanitize the data and save it.
 			if ( isset( $_POST[ 'rt-person-meta-basic-birth-date' ] ) ) {
 				$rt_person_meta_basic_birth_date = sanitize_text_field( $_POST[ 'rt-person-meta-basic-birth-date' ] );
 				update_post_meta( $post_id, 'rt-person-meta-basic-birth-date', $rt_person_meta_basic_birth_date );
 			}
 
+			// Check if rt-person-meta-basic-birth-place is set. If it is set then sanitize the data and save it.
 			if ( isset( $_POST[ 'rt-person-meta-basic-birth-place' ] ) ) {
 				$rt_person_meta_basic_birth_place = sanitize_text_field( $_POST[ 'rt-person-meta-basic-birth-place' ] );
 				if ( ! is_numeric( $rt_person_meta_basic_birth_place ) ) {
@@ -80,29 +106,33 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 				}
 			}
 
+			// Check if rt-person-meta-social-twitter url is set. If it is set then sanitize url the data validate the data and save it.
 			if ( isset( $_POST[ 'rt-person-meta-social-twitter' ] ) ) {
-				$rt_person_meta_social_twitter = sanitize_url( $_POST[ 'rt-person-meta-social-twitter' ]);
+				$rt_person_meta_social_twitter = sanitize_url( $_POST[ 'rt-person-meta-social-twitter' ] );
 				if ( filter_var( $rt_person_meta_social_twitter, FILTER_VALIDATE_URL ) ) {
 					update_post_meta( $post_id, 'rt-person-meta-social-twitter', $rt_person_meta_social_twitter );
 				}
 			}
 
+			// Check if rt-person-meta-social-facebook url is set. If it is set then sanitize url the data validate the data and save it.
 			if ( isset( $_POST[ 'rt-person-meta-social-facebook' ] ) ) {
-				$rt_person_meta_social_facebook = sanitize_url( $_POST[ 'rt-person-meta-social-facebook' ]);
+				$rt_person_meta_social_facebook = sanitize_url( $_POST[ 'rt-person-meta-social-facebook' ] );
 				if ( filter_var( $rt_person_meta_social_facebook, FILTER_VALIDATE_URL ) ) {
 					update_post_meta( $post_id, 'rt-person-meta-social-facebook', $rt_person_meta_social_facebook );
 				}
 			}
 
+			// Check if rt-person-meta-social-instagram url is set. If it is set then sanitize url the data validate the data and save it.
 			if ( isset( $_POST[ 'rt-person-meta-social-instagram' ] ) ) {
-				$rt_person_meta_social_instagram = sanitize_url( $_POST[ 'rt-person-meta-social-instagram' ]);
+				$rt_person_meta_social_instagram = sanitize_url( $_POST[ 'rt-person-meta-social-instagram' ] );
 				if ( filter_var( $rt_person_meta_social_instagram, FILTER_VALIDATE_URL ) ) {
 					update_post_meta( $post_id, 'rt-person-meta-social-instagram', $rt_person_meta_social_instagram );
 				}
 			}
 
+			// Check if rt-person-meta-social-web url is set. If it is set then sanitize url the data validate the data and save it.
 			if ( isset( $_POST[ 'rt-person-meta-social-web' ] ) ) {
-				$rt_person_meta_social_web = sanitize_url( $_POST[ 'rt-person-meta-social-web' ]);
+				$rt_person_meta_social_web = sanitize_url( $_POST[ 'rt-person-meta-social-web' ] );
 				if ( filter_var( $rt_person_meta_social_web, FILTER_VALIDATE_URL ) ) {
 					update_post_meta( $post_id, 'rt-person-meta-social-web', $rt_person_meta_social_web );
 				}
@@ -110,20 +140,28 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 		}
 
 		/**
-		 * This function is used to save the rt-movie post.
+		 * @function save_rt_movie_post
+		 *           This function is used to save the rt-movie post.
+		 *           First it will verify the nonce if it is set or not.
+		 *           If the nonce is set then it will verify the nonce.
+		 *           If the nonce is verified then it will check the expected fields are set or not.
+		 *           If the expected fields are set then it will sanitize the data, validate data and save the data.
+		 *           crew data are stored dynamically with the help of get_terms() function.
+		 *           and for each crew data it will create shadow taxonomy term.
 		 *
 		 * @param int     $post_id The post ID.
 		 * @param WP_Post $post    The post object.
 		 * @param bool    $update  Whether this is an existing post being updated or not.
 		 */
 		private function save_rt_movie_post( int $post_id, WP_Post $post, bool $update ): void {
-
 			// Check if our nonce is set.
 			if ( ! isset( $_POST[ 'rt_movie_meta_nonce' ] ) ) {
 				return;
 			}
+
 			//Sanitize nonce
 			$rt_movie_meta_nonce = sanitize_text_field( $_POST[ 'rt_movie_meta_nonce' ] );
+
 			// Verify that the nonce is valid.
 			if ( ! wp_verify_nonce( $rt_movie_meta_nonce, 'rt_movie_meta_nonce' ) ) {
 				return;
@@ -131,6 +169,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 
 			/** OK, it's safe for us to save the data now. */
 
+			// Get all the rt-person-career terms.
 			$rt_career_terms = get_terms(
 				[
 					'taxonomy'   => 'rt-person-career',
@@ -138,69 +177,97 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 				]
 			);
 
+			// Setting the flag to false. If any crew data is set then it will be set to true. And if there is no crew data then it will be false.
 			$does_any_crew_exist = false;
+
+			// Running foreach loop for each rt-person-career term.
 			foreach ( $rt_career_terms as $rt_career_term ) {
+				// Creating meta key for each rt-person-career term.
 				$meta_key = 'rt-movie-meta-crew-' . $rt_career_term->slug;
-				// Make sure that it is set.
+
+				// Checking if meta ke is available in $_POST.
 				if ( isset( $_POST[ $meta_key ] ) ) {
+					// Setting the flag to true.
 					$does_any_crew_exist     = true;
+
+					// Getting the crew data from $_POST.
 					$rt_movie_meta_crew_data = $_POST[ $meta_key ];
+
+					// Checking if the crew data is array or not.
 					if ( is_array( $rt_movie_meta_crew_data ) && count( $rt_movie_meta_crew_data ) > 0 ) {
+						// Creating an empty array to store the shadow taxonomy term.
 						$shadow_terms = array();
+
+						// Running foreach loop for each crew data.
 						foreach ( $rt_movie_meta_crew_data as $rt_movie_meta_crew ) {
-							// Sanitize user input.
+							// Sanitizing the crew data.
 							$rt_movie_meta_crew = sanitize_text_field( $rt_movie_meta_crew );
-							//If value is emptier than delete the term
+
+							// Checking if the crew data is empty or not and if the crew data is numeric or not.
 							if ( ! empty( $rt_movie_meta_crew ) && is_numeric( $rt_movie_meta_crew ) ) {
 								$shadow_terms[] = $rt_movie_meta_crew;
 							}
 						}
+
+						// Updating the post meta with the shadow taxonomy term.
 						$this->set_object_terms( $post_id, $shadow_terms, $meta_key );
 					} else {
 						if ( ! empty( $rt_movie_meta_crew_data ) && is_numeric( $rt_movie_meta_crew_data ) ) {
 							// Sanitize user input.
 							$rt_movie_meta_crew_data = sanitize_text_field( $rt_movie_meta_crew_data );
+
 							$this->set_object_terms( $post_id, [ $rt_movie_meta_crew_data ], $meta_key );
 						}
 					}
 				} else {
+					// If the meta key is not available in $_POST then it will delete the post meta.
 					update_post_meta( $post_id, $meta_key, [] );
 				}
 			}
 
+			// If there is no crew data then it will delete the term_relationships.
 			if ( ! $does_any_crew_exist ) {
 				wp_delete_object_term_relationships( $post_id, '_rt-movie-person' );
 			}
 
-			// Make sure that it is set.
+			// Checking if rt-movie-meta-basic-rating is available in $_POST.
 			if ( isset( $_POST[ 'rt-movie-meta-basic-rating' ] ) ) {
 				// Sanitize user input.
 				$rt_movie_meta_basic_rating = sanitize_text_field( $_POST[ 'rt-movie-meta-basic-rating' ] );
-				//Validate user input.
+
+				// If value is not numeric than doing explicit type casting.
 				if ( ! is_numeric( $rt_movie_meta_basic_rating ) ) {
 					$rt_movie_meta_basic_rating = (int)$rt_movie_meta_basic_rating;
 				}
+
+				// If the value is between 1 and 5 then it will update the meta field in the database.
 				if ( $rt_movie_meta_basic_rating >= 1 && $rt_movie_meta_basic_rating <= 5 ) {
 					// Update the meta field in the database.
 					update_post_meta( $post_id, 'rt-movie-meta-basic-rating', $rt_movie_meta_basic_rating );
 				}
 			}
 
+			// Checking if rt-movie-meta-basic-runtime is available in $_POST.
 			if ( isset( $_POST[ 'rt-movie-meta-basic-runtime' ] ) ) {
 				// Sanitize user input.
 				$rt_movie_meta_basic_runtime = sanitize_text_field( $_POST[ 'rt-movie-meta-basic-runtime' ] );
-				//Validate user input.
+
+				// If value is not numeric than doing explicit type casting.
 				if ( ! is_numeric( $rt_movie_meta_basic_runtime ) ) {
 					$rt_movie_meta_basic_runtime = (int)$rt_movie_meta_basic_runtime;
 				}
+
+				// If the value is between 1 and 1000 then it will update the meta field in the database.
 				if ( $rt_movie_meta_basic_runtime >= 1 && $rt_movie_meta_basic_runtime <= 1000 ) {
 					update_post_meta( $post_id, 'rt-movie-meta-basic-runtime', $rt_movie_meta_basic_runtime );
 				}
 			}
 
+			// Checking if rt-movie-meta-basic-release-date is available in $_POST.
 			if ( isset( $_POST[ 'rt-movie-meta-basic-release-date' ] ) ) {
 				// Sanitize user input.
 				$rt_movie_meta_basic_release_date = sanitize_text_field( $_POST[ 'rt-movie-meta-basic-release-date' ] );
+
 				// Update the meta field in the database.
 				update_post_meta( $post_id, 'rt-movie-meta-basic-release-date', $rt_movie_meta_basic_release_date );
 			}

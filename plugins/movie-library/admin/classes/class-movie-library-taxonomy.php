@@ -18,6 +18,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Taxonomy' ) ) {
 	 * This class contains all the functions to create the taxonomy for the plugin.
 	 */
 	class Movie_Library_Taxonomy {
+		/**
+		 * @function register_custom_taxonomy.
+		 *           This function is used to register the custom taxonomy for the plugin.
+		 * @return void
+		 */
 		function register_custom_taxonomy(): void {
 			$custom_taxonomies = $this->get_custom_taxonomies();
 			foreach ( $custom_taxonomies as $custom_taxonomy ) {
@@ -26,6 +31,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Taxonomy' ) ) {
 			flush_rewrite_rules();
 		}
 
+		/**
+		 * @function get_custom_taxonomies.
+		 *           This function is used to get the custom taxonomies for the plugin.
+		 * @return array[]
+		 */
 		function get_custom_taxonomies(): array {
 			$custom_taxonomies_array = array(
 				array(
@@ -257,6 +267,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Taxonomy' ) ) {
 					),
 				),
 			);
+
 			return $custom_taxonomies_array;
 		}
 	}

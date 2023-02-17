@@ -21,7 +21,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Deactivation' ) ) {
 	class Movie_Library_Deactivation {
 
 		/**
-		 * This function is used to perform the deactivation functionality for the plugin.
+		 * @function deactivate.
+		 *           This function is used to perform the deactivation functionality for the plugin.
+		 * @return void
 		 */
 		public function deactivate(): void {}
 

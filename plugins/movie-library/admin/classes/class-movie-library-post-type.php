@@ -15,15 +15,15 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Post_type' ) ) {
 	/**
 	 * @class   Custom_Post_type.
-	 * This class contains the functions to register the custom post type.
+	 *          This class contains the functions to register the custom post type.
 	 * @version 1.0.0
 	 */
 	class Movie_Library_Post_type {
 		/**
 		 * @function register_custom_post_type.
-		 * This function is used to register the custom post type.
-		 * It gets the custom post type array from the get_custom_post_types() function.
-		 * And runs the foreach loop for each post type inside an array and registers it.
+		 *           This function is used to register the custom post type.
+		 *           It gets the custom post type array from the get_custom_post_types() function.
+		 *           And runs the foreach loop for each post type inside an array and registers it.
 		 * @return void
 		 * @see      get_custom_post_types()
 		 */
@@ -37,19 +37,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Post_type' ) ) {
 
 		/**
 		 * @function get_custom_post_types.
-		 * This function is used to return the custom post type array.
-		 * Custom post types created
-		 * 1. rt-movie
-		 * 2. rt-person
+		 *           This function is used to return the custom post type array.
+		 *           Custom post types created
+		 *               1. rt-movie
+		 *               2. rt-person
 		 * @return array
 		 */
 		private function get_custom_post_types(): array {
-			/**
-			 * Below array contains the custom post type array.
-			 * Custom post types created
-			 * 1. rt-movie
-			 * 2. rt-person
-			 */
 			$custom_post_types_array = array(
 				array(
 					'post_type' => 'rt-movie',
@@ -132,6 +126,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Post_type' ) ) {
 					),
 				),
 			);
+
 			return $custom_post_types_array;
 		}
 	}
