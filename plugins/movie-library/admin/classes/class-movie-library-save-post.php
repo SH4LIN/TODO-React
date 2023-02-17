@@ -53,29 +53,48 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 
 			/** OK, it's safe for us to save the data now. */
 
-			$keys = array_keys($_POST);
-			foreach ($keys as $key){
-				$exp = '/^rt-movie-meta-crew/';
-				if (preg_match($exp, $key) === 1){
+			$rt_career_terms = get_terms(
+				[
+					'taxonomy'   => 'rt-person-career',
+					'hide_empty' => true,
+				]
+			);
+
+
+			foreach ( $rt_career_terms as $rt_career_term ) {
+				$key = 'rt-movie-meta-crew-' . $rt_career_term->slug;
+				// Make sure that it is set.
+				if ( isset( $_POST[ $key ] ) ) {
 					$rt_movie_meta_crew = $_POST[$key];
 					if(is_array($rt_movie_meta_crew) && count($rt_movie_meta_crew) > 0){
-						$d = array();
+						$terms = array();
 						foreach ($rt_movie_meta_crew as $crew){
 							// Sanitize user input.
 							$crew = sanitize_text_field($crew);
 							//If value is empty than delete the term
 							if(empty($crew)){
 
-								wp_delete_object_term_relationships( $post_id, '_rt-movie-person' );
 							}else{
 								// Update the meta field in the database.
-								$d[] = $crew;
-
+								$terms[] = $crew;
 							}
-							update_post_meta( $post_id, $key, $d );
-							wp_set_object_terms($post_id, $d,'_rt-movie-person', true);
+
 						}
+						update_post_meta( $post_id, $key, $terms );
+						wp_set_object_terms($post_id, $terms,'_rt-movie-person', true);
 					}
+				}else{
+					update_post_meta( $post_id, $key, [] );
+				}
+			}
+
+
+
+
+			foreach ($keys as $key){
+				$exp = '/^rt-movie-meta-crew/';
+				if (preg_match($exp, $key) === 1){
+
 
 				}
 			}
