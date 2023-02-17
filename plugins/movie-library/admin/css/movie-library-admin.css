@@ -30,3 +30,17 @@
 .rt-person-meta-label {
 	font-weight: 600;
 }
+
+.rt-media-meta-add {
+	background: transparent;
+	width: 85%;
+	border: #0c0c0c 1px solid;
+	border-radius: 8px;
+	padding: 10px 18px;
+}
+
+.rt-media-meta-add:hover {
+	background: #0c0c0c;
+	cursor: pointer;
+	color: #fff;
+}

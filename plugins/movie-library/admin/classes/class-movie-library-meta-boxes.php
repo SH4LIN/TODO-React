@@ -120,8 +120,38 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 					}
 					?>
 				</div>
-				<button class="rt-media-meta-images-add" type="button">Add</button>
+				<button class="rt-media-meta-add rt-media-meta-images-add" type="button">Add</button>
 			</div>
+
+			<script type="application/javascript">
+				jQuery(document).read(function ($){
+					$('.rt-media-meta-images-add').on('click', function (e) {
+						e.preventDefault();
+						var rt_media_meta_images_container = $(this).parent().find('.rt-media-meta-images-container');
+						var rt_media_meta_images_frame = wp.media({
+							title: 'Select Images',
+							button: {
+								text: 'Select Images'
+							},
+							multiple: true
+						});
+						rt_media_meta_images_frame.on('select', function () {
+							var rt_media_meta_images_attachment = rt_media_meta_images_frame.state().get('selection').toJSON();
+							var rt_media_meta_images = [];
+							$.each(rt_media_meta_images_attachment, function (index, value) {
+								rt_media_meta_images.push(value.url);
+								rt_media_meta_images_container.append('<div class="rt-media-meta-image"><img src="' + value.url + '" alt=""><button class="rt-media-meta-image-remove" type="button">Remove</button></div>');
+							});
+							$(this).parent().find('input').val(JSON.stringify(rt_media_meta_images));
+						});
+						rt_media_meta_images_frame.open();
+					});
+					$('.rt-media-meta-images-container').on('click', '.rt-media-meta-image-remove', function (e) {
+						e.preventDefault();
+						$(this).parent().remove();
+					});
+				})
+			</script>
 			<?php
 		}
 
@@ -150,7 +180,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 					}
 					?>
 				</div>
-				<button class="rt-media-meta-videos-add" type="button">Add</button>
+				<button class="rt-media-meta-add rt-media-meta-videos-add" type="button">Add</button>
 			</div>
 			<?php
 		}

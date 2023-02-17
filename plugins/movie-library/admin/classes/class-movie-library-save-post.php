@@ -179,6 +179,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 
 			// Setting the flag to false. If any crew data is set then it will be set to true. And if there is no crew data then it will be false.
 			$does_any_crew_exist = false;
+			$shadow_terms        = array();
 
 			// Running foreach loop for each rt-person-career term.
 			foreach ( $rt_career_terms as $rt_career_term ) {
@@ -196,7 +197,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 					// Checking if the crew data is array or not.
 					if ( is_array( $rt_movie_meta_crew_data ) && count( $rt_movie_meta_crew_data ) > 0 ) {
 						// Creating an empty array to store the shadow taxonomy term.
-						$shadow_terms = array();
+						$terms = array();
 
 						// Running foreach loop for each crew data.
 						foreach ( $rt_movie_meta_crew_data as $rt_movie_meta_crew ) {
@@ -205,16 +206,18 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 
 							// Checking if the crew data is empty or not and if the crew data is numeric or not.
 							if ( ! empty( $rt_movie_meta_crew ) && is_numeric( $rt_movie_meta_crew ) ) {
+								$terms[] = $rt_movie_meta_crew;
 								$shadow_terms[] = $rt_movie_meta_crew;
 							}
 						}
 
 						// Updating the post meta with the shadow taxonomy term.
-						$this->set_object_terms( $post_id, $shadow_terms, $meta_key );
+						$this->set_object_terms( $post_id, $terms, $meta_key );
 					} else {
 						if ( ! empty( $rt_movie_meta_crew_data ) && is_numeric( $rt_movie_meta_crew_data ) ) {
 							// Sanitize user input.
 							$rt_movie_meta_crew_data = sanitize_text_field( $rt_movie_meta_crew_data );
+							$shadow_terms[] = $rt_movie_meta_crew_data;
 
 							$this->set_object_terms( $post_id, [ $rt_movie_meta_crew_data ], $meta_key );
 						}
@@ -224,6 +227,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 					update_post_meta( $post_id, $meta_key, [] );
 				}
 			}
+
+			wp_delete_object_term_relationships( $post_id, '_rt-movie-person' );
+			wp_set_object_terms( $post_id, $shadow_terms, '_rt-movie-person', true );
 
 			// If there is no crew data then it will delete the term_relationships.
 			if ( ! $does_any_crew_exist ) {
@@ -285,7 +291,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 		 */
 		private function set_object_terms( int $post_id, mixed $terms, string $key ): void {
 			update_post_meta( $post_id, $key, $terms );
-			wp_set_object_terms( $post_id, $terms, '_rt-movie-person', true );
 		}
 	}
 }
