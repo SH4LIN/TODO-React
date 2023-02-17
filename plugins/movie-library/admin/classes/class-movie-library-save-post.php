@@ -60,11 +60,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 				]
 			);
 
-
+			$does_any_crew_exist = false;
 			foreach ( $rt_career_terms as $rt_career_term ) {
 				$key = 'rt-movie-meta-crew-' . $rt_career_term->slug;
 				// Make sure that it is set.
 				if ( isset( $_POST[ $key ] ) ) {
+					$does_any_crew_exist = true;
 					$rt_movie_meta_crew = $_POST[$key];
 					if(is_array($rt_movie_meta_crew) && count($rt_movie_meta_crew) > 0){
 						$terms = array();
@@ -85,16 +86,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 				}
 			}
 
-
-
-
-			foreach ($keys as $key){
-				$exp = '/^rt-movie-meta-crew/';
-				if (preg_match($exp, $key) === 1){
-
-
-				}
+			if (!$does_any_crew_exist){
+				wp_delete_object_term_relationships($post_id, '_rt-movie-person');
 			}
+
 			// Make sure that it is set.
 			if ( isset( $_POST['rt-movie-meta-basic-rating'] ) ) {
 				// Sanitize user input.
