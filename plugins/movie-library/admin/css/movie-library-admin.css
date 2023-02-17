@@ -17,5 +17,16 @@
 }
 
 .rt-movie-meta-label {
-	font-weight: 700;
+	font-weight: 600;
+}
+
+.rt-person-meta-field {
+	display: block;
+	width: 100%;
+	margin: 10px 0 10px 0;
+	padding: 0;
+}
+
+.rt-person-meta-label {
+	font-weight: 600;
 }
