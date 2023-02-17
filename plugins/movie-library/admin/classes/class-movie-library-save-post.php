@@ -72,10 +72,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 							// Sanitize user input.
 							$crew = sanitize_text_field($crew);
 							//If value is empty than delete the term
-							if(empty($crew)){
-
-							}else{
-								// Update the meta field in the database.
+							if(!empty($crew)){
 								$terms[] = $crew;
 							}
 
