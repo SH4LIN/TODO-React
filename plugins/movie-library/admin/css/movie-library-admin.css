@@ -46,13 +46,13 @@
 	color: #fff;
 }
 
-.rt-media-meta-images-container {
+.rt-media-meta-container {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 10px;
+	gap: 3px;
 }
 
-.rt-media-meta-image-remove {
+.rt-media-meta-remove {
 	z-index: 1;
 	position: absolute;
 	right: 0;
@@ -66,6 +66,7 @@
 	cursor: pointer;
 }
 
-.rt-media-meta-image {
+.rt-media-meta {
 	position: relative;
 }
+

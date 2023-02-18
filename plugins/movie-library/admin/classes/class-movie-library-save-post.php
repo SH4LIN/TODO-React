@@ -317,7 +317,19 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 				// Update the meta field in the database.
 			}
 
+			if( !is_array( $rt_movie_meta_selected_images ) ) {
+				$rt_movie_meta_selected_images = [];
+			}
+			if( !is_array( $rt_movie_meta_uploaded_images ) ) {
+				$rt_movie_meta_uploaded_images = [];
+			}
+
 			$rt_media_meta_images = array_unique(array_merge( $rt_movie_meta_selected_images, $rt_movie_meta_uploaded_images ));
+			foreach ( $rt_media_meta_images as $key => $value ) {
+				if ( !wp_get_attachment_image_url($value) ) {
+					unset( $rt_media_meta_images[ $key ] );
+				}
+			}
 			update_post_meta( $post_id, 'rt-media-meta-images', $rt_media_meta_images );
 		}
 
@@ -340,7 +352,19 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 				// Update the meta field in the database.
 			}
 
+			if( !is_array( $rt_movie_meta_selected_videos ) ) {
+				$rt_movie_meta_selected_videos = [];
+			}
+			if( !is_array( $rt_movie_meta_uploaded_videos ) ) {
+				$rt_movie_meta_uploaded_videos = [];
+			}
+
 			$rt_media_meta_videos = array_unique(array_merge( $rt_movie_meta_selected_videos, $rt_movie_meta_uploaded_videos ));
+			foreach ( $rt_media_meta_videos as $key => $video ) {
+				if ( !wp_get_attachment_url($video) ) {
+					unset( $rt_media_meta_videos[ $key ] );
+				}
+			}
 			update_post_meta( $post_id, 'rt-media-meta-videos', $rt_media_meta_videos );
 		}
 	}
