@@ -298,6 +298,18 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 			update_post_meta( $post_id, $key, $terms );
 		}
 
+		/**
+		 * @function save_rt_movie_meta_images
+		 *           This function is used to save the rt-movie-meta-images meta field in the database.
+		 *           This function will have two array one for selected videos and another for uploaded images.
+		 *           If the selected images array is not empty then it will update the meta field in the database.
+		 *           If the uploaded images array is not empty then it will update the meta field in the database.
+		 *           If both the arrays are empty then it will delete the meta field from the database.
+		 *
+		 * @param int $post_id
+		 *
+		 * @return void
+		 */
 		private function save_rt_movie_meta_images( int $post_id ): void {
 			$rt_movie_meta_selected_images = [];
 			$rt_movie_meta_uploaded_images = [];
@@ -317,22 +329,39 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 				// Update the meta field in the database.
 			}
 
-			if( !is_array( $rt_movie_meta_selected_images ) ) {
+			if ( ! is_array( $rt_movie_meta_selected_images ) ) {
 				$rt_movie_meta_selected_images = [];
 			}
-			if( !is_array( $rt_movie_meta_uploaded_images ) ) {
+			if ( ! is_array( $rt_movie_meta_uploaded_images ) ) {
 				$rt_movie_meta_uploaded_images = [];
 			}
 
-			$rt_media_meta_images = array_unique(array_merge( $rt_movie_meta_selected_images, $rt_movie_meta_uploaded_images ));
+			$rt_media_meta_images = array_unique( array_merge( $rt_movie_meta_selected_images, $rt_movie_meta_uploaded_images ) );
 			foreach ( $rt_media_meta_images as $key => $value ) {
-				if ( !wp_get_attachment_image_url($value) ) {
+				if ( ! wp_get_attachment_image_url( $value ) ) {
 					unset( $rt_media_meta_images[ $key ] );
 				}
 			}
-			update_post_meta( $post_id, 'rt-media-meta-images', $rt_media_meta_images );
+			if( empty( $rt_media_meta_images ) ) {
+				delete_post_meta( $post_id, 'rt-media-meta-images' );
+			} else {
+				update_post_meta( $post_id, 'rt-media-meta-images', $rt_media_meta_images );
+			}
+
 		}
 
+		/**
+		 * @function save_rt_movie_meta_videos
+		 *           This function is used to save the rt-movie-meta-videos meta field in the database.
+		 *           This function will have two array one for selected videos and another for uploaded videos.
+		 *           If the selected videos array is not empty then it will update the meta field in the database.
+		 *           If the uploaded videos array is not empty then it will update the meta field in the database.
+		 *           If both the arrays are empty then it will delete the meta field from the database.
+		 *
+		 * @param int $post_id
+		 *
+		 * @return void
+		 */
 		private function save_rt_movie_meta_videos( int $post_id ): void {
 			$rt_movie_meta_selected_videos = [];
 			$rt_movie_meta_uploaded_videos = [];
@@ -352,20 +381,24 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 				// Update the meta field in the database.
 			}
 
-			if( !is_array( $rt_movie_meta_selected_videos ) ) {
+			if ( ! is_array( $rt_movie_meta_selected_videos ) ) {
 				$rt_movie_meta_selected_videos = [];
 			}
-			if( !is_array( $rt_movie_meta_uploaded_videos ) ) {
+			if ( ! is_array( $rt_movie_meta_uploaded_videos ) ) {
 				$rt_movie_meta_uploaded_videos = [];
 			}
 
-			$rt_media_meta_videos = array_unique(array_merge( $rt_movie_meta_selected_videos, $rt_movie_meta_uploaded_videos ));
+			$rt_media_meta_videos = array_unique( array_merge( $rt_movie_meta_selected_videos, $rt_movie_meta_uploaded_videos ) );
 			foreach ( $rt_media_meta_videos as $key => $video ) {
-				if ( !wp_get_attachment_url($video) ) {
+				if ( ! wp_get_attachment_url( $video ) ) {
 					unset( $rt_media_meta_videos[ $key ] );
 				}
 			}
-			update_post_meta( $post_id, 'rt-media-meta-videos', $rt_media_meta_videos );
+			if( empty( $rt_media_meta_videos ) ) {
+				delete_post_meta( $post_id, 'rt-media-meta-videos' );
+			} else {
+				update_post_meta( $post_id, 'rt-media-meta-videos', $rt_media_meta_videos );
+			}
 		}
 	}
 }

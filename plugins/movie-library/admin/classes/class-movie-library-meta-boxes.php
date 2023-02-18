@@ -95,6 +95,14 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 			);
 		}
 
+		/**
+		 * @function rt_movie_meta_images
+		 *           This function is used to create the meta box for the movie images.
+		 *
+		 * @param WP_Post $post
+		 *
+		 * @return void
+		 */
 		public function rt_media_meta_images( WP_Post $post ): void {
 			$rt_media_meta_images_key                 = array(
 				'images' => 'rt-media-meta-images',
@@ -138,6 +146,17 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 			<?php
 		}
 
+		/**
+		 * @function rt_media_meta_videos
+		 *           This function will add the meta box for videos in rt-movie and rt-person post type.
+		 *           It will also add the functionality to add and remove videos.
+		 *           It will also save the videos in the database.
+		 *           It will also add the functionality to add videos from the media library.
+		 *
+		 * @param WP_Post $post
+		 *
+		 * @return void
+		 */
 		public function rt_media_meta_videos( WP_Post $post ): void {
 			$rt_media_meta_videos_key                 = array(
 				'images' => 'rt-media-meta-videos',
