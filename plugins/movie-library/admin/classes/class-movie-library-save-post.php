@@ -92,6 +92,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 
 			/** OK, it's safe for us to save the data now. */
 
+			$this->save_rt_movie_meta_images( $post_id );
+			$this->save_rt_movie_meta_videos( $post_id );
+
 			// Check if rt-person-meta-basic-birth-date is set. If it is set then sanitize the data and save it.
 			if ( isset( $_POST[ 'rt-person-meta-basic-birth-date' ] ) ) {
 				$rt_person_meta_basic_birth_date = sanitize_text_field( $_POST[ 'rt-person-meta-basic-birth-date' ] );
@@ -169,6 +172,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 
 			/** OK, it's safe for us to save the data now. */
 
+			$this->save_rt_movie_meta_images( $post_id );
+			$this->save_rt_movie_meta_videos( $post_id );
+
 			// Get all the rt-person-career terms.
 			$rt_career_terms = get_terms(
 				[
@@ -189,7 +195,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 				// Checking if meta ke is available in $_POST.
 				if ( isset( $_POST[ $meta_key ] ) ) {
 					// Setting the flag to true.
-					$does_any_crew_exist     = true;
+					$does_any_crew_exist = true;
 
 					// Getting the crew data from $_POST.
 					$rt_movie_meta_crew_data = $_POST[ $meta_key ];
@@ -206,7 +212,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 
 							// Checking if the crew data is empty or not and if the crew data is numeric or not.
 							if ( ! empty( $rt_movie_meta_crew ) && is_numeric( $rt_movie_meta_crew ) ) {
-								$terms[] = $rt_movie_meta_crew;
+								$terms[]        = $rt_movie_meta_crew;
 								$shadow_terms[] = $rt_movie_meta_crew;
 							}
 						}
@@ -217,7 +223,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 						if ( ! empty( $rt_movie_meta_crew_data ) && is_numeric( $rt_movie_meta_crew_data ) ) {
 							// Sanitize user input.
 							$rt_movie_meta_crew_data = sanitize_text_field( $rt_movie_meta_crew_data );
-							$shadow_terms[] = $rt_movie_meta_crew_data;
+							$shadow_terms[]          = $rt_movie_meta_crew_data;
 
 							$this->set_object_terms( $post_id, [ $rt_movie_meta_crew_data ], $meta_key );
 						}
@@ -227,7 +233,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 					update_post_meta( $post_id, $meta_key, [] );
 				}
 			}
-
 			wp_delete_object_term_relationships( $post_id, '_rt-movie-person' );
 			wp_set_object_terms( $post_id, $shadow_terms, '_rt-movie-person', true );
 
@@ -291,6 +296,52 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 		 */
 		private function set_object_terms( int $post_id, mixed $terms, string $key ): void {
 			update_post_meta( $post_id, $key, $terms );
+		}
+
+		private function save_rt_movie_meta_images( int $post_id ): void {
+			$rt_movie_meta_selected_images = [];
+			$rt_movie_meta_uploaded_images = [];
+			// Checking if rt-movie-meta-images is available in $_POST.
+			if ( isset( $_POST[ 'rt-media-meta-selected-images' ] ) && ! empty( $_POST[ 'rt-media-meta-selected-images' ] ) ) {
+				// Sanitize user input.
+				$rt_movie_meta_sanitized_selected_images = sanitize_text_field( $_POST[ 'rt-media-meta-selected-images' ] );
+
+				$rt_movie_meta_selected_images = json_decode( $rt_movie_meta_sanitized_selected_images, false );
+			}
+
+			if ( isset( $_POST[ 'rt-media-meta-uploaded-images' ] ) && ! empty( $_POST[ 'rt-media-meta-uploaded-images' ] ) ) {
+				// Sanitize user input.
+				$rt_movie_meta_sanitized_uploaded_images = sanitize_text_field( $_POST[ 'rt-media-meta-uploaded-images' ] );
+
+				$rt_movie_meta_uploaded_images = json_decode( $rt_movie_meta_sanitized_uploaded_images, false );
+				// Update the meta field in the database.
+			}
+
+			$rt_media_meta_images = array_unique(array_merge( $rt_movie_meta_selected_images, $rt_movie_meta_uploaded_images ));
+			update_post_meta( $post_id, 'rt-media-meta-images', $rt_media_meta_images );
+		}
+
+		private function save_rt_movie_meta_videos( int $post_id ): void {
+			$rt_movie_meta_selected_videos = [];
+			$rt_movie_meta_uploaded_videos = [];
+			// Checking if rt-movie-meta-images is available in $_POST.
+			if ( isset( $_POST[ 'rt-media-meta-selected-videos' ] ) && ! empty( $_POST[ 'rt-media-meta-selected-videos' ] ) ) {
+				// Sanitize user input.
+				$rt_movie_meta_sanitized_selected_videos = sanitize_text_field( $_POST[ 'rt-media-meta-selected-videos' ] );
+
+				$rt_movie_meta_selected_videos = json_decode( $rt_movie_meta_sanitized_selected_videos, false );
+			}
+
+			if ( isset( $_POST[ 'rt-media-meta-uploaded-videos' ] ) && ! empty( $_POST[ 'rt-media-meta-uploaded-videos' ] ) ) {
+				// Sanitize user input.
+				$rt_movie_meta_sanitized_uploaded_videos = sanitize_text_field( $_POST[ 'rt-media-meta-uploaded-videos' ] );
+
+				$rt_movie_meta_uploaded_videos = json_decode( $rt_movie_meta_sanitized_uploaded_videos, false );
+				// Update the meta field in the database.
+			}
+
+			$rt_media_meta_videos = array_unique(array_merge( $rt_movie_meta_selected_videos, $rt_movie_meta_uploaded_videos ));
+			update_post_meta( $post_id, 'rt-media-meta-videos', $rt_media_meta_videos );
 		}
 	}
 }

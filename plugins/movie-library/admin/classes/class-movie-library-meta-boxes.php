@@ -78,14 +78,14 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 					'context'  => 'side',
 					'priority' => 'high',
 				),
-				'rt-media-meta-images' => array(
+				'rt-media-meta-images'  => array(
 					'title'    => __( 'Photos', 'movie-library' ),
 					'callback' => array( $this, 'rt_media_meta_images' ),
 					'screen'   => [ 'rt-movie', 'rt-person' ],
 					'context'  => 'side',
 					'priority' => 'high',
 				),
-				'rt-media-meta-videos' => array(
+				'rt-media-meta-videos'  => array(
 					'title'    => __( 'Videos', 'movie-library' ),
 					'callback' => array( $this, 'rt_media_meta_videos' ),
 					'screen'   => [ 'rt-movie', 'rt-person' ],
@@ -96,61 +96,114 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 		}
 
 		public function rt_media_meta_images( WP_Post $post ): void {
-			$rt_media_meta_images_data = get_post_meta( $post->ID );
-
-			$rt_media_meta_images_key = array(
+			$rt_media_meta_images_key                 = array(
 				'images' => 'rt-media-meta-images',
 			);
+			$rt_media_meta_images_data_attachment_ids = get_post_meta( $post->ID, $rt_media_meta_images_key[ 'images' ] );
 			wp_nonce_field( 'rt_media_meta_nonce', 'rt_media_meta_nonce' );
 			?>
 
 			<div class="rt-media-meta-fields rt-media-meta-images">
-				<div class="rt-media-meta-images-container">
+				<div class="rt-media-meta-images-container rt-media-meta-uploaded-images-container">
 					<?php
-					if ( isset( $rt_media_meta_images_data[ $rt_media_meta_images_key[ 'images' ] ] ) ) {
-						$rt_media_meta_images = unserialize( $rt_media_meta_images_data[ $rt_media_meta_images_key[ 'images' ] ][0] );
-						foreach ( $rt_media_meta_images as $rt_media_meta_image ) {
+					if ( isset( $rt_media_meta_images_data_attachment_ids ) && ! empty( $rt_media_meta_images_data_attachment_ids[ 0 ] ) ) {
+						?>
+						<input name="rt-media-meta-uploaded-images" value="<?php echo esc_attr( json_encode( $rt_media_meta_images_data_attachment_ids[ 0 ] ) ) ?>" hidden="hidden">
+						<h3 class="rt-images-heading rt-uploaded-images-heading"><?php esc_html_e( 'Uploaded Images' ) ?></h3>
+						<?php
+						foreach ( $rt_media_meta_images_data_attachment_ids[ 0 ] as $rt_media_meta_image_attachment_id ) {
+							$image_url = wp_get_attachment_image_url( $rt_media_meta_image_attachment_id, 'full' );
+							if ( ! $image_url ) {
+								continue;
+							}
 							?>
-							<div class="rt-media-meta-image">
-								<img src="<?php echo esc_url( $rt_media_meta_image ); ?>" alt="">
-								<button class="rt-media-meta-image-remove" type="button">Remove</button>
+							<div class="rt-media-meta-image rt-media-meta-uploaded-image">
+								<img src="<?php echo esc_url( $image_url );
+								?>" alt="">
+								<span class="rt-media-meta-image-remove rt-media-meta-uploaded-image-remove" data-id="<?php echo esc_attr( $rt_media_meta_image_attachment_id ); ?>">X</span>
 							</div>
 							<?php
 						}
+						?>
+						<?php
 					}
 					?>
+
+				</div>
+				<div class="rt-media-meta-images-container rt-media-meta-selected-images-container" id="rt-media-meta-selected-images-container">
 				</div>
 				<button class="rt-media-meta-add rt-media-meta-images-add" type="button">Add</button>
+				<input name="rt-media-meta-selected-images" hidden="hidden">
 			</div>
 
 			<script type="application/javascript">
-				jQuery(document).read(function ($){
-					$('.rt-media-meta-images-add').on('click', function (e) {
+				jQuery( document ).ready( function ( $ ) {
+					let rt_media_meta_images = [];
+					let rt_media_meta_selected_images_container = $( '.rt-media-meta-selected-images-container' );
+					let rt_media_meta_images_frame;
+
+					$( 'input[name="rt-media-meta-selected-images"]' ).val( JSON.stringify( rt_media_meta_images ) );
+					$( '.rt-media-meta-uploaded-image-remove' ).on( 'click', function ( e ) {
+						console.log('hello');
+						let rt_uploaded_images = JSON.parse( $( 'input[name="rt-media-meta-uploaded-images"]' ).val() );
 						e.preventDefault();
-						var rt_media_meta_images_container = $(this).parent().find('.rt-media-meta-images-container');
-						var rt_media_meta_images_frame = wp.media({
+						rt_uploaded_images = rt_uploaded_images.filter( function ( item ) {
+							return item !== $( e.currentTarget ).data( 'id' );
+						} );
+						$( this ).parent().remove();
+						if ( rt_uploaded_images.length === 0 ) {
+							$( '.rt-uploaded-images-heading' ).remove();
+						}
+						$( 'input[name="rt-media-meta-uploaded-images"]' ).val( JSON.stringify( rt_uploaded_images ) );
+					} );
+
+					$( '.rt-media-meta-images-add' ).on( 'click', function ( e ) {
+						e.preventDefault();
+						if ( rt_media_meta_images_frame ) {
+							rt_media_meta_images_frame.open();
+							return;
+						}
+
+						rt_media_meta_images_frame = wp.media( {
 							title: 'Select Images',
 							button: {
 								text: 'Select Images'
 							},
 							multiple: true
-						});
-						rt_media_meta_images_frame.on('select', function () {
-							var rt_media_meta_images_attachment = rt_media_meta_images_frame.state().get('selection').toJSON();
-							var rt_media_meta_images = [];
-							$.each(rt_media_meta_images_attachment, function (index, value) {
-								rt_media_meta_images.push(value.url);
-								rt_media_meta_images_container.append('<div class="rt-media-meta-image"><img src="' + value.url + '" alt=""><button class="rt-media-meta-image-remove" type="button">Remove</button></div>');
-							});
-							$(this).parent().find('input').val(JSON.stringify(rt_media_meta_images));
-						});
+						} );
+
+						rt_media_meta_images_frame.on( 'select', function ( e ) {
+							let rt_media_meta_images_attachment = rt_media_meta_images_frame.state().get( 'selection' ).toJSON();
+							console.log( rt_media_meta_images_attachment );
+							if ( rt_media_meta_images.length === 0 ) {
+								rt_media_meta_selected_images_container.append( "<h3 class='rt-images-heading rt-selected-images-heading'><?php esc_html_e( 'Selected Images' ); ?></h3>" );
+							}
+
+							$.each( rt_media_meta_images_attachment, function ( index, value ) {
+								rt_media_meta_images.push( value.id );
+								rt_media_meta_selected_images_container.append(
+									'<div class="rt-media-meta-image rt-media-meta-selected-image"><img src="' + encodeURI( value.url ) + '" alt=""><span class="rt-media-meta-image-remove rt-media-meta-selected-image-remove" data-id="' + value.id + '">X</span></div>'
+								);
+
+							} );
+
+							$( '.rt-media-meta-selected-image-remove' ).on( 'click', function ( e ) {
+								e.preventDefault();
+								rt_media_meta_images = rt_media_meta_images.filter( function ( item ) {
+									return item !== $( e.currentTarget ).data( 'id' );
+								} );
+								$( this ).parent().remove();
+								if ( rt_media_meta_images.length === 0 ) {
+									$( '.rt-selected-images-heading' ).remove();
+								}
+								$( 'input[name="rt-media-meta-selected-images"]' ).val( JSON.stringify( rt_media_meta_images ) );
+							} );
+
+							$( 'input[name="rt-media-meta-selected-images"]' ).val( JSON.stringify( rt_media_meta_images ) );
+						} );
 						rt_media_meta_images_frame.open();
-					});
-					$('.rt-media-meta-images-container').on('click', '.rt-media-meta-image-remove', function (e) {
-						e.preventDefault();
-						$(this).parent().remove();
-					});
-				})
+					} );
+				} );
 			</script>
 			<?php
 		}
@@ -168,7 +221,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 				<div class="rt-media-meta-videos-container">
 					<?php
 					if ( isset( $rt_media_meta_videos_data[ $rt_media_meta_videos_key[ 'videos' ] ] ) ) {
-						$rt_media_meta_videos = unserialize( $rt_media_meta_videos_data[ $rt_media_meta_videos_key[ 'videos' ] ][0] );
+						$rt_media_meta_videos = unserialize( $rt_media_meta_videos_data[ $rt_media_meta_videos_key[ 'videos' ] ][ 0 ] );
 						foreach ( $rt_media_meta_videos as $rt_media_meta_video ) {
 							?>
 							<div class="rt-media-meta-video">

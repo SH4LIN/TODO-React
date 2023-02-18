@@ -37,10 +37,35 @@
 	border: #0c0c0c 1px solid;
 	border-radius: 8px;
 	padding: 10px 18px;
+	margin: 10px 0 10px 0;
 }
 
 .rt-media-meta-add:hover {
 	background: #0c0c0c;
 	cursor: pointer;
 	color: #fff;
+}
+
+.rt-media-meta-images-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.rt-media-meta-image-remove {
+	z-index: 1;
+	position: absolute;
+	right: 0;
+	background: rgba(0, 0, 0, 0.8);
+	border: #fff 1px solid;
+	padding: 0 4px;
+	border-radius: 100%;
+	margin-right: -6px;
+	margin-top: -5px;
+	color: #fff;
+	cursor: pointer;
+}
+
+.rt-media-meta-image {
+	position: relative;
 }
