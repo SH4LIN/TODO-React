@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-02-19T04:54:06+00:00\n"
+"POT-Creation-Date: 2023-02-19T05:51:53+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: movie-library\n"
@@ -669,10 +669,10 @@ msgstr ""
 msgid "Selected Videos"
 msgstr ""
 
-#: admin/js/movie-library-custom-label.js:30
+#: admin/js/movie-library-custom-label.js:18
 msgid "Synopsis"
 msgstr ""
 
-#: admin/js/movie-library-custom-label.js:33
+#: admin/js/movie-library-custom-label.js:21
 msgid "Write a synopsis"
 msgstr ""
