@@ -185,15 +185,76 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 			return ob_get_clean();
 		}
 
-		public function movie_library_person_shortcode( $atts = array(), $content = null, $tag = '' ) {
-			$atts = array_change_key_case( (array)$atts );
-			$atts = shortcode_atts(
+		public function movie_library_person_shortcode( $attributes = array(), $content = null, $tag = '' ) {
+			$attributes = array_change_key_case( (array)$attributes );
+			$attributes = shortcode_atts(
 				array(
 					'career' => '',
-				), $atts, $tag
+				), $attributes, $tag
 			);
 
-			return $tag;
+			if ( ! empty( $attributes[ 'career' ] ) ) {
+				$field          = is_numeric( $attributes[ 'career' ] ) ? 'term_id' : 'slug';
+				$terms          = sanitize_text_field( $attributes[ 'career' ] );
+				$search_query[] = array(
+					'taxonomy' => 'rt-person-career',
+					'field' => $field,
+					'terms' => $terms,
+				);
+			}
+
+			if ( ! empty( $search_query ) ) {
+				$search_query[ 'relation' ] = 'AND';
+				$query                      = new WP_Query(
+					array(
+						'post_type' => 'rt-person',
+						'tax_query' => $search_query,
+					)
+				);
+			} else {
+				$query = new WP_Query(
+					array(
+						'post_type' => 'rt-person',
+					)
+				);
+			}
+
+			ob_start();
+			if ( $query->have_posts() ) {
+				while ( $query->have_posts() ) {
+					$person_details = array();
+					$query->the_post();
+					$person_id                = get_the_ID();
+					$person_name              = get_the_title();
+					$person_details[ 'name' ] = $person_name;
+					if ( has_post_thumbnail( $person_id ) ) {
+						$person_poster              = wp_get_attachment_image_src( get_post_thumbnail_id( $person_id ), 'full' );
+						$person_poster              = $person_poster[ 0 ];
+						$person_details[ 'poster' ] = $person_poster;
+					}
+					$person_career_details = get_the_terms( $person_id, 'rt-person-career' );
+					if ( ! empty( $person_career_details   ) ) {
+						if( is_array( $person_career_details ) ) {
+							$careers = array();
+							foreach ( $person_career_details as $value ) {
+								$careers[] = $value->name;
+							}
+							$person_details[ 'career' ] = implode( ', ', $careers );
+						} else {
+							$person_details[ 'career' ] = $person_career_details->name;
+						}
+					}
+					?>
+					<pre><?php print_r( $person_details ); ?> </pre>
+					<?php
+				}
+			} else {
+				?>
+				<p><?php esc_html_e( 'No people found.', 'movie-library' ); ?></p>
+				<?php
+			}
+
+			return ob_get_clean();
 		}
 
 	}
