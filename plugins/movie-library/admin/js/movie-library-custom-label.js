@@ -27,10 +27,10 @@ jQuery(
 						'movie-library',
 						function ( translation, text, domain ) {
 							if ( 'Excerpt' === text ) {
-								return __( 'Synopsis' );
+								return __( 'Synopsis', 'movie-library' );
 							}
 							if ( 'Write an excerpt (optional)' === text ) {
-								return __( 'Write a synopsis' );
+								return __( 'Write a synopsis', 'movie-library' );
 							}
 							return translation;
 						}

@@ -5,13 +5,17 @@
  * @package MovieLib
  */
 
+/**
+ * This function will be called when document is ready and it will set all the required event listeners for uploading images and videos.
+ *
+ * @param {object} $ jQuery object.
+ */
 jQuery(
 	function ( $ ) {
 		$( document ).ready(
 			function ( $ ) {
 				'use strict';
 
-				const { __, _x, _n, sprintf } = wp.i18n;
 				setupMediaMetaImagesUploader( $ );
 				setupMediaMetaVideosUploader( $ );
 
@@ -20,17 +24,23 @@ jQuery(
 	}
 );
 
-
+/**
+ * This function will be called when document is ready and it will set all the required event listeners for uploading images.
+ *
+ * @param $
+ */
 function setupMediaMetaImagesUploader( $ ) {
-	let rt_media_meta_images = [];
+	const { __, _x, _n, sprintf } = wp.i18n;
+
+	let rt_media_meta_images                    = [];
 	let rt_media_meta_selected_images_container = $( '.rt-media-meta-selected-images-container' );
 	let rt_media_meta_images_frame;
 
-	$( 'input[name="rt-media-meta-selected-images"]' ).val( JSON.stringify( rt_media_meta_images ) );
+	setInputValue( $, 'input[name="rt-media-meta-selected-images"]', JSON.stringify( rt_media_meta_images ) )
 	$( '.rt-media-meta-uploaded-image-remove' ).on(
 		'click',
 		function ( e ) {
-			let rt_uploaded_images = JSON.parse( $( 'input[name="rt-media-meta-uploaded-images"]' ).val() );
+			let rt_uploaded_images = getInputValue( $, 'input[name="rt-media-meta-uploaded-images"]' );
 			e.preventDefault();
 			rt_uploaded_images = rt_uploaded_images.filter(
 				function ( item ) {
@@ -41,7 +51,7 @@ function setupMediaMetaImagesUploader( $ ) {
 			if ( rt_uploaded_images.length === 0 ) {
 				$( '.rt-media-meta-uploaded-images-heading' ).remove();
 			}
-			$( 'input[name="rt-media-meta-uploaded-images"]' ).val( JSON.stringify( rt_uploaded_images ) );
+			setInputValue( $, 'input[name="rt-media-meta-uploaded-images"]', JSON.stringify( rt_uploaded_images ) );
 		}
 	);
 
@@ -56,9 +66,9 @@ function setupMediaMetaImagesUploader( $ ) {
 
 			rt_media_meta_images_frame = wp.media(
 				{
-					title: 'Select Images',
+					title: __( 'Select Images', 'movie-library' ),
 					button: {
-						text: 'Select Images'
+						text: __( 'Select Images', 'movie-library' )
 					},
 					library: {
 						type: 'image'
@@ -71,10 +81,8 @@ function setupMediaMetaImagesUploader( $ ) {
 				'select',
 				function ( e ) {
 					let rt_media_meta_images_attachment = rt_media_meta_images_frame.state().get( 'selection' ).toJSON();
-					console.log( rt_media_meta_images.length );
 					if ( rt_media_meta_images.length === 0 ) {
-						console.log( rt_media_meta_images.length );
-						rt_media_meta_selected_images_container.append( "<h3 class='rt-media-meta-heading rt-media-meta-images-heading rt-media-meta-selected-images-heading'>Selected Images</h3>" );
+						rt_media_meta_selected_images_container.append( "<h3 class='rt-media-meta-heading rt-media-meta-images-heading rt-media-meta-selected-images-heading'>" + __( 'Selected Images', 'movie-library' ) + "</h3>" );
 					}
 
 					$.each(
@@ -101,11 +109,10 @@ function setupMediaMetaImagesUploader( $ ) {
 							if ( rt_media_meta_images.length === 0 ) {
 								$( '.rt-media-meta-selected-images-heading' ).remove();
 							}
-							$( 'input[name="rt-media-meta-selected-images"]' ).val( JSON.stringify( rt_media_meta_images ) );
+							setInputValue( $, 'input[name="rt-media-meta-selected-images"]', JSON.stringify( rt_media_meta_images ) );
 						}
 					);
-
-					$( 'input[name="rt-media-meta-selected-images"]' ).val( JSON.stringify( rt_media_meta_images ) );
+					setInputValue( $, 'input[name="rt-media-meta-selected-images"]', JSON.stringify( rt_media_meta_images ) );
 				}
 			);
 			rt_media_meta_images_frame.open();
@@ -113,17 +120,25 @@ function setupMediaMetaImagesUploader( $ ) {
 	);
 }
 
+/**
+ * This function will be called when document is ready and it will set all the required event listeners for uploading videos.
+ *
+ * @param $
+ */
 function setupMediaMetaVideosUploader( $ ) {
-	let rt_media_meta_videos = [];
+	const { __, _x, _n, sprintf } = wp.i18n;
+
+
+	let rt_media_meta_videos                    = [];
 	let rt_media_meta_selected_videos_container = $( '.rt-media-meta-selected-videos-container' );
 	let rt_media_meta_videos_frame;
 
-	$( 'input[name="rt-media-meta-selected-videos"]' ).val( JSON.stringify( rt_media_meta_videos ) );
+	setInputValue( $, 'input[name="rt-media-meta-selected-videos"]', JSON.stringify( rt_media_meta_videos ) );
 	$( '.rt-media-meta-uploaded-video-remove' ).on(
 		'click',
 		function ( e ) {
 			console.log( 'hello' );
-			let rt_uploaded_videos = JSON.parse( $( 'input[name="rt-media-meta-uploaded-videos"]' ).val() );
+			let rt_uploaded_videos = getInputValue( $, 'input[name="rt-media-meta-uploaded-videos"]' );
 			e.preventDefault();
 			rt_uploaded_videos = rt_uploaded_videos.filter(
 				function ( item ) {
@@ -134,7 +149,7 @@ function setupMediaMetaVideosUploader( $ ) {
 			if ( rt_uploaded_videos.length === 0 ) {
 				$( '.rt-media-meta-uploaded-videos-heading' ).remove();
 			}
-			$( 'input[name="rt-media-meta-uploaded-videos"]' ).val( JSON.stringify( rt_uploaded_videos ) );
+			setInputValue( $, 'input[name="rt-media-meta-uploaded-videos"]', JSON.stringify( rt_uploaded_videos ) );
 		}
 	);
 
@@ -149,9 +164,9 @@ function setupMediaMetaVideosUploader( $ ) {
 
 			rt_media_meta_videos_frame = wp.media(
 				{
-					title: 'Select Videos',
+					title: __( 'Select Videos', 'movie-library' ),
 					button: {
-						text: 'Select Videos'
+						text: __( 'Select Videos', 'movie-library' )
 					},
 					library: {
 						type: 'video'
@@ -164,9 +179,8 @@ function setupMediaMetaVideosUploader( $ ) {
 				'select',
 				function ( e ) {
 					let rt_media_meta_videos_attachment = rt_media_meta_videos_frame.state().get( 'selection' ).toJSON();
-					console.log( rt_media_meta_videos_attachment );
 					if ( rt_media_meta_videos.length === 0 ) {
-						rt_media_meta_selected_videos_container.append( "<h3 class='rt-media-meta-heading rt-media-meta-videos-heading rt-media-meta-selected-videos-heading'>Selected Videos</h3>" );
+						rt_media_meta_selected_videos_container.append( "<h3 class='rt-media-meta-heading rt-media-meta-videos-heading rt-media-meta-selected-videos-heading'>" + __( 'Selected Videos', 'movie-library' ) + "</h3>" );
 					}
 
 					$.each(
@@ -193,14 +207,36 @@ function setupMediaMetaVideosUploader( $ ) {
 							if ( rt_media_meta_videos.length === 0 ) {
 								$( '.rt-media-meta-selected-videos-heading' ).remove();
 							}
-							$( 'input[name="rt-media-meta-selected-videos"]' ).val( JSON.stringify( rt_media_meta_videos ) );
+							setInputValue( $, 'input[name="rt-media-meta-selected-videos"]', JSON.stringify( rt_media_meta_videos ) );
 						}
 					);
 
-					$( 'input[name="rt-media-meta-selected-videos"]' ).val( JSON.stringify( rt_media_meta_videos ) );
+					setInputValue( $, 'input[name="rt-media-meta-selected-videos"]', JSON.stringify( rt_media_meta_videos ) );
 				}
 			);
 			rt_media_meta_videos_frame.open();
 		}
 	);
+}
+
+/**
+ * This function will return the value of the input field.
+ *
+ * @param $
+ * @param selector
+ * @returns {any}
+ */
+function getInputValue( $, selector ) {
+	return JSON.parse( $( selector ).val() );
+}
+
+/**
+ * This function will set the value of the input field.
+ *
+ * @param $
+ * @param selector
+ * @param value
+ */
+function setInputValue( $, selector, value ) {
+	$( selector ).val( value );
 }

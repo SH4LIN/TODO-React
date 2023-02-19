@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-02-15T07:19:44+00:00\n"
+"POT-Creation-Date: 2023-02-19T04:54:06+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: movie-library\n"
@@ -31,568 +31,648 @@ msgstr ""
 msgid "Shalin Shah"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:58
+#: admin/classes/class-movie-library-meta-boxes.php:54
+#: admin/classes/class-movie-library-meta-boxes.php:68
+#: admin/classes/class-movie-library-meta-boxes.php:75
+msgid "Basic"
+msgstr ""
+
+#: admin/classes/class-movie-library-meta-boxes.php:61
+msgid "Crew"
+msgstr ""
+
+#: admin/classes/class-movie-library-meta-boxes.php:82
+msgid "Photos"
+msgstr ""
+
+#: admin/classes/class-movie-library-meta-boxes.php:89
+msgid "Videos"
+msgstr ""
+
+#: admin/classes/class-movie-library-meta-boxes.php:227
+msgid "Twitter"
+msgstr ""
+
+#: admin/classes/class-movie-library-meta-boxes.php:238
+msgid "Facebook"
+msgstr ""
+
+#: admin/classes/class-movie-library-meta-boxes.php:249
+msgid "Instagram"
+msgstr ""
+
+#: admin/classes/class-movie-library-meta-boxes.php:260
+msgid "Website"
+msgstr ""
+
+#: admin/classes/class-movie-library-meta-boxes.php:293
+msgid "Birth Date"
+msgstr ""
+
+#: admin/classes/class-movie-library-meta-boxes.php:303
+msgid "Birth Place"
+msgstr ""
+
+#: admin/classes/class-movie-library-meta-boxes.php:340
+msgid "Rating (Between 1-5)"
+msgstr ""
+
+#: admin/classes/class-movie-library-meta-boxes.php:352
+msgid "Runtime (Minutes)"
+msgstr ""
+
+#: admin/classes/class-movie-library-meta-boxes.php:365
+msgid "Release Date"
+msgstr ""
+
+#: admin/classes/class-movie-library-post-type.php:52
 msgctxt "Post type general name"
 msgid "Movies"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:59
+#: admin/classes/class-movie-library-post-type.php:53
 msgctxt "Post type singular name"
 msgid "Movie"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:60
+#: admin/classes/class-movie-library-post-type.php:54
 msgctxt "Admin Menu text"
 msgid "Movies"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:61
+#: admin/classes/class-movie-library-post-type.php:55
 msgctxt "Add New on Toolbar"
 msgid "Movie"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:62
-#: admin/class-movie-library-post-type.php:102
+#: admin/classes/class-movie-library-post-type.php:56
+#: admin/classes/class-movie-library-post-type.php:96
 msgid "Add New"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:63
+#: admin/classes/class-movie-library-post-type.php:57
 msgid "Add New Movie"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:64
+#: admin/classes/class-movie-library-post-type.php:58
 msgid "New Movie"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:65
+#: admin/classes/class-movie-library-post-type.php:59
 msgid "Edit Movie"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:66
+#: admin/classes/class-movie-library-post-type.php:60
 msgid "View Movie"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:67
+#: admin/classes/class-movie-library-post-type.php:61
 msgid "All Movies"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:68
+#: admin/classes/class-movie-library-post-type.php:62
 msgid "Search Movies"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:69
+#: admin/classes/class-movie-library-post-type.php:63
 msgid "Parent Movies:"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:70
+#: admin/classes/class-movie-library-post-type.php:64
 msgid "No movies found."
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:71
+#: admin/classes/class-movie-library-post-type.php:65
 msgid "No movies found in Trash."
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:72
+#: admin/classes/class-movie-library-post-type.php:66
 msgctxt "movie"
 msgid "Movie Poster"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:73
+#: admin/classes/class-movie-library-post-type.php:67
 msgctxt "movie"
 msgid "Set Movie Poster"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:74
+#: admin/classes/class-movie-library-post-type.php:68
 msgctxt "movie"
 msgid "Remove Movie Poster"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:75
+#: admin/classes/class-movie-library-post-type.php:69
 msgctxt "movie"
 msgid "Use as Movie Poster"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:76
+#: admin/classes/class-movie-library-post-type.php:70
 msgctxt "The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4"
 msgid "Movie archives"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:78
-#: admin/class-movie-library-post-type.php:118
+#: admin/classes/class-movie-library-post-type.php:72
+#: admin/classes/class-movie-library-post-type.php:112
 msgid "Description."
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:98
+#: admin/classes/class-movie-library-post-type.php:92
 msgctxt "Post type general name"
 msgid "People"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:99
+#: admin/classes/class-movie-library-post-type.php:93
 msgctxt "Post type singular name"
 msgid "Person"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:100
+#: admin/classes/class-movie-library-post-type.php:94
 msgctxt "Admin Menu text"
 msgid "People"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:101
+#: admin/classes/class-movie-library-post-type.php:95
 msgctxt "Add New on Toolbar"
 msgid "Person"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:103
+#: admin/classes/class-movie-library-post-type.php:97
 msgid "Add New Person"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:104
+#: admin/classes/class-movie-library-post-type.php:98
 msgid "New Person"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:105
+#: admin/classes/class-movie-library-post-type.php:99
 msgid "Edit Person"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:106
+#: admin/classes/class-movie-library-post-type.php:100
 msgid "View Person"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:107
+#: admin/classes/class-movie-library-post-type.php:101
 msgid "All People"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:108
+#: admin/classes/class-movie-library-post-type.php:102
 msgid "Search People"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:109
+#: admin/classes/class-movie-library-post-type.php:103
 msgid "Parent People:"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:110
+#: admin/classes/class-movie-library-post-type.php:104
 msgid "No people found."
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:111
+#: admin/classes/class-movie-library-post-type.php:105
 msgid "No people found in Trash."
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:112
+#: admin/classes/class-movie-library-post-type.php:106
 msgctxt "person"
 msgid "Profile picture"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:113
+#: admin/classes/class-movie-library-post-type.php:107
 msgctxt "person"
 msgid "Set Profile picture"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:114
+#: admin/classes/class-movie-library-post-type.php:108
 msgctxt "person"
 msgid "Remove Profile picture"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:115
+#: admin/classes/class-movie-library-post-type.php:109
 msgctxt "person"
 msgid "Use as Profile picture"
 msgstr ""
 
-#: admin/class-movie-library-post-type.php:116
+#: admin/classes/class-movie-library-post-type.php:110
 msgctxt "The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4"
 msgid "Person archives"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:32
+#: admin/classes/class-movie-library-taxonomy.php:46
 msgctxt "taxonomy general name"
 msgid "Genres"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:33
+#: admin/classes/class-movie-library-taxonomy.php:47
 msgctxt "taxonomy singular name"
 msgid "Genre"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:34
+#: admin/classes/class-movie-library-taxonomy.php:48
 msgid "Search Genres"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:35
+#: admin/classes/class-movie-library-taxonomy.php:49
 msgid "Popular Genres"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:36
+#: admin/classes/class-movie-library-taxonomy.php:50
 msgid "All Genres"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:37
+#: admin/classes/class-movie-library-taxonomy.php:51
 msgid "Parent Genre"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:38
+#: admin/classes/class-movie-library-taxonomy.php:52
 msgid "Parent Genre:"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:39
+#: admin/classes/class-movie-library-taxonomy.php:53
 msgid "Edit Genre"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:40
+#: admin/classes/class-movie-library-taxonomy.php:54
 msgid "Update Genre"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:41
-#: admin/class-movie-library-taxonomy.php:76
+#: admin/classes/class-movie-library-taxonomy.php:55
+#: admin/classes/class-movie-library-taxonomy.php:90
 msgid "Add New Genre"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:42
-#: admin/class-movie-library-taxonomy.php:77
+#: admin/classes/class-movie-library-taxonomy.php:56
+#: admin/classes/class-movie-library-taxonomy.php:91
 msgid "New Genre Name"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:43
+#: admin/classes/class-movie-library-taxonomy.php:57
 msgid "Separate genres with commas"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:44
+#: admin/classes/class-movie-library-taxonomy.php:58
 msgid "Add or remove genres"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:45
+#: admin/classes/class-movie-library-taxonomy.php:59
 msgid "Choose from the most used genres"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:46
+#: admin/classes/class-movie-library-taxonomy.php:60
 msgid "No genres found."
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:47
+#: admin/classes/class-movie-library-taxonomy.php:61
 msgid "Genres"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:67
+#: admin/classes/class-movie-library-taxonomy.php:81
 msgctxt "taxonomy general name"
 msgid "Labels"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:68
+#: admin/classes/class-movie-library-taxonomy.php:82
 msgctxt "taxonomy singular name"
 msgid "Label"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:69
+#: admin/classes/class-movie-library-taxonomy.php:83
 msgid "Search Labels"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:70
+#: admin/classes/class-movie-library-taxonomy.php:84
 msgid "Popular Labels"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:71
+#: admin/classes/class-movie-library-taxonomy.php:85
 msgid "All Labels"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:72
+#: admin/classes/class-movie-library-taxonomy.php:86
 msgid "Parent Label"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:73
+#: admin/classes/class-movie-library-taxonomy.php:87
 msgid "Parent Label:"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:74
+#: admin/classes/class-movie-library-taxonomy.php:88
 msgid "Edit Label"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:75
+#: admin/classes/class-movie-library-taxonomy.php:89
 msgid "Update Label"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:78
+#: admin/classes/class-movie-library-taxonomy.php:92
 msgid "Separate labels with commas"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:79
+#: admin/classes/class-movie-library-taxonomy.php:93
 msgid "Add or remove labels"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:80
+#: admin/classes/class-movie-library-taxonomy.php:94
 msgid "Choose from the most used labels"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:81
+#: admin/classes/class-movie-library-taxonomy.php:95
 msgid "No labels found."
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:82
+#: admin/classes/class-movie-library-taxonomy.php:96
 msgid "Labels"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:102
+#: admin/classes/class-movie-library-taxonomy.php:116
 msgctxt "taxonomy general name"
 msgid "Languages"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:103
+#: admin/classes/class-movie-library-taxonomy.php:117
 msgctxt "taxonomy singular name"
 msgid "Language"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:104
+#: admin/classes/class-movie-library-taxonomy.php:118
 msgid "Search Languages"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:105
+#: admin/classes/class-movie-library-taxonomy.php:119
 msgid "Popular Languages"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:106
+#: admin/classes/class-movie-library-taxonomy.php:120
 msgid "All Languages"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:107
+#: admin/classes/class-movie-library-taxonomy.php:121
 msgid "Parent Language"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:108
+#: admin/classes/class-movie-library-taxonomy.php:122
 msgid "Parent Language:"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:109
+#: admin/classes/class-movie-library-taxonomy.php:123
 msgid "Edit Language"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:110
+#: admin/classes/class-movie-library-taxonomy.php:124
 msgid "Update Language"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:111
+#: admin/classes/class-movie-library-taxonomy.php:125
 msgid "Add New Language"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:112
+#: admin/classes/class-movie-library-taxonomy.php:126
 msgid "New Language Name"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:113
+#: admin/classes/class-movie-library-taxonomy.php:127
 msgid "Separate Languages with commas"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:114
+#: admin/classes/class-movie-library-taxonomy.php:128
 msgid "Add or remove Languages"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:115
+#: admin/classes/class-movie-library-taxonomy.php:129
 msgid "Choose from the most used Languages"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:116
+#: admin/classes/class-movie-library-taxonomy.php:130
 msgid "No Languages found."
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:117
+#: admin/classes/class-movie-library-taxonomy.php:131
 msgid "Languages"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:137
+#: admin/classes/class-movie-library-taxonomy.php:151
 msgctxt "taxonomy general name"
 msgid "Production companies"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:138
+#: admin/classes/class-movie-library-taxonomy.php:152
 msgctxt "taxonomy singular name"
 msgid "Production company"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:139
+#: admin/classes/class-movie-library-taxonomy.php:153
 msgid "Search Production companies"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:140
+#: admin/classes/class-movie-library-taxonomy.php:154
 msgid "Popular Production companies"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:141
+#: admin/classes/class-movie-library-taxonomy.php:155
 msgid "All Production company"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:142
+#: admin/classes/class-movie-library-taxonomy.php:156
 msgid "Parent Production company"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:143
+#: admin/classes/class-movie-library-taxonomy.php:157
 msgid "Parent Production company:"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:144
+#: admin/classes/class-movie-library-taxonomy.php:158
 msgid "Edit Production company"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:145
+#: admin/classes/class-movie-library-taxonomy.php:159
 msgid "Update Production company"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:146
+#: admin/classes/class-movie-library-taxonomy.php:160
 msgid "Add New Production company"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:147
+#: admin/classes/class-movie-library-taxonomy.php:161
 msgid "New Production company Name"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:148
+#: admin/classes/class-movie-library-taxonomy.php:162
 msgid "Separate Production companies with commas"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:149
+#: admin/classes/class-movie-library-taxonomy.php:163
 msgid "Add or remove Production companies"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:150
+#: admin/classes/class-movie-library-taxonomy.php:164
 msgid "Choose from the most used Production companies"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:151
+#: admin/classes/class-movie-library-taxonomy.php:165
 msgid "No Production companies found."
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:152
+#: admin/classes/class-movie-library-taxonomy.php:166
 msgid "Production companies"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:172
+#: admin/classes/class-movie-library-taxonomy.php:186
 msgctxt "taxonomy general name"
 msgid "Tags"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:173
+#: admin/classes/class-movie-library-taxonomy.php:187
 msgctxt "taxonomy singular name"
 msgid "Tag"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:174
+#: admin/classes/class-movie-library-taxonomy.php:188
 msgid "Search Tags"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:175
+#: admin/classes/class-movie-library-taxonomy.php:189
 msgid "Popular Tags"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:176
+#: admin/classes/class-movie-library-taxonomy.php:190
 msgid "All Tag"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:177
+#: admin/classes/class-movie-library-taxonomy.php:191
 msgid "Parent Tag"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:178
+#: admin/classes/class-movie-library-taxonomy.php:192
 msgid "Parent Tag:"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:179
+#: admin/classes/class-movie-library-taxonomy.php:193
 msgid "Edit Tag"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:180
+#: admin/classes/class-movie-library-taxonomy.php:194
 msgid "Update Tag"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:181
+#: admin/classes/class-movie-library-taxonomy.php:195
 msgid "Add New Tag"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:182
+#: admin/classes/class-movie-library-taxonomy.php:196
 msgid "New Tag Name"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:183
+#: admin/classes/class-movie-library-taxonomy.php:197
 msgid "Separate Tags with commas"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:184
+#: admin/classes/class-movie-library-taxonomy.php:198
 msgid "Add or remove Tags"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:185
+#: admin/classes/class-movie-library-taxonomy.php:199
 msgid "Choose from the most used Tags"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:186
+#: admin/classes/class-movie-library-taxonomy.php:200
 msgid "No Tags found."
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:187
+#: admin/classes/class-movie-library-taxonomy.php:201
 msgid "Tags"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:206
+#: admin/classes/class-movie-library-taxonomy.php:220
 msgid "Internal Markers"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:225
+#: admin/classes/class-movie-library-taxonomy.php:239
 msgctxt "taxonomy general name"
 msgid "Careers"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:226
+#: admin/classes/class-movie-library-taxonomy.php:240
 msgctxt "taxonomy singular name"
 msgid "Career"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:227
+#: admin/classes/class-movie-library-taxonomy.php:241
 msgid "Search Careers"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:228
+#: admin/classes/class-movie-library-taxonomy.php:242
 msgid "Popular Careers"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:229
+#: admin/classes/class-movie-library-taxonomy.php:243
 msgid "All Career"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:230
+#: admin/classes/class-movie-library-taxonomy.php:244
 msgid "Parent Career"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:231
+#: admin/classes/class-movie-library-taxonomy.php:245
 msgid "Parent Career:"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:232
+#: admin/classes/class-movie-library-taxonomy.php:246
 msgid "Edit Career"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:233
+#: admin/classes/class-movie-library-taxonomy.php:247
 msgid "Update Career"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:234
+#: admin/classes/class-movie-library-taxonomy.php:248
 msgid "Add New Career"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:235
+#: admin/classes/class-movie-library-taxonomy.php:249
 msgid "New Career Name"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:236
+#: admin/classes/class-movie-library-taxonomy.php:250
 msgid "Separate Careers with commas"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:237
+#: admin/classes/class-movie-library-taxonomy.php:251
 msgid "Add or remove Careers"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:238
+#: admin/classes/class-movie-library-taxonomy.php:252
 msgid "Choose from the most used Careers"
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:239
+#: admin/classes/class-movie-library-taxonomy.php:253
 msgid "No Careers found."
 msgstr ""
 
-#: admin/class-movie-library-taxonomy.php:240
+#: admin/classes/class-movie-library-taxonomy.php:254
 msgid "Careers"
+msgstr ""
+
+#: admin/js/movie-library-admin.js:69
+#: admin/js/movie-library-admin.js:71
+msgid "Select Images"
+msgstr ""
+
+#: admin/js/movie-library-admin.js:85
+msgid "Selected Images"
+msgstr ""
+
+#: admin/js/movie-library-admin.js:167
+#: admin/js/movie-library-admin.js:169
+msgid "Select Videos"
+msgstr ""
+
+#: admin/js/movie-library-admin.js:183
+msgid "Selected Videos"
+msgstr ""
+
+#: admin/js/movie-library-custom-label.js:30
+msgid "Synopsis"
+msgstr ""
+
+#: admin/js/movie-library-custom-label.js:33
+msgid "Write a synopsis"
 msgstr ""
