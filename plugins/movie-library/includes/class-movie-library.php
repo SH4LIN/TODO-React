@@ -19,6 +19,7 @@ use MovieLib\admin\classes\Movie_Library_Activation;
 use MovieLib\admin\classes\Movie_Library_Deactivation;
 use MovieLib\admin\classes\Movie_Library_Post_type;
 use MovieLib\admin\classes\Movie_Library_Save_Post;
+use MovieLib\admin\classes\Movie_Library_Shortcodes;
 use MovieLib\admin\classes\Movie_Library_Taxonomy;
 use MovieLib\admin\classes\Movie_Library_Meta_Boxes;
 
@@ -153,6 +154,8 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 			$post_type->register_custom_post_type();
 			$taxonomy = new Movie_Library_Taxonomy();
 			$taxonomy->register_custom_taxonomy();
+			$shortcode = new Movie_Library_Shortcodes();
+			$shortcode->register_shortcodes();
 		}
 
 		/**
