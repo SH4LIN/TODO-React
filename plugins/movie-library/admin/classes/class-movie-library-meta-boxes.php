@@ -424,7 +424,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 							<?php
 
 							foreach ( $data as $rt_p ) {
-								if ( empty( $rt_movie_meta_crew_data[ strtolower( 'rt-movie-meta-crew-' . $key ) ] ) ) {
+								if ( empty( $rt_movie_meta_crew_data[ strtolower( 'rt-movie-meta-crew-' . $key ) ][0] ) ) {
 									printf(
 										'<option value="%1$d">%2$s</option>',
 										esc_attr( $rt_p[ 'id' ] ),

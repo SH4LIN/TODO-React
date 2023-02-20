@@ -37,7 +37,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Taxonomy' ) ) {
 		 * @return array[]
 		 */
 		function get_custom_taxonomies(): array {
-			$custom_taxonomies_array = array(
+			return array(
 				array(
 					'taxonomy'  => 'rt-movie-genre',
 					'post_type' => array( 'rt-movie' ),
@@ -267,8 +267,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Taxonomy' ) ) {
 					),
 				),
 			);
-
-			return $custom_taxonomies_array;
 		}
 	}
 }

@@ -44,7 +44,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Post_type' ) ) {
 		 * @return array
 		 */
 		private function get_custom_post_types(): array {
-			$custom_post_types_array = array(
+			return array(
 				array(
 					'post_type' => 'rt-movie',
 					'args'      => array(
@@ -126,8 +126,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Post_type' ) ) {
 					),
 				),
 			);
-
-			return $custom_post_types_array;
 		}
 	}
 }
