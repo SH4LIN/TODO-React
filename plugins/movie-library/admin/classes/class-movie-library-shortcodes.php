@@ -147,7 +147,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 				);
 			}
 
-			ob_start();
 			$movie_details = array();
 			if ( $query->have_posts() ) {
 				while ( $query->have_posts() ) {
@@ -202,11 +201,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 				<?php
 			}
 			$query->reset_postdata();
+			ob_start();
 			?>
 			<div class="movie-list-container">
 			<?php
 			foreach ( $movie_details as $movie_detail ) {
-
 				?>
 
 				<div class="movie-list-item">
@@ -251,7 +250,15 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 			return ob_get_clean();
 		}
 
-		public function movie_library_person_shortcode( $attributes = array(), $content = null, $tag = '' ) {
+		private function show_no_people_found_message():string|false{
+			ob_start();
+			?>
+			<p><?php esc_html_e( 'No people found.', 'movie-library' ); ?></p>
+			<?php
+			return ob_get_clean();
+		}
+
+		public function movie_library_person_shortcode( $attributes = array(), $content = null, $tag = '' ):string|false {
 			$attributes = array_change_key_case( (array)$attributes );
 			$attributes = shortcode_atts(
 				array(
@@ -261,28 +268,17 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 
 			if ( ! empty( $attributes[ 'career' ] ) ) {
 				$terms          = sanitize_text_field( $attributes[ 'career' ] );
-				$search_query[] = array(
-					'relation' => 'OR',
-					array
-					(
-						'taxonomy' => 'rt-person-career',
-						'field' => 'term_id',
-						'terms' => $terms,
-					),
-					array
-					(
-						'taxonomy' => 'rt-person-career',
-						'field' => 'name',
-						'terms' => $terms,
-					),
-					array
-					(
-						'taxonomy' => 'rt-person-career',
-						'field' => 'slug',
-						'terms' => $terms,
-					),
-
-				);
+				$term_id = term_exists( $terms, 'rt-person-career' );
+				if ( $term_id ) {
+					$search_query[] =
+						array(
+							'taxonomy' => 'rt-person-career',
+							'field' => 'term_id',
+							'terms' => $term_id[ 'term_id' ],
+						);
+				}else{
+					return $this->show_no_people_found_message();
+				}
 			}
 
 			if ( ! empty( $search_query ) ) {
@@ -301,7 +297,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 				);
 			}
 
-			ob_start();
 			$people_details = array();
 			if ( $query->have_posts() ) {
 				while ( $query->have_posts() ) {
@@ -332,10 +327,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 					$people_details[] = $person_details;
 				}
 			} else {
-				?>
-				<p><?php esc_html_e( 'No people found.', 'movie-library' ); ?></p>
-				<?php
-			} ?>
+				return $this->show_no_people_found_message();
+			}
+			$query->reset_postdata();
+			ob_start();
+			?>
 			<div class="movie-list-container">
 			<?php
 			foreach ( $people_details as $person_detail ) {
