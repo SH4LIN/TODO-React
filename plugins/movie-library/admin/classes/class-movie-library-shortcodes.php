@@ -63,7 +63,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 						'fields' => 'ids',
 					)
 				);
-				if( ! $person->have_posts() ) {
+				if ( ! $person->have_posts() ) {
 					$person = new Wp_Query(
 						array(
 							'post_type' => 'rt-person',
@@ -167,21 +167,24 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 			}
 
 			ob_start();
+			$movie_details = array();
 			if ( $query->have_posts() ) {
 				while ( $query->have_posts() ) {
-					$movie_details = array();
+					$movie_detail = [];
 					$query->the_post();
-					$movie_id                 = get_the_ID();
-					$movie_title              = get_the_title();
-					$movie_details[ 'Title' ] = $movie_title;
+					$movie_id                = get_the_ID();
+					$movie_title             = get_the_title();
+					$movie_detail[ 'Title' ] = $movie_title;
 					if ( has_post_thumbnail( $movie_id ) ) {
-						$movie_poster              = wp_get_attachment_image_src( get_post_thumbnail_id( $movie_id ), 'full' );
-						$movie_poster              = $movie_poster[ 0 ];
-						$movie_details[ 'Poster' ] = $movie_poster;
+						$movie_poster             = wp_get_attachment_image_src( get_post_thumbnail_id( $movie_id ), 'full' );
+						$movie_poster             = $movie_poster[ 0 ];
+						$movie_detail[ 'Poster' ] = $movie_poster;
+					} else {
+						$movie_detail[ 'Poster' ] = 'https://movie-library-assignment.lndo.site/wp-content/uploads/2023/02/dummy-image.jpg';
 					}
 					$movie_runtime_meta = get_post_meta( $movie_id, 'rt-movie-meta-basic-runtime', true );
 					if ( ! empty( $movie_runtime_meta ) ) {
-						$movie_details[ 'Runtime' ] = $movie_runtime_meta;
+						$movie_detail[ 'Runtime' ] = $movie_runtime_meta;
 					}
 					$movie_crew_director = get_post_meta( $movie_id, 'rt-movie-meta-crew-director' );
 					if ( ! empty( $movie_crew_director ) && ! empty( $movie_crew_director[ 0 ] ) ) {
@@ -190,9 +193,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 							foreach ( $movie_crew_director[ 0 ] as $value ) {
 								$directors[] = get_the_title( $value );
 							}
-							$movie_details[ 'Director' ] = implode( ', ', $directors );
+							$movie_detail[ 'Director' ] = implode( ', ', $directors );
 						} else {
-							$movie_details[ 'Director' ] = get_the_title( $movie_crew_director[ 0 ] );
+							$movie_detail[ 'Director' ] = get_the_title( $movie_crew_director[ 0 ] );
 						}
 					}
 					$movie_crew_actor = get_post_meta( $movie_id, 'rt-movie-meta-crew-actor' );
@@ -205,25 +208,56 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 							foreach ( $movie_crew_actor[ 0 ] as $value ) {
 								$actors[] = get_the_title( $value );
 							}
-							$movie_details[ 'Actor' ] = implode( ', ', $actors );
+							$movie_detail[ 'Actor' ] = implode( ', ', $actors );
 						} else {
-							$movie_details[ 'Actor' ] = get_the_title( $movie_crew_actor[ 0 ] );
+							$movie_detail[ 'Actor' ] = get_the_title( $movie_crew_actor[ 0 ] );
 						}
 					}
-
-					?>
-					<pre><?php print_r( $movie_details ); ?> </pre>
-					<?php
+					$movie_details[] = $movie_detail;
 				}
 			} else {
 				?>
 				<p><?php esc_html_e( 'No movies found.', 'movie-library' ); ?></p>
 				<?php
 			}
-			?>
-
-			<?php
 			$query->reset_postdata();
+			?>
+			<div class="movie-list-container">
+			<?php
+			foreach ( $movie_details as $movie_detail ) {
+
+				?>
+
+				<div class="movie-list-item">
+					<div class="movie-list-item-image">
+						<img class="movie-image" src="<?php echo esc_url( $movie_detail[ 'Poster' ] ); ?>" alt="<?php echo esc_attr( $movie_details[ 'Title' ] ); ?>">
+					</div>
+					<div class="movie-list-item-details">
+						<div class="movie-list-item-title">
+							<?php printf(esc_html__('Title: %1$s','movie-library'),$movie_detail[ 'Title' ] ); ?>
+						</div>
+						<?php if ( isset( $movie_detail[ 'Director' ] ) ): ?>
+							<div class="movie-list-item-director">
+								<?php printf(esc_html__('Director: %1$s','movie-library'),$movie_detail[ 'Director' ] ); ?>
+							</div>
+						<?php endif; ?>
+						<?php if ( isset( $movie_detail[ 'Actor' ] ) ): ?>
+							<div class="movie-list-item-actor">
+								<?php printf(esc_html__('Actor: %1$s','movie-library'),$movie_detail[ 'Actor' ] ); ?>
+							</div>
+						<?php endif; ?>
+						<?php if ( isset( $movie_detail[ 'Runtime' ] ) ): ?>
+							<div class="movie-list-item-runtime">
+								<?php printf(esc_html__('Runtime: %1$s Minutes','movie-library'),$movie_detail[ 'Runtime' ] ); ?>
+							</div>
+						<?php endif; ?>
+					</div>
+				</div>
+
+
+				<?php
+			}
+			?></div><?php
 
 			return ob_get_clean();
 		}
@@ -279,6 +313,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 			}
 
 			ob_start();
+			$people_details = array();
 			if ( $query->have_posts() ) {
 				while ( $query->have_posts() ) {
 					$person_details = array();
@@ -290,6 +325,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 						$person_poster                       = wp_get_attachment_image_src( get_post_thumbnail_id( $person_id ), 'full' );
 						$person_poster                       = $person_poster[ 0 ];
 						$person_details[ 'Profile Picture' ] = $person_poster;
+					}else{
+						$person_details[ 'Profile Picture' ] = 'https://movie-library-assignment.lndo.site/wp-content/uploads/2023/02/dummy-image.jpg';
 					}
 					$person_career_details = get_the_terms( $person_id, 'rt-person-career' );
 					if ( ! empty( $person_career_details ) ) {
@@ -303,15 +340,39 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 							$person_details[ 'Career' ] = $person_career_details->name;
 						}
 					}
-					?>
-					<pre><?php print_r( $person_details ); ?> </pre>
-					<?php
+					$people_details[] = $person_details;
 				}
 			} else {
 				?>
 				<p><?php esc_html_e( 'No people found.', 'movie-library' ); ?></p>
 				<?php
+			}?>
+			<div class="movie-list-container">
+			<?php
+			foreach ( $people_details as $person_detail ) {
+
+				?>
+
+				<div class="movie-list-item">
+					<div class="movie-list-item-image">
+						<img class="movie-image" src="<?php echo esc_url( $person_detail[ 'Profile Picture' ] ); ?>" alt="<?php echo esc_attr( $person_detail[ 'Name' ] ); ?>">
+					</div>
+					<div class="movie-list-item-details">
+						<div class="movie-list-item-title">
+							<?php printf(esc_html__('Name: %1$s','movie-library'),$person_detail[ 'Name' ] ); ?>
+						</div>
+						<?php if ( isset( $movie_detail[ 'Director' ] ) ): ?>
+							<div class="movie-list-item-director">
+								<?php printf(esc_html__('Career: %1$s','movie-library'),$movie_detail[ 'Career' ] ); ?>
+							</div>
+						<?php endif; ?>
+					</div>
+				</div>
+
+
+				<?php
 			}
+			?></div><?php
 
 			return ob_get_clean();
 		}
