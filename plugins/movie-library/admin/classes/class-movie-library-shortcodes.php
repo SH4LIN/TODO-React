@@ -61,7 +61,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 						'post_type' => 'rt-person',
 						'title' => $name,
 						'fields' => 'ids',
-
 					)
 				);
 				if( ! $person->have_posts() ) {
@@ -168,9 +167,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 			}
 
 			ob_start();
-			echo '<pre>';
-			print_r( $query );
-			echo '</pre>';
 			if ( $query->have_posts() ) {
 				while ( $query->have_posts() ) {
 					$movie_details = array();

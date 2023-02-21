@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit;
 use MovieLib\admin\classes\Movie_Library_Activation;
 use MovieLib\admin\classes\Movie_Library_Deactivation;
 use MovieLib\admin\classes\Movie_Library_Post_type;
+use MovieLib\admin\classes\Movie_Library_Settings_Page;
 use MovieLib\admin\classes\Movie_Library_Save_Post;
 use MovieLib\admin\classes\Movie_Library_Shortcodes;
 use MovieLib\admin\classes\Movie_Library_Taxonomy;
@@ -71,7 +72,12 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		private function register_scripts(): void {
 			wp_register_script( 'movie-library-admin', MLB_PLUGIN_URL . 'admin/js/movie-library-admin.js', [], MLB_PLUGIN_VERSION );
-			wp_register_script( 'movie-library-custom-label', MLB_PLUGIN_URL . 'admin/js/movie-library-custom-label.js', [ 'wp-hooks', 'wp-i18n' ], MLB_PLUGIN_VERSION );
+			wp_register_script(
+				'movie-library-custom-label', MLB_PLUGIN_URL . 'admin/js/movie-library-custom-label.js', [
+				'wp-hooks',
+				'wp-i18n',
+			],  MLB_PLUGIN_VERSION
+			);
 		}
 
 		/**
@@ -80,10 +86,11 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 * @return void
 		 */
 		private function register_hooks(): void {
-			$movie_library_activation   = new Movie_Library_Activation();
-			$movie_library_deactivation = new Movie_Library_Deactivation();
-			$movie_library_meta_boxes   = new Movie_Library_Meta_Boxes();
-			$movie_library_save_post    = new Movie_Library_Save_Post();
+			$movie_library_activation    = new Movie_Library_Activation();
+			$movie_library_deactivation  = new Movie_Library_Deactivation();
+			$movie_library_meta_boxes    = new Movie_Library_Meta_Boxes();
+			$movie_library_save_post     = new Movie_Library_Save_Post();
+			$movie_library_settings_page = new Movie_Library_Settings_Page();
 			register_activation_hook( MLB_PLUGIN_FILE, [ $movie_library_activation, 'activate' ] );
 			register_deactivation_hook( MLB_PLUGIN_FILE, [ $movie_library_deactivation, 'deactivate' ] );
 			add_action( 'init', [ $this, 'load_plugin_text_domain' ] );
@@ -94,6 +101,12 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 			add_action( 'wp_enqueue_scripts', [ $this, 'wp_enqueue_scripts' ] );
 			add_action( 'add_meta_boxes', [ $movie_library_meta_boxes, 'add_meta_boxes' ] );
 			add_action( 'save_post', [ $movie_library_save_post, 'save_post' ], 10, 3 );
+			add_action(
+				'admin_menu', [
+								$movie_library_settings_page,
+								'add_movie_library_sub_menu',
+							]
+			);
 
 			add_filter( 'enter_title_here', [ $this, 'change_title_text' ], 10, 2 );
 			add_filter( 'write_your_story', [ $this, 'change_post_content_text' ], 10, 2 );
@@ -185,7 +198,7 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 * @return void
 		 */
 		public function enqueue_custom_label_script(): void {
-			if ( get_post_type() === 'rt-movie'  ) {
+			if ( get_post_type() === 'rt-movie' ) {
 				wp_enqueue_script( 'movie-library-custom-label' );
 				wp_set_script_translations( 'movie-library-custom-label', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
 			}
