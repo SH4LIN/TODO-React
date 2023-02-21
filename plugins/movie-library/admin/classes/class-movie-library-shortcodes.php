@@ -111,47 +111,69 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 
 			if ( ! empty( $attributes[ 'genre' ] ) ) {
 				$terms   = sanitize_text_field( $attributes[ 'genre' ] );
-				$term_id = term_exists( $terms, 'rt-movie-genre' );
-				if ( $term_id ) {
-					$search_query[] =
-						array(
-							'taxonomy' => 'rt-movie-genre',
-							'field' => 'term_id',
-							'terms' => $term_id[ 'term_id' ],
-						);
-				} else {
-					return $this->show_no_movies_found_message();
-				}
+				$search_query[] = array(
+					'relation' => 'OR',
+					array(
+						'taxonomy' => 'rt-movie-genre',
+						'field' => 'term_id',
+						'terms' => $terms,
+					),
+					array(
+						'taxonomy' => 'rt-movie-genre',
+						'field' => 'slug',
+						'terms' => $terms,
+					),
+					array(
+						'taxonomy' => 'rt-movie-genre',
+						'field' => 'name',
+						'terms' => $terms,
+					),
+				);
 			}
 
 			if ( ! empty( $attributes[ 'label' ] ) ) {
 				$terms   = sanitize_text_field( $attributes[ 'label' ] );
-				$term_id = term_exists( $terms, 'rt-movie-label' );
-				if ( $term_id ) {
-					$search_query[] =
-						array(
-							'taxonomy' => 'rt-movie-label',
-							'field' => 'term_id',
-							'terms' => $term_id[ 'term_id' ],
-						);
-				} else {
-					return $this->show_no_movies_found_message();
-				}
+				$search_query[] = array(
+					'relation' => 'OR',
+					array(
+						'taxonomy' => 'rt-movie-label',
+						'field' => 'term_id',
+						'terms' => $terms,
+					),
+					array(
+						'taxonomy' => 'rt-movie-label',
+						'field' => 'slug',
+						'terms' => $terms,
+					),
+					array(
+						'taxonomy' => 'rt-movie-label',
+						'field' => 'name',
+						'terms' => $terms,
+					),
+
+				);
 			}
 
 			if ( ! empty( $attributes[ 'language' ] ) ) {
 				$terms   = sanitize_text_field( $attributes[ 'language' ] );
-				$term_id = term_exists( $terms, 'rt-movie-language' );
-				if ( $term_id ) {
-					$search_query[] =
-						array(
-							'taxonomy' => 'rt-movie-language',
-							'field' => 'term_id',
-							'terms' => $term_id[ 'term_id' ],
-						);
-				} else {
-					return $this->show_no_movies_found_message();
-				}
+				$search_query[] = array(
+					'relation' => 'OR',
+					array(
+						'taxonomy' => 'rt-movie-language',
+						'field' => 'term_id',
+						'terms' => $terms,
+					),
+					array(
+						'taxonomy' => 'rt-movie-language',
+						'field' => 'slug',
+						'terms' => $terms,
+					),
+					array(
+						'taxonomy' => 'rt-movie-language',
+						'field' => 'name',
+						'terms' => $terms,
+					),
+				);
 			}
 
 			if ( ! empty( $search_query ) ) {
@@ -328,17 +350,28 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 
 			if ( ! empty( $attributes[ 'career' ] ) ) {
 				$terms   = sanitize_text_field( $attributes[ 'career' ] );
-				$term_id = term_exists( $terms, 'rt-person-career' );
-				if ( $term_id ) {
-					$search_query[] =
-						array(
-							'taxonomy' => 'rt-person-career',
-							'field' => 'term_id',
-							'terms' => $term_id[ 'term_id' ],
-						);
-				} else {
-					return $this->show_no_people_found_message();
-				}
+				$search_query[] = array(
+					'relation' => 'OR',
+					array
+					(
+						'taxonomy' => 'rt-person-career',
+						'field' => 'term_id',
+						'terms' => $terms,
+					),
+					array
+					(
+						'taxonomy' => 'rt-person-career',
+						'field' => 'name',
+						'terms' => $terms,
+					),
+					array
+					(
+						'taxonomy' => 'rt-person-career',
+						'field' => 'slug',
+						'terms' => $terms,
+					),
+
+				);
 			}
 
 			if ( ! empty( $search_query ) ) {
