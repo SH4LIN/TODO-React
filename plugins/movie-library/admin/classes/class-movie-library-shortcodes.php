@@ -71,6 +71,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 							'fields' => 'ids',
 						)
 					);
+					if( ! $person->have_posts() ){
+						return $this->show_no_movies_found_message();
+					}
 				}
 
 				$search_query[] = array(
@@ -82,70 +85,48 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 			}
 
 			if ( ! empty( $attributes[ 'genre' ] ) ) {
-				$terms          = sanitize_text_field( $attributes[ 'genre' ] );
-				$search_query[] = array(
-					'relation' => 'OR',
-					array(
-						'taxonomy' => 'rt-movie-genre',
-						'field' => 'term_id',
-						'terms' => $terms,
-					),
-					array(
-						'taxonomy' => 'rt-movie-genre',
-						'field' => 'slug',
-						'terms' => $terms,
-					),
-					array(
-						'taxonomy' => 'rt-movie-genre',
-						'field' => 'name',
-						'terms' => $terms,
-					),
-				);
+				$terms   = sanitize_text_field( $attributes[ 'genre' ] );
+				$term_id = term_exists( $terms, 'rt-movie-genre' );
+				if ( $term_id ) {
+					$search_query[] =
+						array(
+							'taxonomy' => 'rt-movie-genre',
+							'field' => 'term_id',
+							'terms' => $term_id[ 'term_id' ],
+						);
+				}else{
+					return $this->show_no_movies_found_message();
+				}
 			}
 
 			if ( ! empty( $attributes[ 'label' ] ) ) {
 				$terms          = sanitize_text_field( $attributes[ 'label' ] );
-				$search_query[] = array(
-					'relation' => 'OR',
-					array(
-						'taxonomy' => 'rt-movie-label',
-						'field' => 'term_id',
-						'terms' => $terms,
-					),
-					array(
-						'taxonomy' => 'rt-movie-label',
-						'field' => 'slug',
-						'terms' => $terms,
-					),
-					array(
-						'taxonomy' => 'rt-movie-label',
-						'field' => 'name',
-						'terms' => $terms,
-					),
-
-				);
+				$term_id = term_exists( $terms, 'rt-movie-label' );
+				if ( $term_id ) {
+					$search_query[] =
+						array(
+							'taxonomy' => 'rt-movie-label',
+							'field' => 'term_id',
+							'terms' => $term_id[ 'term_id' ],
+						);
+				}else{
+					return $this->show_no_movies_found_message();
+				}
 			}
 
 			if ( ! empty( $attributes[ 'language' ] ) ) {
 				$terms          = sanitize_text_field( $attributes[ 'language' ] );
-				$search_query[] = array(
-					'relation' => 'OR',
-					array(
-						'taxonomy' => 'rt-movie-language',
-						'field' => 'term_id',
-						'terms' => $terms,
-					),
-					array(
-						'taxonomy' => 'rt-movie-language',
-						'field' => 'slug',
-						'terms' => $terms,
-					),
-					array(
-						'taxonomy' => 'rt-movie-language',
-						'field' => 'name',
-						'terms' => $terms,
-					),
-				);
+				$term_id = term_exists( $terms, 'rt-movie-language' );
+				if ( $term_id ) {
+					$search_query[] =
+						array(
+							'taxonomy' => 'rt-movie-language',
+							'field' => 'term_id',
+							'terms' => $term_id[ 'term_id' ],
+						);
+				}else{
+					return $this->show_no_movies_found_message();
+				}
 			}
 
 			if ( ! empty( $search_query ) ) {
@@ -234,21 +215,21 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 					</div>
 					<div class="movie-list-item-details">
 						<div class="movie-list-item-title">
-							<?php printf(esc_html__('Title: %1$s','movie-library'),$movie_detail[ 'Title' ] ); ?>
+							<?php printf( esc_html__( 'Title: %1$s', 'movie-library' ), $movie_detail[ 'Title' ] ); ?>
 						</div>
 						<?php if ( isset( $movie_detail[ 'Director' ] ) ): ?>
 							<div class="movie-list-item-director">
-								<?php printf(esc_html__('Director: %1$s','movie-library'),$movie_detail[ 'Director' ] ); ?>
+								<?php printf( esc_html__( 'Director: %1$s', 'movie-library' ), $movie_detail[ 'Director' ] ); ?>
 							</div>
 						<?php endif; ?>
 						<?php if ( isset( $movie_detail[ 'Actor' ] ) ): ?>
 							<div class="movie-list-item-actor">
-								<?php printf(esc_html__('Actor: %1$s','movie-library'),$movie_detail[ 'Actor' ] ); ?>
+								<?php printf( esc_html__( 'Actor: %1$s', 'movie-library' ), $movie_detail[ 'Actor' ] ); ?>
 							</div>
 						<?php endif; ?>
 						<?php if ( isset( $movie_detail[ 'Runtime' ] ) ): ?>
 							<div class="movie-list-item-runtime">
-								<?php printf(esc_html__('Runtime: %1$s Minutes','movie-library'),$movie_detail[ 'Runtime' ] ); ?>
+								<?php printf( esc_html__( 'Runtime: %1$s Minutes', 'movie-library' ), $movie_detail[ 'Runtime' ] ); ?>
 							</div>
 						<?php endif; ?>
 					</div>
@@ -259,6 +240,14 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 			}
 			?></div><?php
 
+			return ob_get_clean();
+		}
+
+		private function show_no_movies_found_message():string|false{
+			ob_start();
+			?>
+			<p><?php esc_html_e( 'No movies found.', 'movie-library' ); ?></p>
+			<?php
 			return ob_get_clean();
 		}
 
@@ -325,7 +314,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 						$person_poster                       = wp_get_attachment_image_src( get_post_thumbnail_id( $person_id ), 'full' );
 						$person_poster                       = $person_poster[ 0 ];
 						$person_details[ 'Profile Picture' ] = $person_poster;
-					}else{
+					} else {
 						$person_details[ 'Profile Picture' ] = 'https://movie-library-assignment.lndo.site/wp-content/uploads/2023/02/dummy-image.jpg';
 					}
 					$person_career_details = get_the_terms( $person_id, 'rt-person-career' );
@@ -346,7 +335,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 				?>
 				<p><?php esc_html_e( 'No people found.', 'movie-library' ); ?></p>
 				<?php
-			}?>
+			} ?>
 			<div class="movie-list-container">
 			<?php
 			foreach ( $people_details as $person_detail ) {
@@ -359,11 +348,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 					</div>
 					<div class="movie-list-item-details">
 						<div class="movie-list-item-title">
-							<?php printf(esc_html__('Name: %1$s','movie-library'),$person_detail[ 'Name' ] ); ?>
+							<?php printf( esc_html__( 'Name: %1$s', 'movie-library' ), $person_detail[ 'Name' ] ); ?>
 						</div>
 						<?php if ( isset( $movie_detail[ 'Director' ] ) ): ?>
 							<div class="movie-list-item-director">
-								<?php printf(esc_html__('Career: %1$s','movie-library'),$movie_detail[ 'Career' ] ); ?>
+								<?php printf( esc_html__( 'Career: %1$s', 'movie-library' ), $movie_detail[ 'Career' ] ); ?>
 							</div>
 						<?php endif; ?>
 					</div>
