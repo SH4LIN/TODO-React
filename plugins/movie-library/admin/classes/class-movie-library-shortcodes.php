@@ -22,6 +22,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 	 */
 	class Movie_Library_Shortcodes {
 
+		/**
+		 * @function register_shortcodes
+		 *           This function is used to register shortcodes for the plugin.
+		 *
+		 * @return void
+		 */
 		public function register_shortcodes(): void {
 			$shortcodes = $this->get_shortcodes();
 			foreach ( $shortcodes as $shortcode => $data ) {
@@ -31,6 +37,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 			}
 		}
 
+		/**
+		 * @function get_shortcodes
+		 *           This function is used to get the shortcodes for the plugin.
+		 *           For future reference if you want to add some more shortcode just add it here.
+		 *
+		 * @return array[]
+		 */
 		private function get_shortcodes(): array {
 			return array(
 				'movie' => array(
@@ -42,7 +55,19 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 			);
 		}
 
-		public function movie_library_movie_shortcode( $attributes = array(), $content = null, $tag = '' ) {
+		/**
+		 * @function movie_library_movie_shortcode
+		 *           This function is callback function for the movie shortcode.
+		 *           It will be executed when the movie shortcode is used.
+		 *           and it will replace the shortcode with the provided HTML.
+		 *
+		 * @param $attributes
+		 * @param $content
+		 * @param $tag
+		 *
+		 * @return bool|string
+		 */
+		public function movie_library_movie_shortcode( $attributes = array(), $content = null, $tag = '' ): bool|string {
 			$attributes = array_change_key_case( (array)$attributes );
 			$attributes = shortcode_atts(
 				array(
@@ -71,7 +96,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 							'fields' => 'ids',
 						)
 					);
-					if( ! $person->have_posts() ){
+					if ( ! $person->have_posts() ) {
 						return $this->show_no_movies_found_message();
 					}
 				}
@@ -94,13 +119,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 							'field' => 'term_id',
 							'terms' => $term_id[ 'term_id' ],
 						);
-				}else{
+				} else {
 					return $this->show_no_movies_found_message();
 				}
 			}
 
 			if ( ! empty( $attributes[ 'label' ] ) ) {
-				$terms          = sanitize_text_field( $attributes[ 'label' ] );
+				$terms   = sanitize_text_field( $attributes[ 'label' ] );
 				$term_id = term_exists( $terms, 'rt-movie-label' );
 				if ( $term_id ) {
 					$search_query[] =
@@ -109,13 +134,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 							'field' => 'term_id',
 							'terms' => $term_id[ 'term_id' ],
 						);
-				}else{
+				} else {
 					return $this->show_no_movies_found_message();
 				}
 			}
 
 			if ( ! empty( $attributes[ 'language' ] ) ) {
-				$terms          = sanitize_text_field( $attributes[ 'language' ] );
+				$terms   = sanitize_text_field( $attributes[ 'language' ] );
 				$term_id = term_exists( $terms, 'rt-movie-language' );
 				if ( $term_id ) {
 					$search_query[] =
@@ -124,7 +149,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 							'field' => 'term_id',
 							'terms' => $term_id[ 'term_id' ],
 						);
-				}else{
+				} else {
 					return $this->show_no_movies_found_message();
 				}
 			}
@@ -196,15 +221,25 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 					$movie_details[] = $movie_detail;
 				}
 			} else {
-				?>
-				<p><?php esc_html_e( 'No movies found.', 'movie-library' ); ?></p>
-				<?php
+				$this->show_no_movies_found_message();
 			}
 			$query->reset_postdata();
 			ob_start();
 			?>
 			<div class="movie-list-container">
+			<?php $this->display_movies( $movie_details ); ?></div>
 			<?php
+
+			return ob_get_clean();
+		}
+
+		/**
+		 * @function display_movies
+		 *           This function is used to provide the HTML for the movie list.
+		 *
+		 * @param array $movie_details Movie details.
+		 */
+		private function display_movies(array $movie_details ): void {
 			foreach ( $movie_details as $movie_detail ) {
 				?>
 
@@ -237,28 +272,53 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 
 				<?php
 			}
-			?></div><?php
-
-			return ob_get_clean();
 		}
 
-		private function show_no_movies_found_message():string|false{
-			ob_start();
-			?>
-			<p><?php esc_html_e( 'No movies found.', 'movie-library' ); ?></p>
-			<?php
-			return ob_get_clean();
+		/**
+		 * @function display_people
+		 *           This function is used to provide the HTML for the people list.
+		 *
+		 * @param array $people_details People details.
+		 */
+		private function display_people( array $people_details ): void {
+			foreach ( $people_details as $person_detail ) {
+
+				?>
+
+				<div class="movie-list-item">
+					<div class="movie-list-item-image">
+						<img class="movie-image" src="<?php echo esc_url( $person_detail[ 'Profile Picture' ] ); ?>" alt="<?php echo esc_attr( $person_detail[ 'Name' ] ); ?>">
+					</div>
+					<div class="movie-list-item-details">
+						<div class="movie-list-item-title">
+							<?php printf( esc_html__( 'Name: %1$s', 'movie-library' ), $person_detail[ 'Name' ] ); ?>
+						</div>
+						<?php if ( isset( $movie_detail[ 'Director' ] ) ): ?>
+							<div class="movie-list-item-director">
+								<?php printf( esc_html__( 'Career: %1$s', 'movie-library' ), $movie_detail[ 'Career' ] ); ?>
+							</div>
+						<?php endif; ?>
+					</div>
+				</div>
+
+
+				<?php
+			}
 		}
 
-		private function show_no_people_found_message():string|false{
-			ob_start();
-			?>
-			<p><?php esc_html_e( 'No people found.', 'movie-library' ); ?></p>
-			<?php
-			return ob_get_clean();
-		}
-
-		public function movie_library_person_shortcode( $attributes = array(), $content = null, $tag = '' ):string|false {
+		/**
+		 * @function movie_library_person_shortcode
+		 *           This function is callback function for the person shortcode.
+		 *           It will be called when the shortcode is used in the page.
+		 *           It will display the list of people.
+		 *
+		 * @param $attributes
+		 * @param $content
+		 * @param $tag
+		 *
+		 * @return string|false
+		 */
+		public function movie_library_person_shortcode( $attributes = array(), $content = null, $tag = '' ): string|false {
 			$attributes = array_change_key_case( (array)$attributes );
 			$attributes = shortcode_atts(
 				array(
@@ -267,7 +327,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 			);
 
 			if ( ! empty( $attributes[ 'career' ] ) ) {
-				$terms          = sanitize_text_field( $attributes[ 'career' ] );
+				$terms   = sanitize_text_field( $attributes[ 'career' ] );
 				$term_id = term_exists( $terms, 'rt-person-career' );
 				if ( $term_id ) {
 					$search_query[] =
@@ -276,7 +336,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 							'field' => 'term_id',
 							'terms' => $term_id[ 'term_id' ],
 						);
-				}else{
+				} else {
 					return $this->show_no_people_found_message();
 				}
 			}
@@ -333,32 +393,34 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 			ob_start();
 			?>
 			<div class="movie-list-container">
+			<?php $this->display_people( $people_details ); ?></div>
 			<?php
-			foreach ( $people_details as $person_detail ) {
+			return ob_get_clean();
+		}
 
-				?>
+		/**
+		 * @function show_no_movies_found_message
+		 *           This function will display the message when no movies are found.
+		 * @return string|false
+		 */
+		private function show_no_movies_found_message(): string|false {
+			ob_start();
+			?>
+			<p><?php esc_html_e( 'No movies found.', 'movie-library' ); ?></p>
+			<?php
+			return ob_get_clean();
+		}
 
-				<div class="movie-list-item">
-					<div class="movie-list-item-image">
-						<img class="movie-image" src="<?php echo esc_url( $person_detail[ 'Profile Picture' ] ); ?>" alt="<?php echo esc_attr( $person_detail[ 'Name' ] ); ?>">
-					</div>
-					<div class="movie-list-item-details">
-						<div class="movie-list-item-title">
-							<?php printf( esc_html__( 'Name: %1$s', 'movie-library' ), $person_detail[ 'Name' ] ); ?>
-						</div>
-						<?php if ( isset( $movie_detail[ 'Director' ] ) ): ?>
-							<div class="movie-list-item-director">
-								<?php printf( esc_html__( 'Career: %1$s', 'movie-library' ), $movie_detail[ 'Career' ] ); ?>
-							</div>
-						<?php endif; ?>
-					</div>
-				</div>
-
-
-				<?php
-			}
-			?></div><?php
-
+		/**
+		 * @function show_no_people_found_message
+		 *           This function will display the message when no people are found.
+		 * @return string|false
+		 */
+		private function show_no_people_found_message(): string|false {
+			ob_start();
+			?>
+			<p><?php esc_html_e( 'No people found.', 'movie-library' ); ?></p>
+			<?php
 			return ob_get_clean();
 		}
 
