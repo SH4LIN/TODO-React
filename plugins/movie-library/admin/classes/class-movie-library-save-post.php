@@ -321,13 +321,23 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 
 				}
 
-				// If the value is between 1 and 5 then it will update the meta field in the database.
-				if ( $rt_movie_meta_basic_rating >= 1 && $rt_movie_meta_basic_rating <= 5 ) {
+				// If value is less than 0 than setting it to 0.
+				if ( $rt_movie_meta_basic_rating < 0 ) {
 
-					// Update the meta field in the database.
-					update_post_meta( $post_id, 'rt-movie-meta-basic-rating', $rt_movie_meta_basic_rating );
+					$rt_movie_meta_basic_rating = 0;
 
 				}
+
+				// If value is greater than 10 than setting it to 10.
+				if ( $rt_movie_meta_basic_rating > 10 ) {
+
+					$rt_movie_meta_basic_rating = 10;
+
+				}
+
+				// Update the meta field in the database.
+				update_post_meta( $post_id, 'rt-movie-meta-basic-rating', $rt_movie_meta_basic_rating );
+
 			}
 
 			// Checking if rt-movie-meta-basic-runtime is available in $_POST.
@@ -343,12 +353,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 
 				}
 
-				// If the value is between 1 and 1000 then it will update the meta field in the database.
-				if ( $rt_movie_meta_basic_runtime >= 1 && $rt_movie_meta_basic_runtime <= 1000 ) {
+				update_post_meta( $post_id, 'rt-movie-meta-basic-runtime', $rt_movie_meta_basic_runtime );
 
-					update_post_meta( $post_id, 'rt-movie-meta-basic-runtime', $rt_movie_meta_basic_runtime );
-
-				}
 			}
 
 			// Checking if rt-movie-meta-basic-release-date is available in $_POST.

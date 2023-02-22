@@ -132,23 +132,19 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 					<label class = "rt-movie-meta-label rt-movie-meta-basic-label rt-movie-meta-basic-rating-label"
 							for = "<?php echo esc_attr( $rt_movie_meta_basic_key['rating'] ); ?>">
 
-						<?php esc_html_e( 'Rating (Between 1-5)', 'movie-library' ); ?>
+						<?php esc_html_e( 'Rating (Between 1-10)', 'movie-library' ); ?>
 
 					</label>
 
-					<input type = "number"
-							value = "
-							<?php
-							if ( isset( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['rating'] ] ) &&
-								isset( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['rating'] ][0] )
-							) {
-								echo esc_attr( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['rating'] ][0] );
-							} else {
-								echo esc_attr( '' );
-							}
+					<?php
+					$rating = '';
+					if ( isset( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['rating'] ] ) ) {
+						$rating = $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['rating'] ][0];
+					}
+					?>
 
-							?>
-							"
+					<input type = "number"
+							value = "<?php echo esc_attr( $rating ); ?>"
 							class = "rt-movie-meta-field rt-movie-meta-basic-field rt-movie-meta-basic-rating-field"
 							name = "<?php echo esc_attr( $rt_movie_meta_basic_key['rating'] ); ?>"
 							id = "<?php echo esc_attr( $rt_movie_meta_basic_key['rating'] ); ?>"
@@ -166,19 +162,15 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 
 					</label>
 
-					<input type = "number"
-							value = "
-							<?php
-							if ( isset( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['runtime'] ] ) &&
-								isset( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['runtime'] ][0] )
-							) {
-								echo esc_attr( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['runtime'] ][0] );
-							} else {
-								echo esc_attr( '' );
-							}
+					<?php
+					$runtime = '';
+					if ( isset( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['runtime'] ] ) ) {
+						$runtime = $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['runtime'] ][0];
+					}
+					?>
 
-							?>
-							"
+					<input type = "number"
+							value = "<?php echo esc_attr( $runtime ); ?>"
 							class = "rt-movie-meta-field rt-movie-meta-basic-field rt-movie-meta-basic-runtime-field"
 							name  = "<?php echo esc_attr( $rt_movie_meta_basic_key['runtime'] ); ?>"
 							id    = "<?php echo esc_attr( $rt_movie_meta_basic_key['runtime'] ); ?>"
@@ -196,19 +188,15 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 
 					</label>
 
-					<input type = "date"
-							value = "
-							<?php
-							if ( isset( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['release-date'] ] ) &&
-								isset( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['release-date'] ][0] )
-							) {
-								echo esc_attr( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['release-date'] ][0] );
-							} else {
-								echo esc_attr( '' );
-							}
+					<?php
+					$release_date = '';
+					if ( isset( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['release-date'] ] ) ) {
+						$release_date = $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['release-date'] ][0];
+					}
+					?>
 
-							?>
-							"
+					<input type = "date"
+							value = "<?php echo esc_attr( $release_date ); ?>"
 							class = "rt-movie-meta-field rt-movie-meta-basic-field rt-movie-meta-basic-release-date-field"
 							name  = "<?php echo esc_attr( $rt_movie_meta_basic_key['release-date'] ); ?>"
 							id    = "<?php echo esc_attr( $rt_movie_meta_basic_key['release-date'] ); ?>" />
