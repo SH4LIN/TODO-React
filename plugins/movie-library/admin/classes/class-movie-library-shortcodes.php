@@ -199,7 +199,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 					} else {
 
 						$movie_detail['Poster'] =
-							'https://movie-library-assignment.lndo.site/wp-content/uploads/2023/02/dummy-image.jpg';
+							'https://via.placeholder.com/600';
 
 					}
 
@@ -368,7 +368,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 					} else {
 
 						$person_details['Profile Picture'] =
-							'https://movie-library-assignment.lndo.site/wp-content/uploads/2023/02/dummy-image.jpg';
+							'https://via.placeholder.com/500';
 
 					}
 
