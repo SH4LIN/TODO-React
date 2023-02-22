@@ -291,7 +291,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 
 				<button class = "rt-media-meta-add rt-media-meta-add rt-media-meta-videos-add"
 							type = "button">
-						Add
+						<?php esc_html_e( 'Add Videos', 'movie-library' ); ?>
 				</button>
 
 				<input name = "rt-media-meta-selected-videos" hidden = "hidden">
