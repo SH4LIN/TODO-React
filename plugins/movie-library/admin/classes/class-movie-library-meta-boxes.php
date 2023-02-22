@@ -620,15 +620,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 									id = "<?php echo esc_attr( strtolower( str_replace( '-', '_', 'rt-movie-meta-crew-' . $key ) ) ); ?>"
 									multiple = "multiple" >
 
-							<option value = "" disabled> 
-
-								<?php
-								// translators: %s is the name of the career term.
-								echo esc_html( printf( __( 'Select %d', 'movie-library' ), esc_html( $key ) ) );
-								?>
-
-							</option>
-
 							<?php
 
 							foreach ( $rt_person_data as $rt_p ) {

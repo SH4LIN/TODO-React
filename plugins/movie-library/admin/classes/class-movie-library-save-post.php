@@ -227,7 +227,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 					$does_any_crew_exist = true;
 
 					// Getting the crew data from $_POST.
-					$rt_movie_meta_crew_data = sanitize_text_field( wp_unslash( $_POST[ $meta_key ] ) );
+					$rt_movie_meta_crew_data = sanitize_meta( $meta_key, wp_unslash( $_POST[ $meta_key ] ), 'rt-movie' );
 
 					// Checking if the crew data is array or not.
 					if ( is_array( $rt_movie_meta_crew_data ) && count( $rt_movie_meta_crew_data ) > 0 ) {
