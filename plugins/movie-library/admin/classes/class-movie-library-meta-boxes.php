@@ -536,6 +536,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 							class = "rt-movie-meta-field rt-movie-meta-basic-field rt-movie-meta-basic-release-date-field"
 							name  = "<?php echo esc_attr( $rt_movie_meta_basic_key['release-date'] ); ?>"
 							id    = "<?php echo esc_attr( $rt_movie_meta_basic_key['release-date'] ); ?>" />
+
 				</div>
 
 			</div>
@@ -607,17 +608,17 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 
 						<label class = "rt-movie-meta-label rt-movie-meta-crew-label 
 								<?php echo esc_attr( strtolower( 'rt-movie-meta-crew-' . $key . '-label' ) ); ?>" 
-							for = "<?php echo esc_attr( strtolower( str_replace( '-', '_', 'rt-movie-meta-crew-' . $key ) ) ); ?>">
+									for = "<?php echo esc_attr( strtolower( str_replace( '-', '_', 'rt-movie-meta-crew-' . $key ) ) ); ?>">
+
 							<?php echo esc_html( $key ); ?>
+
 						</label>
 
 						<select class = "rt-movie-meta-field rt-movie-meta-crew-field 
 									<?php echo esc_attr( strtolower( 'rt-movie-meta-crew-' . $key . '-field' ) ); ?>"
-								name = "
-									<?php echo esc_attr( strtolower( 'rt-movie-meta-crew-' . $key ) . '[]' ); ?>"
-								id = "
-									<?php echo esc_attr( strtolower( str_replace( '-', '_', 'rt-movie-meta-crew-' . $key ) ) ); ?>"
-								multiple = "multiple" >
+									name = "<?php echo esc_attr( strtolower( 'rt-movie-meta-crew-' . $key ) . '[]' ); ?>"
+									id = "<?php echo esc_attr( strtolower( str_replace( '-', '_', 'rt-movie-meta-crew-' . $key ) ) ); ?>"
+									multiple = "multiple" >
 
 							<option value = "" disabled> 
 
@@ -627,6 +628,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 								?>
 
 							</option>
+
 							<?php
 
 							foreach ( $rt_person_data as $rt_p ) {
@@ -685,13 +687,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 													class = "rt-movie-meta-crew-actor-character-field"
 													name = "<?php echo esc_attr( $rt_character_data['person_id'] ); ?>"
 													id = "<?php echo esc_attr( $rt_character_data['person_id'] ); ?>"
-													value = "<?php echo esc_attr( $rt_character_data['character_name'] ); ?> /">
+													value = "<?php echo esc_attr( $rt_character_data['character_name'] ); ?>"/>
 
 											<input type = "text"
 													class = "hidden-field"
 													name = "<?php echo esc_attr( $rt_character_data['person_id'] . '-name' ); ?>"
 													id = "<?php echo esc_attr( $rt_character_data['person_id'] ); ?>"
-													value = "<?php echo esc_attr( $rt_character_data['person_name'] ); ?> /">
+													value = "<?php echo esc_attr( $rt_character_data['person_name'] ); ?>"/>
 
 										</div>
 

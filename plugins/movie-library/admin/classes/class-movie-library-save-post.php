@@ -219,10 +219,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 										$rt_movie_meta_crew_person_name = sanitize_text_field( $_POST[ $rt_movie_meta_crew . '-name' ] );
 										$term['person_name']            = $rt_movie_meta_crew_person_name;
 									}
-									$term['person_id'] = $rt_movie_meta_crew;
+									$term['person_id'] = (int)$rt_movie_meta_crew;
 									$terms[]           = $term;
 								} else {
-									$terms[]['person_id'] = $rt_movie_meta_crew;
+									$terms[]['person_id'] = (int) $rt_movie_meta_crew;
 								}
 								$shadow_terms[] = $rt_movie_meta_crew;
 							}
