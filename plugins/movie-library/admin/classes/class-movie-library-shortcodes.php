@@ -289,32 +289,135 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 		}
 
 		/**
-		 * This function is used to return the search query for the taxonomy.
+		 * This function is callback function for the person shortcode.
+		 * It will be called when the shortcode is used in the page.
+		 * It will display the list of people.
 		 *
-		 * @param array|string $terms    Terms.
-		 * @param string       $taxonomy Taxonomy.
-		 * @return array
+		 * @param array  $attributes attributes from the shortcode.
+		 * @param string $content content from the shortcode.
+		 * @param string $tag shortcode name.
+		 *
+		 * @return string|false
 		 */
-		private function get_search_query( $terms, $taxonomy ): array {
+		public function movie_library_person_shortcode( $attributes = array(), $content = null, $tag = '',
+		): string|false {
 
-			return array(
-				'relation' => 'OR',
+			$attributes = array_change_key_case( (array) $attributes );
+
+			$attributes = shortcode_atts(
 				array(
-					'taxonomy' => $taxonomy,
-					'field'    => 'term_id',
-					'terms'    => $terms,
+					'career' => '',
 				),
-				array(
-					'taxonomy' => $taxonomy,
-					'field'    => 'slug',
-					'terms'    => $terms,
-				),
-				array(
-					'taxonomy' => $taxonomy,
-					'field'    => 'name',
-					'terms'    => $terms,
-				),
+				$attributes,
+				$tag
 			);
+
+			$search_query = array();
+
+			if ( ! empty( $attributes['career'] ) ) {
+
+				$terms          = sanitize_text_field( $attributes['career'] );
+				$search_query[] = $this->get_search_query( $terms, 'rt-person-career' );
+
+			}
+
+			if ( ! empty( $search_query ) ) {
+
+				if ( count( $search_query ) > 1 ) {
+
+					$search_query['relation'] = 'AND';
+
+				}
+
+				$query = new WP_Query(
+					array(
+						'post_type' => 'rt-person',
+						'tax_query' => $search_query,
+					)
+				);
+
+			} else {
+
+				$query = new WP_Query(
+					array(
+						'post_type' => 'rt-person',
+					)
+				);
+
+			}
+
+			$people_details = array();
+
+			if ( $query->have_posts() ) {
+
+				while ( $query->have_posts() ) {
+
+					$person_details = array();
+					$query->the_post();
+					$person_id              = get_the_ID();
+					$person_name            = get_the_title();
+					$person_details['Name'] = $person_name;
+
+					if ( has_post_thumbnail( $person_id ) ) {
+
+						$person_poster                     =
+							wp_get_attachment_image_src( get_post_thumbnail_id( $person_id ), 'full' );
+						$person_poster                     = $person_poster[0];
+						$person_details['Profile Picture'] = $person_poster;
+
+					} else {
+
+						$person_details['Profile Picture'] =
+							'https://movie-library-assignment.lndo.site/wp-content/uploads/2023/02/dummy-image.jpg';
+
+					}
+
+					$person_career_details = get_the_terms( $person_id, 'rt-person-career' );
+
+					if ( ! empty( $person_career_details ) ) {
+
+						if ( is_array( $person_career_details ) ) {
+
+							$careers = array();
+
+							foreach ( $person_career_details as $value ) {
+
+								$careers[] = $value->name;
+
+							}
+
+							$person_details['Career'] = implode( ', ', $careers );
+
+						} else {
+
+							$person_details['Career'] = $person_career_details->title;
+
+						}
+					}
+
+					$people_details[] = $person_details;
+
+				}
+			} else {
+
+				return $this->show_no_people_found_message();
+
+			}
+
+			wp_reset_postdata();
+			ob_start();
+
+			?>
+
+			<div class="movie-list-container">
+
+				<?php $this->display_people( $people_details ); ?>
+
+			</div>
+
+			<?php
+
+			return ob_get_clean();
 
 		}
 
@@ -465,139 +568,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 		}
 
 		/**
-		 * This function is callback function for the person shortcode.
-		 * It will be called when the shortcode is used in the page.
-		 * It will display the list of people.
-		 *
-		 * @param array  $attributes attributes from the shortcode.
-		 * @param string $content content from the shortcode.
-		 * @param string $tag shortcode name.
-		 *
-		 * @return string|false
-		 */
-		public function movie_library_person_shortcode( $attributes = array(), $content = null, $tag = '',
-		): string|false {
-
-			$attributes = array_change_key_case( (array) $attributes );
-
-			$attributes = shortcode_atts(
-				array(
-					'career' => '',
-				),
-				$attributes,
-				$tag
-			);
-
-			$search_query = array();
-
-			if ( ! empty( $attributes['career'] ) ) {
-
-				$terms          = sanitize_text_field( $attributes['career'] );
-				$search_query[] = $this->get_search_query( $terms, 'rt-person-career' );
-
-			}
-
-			if ( ! empty( $search_query ) ) {
-
-				if ( count( $search_query ) > 1 ) {
-
-					$search_query['relation'] = 'AND';
-
-				}
-
-				$query = new WP_Query(
-					array(
-						'post_type' => 'rt-person',
-						'tax_query' => $search_query,
-					)
-				);
-
-			} else {
-
-				$query = new WP_Query(
-					array(
-						'post_type' => 'rt-person',
-					)
-				);
-
-			}
-
-			$people_details = array();
-
-			if ( $query->have_posts() ) {
-
-				while ( $query->have_posts() ) {
-
-					$person_details = array();
-					$query->the_post();
-					$person_id              = get_the_ID();
-					$person_name            = get_the_title();
-					$person_details['Name'] = $person_name;
-
-					if ( has_post_thumbnail( $person_id ) ) {
-
-						$person_poster                     =
-							wp_get_attachment_image_src( get_post_thumbnail_id( $person_id ), 'full' );
-						$person_poster                     = $person_poster[0];
-						$person_details['Profile Picture'] = $person_poster;
-
-					} else {
-
-						$person_details['Profile Picture'] =
-							'https://movie-library-assignment.lndo.site/wp-content/uploads/2023/02/dummy-image.jpg';
-
-					}
-
-					$person_career_details = get_the_terms( $person_id, 'rt-person-career' );
-
-					if ( ! empty( $person_career_details ) ) {
-
-						if ( is_array( $person_career_details ) ) {
-
-							$careers = array();
-
-							foreach ( $person_career_details as $value ) {
-
-								$careers[] = $value->name;
-
-							}
-
-							$person_details['Career'] = implode( ', ', $careers );
-
-						} else {
-
-							$person_details['Career'] = $person_career_details->title;
-
-						}
-					}
-
-					$people_details[] = $person_details;
-
-				}
-			} else {
-
-				return $this->show_no_people_found_message();
-
-			}
-
-			wp_reset_postdata();
-			ob_start();
-
-			?>
-
-			<div class="movie-list-container">
-
-				<?php $this->display_people( $people_details ); ?>
-
-			</div>
-
-			<?php
-
-			return ob_get_clean();
-
-		}
-
-		/**
 		 * This function will display the message when no movies are found.
 		 *
 		 * @return string|false
@@ -640,6 +610,36 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 			<?php
 
 			return ob_get_clean();
+
+		}
+
+		/**
+		 * This function is used to return the search query for the taxonomy.
+		 *
+		 * @param array|string $terms    Terms.
+		 * @param string       $taxonomy Taxonomy.
+		 * @return array
+		 */
+		private function get_search_query( $terms, $taxonomy ): array {
+
+			return array(
+				'relation' => 'OR',
+				array(
+					'taxonomy' => $taxonomy,
+					'field'    => 'term_id',
+					'terms'    => $terms,
+				),
+				array(
+					'taxonomy' => $taxonomy,
+					'field'    => 'slug',
+					'terms'    => $terms,
+				),
+				array(
+					'taxonomy' => $taxonomy,
+					'field'    => 'name',
+					'terms'    => $terms,
+				),
+			);
 
 		}
 

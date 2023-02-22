@@ -364,21 +364,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 		}
 
 		/**
-		 * This function is used to update the post meta and set the object terms
-		 *
-		 * @param int    $post_id Post ID.
-		 * @param mixed  $terms  Terms to be stored.
-		 * @param string $key   Meta key.
-		 *
-		 * @return void
-		 */
-		private function set_object_terms( int $post_id, mixed $terms, string $key ): void {
-
-			update_post_meta( $post_id, $key, $terms );
-
-		}
-
-		/**
 		 * This function is used to save the rt-movie-meta-images meta field in the database.
 		 * This function will have two array one for selected videos and another for uploaded images.
 		 * If the selected images array is not empty then it will update the meta field in the database.
@@ -543,6 +528,21 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 				update_post_meta( $post_id, 'rt-media-meta-videos', $rt_media_meta_videos );
 
 			}
+		}
+
+		/**
+		 * This function is used to update the post meta and set the object terms
+		 *
+		 * @param int    $post_id Post ID.
+		 * @param mixed  $terms  Terms to be stored.
+		 * @param string $key   Meta key.
+		 *
+		 * @return void
+		 */
+		private function set_object_terms( int $post_id, mixed $terms, string $key ): void {
+
+			update_post_meta( $post_id, $key, $terms );
+
 		}
 	}
 }

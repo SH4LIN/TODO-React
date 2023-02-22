@@ -184,57 +184,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
 		}
 
 		/**
-		 * This function will be used to remove the data from the database.
-		 *
-		 * @return void
-		 */
-		public function remove_plugin_data_settings_submit(): void {
-
-			if ( isset( $_SERVER['REQUEST_METHOD'] ) &&
-				'POST' === $_SERVER['REQUEST_METHOD'] &&
-				isset( $_POST['submit'] ) &&
-				isset( $_POST['option_page'] ) &&
-				$this->option_group === $_POST['option_page'] ) {
-
-				if ( ! isset( $_POST['_wpnonce'] ) ) {
-					return;
-				}
-
-				// Sanitize nonce.
-				$rt_person_meta_nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) );
-
-				// Verify that the nonce is valid.
-				if ( ! wp_verify_nonce( $rt_person_meta_nonce, "$this->option_group-options" ) ) {
-					return;
-				}
-
-				if ( isset( $_POST[ $this->checkbox_option_name ] ) ) {
-
-					$checkbox_data = sanitize_text_field( wp_unslash( $_POST[ $this->checkbox_option_name ] ) );
-
-					if ( 'off' === $checkbox_data ) {
-
-						$checkbox_data = 'on';
-
-					}
-				} else {
-
-					$checkbox_data = 'off';
-
-				}
-
-				update_option( $this->checkbox_option_name, $checkbox_data );
-
-				$class   = 'notice notice-success is-dismissible';
-				$message = __( 'Settings saved.', 'movie-library' );
-
-				printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
-
-			}
-
-		}
-
-		/**
 		 * This function will be used to create the settings page. Which will have checkbox to remove data.
 		 * When you uninstall the plugin.
 		 */
@@ -329,6 +278,57 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
 			</div>
 
 			<?php
+
+		}
+
+		/**
+		 * This function will be used to remove the data from the database.
+		 *
+		 * @return void
+		 */
+		public function remove_plugin_data_settings_submit(): void {
+
+			if ( isset( $_SERVER['REQUEST_METHOD'] ) &&
+			     'POST' === $_SERVER['REQUEST_METHOD'] &&
+			     isset( $_POST['submit'] ) &&
+			     isset( $_POST['option_page'] ) &&
+			     $this->option_group === $_POST['option_page'] ) {
+
+				if ( ! isset( $_POST['_wpnonce'] ) ) {
+					return;
+				}
+
+				// Sanitize nonce.
+				$rt_person_meta_nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) );
+
+				// Verify that the nonce is valid.
+				if ( ! wp_verify_nonce( $rt_person_meta_nonce, "$this->option_group-options" ) ) {
+					return;
+				}
+
+				if ( isset( $_POST[ $this->checkbox_option_name ] ) ) {
+
+					$checkbox_data = sanitize_text_field( wp_unslash( $_POST[ $this->checkbox_option_name ] ) );
+
+					if ( 'off' === $checkbox_data ) {
+
+						$checkbox_data = 'on';
+
+					}
+				} else {
+
+					$checkbox_data = 'off';
+
+				}
+
+				update_option( $this->checkbox_option_name, $checkbox_data );
+
+				$class   = 'notice notice-success is-dismissible';
+				$message = __( 'Settings saved.', 'movie-library' );
+
+				printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
+
+			}
 
 		}
 

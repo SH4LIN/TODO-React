@@ -118,7 +118,6 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 			register_activation_hook( MLB_PLUGIN_FILE, [ $movie_library_activation, 'activate' ] );
 			register_deactivation_hook( MLB_PLUGIN_FILE, [ $movie_library_deactivation, 'deactivate' ] );
 
-			add_action( 'init', [ $this, 'load_plugin_text_domain' ] );
 			add_action( 'init', [ $this, 'setup_environment' ] );
 			add_action( 'plugins_loaded', [ $this, 'load_plugin_text_domain' ] );
 			add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_script' ] );
@@ -136,58 +135,6 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 
 			add_filter( 'enter_title_here', [ $this, 'change_title_text' ], 10, 2 );
 			add_filter( 'write_your_story', [ $this, 'change_post_content_text' ], 10, 2 );
-		}
-
-		/**
-		 * This function is used to change the title text for the post type.
-		 * It will change the title text to "Title" for the post type "rt-movie" and "Name" for the post type "rt-person".
-		 * It will not change the title text for any other post type.
-		 * It will return the original title text for any other post type.
-		 *
-		 * @param string  $title title that needs to be changed.
-		 * @param WP_Post $post post object.
-		 *
-		 * @return string
-		 */
-		public function change_title_text( $title, $post ): string {
-
-			if ( 'rt-movie' === $post->post_type ) {
-
-				$title = __( 'Title', 'movie-library' );
-
-			} elseif ( 'rt-person' === $post->post_type ) {
-
-				$title = __( 'Name', 'movie-library' );
-
-			}
-
-			return $title;
-		}
-
-		/**
-		 * This function is used to change the post content text for the post type.
-		 * It will change the post content text to "Plot" for the post type "rt-movie" and "Biography" for the post type "rt-person".
-		 * It will not change the post content text for any other post type.
-		 * It will return the original post content text for any other post type.
-		 *
-		 * @param string  $title title that needs to be changed.
-		 * @param WP_Post $post post object.
-		 *
-		 * @return string
-		 */
-		public function change_post_content_text( $title, $post ): string {
-
-			if ( 'rt-movie' === $post->post_type ) {
-
-				$title = __( 'Plot', 'movie-library' );
-
-			} elseif ( 'rt-person' === $post->post_type ) {
-
-				$title = __( 'Biography', 'movie-library' );
-
-			}
-
-			return $title;
 		}
 
 		/**
@@ -262,6 +209,58 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 			wp_enqueue_style( 'movie-library-frontend', MLB_PLUGIN_URL . 'public/css/movie-library-frontend.css', [], MLB_PLUGIN_VERSION );
 			wp_enqueue_script( 'movie-library-frontend', MLB_PLUGIN_URL . 'public/js/movie-library-frontend.js', [], MLB_PLUGIN_VERSION, true );
 
+		}
+
+		/**
+		 * This function is used to change the title text for the post type.
+		 * It will change the title text to "Title" for the post type "rt-movie" and "Name" for the post type "rt-person".
+		 * It will not change the title text for any other post type.
+		 * It will return the original title text for any other post type.
+		 *
+		 * @param string  $title title that needs to be changed.
+		 * @param WP_Post $post post object.
+		 *
+		 * @return string
+		 */
+		public function change_title_text( $title, $post ): string {
+
+			if ( 'rt-movie' === $post->post_type ) {
+
+				$title = __( 'Title', 'movie-library' );
+
+			} elseif ( 'rt-person' === $post->post_type ) {
+
+				$title = __( 'Name', 'movie-library' );
+
+			}
+
+			return $title;
+		}
+
+		/**
+		 * This function is used to change the post content text for the post type.
+		 * It will change the post content text to "Plot" for the post type "rt-movie" and "Biography" for the post type "rt-person".
+		 * It will not change the post content text for any other post type.
+		 * It will return the original post content text for any other post type.
+		 *
+		 * @param string  $title title that needs to be changed.
+		 * @param WP_Post $post post object.
+		 *
+		 * @return string
+		 */
+		public function change_post_content_text( $title, $post ): string {
+
+			if ( 'rt-movie' === $post->post_type ) {
+
+				$title = __( 'Plot', 'movie-library' );
+
+			} elseif ( 'rt-person' === $post->post_type ) {
+
+				$title = __( 'Biography', 'movie-library' );
+
+			}
+
+			return $title;
 		}
 
 	}
