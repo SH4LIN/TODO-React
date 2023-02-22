@@ -15,115 +15,136 @@ defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
 	/**
-	 * @class   Movie_Library_Remove_Plugin_Data_Settings_Page
-	 *          This class is used to create the submenu which will give you checkbox.
-	 *          Checking it will remove all the data from the database. When you uninstall the plugin.
+	 * This class is used to create the submenu which will give you checkbox.
+	 * Checking it will remove all the data from the database. When you uninstall the plugin.
+	 *
 	 * @version 1.0.0
 	 */
 	class Movie_Library_Settings_Page {
 
 		/**
-		 * @var string $parent_slug
-		 *      This variable will be used to store the parent slug.
+		 * Variable parent slug.
+		 *
+		 * @var string $parent_slug This variable will be used to store the parent slug.
 		 */
 		private string $parent_slug;
 
 		/**
+		 * Variable page title.
+		 *
 		 * @var string $page_title
-		 *      This variable will be used to store the page title.
 		 */
 		private string $page_title;
 
 		/**
-		 * @var string $menu_title
-		 *      This variable will be used to store the menu title.
+		 * Variable manu title.
+		 *
+		 * @var string $menu_title This variable will be used to store the menu title.
 		 */
 		private string $menu_title;
 
 		/**
-		 * @var string $capability
-		 *      This variable will be used to store the capability.
+		 * Variable capability.
+		 *
+		 * @var string $capability This variable will be used to store the capability.
 		 */
 		private string $capability;
 
 		/**
-		 * @var string $menu_slug
-		 *      This variable will be used to store the menu slug.
+		 * Variable menu slug.
+		 *
+		 * @var string $menu_slugThis variable will be used to store the menu slug.
 		 */
 		private string $menu_slug;
 
 		/**
-		 * @var array $movie_library_settings_page_callback
-		 *      This variable will be used to store the callback function.
+		 * Variable movie library settings page callback.
+		 *
+		 * @var array $movie_library_settings_page_callbackThis variable will be used to store the callback function.
 		 */
 		private array $movie_library_settings_page_callback;
 
 		/**
-		 * @var string $option_group
-		 *      This variable will be used to store the option group.
+		 * Variable option group.
+		 *
+		 * @var string $option_group his variable will be used to store the option group.
 		 */
 		private string $option_group;
 
 		/**
-		 * @var string $save_button_text
-		 *      This variable will be used to store the save button text.
+		 * Variable save button text.
+		 *
+		 * @var string $save_button_text This variable will be used to store the save button text.
 		 */
 		private string $save_button_text;
 
 		/**
-		 * @var string $checkbox_option_name
-		 *      This variable will be used to store the checkbox option name.
+		 * Variable checkbox option name.
+		 *
+		 * @var string $checkbox_option_name This variable will be used to store the checkbox option name.
 		 */
 		private string $checkbox_option_name;
 
 		/**
-		 * @var array $form_submission_callback
-		 *      This variable will be used to store the form submission callback.
+		 * Variable form submission callback.
+		 *
+		 * @var array $form_submission_callback This variable will be used to store the form submission callback.
 		 */
 		private array $form_submission_callback;
 
 		/**
-		 * @var array $admin_init_callback
-		 *      This variable will be used to store the admin init callback.
+		 * Variable admin init callback.
+		 *
+		 * @var array $admin_init_callback This variable will be used to store the admin init callback.
 		 */
 		private array $admin_init_callback;
 
 		/**
-		 * @var string $remove_plugin_data_section_id
-		 *      This variable will be used to store the remove plugin data section id.
+		 * Variable remove plugin data section id.
+		 *
+		 * @var string $remove_plugin_data_section_id This variable will be used to store the remove plugin data section id.
 		 */
 		private string $remove_plugin_data_section_id;
 
 		/**
-		 * @var string $remove_plugin_data_section_title
-		 *      This variable will be used to store the remove plugin data section title.
+		 * Variable remove plugin data section title.
+		 *
+		 * @var string $remove_plugin_data_section_title This variable will be used to store the remove plugin data section title.
 		 */
 		private string $remove_plugin_data_section_title;
 
 		/**
-		 * @var array $remove_plugin_data_section_callback
-		 *      This variable will be used to store the remove plugin data section callback.
+		 * Variable remove plugin data section callback.
+		 *
+		 * @var array $remove_plugin_data_section_callback This variable will be used to store the remove plugin data section callback.
 		 */
 		private array $remove_plugin_data_section_callback;
 
 		/**
-		 * @var string $field_description
-		 *      This variable will be used to store the field description.
+		 * Variable field description.
+		 *
+		 * @var string $field_description This variable will be used to store the field description.
 		 */
 		private string $remove_plugin_data_section_description;
 
 		/**
-		 * @var array $remove_plugin_data_field_callback
-		 *      This variable will be used to store the remove plugin data field callback.
+		 * Variable remove plugin data field callback.
+		 *
+		 * @var array $remove_plugin_data_field_callback This variable will be used to store the remove plugin data field callback.
 		 */
 		private array $remove_plugin_data_field_callback;
 
 		/**
-		 * @var string $remove_plugin_data_field_title
-		 *      This variable will be used to store the remove plugin data field title.
+		 * Variable remove plugin data field title.
+		 *
+		 * @var string $remove_plugin_data_field_title This variable will be used to store the remove plugin data field title.
 		 */
 		private string $remove_plugin_data_field_title;
 
+		/**
+		 * Constructor of the class.
+		 * It is used to initialize the variables that are used to create the sub menu page.
+		 */
 		public function __construct() {
 			$this->parent_slug                            = 'options-general.php';
 			$this->page_title                             = __( 'Movie Library Settings', 'movie-library' );
@@ -145,8 +166,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
 		}
 
 		/**
-		 * @function add_remove_plugin_data_sub_menu
-		 *           This function will be used to create the submenu.
+		 * This function will be used to create the submenu.
+		 *
 		 * @return void
 		 */
 		public function add_movie_library_sub_menu(): void {
@@ -165,16 +186,29 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
 		}
 
 		/**
-		 * @function remove_plugin_data_settings_submit
-		 *           This function will be used to remove the data from the database.
+		 * This function will be used to remove the data from the database.
+		 *
 		 * @return void
 		 */
 		public function remove_plugin_data_settings_submit(): void {
-			if (
-				'POST' === $_SERVER[ 'REQUEST_METHOD' ] &&
-				isset( $_POST[ 'submit' ] ) &&
-				isset( $_POST[ 'option_page' ] ) &&
-				$this->option_group === $_POST[ 'option_page' ] ) {
+			if ( isset($_SERVER['REQUEST_METHOD']) &&
+				'POST' === $_SERVER['REQUEST_METHOD'] &&
+				isset( $_POST['submit'] ) &&
+				isset( $_POST['option_page'] ) &&
+				$this->option_group === $_POST['option_page'] ) {
+				// Un-slashing $_POST data.
+				wp_unslash( $_POST );
+				if ( ! isset( $_POST['_wpnonce'] ) ) {
+					return;
+				}
+
+				// Sanitize nonce.
+				$rt_person_meta_nonce = sanitize_text_field( $_POST['_wpnonce'] );
+
+				// Verify that the nonce is valid.
+				if ( ! wp_verify_nonce( $rt_person_meta_nonce, "$this->option_group-options" ) ) {
+					return;
+				}
 				if ( isset( $_POST[ $this->checkbox_option_name ] ) ) {
 					$checkbox_data = sanitize_text_field( $_POST[ $this->checkbox_option_name ] );
 					if ( $checkbox_data === 'off' ) {
@@ -195,9 +229,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
 		}
 
 		/**
-		 * @function remove_plugin_data_settings_page
-		 *           This function will be used to create the settings page. Which will have checkbox to remove data.
-		 *           When you uninstall the plugin.
+		 * This function will be used to create the settings page. Which will have checkbox to remove data.
+		 * When you uninstall the plugin.
 		 */
 		public function movie_library_settings_page(): void {
 			// check user capabilities
@@ -220,8 +253,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
 		}
 
 		/**
-		 * @function remove_plugin_data_settings
-		 *           This function will be used to create the settings.
+		 * This function will be used to create the settings.
+		 *
 		 * @return void
 		 */
 		public function movie_library_settings(): void {
@@ -264,7 +297,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
 			$checked = '';
 
 			if ( $data ) {
-				if ( $data === 'on' ) {
+				if ( 'on' === $data ) {
 					$checked = 'checked';
 				}
 				$value = $data;
@@ -272,10 +305,15 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
 
 			?>
 			<label for="<?php echo esc_attr( $this->checkbox_option_name ); ?>">
-				<input type="<?php echo esc_attr( 'checkbox' ); ?>" name="<?php echo esc_attr( $this->checkbox_option_name ); ?>" id="<?php echo esc_attr( $this->checkbox_option_name ); ?>" value="<?php echo esc_attr( $value ); ?>" <?php echo esc_attr( $checked ); ?>/>
+				<input type="<?php echo esc_attr( 'checkbox' ); ?>"
+					name="<?php echo esc_attr( $this->checkbox_option_name ); ?>"
+					id="<?php echo esc_attr( $this->checkbox_option_name ); ?>"
+					value="<?php echo esc_attr( $value ); ?>" <?php echo esc_attr( $checked ); ?>/>
 			</label>
 			<div class="notice notice-warning is-dismissible">
-				<p><?php esc_html_e( 'Below setting will delete the plugin data when you uninstall the plugin!' ); ?></p>
+				<p><?php esc_html_e(
+						'Below setting will delete the plugin data when you uninstall the plugin!'
+					); ?></p>
 			</div>
 			<?php
 		}

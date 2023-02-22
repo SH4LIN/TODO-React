@@ -15,14 +15,13 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Activation' ) ) {
 
 	/**
-	 * @class Movie_Library_Activation
-	 *        This class is used to perform the activation functionality for the plugin.
+	 * This class is used to perform the activation functionality for the plugin.
 	 */
 	class Movie_Library_Activation {
 
 		/**
-		 * @function activate.
-		 *           This function is used to perform the activation functionality for the plugin.
+		 * This function is used to perform the activation functionality for the plugin.
+		 *
 		 * @return void
 		 */
 		public function activate(): void {}

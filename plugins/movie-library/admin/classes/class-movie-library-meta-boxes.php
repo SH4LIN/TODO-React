@@ -18,14 +18,13 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 
 	/**
-	 * @class Movie_Library_Meta_Boxes
-	 *        This class is used to create the meta boxes for the plugin.
+	 * This class is used to create the meta boxes for the plugin.
 	 */
 	class Movie_Library_Meta_Boxes {
 
 		/**
-		 * @function add_meta_boxes
-		 *           This function is used to add the meta boxes for the plugin.
+		 * This function is used to add the meta boxes for the plugin.
+		 *
 		 * @return void
 		 */
 		public function add_meta_boxes(): void {
@@ -34,18 +33,18 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 			foreach ( $meta_boxes_args as $meta_box_id => $meta_box_args ) {
 				add_meta_box(
 					$meta_box_id,
-					$meta_box_args[ 'title' ],
-					$meta_box_args[ 'callback' ],
-					$meta_box_args[ 'screen' ],
-					$meta_box_args[ 'context' ],
-					$meta_box_args[ 'priority' ]
+					$meta_box_args['title'],
+					$meta_box_args['callback'],
+					$meta_box_args['screen'],
+					$meta_box_args['context'],
+					$meta_box_args['priority']
 				);
 			}
 		}
 
 		/**
-		 * @function get_meta_boxes_args
-		 *           This function is used to get the meta boxes arguments.
+		 * This function is used to get the meta boxes arguments.
+		 *
 		 * @return array The meta boxes arguments.
 		 */
 		private function get_meta_boxes_args(): array {
@@ -53,42 +52,42 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 				'rt-movie-meta-basic'   => array(
 					'title'    => __( 'Basic', 'movie-library' ),
 					'callback' => array( $this, 'rt_movie_meta_basic' ),
-					'screen'   => [ 'rt-movie' ],
+					'screen'   => array( 'rt-movie' ),
 					'context'  => 'side',
 					'priority' => 'high',
 				),
 				'rt-movie-meta-crew'    => array(
 					'title'    => __( 'Crew', 'movie-library' ),
 					'callback' => array( $this, 'rt_movie_meta_crew' ),
-					'screen'   => [ 'rt-movie' ],
+					'screen'   => array( 'rt-movie' ),
 					'context'  => 'side',
 					'priority' => 'high',
 				),
 				'rt-person-meta-basic'  => array(
 					'title'    => __( 'Basic', 'movie-library' ),
 					'callback' => array( $this, 'rt_person_meta_basic' ),
-					'screen'   => [ 'rt-person' ],
+					'screen'   => array( 'rt-person' ),
 					'context'  => 'side',
 					'priority' => 'high',
 				),
 				'rt-person-meta-social' => array(
 					'title'    => __( 'Basic', 'movie-library' ),
 					'callback' => array( $this, 'rt_person_meta_social' ),
-					'screen'   => [ 'rt-person' ],
+					'screen'   => array( 'rt-person' ),
 					'context'  => 'side',
 					'priority' => 'high',
 				),
 				'rt-media-meta-images'  => array(
 					'title'    => __( 'Photos', 'movie-library' ),
 					'callback' => array( $this, 'rt_media_meta_images' ),
-					'screen'   => [ 'rt-movie', 'rt-person' ],
+					'screen'   => array( 'rt-movie', 'rt-person' ),
 					'context'  => 'side',
 					'priority' => 'high',
 				),
 				'rt-media-meta-videos'  => array(
 					'title'    => __( 'Videos', 'movie-library' ),
 					'callback' => array( $this, 'rt_media_meta_videos' ),
-					'screen'   => [ 'rt-movie', 'rt-person' ],
+					'screen'   => array( 'rt-movie', 'rt-person' ),
 					'context'  => 'side',
 					'priority' => 'high',
 				),
@@ -96,10 +95,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 		}
 
 		/**
-		 * @function rt_movie_meta_images
-		 *           This function is used to create the meta box for the movie images.
+		 * This function is used to create the meta box for the movie images.
 		 *
-		 * @param WP_Post $post
+		 * @param WP_Post $post The post object.
 		 *
 		 * @return void
 		 */
@@ -108,7 +106,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 				'images' => 'rt-media-meta-images',
 			);
 			$rt_media_meta_images_data_attachment_ids =
-				get_post_meta( $post->ID, $rt_media_meta_images_key[ 'images' ] );
+				get_post_meta( $post->ID, $rt_media_meta_images_key['images'] );
 			wp_nonce_field( 'rt_media_meta_nonce', 'rt_media_meta_nonce' );
 			?>
 
@@ -135,9 +133,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 								<img src = "<?php echo esc_url( $image_url );
 								?>" alt = "">
 								<span class = "rt-media-meta-remove rt-media-meta-image-remove rt-media-meta-uploaded-image-remove"
-								      data-id = "<?php echo esc_attr(
-									      $rt_media_meta_image_attachment_id
-								      ); ?>">X</span>
+										data-id = "<?php echo esc_attr(
+											$rt_media_meta_image_attachment_id
+										); ?>">X</span>
 							</div>
 							<?php
 						}
@@ -148,23 +146,22 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 
 				</div>
 				<div class = "rt-media-meta-container rt-media-meta-images-container rt-media-meta-selected-images-container"
-				     id = "rt-media-meta-selected-images-container">
+						id = "rt-media-meta-selected-images-container">
 				</div>
 				<button class = "rt-media-meta-add rt-media-meta-add rt-media-meta-images-add"
-				        type = "button">Add</button>
+						type = "button">Add</button>
 				<input name = "rt-media-meta-selected-images" hidden = "hidden">
 			</div>
 			<?php
 		}
 
 		/**
-		 * @function rt_media_meta_videos
-		 *           This function will add the meta box for videos in rt-movie and rt-person post type.
-		 *           It will also add the functionality to add and remove videos.
-		 *           It will also save the videos in the database.
-		 *           It will also add the functionality to add videos from the media library.
+		 * This function will add the meta box for videos in rt-movie and rt-person post type.
+		 * It will also add the functionality to add and remove videos.
+		 * It will also save the videos in the database.
+		 * It will also add the functionality to add videos from the media library.
 		 *
-		 * @param WP_Post $post
+		 * @param WP_Post $post The post object.
 		 *
 		 * @return void
 		 */
@@ -173,7 +170,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 				'images' => 'rt-media-meta-videos',
 			);
 			$rt_media_meta_videos_data_attachment_ids =
-				get_post_meta( $post->ID, $rt_media_meta_videos_key[ 'images' ] );
+				get_post_meta( $post->ID, $rt_media_meta_videos_key['images'] );
 			wp_nonce_field( 'rt_media_meta_nonce', 'rt_media_meta_nonce' );
 			?>
 
@@ -201,9 +198,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 									<source src = "<?php echo esc_url( $video_url ); ?>">
 								</video>
 								<span class = "rt-media-meta-remove rt-media-meta-video-remove rt-media-meta-uploaded-video-remove"
-								      data-id = "<?php echo esc_attr(
-									      $rt_media_meta_video_attachment_id
-								      ); ?>">X</span>
+										data-id = "<?php echo esc_attr(
+											$rt_media_meta_video_attachment_id
+										); ?>">X</span>
 							</div>
 							<?php
 						}
@@ -214,18 +211,17 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 
 				</div>
 				<div class = "rt-media-meta-container rt-media-meta-videos-container rt-media-meta-selected-videos-container"
-				     id = "rt-media-meta-selected-videos-container">
+						id = "rt-media-meta-selected-videos-container">
 				</div>
 				<button class = "rt-media-meta-add rt-media-meta-add rt-media-meta-videos-add"
-				        type = "button">Add</button>
+						type = "button">Add</button>
 				<input name = "rt-media-meta-selected-videos" hidden = "hidden">
 			</div>
 			<?php
 		}
 
 		/**
-		 * @function rt_movie_meta_basic
-		 *           This function is used to create the meta box for the person social details.
+		 * This function is used to create the meta box for the person social details.
 		 *
 		 * @param WP_Post $post The post object.
 		 *
@@ -246,66 +242,66 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 			<div class = "rt-person-meta-fields rt-person-meta-social-fields">
 				<div class = "rt-person-meta-container rt-person-meta-social-container rt-person-meta-social-twitter-container">
 					<label class = "rt-person-meta-label rt-person-meta-social-label rt-person-meta-social-twitter-label"
-					       for = "<?php echo esc_attr(
-						       $rt_person_meta_social_key[ 'twitter' ]
-					       ); ?>">
+							for = "<?php echo esc_attr(
+								$rt_person_meta_social_key[ 'twitter' ]
+							); ?>">
 						<?php esc_html_e( 'Twitter', 'movie-library' ); ?>
 					</label>
 					<input type = "text"
-					       value = "<?php echo esc_url(
-						       $rt_person_meta_social_data[ $rt_person_meta_social_key[ 'twitter' ] ][ 0 ]
-					       ) ?>"
-					       class = "rt-person-meta-field rt-person-meta-social-field rt-person-meta-social-twitter-field"
-					       name = "<?php echo esc_attr( $rt_person_meta_social_key[ 'twitter' ] ); ?>"
-					       id = "<?php echo esc_attr( $rt_person_meta_social_key[ 'twitter' ] ); ?>"
+							value = "<?php echo esc_url(
+								$rt_person_meta_social_data[ $rt_person_meta_social_key[ 'twitter' ] ][ 0 ]
+							) ?>"
+							class = "rt-person-meta-field rt-person-meta-social-field rt-person-meta-social-twitter-field"
+							name = "<?php echo esc_attr( $rt_person_meta_social_key[ 'twitter' ] ); ?>"
+							id = "<?php echo esc_attr( $rt_person_meta_social_key[ 'twitter' ] ); ?>"
 					/>
 				</div>
 				<div class = "rt-person-meta-container rt-person-meta-social-container rt-person-meta-social-facebook-container">
 					<label class = "rt-person-meta-label rt-person-meta-social-label rt-person-meta-social-facebook-label"
-					       for = "<?php echo esc_attr(
-						       $rt_person_meta_social_key[ 'facebook' ]
-					       ); ?>">
+							for = "<?php echo esc_attr(
+								$rt_person_meta_social_key[ 'facebook' ]
+							); ?>">
 						<?php esc_html_e( 'Facebook', 'movie-library' ); ?>
 					</label>
 					<input type = "text"
-					       value = "<?php echo esc_url(
-						       $rt_person_meta_social_data[ $rt_person_meta_social_key[ 'facebook' ] ][ 0 ]
-					       ) ?>"
-					       class = "rt-person-meta-field rt-person-meta-social-field rt-person-meta-social-facebook-field"
-					       name = "<?php echo esc_attr( $rt_person_meta_social_key[ 'facebook' ] ); ?>"
-					       id = "<?php echo esc_attr( $rt_person_meta_social_key[ 'facebook' ] ); ?>"
+							value = "<?php echo esc_url(
+								$rt_person_meta_social_data[ $rt_person_meta_social_key[ 'facebook' ] ][ 0 ]
+							) ?>"
+							class = "rt-person-meta-field rt-person-meta-social-field rt-person-meta-social-facebook-field"
+							name = "<?php echo esc_attr( $rt_person_meta_social_key[ 'facebook' ] ); ?>"
+							id = "<?php echo esc_attr( $rt_person_meta_social_key[ 'facebook' ] ); ?>"
 					/>
 				</div>
 				<div class = "rt-person-meta-container rt-person-meta-social-container rt-person-meta-social-instagram-container">
 					<label class = "rt-person-meta-label rt-person-meta-social-label rt-person-meta-social-instagram-label"
-					       for = "<?php echo esc_attr(
-						       $rt_person_meta_social_key[ 'instagram' ]
-					       ); ?>">
+							for = "<?php echo esc_attr(
+								$rt_person_meta_social_key[ 'instagram' ]
+							); ?>">
 						<?php esc_html_e( 'Instagram', 'movie-library' ); ?>
 					</label>
 					<input type = "text"
-					       value = "<?php echo esc_url(
-						       $rt_person_meta_social_data[ $rt_person_meta_social_key[ 'instagram' ] ][ 0 ]
-					       ) ?>"
-					       class = "rt-person-meta-field rt-person-meta-social-field rt-person-meta-social-instagram-field"
-					       name = "<?php echo esc_attr( $rt_person_meta_social_key[ 'instagram' ] ); ?>"
-					       id = "<?php echo esc_attr( $rt_person_meta_social_key[ 'instagram' ] ); ?>"
+							value = "<?php echo esc_url(
+								$rt_person_meta_social_data[ $rt_person_meta_social_key[ 'instagram' ] ][ 0 ]
+							) ?>"
+							class = "rt-person-meta-field rt-person-meta-social-field rt-person-meta-social-instagram-field"
+							name = "<?php echo esc_attr( $rt_person_meta_social_key[ 'instagram' ] ); ?>"
+							id = "<?php echo esc_attr( $rt_person_meta_social_key[ 'instagram' ] ); ?>"
 					/>
 				</div>
 				<div class = "rt-person-meta-container rt-person-meta-social-container rt-person-meta-social-website-container">
 					<label class = "rt-person-meta-label rt-person-meta-social-label rt-person-meta-social-website-label"
-					       for = "<?php echo esc_attr(
-						       $rt_person_meta_social_key[ 'Website' ]
-					       ); ?>">
+							for = "<?php echo esc_attr(
+								$rt_person_meta_social_key[ 'Website' ]
+							); ?>">
 						<?php esc_html_e( 'Website', 'movie-library' ); ?>
 					</label>
 					<input type = "text"
-					       value = "<?php echo esc_url(
-						       $rt_person_meta_social_data[ $rt_person_meta_social_key[ 'website' ] ][ 0 ]
-					       ) ?>"
-					       class = "rt-person-meta-field rt-person-meta-social-field rt-person-meta-social-website-field"
-					       name = "<?php echo esc_attr( $rt_person_meta_social_key[ 'website' ] ); ?>"
-					       id = "<?php echo esc_attr( $rt_person_meta_social_key[ 'website' ] ); ?>" />
+							value = "<?php echo esc_url(
+								$rt_person_meta_social_data[ $rt_person_meta_social_key[ 'website' ] ][ 0 ]
+							) ?>"
+							class = "rt-person-meta-field rt-person-meta-social-field rt-person-meta-social-website-field"
+							name = "<?php echo esc_attr( $rt_person_meta_social_key[ 'website' ] ); ?>"
+							id = "<?php echo esc_attr( $rt_person_meta_social_key[ 'website' ] ); ?>" />
 				</div>
 			</div>
 			<?php
@@ -332,33 +328,33 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 			<div class = "rt-person-meta-fields rt-person-meta-basic-fields">
 				<div class = "rt-person-meta-container rt-person-meta-basic-container rt-person-meta-basic-birth-date-container">
 					<label class = "rt-person-meta-label rt-person-meta-basic-label rt-person-meta-basic-birth-date-label"
-					       for = "<?php echo esc_attr(
-						       $rt_person_meta_basic_key[ 'birth-date' ]
-					       ); ?>">
+							for = "<?php echo esc_attr(
+								$rt_person_meta_basic_key[ 'birth-date' ]
+							); ?>">
 						<?php esc_html_e( 'Birth Date', 'movie-library' ); ?>
 					</label>
 					<input type = "date"
-					       value = "<?php echo esc_attr(
-						       $rt_person_meta_basic_data[ $rt_person_meta_basic_key[ 'birth-date' ] ][ 0 ]
-					       ) ?>"
-					       class = "rt-person-meta-field rt-person-meta-basic-field rt-person-meta-basic-birth-date-field"
-					       name = "<?php echo esc_attr( $rt_person_meta_basic_key[ 'birth-date' ] ); ?>"
-					       id = "<?php echo esc_attr( $rt_person_meta_basic_key[ 'birth-date' ] ); ?>" />
+							value = "<?php echo esc_attr(
+								$rt_person_meta_basic_data[ $rt_person_meta_basic_key[ 'birth-date' ] ][ 0 ]
+							) ?>"
+							class = "rt-person-meta-field rt-person-meta-basic-field rt-person-meta-basic-birth-date-field"
+							name = "<?php echo esc_attr( $rt_person_meta_basic_key[ 'birth-date' ] ); ?>"
+							id = "<?php echo esc_attr( $rt_person_meta_basic_key[ 'birth-date' ] ); ?>" />
 				</div>
 				<div class = "rt-person-meta-container rt-person-meta-basic-container rt-person-meta-basic-birth-place-container">
 					<label class = "rt-person-meta-label rt-person-meta-basic-label rt-person-meta-basic-birth-place-label"
-					       for = "<?php echo esc_attr(
-						       $rt_person_meta_basic_key[ 'birth-place' ]
-					       ); ?>">
+							for = "<?php echo esc_attr(
+								$rt_person_meta_basic_key[ 'birth-place' ]
+							); ?>">
 						<?php esc_html_e( 'Birth Place', 'movie-library' ); ?>
 					</label>
 					<input type = "text"
-					       value = "<?php echo esc_attr(
-						       $rt_person_meta_basic_data[ $rt_person_meta_basic_key[ 'birth-place' ] ][ 0 ]
-					       ) ?>"
-					       class = "rt-person-meta-field rt-person-meta-basic-field rt-person-meta-basic-birth-place-field"
-					       name = "<?php echo esc_attr( $rt_person_meta_basic_key[ 'birth-place' ] ); ?>"
-					       id = "<?php echo esc_attr( $rt_person_meta_basic_key[ 'birth-place' ] ); ?>" />
+							value = "<?php echo esc_attr(
+								$rt_person_meta_basic_data[ $rt_person_meta_basic_key[ 'birth-place' ] ][ 0 ]
+							) ?>"
+							class = "rt-person-meta-field rt-person-meta-basic-field rt-person-meta-basic-birth-place-field"
+							name = "<?php echo esc_attr( $rt_person_meta_basic_key[ 'birth-place' ] ); ?>"
+							id = "<?php echo esc_attr( $rt_person_meta_basic_key[ 'birth-place' ] ); ?>" />
 				</div>
 
 
@@ -368,8 +364,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 		}
 
 		/**
-		 * @function rt_movie_meta_basic
-		 *           This function is used to display the meta box for the movie details.
+		 * This function is used to display the meta box for the movie details.
 		 *
 		 * @param WP_Post $post The post object.
 		 *
@@ -389,53 +384,53 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 			<div class = "rt-movie-meta-fields rt-movie-meta-basic-fields">
 				<div class = "rt-movie-meta-container rt-movie-meta-basic-container rt-movie-meta-basic-rating-container">
 					<label class = "rt-movie-meta-label rt-movie-meta-basic-label rt-movie-meta-basic-rating-label"
-					       for = "<?php echo esc_attr(
-						       $rt_movie_meta_basic_key[ 'rating' ]
-					       ); ?>">
+							for = "<?php echo esc_attr(
+								$rt_movie_meta_basic_key[ 'rating' ]
+							); ?>">
 						<?php esc_html_e( 'Rating (Between 1-5)', 'movie-library' ); ?>
 					</label>
 					<input type = "number"
-					       value = "<?php echo esc_attr(
-						       $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key[ 'rating' ] ][ 0 ]
-					       ) ?>"
-					       class = "rt-movie-meta-field rt-movie-meta-basic-field rt-movie-meta-basic-rating-field"
-					       name = "<?php echo esc_attr( $rt_movie_meta_basic_key[ 'rating' ] ); ?>"
-					       id = "<?php echo esc_attr( $rt_movie_meta_basic_key[ 'rating' ] ); ?>"
-					       max = "5"
-					       min = "1" />
+							value = "<?php echo esc_attr(
+								$rt_movie_meta_basic_data[ $rt_movie_meta_basic_key[ 'rating' ] ][ 0 ]
+							) ?>"
+							class = "rt-movie-meta-field rt-movie-meta-basic-field rt-movie-meta-basic-rating-field"
+							name = "<?php echo esc_attr( $rt_movie_meta_basic_key[ 'rating' ] ); ?>"
+							id = "<?php echo esc_attr( $rt_movie_meta_basic_key[ 'rating' ] ); ?>"
+							max = "5"
+							min = "1" />
 				</div>
 				<div class = "rt-movie-meta-container rt-movie-meta-basic-container rt-movie-meta-basic-runtime-container">
 					<label class = "rt-movie-meta-label rt-movie-meta-basic-label rt-movie-meta-basic-runtime-label"
-					       for = "<?php echo esc_attr(
-						       $rt_movie_meta_basic_key[ 'runtime' ]
-					       ); ?>">
+							for = "<?php echo esc_attr(
+								$rt_movie_meta_basic_key[ 'runtime' ]
+							); ?>">
 						<?php esc_html_e( 'Runtime (Minutes)', 'movie-library' ); ?>
 					</label>
 					<input type = "number"
-					       value = "<?php echo esc_attr(
-						       $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key[ 'runtime' ] ][ 0 ]
-					       ) ?>"
-					       class = "rt-movie-meta-field rt-movie-meta-basic-field rt-movie-meta-basic-runtime-field"
-					       name = "<?php echo esc_attr( $rt_movie_meta_basic_key[ 'runtime' ] ); ?>"
-					       id = "<?php echo esc_attr( $rt_movie_meta_basic_key[ 'runtime' ] ); ?>"
-					       min = "1"
-					       max = "1000" />
+							value = "<?php echo esc_attr(
+								$rt_movie_meta_basic_data[ $rt_movie_meta_basic_key[ 'runtime' ] ][ 0 ]
+							) ?>"
+							class = "rt-movie-meta-field rt-movie-meta-basic-field rt-movie-meta-basic-runtime-field"
+							name = "<?php echo esc_attr( $rt_movie_meta_basic_key[ 'runtime' ] ); ?>"
+							id = "<?php echo esc_attr( $rt_movie_meta_basic_key[ 'runtime' ] ); ?>"
+							min = "1"
+							max = "1000" />
 
 				</div>
 				<div class = "rt-movie-meta-container rt-movie-meta-basic-container rt-movie-meta-basic-release-date-container">
 					<label class = "rt-movie-meta-label rt-movie-meta-basic-label rt-movie-meta-basic-release-date-label"
-					       for = "<?php echo esc_attr(
-						       $rt_movie_meta_basic_key[ 'release-date' ]
-					       ); ?>">
+							for = "<?php echo esc_attr(
+								$rt_movie_meta_basic_key[ 'release-date' ]
+							); ?>">
 						<?php esc_html_e( 'Release Date', 'movie-library' ); ?>
 					</label>
 					<input type = "date"
-					       value = "<?php echo esc_attr(
-						       $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key[ 'release-date' ] ][ 0 ]
-					       ) ?>"
-					       class = "rt-movie-meta-field rt-movie-meta-basic-field rt-movie-meta-basic-release-date-field"
-					       name = "<?php echo esc_attr( $rt_movie_meta_basic_key[ 'release-date' ] ); ?>"
-					       id = "<?php echo esc_attr( $rt_movie_meta_basic_key[ 'release-date' ] ); ?>" />
+							value = "<?php echo esc_attr(
+								$rt_movie_meta_basic_data[ $rt_movie_meta_basic_key[ 'release-date' ] ][ 0 ]
+							) ?>"
+							class = "rt-movie-meta-field rt-movie-meta-basic-field rt-movie-meta-basic-release-date-field"
+							name = "<?php echo esc_attr( $rt_movie_meta_basic_key[ 'release-date' ] ); ?>"
+							id = "<?php echo esc_attr( $rt_movie_meta_basic_key[ 'release-date' ] ); ?>" />
 				</div>
 
 			</div>
@@ -453,10 +448,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 		 */
 		public function rt_movie_meta_crew( WP_Post $post ): void {
 			$rt_career_terms = get_terms(
-				[
+				array(
 					'taxonomy'   => 'rt-person-career',
-					'hide_empty' => FALSE,
-				]
+					'hide_empty' => false,
+				)
 			);
 
 			$rt_people_data          = array();
@@ -471,11 +466,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 			$selected_people = array();
 			foreach ( $rt_movie_meta_crew_data as $key => $rt_movie_meta_crew ) {
 				if ( empty( $rt_movie_meta_crew ) ) {
-					$selected_people[ $key ] = [];
+					$selected_people[ $key ] = array();
 					continue;
 				}
 				foreach ( $rt_movie_meta_crew as $rt_movie_data ) {
-					$selected_people[ $key ][] = $rt_movie_data[ 'person_id' ];
+					$selected_people[ $key ][] = $rt_movie_data['person_id'];
 				}
 			}
 
@@ -499,10 +494,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 						</label>
 						<select class = "rt-movie-meta-field rt-movie-meta-crew-field <?php echo esc_attr(
 							strtolower( 'rt-movie-meta-crew-' . $key . '-field' ) ) ?>"
-						        name = "<?php echo esc_attr( strtolower( 'rt-movie-meta-crew-' . $key ) . '[]' ); ?>"
-						        id = "<?php echo esc_attr(
-							        strtolower( str_replace( '-', '_', 'rt-movie-meta-crew-' . $key ) ) ) ?>"
-						        multiple = "multiple">
+								name = "<?php echo esc_attr( strtolower( 'rt-movie-meta-crew-' . $key ) . '[]' ); ?>"
+								id = "<?php echo esc_attr(
+									strtolower( str_replace( '-', '_', 'rt-movie-meta-crew-' . $key ) ) ) ?>"
+								multiple = "multiple">
 
 							<option value = "" disabled> <?php echo esc_html__( "Select" ) . esc_html(
 										$key ); ?></option>
@@ -543,19 +538,19 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 										?>
 										<div class = "rt-movie-meta-crew-actor-character-container">
 											<label class = "rt-movie-meta-label rt-movie-meta-crew-label "
-											       for = "<?php echo esc_attr( $rt_character_data[ 'person_id' ] ); ?>">
+													for = "<?php echo esc_attr( $rt_character_data[ 'person_id' ] ); ?>">
 												<?php echo esc_html( $rt_character_data[ 'person_name' ] . ( ' (Character Name)' ) ) ?>
 											</label>
 											<input type = "text"
-											       class = "rt-movie-meta-crew-actor-character-field"
-											       name = "<?php echo esc_attr( $rt_character_data[ 'person_id' ] ); ?>"
-											       id = "<?php echo esc_attr( $rt_character_data[ 'person_id' ] ); ?>"
-											       value = "<?php echo esc_attr( $rt_character_data[ 'character_name' ] ); ?>">
+													class = "rt-movie-meta-crew-actor-character-field"
+													name = "<?php echo esc_attr( $rt_character_data[ 'person_id' ] ); ?>"
+													id = "<?php echo esc_attr( $rt_character_data[ 'person_id' ] ); ?>"
+													value = "<?php echo esc_attr( $rt_character_data[ 'character_name' ] ); ?>">
 											<input type = "text"
-											       class = "hidden-field"
-											       name = "<?php echo esc_attr( $rt_character_data[ 'person_id' ] . '-name' ); ?>"
-											       id = "<?php echo esc_attr( $rt_character_data[ 'person_id' ] ); ?>"
-											       value = "<?php echo esc_attr( $rt_character_data[ 'person_name' ] ); ?>">
+													class = "hidden-field"
+													name = "<?php echo esc_attr( $rt_character_data[ 'person_id' ] . '-name' ); ?>"
+													id = "<?php echo esc_attr( $rt_character_data[ 'person_id' ] ); ?>"
+													value = "<?php echo esc_attr( $rt_character_data[ 'person_name' ] ); ?>">
 										</div>
 									<?php } ?>
 								<?php } ?>
@@ -584,7 +579,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 		private function get_person_data( $rt_career_term ): array {
 			$rt_person_data  = array();
 			$rt_person_query = new WP_Query(
-				[
+				array(
 					'post_type' => 'rt-person',
 					'per_page'  => 10,
 					'tax_query' => array(
@@ -594,7 +589,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 							'terms'    => $rt_career_term->term_id,
 						),
 					),
-				]
+				)
 			);
 
 			if ( $rt_person_query->have_posts() ) {
@@ -618,7 +613,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 				if ( empty( $rt_movie_meta_crew ) ) {
 					continue;
 				}
-				$un_shifted_array[ $key ] = $rt_movie_meta_crew[ 0 ];
+				$un_shifted_array[ $key ] = $rt_movie_meta_crew[0];
 			}
 
 			return $un_shifted_array;

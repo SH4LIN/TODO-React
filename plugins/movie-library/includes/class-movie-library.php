@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
 
 use MovieLib\admin\classes\Movie_Library_Activation;
 use MovieLib\admin\classes\Movie_Library_Deactivation;
-use MovieLib\admin\classes\Movie_Library_Post_type;
+use MovieLib\admin\classes\Movie_Library_Post_Type;
 use MovieLib\admin\classes\Movie_Library_Settings_Page;
 use MovieLib\admin\classes\Movie_Library_Save_Post;
 use MovieLib\admin\classes\Movie_Library_Shortcodes;
@@ -172,7 +172,7 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		public function setup_environment(): void {
 			// Set up localisation.
-			$post_type = new Movie_Library_Post_type();
+			$post_type = new Movie_Library_Post_Type();
 			$post_type->register_custom_post_type();
 			$taxonomy = new Movie_Library_Taxonomy();
 			$taxonomy->register_custom_taxonomy();

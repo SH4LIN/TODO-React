@@ -14,30 +14,32 @@ defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Taxonomy' ) ) {
 	/**
-	 * @class Movie_Library_Taxonomy
 	 * This class contains all the functions to create the taxonomy for the plugin.
 	 */
 	class Movie_Library_Taxonomy {
 		/**
-		 * @function register_custom_taxonomy.
-		 *           This function is used to register the custom taxonomy for the plugin.
+		 * This function is used to register the custom taxonomy for the plugin.
+		 *
 		 * @return void
 		 */
-		function register_custom_taxonomy(): void {
+		public function register_custom_taxonomy(): void {
 			$custom_taxonomies = $this->get_custom_taxonomies();
 			foreach ( $custom_taxonomies as $custom_taxonomy ) {
-				register_taxonomy( $custom_taxonomy[ 'taxonomy' ], $custom_taxonomy[ 'post_type' ],
-				                   $custom_taxonomy[ 'args' ] );
+				register_taxonomy(
+					$custom_taxonomy['taxonomy'],
+					$custom_taxonomy['post_type'],
+					$custom_taxonomy['args']
+				);
 			}
 			flush_rewrite_rules();
 		}
 
 		/**
-		 * @function get_custom_taxonomies.
-		 *           This function is used to get the custom taxonomies for the plugin.
+		 * This function is used to get the custom taxonomies for the plugin.
+		 *
 		 * @return array[]
 		 */
-		function get_custom_taxonomies(): array {
+		private function get_custom_taxonomies(): array {
 			return array(
 				array(
 					'taxonomy'  => 'rt-movie-genre',
@@ -61,16 +63,16 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Taxonomy' ) ) {
 							'not_found'                  => __( 'No genres found.', 'movie-library' ),
 							'menu_name'                  => __( 'Genres', 'movie-library' ),
 						),
-						'hierarchical'       => TRUE,
-						'show_ui'            => TRUE,
-						'show_in_menu'       => TRUE,
-						'show_in_nav_menus'  => TRUE,
-						'show_admin_column'  => TRUE,
-						'show_in_quick_edit' => TRUE,
-						'show_in_rest'       => TRUE,
-						'query_var'          => TRUE,
-						'public'             => TRUE,
-						'publicly_queryable' => TRUE,
+						'hierarchical'       => true,
+						'show_ui'            => true,
+						'show_in_menu'       => true,
+						'show_in_nav_menus'  => true,
+						'show_admin_column'  => true,
+						'show_in_quick_edit' => true,
+						'show_in_rest'       => true,
+						'query_var'          => true,
+						'public'             => true,
+						'publicly_queryable' => true,
 						'rewrite'            => array( 'slug' => 'rt-movie-genre' ),
 					),
 				),
@@ -96,16 +98,16 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Taxonomy' ) ) {
 							'not_found'                  => __( 'No labels found.', 'movie-library' ),
 							'menu_name'                  => __( 'Labels', 'movie-library' ),
 						),
-						'hierarchical'       => TRUE,
-						'show_ui'            => TRUE,
-						'show_in_menu'       => TRUE,
-						'show_in_nav_menus'  => TRUE,
-						'show_admin_column'  => TRUE,
-						'show_in_quick_edit' => TRUE,
-						'show_in_rest'       => TRUE,
-						'query_var'          => TRUE,
-						'public'             => TRUE,
-						'publicly_queryable' => TRUE,
+						'hierarchical'       => true,
+						'show_ui'            => true,
+						'show_in_menu'       => true,
+						'show_in_nav_menus'  => true,
+						'show_admin_column'  => true,
+						'show_in_quick_edit' => true,
+						'show_in_rest'       => true,
+						'query_var'          => true,
+						'public'             => true,
+						'publicly_queryable' => true,
 						'rewrite'            => array( 'slug' => 'rt-movie-label' ),
 					),
 				),
@@ -127,21 +129,23 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Taxonomy' ) ) {
 							'new_item_name'              => __( 'New Language Name', 'movie-library' ),
 							'separate_items_with_commas' => __( 'Separate Languages with commas', 'movie-library' ),
 							'add_or_remove_items'        => __( 'Add or remove Languages', 'movie-library' ),
-							'choose_from_most_used'      => __( 'Choose from the most used Languages',
-							                                    'movie-library' ),
+							'choose_from_most_used'      => __(
+								'Choose from the most used Languages',
+								'movie-library'
+							),
 							'not_found'                  => __( 'No Languages found.', 'movie-library' ),
 							'menu_name'                  => __( 'Languages', 'movie-library' ),
 						),
-						'hierarchical'       => TRUE,
-						'show_ui'            => TRUE,
-						'show_in_menu'       => TRUE,
-						'show_in_nav_menus'  => TRUE,
-						'show_admin_column'  => TRUE,
-						'show_in_quick_edit' => TRUE,
-						'show_in_rest'       => TRUE,
-						'query_var'          => TRUE,
-						'public'             => TRUE,
-						'publicly_queryable' => TRUE,
+						'hierarchical'       => true,
+						'show_ui'            => true,
+						'show_in_menu'       => true,
+						'show_in_nav_menus'  => true,
+						'show_admin_column'  => true,
+						'show_in_quick_edit' => true,
+						'show_in_rest'       => true,
+						'query_var'          => true,
+						'public'             => true,
+						'publicly_queryable' => true,
 						'rewrite'            => array( 'slug' => 'rt-movie-language' ),
 					),
 				),
@@ -150,10 +154,16 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Taxonomy' ) ) {
 					'post_type' => array( 'rt-movie' ),
 					'args'      => array(
 						'labels'             => array(
-							'name'                       => _x( 'Production companies', 'taxonomy general name',
-							                                    'movie-library' ),
-							'singular_name'              => _x( 'Production company', 'taxonomy singular name',
-							                                    'movie-library' ),
+							'name'                       => _x(
+								'Production companies',
+								'taxonomy general name',
+								'movie-library'
+							),
+							'singular_name'              => _x(
+								'Production company',
+								'taxonomy singular name',
+								'movie-library'
+							),
 							'search_items'               => __( 'Search Production companies', 'movie-library' ),
 							'popular_items'              => __( 'Popular Production companies', 'movie-library' ),
 							'all_items'                  => __( 'All Production company', 'movie-library' ),
@@ -163,24 +173,28 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Taxonomy' ) ) {
 							'update_item'                => __( 'Update Production company', 'movie-library' ),
 							'add_new_item'               => __( 'Add New Production company', 'movie-library' ),
 							'new_item_name'              => __( 'New Production company Name', 'movie-library' ),
-							'separate_items_with_commas' => __( 'Separate Production companies with commas',
-							                                    'movie-library' ),
+							'separate_items_with_commas' => __(
+								'Separate Production companies with commas',
+								'movie-library'
+							),
 							'add_or_remove_items'        => __( 'Add or remove Production companies', 'movie-library' ),
-							'choose_from_most_used'      => __( 'Choose from the most used Production companies',
-							                                    'movie-library' ),
+							'choose_from_most_used'      => __(
+								'Choose from the most used Production companies',
+								'movie-library'
+							),
 							'not_found'                  => __( 'No Production companies found.', 'movie-library' ),
 							'menu_name'                  => __( 'Production companies', 'movie-library' ),
 						),
-						'hierarchical'       => TRUE,
-						'show_ui'            => TRUE,
-						'show_in_menu'       => TRUE,
-						'show_in_nav_menus'  => TRUE,
-						'show_admin_column'  => TRUE,
-						'show_in_quick_edit' => TRUE,
-						'show_in_rest'       => TRUE,
-						'query_var'          => TRUE,
-						'public'             => TRUE,
-						'publicly_queryable' => TRUE,
+						'hierarchical'       => true,
+						'show_ui'            => true,
+						'show_in_menu'       => true,
+						'show_in_nav_menus'  => true,
+						'show_admin_column'  => true,
+						'show_in_quick_edit' => true,
+						'show_in_rest'       => true,
+						'query_var'          => true,
+						'public'             => true,
+						'publicly_queryable' => true,
 						'rewrite'            => array( 'slug' => 'rt-movie-production-company' ),
 					),
 				),
@@ -206,16 +220,16 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Taxonomy' ) ) {
 							'not_found'                  => __( 'No Tags found.', 'movie-library' ),
 							'menu_name'                  => __( 'Tags', 'movie-library' ),
 						),
-						'hierarchical'       => FALSE,
-						'show_ui'            => TRUE,
-						'show_in_menu'       => TRUE,
-						'show_in_nav_menus'  => TRUE,
-						'show_admin_column'  => TRUE,
-						'show_in_quick_edit' => TRUE,
-						'show_in_rest'       => TRUE,
-						'query_var'          => TRUE,
-						'public'             => TRUE,
-						'publicly_queryable' => TRUE,
+						'hierarchical'       => false,
+						'show_ui'            => true,
+						'show_in_menu'       => true,
+						'show_in_nav_menus'  => true,
+						'show_admin_column'  => true,
+						'show_in_quick_edit' => true,
+						'show_in_rest'       => true,
+						'query_var'          => true,
+						'public'             => true,
+						'publicly_queryable' => true,
 						'rewrite'            => array( 'slug' => 'rt-movie-tag' ),
 					),
 				),
@@ -224,17 +238,17 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Taxonomy' ) ) {
 					'post_type' => array( 'rt-movie' ),
 					'args'      => array(
 						'label'              => __( 'Internal Markers', 'movie-library' ),
-						'hierarchical'       => FALSE,
-						'show_ui'            => FALSE,
-						'show_in_menu'       => FALSE,
-						'show_in_nav_menus'  => FALSE,
-						'show_admin_column'  => FALSE,
-						'show_in_quick_edit' => FALSE,
-						'show_in_rest'       => FALSE,
-						'query_var'          => FALSE,
-						'public'             => FALSE,
-						'publicly_queryable' => FALSE,
-						'rewrite'            => FALSE,
+						'hierarchical'       => false,
+						'show_ui'            => false,
+						'show_in_menu'       => false,
+						'show_in_nav_menus'  => false,
+						'show_admin_column'  => false,
+						'show_in_quick_edit' => false,
+						'show_in_rest'       => false,
+						'query_var'          => false,
+						'public'             => false,
+						'publicly_queryable' => false,
+						'rewrite'            => false,
 					),
 				),
 				array(
@@ -259,16 +273,16 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Taxonomy' ) ) {
 							'not_found'                  => __( 'No Careers found.', 'movie-library' ),
 							'menu_name'                  => __( 'Careers', 'movie-library' ),
 						),
-						'hierarchical'       => TRUE,
-						'show_ui'            => TRUE,
-						'show_in_menu'       => TRUE,
-						'show_in_nav_menus'  => TRUE,
-						'show_admin_column'  => TRUE,
-						'show_in_quick_edit' => TRUE,
-						'show_in_rest'       => TRUE,
-						'query_var'          => TRUE,
-						'public'             => TRUE,
-						'publicly_queryable' => TRUE,
+						'hierarchical'       => true,
+						'show_ui'            => true,
+						'show_in_menu'       => true,
+						'show_in_nav_menus'  => true,
+						'show_admin_column'  => true,
+						'show_in_quick_edit' => true,
+						'show_in_rest'       => true,
+						'query_var'          => true,
+						'public'             => true,
+						'publicly_queryable' => true,
 						'rewrite'            => array( 'slug' => 'rt-person-career' ),
 					),
 				),

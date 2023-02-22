@@ -30,47 +30,47 @@ defined( 'ABSPATH' ) || exit;
  */
 
 /**
- * @const MLB_PLUGIN_DIR
+ * MLB_PLUGIN_DIR
  */
-define( "MLB_PLUGIN_DIR", plugin_dir_path( __FILE__ ) );
+define( 'MLB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 /**
- * @const MLB_PLUGIN_URL
+ * MLB_PLUGIN_URL
  */
 define( 'MLB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 /**
- * @const MLB_PLUGIN_BASENAME
+ * MLB_PLUGIN_BASENAME
  */
 define( 'MLB_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 /**
- * @const MLB_PLUGIN_RELATIVE_PATH
+ * MLB_PLUGIN_RELATIVE_PATH
  */
 define( 'MLB_PLUGIN_RELATIVE_PATH', plugin_basename( dirname( __FILE__ ) ) );
 
 /**
- * @const MLB_PLUGIN_FILE
+ * MLB_PLUGIN_FILE
  */
 const MLB_PLUGIN_FILE = __FILE__;
 
 /**
- * @const MLB_PLUGIN_VERSION
+ * MLB_PLUGIN_VERSION
  */
 const MLB_PLUGIN_VERSION = '1.0.0';
 
 /**
- * @const MLB_TEXT_DOMAIN
+ * MLB_TEXT_DOMAIN
  */
 const MLB_TEXT_DOMAIN = 'movie-library';
 
 /**
- * @const MLB_SLUG
+ * MLB_SLUG
  */
 const MLB_SLUG = 'movie-library';
 
 /**
- * @const MLB_NAME
+ * MLB_NAME
  */
 const MLB_NAME = 'Movie Library';
 
@@ -79,12 +79,12 @@ require_once MLB_PLUGIN_DIR . 'includes/class-movie-library-autoloader.php';
 use MovieLib\includes\Movie_Library;
 
 // Global for backwards compatibility.
-$GLOBALS[ 'movie-library' ] = movie_library();
+$GLOBALS['movie-library'] = movie_library();
 
 /**
- * @function movie_library()
  * Main instance of Movie_Library.
  * Returns the main instance of Movie_Library to prevent the need to use globals.
+ *
  * @return Movie_Library
  */
 function movie_library(): Movie_Library {

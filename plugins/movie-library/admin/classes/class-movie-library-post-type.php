@@ -12,35 +12,35 @@ namespace MovieLib\admin\classes;
  */
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Post_type' ) ) {
+if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Post_Type' ) ) {
 	/**
-	 * @class   Custom_Post_type.
-	 *          This class contains the functions to register the custom post type.
+	 * This class contains the functions to register the custom post type.
+	 *
 	 * @version 1.0.0
 	 */
-	class Movie_Library_Post_type {
+	class Movie_Library_Post_Type {
 		/**
-		 * @function register_custom_post_type.
-		 *           This function is used to register the custom post type.
-		 *           It gets the custom post type array from the get_custom_post_types() function.
-		 *           And runs the foreach loop for each post type inside an array and registers it.
+		 * This function is used to register the custom post type.
+		 * It gets the custom post type array from the get_custom_post_types() function.
+		 * And runs the foreach loop for each post type inside an array and registers it.
+		 *
 		 * @return void
 		 * @see      get_custom_post_types()
 		 */
 		public function register_custom_post_type(): void {
 			$custom_post_types = $this->get_custom_post_types();
 			foreach ( $custom_post_types as $custom_post_type ) {
-				register_post_type( $custom_post_type[ 'post_type' ], $custom_post_type[ 'args' ] );
+				register_post_type( $custom_post_type['post_type'], $custom_post_type['args'] );
 			}
 			flush_rewrite_rules();
 		}
 
 		/**
-		 * @function get_custom_post_types.
-		 *           This function is used to return the custom post type array.
-		 *           Custom post types created
-		 *               1. rt-movie
-		 *               2. rt-person
+		 * This function is used to return the custom post type array.
+		 * Custom post types created
+		 * 1. rt-movie
+		 * 2. rt-person
+		 *
 		 * @return array
 		 */
 		private function get_custom_post_types(): array {
@@ -67,24 +67,26 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Post_type' ) ) {
 							'set_featured_image'    => _x( 'Set Movie Poster', 'movie', 'movie-library' ),
 							'remove_featured_image' => _x( 'Remove Movie Poster', 'movie', 'movie-library' ),
 							'use_featured_image'    => _x( 'Use as Movie Poster', 'movie', 'movie-library' ),
-							'archives'              => _x( 'Movie archives',
-							                               'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4',
-							                               'movie-library' ),
+							'archives'              => _x(
+								'Movie archives',
+								'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4',
+								'movie-library'
+							),
 						),
 						'description'        => __( 'Description.', 'movie-library' ),
-						'public'             => TRUE,
-						'publicly_queryable' => TRUE,
-						'show_ui'            => TRUE,
-						'show_in_menu'       => TRUE,
-						'query_var'          => TRUE,
-						'rewrite'            => [ 'slug' => 'rt-movie' ],
+						'public'             => true,
+						'publicly_queryable' => true,
+						'show_ui'            => true,
+						'show_in_menu'       => true,
+						'query_var'          => true,
+						'rewrite'            => array( 'slug' => 'rt-movie' ),
 						'capability_type'    => 'post',
 						'has_archive'        => 'movies',
-						'hierarchical'       => FALSE,
-						'menu_position'      => NULL,
+						'hierarchical'       => false,
+						'menu_position'      => null,
 						'menu_icon'          => 'dashicons-format-video',
-						'supports'           => [ 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ],
-						'show_in_rest'       => TRUE,
+						'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
+						'show_in_rest'       => true,
 					),
 				),
 				array(
@@ -109,24 +111,26 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Post_type' ) ) {
 							'set_featured_image'    => _x( 'Set Profile picture', 'person', 'movie-library' ),
 							'remove_featured_image' => _x( 'Remove Profile picture', 'person', 'movie-library' ),
 							'use_featured_image'    => _x( 'Use as Profile picture', 'person', 'movie-library' ),
-							'archives'              => _x( 'Person archives',
-							                               'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4',
-							                               'movie-library' ),
+							'archives'              => _x(
+								'Person archives',
+								'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4',
+								'movie-library'
+							),
 						),
 						'description'        => __( 'Description.', 'movie-library' ),
-						'public'             => TRUE,
-						'publicly_queryable' => TRUE,
-						'show_ui'            => TRUE,
-						'show_in_menu'       => TRUE,
-						'query_var'          => TRUE,
-						'rewrite'            => [ 'slug' => 'rt-person' ],
+						'public'             => true,
+						'publicly_queryable' => true,
+						'show_ui'            => true,
+						'show_in_menu'       => true,
+						'query_var'          => true,
+						'rewrite'            => array( 'slug' => 'rt-person' ),
 						'capability_type'    => 'post',
 						'has_archive'        => 'people',
-						'hierarchical'       => FALSE,
-						'menu_position'      => NULL,
+						'hierarchical'       => false,
+						'menu_position'      => null,
 						'menu_icon'          => 'dashicons-businessman',
-						'supports'           => [ 'title', 'editor', 'author', 'thumbnail', 'excerpt' ],
-						'show_in_rest'       => TRUE,
+						'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
+						'show_in_rest'       => true,
 					),
 				),
 			);
