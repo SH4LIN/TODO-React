@@ -29,11 +29,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 		 */
 		public function add_meta_boxes(): void {
 
+			// This code will get all the meta boxes arguments.
 			$meta_boxes_args = $this->get_meta_boxes_args();
 
 			// Adding the meta box for each meta boxes arguments.
 			foreach ( $meta_boxes_args as $meta_box_id => $meta_box_args ) {
 
+				// This will call the add_meta_box WordPress function. To add the meta boxes in the admin area.
 				add_meta_box(
 					$meta_box_id,
 					$meta_box_args['title'],
@@ -113,14 +115,17 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 		 */
 		public function rt_movie_meta_basic( WP_Post $post ): void {
 
+			// This will get the movie basic meta-data.
 			$rt_movie_meta_basic_data = get_post_meta( $post->ID );
 
+			// This will create the meta key for the movie basic meta-data.
 			$rt_movie_meta_basic_key = array(
 				'rating'       => 'rt-movie-meta-basic-rating',
 				'runtime'      => 'rt-movie-meta-basic-runtime',
 				'release-date' => 'rt-movie-meta-basic-release-date',
 			);
 
+			// This will add the nonce field for the movie basic meta-data.
 			wp_nonce_field( 'rt_movie_meta_nonce', 'rt_movie_meta_nonce' );
 
 			?>
@@ -384,13 +389,16 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 		 */
 		public function rt_person_meta_basic( WP_Post $post ): void {
 
+			// This will be used to get the person meta basic data.
 			$rt_person_meta_basic_data = get_post_meta( $post->ID );
 
+			// This will create the array of the person meta basic keys.
 			$rt_person_meta_basic_key = array(
 				'birth-date'  => 'rt-person-meta-basic-birth-date',
 				'birth-place' => 'rt-person-meta-basic-birth-place',
 			);
 
+			// This will be used to add the nonce field.
 			wp_nonce_field( 'rt_person_meta_nonce', 'rt_person_meta_nonce' );
 
 			?>
