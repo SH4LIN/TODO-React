@@ -761,7 +761,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 				array(
 					'post_type' => 'rt-person',
 					'per_page'  => 10,
-					'tax_query' => array(
+					'tax_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 						array(
 							'taxonomy' => 'rt-person-career',
 							'field'    => 'term_id',

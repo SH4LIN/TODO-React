@@ -161,7 +161,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 				$query = new WP_Query(
 					array(
 						'post_type' => 'rt-movie',
-						'tax_query' => $search_query,
+						'tax_query' => $search_query, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 					)
 				);
 
@@ -332,7 +332,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 				$query = new WP_Query(
 					array(
 						'post_type' => 'rt-person',
-						'tax_query' => $search_query,
+						'tax_query' => $search_query, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 					)
 				);
 
