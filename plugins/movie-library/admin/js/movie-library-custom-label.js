@@ -6,22 +6,24 @@
  * @package MovieLib
  */
 
-( function () {
-		'use strict';
+(function () {
+	'use strict';
 
-		const { __, _x, _n, sprintf } = wp.i18n;
-		wp.hooks.addFilter(
-			'i18n.gettext',
-			'movie-library',
-			function ( translation, text, domain ) {
-				if ( text === 'Excerpt' ) {
-					return __( 'Synopsis', 'movie-library' );
-				}
-				if ( text === 'Write an excerpt (optional)' ) {
-					return __( 'Write a synopsis', 'movie-library' );
-				}
-				return translation;
+	const { __, _x, _n, sprintf } = wp.i18n;
+
+	wp.hooks.addFilter(
+		'i18n.gettext',
+		'movie-library',
+		function (translation, text, domain) {
+			if (text === 'Excerpt') {
+				return __('Synopsis', 'movie-library');
 			}
-		);
-}
-)();
+
+			if (text === 'Write an excerpt (optional)') {
+				return __('Write a synopsis', 'movie-library');
+			}
+
+			return translation;
+		}
+	);
+})();
