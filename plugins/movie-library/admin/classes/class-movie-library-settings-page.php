@@ -289,10 +289,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
 		public function remove_plugin_data_settings_submit(): void {
 
 			if ( isset( $_SERVER['REQUEST_METHOD'] ) &&
-			     'POST' === $_SERVER['REQUEST_METHOD'] &&
-			     isset( $_POST['submit'] ) &&
-			     isset( $_POST['option_page'] ) &&
-			     $this->option_group === $_POST['option_page'] ) {
+					'POST' === $_SERVER['REQUEST_METHOD'] &&
+					isset( $_POST['submit'] ) &&
+					isset( $_POST['option_page'] ) &&
+					$this->option_group === $_POST['option_page'] ) {
 
 				if ( ! isset( $_POST['_wpnonce'] ) ) {
 					return;
