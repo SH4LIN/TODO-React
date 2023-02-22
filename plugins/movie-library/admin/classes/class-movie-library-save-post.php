@@ -39,35 +39,32 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 				return;
 			}
 
-			if ( isset( $_POST['post_type'] ) ) {
+			// Check is post type is rt-movie or rt-person.
+			if ( 'rt-movie' === $post->post_type ) {
+				// Check the user's permissions.
 
-				// Check is post type is rt-movie or rt-person.
-				if ( 'rt-movie' === $_POST['post_type'] ) {
-					// Check the user's permissions.
-
-					if ( ! current_user_can( 'edit_post', $post_id ) ) {
-						return;
-					} else {
-
-						$this->save_rt_movie_post( $post_id, $post, $update );
-
-					}
-				} elseif ( 'rt-person' === $_POST['post_type'] ) {
-
-					// Check the user's permissions.
-					if ( ! current_user_can( 'edit_post', $post_id ) ) {
-						return;
-					} else {
-
-						$this->save_rt_person_post( $post_id, $post, $update );
-
-					}
+				if ( ! current_user_can( 'edit_post', $post_id ) ) {
+					return;
 				} else {
 
-					// Check the user's permissions.
-					if ( ! current_user_can( 'edit_post', $post_id ) ) {
-						return;
-					}
+					$this->save_rt_movie_post( $post_id, $post, $update );
+
+				}
+			} elseif ( 'rt-person' === $post->post_type ) {
+
+				// Check the user's permissions.
+				if ( ! current_user_can( 'edit_post', $post_id ) ) {
+					return;
+				} else {
+
+					$this->save_rt_person_post( $post_id, $post, $update );
+
+				}
+			} else {
+
+				// Check the user's permissions.
+				if ( ! current_user_can( 'edit_post', $post_id ) ) {
+					return;
 				}
 			}
 		}
@@ -394,6 +391,21 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 		 */
 		private function save_rt_movie_meta_images( int $post_id ): void {
 
+			// Check if our nonce is set.
+			if ( ! isset( $_POST['rt_media_meta_nonce'] ) ) {
+				return;
+			}
+
+			// Sanitize nonce.
+			$rt_movie_meta_nonce = sanitize_text_field( wp_unslash( $_POST['rt_media_meta_nonce'] ) );
+
+			// Verify that the nonce is valid.
+			if ( ! wp_verify_nonce( $rt_movie_meta_nonce, 'rt_media_meta_nonce' ) ) {
+				return;
+			}
+
+			/** OK, it's safe for us to save the data now. */
+
 			$rt_movie_meta_selected_images = array();
 			$rt_movie_meta_uploaded_images = array();
 
@@ -462,6 +474,21 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 		 * @return void
 		 */
 		private function save_rt_movie_meta_videos( int $post_id ): void {
+
+			// Check if our nonce is set.
+			if ( ! isset( $_POST['rt_media_meta_nonce'] ) ) {
+				return;
+			}
+
+			// Sanitize nonce.
+			$rt_movie_meta_nonce = sanitize_text_field( wp_unslash( $_POST['rt_media_meta_nonce'] ) );
+
+			// Verify that the nonce is valid.
+			if ( ! wp_verify_nonce( $rt_movie_meta_nonce, 'rt_media_meta_nonce' ) ) {
+				return;
+			}
+
+			/** OK, it's safe for us to save the data now. */
 
 			$rt_movie_meta_selected_videos = array();
 			$rt_movie_meta_uploaded_videos = array();
