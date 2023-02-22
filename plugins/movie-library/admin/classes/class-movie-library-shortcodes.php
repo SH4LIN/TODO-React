@@ -317,13 +317,16 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 				), $attributes, $tag
 			);
 
+			$search_query = array();
 			if ( ! empty( $attributes[ 'career' ] ) ) {
 				$terms   = sanitize_text_field( $attributes[ 'career' ] );
 				$search_query[] = $this->get_search_query( $terms,'rt-person-career' );
 			}
 
 			if ( ! empty( $search_query ) ) {
-				$search_query[ 'relation' ] = 'AND';
+				if( count( $search_query ) > 1) {
+					$search_query[ 'relation' ] = 'AND';
+				}
 				$query                      = new WP_Query(
 					array(
 						'post_type' => 'rt-person',

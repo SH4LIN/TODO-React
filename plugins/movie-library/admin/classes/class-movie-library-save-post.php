@@ -178,7 +178,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 			// Get all the rt-person-career terms.
 			$rt_career_terms = get_terms(
 				[
-					'taxonomy'   => 'rt-person-career',
+					'taxonomy' => 'rt-person-career',
 					'hide_empty' => true,
 				]
 			);
@@ -212,7 +212,21 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 
 							// Checking if the crew data is empty or not and if the crew data is numeric or not.
 							if ( ! empty( $rt_movie_meta_crew ) && is_numeric( $rt_movie_meta_crew ) ) {
-								$terms[]        = $rt_movie_meta_crew;
+								if ( $meta_key === 'rt-movie-meta-crew-actor' ) {
+									$term = array();
+									if(isset($_POST[$rt_movie_meta_crew])){
+										$rt_movie_meta_crew_character_name = sanitize_text_field($_POST[$rt_movie_meta_crew]);
+										$term['character_name'] = $rt_movie_meta_crew_character_name;
+									}
+									if(isset($_POST[$rt_movie_meta_crew.'-name'])){
+										$rt_movie_meta_crew_person_name = sanitize_text_field($_POST[$rt_movie_meta_crew.'-name']);
+										$term['person_name'] = $rt_movie_meta_crew_person_name;
+									}
+									$term['person_id'] = $rt_movie_meta_crew;
+									$terms[] = $term;
+								} else {
+									$terms[]['person_id'] = $rt_movie_meta_crew;
+								}
 								$shadow_terms[] = $rt_movie_meta_crew;
 							}
 						}
@@ -233,12 +247,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 					update_post_meta( $post_id, $meta_key, [] );
 				}
 			}
-			wp_delete_object_term_relationships( $post_id, '_rt-movie-person' );
-			wp_set_object_terms( $post_id, $shadow_terms, '_rt-movie-person', true );
 
 			// If there is no crew data then it will delete the term_relationships.
-			if ( ! $does_any_crew_exist ) {
-				wp_delete_object_term_relationships( $post_id, '_rt-movie-person' );
+			wp_delete_object_term_relationships( $post_id, '_rt-movie-person' );
+			if ( $does_any_crew_exist ) {
+				wp_set_object_terms( $post_id, $shadow_terms, '_rt-movie-person', true );
 			}
 
 			// Checking if rt-movie-meta-basic-rating is available in $_POST.
@@ -342,12 +355,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 					unset( $rt_media_meta_images[ $key ] );
 				}
 			}
-			if( empty( $rt_media_meta_images ) ) {
+			if ( empty( $rt_media_meta_images ) ) {
 				delete_post_meta( $post_id, 'rt-media-meta-images' );
 			} else {
 				update_post_meta( $post_id, 'rt-media-meta-images', $rt_media_meta_images );
 			}
-
 		}
 
 		/**
@@ -394,7 +406,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 					unset( $rt_media_meta_videos[ $key ] );
 				}
 			}
-			if( empty( $rt_media_meta_videos ) ) {
+			if ( empty( $rt_media_meta_videos ) ) {
 				delete_post_meta( $post_id, 'rt-media-meta-videos' );
 			} else {
 				update_post_meta( $post_id, 'rt-media-meta-videos', $rt_media_meta_videos );

@@ -69,3 +69,11 @@
 .rt-media-meta {
 	position: relative;
 }
+
+.rt-movie-meta-crew-actor-character-field {
+	display: block;
+	width: 100%;
+	margin: 10px 0 10px 0;
+	padding: 0;
+}
+
