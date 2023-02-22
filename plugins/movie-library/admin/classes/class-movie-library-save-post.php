@@ -207,10 +207,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 
 			// Get all the rt-person-career terms.
 			$rt_career_terms = get_terms(
-				[
+				array(
 					'taxonomy'   => 'rt-person-career',
 					'hide_empty' => true,
-				]
+				)
 			);
 
 			// Setting the flag to false. If any crew data is set then it will be set to true. And if there is no crew data then it will be false.
@@ -290,14 +290,14 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 							$rt_movie_meta_crew_data = sanitize_text_field( $rt_movie_meta_crew_data );
 							$shadow_terms[]          = $rt_movie_meta_crew_data;
 
-							$this->set_object_terms( $post_id, [ $rt_movie_meta_crew_data ], $meta_key );
+							$this->set_object_terms( $post_id, array( $rt_movie_meta_crew_data ), $meta_key );
 
 						}
 					}
 				} else {
 
 					// If the meta key is not available in $_POST then it will delete the post meta.
-					update_post_meta( $post_id, $meta_key, [] );
+					update_post_meta( $post_id, $meta_key, array() );
 
 				}
 			}
@@ -394,8 +394,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 		 */
 		private function save_rt_movie_meta_images( int $post_id ): void {
 
-			$rt_movie_meta_selected_images = [];
-			$rt_movie_meta_uploaded_images = [];
+			$rt_movie_meta_selected_images = array();
+			$rt_movie_meta_uploaded_images = array();
 
 			// Checking if rt-movie-meta-images is available in $_POST.
 			if ( isset( $_POST['rt-media-meta-selected-images'] ) && ! empty( $_POST['rt-media-meta-selected-images'] ) ) {
@@ -418,13 +418,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 
 			if ( ! is_array( $rt_movie_meta_selected_images ) ) {
 
-				$rt_movie_meta_selected_images = [];
+				$rt_movie_meta_selected_images = array();
 
 			}
 
 			if ( ! is_array( $rt_movie_meta_uploaded_images ) ) {
 
-				$rt_movie_meta_uploaded_images = [];
+				$rt_movie_meta_uploaded_images = array();
 
 			}
 
@@ -463,8 +463,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 		 */
 		private function save_rt_movie_meta_videos( int $post_id ): void {
 
-			$rt_movie_meta_selected_videos = [];
-			$rt_movie_meta_uploaded_videos = [];
+			$rt_movie_meta_selected_videos = array();
+			$rt_movie_meta_uploaded_videos = array();
 
 			// Checking if rt-movie-meta-images is available in $_POST.
 			if ( isset( $_POST['rt-media-meta-selected-videos'] ) && ! empty( $_POST['rt-media-meta-selected-videos'] ) ) {
@@ -487,12 +487,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 
 			if ( ! is_array( $rt_movie_meta_selected_videos ) ) {
 
-				$rt_movie_meta_selected_videos = [];
+				$rt_movie_meta_selected_videos = array();
 
 			}
 			if ( ! is_array( $rt_movie_meta_uploaded_videos ) ) {
 
-				$rt_movie_meta_uploaded_videos = [];
+				$rt_movie_meta_uploaded_videos = array();
 
 			}
 

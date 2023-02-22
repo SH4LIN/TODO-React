@@ -121,13 +121,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
 		private array $remove_plugin_data_section_callback;
 
 		/**
-		 * Variable field description.
-		 *
-		 * @var string $field_description This variable will be used to store the field description.
-		 */
-		private string $remove_plugin_data_section_description;
-
-		/**
 		 * Variable remove plugin data field callback.
 		 *
 		 * @var array $remove_plugin_data_field_callback This variable will be used to store the remove plugin data field callback.
