@@ -88,7 +88,9 @@ $GLOBALS['movie-library'] = movie_library();
  * @return Movie_Library
  */
 function movie_library(): Movie_Library {
+
 	return Movie_Library::instance();
+
 }
 
 

@@ -146,23 +146,22 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
 		 * It is used to initialize the variables that are used to create the sub menu page.
 		 */
 		public function __construct() {
-			$this->parent_slug                            = 'options-general.php';
-			$this->page_title                             = __( 'Movie Library Settings', 'movie-library' );
-			$this->menu_title                             = __( 'Movie Library Settings', 'movie-library' );
-			$this->capability                             = 'manage_options';
-			$this->menu_slug                              = 'movie-library-settings';
-			$this->movie_library_settings_page_callback   = array( $this, 'movie_library_settings_page' );
-			$this->option_group                           = 'movie-library-settings-group';
-			$this->save_button_text                       = __( 'Save Changes', 'movie-library' );
-			$this->checkbox_option_name                   = 'remove_plugin_data_check_box';
-			$this->form_submission_callback               = array( $this, 'remove_plugin_data_settings_submit' );
-			$this->admin_init_callback                    = array( $this, 'movie_library_settings' );
-			$this->remove_plugin_data_section_id          = 'remove_plugin_data_section';
-			$this->remove_plugin_data_section_title       = 'Remove Data';
-			$this->remove_plugin_data_section_callback    = array( $this, 'remove_plugin_data_section_callback' );
-			$this->remove_plugin_data_section_description = 'Check the checkbox to remove all the data from the database when you uninstall the plugin.';
-			$this->remove_plugin_data_field_callback      = array( $this, 'remove_plugin_data_field_callback' );
-			$this->remove_plugin_data_field_title         = __( 'Remove Plugin Data', 'movie-library' );
+			$this->parent_slug                          = 'options-general.php';
+			$this->page_title                           = __( 'Movie Library Settings', 'movie-library' );
+			$this->menu_title                           = __( 'Movie Library Settings', 'movie-library' );
+			$this->capability                           = 'manage_options';
+			$this->menu_slug                            = 'movie-library-settings';
+			$this->movie_library_settings_page_callback = array( $this, 'movie_library_settings_page' );
+			$this->option_group                         = 'movie-library-settings-group';
+			$this->save_button_text                     = __( 'Save Changes', 'movie-library' );
+			$this->checkbox_option_name                 = 'remove_plugin_data_check_box';
+			$this->form_submission_callback             = array( $this, 'remove_plugin_data_settings_submit' );
+			$this->admin_init_callback                  = array( $this, 'movie_library_settings' );
+			$this->remove_plugin_data_section_id        = 'remove_plugin_data_section';
+			$this->remove_plugin_data_section_title     = 'Remove Data';
+			$this->remove_plugin_data_section_callback  = array( $this, 'remove_plugin_data_section_callback' );
+			$this->remove_plugin_data_field_callback    = array( $this, 'remove_plugin_data_field_callback' );
+			$this->remove_plugin_data_field_title       = __( 'Remove Plugin Data', 'movie-library' );
 		}
 
 		/**
@@ -171,6 +170,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
 		 * @return void
 		 */
 		public function add_movie_library_sub_menu(): void {
+
 			$hook_name = add_submenu_page(
 				$this->parent_slug,
 				$this->page_title,
@@ -179,10 +179,15 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
 				$this->menu_slug,
 				$this->movie_library_settings_page_callback
 			);
-			if ( $hook_name !== false ) {
+
+			if ( false !== $hook_name ) {
+
 				add_action( 'load-' . $hook_name, $this->form_submission_callback );
+
 			}
+
 			add_action( 'admin_init', $this->admin_init_callback );
+
 		}
 
 		/**
@@ -191,41 +196,49 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
 		 * @return void
 		 */
 		public function remove_plugin_data_settings_submit(): void {
-			if ( isset($_SERVER['REQUEST_METHOD']) &&
+
+			if ( isset( $_SERVER['REQUEST_METHOD'] ) &&
 				'POST' === $_SERVER['REQUEST_METHOD'] &&
 				isset( $_POST['submit'] ) &&
 				isset( $_POST['option_page'] ) &&
 				$this->option_group === $_POST['option_page'] ) {
-				// Un-slashing $_POST data.
-				wp_unslash( $_POST );
+
 				if ( ! isset( $_POST['_wpnonce'] ) ) {
 					return;
 				}
 
 				// Sanitize nonce.
-				$rt_person_meta_nonce = sanitize_text_field( $_POST['_wpnonce'] );
+				$rt_person_meta_nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) );
 
 				// Verify that the nonce is valid.
 				if ( ! wp_verify_nonce( $rt_person_meta_nonce, "$this->option_group-options" ) ) {
 					return;
 				}
+
 				if ( isset( $_POST[ $this->checkbox_option_name ] ) ) {
-					$checkbox_data = sanitize_text_field( $_POST[ $this->checkbox_option_name ] );
-					if ( $checkbox_data === 'off' ) {
-						$checkbox_data      = 'on';
-						$is_setting_changed = true;
+
+					$checkbox_data = sanitize_text_field( wp_unslash( $_POST[ $this->checkbox_option_name ] ) );
+
+					if ( 'off' === $checkbox_data ) {
+
+						$checkbox_data = 'on';
+
 					}
 				} else {
-					$checkbox_data      = 'off';
-					$is_setting_changed = true;
+
+					$checkbox_data = 'off';
+
 				}
+
 				update_option( $this->checkbox_option_name, $checkbox_data );
 
 				$class   = 'notice notice-success is-dismissible';
-				$message = __( 'Settings saved.', 'sample-text-domain' );
+				$message = __( 'Settings saved.', 'movie-library' );
 
 				printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
+
 			}
+
 		}
 
 		/**
@@ -233,7 +246,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
 		 * When you uninstall the plugin.
 		 */
 		public function movie_library_settings_page(): void {
-			// check user capabilities
+			// Check user capabilities.
 			if ( ! current_user_can( $this->capability ) ) {
 				return;
 			}
@@ -275,19 +288,19 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
 		}
 
 		/**
-		 * @function remove_plugin_data_settings_section_callback
-		 *           This function will be used to create the section.
+		 * This function will be used to create the section.
+		 *
 		 * @return void
 		 */
 		public function remove_plugin_data_section_callback(): void {
 			?>
-			<p><?php esc_html_e( $this->remove_plugin_data_section_description, 'movie-library' ); ?></p>
+			<p><?php esc_html_e( 'Check the checkbox to remove all the data from the database when you uninstall the plugin.', 'movie-library' ); ?></p>
 			<?php
 		}
 
 		/**
-		 * @function remove_plugin_data_settings_field_callback
-		 *           This function will be used to create the field.
+		 * This function will be used to create the field.
+		 *
 		 * @return void
 		 */
 		public function remove_plugin_data_field_callback(): void {
@@ -304,19 +317,28 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
 			}
 
 			?>
+
 			<label for="<?php echo esc_attr( $this->checkbox_option_name ); ?>">
+
 				<input type="<?php echo esc_attr( 'checkbox' ); ?>"
 					name="<?php echo esc_attr( $this->checkbox_option_name ); ?>"
 					id="<?php echo esc_attr( $this->checkbox_option_name ); ?>"
 					value="<?php echo esc_attr( $value ); ?>" <?php echo esc_attr( $checked ); ?>/>
+
 			</label>
+
 			<div class="notice notice-warning is-dismissible">
-				<p><?php esc_html_e(
-						'Below setting will delete the plugin data when you uninstall the plugin!'
-					); ?></p>
+
+				<p>
+					<?php esc_html_e( 'Below setting will delete the plugin data when you uninstall the plugin!', 'movie-library' ); ?>
+				</p>
+
 			</div>
+
 			<?php
+
 		}
+
 	}
 }
 

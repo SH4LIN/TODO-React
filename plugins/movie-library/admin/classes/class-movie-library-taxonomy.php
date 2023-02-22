@@ -23,15 +23,21 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Taxonomy' ) ) {
 		 * @return void
 		 */
 		public function register_custom_taxonomy(): void {
+
 			$custom_taxonomies = $this->get_custom_taxonomies();
+
 			foreach ( $custom_taxonomies as $custom_taxonomy ) {
+
 				register_taxonomy(
 					$custom_taxonomy['taxonomy'],
 					$custom_taxonomy['post_type'],
 					$custom_taxonomy['args']
 				);
+
 			}
+
 			flush_rewrite_rules();
+
 		}
 
 		/**
@@ -40,6 +46,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Taxonomy' ) ) {
 		 * @return array[]
 		 */
 		private function get_custom_taxonomies(): array {
+
 			return array(
 				array(
 					'taxonomy'  => 'rt-movie-genre',
@@ -287,6 +294,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Taxonomy' ) ) {
 					),
 				),
 			);
+
 		}
 	}
 }
