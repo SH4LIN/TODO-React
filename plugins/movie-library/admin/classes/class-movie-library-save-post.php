@@ -545,7 +545,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 		 *
 		 * @return void
 		 */
-		private function set_object_terms( int $post_id, mixed $terms, string $key ): void {
+		private function set_object_terms( int $post_id, $terms, string $key ): void {
 
 			update_post_meta( $post_id, $key, $terms );
 
