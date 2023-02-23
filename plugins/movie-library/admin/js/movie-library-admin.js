@@ -1,7 +1,6 @@
 /**
- * Movie Library Media Meta JS
+ * Movie Library Admin JS
  * This file is used to upload images and videos to the metadata.
- *
  */
 
 /**
@@ -64,8 +63,6 @@ function setupMediaMetaImagesUploader($) {
 	});
 
 	$('.rt-media-meta-images-add').on('click', function (e) {
-		e.preventDefault();
-
 		if (rtMediaMetaImagesFrame) {
 			rtMediaMetaImagesFrame.open();
 			return;
@@ -200,9 +197,7 @@ function setupMediaMetaVideosUploader($) {
 			multiple: true,
 		});
 
-		rtMediaMetaVideosFrame.on('select', function (event) {
-			event.preventDefault();
-
+		rtMediaMetaVideosFrame.on('select', function () {
 			const rtMediaMetaVideosAttachment = rtMediaMetaVideosFrame
 				.state()
 				.get('selection')

@@ -78,7 +78,7 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		private function register_scripts(): void {
 
-			wp_register_script( 'movie-library-admin', MLB_PLUGIN_URL . 'admin/js/movie-library-admin.js', [ 'wp-i18n' ], MLB_PLUGIN_VERSION, true );
+			wp_register_script( 'movie-library-admin', MLB_PLUGIN_URL . 'admin/js/movie-library-admin.js', [ 'wp-i18n', 'jquery' ], MLB_PLUGIN_VERSION, true );
 
 			wp_register_script(
 				'movie-library-custom-label',
@@ -96,6 +96,7 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 				MLB_PLUGIN_URL . 'admin/js/movie-library-rt-movie.js',
 				[
 					'wp-i18n',
+					'jquery',
 				],
 				MLB_PLUGIN_VERSION,
 				true
@@ -120,6 +121,7 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 
 			add_action( 'init', [ $this, 'setup_environment' ] );
 			add_action( 'plugins_loaded', [ $this, 'load_plugin_text_domain' ] );
+			add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_jquery' ] );
 			add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_script' ] );
 			add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_custom_label_script' ] );
 			add_action( 'wp_enqueue_scripts', [ $this, 'wp_enqueue_scripts' ] );
@@ -164,6 +166,17 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		public function load_plugin_text_domain(): void {
 
 			load_plugin_textdomain( 'movie-library', false, MLB_PLUGIN_RELATIVE_PATH . '/languages' );
+
+		}
+
+		/**
+		 * This function is used to enqueue the jquery script.
+		 *
+		 * @return void
+		 */
+		public function enqueue_jquery(): void {
+
+			wp_enqueue_script( 'jquery' );
 
 		}
 

@@ -3,7 +3,6 @@
 	flex-direction: column;
 	flex-wrap: wrap;
 	gap: 20px;
-
 }
 
 .movie-list-item-image {
@@ -24,7 +23,6 @@
 	padding: 10px;
 	color: #fff;
 	border-radius: 0 0 20px 20px;
-
 }
 
 .movie-image {

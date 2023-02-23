@@ -30,7 +30,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Post_Type' ) ) {
 		public function register_custom_post_type(): void {
 			$custom_post_types = $this->get_custom_post_types();
 			foreach ( $custom_post_types as $custom_post_type ) {
-				register_post_type( $custom_post_type['post_type'], $custom_post_type['args'] );
+				register_post_type( $custom_post_type['custom_post_type'], $custom_post_type['args'] );
 			}
 			flush_rewrite_rules();
 		}
@@ -46,8 +46,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Post_Type' ) ) {
 		private function get_custom_post_types(): array {
 			return array(
 				array(
-					'post_type' => 'rt-movie',
-					'args'      => array(
+					'custom_post_type' => 'rt-movie',
+					'args'             => array(
 						'labels'             => array(
 							'name'                  => _x( 'Movies', 'Post type general name', 'movie-library' ),
 							'singular_name'         => _x( 'Movie', 'Post type singular name', 'movie-library' ),
@@ -90,8 +90,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Post_Type' ) ) {
 					),
 				),
 				array(
-					'post_type' => 'rt-person',
-					'args'      => array(
+					'custom_post_type' => 'rt-person',
+					'args'             => array(
 						'labels'             => array(
 							'name'                  => _x( 'People', 'Post type general name', 'movie-library' ),
 							'singular_name'         => _x( 'Person', 'Post type singular name', 'movie-library' ),

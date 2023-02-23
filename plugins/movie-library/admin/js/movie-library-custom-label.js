@@ -1,11 +1,13 @@
 /**
- * Movie Library Admin JS
+ * Movie Library Custom Label JS
  * This file is used to add custom JS to the admin area.
  * It will change the label of the excerpt metabox to synopsis.
- *
- * @package
  */
 
+/**
+ * This function is used to add filter to the i18n.gettext hook.
+ * It will change the label of the excerpt metabox to synopsis.
+ */
 (function () {
 	'use strict';
 

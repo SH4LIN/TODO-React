@@ -1,5 +1,11 @@
 /**
+ * Movie Library RT Movie JS
  * This file is used to add the text-field dynamically when user selects any actor from the drop-down.
+ * and remove the text-field if it is unselected.
+ */
+
+/**
+ * This function will be used to add the Text-field dynamically when user selects any actor from the drop-down.
  * and remove the text-field if it is unselected.
  */
 jQuery(function ($) {
