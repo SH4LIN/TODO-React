@@ -70,9 +70,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 		 * @param string $content content from the shortcode.
 		 * @param string $tag shortcode name.
 		 *
-		 * @return string|bool
+		 * @return string|false
 		 */
-		public function movie_library_movie_shortcode( $attributes = array(), $content = null, $tag = '' ): string|bool { // phpcs:ignore WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore, WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter
+		public function movie_library_movie_shortcode( $attributes = array(), $content = null, $tag = '' ): string|false { // phpcs:ignore WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore, WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter, Generic.PHP.Syntax.PHPSyntax
 
 			$attributes = array_change_key_case( (array) $attributes );
 
@@ -298,7 +298,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 		 *
 		 * @return string|false
 		 */
-		public function movie_library_person_shortcode( $attributes = array(), $content = null, $tag = '' ): string|bool { // phpcs:ignore WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore, WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter
+		public function movie_library_person_shortcode( $attributes = array(), $content = null, $tag = '' ): string|false { // phpcs:ignore WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore, WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter, Generic.PHP.Syntax.PHPSyntax
 
 			$attributes = array_change_key_case( (array) $attributes );
 
@@ -570,7 +570,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 		 *
 		 * @return string|false
 		 */
-		private function show_no_movies_found_message(): string|bool { // phpcs:ignore WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore, WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter
+		private function show_no_movies_found_message(): string|false { // phpcs:ignore WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore, WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter, Generic.PHP.Syntax.PHPSyntax
 
 			ob_start();
 
@@ -593,7 +593,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 		 *
 		 * @return string|false
 		 */
-		private function show_no_people_found_message(): string|bool { // phpcs:ignore WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore, WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter
+		private function show_no_people_found_message(): string|false { // phpcs:ignore WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore, WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter, Generic.PHP.Syntax.PHPSyntax
 
 			ob_start();
 
