@@ -72,7 +72,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 		 *
 		 * @return string|false
 		 */
-		public function movie_library_movie_shortcode( $attributes = array(), $content = null, $tag = '' ) {
+		public function movie_library_movie_shortcode( $attributes = array(), $content = null, $tag = '' ): string | false {
 
 			$attributes = array_change_key_case( (array) $attributes );
 
