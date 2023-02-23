@@ -3,37 +3,37 @@
  * and remove the text-field if it is unselected.
  */
 jQuery(function ($) {
-	$(document).ready(function ($) {
+	$(document).ready(function () {
 		'use strict';
 
 		// This will get the selected value from the drop-down.
-		let rt_movie_meta_crew_actor = $('#rt_movie_meta_crew_actor');
-		let rt_movie_meta_crew_actor_selected = rt_movie_meta_crew_actor.val();
+		const rtMovieMetaCrewActor = $('#rt_movie_meta_crew_actor');
+		const rtMovieMetaCrewActorSelected = rtMovieMetaCrewActor.val();
 
 		// This will find the reference of container where we will add the text-field.
-		let rt_movie_meta_crew_actor_character_container = $(
+		const rtMovieMetaCrewActorCharacterContainer = $(
 			'#rt_movie_meta_crew_actor_character_container'
 		);
 
-		let old_value = rt_movie_meta_crew_actor_selected;
-		let new_value = rt_movie_meta_crew_actor_selected;
+		let oldValue = rtMovieMetaCrewActorSelected;
+		let newValue = rtMovieMetaCrewActorSelected;
 
 		// This will add the callback function to dropdown onChanged event.
-		rt_movie_meta_crew_actor.on('change', function (e) {
-			new_value = $(this).val();
-			let diff = $(new_value).not(old_value).get();
-			let diff2 = $(old_value).not(new_value).get();
+		rtMovieMetaCrewActor.on('change', function () {
+			newValue = $(this).val();
+			const diff = $(newValue).not(oldValue).get();
+			const diff2 = $(oldValue).not(newValue).get();
 
 			// This will add the text-field if any new value is selected.
 			if (diff.length > 0) {
 				$.each(diff, function (index, value) {
-					let label = $(
+					const label = $(
 						'#rt_movie_meta_crew_actor option[value="' +
 							value +
 							'"]'
 					).text();
 
-					rt_movie_meta_crew_actor_character_container.append(
+					rtMovieMetaCrewActorCharacterContainer.append(
 						'<div>' +
 							'<label for="rt_movie_meta_crew_actor_character_' +
 							value +
@@ -72,7 +72,7 @@ jQuery(function ($) {
 				});
 			}
 
-			old_value = new_value;
+			oldValue = newValue;
 		});
 	});
 });
