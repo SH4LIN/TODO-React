@@ -70,9 +70,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 		 * @param string $content content from the shortcode.
 		 * @param string $tag shortcode name.
 		 *
-		 * @return bool|string
+		 * @return string|bool
 		 */
-		public function movie_library_movie_shortcode( $attributes = array(), $content = null, $tag = '' ): bool|string { // phpcs:ignore WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore, WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter
+		public function movie_library_movie_shortcode( $attributes = array(), $content = null, $tag = '' ): string|bool { // phpcs:ignore WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore, WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter
 
 			$attributes = array_change_key_case( (array) $attributes );
 
