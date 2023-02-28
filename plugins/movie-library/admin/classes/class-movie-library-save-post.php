@@ -317,7 +317,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 				// If value is not numeric than doing explicit type casting.
 				if ( ! is_numeric( $rt_movie_meta_basic_rating ) ) {
 
-					$rt_movie_meta_basic_rating = (int) $rt_movie_meta_basic_rating;
+					$rt_movie_meta_basic_rating = (float) $rt_movie_meta_basic_rating;
 
 				}
 
@@ -353,8 +353,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 
 				}
 
-				update_post_meta( $post_id, 'rt-movie-meta-basic-runtime', $rt_movie_meta_basic_runtime );
+				if ( $rt_movie_meta_basic_runtime > 0 && $rt_movie_meta_basic_runtime <= 1000 ) {
 
+					update_post_meta( $post_id, 'rt-movie-meta-basic-runtime', $rt_movie_meta_basic_runtime );
+
+				}
 			}
 
 			// Checking if rt-movie-meta-basic-release-date is available in $_POST.

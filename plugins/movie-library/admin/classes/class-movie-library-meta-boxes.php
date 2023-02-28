@@ -156,6 +156,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 							max = "10"
 							min = "0" />
 
+					<span class = "rt-movie-meta-field-error rt-movie-meta-basic-field-error rt-movie-meta-basic-rating-field-error" id="rt-movie-meta-basic-rating-field-error"></span>
+
 				</div>
 
 				<div class = "rt-movie-meta-container rt-movie-meta-basic-container rt-movie-meta-basic-runtime-container">
@@ -181,6 +183,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 							id    = "<?php echo esc_attr( $rt_movie_meta_basic_key['runtime'] ); ?>"
 							min   = "1"
 							max   = "1000" />
+
+					<span class = "rt-movie-meta-field-error rt-movie-meta-basic-field-error rt-movie-meta-basic-runtime-field-error" id="rt-movie-meta-basic-runtime-field-error"></span>
 
 				</div>
 
@@ -356,7 +360,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 											<input type = "text"
 													class = "hidden-field"
 													name = "<?php echo esc_attr( $rt_character_data['person_id'] . '-name' ); ?>"
-													id = "<?php echo esc_attr( $rt_character_data['person_id'] ); ?>"
+													id = "<?php echo esc_attr( $rt_character_data['person_id'] . '-name' ); ?>"
 													value = "<?php echo esc_attr( $rt_character_data['person_name'] ); ?>"/>
 
 										</div>
@@ -565,29 +569,31 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 
 			<div class = "rt-media-meta-fields rt-media-meta-images">
 
+				<?php
+				if ( isset( $rt_media_meta_images_data_attachment_ids ) && ! empty( $rt_media_meta_images_data_attachment_ids[0] ) ) {
+					?>
+				<input name = "rt-media-meta-uploaded-images"
+						value = "<?php echo esc_attr( wp_json_encode( $rt_media_meta_images_data_attachment_ids[0] ) ); ?>"
+						hidden = "hidden">
+
+				<h3 class = "rt-media-meta-heading rt-media-meta-images-heading rt-media-meta-uploaded-images-heading">
+
+					<?php esc_html_e( 'Uploaded Images', 'movie-library' ); ?>
+
+				</h3>
+					<?php
+				}
+				?>
+
 				<div class = "rt-media-meta-container rt-media-meta-images-container rt-media-meta-uploaded-images-container">
 
 					<?php
 
 					if ( isset( $rt_media_meta_images_data_attachment_ids ) && ! empty( $rt_media_meta_images_data_attachment_ids[0] ) ) {
 
-						?>
-
-						<input name = "rt-media-meta-uploaded-images"
-								value = "<?php echo esc_attr( wp_json_encode( $rt_media_meta_images_data_attachment_ids[0] ) ); ?>"
-								hidden = "hidden">
-
-						<h3 class = "rt-media-meta-heading rt-media-meta-images-heading rt-media-meta-uploaded-images-heading">
-
-							<?php esc_html_e( 'Uploaded Images', 'movie-library' ); ?>
-
-						</h3>
-
-						<?php
-
 						foreach ( $rt_media_meta_images_data_attachment_ids[0] as $rt_media_meta_image_attachment_id ) {
 
-							$image_url = wp_get_attachment_image_url( $rt_media_meta_image_attachment_id, 'full' );
+							$image_url = wp_get_attachment_image_url( $rt_media_meta_image_attachment_id );
 
 							if ( ! $image_url ) {
 								continue;
@@ -622,21 +628,21 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 
 				</div>
 
-				<div class = "rt-media-meta-container rt-media-meta-images-container rt-media-meta-selected-images-container"
-						id = "rt-media-meta-selected-images-container">
+			</div>
 
-				</div>
-
-				<button class = "rt-media-meta-add rt-media-meta-add rt-media-meta-images-add"
-						type = "button">
-
-					<?php esc_html_e( 'Add Images', 'movie-library' ); ?>
-
-				</button>
-
-				<input name = "rt-media-meta-selected-images" hidden = "hidden">
+			<div class = "rt-media-meta-container rt-media-meta-images-container rt-media-meta-selected-images-container"
+					id = "rt-media-meta-selected-images-container">
 
 			</div>
+
+			<input name = "rt-media-meta-selected-images" hidden = "hidden">
+
+			<button class = "rt-media-meta-add rt-media-meta-add rt-media-meta-images-add"
+					type = "button">
+
+				<?php esc_html_e( 'Add Images', 'movie-library' ); ?>
+
+			</button>
 
 			<?php
 		}
