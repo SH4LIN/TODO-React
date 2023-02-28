@@ -137,7 +137,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 					<label class = "rt-movie-meta-label rt-movie-meta-basic-label rt-movie-meta-basic-rating-label"
 							for = "<?php echo esc_attr( $rt_movie_meta_basic_key['rating'] ); ?>">
 
-						<?php esc_html_e( 'Rating (Between 1-10)', 'movie-library' ); ?>
+						<?php esc_html_e( 'Rating (Between 0-10)', 'movie-library' ); ?>
 
 					</label>
 
@@ -153,8 +153,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
 							class = "rt-movie-meta-field rt-movie-meta-basic-field rt-movie-meta-basic-rating-field"
 							name = "<?php echo esc_attr( $rt_movie_meta_basic_key['rating'] ); ?>"
 							id = "<?php echo esc_attr( $rt_movie_meta_basic_key['rating'] ); ?>"
-							max = "5"
-							min = "1" />
+							max = "10"
+							min = "0" />
 
 				</div>
 

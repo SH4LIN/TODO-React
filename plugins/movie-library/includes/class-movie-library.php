@@ -78,26 +78,43 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		private function register_scripts(): void {
 
-			wp_register_script( 'movie-library-admin', MLB_PLUGIN_URL . 'admin/js/movie-library-admin.js', [ 'wp-i18n', 'jquery' ], MLB_PLUGIN_VERSION, true );
-
 			wp_register_script(
-				'movie-library-custom-label',
-				MLB_PLUGIN_URL . 'admin/js/movie-library-custom-label.js',
-				[
-					'wp-hooks',
-					'wp-i18n',
-				],
+				'movie-library-image-video-upload',
+				MLB_PLUGIN_URL . 'admin/js/movie-library-image-video-upload.js',
+				array( 'wp-i18n', 'jquery' ),
 				MLB_PLUGIN_VERSION,
 				true
 			);
 
 			wp_register_script(
-				'movie-library-rt-movie',
-				MLB_PLUGIN_URL . 'admin/js/movie-library-rt-movie.js',
-				[
+				'movie-library-custom-label',
+				MLB_PLUGIN_URL . 'admin/js/movie-library-custom-label.js',
+				array(
+					'wp-hooks',
+					'wp-i18n',
+				),
+				MLB_PLUGIN_VERSION,
+				true
+			);
+
+			wp_register_script(
+				'movie-library-character',
+				MLB_PLUGIN_URL . 'admin/js/movie-library-character.js',
+				array(
 					'wp-i18n',
 					'jquery',
-				],
+				),
+				MLB_PLUGIN_VERSION,
+				true
+			);
+
+			wp_register_script(
+				'movie-library-validation',
+				MLB_PLUGIN_URL . 'admin/js/movie-library-validation.js',
+				array(
+					'wp-i18n',
+					'jquery',
+				),
 				MLB_PLUGIN_VERSION,
 				true
 			);
@@ -116,27 +133,28 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 			$movie_library_save_post     = new Movie_Library_Save_Post();
 			$movie_library_settings_page = new Movie_Library_Settings_Page();
 
-			register_activation_hook( MLB_PLUGIN_FILE, [ $movie_library_activation, 'activate' ] );
-			register_deactivation_hook( MLB_PLUGIN_FILE, [ $movie_library_deactivation, 'deactivate' ] );
+			register_activation_hook( MLB_PLUGIN_FILE, array( $movie_library_activation, 'activate' ) );
+			register_deactivation_hook( MLB_PLUGIN_FILE, array( $movie_library_deactivation, 'deactivate' ) );
 
-			add_action( 'init', [ $this, 'setup_environment' ] );
-			add_action( 'plugins_loaded', [ $this, 'load_plugin_text_domain' ] );
-			add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_jquery' ] );
-			add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_script' ] );
-			add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_custom_label_script' ] );
-			add_action( 'wp_enqueue_scripts', [ $this, 'wp_enqueue_scripts' ] );
-			add_action( 'add_meta_boxes', [ $movie_library_meta_boxes, 'add_meta_boxes' ] );
-			add_action( 'save_post', [ $movie_library_save_post, 'save_post' ], 10, 3 );
+			add_action( 'init', array( $this, 'setup_environment' ) );
+			add_action( 'plugins_loaded', array( $this, 'load_plugin_text_domain' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_css' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_image_video_upload_script' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_custom_label_character_script' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_validation_script' ) );
+			add_action( 'wp_enqueue_scripts', array( $this, 'wp_enqueue_scripts' ) );
+			add_action( 'add_meta_boxes', array( $movie_library_meta_boxes, 'add_meta_boxes' ) );
+			add_action( 'save_post', array( $movie_library_save_post, 'save_post' ), 10, 3 );
 			add_action(
 				'admin_menu',
-				[
+				array(
 					$movie_library_settings_page,
 					'add_movie_library_sub_menu',
-				]
+				)
 			);
 
-			add_filter( 'enter_title_here', [ $this, 'change_title_text' ], 10, 2 );
-			add_filter( 'write_your_story', [ $this, 'change_post_content_text' ], 10, 2 );
+			add_filter( 'enter_title_here', array( $this, 'change_title_text' ), 10, 2 );
+			add_filter( 'write_your_story', array( $this, 'change_post_content_text' ), 10, 2 );
 		}
 
 		/**
@@ -170,26 +188,25 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		}
 
 		/**
-		 * This function is used to enqueue the jquery script.
+		 * This function is used to enqueue the admin CSS.
 		 *
 		 * @return void
 		 */
-		public function enqueue_jquery(): void {
+		public function enqueue_admin_css(): void {
 
-			wp_enqueue_script( 'jquery' );
+			wp_enqueue_style( 'movie-library-admin', MLB_PLUGIN_URL . 'admin/css/movie-library-admin.css', array(), MLB_PLUGIN_VERSION );
 
 		}
 
 		/**
-		 * This function Enqueues admin script.
+		 * This function Enqueues image, video upload script.
 		 *
 		 * @return void
 		 */
-		public function enqueue_admin_script(): void {
+		public function enqueue_image_video_upload_script(): void {
 
-			wp_enqueue_style( 'movie-library-admin', MLB_PLUGIN_URL . 'admin/css/movie-library-admin.css', [], MLB_PLUGIN_VERSION );
-			wp_enqueue_script( 'movie-library-admin' );
-			wp_set_script_translations( 'movie-library-admin', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
+			wp_enqueue_script( 'movie-library-image-video-upload' );
+			wp_set_script_translations( 'movie-library-image-video-upload', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
 			wp_enqueue_media();
 
 		}
@@ -199,16 +216,32 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 *
 		 * @return void
 		 */
-		public function enqueue_custom_label_script(): void {
+		public function enqueue_custom_label_character_script(): void {
 
 			if ( get_post_type() === 'rt-movie' ) {
 
 				wp_enqueue_script( 'movie-library-custom-label' );
 				wp_set_script_translations( 'movie-library-custom-label', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
-				wp_enqueue_script( 'movie-library-rt-movie' );
-				wp_set_script_translations( 'movie-library-rt-movie', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
+
+				wp_enqueue_script( 'movie-library-character' );
+				wp_set_script_translations( 'movie-library-character', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
 
 			}
+
+		}
+
+		/**
+		 * This function Enqueues validation script.
+		 *
+		 * @return void
+		 */
+		public function enqueue_validation_script(): void {
+
+			$post_type = get_post_type();
+
+			wp_enqueue_script( 'movie-library-validation' );
+			wp_localize_script( 'movie-library-validation', 'movieLibrary', array( 'postType' => $post_type ) );
+			wp_set_script_translations( 'movie-library-validation', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
 
 		}
 
@@ -219,8 +252,8 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		public function wp_enqueue_scripts(): void {
 
-			wp_enqueue_style( 'movie-library-frontend', MLB_PLUGIN_URL . 'public/css/movie-library-frontend.css', [], MLB_PLUGIN_VERSION );
-			wp_enqueue_script( 'movie-library-frontend', MLB_PLUGIN_URL . 'public/js/movie-library-frontend.js', [], MLB_PLUGIN_VERSION, true );
+			wp_enqueue_style( 'movie-library-frontend', MLB_PLUGIN_URL . 'public/css/movie-library-frontend.css', array(), MLB_PLUGIN_VERSION );
+			wp_enqueue_script( 'movie-library-frontend', MLB_PLUGIN_URL . 'public/js/movie-library-frontend.js', array(), MLB_PLUGIN_VERSION, true );
 
 		}
 

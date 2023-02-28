@@ -266,7 +266,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
 				}
 			} else {
 
-				$this->show_no_movies_found_message();
+				return $this->show_no_movies_found_message();
 
 			}
 

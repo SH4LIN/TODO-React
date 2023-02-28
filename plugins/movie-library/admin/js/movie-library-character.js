@@ -8,7 +8,7 @@
  * This function will be used to add the Text-field dynamically when user selects any actor from the drop-down.
  * and remove the text-field if it is unselected.
  */
-jQuery(function ($) {
+(function ($) {
 	$(document).ready(function () {
 		'use strict';
 
@@ -81,4 +81,4 @@ jQuery(function ($) {
 			oldValue = newValue;
 		});
 	});
-});
+})(jQuery);

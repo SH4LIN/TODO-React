@@ -124,7 +124,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 			// Check if rt-person-meta-social-twitter url is set. If it is set then sanitize url the data validate the data and save it.
 			if ( isset( $_POST['rt-person-meta-social-twitter'] ) ) {
 
-				$rt_person_meta_social_twitter = esc_url_raw( wp_unslash( $_POST['rt-person-meta-social-twitter'] ) );
+				$rt_person_meta_social_twitter = filter_var( wp_unslash( $_POST['rt-person-meta-social-twitter'] ), FILTER_SANITIZE_URL );
 
 				if ( filter_var( $rt_person_meta_social_twitter, FILTER_VALIDATE_URL ) ) {
 
@@ -136,7 +136,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 			// Check if rt-person-meta-social-facebook url is set. If it is set then sanitize url the data validate the data and save it.
 			if ( isset( $_POST['rt-person-meta-social-facebook'] ) ) {
 
-				$rt_person_meta_social_facebook = esc_url_raw( wp_unslash( $_POST['rt-person-meta-social-facebook'] ) );
+				$rt_person_meta_social_facebook = filter_var( wp_unslash( $_POST['rt-person-meta-social-facebook'] ), FILTER_SANITIZE_URL );
 
 				if ( filter_var( $rt_person_meta_social_facebook, FILTER_VALIDATE_URL ) ) {
 
@@ -148,7 +148,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 			// Check if rt-person-meta-social-instagram url is set. If it is set then sanitize url the data validate the data and save it.
 			if ( isset( $_POST['rt-person-meta-social-instagram'] ) ) {
 
-				$rt_person_meta_social_instagram = esc_url_raw( wp_unslash( $_POST['rt-person-meta-social-instagram'] ) );
+				$rt_person_meta_social_instagram = filter_var( wp_unslash( $_POST['rt-person-meta-social-instagram'] ), FILTER_SANITIZE_URL );
 
 				if ( filter_var( $rt_person_meta_social_instagram, FILTER_VALIDATE_URL ) ) {
 
@@ -160,7 +160,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 			// Check if rt-person-meta-social-web url is set. If it is set then sanitize url the data validate the data and save it.
 			if ( isset( $_POST['rt-person-meta-social-web'] ) ) {
 
-				$rt_person_meta_social_web = esc_url_raw( wp_unslash( $_POST['rt-person-meta-social-web'] ) );
+				$rt_person_meta_social_web = filter_var( wp_unslash( $_POST['rt-person-meta-social-web'] ), FILTER_SANITIZE_URL );
 
 				if ( filter_var( $rt_person_meta_social_web, FILTER_VALIDATE_URL ) ) {
 

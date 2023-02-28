@@ -8,14 +8,14 @@
  *
  * @param {Object} $ jQuery object.
  */
-jQuery(function ($) {
+(function ($) {
 	$(document).ready(function () {
 		'use strict';
 
 		setupMediaMetaImagesUploader($);
 		setupMediaMetaVideosUploader($);
 	});
-});
+})(jQuery);
 
 /**
  * This function will be called when document is ready and it will set all the required event listeners for uploading images.
