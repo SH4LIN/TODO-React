@@ -19,10 +19,12 @@ use MovieLib\admin\classes\Activation;
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\custom_post_types\Rt_Person;
 use MovieLib\admin\classes\Deactivation;
+use MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box;
+use MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box;
+use MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box;
 use MovieLib\admin\classes\Settings_Page;
 use MovieLib\admin\classes\Movie_Library_Save_Post;
 use MovieLib\admin\classes\Shortcodes;
-use MovieLib\admin\classes\Meta_Boxes;
 use MovieLib\admin\classes\taxonomies\Movie_Genre;
 use MovieLib\admin\classes\taxonomies\Movie_Label;
 use MovieLib\admin\classes\taxonomies\Movie_Language;
@@ -139,7 +141,6 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		private function register_hooks(): void {
 			$movie_library_activation    = new Activation();
 			$movie_library_deactivation  = new Deactivation();
-			$movie_library_meta_boxes    = new Meta_Boxes();
 			$movie_library_save_post     = new Movie_Library_Save_Post();
 			$movie_library_settings_page = new Settings_Page();
 
@@ -153,7 +154,7 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_custom_label_character_script' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_validation_script' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'wp_enqueue_scripts' ) );
-			add_action( 'add_meta_boxes', array( $movie_library_meta_boxes, 'add_meta_boxes' ) );
+			add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 			add_action( 'save_post', array( $movie_library_save_post, 'save_post' ), 10, 3 );
 			add_action(
 				'admin_menu',
@@ -188,6 +189,7 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 * @return void
 		 */
 		private function register_custom_taxonomies(): void {
+
 			$rt_movie_genre = new Movie_Genre();
 			$rt_movie_genre->register();
 
@@ -301,6 +303,24 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 
 			wp_enqueue_style( 'movie-library-frontend', MLB_PLUGIN_URL . 'public/css/movie-library-frontend.css', array(), MLB_PLUGIN_VERSION );
 			wp_enqueue_script( 'movie-library-frontend', MLB_PLUGIN_URL . 'public/js/movie-library-frontend.js', array(), MLB_PLUGIN_VERSION, true );
+
+		}
+
+		/**
+		 * This function is used to add all the meta-boxes.
+		 *
+		 * @return void
+		 */
+		public function add_meta_boxes(): void {
+
+			$rt_movie_meta_box = new RT_Movie_Meta_Box();
+			$rt_movie_meta_box->create_meta_box();
+
+			$rt_person_meta_box = new RT_Person_Meta_Box();
+			$rt_person_meta_box->create_meta_box();
+
+			$rt_media_meta_box = new RT_Media_Meta_Box();
+			$rt_media_meta_box->create_meta_box();
 
 		}
 
