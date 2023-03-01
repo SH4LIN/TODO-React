@@ -122,8 +122,18 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 			);
 
 			wp_register_script(
-				'movie-library-validation',
-				MLB_PLUGIN_URL . 'admin/js/movie-library-validation.js',
+				'movie-library-rt-movie-validation',
+				MLB_PLUGIN_URL . 'admin/js/movie-library-rt-movie-validation.js',
+				array(
+					'wp-i18n',
+				),
+				MLB_PLUGIN_VERSION,
+				true
+			);
+
+			wp_register_script(
+				'movie-library-rt-person-validation',
+				MLB_PLUGIN_URL . 'admin/js/movie-library-rt-person-validation.js',
 				array(
 					'wp-i18n',
 				),
@@ -288,9 +298,17 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 
 			$post_type = get_post_type();
 
-			wp_enqueue_script( 'movie-library-validation' );
-			wp_localize_script( 'movie-library-validation', 'movieLibrary', array( 'postType' => $post_type ) );
-			wp_set_script_translations( 'movie-library-validation', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
+			if ( RT_MOVIE_SLUG === $post_type ) {
+
+				wp_enqueue_script( 'movie-library-rt-movie-validation' );
+				wp_set_script_translations( 'movie-library-rt-movie-validation', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
+
+			} elseif ( RT_PERSON_SLUG === $post_type ) {
+
+				wp_enqueue_script( 'movie-library-rt-person-validation' );
+				wp_set_script_translations( 'movie-library-rt-person-validation', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
+
+			}
 
 		}
 

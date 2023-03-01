@@ -60,6 +60,10 @@
 	color: #f00;
 }
 
+.rt-person-meta-field-error {
+	color: #f00;
+}
+
 .rt-media-meta-add {
 	background: transparent;
 	width: 85%;

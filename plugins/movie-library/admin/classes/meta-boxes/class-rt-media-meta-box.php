@@ -22,12 +22,12 @@ const RT_MEDIA_META_VIDEOS_SLUG = 'rt-media-meta-videos';
 if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 
 	/**
-	 * This class is used to create all the meta-boxes for rt-movie post type.
+	 * This class is used to create all media meta-boxes for rt-movie and rt-person post type.
 	 */
 	class RT_Media_Meta_Box {
 
 		/**
-		 * This function is used to create the meta-box for basic information and crew information.
+		 * This function is used to create the meta-box for photos and videos.
 		 *
 		 * @return void
 		 */

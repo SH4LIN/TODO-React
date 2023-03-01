@@ -1,5 +1,5 @@
 /**
- * This file is used to apply front-end validation to the meta-boxes.
+ * This file is used to apply front-end validation to the rt-movie meta-boxes.
  */
 
 /**
@@ -7,13 +7,8 @@
  */
 (function () {
 	'use strict';
-	// eslint-disable-next-line no-undef
-	if (movieLibrary.postType === 'rt-movie') {
-		validateRtMovie();
-		// eslint-disable-next-line no-undef
-	} else if (movieLibrary.postType === 'rt-person') {
-		validateRtPerson();
-	}
+
+	validateRtMovie();
 })();
 
 let submit;
@@ -21,13 +16,15 @@ let isRatingValid = true;
 let isRuntimeValid = true;
 
 window.onload = function () {
-	submit = document.querySelector('.editor-post-publish-button');
+	submit = document.querySelector('.editor-post-publish-button__button');
 };
 
 /**
  * This function is used to validate the rt-movie post type.
  */
 function validateRtMovie() {
+	const { __ } = wp.i18n;
+
 	document
 		.getElementById('rt-movie-meta-basic-rating')
 		.addEventListener('input', function (e) {
@@ -39,7 +36,10 @@ function validateRtMovie() {
 				) {
 					document.getElementById(
 						'rt-movie-meta-basic-rating-field-error'
-					).textContent = 'Value should be between 0 and 10';
+					).textContent = __(
+						'Value should be between 0 and 10',
+						'movie-library'
+					);
 					isRatingValid = false;
 					changeRtMovieButtonState();
 				} else {
@@ -69,7 +69,10 @@ function validateRtMovie() {
 				) {
 					document.getElementById(
 						'rt-movie-meta-basic-runtime-field-error'
-					).textContent = 'Value should be between 1 and 1000';
+					).textContent = __(
+						'Value should be between 1 and 1000',
+						'movie-library'
+					);
 					isRuntimeValid = false;
 					changeRtMovieButtonState();
 				} else {
@@ -89,6 +92,9 @@ function validateRtMovie() {
 		});
 }
 
+/**
+ * This function is used to enable or disable the publish button on rt-movie post type.
+ */
 function changeRtMovieButtonState() {
 	if (isRatingValid && isRuntimeValid) {
 		submit.disabled = false;
@@ -96,8 +102,3 @@ function changeRtMovieButtonState() {
 		submit.disabled = true;
 	}
 }
-
-/**
- * This function is used to validate the rt-person post type.
- */
-function validateRtPerson() {}

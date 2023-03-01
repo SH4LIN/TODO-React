@@ -21,12 +21,12 @@ const RT_PERSON_META_SOCIAL_SLUG = 'rt-person-meta-social';
 if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) {
 
 	/**
-	 * This class is used to create all the meta-boxes for rt-movie post type.
+	 * This class is used to create all the meta-boxes for rt-person post type.
 	 */
 	class RT_Person_Meta_Box {
 
 		/**
-		 * This function is used to create the meta-box for basic information and crew information.
+		 * This function is used to create the meta-box for basic information and social information.
 		 *
 		 * @return void
 		 */
@@ -155,6 +155,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 						name = "<?php echo esc_attr( $rt_person_meta_social_key['twitter'] ); ?>"
 						id = "<?php echo esc_attr( $rt_person_meta_social_key['twitter'] ); ?>"/>
 
+					<span class = "rt-person-meta-field-error rt-person-meta-social-field-error rt-person-meta-social-twitter-field-error" id="rt-person-meta-social-twitter-field-error"></span>
+
 				</div>
 
 				<div class = "rt-person-meta-container rt-person-meta-social-container rt-person-meta-social-facebook-container">
@@ -171,6 +173,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 						class = "rt-person-meta-field rt-person-meta-social-field rt-person-meta-social-facebook-field"
 						name = "<?php echo esc_attr( $rt_person_meta_social_key['facebook'] ); ?>"
 						id = "<?php echo esc_attr( $rt_person_meta_social_key['facebook'] ); ?>"/>
+
+					<span class = "rt-person-meta-field-error rt-person-meta-social-field-error rt-person-meta-social-facebook-field-error" id="rt-person-meta-social-facebook-field-error"></span>
 
 				</div>
 
@@ -189,6 +193,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 						name = "<?php echo esc_attr( $rt_person_meta_social_key['instagram'] ); ?>"
 						id = "<?php echo esc_attr( $rt_person_meta_social_key['instagram'] ); ?>"/>
 
+					<span class = "rt-person-meta-field-error rt-person-meta-social-field-error rt-person-meta-social-instagram-field-error" id="rt-person-meta-social-instagram-field-error"></span>
+
 				</div>
 
 				<div class = "rt-person-meta-container rt-person-meta-social-container rt-person-meta-social-website-container">
@@ -205,6 +211,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 						class = "rt-person-meta-field rt-person-meta-social-field rt-person-meta-social-website-field"
 						name = "<?php echo esc_attr( $rt_person_meta_social_key['website'] ); ?>"
 						id = "<?php echo esc_attr( $rt_person_meta_social_key['website'] ); ?>" />
+
+					<span class = "rt-person-meta-field-error rt-person-meta-social-field-error rt-person-meta-social-website-field-error" id="rt-person-meta-social-website-field-error"></span>
 
 				</div>
 

@@ -552,11 +552,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 					'post_type' => RT_PERSON_SLUG,
 					'per_page'  => 10,
 					'tax_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-										  array(
-											  'taxonomy' => RT_PERSON_CAREER_SLUG,
-											  'field'    => 'term_id',
-											  'terms'    => $rt_career_term->term_id,
-										  ),
+									array(
+											'taxonomy' => RT_PERSON_CAREER_SLUG,
+											'field'    => 'term_id',
+											'terms'    => $rt_career_term->term_id,
+									),
 					),
 				)
 			);
