@@ -79,7 +79,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 		 *
 		 * @return string|false
 		 */
-		public function movie_library_movie_shortcode( $attributes = array(), $content = null, $tag = '' ): string | false {
+		public function movie_library_movie_shortcode( $attributes = array(), $content = null, $tag = '' ) {
 
 			$attributes = array_change_key_case( (array) $attributes );
 
@@ -305,7 +305,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 		 *
 		 * @return string|false
 		 */
-		public function movie_library_person_shortcode( $attributes = array(), $content = null, $tag = '' ): string | false {
+		public function movie_library_person_shortcode( $attributes = array(), $content = null, $tag = '' ) {
 
 			$attributes = array_change_key_case( (array) $attributes );
 
@@ -577,7 +577,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 		 *
 		 * @return string|false
 		 */
-		private function show_no_movies_found_message(): string | false {
+		private function show_no_movies_found_message() {
 
 			ob_start();
 
@@ -600,7 +600,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 		 *
 		 * @return string|false
 		 */
-		private function show_no_people_found_message(): string | false {
+		private function show_no_people_found_message() {
 
 			ob_start();
 
