@@ -31,6 +31,8 @@ use MovieLib\admin\classes\taxonomies\Movie_Production_Company;
 use MovieLib\admin\classes\taxonomies\Movie_Tag;
 use MovieLib\admin\classes\taxonomies\Person_Career;
 use WP_Post;
+use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
+use const MovieLib\admin\classes\custom_post_types\RT_PERSON_SLUG;
 
 if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 	/**
@@ -112,7 +114,6 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 				MLB_PLUGIN_URL . 'admin/js/movie-library-character.js',
 				array(
 					'wp-i18n',
-					'jquery',
 				),
 				MLB_PLUGIN_VERSION,
 				true
@@ -123,7 +124,6 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 				MLB_PLUGIN_URL . 'admin/js/movie-library-validation.js',
 				array(
 					'wp-i18n',
-					'jquery',
 				),
 				MLB_PLUGIN_VERSION,
 				true
@@ -218,7 +218,6 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		public function setup_environment(): void {
 
-
 			$shortcode = new Shortcodes();
 			$shortcode->register_shortcodes();
 
@@ -266,7 +265,7 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		public function enqueue_custom_label_character_script(): void {
 
-			if ( get_post_type() === 'rt-movie' ) {
+			if ( get_post_type() === RT_MOVIE_SLUG ) {
 
 				wp_enqueue_script( 'movie-library-custom-label' );
 				wp_set_script_translations( 'movie-library-custom-label', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
@@ -318,11 +317,11 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		public function change_title_text( $title, $post ): string {
 
-			if ( 'rt-movie' === $post->post_type ) {
+			if ( RT_MOVIE_SLUG === $post->post_type ) {
 
 				$title = __( 'Title', 'movie-library' );
 
-			} elseif ( 'rt-person' === $post->post_type ) {
+			} elseif ( RT_PERSON_SLUG === $post->post_type ) {
 
 				$title = __( 'Name', 'movie-library' );
 
@@ -344,11 +343,11 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		public function change_post_content_text( $title, $post ): string {
 
-			if ( 'rt-movie' === $post->post_type ) {
+			if ( RT_MOVIE_SLUG === $post->post_type ) {
 
 				$title = __( 'Plot', 'movie-library' );
 
-			} elseif ( 'rt-person' === $post->post_type ) {
+			} elseif ( RT_PERSON_SLUG === $post->post_type ) {
 
 				$title = __( 'Biography', 'movie-library' );
 

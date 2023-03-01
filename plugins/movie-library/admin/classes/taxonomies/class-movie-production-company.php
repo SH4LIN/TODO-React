@@ -7,10 +7,17 @@
 
 namespace MovieLib\admin\classes\taxonomies;
 
+use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
+
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
+
+/**
+ * RT_MOVIE_PRODUCTION_COMPANY_SLUG
+ */
+const RT_MOVIE_PRODUCTION_COMPANY_SLUG = 'rt-movie-production-company';
 
 if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Production_Company' ) ) {
 
@@ -26,8 +33,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Production_Company
 		 */
 		public function register():void {
 			$rt_movie_production_company = array(
-				'taxonomy'  => 'rt-movie-production-company',
-				'post_type' => array( 'rt-movie' ),
+				'taxonomy'  => RT_MOVIE_PRODUCTION_COMPANY_SLUG,
+				'post_type' => array( RT_MOVIE_SLUG ),
 				'args'      => array(
 					'labels'             => array(
 						'name'                       => _x(

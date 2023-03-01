@@ -74,11 +74,6 @@ const MLB_SLUG = 'movie-library';
  */
 const MLB_NAME = 'Movie Library';
 
-/**
- * RT_MOVIE_SLUG
- */
-const RT_MOVIE_SLUG = 'rt-movie';
-
 require_once MLB_PLUGIN_DIR . 'includes/class-autoloader.php';
 
 use MovieLib\includes\Movie_Library;

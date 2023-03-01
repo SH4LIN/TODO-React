@@ -9,6 +9,9 @@ namespace MovieLib\admin\classes;
 
 use WP_Post;
 use WP_Query;
+use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
+use const MovieLib\admin\classes\custom_post_types\RT_PERSON_SLUG;
+use const MovieLib\admin\classes\taxonomies\RT_PERSON_CAREER_SLUG;
 
 /**
  * This is a security measure to prevent direct access to the file.
@@ -63,42 +66,42 @@ if ( ! class_exists( 'MovieLib\admin\classes\Meta_Boxes' ) ) {
 				'rt-movie-meta-basic'   => array(
 					'title'    => __( 'Basic', 'movie-library' ),
 					'callback' => array( $this, 'rt_movie_meta_basic' ),
-					'screen'   => array( 'rt-movie' ),
+					'screen'   => array( RT_MOVIE_SLUG ),
 					'context'  => 'side',
 					'priority' => 'high',
 				),
 				'rt-movie-meta-crew'    => array(
 					'title'    => __( 'Crew', 'movie-library' ),
 					'callback' => array( $this, 'rt_movie_meta_crew' ),
-					'screen'   => array( 'rt-movie' ),
+					'screen'   => array( RT_MOVIE_SLUG ),
 					'context'  => 'side',
 					'priority' => 'high',
 				),
 				'rt-person-meta-basic'  => array(
 					'title'    => __( 'Basic', 'movie-library' ),
 					'callback' => array( $this, 'rt_person_meta_basic' ),
-					'screen'   => array( 'rt-person' ),
+					'screen'   => array( RT_PERSON_SLUG ),
 					'context'  => 'side',
 					'priority' => 'high',
 				),
 				'rt-person-meta-social' => array(
 					'title'    => __( 'Basic', 'movie-library' ),
 					'callback' => array( $this, 'rt_person_meta_social' ),
-					'screen'   => array( 'rt-person' ),
+					'screen'   => array( RT_PERSON_SLUG ),
 					'context'  => 'side',
 					'priority' => 'high',
 				),
 				'rt-media-meta-images'  => array(
 					'title'    => __( 'Photos', 'movie-library' ),
 					'callback' => array( $this, 'rt_media_meta_images' ),
-					'screen'   => array( 'rt-movie', 'rt-person' ),
+					'screen'   => array( RT_MOVIE_SLUG, RT_PERSON_SLUG ),
 					'context'  => 'side',
 					'priority' => 'high',
 				),
 				'rt-media-meta-videos'  => array(
 					'title'    => __( 'Videos', 'movie-library' ),
 					'callback' => array( $this, 'rt_media_meta_videos' ),
-					'screen'   => array( 'rt-movie', 'rt-person' ),
+					'screen'   => array( RT_MOVIE_SLUG, RT_PERSON_SLUG ),
 					'context'  => 'side',
 					'priority' => 'high',
 				),
@@ -227,7 +230,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Meta_Boxes' ) ) {
 		public function rt_movie_meta_crew( WP_Post $post ): void {
 			$rt_career_terms = get_terms(
 				array(
-					'taxonomy'   => 'rt-person-career',
+					'taxonomy'   => RT_PERSON_CAREER_SLUG,
 					'hide_empty' => false,
 				)
 			);
@@ -765,11 +768,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\Meta_Boxes' ) ) {
 
 			$rt_person_query = new WP_Query(
 				array(
-					'post_type' => 'rt-person',
+					'post_type' => RT_PERSON_SLUG,
 					'per_page'  => 10,
 					'tax_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 						array(
-							'taxonomy' => 'rt-person-career',
+							'taxonomy' => RT_PERSON_CAREER_SLUG,
 							'field'    => 'term_id',
 							'terms'    => $rt_career_term->term_id,
 						),

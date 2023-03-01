@@ -13,6 +13,13 @@ namespace MovieLib\admin\classes;
 defined( 'ABSPATH' ) || exit;
 
 use WP_Query;
+use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
+use const MovieLib\admin\classes\custom_post_types\RT_PERSON_SLUG;
+use const MovieLib\admin\classes\taxonomies\RT_MOVIE_GENRE_SLUG;
+use const MovieLib\admin\classes\taxonomies\RT_MOVIE_LABEL_SLUG;
+use const MovieLib\admin\classes\taxonomies\RT_MOVIE_LANGUAGE_SLUG;
+use const MovieLib\admin\classes\taxonomies\RT_MOVIE_PERSON_SLUG;
+use const MovieLib\admin\classes\taxonomies\RT_PERSON_CAREER_SLUG;
 
 if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 	/**
@@ -95,7 +102,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 
 				$person = new Wp_Query(
 					array(
-						'post_type' => 'rt-person',
+						'post_type' => RT_PERSON_SLUG,
 						'title'     => $name,
 						'fields'    => 'ids',
 					)
@@ -105,7 +112,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 
 					$person = new Wp_Query(
 						array(
-							'post_type' => 'rt-person',
+							'post_type' => RT_PERSON_SLUG,
 							'name'      => $name,
 							'fields'    => 'ids',
 						)
@@ -119,7 +126,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 				}
 
 				$search_query[] = array(
-					'taxonomy' => '_rt-movie-person',
+					'taxonomy' => RT_MOVIE_PERSON_SLUG,
 					'field'    => 'slug',
 					'terms'    => $person->get_posts(),
 				);
@@ -131,21 +138,21 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 			if ( ! empty( $attributes['genre'] ) ) {
 
 				$terms          = sanitize_text_field( $attributes['genre'] );
-				$search_query[] = $this->get_search_query( $terms, 'rt-movie-genre' );
+				$search_query[] = $this->get_search_query( $terms, RT_MOVIE_GENRE_SLUG );
 
 			}
 
 			if ( ! empty( $attributes['label'] ) ) {
 
 				$terms          = sanitize_text_field( $attributes['label'] );
-				$search_query[] = $this->get_search_query( $terms, 'rt-movie-label' );
+				$search_query[] = $this->get_search_query( $terms, RT_MOVIE_LABEL_SLUG );
 
 			}
 
 			if ( ! empty( $attributes['language'] ) ) {
 
 				$terms          = sanitize_text_field( $attributes['language'] );
-				$search_query[] = $this->get_search_query( $terms, 'rt-movie-language' );
+				$search_query[] = $this->get_search_query( $terms, RT_MOVIE_LANGUAGE_SLUG );
 
 			}
 
@@ -159,7 +166,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 
 				$query = new WP_Query(
 					array(
-						'post_type' => 'rt-movie',
+						'post_type' => RT_MOVIE_SLUG,
 						'tax_query' => $search_query, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 					)
 				);
@@ -168,7 +175,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 
 				$query = new WP_Query(
 					array(
-						'post_type' => 'rt-movie',
+						'post_type' => RT_MOVIE_SLUG,
 					)
 				);
 
@@ -315,7 +322,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 			if ( ! empty( $attributes['career'] ) ) {
 
 				$terms          = sanitize_text_field( $attributes['career'] );
-				$search_query[] = $this->get_search_query( $terms, 'rt-person-career' );
+				$search_query[] = $this->get_search_query( $terms, RT_PERSON_CAREER_SLUG );
 
 			}
 
@@ -329,7 +336,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 
 				$query = new WP_Query(
 					array(
-						'post_type' => 'rt-person',
+						'post_type' => RT_PERSON_SLUG,
 						'tax_query' => $search_query, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 					)
 				);
@@ -338,7 +345,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 
 				$query = new WP_Query(
 					array(
-						'post_type' => 'rt-person',
+						'post_type' => RT_PERSON_SLUG,
 					)
 				);
 
@@ -370,7 +377,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 
 					}
 
-					$person_career_details = get_the_terms( $person_id, 'rt-person-career' );
+					$person_career_details = get_the_terms( $person_id, RT_PERSON_CAREER_SLUG );
 
 					if ( ! empty( $person_career_details ) ) {
 

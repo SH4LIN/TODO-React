@@ -12,6 +12,11 @@ namespace MovieLib\admin\classes\custom_post_types;
  */
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * RT_PERSON_SLUG
+ */
+const RT_PERSON_SLUG = 'rt-person';
+
 if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\Rt_Person' ) ) {
 
 	/**
@@ -25,52 +30,50 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\Rt_Person' ) ) {
 		 * @return void
 		 */
 		public function register(): void {
-			$rt_person = array(
-				'custom_post_type' => 'rt-person',
-				'args'             => array(
-					'labels'             => array(
-						'name'                  => _x( 'People', 'Post type general name', 'movie-library' ),
-						'singular_name'         => _x( 'Person', 'Post type singular name', 'movie-library' ),
-						'menu_name'             => _x( 'People', 'Admin Menu text', 'movie-library' ),
-						'name_admin_bar'        => _x( 'Person', 'Add New on Toolbar', 'movie-library' ),
-						'add_new'               => __( 'Add New', 'movie-library' ),
-						'add_new_item'          => __( 'Add New Person', 'movie-library' ),
-						'new_item'              => __( 'New Person', 'movie-library' ),
-						'edit_item'             => __( 'Edit Person', 'movie-library' ),
-						'view_item'             => __( 'View Person', 'movie-library' ),
-						'all_items'             => __( 'All People', 'movie-library' ),
-						'search_items'          => __( 'Search People', 'movie-library' ),
-						'parent_item_colon'     => __( 'Parent People:', 'movie-library' ),
-						'not_found'             => __( 'No people found.', 'movie-library' ),
-						'not_found_in_trash'    => __( 'No people found in Trash.', 'movie-library' ),
-						'featured_image'        => _x( 'Profile picture', 'person', 'movie-library' ),
-						'set_featured_image'    => _x( 'Set Profile picture', 'person', 'movie-library' ),
-						'remove_featured_image' => _x( 'Remove Profile picture', 'person', 'movie-library' ),
-						'use_featured_image'    => _x( 'Use as Profile picture', 'person', 'movie-library' ),
-						'archives'              => _x(
-							'Person archives',
-							'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4',
-							'movie-library'
-						),
+			$args = array(
+				'labels'             => array(
+					'name'                  => _x( 'People', 'Post type general name', 'movie-library' ),
+					'singular_name'         => _x( 'Person', 'Post type singular name', 'movie-library' ),
+					'menu_name'             => _x( 'People', 'Admin Menu text', 'movie-library' ),
+					'name_admin_bar'        => _x( 'Person', 'Add New on Toolbar', 'movie-library' ),
+					'add_new'               => __( 'Add New', 'movie-library' ),
+					'add_new_item'          => __( 'Add New Person', 'movie-library' ),
+					'new_item'              => __( 'New Person', 'movie-library' ),
+					'edit_item'             => __( 'Edit Person', 'movie-library' ),
+					'view_item'             => __( 'View Person', 'movie-library' ),
+					'all_items'             => __( 'All People', 'movie-library' ),
+					'search_items'          => __( 'Search People', 'movie-library' ),
+					'parent_item_colon'     => __( 'Parent People:', 'movie-library' ),
+					'not_found'             => __( 'No people found.', 'movie-library' ),
+					'not_found_in_trash'    => __( 'No people found in Trash.', 'movie-library' ),
+					'featured_image'        => _x( 'Profile picture', 'person', 'movie-library' ),
+					'set_featured_image'    => _x( 'Set Profile picture', 'person', 'movie-library' ),
+					'remove_featured_image' => _x( 'Remove Profile picture', 'person', 'movie-library' ),
+					'use_featured_image'    => _x( 'Use as Profile picture', 'person', 'movie-library' ),
+					'archives'              => _x(
+						'Person archives',
+						'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4',
+						'movie-library'
 					),
-					'description'        => __( 'Description.', 'movie-library' ),
-					'public'             => true,
-					'publicly_queryable' => true,
-					'show_ui'            => true,
-					'show_in_menu'       => true,
-					'query_var'          => true,
-					'rewrite'            => false,
-					'capability_type'    => 'post',
-					'has_archive'        => 'people',
-					'hierarchical'       => false,
-					'menu_position'      => null,
-					'menu_icon'          => 'dashicons-businessman',
-					'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
-					'show_in_rest'       => true,
 				),
+				'description'        => __( 'Description.', 'movie-library' ),
+				'public'             => true,
+				'publicly_queryable' => true,
+				'show_ui'            => true,
+				'show_in_menu'       => true,
+				'query_var'          => true,
+				'rewrite'            => false,
+				'capability_type'    => 'post',
+				'has_archive'        => 'people',
+				'hierarchical'       => false,
+				'menu_position'      => null,
+				'menu_icon'          => 'dashicons-businessman',
+				'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
+				'show_in_rest'       => true,
+
 			);
 
-			register_post_type( $rt_person['custom_post_type'], $rt_person['args'] );
+			register_post_type( RT_PERSON_SLUG, $args );
 
 		}
 	}

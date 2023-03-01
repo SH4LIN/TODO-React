@@ -7,10 +7,17 @@
 
 namespace MovieLib\admin\classes\taxonomies;
 
+use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
+
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
+
+/**
+ * RT_MOVIE_LABEL_SLUG
+ */
+const RT_MOVIE_LABEL_SLUG = 'rt-movie-label';
 
 if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Label' ) ) {
 
@@ -26,8 +33,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Label' ) ) {
 		 */
 		public function register():void {
 			$rt_movie_label = array(
-				'taxonomy'  => 'rt-movie-label',
-				'post_type' => array( 'rt-movie' ),
+				'taxonomy'  => RT_MOVIE_LABEL_SLUG,
+				'post_type' => array( RT_MOVIE_SLUG ),
 				'args'      => array(
 					'labels'             => array(
 						'name'                       => _x( 'Labels', 'taxonomy general name', 'movie-library' ),
