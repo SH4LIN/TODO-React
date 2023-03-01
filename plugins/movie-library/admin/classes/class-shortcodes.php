@@ -14,13 +14,13 @@ defined( 'ABSPATH' ) || exit;
 
 use WP_Query;
 
-if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Shortcodes' ) ) {
+if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 	/**
 	 * This class is used to register shortcodes for the plugin.
 	 *
 	 * @version 1.0.0
 	 */
-	class Movie_Library_Shortcodes {
+	class Shortcodes {
 
 		/**
 		 * This function is used to register shortcodes for the plugin.

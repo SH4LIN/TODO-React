@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * This class is used to autoload the classes of the plugin.
  */
-class Movie_Library_Autoloader {
+class Autoloader {
 	/**
 	 * This function will register the autoloader function.
 	 * spl_autoload_register() will register the autoloader callback function.
@@ -76,4 +76,4 @@ class Movie_Library_Autoloader {
 /**
  * Below code will call the register function of the Movie_Library_Autoloader class.
  */
-Movie_Library_Autoloader::register();
+Autoloader::register();

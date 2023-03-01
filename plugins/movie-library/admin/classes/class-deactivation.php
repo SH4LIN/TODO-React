@@ -12,12 +12,12 @@ namespace MovieLib\admin\classes;
  */
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Deactivation' ) ) {
+if ( ! class_exists( 'MovieLib\admin\classes\Deactivation' ) ) {
 
 	/**
 	 * This class is used to perform the deactivation functionality for the plugin.
 	 */
-	class Movie_Library_Deactivation {
+	class Deactivation {
 
 		/**
 		 * This function is used to perform the deactivation functionality for the plugin.

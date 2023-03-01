@@ -12,12 +12,12 @@ namespace MovieLib\admin\classes;
  */
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Activation' ) ) {
+if ( ! class_exists( 'MovieLib\admin\classes\Activation' ) ) {
 
 	/**
 	 * This class is used to perform the activation functionality for the plugin.
 	 */
-	class Movie_Library_Activation {
+	class Activation {
 
 		/**
 		 * This function is used to perform the activation functionality for the plugin.

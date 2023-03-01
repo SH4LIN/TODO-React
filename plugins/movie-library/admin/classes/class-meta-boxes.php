@@ -15,12 +15,12 @@ use WP_Query;
  */
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Meta_Boxes' ) ) {
+if ( ! class_exists( 'MovieLib\admin\classes\Meta_Boxes' ) ) {
 
 	/**
 	 * This class is used to create the meta boxes for the plugin.
 	 */
-	class Movie_Library_Meta_Boxes {
+	class Meta_Boxes {
 
 		/**
 		 * This function is used to add the meta boxes for the plugin.

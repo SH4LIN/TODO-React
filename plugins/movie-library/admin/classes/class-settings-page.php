@@ -13,14 +13,14 @@ namespace MovieLib\admin\classes;
  */
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Settings_Page' ) ) {
+if ( ! class_exists( 'MovieLib\admin\classes\Settings_Page' ) ) {
 	/**
 	 * This class is used to create the submenu which will give you checkbox.
 	 * Checking it will remove all the data from the database. When you uninstall the plugin.
 	 *
 	 * @version 1.0.0
 	 */
-	class Movie_Library_Settings_Page {
+	class Settings_Page {
 
 		/**
 		 * Variable parent slug.

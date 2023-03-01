@@ -2,7 +2,7 @@
 /** Main plugin file.
  *
  * @package           MovieLib
- * @author            Shalin Shah
+ * @author            rtCamp
  * @wordPress-Plugin
  * Plugin Name:       Movie Library
  * Plugin URI:        https://learn.rtcamp.com
@@ -10,7 +10,7 @@
  * Version:           1.0.0
  * Requires at least: 5.0
  * Requires PHP:      7.2
- * Author:            Shalin Shah
+ * Author:            rtCamp
  * Author URI:        https://learn.rtcamp.com
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -74,7 +74,12 @@ const MLB_SLUG = 'movie-library';
  */
 const MLB_NAME = 'Movie Library';
 
-require_once MLB_PLUGIN_DIR . 'includes/class-movie-library-autoloader.php';
+/**
+ * RT_MOVIE_SLUG
+ */
+const RT_MOVIE_SLUG = 'rt-movie';
+
+require_once MLB_PLUGIN_DIR . 'includes/class-autoloader.php';
 
 use MovieLib\includes\Movie_Library;
 

@@ -15,14 +15,21 @@ namespace MovieLib\includes;
  */
 defined( 'ABSPATH' ) || exit;
 
-use MovieLib\admin\classes\Movie_Library_Activation;
-use MovieLib\admin\classes\Movie_Library_Deactivation;
-use MovieLib\admin\classes\Movie_Library_Post_Type;
-use MovieLib\admin\classes\Movie_Library_Settings_Page;
+use MovieLib\admin\classes\Activation;
+use MovieLib\admin\classes\custom_post_types\RT_Movie;
+use MovieLib\admin\classes\custom_post_types\Rt_Person;
+use MovieLib\admin\classes\Deactivation;
+use MovieLib\admin\classes\Settings_Page;
 use MovieLib\admin\classes\Movie_Library_Save_Post;
-use MovieLib\admin\classes\Movie_Library_Shortcodes;
-use MovieLib\admin\classes\Movie_Library_Taxonomy;
-use MovieLib\admin\classes\Movie_Library_Meta_Boxes;
+use MovieLib\admin\classes\Shortcodes;
+use MovieLib\admin\classes\Meta_Boxes;
+use MovieLib\admin\classes\taxonomies\Movie_Genre;
+use MovieLib\admin\classes\taxonomies\Movie_Label;
+use MovieLib\admin\classes\taxonomies\Movie_Language;
+use MovieLib\admin\classes\taxonomies\Movie_Person;
+use MovieLib\admin\classes\taxonomies\Movie_Production_Company;
+use MovieLib\admin\classes\taxonomies\Movie_Tag;
+use MovieLib\admin\classes\taxonomies\Person_Career;
 use WP_Post;
 
 if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
@@ -66,6 +73,9 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 
 			$this->register_scripts();
 			$this->register_hooks();
+			$this->register_custom_post_types();
+			$this->register_custom_taxonomies();
+			flush_rewrite_rules();
 
 		}
 
@@ -127,11 +137,11 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 * @return void
 		 */
 		private function register_hooks(): void {
-			$movie_library_activation    = new Movie_Library_Activation();
-			$movie_library_deactivation  = new Movie_Library_Deactivation();
-			$movie_library_meta_boxes    = new Movie_Library_Meta_Boxes();
+			$movie_library_activation    = new Activation();
+			$movie_library_deactivation  = new Deactivation();
+			$movie_library_meta_boxes    = new Meta_Boxes();
 			$movie_library_save_post     = new Movie_Library_Save_Post();
-			$movie_library_settings_page = new Movie_Library_Settings_Page();
+			$movie_library_settings_page = new Settings_Page();
 
 			register_activation_hook( MLB_PLUGIN_FILE, array( $movie_library_activation, 'activate' ) );
 			register_deactivation_hook( MLB_PLUGIN_FILE, array( $movie_library_deactivation, 'deactivate' ) );
@@ -158,20 +168,58 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		}
 
 		/**
+		 * This function is used to register the custom post types.
+		 *
+		 * @return void
+		 */
+		private function register_custom_post_types(): void {
+
+			$rt_movie = new RT_Movie();
+			$rt_movie->register();
+
+			$rt_person = new Rt_Person();
+			$rt_person->register();
+
+		}
+
+		/**
+		 * This function is used to register the custom taxonomies.
+		 *
+		 * @return void
+		 */
+		private function register_custom_taxonomies(): void {
+			$rt_movie_genre = new Movie_Genre();
+			$rt_movie_genre->register();
+
+			$rt_movie_language = new Movie_Language();
+			$rt_movie_language->register();
+
+			$rt_movie_label = new Movie_Label();
+			$rt_movie_label->register();
+
+			$rt_movie_person = new Movie_Person();
+			$rt_movie_person->register();
+
+			$rt_movie_production_company = new Movie_Production_Company();
+			$rt_movie_production_company->register();
+
+			$rt_movie_tag = new Movie_Tag();
+			$rt_movie_tag->register();
+
+			$rt_person_career = new Person_Career();
+			$rt_person_career->register();
+
+		}
+
+		/**
 		 * This function is used to setup the environment for the plugin. Like regestering custom post type and custom taxonomy.
 		 *
 		 * @return void
 		 */
 		public function setup_environment(): void {
 
-			// Set up localisation.
-			$post_type = new Movie_Library_Post_Type();
-			$post_type->register_custom_post_type();
 
-			$taxonomy = new Movie_Library_Taxonomy();
-			$taxonomy->register_custom_taxonomy();
-
-			$shortcode = new Movie_Library_Shortcodes();
+			$shortcode = new Shortcodes();
 			$shortcode->register_shortcodes();
 
 		}
