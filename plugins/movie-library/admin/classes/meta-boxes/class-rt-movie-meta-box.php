@@ -11,6 +11,7 @@ use WP_Post;
 use WP_Query;
 use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
 use const MovieLib\admin\classes\custom_post_types\RT_PERSON_SLUG;
+use const MovieLib\admin\classes\taxonomies\RT_MOVIE_PERSON_SLUG;
 use const MovieLib\admin\classes\taxonomies\RT_PERSON_CAREER_SLUG;
 
 /**
@@ -333,6 +334,209 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 		}
 
 		/**
+		 * This function is used to save the rt-movie post.
+		 * First it will verify the nonce if it is set or not.
+		 * If the nonce is set then it will verify the nonce.
+		 * If the nonce is verified then it will check the expected fields are set or not.
+		 * If the expected fields are set then it will sanitize the data, validate data and save the data.
+		 * crew data are stored dynamically with the help of get_terms() function.
+		 * and for each crew data it will create shadow taxonomy term.
+		 *
+		 * @param int     $post_id The post ID.
+		 * @param WP_Post $post The post object.
+		 * @param bool    $update Whether this is an existing post being updated or not.
+		 */
+		public function save_rt_movie_post( int $post_id, WP_Post $post, bool $update ): void {
+			// Check if our nonce is set.
+			if ( ! isset( $_POST['rt_movie_meta_nonce'] ) ) {
+				return;
+			}
+
+			// Sanitize nonce.
+			$rt_movie_meta_nonce = sanitize_text_field( wp_unslash( $_POST['rt_movie_meta_nonce'] ) );
+
+			// Verify that the nonce is valid.
+			if ( ! wp_verify_nonce( $rt_movie_meta_nonce, 'rt_movie_meta_nonce' ) ) {
+				return;
+			}
+
+			/** OK, it's safe for us to save the data now. */
+
+			$rt_media_meta_box = new RT_Media_Meta_Box();
+			$rt_media_meta_box->save_rt_movie_meta_images( $post_id );
+			$rt_media_meta_box->save_rt_movie_meta_videos( $post_id );
+
+			// Get all the rt-person-career terms.
+			$rt_career_terms = get_terms(
+				array(
+					'taxonomy'   => RT_PERSON_CAREER_SLUG,
+					'hide_empty' => true,
+				)
+			);
+
+			// Setting the flag to false. If any crew data is set then it will be set to true. And if there is no crew data then it will be false.
+			$does_any_crew_exist = false;
+			$shadow_terms        = array();
+
+			// Running foreach loop for each rt-person-career term.
+			foreach ( $rt_career_terms as $rt_career_term ) {
+
+				// Creating meta key for each rt-person-career term.
+				$meta_key = sanitize_key( 'rt-movie-meta-crew-' . $rt_career_term->slug );
+
+				// Checking if meta ke is available in $_POST.
+				if ( isset( $_POST[ $meta_key ] ) ) {
+
+					// Setting the flag to true.
+					$does_any_crew_exist = true;
+
+					// Getting the crew data from $_POST.
+					$rt_movie_meta_crew_data = sanitize_meta( $meta_key, wp_unslash( $_POST[ $meta_key ] ), RT_MOVIE_SLUG );
+
+					// Checking if the crew data is array or not.
+					if ( is_array( $rt_movie_meta_crew_data ) && count( $rt_movie_meta_crew_data ) > 0 ) {
+
+						// Creating an empty array to store the shadow taxonomy term.
+						$terms = array();
+
+						// Running foreach loop for each crew data.
+						foreach ( $rt_movie_meta_crew_data as $rt_movie_meta_crew ) {
+
+							// Sanitizing the crew data.
+							$rt_movie_meta_crew = sanitize_text_field( $rt_movie_meta_crew );
+
+							// Checking if the crew data is empty or not and if the crew data is numeric or not.
+							if ( ! empty( $rt_movie_meta_crew ) && is_numeric( $rt_movie_meta_crew ) ) {
+
+								if ( 'rt-movie-meta-crew-actor' === $meta_key ) {
+
+									$term = array();
+
+									if ( isset( $_POST[ $rt_movie_meta_crew ] ) ) {
+
+										$rt_movie_meta_crew_character_name = sanitize_text_field( wp_unslash( $_POST[ $rt_movie_meta_crew ] ) );
+										$term['character_name']            = $rt_movie_meta_crew_character_name;
+
+									}
+
+									if ( isset( $_POST[ $rt_movie_meta_crew . '-name' ] ) ) {
+
+										$rt_movie_meta_crew_person_name = sanitize_text_field( wp_unslash( $_POST[ $rt_movie_meta_crew . '-name' ] ) );
+										$term['person_name']            = $rt_movie_meta_crew_person_name;
+
+									}
+
+									$term['person_id'] = (int) $rt_movie_meta_crew;
+									$terms[]           = $term;
+
+								} else {
+
+									$terms[]['person_id'] = (int) $rt_movie_meta_crew;
+
+								}
+
+								$shadow_terms[] = $rt_movie_meta_crew;
+
+							}
+						}
+
+						// Updating the post meta with the shadow taxonomy term.
+						$this->set_object_terms( $post_id, $terms, $meta_key );
+
+					} else {
+
+						if ( ! empty( $rt_movie_meta_crew_data ) && is_numeric( $rt_movie_meta_crew_data ) ) {
+
+							// Sanitize user input.
+							$rt_movie_meta_crew_data = sanitize_text_field( $rt_movie_meta_crew_data );
+							$shadow_terms[]          = $rt_movie_meta_crew_data;
+
+							$this->set_object_terms( $post_id, array( $rt_movie_meta_crew_data ), $meta_key );
+
+						}
+					}
+				} else {
+
+					// If the meta key is not available in $_POST then it will delete the post meta.
+					update_post_meta( $post_id, $meta_key, array() );
+
+				}
+			}
+
+			// If there is no crew data then it will delete the term_relationships.
+			wp_delete_object_term_relationships( $post_id, RT_MOVIE_PERSON_SLUG );
+
+			if ( $does_any_crew_exist ) {
+
+				wp_set_object_terms( $post_id, $shadow_terms, RT_MOVIE_PERSON_SLUG, true );
+
+			}
+
+			// Checking if rt-movie-meta-basic-rating is available in $_POST.
+			if ( isset( $_POST['rt-movie-meta-basic-rating'] ) ) {
+
+				// Sanitize user input.
+				$rt_movie_meta_basic_rating = sanitize_text_field( wp_unslash( $_POST['rt-movie-meta-basic-rating'] ) );
+
+				// If value is not numeric than doing explicit type casting.
+				if ( ! is_numeric( $rt_movie_meta_basic_rating ) ) {
+
+					$rt_movie_meta_basic_rating = (float) $rt_movie_meta_basic_rating;
+
+				}
+
+				// If value is less than 0 than setting it to 0.
+				if ( $rt_movie_meta_basic_rating < 0 ) {
+
+					$rt_movie_meta_basic_rating = 0;
+
+				}
+
+				// If value is greater than 10 than setting it to 10.
+				if ( $rt_movie_meta_basic_rating > 10 ) {
+
+					$rt_movie_meta_basic_rating = 10;
+
+				}
+
+				// Update the meta field in the database.
+				update_post_meta( $post_id, 'rt-movie-meta-basic-rating', $rt_movie_meta_basic_rating );
+
+			}
+
+			// Checking if rt-movie-meta-basic-runtime is available in $_POST.
+			if ( isset( $_POST['rt-movie-meta-basic-runtime'] ) ) {
+
+				// Sanitize user input.
+				$rt_movie_meta_basic_runtime = sanitize_text_field( wp_unslash( $_POST['rt-movie-meta-basic-runtime'] ) );
+
+				// If value is not numeric than doing explicit type casting.
+				if ( ! is_numeric( $rt_movie_meta_basic_runtime ) ) {
+
+					$rt_movie_meta_basic_runtime = (int) $rt_movie_meta_basic_runtime;
+
+				}
+
+				if ( $rt_movie_meta_basic_runtime > 0 && $rt_movie_meta_basic_runtime <= 1000 ) {
+
+					update_post_meta( $post_id, 'rt-movie-meta-basic-runtime', $rt_movie_meta_basic_runtime );
+
+				}
+			}
+
+			// Checking if rt-movie-meta-basic-release-date is available in $_POST.
+			if ( isset( $_POST['rt-movie-meta-basic-release-date'] ) ) {
+
+				// Sanitize user input.
+				$rt_movie_meta_basic_release_date = sanitize_text_field( wp_unslash( $_POST['rt-movie-meta-basic-release-date'] ) );
+
+				// Update the meta field in the database.
+				update_post_meta( $post_id, 'rt-movie-meta-basic-release-date', $rt_movie_meta_basic_release_date );
+
+			}
+		}
+
+		/**
 		 * This function is used to get the person data.
 		 *
 		 * @param object $rt_career_term The career term object.
@@ -398,6 +602,21 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 			}
 
 			return $un_shifted_array;
+
+		}
+
+		/**
+		 * This function is used to update the post meta and set the object terms
+		 *
+		 * @param int    $post_id Post ID.
+		 * @param mixed  $terms  Terms to be stored.
+		 * @param string $key   Meta key.
+		 *
+		 * @return void
+		 */
+		private function set_object_terms( int $post_id, $terms, string $key ): void {
+
+			update_post_meta( $post_id, $key, $terms );
 
 		}
 

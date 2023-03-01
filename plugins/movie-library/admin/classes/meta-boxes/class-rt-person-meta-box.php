@@ -214,5 +214,107 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 
 		}
 
+		/**
+		 * This function is used to save the rt-person post.
+		 * First it will verify the nonce if it is set or not.
+		 * If the nonce is set then it will verify the nonce.
+		 * If the nonce is verified then it will check the expected fields are set or not.
+		 * If the expected fields are set then it will sanitize the data, validate data and save the data.
+		 *
+		 * @param int     $post_id The post ID.
+		 * @param WP_Post $post The post object.
+		 * @param bool    $update Whether this is an existing post being updated or not.
+		 */
+		public function save_rt_person_post( int $post_id, WP_Post $post, bool $update ): void {
+
+			// Check if our nonce is set.
+			if ( ! isset( $_POST['rt_person_meta_nonce'] ) ) {
+				return;
+			}
+
+			// Sanitize nonce.
+			$rt_person_meta_nonce = sanitize_text_field( wp_unslash( $_POST['rt_person_meta_nonce'] ) );
+
+			// Verify that the nonce is valid.
+			if ( ! wp_verify_nonce( $rt_person_meta_nonce, 'rt_person_meta_nonce' ) ) {
+				return;
+			}
+
+			/** OK, it's safe for us to save the data now. */
+
+			$rt_media_meta_box = new RT_Media_Meta_Box();
+			$rt_media_meta_box->save_rt_movie_meta_images( $post_id );
+			$rt_media_meta_box->save_rt_movie_meta_videos( $post_id );
+
+			// Check if rt-person-meta-basic-birth-date is set. If it is set then sanitize the data and save it.
+			if ( isset( $_POST['rt-person-meta-basic-birth-date'] ) ) {
+
+				$rt_person_meta_basic_birth_date = sanitize_text_field( wp_unslash( $_POST['rt-person-meta-basic-birth-date'] ) );
+
+				update_post_meta( $post_id, 'rt-person-meta-basic-birth-date', $rt_person_meta_basic_birth_date );
+
+			}
+
+			// Check if rt-person-meta-basic-birth-place is set. If it is set then sanitize the data and save it.
+			if ( isset( $_POST['rt-person-meta-basic-birth-place'] ) ) {
+
+				$rt_person_meta_basic_birth_place = sanitize_text_field( wp_unslash( $_POST['rt-person-meta-basic-birth-place'] ) );
+
+				if ( ! is_numeric( $rt_person_meta_basic_birth_place ) ) {
+
+					update_post_meta( $post_id, 'rt-person-meta-basic-birth-place', $rt_person_meta_basic_birth_place );
+
+				}
+			}
+
+			// Check if rt-person-meta-social-twitter url is set. If it is set then sanitize url the data validate the data and save it.
+			if ( isset( $_POST['rt-person-meta-social-twitter'] ) ) {
+
+				$rt_person_meta_social_twitter = filter_var( wp_unslash( $_POST['rt-person-meta-social-twitter'] ), FILTER_SANITIZE_URL );
+
+				if ( filter_var( $rt_person_meta_social_twitter, FILTER_VALIDATE_URL ) ) {
+
+					update_post_meta( $post_id, 'rt-person-meta-social-twitter', $rt_person_meta_social_twitter );
+
+				}
+			}
+
+			// Check if rt-person-meta-social-facebook url is set. If it is set then sanitize url the data validate the data and save it.
+			if ( isset( $_POST['rt-person-meta-social-facebook'] ) ) {
+
+				$rt_person_meta_social_facebook = filter_var( wp_unslash( $_POST['rt-person-meta-social-facebook'] ), FILTER_SANITIZE_URL );
+
+				if ( filter_var( $rt_person_meta_social_facebook, FILTER_VALIDATE_URL ) ) {
+
+					update_post_meta( $post_id, 'rt-person-meta-social-facebook', $rt_person_meta_social_facebook );
+
+				}
+			}
+
+			// Check if rt-person-meta-social-instagram url is set. If it is set then sanitize url the data validate the data and save it.
+			if ( isset( $_POST['rt-person-meta-social-instagram'] ) ) {
+
+				$rt_person_meta_social_instagram = filter_var( wp_unslash( $_POST['rt-person-meta-social-instagram'] ), FILTER_SANITIZE_URL );
+
+				if ( filter_var( $rt_person_meta_social_instagram, FILTER_VALIDATE_URL ) ) {
+
+					update_post_meta( $post_id, 'rt-person-meta-social-instagram', $rt_person_meta_social_instagram );
+
+				}
+			}
+
+			// Check if rt-person-meta-social-web url is set. If it is set then sanitize url the data validate the data and save it.
+			if ( isset( $_POST['rt-person-meta-social-web'] ) ) {
+
+				$rt_person_meta_social_web = filter_var( wp_unslash( $_POST['rt-person-meta-social-web'] ), FILTER_SANITIZE_URL );
+
+				if ( filter_var( $rt_person_meta_social_web, FILTER_VALIDATE_URL ) ) {
+
+					update_post_meta( $post_id, 'rt-person-meta-social-web', $rt_person_meta_social_web );
+
+				}
+			}
+		}
+
 	}
 }

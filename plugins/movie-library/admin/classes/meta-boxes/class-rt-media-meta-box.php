@@ -257,5 +257,172 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 			<?php
 		}
 
+		/**
+		 * This function is used to save the rt-movie-meta-images meta field in the database.
+		 * This function will have two array one for selected videos and another for uploaded images.
+		 * If the selected images array is not empty then it will update the meta field in the database.
+		 * If the uploaded images array is not empty then it will update the meta field in the database.
+		 * If both the arrays are empty then it will delete the meta field from the database.
+		 *
+		 * @param int $post_id Post ID.
+		 *
+		 * @return void
+		 */
+		public function save_rt_movie_meta_images( int $post_id ): void {
+
+			// Check if our nonce is set.
+			if ( ! isset( $_POST['rt_media_meta_nonce'] ) ) {
+				return;
+			}
+
+			// Sanitize nonce.
+			$rt_movie_meta_nonce = sanitize_text_field( wp_unslash( $_POST['rt_media_meta_nonce'] ) );
+
+			// Verify that the nonce is valid.
+			if ( ! wp_verify_nonce( $rt_movie_meta_nonce, 'rt_media_meta_nonce' ) ) {
+				return;
+			}
+
+			/** OK, it's safe for us to save the data now. */
+
+			$rt_movie_meta_selected_images = array();
+			$rt_movie_meta_uploaded_images = array();
+
+			// Checking if rt-movie-meta-images is available in $_POST.
+			if ( isset( $_POST['rt-media-meta-selected-images'] ) && ! empty( $_POST['rt-media-meta-selected-images'] ) ) {
+
+				// Sanitize user input.
+				$rt_movie_meta_sanitized_selected_images = sanitize_text_field( wp_unslash( $_POST['rt-media-meta-selected-images'] ) );
+
+				$rt_movie_meta_selected_images = json_decode( $rt_movie_meta_sanitized_selected_images, false );
+
+			}
+
+			if ( isset( $_POST['rt-media-meta-uploaded-images'] ) && ! empty( $_POST['rt-media-meta-uploaded-images'] ) ) {
+
+				// Sanitize user input.
+				$rt_movie_meta_sanitized_uploaded_images = sanitize_text_field( wp_unslash( $_POST['rt-media-meta-uploaded-images'] ) );
+
+				$rt_movie_meta_uploaded_images = json_decode( $rt_movie_meta_sanitized_uploaded_images, false );
+
+			}
+
+			if ( ! is_array( $rt_movie_meta_selected_images ) ) {
+
+				$rt_movie_meta_selected_images = array();
+
+			}
+
+			if ( ! is_array( $rt_movie_meta_uploaded_images ) ) {
+
+				$rt_movie_meta_uploaded_images = array();
+
+			}
+
+			$rt_media_meta_images = array_unique( array_merge( $rt_movie_meta_selected_images, $rt_movie_meta_uploaded_images ) );
+
+			foreach ( $rt_media_meta_images as $key => $value ) {
+
+				if ( ! wp_get_attachment_image_url( $value ) ) {
+
+					unset( $rt_media_meta_images[ $key ] );
+
+				}
+			}
+			if ( empty( $rt_media_meta_images ) ) {
+
+				delete_post_meta( $post_id, 'rt-media-meta-images' );
+
+			} else {
+
+				update_post_meta( $post_id, 'rt-media-meta-images', $rt_media_meta_images );
+
+			}
+
+		}
+
+		/**
+		 * This function is used to save the rt-movie-meta-videos meta field in the database.
+		 * This function will have two array one for selected videos and another for uploaded videos.
+		 * If the selected videos array is not empty then it will update the meta field in the database.
+		 * If the uploaded videos array is not empty then it will update the meta field in the database.
+		 * If both the arrays are empty then it will delete the meta field from the database.
+		 *
+		 * @param int $post_id The post id.
+		 *
+		 * @return void
+		 */
+		public function save_rt_movie_meta_videos( int $post_id ): void {
+
+			// Check if our nonce is set.
+			if ( ! isset( $_POST['rt_media_meta_nonce'] ) ) {
+				return;
+			}
+
+			// Sanitize nonce.
+			$rt_movie_meta_nonce = sanitize_text_field( wp_unslash( $_POST['rt_media_meta_nonce'] ) );
+
+			// Verify that the nonce is valid.
+			if ( ! wp_verify_nonce( $rt_movie_meta_nonce, 'rt_media_meta_nonce' ) ) {
+				return;
+			}
+
+			/** OK, it's safe for us to save the data now. */
+
+			$rt_movie_meta_selected_videos = array();
+			$rt_movie_meta_uploaded_videos = array();
+
+			// Checking if rt-movie-meta-images is available in $_POST.
+			if ( isset( $_POST['rt-media-meta-selected-videos'] ) && ! empty( $_POST['rt-media-meta-selected-videos'] ) ) {
+
+				// Sanitize user input.
+				$rt_movie_meta_sanitized_selected_videos = sanitize_text_field( wp_unslash( $_POST['rt-media-meta-selected-videos'] ) );
+
+				$rt_movie_meta_selected_videos = json_decode( $rt_movie_meta_sanitized_selected_videos, false );
+
+			}
+
+			if ( isset( $_POST['rt-media-meta-uploaded-videos'] ) && ! empty( $_POST['rt-media-meta-uploaded-videos'] ) ) {
+
+				// Sanitize user input.
+				$rt_movie_meta_sanitized_uploaded_videos = sanitize_text_field( wp_unslash( $_POST['rt-media-meta-uploaded-videos'] ) );
+
+				$rt_movie_meta_uploaded_videos = json_decode( $rt_movie_meta_sanitized_uploaded_videos, false );
+
+			}
+
+			if ( ! is_array( $rt_movie_meta_selected_videos ) ) {
+
+				$rt_movie_meta_selected_videos = array();
+
+			}
+			if ( ! is_array( $rt_movie_meta_uploaded_videos ) ) {
+
+				$rt_movie_meta_uploaded_videos = array();
+
+			}
+
+			$rt_media_meta_videos = array_unique( array_merge( $rt_movie_meta_selected_videos, $rt_movie_meta_uploaded_videos ) );
+
+			foreach ( $rt_media_meta_videos as $key => $video ) {
+
+				if ( ! wp_get_attachment_url( $video ) ) {
+
+					unset( $rt_media_meta_videos[ $key ] );
+
+				}
+			}
+
+			if ( empty( $rt_media_meta_videos ) ) {
+
+				delete_post_meta( $post_id, 'rt-media-meta-videos' );
+
+			} else {
+
+				update_post_meta( $post_id, 'rt-media-meta-videos', $rt_media_meta_videos );
+
+			}
+		}
+
 	}
 }
