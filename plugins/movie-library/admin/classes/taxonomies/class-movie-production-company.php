@@ -7,17 +7,12 @@
 
 namespace MovieLib\admin\classes\taxonomies;
 
-use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
+use MovieLib\admin\classes\custom_post_types\RT_Movie;
 
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
-
-/**
- * RT_MOVIE_PRODUCTION_COMPANY_SLUG
- */
-const RT_MOVIE_PRODUCTION_COMPANY_SLUG = 'rt-movie-production-company';
 
 if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Production_Company' ) ) {
 
@@ -25,6 +20,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Production_Company
 	 * This class is used to register rt-movie-production-company taxonomy.
 	 */
 	class Movie_Production_Company {
+
+		/**
+		 * RT_MOVIE_PRODUCTION_COMPANY_SLUG
+		 */
+		const SLUG = 'rt-movie-production-company';
 
 		/**
 		 * Variable instance.
@@ -62,8 +62,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Production_Company
 		 */
 		public function register():void {
 			$rt_movie_production_company = array(
-				'taxonomy'  => RT_MOVIE_PRODUCTION_COMPANY_SLUG,
-				'post_type' => array( RT_MOVIE_SLUG ),
+				'taxonomy'  => self::SLUG,
+				'post_type' => array( RT_Movie::SLUG ),
 				'args'      => array(
 					'labels'             => array(
 						'name'                       => _x(

@@ -7,11 +7,12 @@
 
 namespace MovieLib\admin\classes;
 
+use MovieLib\admin\classes\custom_post_types\RT_Movie;
+use MovieLib\admin\classes\custom_post_types\RT_Person;
 use WP_Post;
 use MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box;
-use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
-use const MovieLib\admin\classes\custom_post_types\RT_PERSON_SLUG;
+
 
 
 /**
@@ -75,7 +76,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 			}
 
 			// Check is post type is rt-movie or rt-person.
-			if ( RT_MOVIE_SLUG === $post->post_type ) {
+			if ( RT_Movie::SLUG === $post->post_type ) {
 				// Check the user's permissions.
 
 				if ( ! current_user_can( 'edit_post', $post_id ) ) {
@@ -86,7 +87,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 					$rt_movie_meta_box->save_rt_movie_post( $post_id, $post, $update );
 
 				}
-			} elseif ( RT_PERSON_SLUG === $post->post_type ) {
+			} elseif ( RT_Person::SLUG === $post->post_type ) {
 
 				// Check the user's permissions.
 				if ( ! current_user_can( 'edit_post', $post_id ) ) {

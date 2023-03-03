@@ -31,8 +31,6 @@ use MovieLib\admin\classes\taxonomies\Movie_Production_Company;
 use MovieLib\admin\classes\taxonomies\Movie_Tag;
 use MovieLib\admin\classes\taxonomies\Person_Career;
 use WP_Post;
-use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
-use const MovieLib\admin\classes\custom_post_types\RT_PERSON_SLUG;
 
 if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 	/**
@@ -270,7 +268,7 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		public function enqueue_custom_label_character_script(): void {
 
-			if ( get_post_type() === RT_MOVIE_SLUG ) {
+			if ( get_post_type() === RT_Movie::SLUG ) {
 
 				wp_enqueue_script( 'movie-library-custom-label' );
 				wp_set_script_translations( 'movie-library-custom-label', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
@@ -291,12 +289,12 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 
 			$post_type = get_post_type();
 
-			if ( RT_MOVIE_SLUG === $post_type ) {
+			if ( RT_Movie::SLUG === $post_type ) {
 
 				wp_enqueue_script( 'movie-library-rt-movie-validation' );
 				wp_set_script_translations( 'movie-library-rt-movie-validation', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
 
-			} elseif ( RT_PERSON_SLUG === $post_type ) {
+			} elseif ( RT_Person::SLUG === $post_type ) {
 
 				wp_enqueue_script( 'movie-library-rt-person-validation' );
 				wp_set_script_translations( 'movie-library-rt-person-validation', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
@@ -348,11 +346,11 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		public function change_title_text( $title, $post ): string {
 
-			if ( RT_MOVIE_SLUG === $post->post_type ) {
+			if ( RT_Movie::SLUG === $post->post_type ) {
 
 				$title = __( 'Title', 'movie-library' );
 
-			} elseif ( RT_PERSON_SLUG === $post->post_type ) {
+			} elseif ( RT_Person::SLUG === $post->post_type ) {
 
 				$title = __( 'Name', 'movie-library' );
 
@@ -374,11 +372,11 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		public function change_post_content_text( $title, $post ): string {
 
-			if ( RT_MOVIE_SLUG === $post->post_type ) {
+			if ( RT_Movie::SLUG === $post->post_type ) {
 
 				$title = __( 'Plot', 'movie-library' );
 
-			} elseif ( RT_PERSON_SLUG === $post->post_type ) {
+			} elseif ( RT_Person::SLUG === $post->post_type ) {
 
 				$title = __( 'Biography', 'movie-library' );
 

@@ -7,10 +7,10 @@
 
 namespace MovieLib\admin\classes\meta_boxes;
 
+use MovieLib\admin\classes\custom_post_types\RT_Movie;
+use MovieLib\admin\classes\custom_post_types\RT_Person;
 use WP_Post;
 use WP_Query;
-use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
-use const MovieLib\admin\classes\custom_post_types\RT_PERSON_SLUG;
 use const MovieLib\admin\classes\taxonomies\RT_MOVIE_PERSON_SLUG;
 use const MovieLib\admin\classes\taxonomies\RT_PERSON_CAREER_SLUG;
 
@@ -19,15 +19,22 @@ use const MovieLib\admin\classes\taxonomies\RT_PERSON_CAREER_SLUG;
  */
 defined( 'ABSPATH' ) || exit;
 
-const RT_MOVIE_META_BASIC_SLUG = 'rt-movie-meta-basic';
-const RT_MOVIE_META_CREW_SLUG  = 'rt-movie-meta-crew';
-
 if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 
 	/**
 	 * This class is used to create all the meta-boxes for rt-movie post type.
 	 */
 	class RT_Movie_Meta_Box {
+
+		/**
+		 * RT_MOVIE_META_BASIC_SLUG
+		 */
+		const MOVIE_META_BASIC_SLUG = 'rt-movie-meta-basic';
+
+		/**
+		 * RT_MOVIE_META_CREW_SLUG
+		 */
+		const MOVIE_META_CREW_SLUG = 'rt-movie-meta-crew';
 
 		/**
 		 * Variable instance.
@@ -66,19 +73,19 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 		public function create_meta_box():void {
 
 			add_meta_box(
-				RT_MOVIE_META_BASIC_SLUG,
+				self::MOVIE_META_BASIC_SLUG,
 				__( 'Basic', 'movie-library' ),
 				array( $this, 'rt_movie_meta_basic' ),
-				array( RT_MOVIE_SLUG ),
+				array( RT_Movie::SLUG ),
 				'side',
 				'high'
 			);
 
 				add_meta_box(
-					RT_MOVIE_META_CREW_SLUG,
+					self::MOVIE_META_CREW_SLUG,
 					__( 'Crew', 'movie-library' ),
 					array( $this, 'rt_movie_meta_crew' ),
-					array( RT_MOVIE_SLUG ),
+					array( RT_Movie::SLUG ),
 					'side',
 					'high'
 				);
@@ -420,7 +427,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 					$does_any_crew_exist = true;
 
 					// Getting the crew data from $_POST.
-					$rt_movie_meta_crew_data = sanitize_meta( $meta_key, wp_unslash( $_POST[ $meta_key ] ), RT_MOVIE_SLUG );
+					$rt_movie_meta_crew_data = sanitize_meta( $meta_key, wp_unslash( $_POST[ $meta_key ] ), RT_Movie::SLUG );
 
 					// Checking if the crew data is array or not.
 					if ( is_array( $rt_movie_meta_crew_data ) && count( $rt_movie_meta_crew_data ) > 0 ) {
@@ -578,7 +585,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 
 			$rt_person_query = new WP_Query(
 				array(
-					'post_type' => RT_PERSON_SLUG,
+					'post_type' => RT_Person::SLUG,
 					'per_page'  => 10,
 					'tax_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 									array(

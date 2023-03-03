@@ -12,17 +12,17 @@ namespace MovieLib\admin\classes\custom_post_types;
  */
 defined( 'ABSPATH' ) || exit;
 
-/**
- * RT_MOVIE_SLUG
- */
-const RT_MOVIE_SLUG = 'rt-movie';
-
 if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 
 	/**
 	 * This class is used to create rt-movie custom post type.
 	 */
 	class RT_Movie {
+
+		/**
+		 * RT_MOVIE_SLUG
+		 */
+		const SLUG = 'rt-movie';
 
 		/**
 		 * Variable instance.
@@ -101,7 +101,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 				'show_in_rest'       => true,
 			);
 
-			register_post_type( RT_MOVIE_SLUG, $args );
+			register_post_type( self::SLUG, $args );
 		}
 	}
 }

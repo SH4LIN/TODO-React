@@ -7,16 +7,13 @@
 
 namespace MovieLib\admin\classes\meta_boxes;
 
+use MovieLib\admin\classes\custom_post_types\RT_Person;
 use WP_Post;
-use const MovieLib\admin\classes\custom_post_types\RT_PERSON_SLUG;
 
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
-
-const RT_PERSON_META_BASIC_SLUG  = 'rt-person-meta-basic';
-const RT_PERSON_META_SOCIAL_SLUG = 'rt-person-meta-social';
 
 if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) {
 
@@ -24,6 +21,16 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 	 * This class is used to create all the meta-boxes for rt-person post type.
 	 */
 	class RT_Person_Meta_Box {
+
+		/**
+		 * RT_PERSON_META_BASIC_SLUG
+		 */
+		const PERSON_META_BASIC_SLUG = 'rt-person-meta-basic';
+
+		/**
+		 * RT_PERSON_META_SOCIAL_SLUG
+		 */
+		const PERSON_META_SOCIAL_SLUG = 'rt-person-meta-social';
 
 		/**
 		 * Variable instance.
@@ -62,19 +69,19 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 		public function create_meta_box():void {
 
 			add_meta_box(
-				RT_PERSON_META_BASIC_SLUG,
+				self::PERSON_META_BASIC_SLUG,
 				__( 'Basic', 'movie-library' ),
 				array( $this, 'rt_person_meta_basic' ),
-				array( RT_PERSON_SLUG ),
+				array( RT_Person::SLUG ),
 				'side',
 				'high'
 			);
 
 			add_meta_box(
-				RT_PERSON_META_SOCIAL_SLUG,
+				self::PERSON_META_SOCIAL_SLUG,
 				__( 'Social', 'movie-library' ),
 				array( $this, 'rt_person_meta_social' ),
-				array( RT_PERSON_SLUG ),
+				array( RT_Person::SLUG ),
 				'side',
 				'high'
 			);

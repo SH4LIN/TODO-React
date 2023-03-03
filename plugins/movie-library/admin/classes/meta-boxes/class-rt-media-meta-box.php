@@ -7,17 +7,14 @@
 
 namespace MovieLib\admin\classes\meta_boxes;
 
+use MovieLib\admin\classes\custom_post_types\RT_Movie;
+use MovieLib\admin\classes\custom_post_types\RT_Person;
 use WP_Post;
-use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
-use const MovieLib\admin\classes\custom_post_types\RT_PERSON_SLUG;
 
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
-
-const RT_MEDIA_META_IMAGES_SLUG = 'rt-media-meta-images';
-const RT_MEDIA_META_VIDEOS_SLUG = 'rt-media-meta-videos';
 
 if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 
@@ -25,6 +22,16 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 	 * This class is used to create all media meta-boxes for rt-movie and rt-person post type.
 	 */
 	class RT_Media_Meta_Box {
+
+		/**
+		 * RT_MEDIA_META_IMAGES_SLUG
+		 */
+		const IMAGES_SLUG = 'rt-media-meta-images';
+
+		/**
+		 * RT_MEDIA_META_VIDEOS_SLUG
+		 */
+		const VIDEOS_SLUG = 'rt-media-meta-videos';
 
 		/**
 		 * Variable instance.
@@ -63,19 +70,19 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 		public function create_meta_box():void {
 
 			add_meta_box(
-				RT_MEDIA_META_IMAGES_SLUG,
+				self::IMAGES_SLUG,
 				__( 'Photos', 'movie-library' ),
 				array( $this, 'rt_media_meta_images' ),
-				array( RT_MOVIE_SLUG, RT_PERSON_SLUG ),
+				array( RT_Movie::SLUG, RT_Person::SLUG ),
 				'side',
 				'high'
 			);
 
 			add_meta_box(
-				RT_MEDIA_META_VIDEOS_SLUG,
+				self::VIDEOS_SLUG,
 				__( 'Videos', 'movie-library' ),
 				array( $this, 'rt_media_meta_videos' ),
-				array( RT_MOVIE_SLUG, RT_PERSON_SLUG ),
+				array( RT_Movie::SLUG, RT_Person::SLUG ),
 				'side',
 				'high'
 			);

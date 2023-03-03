@@ -7,17 +7,12 @@
 
 namespace MovieLib\admin\classes\taxonomies;
 
-use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
+use MovieLib\admin\classes\custom_post_types\RT_Movie;
 
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
-
-/**
- * RT_MOVIE_PERSON_SLUG
- */
-const RT_MOVIE_PERSON_SLUG = '_rt-movie-person';
 
 if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Person' ) ) {
 
@@ -25,6 +20,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Person' ) ) {
 	 * This class is used to register rt-movie-person shadow taxonomy.
 	 */
 	class Movie_Person {
+
+		/**
+		 * RT_MOVIE_PERSON_SLUG
+		 */
+		const SLUG = '_rt-movie-person';
 
 		/**
 		 * Variable instance.
@@ -62,8 +62,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Person' ) ) {
 		 */
 		public function register():void {
 			$rt_movie_person = array(
-				'taxonomy'  => RT_MOVIE_PERSON_SLUG,
-				'post_type' => array( RT_MOVIE_SLUG ),
+				'taxonomy'  => self::SLUG,
+				'post_type' => array( RT_Movie::SLUG ),
 				'args'      => array(
 					'label'              => __( 'Internal Markers', 'movie-library' ),
 					'hierarchical'       => false,

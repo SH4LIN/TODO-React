@@ -7,17 +7,12 @@
 
 namespace MovieLib\admin\classes\taxonomies;
 
-use const MovieLib\admin\classes\custom_post_types\RT_PERSON_SLUG;
+use MovieLib\admin\classes\custom_post_types\RT_Person;
 
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
-
-/**
- * RT_MOVIE_TAG_SLUG
- */
-const RT_PERSON_CAREER_SLUG = 'rt-person-career';
 
 if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Person_Career' ) ) {
 
@@ -25,6 +20,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Person_Career' ) ) {
 	 * This class is used to register rt-person-career taxonomy.
 	 */
 	class Person_Career {
+
+		/**
+		 * RT_MOVIE_TAG_SLUG
+		 */
+		const SLUG = 'rt-person-career';
 
 		/**
 		 * Variable instance.
@@ -62,8 +62,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Person_Career' ) ) {
 		 */
 		public function register(): void {
 			$rt_person_career = array(
-				'taxonomy'  => RT_PERSON_CAREER_SLUG,
-				'post_type' => array( RT_PERSON_SLUG ),
+				'taxonomy'  => self::SLUG,
+				'post_type' => array( RT_Person::SLUG ),
 				'args'      => array(
 					'labels'             => array(
 						'name'                       => _x( 'Careers', 'taxonomy general name', 'movie-library' ),

@@ -12,17 +12,17 @@ namespace MovieLib\admin\classes\custom_post_types;
  */
 defined( 'ABSPATH' ) || exit;
 
-/**
- * RT_PERSON_SLUG
- */
-const RT_PERSON_SLUG = 'rt-person';
-
 if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Person' ) ) {
 
 	/**
 	 * This class is used to create rt-person custom post type.
 	 */
 	class RT_Person {
+
+		/**
+		 * RT_PERSON_SLUG
+		 */
+		const SLUG = 'rt-person';
 
 		/**
 		 * Variable instance.
@@ -102,7 +102,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Person' ) ) {
 
 			);
 
-			register_post_type( RT_PERSON_SLUG, $args );
+			register_post_type( self::SLUG, $args );
 
 		}
 	}
