@@ -38,7 +38,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 		 *
 		 * @return void
 		 */
-		public function save_post( int $post_id, WP_Post $post, bool $update ): void {
+		public function save_custom_post( int $post_id, WP_Post $post, bool $update ): void {
 
 			if ( wp_is_post_autosave( $post_id ) || wp_is_post_revision( $post_id ) ) {
 				return;

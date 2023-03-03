@@ -15,10 +15,8 @@ namespace MovieLib\includes;
  */
 defined( 'ABSPATH' ) || exit;
 
-use MovieLib\admin\classes\Activation;
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\custom_post_types\Rt_Person;
-use MovieLib\admin\classes\Deactivation;
 use MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box;
@@ -149,13 +147,8 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 * @return void
 		 */
 		private function register_hooks(): void {
-			$movie_library_activation    = new Activation();
-			$movie_library_deactivation  = new Deactivation();
 			$movie_library_save_post     = new Movie_Library_Save_Post();
 			$movie_library_settings_page = new Settings_Page();
-
-			register_activation_hook( MLB_PLUGIN_FILE, array( $movie_library_activation, 'activate' ) );
-			register_deactivation_hook( MLB_PLUGIN_FILE, array( $movie_library_deactivation, 'deactivate' ) );
 
 			add_action( 'init', array( $this, 'setup_environment' ) );
 			add_action( 'plugins_loaded', array( $this, 'load_plugin_text_domain' ) );
@@ -163,9 +156,9 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_image_video_upload_script' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_custom_label_character_script' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_validation_script' ) );
-			add_action( 'wp_enqueue_scripts', array( $this, 'wp_enqueue_scripts' ) );
-			add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
-			add_action( 'save_post', array( $movie_library_save_post, 'save_post' ), 10, 3 );
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_scripts' ) );
+			add_action( 'add_meta_boxes', array( $this, 'add_custom_meta_boxes' ) );
+			add_action( 'save_post', array( $movie_library_save_post, 'save_custom_post' ), 10, 3 );
 			add_action(
 				'admin_menu',
 				array(
@@ -317,7 +310,7 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 *
 		 * @return void
 		 */
-		public function wp_enqueue_scripts(): void {
+		public function enqueue_frontend_scripts(): void {
 
 			wp_enqueue_style( 'movie-library-frontend', MLB_PLUGIN_URL . 'public/css/movie-library-frontend.css', array(), MLB_PLUGIN_VERSION );
 			wp_enqueue_script( 'movie-library-frontend', MLB_PLUGIN_URL . 'public/js/movie-library-frontend.js', array(), MLB_PLUGIN_VERSION, true );
@@ -329,7 +322,7 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 *
 		 * @return void
 		 */
-		public function add_meta_boxes(): void {
+		public function add_custom_meta_boxes(): void {
 
 			$rt_movie_meta_box = new RT_Movie_Meta_Box();
 			$rt_movie_meta_box->create_meta_box();
