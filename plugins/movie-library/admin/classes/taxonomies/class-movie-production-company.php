@@ -27,6 +27,35 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Production_Company
 	class Movie_Production_Company {
 
 		/**
+		 * Variable instance.
+		 *
+		 * @var ?Movie_Production_Company $instance The single instance of the class.
+		 */
+		protected static ?Movie_Production_Company $instance = null;
+
+		/**
+		 *  Main Movie_Production_Company Instance.
+		 *  Ensures only one instance of Movie_Production_Company is loaded or can be loaded.
+		 *
+		 * @return Movie_Production_Company - Main instance.
+		 */
+		public static function instance(): Movie_Production_Company {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * Movie_Production_Company Constructor.
+		 */
+		private function __construct() {}
+
+		/**
 		 * This function is used to register rt-movie-production-company taxonomy.
 		 *
 		 * @return void

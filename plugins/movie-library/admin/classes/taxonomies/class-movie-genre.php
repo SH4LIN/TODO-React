@@ -27,6 +27,35 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Genre' ) ) {
 	class Movie_Genre {
 
 		/**
+		 * Variable instance.
+		 *
+		 * @var ?Movie_Genre $instance The single instance of the class.
+		 */
+		protected static ?Movie_Genre $instance = null;
+
+		/**
+		 *  Main Movie_Genre Instance.
+		 *  Ensures only one instance of Movie_Genre is loaded or can be loaded.
+		 *
+		 * @return Movie_Genre - Main instance.
+		 */
+		public static function instance(): Movie_Genre {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * Movie_Genre Constructor.
+		 */
+		private function __construct() {}
+
+		/**
 		 * This function is used to register rt-movie-genre taxonomy.
 		 *
 		 * @return void

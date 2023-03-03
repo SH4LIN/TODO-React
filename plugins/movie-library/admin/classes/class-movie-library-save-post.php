@@ -25,6 +25,36 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 	 * This class is used to handle all the operation while saving the post.
 	 */
 	class Movie_Library_Save_Post {
+
+		/**
+		 * Variable instance.
+		 *
+		 * @var ?Movie_Library_Save_Post $instance The single instance of the class.
+		 */
+		protected static ?Movie_Library_Save_Post $instance = null;
+
+		/**
+		 *  Main Movie_Library_Save_Post Instance.
+		 *  Ensures only one instance of Movie_Library_Save_Post is loaded or can be loaded.
+		 *
+		 * @return Movie_Library_Save_Post - Main instance.
+		 */
+		public static function instance(): Movie_Library_Save_Post {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * Movie_Library_Save_Post Constructor.
+		 */
+		private function __construct() {}
+
 		/**
 		 * This function is used to save the post.
 		 * It also checks the user's permission to save the post.
@@ -52,7 +82,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 					return;
 				} else {
 
-					$rt_movie_meta_box = new RT_Movie_Meta_Box();
+					$rt_movie_meta_box = RT_Movie_Meta_Box::instance();
 					$rt_movie_meta_box->save_rt_movie_post( $post_id, $post, $update );
 
 				}
@@ -63,7 +93,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 					return;
 				} else {
 
-					$rt_person_meta_box = new RT_Person_Meta_Box();
+					$rt_person_meta_box = RT_Person_Meta_Box::instance();
 					$rt_person_meta_box->save_rt_person_post( $post_id, $post, $update );
 
 				}

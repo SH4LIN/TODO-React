@@ -27,6 +27,35 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 	class RT_Media_Meta_Box {
 
 		/**
+		 * Variable instance.
+		 *
+		 * @var ?RT_Media_Meta_Box $instance The single instance of the class.
+		 */
+		protected static ?RT_Media_Meta_Box $instance = null;
+
+		/**
+		 *  Main RT_Media_Meta_Box Instance.
+		 *  Ensures only one instance of RT_Media_Meta_Box is loaded or can be loaded.
+		 *
+		 * @return RT_Media_Meta_Box - Main instance.
+		 */
+		public static function instance(): RT_Media_Meta_Box {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * RT_Media_Meta_Box Constructor.
+		 */
+		private function __construct() {}
+
+		/**
 		 * This function is used to create the meta-box for photos and videos.
 		 *
 		 * @return void

@@ -27,6 +27,35 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Person_Career' ) ) {
 	class Person_Career {
 
 		/**
+		 * Variable instance.
+		 *
+		 * @var ?Person_Career $instance The single instance of the class.
+		 */
+		protected static ?Person_Career $instance = null;
+
+		/**
+		 *  Main Person_Career Instance.
+		 *  Ensures only one instance of Person_Career is loaded or can be loaded.
+		 *
+		 * @return Person_Career - Main instance.
+		 */
+		public static function instance(): Person_Career {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * Person_Career Constructor.
+		 */
+		private function __construct() {}
+
+		/**
 		 * This function is used to register rt-person-career taxonomy.
 		 *
 		 * @return void

@@ -23,6 +23,30 @@ if ( ! class_exists( 'MovieLib\admin\classes\Settings_Page' ) ) {
 	class Settings_Page {
 
 		/**
+		 * Variable instance.
+		 *
+		 * @var ?Settings_Page $instance The single instance of the class.
+		 */
+		protected static ?Settings_Page $instance = null;
+
+		/**
+		 *  Main Settings_Page Instance.
+		 *  Ensures only one instance of Settings_Page is loaded or can be loaded.
+		 *
+		 * @return Settings_Page - Main instance.
+		 */
+		public static function instance(): Settings_Page {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
 		 * Variable parent slug.
 		 *
 		 * @var string $parent_slug This variable will be used to store the parent slug.
@@ -138,7 +162,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Settings_Page' ) ) {
 		 * Constructor of the class.
 		 * It is used to initialize the variables that are used to create the sub menu page.
 		 */
-		public function __construct() {
+		private function __construct() {
 			$this->parent_slug                          = 'options-general.php';
 			$this->page_title                           = __( 'Movie Library Settings', 'movie-library' );
 			$this->menu_title                           = __( 'Movie Library Settings', 'movie-library' );

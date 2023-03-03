@@ -27,6 +27,35 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Language' ) ) {
 	class Movie_Language {
 
 		/**
+		 * Variable instance.
+		 *
+		 * @var ?Movie_Language $instance The single instance of the class.
+		 */
+		protected static ?Movie_Language $instance = null;
+
+		/**
+		 *  Main Movie_Language Instance.
+		 *  Ensures only one instance of Movie_Language is loaded or can be loaded.
+		 *
+		 * @return Movie_Language - Main instance.
+		 */
+		public static function instance(): Movie_Language {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * Movie_Language Constructor.
+		 */
+		private function __construct() {}
+
+		/**
 		 * This function is used to register rt-movie-language taxonomy.
 		 *
 		 * @return void

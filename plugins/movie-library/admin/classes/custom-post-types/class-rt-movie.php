@@ -25,6 +25,35 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 	class RT_Movie {
 
 		/**
+		 * Variable instance.
+		 *
+		 * @var ?RT_Movie $instance The single instance of the class.
+		 */
+		protected static ?RT_Movie $instance = null;
+
+		/**
+		 *  Main RT_Movie Instance.
+		 *  Ensures only one instance of RT_MOVIE is loaded or can be loaded.
+		 *
+		 * @return RT_Movie - Main instance.
+		 */
+		public static function instance(): RT_Movie {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * RT_Movie Constructor.
+		 */
+		private function __construct() {}
+
+		/**
 		 * This function is used to register rt-movie custom post type.
 		 *
 		 * @return void

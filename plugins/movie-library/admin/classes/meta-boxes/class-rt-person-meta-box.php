@@ -26,6 +26,35 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 	class RT_Person_Meta_Box {
 
 		/**
+		 * Variable instance.
+		 *
+		 * @var ?RT_Person_Meta_Box $instance The single instance of the class.
+		 */
+		protected static ?RT_Person_Meta_Box $instance = null;
+
+		/**
+		 *  Main RT_Person_Meta_Box Instance.
+		 *  Ensures only one instance of RT_Person_Meta_Box is loaded or can be loaded.
+		 *
+		 * @return RT_Person_Meta_Box - Main instance.
+		 */
+		public static function instance(): RT_Person_Meta_Box {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * RT_Person_Meta_Box Constructor.
+		 */
+		private function __construct() {}
+
+		/**
 		 * This function is used to create the meta-box for basic information and social information.
 		 *
 		 * @return void
@@ -250,7 +279,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 
 			/** OK, it's safe for us to save the data now. */
 
-			$rt_media_meta_box = new RT_Media_Meta_Box();
+			$rt_media_meta_box = RT_Media_Meta_Box::instance();
 			$rt_media_meta_box->save_rt_movie_meta_images( $post_id );
 			$rt_media_meta_box->save_rt_movie_meta_videos( $post_id );
 

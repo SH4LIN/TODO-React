@@ -27,6 +27,35 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Tag' ) ) {
 	class Movie_Tag {
 
 		/**
+		 * Variable instance.
+		 *
+		 * @var ?Movie_Tag $instance The single instance of the class.
+		 */
+		protected static ?Movie_Tag $instance = null;
+
+		/**
+		 *  Main Movie_Tag Instance.
+		 *  Ensures only one instance of Movie_Tag is loaded or can be loaded.
+		 *
+		 * @return Movie_Tag - Main instance.
+		 */
+		public static function instance(): Movie_Tag {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * Movie_Tag Constructor.
+		 */
+		private function __construct() {}
+
+		/**
 		 * This function is used to register rt-movie-tag taxonomy.
 		 *
 		 * @return void

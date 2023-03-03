@@ -27,6 +27,35 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Person' ) ) {
 	class Movie_Person {
 
 		/**
+		 * Variable instance.
+		 *
+		 * @var ?Movie_Person $instance The single instance of the class.
+		 */
+		protected static ?Movie_Person $instance = null;
+
+		/**
+		 *  Main Movie_Person Instance.
+		 *  Ensures only one instance of Movie_Person is loaded or can be loaded.
+		 *
+		 * @return Movie_Person - Main instance.
+		 */
+		public static function instance(): Movie_Person {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * Movie_Person Constructor.
+		 */
+		private function __construct() {}
+
+		/**
 		 * This function is used to register rt-movie-person shadow taxonomy.
 		 *
 		 * @return void

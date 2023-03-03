@@ -27,6 +27,35 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Label' ) ) {
 	class Movie_Label {
 
 		/**
+		 * Variable instance.
+		 *
+		 * @var ?Movie_Label $instance The single instance of the class.
+		 */
+		protected static ?Movie_Label $instance = null;
+
+		/**
+		 *  Main Movie_Label Instance.
+		 *  Ensures only one instance of Movie_Label is loaded or can be loaded.
+		 *
+		 * @return Movie_Label - Main instance.
+		 */
+		public static function instance(): Movie_Label {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * Movie_Label Constructor.
+		 */
+		private function __construct() {}
+
+		/**
 		 * This function is used to register rt-movie-label taxonomy.
 		 *
 		 * @return void

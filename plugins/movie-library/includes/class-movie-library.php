@@ -16,7 +16,7 @@ namespace MovieLib\includes;
 defined( 'ABSPATH' ) || exit;
 
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
-use MovieLib\admin\classes\custom_post_types\Rt_Person;
+use MovieLib\admin\classes\custom_post_types\RT_Person;
 use MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box;
@@ -147,8 +147,8 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 * @return void
 		 */
 		private function register_hooks(): void {
-			$movie_library_save_post     = new Movie_Library_Save_Post();
-			$movie_library_settings_page = new Settings_Page();
+			$movie_library_save_post     = Movie_Library_Save_Post::instance();
+			$movie_library_settings_page = Settings_Page::instance();
 
 			add_action( 'init', array( $this, 'setup_environment' ) );
 			add_action( 'plugins_loaded', array( $this, 'load_plugin_text_domain' ) );
@@ -178,10 +178,10 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		private function register_custom_post_types(): void {
 
-			$rt_movie = new RT_Movie();
+			$rt_movie = RT_Movie::instance();
 			$rt_movie->register();
 
-			$rt_person = new Rt_Person();
+			$rt_person = RT_Person::instance();
 			$rt_person->register();
 
 		}
@@ -193,25 +193,25 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		private function register_custom_taxonomies(): void {
 
-			$rt_movie_genre = new Movie_Genre();
+			$rt_movie_genre = Movie_Genre::instance();
 			$rt_movie_genre->register();
 
-			$rt_movie_language = new Movie_Language();
+			$rt_movie_language = Movie_Language::instance();
 			$rt_movie_language->register();
 
-			$rt_movie_label = new Movie_Label();
+			$rt_movie_label = Movie_Label::instance();
 			$rt_movie_label->register();
 
-			$rt_movie_person = new Movie_Person();
+			$rt_movie_person = Movie_Person::instance();
 			$rt_movie_person->register();
 
-			$rt_movie_production_company = new Movie_Production_Company();
+			$rt_movie_production_company = Movie_Production_Company::instance();
 			$rt_movie_production_company->register();
 
-			$rt_movie_tag = new Movie_Tag();
+			$rt_movie_tag = Movie_Tag::instance();
 			$rt_movie_tag->register();
 
-			$rt_person_career = new Person_Career();
+			$rt_person_career = Person_Career::instance();
 			$rt_person_career->register();
 
 		}
@@ -324,13 +324,13 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		public function add_custom_meta_boxes(): void {
 
-			$rt_movie_meta_box = new RT_Movie_Meta_Box();
+			$rt_movie_meta_box = RT_Movie_Meta_Box::instance();
 			$rt_movie_meta_box->create_meta_box();
 
-			$rt_person_meta_box = new RT_Person_Meta_Box();
+			$rt_person_meta_box = RT_Person_Meta_Box::instance();
 			$rt_person_meta_box->create_meta_box();
 
-			$rt_media_meta_box = new RT_Media_Meta_Box();
+			$rt_media_meta_box = RT_Media_Meta_Box::instance();
 			$rt_media_meta_box->create_meta_box();
 
 		}

@@ -17,12 +17,41 @@ defined( 'ABSPATH' ) || exit;
  */
 const RT_PERSON_SLUG = 'rt-person';
 
-if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\Rt_Person' ) ) {
+if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Person' ) ) {
 
 	/**
 	 * This class is used to create rt-person custom post type.
 	 */
-	class Rt_Person {
+	class RT_Person {
+
+		/**
+		 * Variable instance.
+		 *
+		 * @var ?RT_Person $instance The single instance of the class.
+		 */
+		protected static ?RT_Person $instance = null;
+
+		/**
+		 *  Main Rt_Person Instance.
+		 *  Ensures only one instance of Rt_Person is loaded or can be loaded.
+		 *
+		 * @return RT_Person - Main instance.
+		 */
+		public static function instance(): RT_Person {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * RT_Person Constructor.
+		 */
+		private function __construct() {}
 
 		/**
 		 * This function is used to register rt-person custom post type.
