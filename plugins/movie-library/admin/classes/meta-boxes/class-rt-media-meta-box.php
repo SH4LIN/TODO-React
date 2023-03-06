@@ -7,17 +7,14 @@
 
 namespace MovieLib\admin\classes\meta_boxes;
 
+use MovieLib\admin\classes\custom_post_types\RT_Movie;
+use MovieLib\admin\classes\custom_post_types\RT_Person;
 use WP_Post;
-use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
-use const MovieLib\admin\classes\custom_post_types\RT_PERSON_SLUG;
 
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
-
-const RT_MEDIA_META_IMAGES_SLUG = 'rt-media-meta-images';
-const RT_MEDIA_META_VIDEOS_SLUG = 'rt-media-meta-videos';
 
 if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 
@@ -27,6 +24,45 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 	class RT_Media_Meta_Box {
 
 		/**
+		 * RT_MEDIA_META_IMAGES_SLUG
+		 */
+		const IMAGES_SLUG = 'rt-media-meta-images';
+
+		/**
+		 * RT_MEDIA_META_VIDEOS_SLUG
+		 */
+		const VIDEOS_SLUG = 'rt-media-meta-videos';
+
+		/**
+		 * Variable instance.
+		 *
+		 * @var ?RT_Media_Meta_Box $instance The single instance of the class.
+		 */
+		protected static ?RT_Media_Meta_Box $instance = null;
+
+		/**
+		 *  Main RT_Media_Meta_Box Instance.
+		 *  Ensures only one instance of RT_Media_Meta_Box is loaded or can be loaded.
+		 *
+		 * @return RT_Media_Meta_Box - Main instance.
+		 */
+		public static function instance(): RT_Media_Meta_Box {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * RT_Media_Meta_Box Constructor.
+		 */
+		private function __construct() {}
+
+		/**
 		 * This function is used to create the meta-box for photos and videos.
 		 *
 		 * @return void
@@ -34,19 +70,19 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 		public function create_meta_box():void {
 
 			add_meta_box(
-				RT_MEDIA_META_IMAGES_SLUG,
+				self::IMAGES_SLUG,
 				__( 'Photos', 'movie-library' ),
 				array( $this, 'rt_media_meta_images' ),
-				array( RT_MOVIE_SLUG, RT_PERSON_SLUG ),
+				array( RT_Movie::SLUG, RT_Person::SLUG ),
 				'side',
 				'high'
 			);
 
 			add_meta_box(
-				RT_MEDIA_META_VIDEOS_SLUG,
+				self::VIDEOS_SLUG,
 				__( 'Videos', 'movie-library' ),
 				array( $this, 'rt_media_meta_videos' ),
-				array( RT_MOVIE_SLUG, RT_PERSON_SLUG ),
+				array( RT_Movie::SLUG, RT_Person::SLUG ),
 				'side',
 				'high'
 			);
@@ -76,16 +112,17 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 
 				<?php
 				if ( isset( $rt_media_meta_images_data_attachment_ids ) && ! empty( $rt_media_meta_images_data_attachment_ids[0] ) ) {
+
 					?>
+
 					<input name = "rt-media-meta-uploaded-images"
 						value = "<?php echo esc_attr( wp_json_encode( $rt_media_meta_images_data_attachment_ids[0] ) ); ?>"
 						hidden = "hidden">
 
 					<h3 class = "rt-media-meta-heading rt-media-meta-images-heading rt-media-meta-uploaded-images-heading">
-
 						<?php esc_html_e( 'Uploaded Images', 'movie-library' ); ?>
-
 					</h3>
+
 					<?php
 				}
 				?>
@@ -107,20 +144,15 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 							?>
 
 							<div class = "rt-media-meta rt-media-meta-image rt-media-meta-uploaded-image">
-
 								<img src = "<?php echo esc_url( $image_url ); ?>" alt = "">
 
 								<span class = "rt-media-meta-remove rt-media-meta-image-remove rt-media-meta-uploaded-image-remove"
 									data-id = "<?php echo esc_attr( $rt_media_meta_image_attachment_id ); ?>">
-
 										X
-
 								</span>
-
 							</div>
 
 							<?php
-
 						}
 
 						?>
@@ -137,16 +169,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 
 			<div class = "rt-media-meta-container rt-media-meta-images-container rt-media-meta-selected-images-container"
 				id = "rt-media-meta-selected-images-container">
-
 			</div>
 
 			<input name = "rt-media-meta-selected-images" hidden = "hidden">
 
 			<button class = "rt-media-meta-add rt-media-meta-add rt-media-meta-images-add"
 				type = "button">
-
 				<?php esc_html_e( 'Add Images', 'movie-library' ); ?>
-
 			</button>
 
 			<?php
@@ -176,7 +205,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 			?>
 
 			<div class = "rt-media-meta-fields rt-media-meta-videos">
-
 				<div class = "rt-media-meta-container rt-media-meta-videos-container rt-media-meta-uploaded-videos-container">
 
 					<?php
@@ -190,9 +218,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 							hidden = "hidden">
 
 						<h3 class = "rt-media-meta-heading rt-media-meta-videos-heading rt-media-meta-uploaded-videos-heading">
-
 							<?php esc_html_e( 'Uploaded Videos', 'movie-library' ); ?>
-
 						</h3>
 
 						<?php
@@ -208,20 +234,14 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 							?>
 
 							<div class = "rt-media-meta rt-media-meta-video rt-media-meta-uploaded-video">
-
 								<video>
-
 									<source src = "<?php echo esc_url( $video_url ); ?>">
-
 								</video>
 
 								<span class = "rt-media-meta-remove rt-media-meta-video-remove rt-media-meta-uploaded-video-remove"
 									data-id = "<?php echo esc_attr( $rt_media_meta_video_attachment_id ); ?>">
-
 										X
-
 								</span>
-
 							</div>
 
 							<?php
@@ -240,14 +260,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 
 				<div class = "rt-media-meta-container rt-media-meta-videos-container rt-media-meta-selected-videos-container"
 					id = "rt-media-meta-selected-videos-container">
-
 				</div>
 
 				<button class = "rt-media-meta-add rt-media-meta-add rt-media-meta-videos-add"
 					type = "button">
-
 					<?php esc_html_e( 'Add Videos', 'movie-library' ); ?>
-
 				</button>
 
 				<input name = "rt-media-meta-selected-videos" hidden = "hidden">

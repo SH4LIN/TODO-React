@@ -7,17 +7,12 @@
 
 namespace MovieLib\admin\classes\taxonomies;
 
-use const MovieLib\admin\classes\custom_post_types\RT_PERSON_SLUG;
+use MovieLib\admin\classes\custom_post_types\RT_Person;
 
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
-
-/**
- * RT_MOVIE_TAG_SLUG
- */
-const RT_PERSON_CAREER_SLUG = 'rt-person-career';
 
 if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Person_Career' ) ) {
 
@@ -27,14 +22,48 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Person_Career' ) ) {
 	class Person_Career {
 
 		/**
+		 * RT_PERSON_CAREER_SLUG
+		 */
+		const SLUG = 'rt-person-career';
+
+		/**
+		 * Variable instance.
+		 *
+		 * @var ?Person_Career $instance The single instance of the class.
+		 */
+		protected static ?Person_Career $instance = null;
+
+		/**
+		 *  Main Person_Career Instance.
+		 *  Ensures only one instance of Person_Career is loaded or can be loaded.
+		 *
+		 * @return Person_Career - Main instance.
+		 */
+		public static function instance(): Person_Career {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * Person_Career Constructor.
+		 */
+		private function __construct() {}
+
+		/**
 		 * This function is used to register rt-person-career taxonomy.
 		 *
 		 * @return void
 		 */
 		public function register(): void {
 			$rt_person_career = array(
-				'taxonomy'  => RT_PERSON_CAREER_SLUG,
-				'post_type' => array( RT_PERSON_SLUG ),
+				'taxonomy'  => self::SLUG,
+				'post_type' => array( RT_Person::SLUG ),
 				'args'      => array(
 					'labels'             => array(
 						'name'                       => _x( 'Careers', 'taxonomy general name', 'movie-library' ),

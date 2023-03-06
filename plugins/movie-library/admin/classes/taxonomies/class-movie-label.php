@@ -7,17 +7,12 @@
 
 namespace MovieLib\admin\classes\taxonomies;
 
-use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
+use MovieLib\admin\classes\custom_post_types\RT_Movie;
 
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
-
-/**
- * RT_MOVIE_LABEL_SLUG
- */
-const RT_MOVIE_LABEL_SLUG = 'rt-movie-label';
 
 if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Label' ) ) {
 
@@ -27,14 +22,48 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Label' ) ) {
 	class Movie_Label {
 
 		/**
+		 * RT_MOVIE_LABEL_SLUG
+		 */
+		const SLUG = 'rt-movie-label';
+
+		/**
+		 * Variable instance.
+		 *
+		 * @var ?Movie_Label $instance The single instance of the class.
+		 */
+		protected static ?Movie_Label $instance = null;
+
+		/**
+		 *  Main Movie_Label Instance.
+		 *  Ensures only one instance of Movie_Label is loaded or can be loaded.
+		 *
+		 * @return Movie_Label - Main instance.
+		 */
+		public static function instance(): Movie_Label {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * Movie_Label Constructor.
+		 */
+		private function __construct() {}
+
+		/**
 		 * This function is used to register rt-movie-label taxonomy.
 		 *
 		 * @return void
 		 */
 		public function register():void {
 			$rt_movie_label = array(
-				'taxonomy'  => RT_MOVIE_LABEL_SLUG,
-				'post_type' => array( RT_MOVIE_SLUG ),
+				'taxonomy'  => self::SLUG,
+				'post_type' => array( RT_Movie::SLUG ),
 				'args'      => array(
 					'labels'             => array(
 						'name'                       => _x( 'Labels', 'taxonomy general name', 'movie-library' ),

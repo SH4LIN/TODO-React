@@ -12,17 +12,46 @@ namespace MovieLib\admin\classes\custom_post_types;
  */
 defined( 'ABSPATH' ) || exit;
 
-/**
- * RT_MOVIE_SLUG
- */
-const RT_MOVIE_SLUG = 'rt-movie';
-
 if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 
 	/**
 	 * This class is used to create rt-movie custom post type.
 	 */
 	class RT_Movie {
+
+		/**
+		 * RT_MOVIE_SLUG
+		 */
+		const SLUG = 'rt-movie';
+
+		/**
+		 * Variable instance.
+		 *
+		 * @var ?RT_Movie $instance The single instance of the class.
+		 */
+		protected static ?RT_Movie $instance = null;
+
+		/**
+		 *  Main RT_Movie Instance.
+		 *  Ensures only one instance of RT_MOVIE is loaded or can be loaded.
+		 *
+		 * @return RT_Movie - Main instance.
+		 */
+		public static function instance(): RT_Movie {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * RT_Movie Constructor.
+		 */
+		private function __construct() {}
 
 		/**
 		 * This function is used to register rt-movie custom post type.
@@ -32,10 +61,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 		public function register(): void {
 			$args = array(
 				'labels'             => array(
-					'name'                  => _x( 'Movies', 'Post type general name', 'movie-library' ),
-					'singular_name'         => _x( 'Movie', 'Post type singular name', 'movie-library' ),
-					'menu_name'             => _x( 'Movies', 'Admin Menu text', 'movie-library' ),
-					'name_admin_bar'        => _x( 'Movie', 'Add New on Toolbar', 'movie-library' ),
+					'name'                  => __( 'Movies', 'movie-library' ),
+					'singular_name'         => __( 'Movie', 'movie-library' ),
+					'menu_name'             => __( 'Movies', 'movie-library' ),
+					'name_admin_bar'        => __( 'Movie', 'movie-library' ),
 					'add_new'               => __( 'Add New', 'movie-library' ),
 					'add_new_item'          => __( 'Add New Movie', 'movie-library' ),
 					'new_item'              => __( 'New Movie', 'movie-library' ),
@@ -72,7 +101,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 				'show_in_rest'       => true,
 			);
 
-			register_post_type( RT_MOVIE_SLUG, $args );
+			register_post_type( self::SLUG, $args ); // phpcs:ignore WordPress.NamingConventions.ValidPostTypeSlug.NotStringLiteral
 		}
 	}
 }

@@ -57,7 +57,7 @@ const MLB_PLUGIN_FILE = __FILE__;
 /**
  * MLB_PLUGIN_VERSION
  */
-const MLB_PLUGIN_VERSION = '1.0.0';
+define( 'MLB_PLUGIN_VERSION', filemtime( __FILE__ ) );
 
 /**
  * MLB_TEXT_DOMAIN

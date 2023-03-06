@@ -15,16 +15,16 @@ namespace MovieLib\includes;
  */
 defined( 'ABSPATH' ) || exit;
 
-use MovieLib\admin\classes\Activation;
+use MovieLib\admin\classes\Asset;
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
-use MovieLib\admin\classes\custom_post_types\Rt_Person;
-use MovieLib\admin\classes\Deactivation;
+use MovieLib\admin\classes\custom_post_types\RT_Person;
 use MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box;
 use MovieLib\admin\classes\Settings_Page;
 use MovieLib\admin\classes\Movie_Library_Save_Post;
-use MovieLib\admin\classes\Shortcodes;
+use MovieLib\admin\classes\shortcodes\Movie_Shortcode;
+use MovieLib\admin\classes\shortcodes\Person_Shortcode;
 use MovieLib\admin\classes\taxonomies\Movie_Genre;
 use MovieLib\admin\classes\taxonomies\Movie_Label;
 use MovieLib\admin\classes\taxonomies\Movie_Language;
@@ -33,8 +33,6 @@ use MovieLib\admin\classes\taxonomies\Movie_Production_Company;
 use MovieLib\admin\classes\taxonomies\Movie_Tag;
 use MovieLib\admin\classes\taxonomies\Person_Career;
 use WP_Post;
-use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
-use const MovieLib\admin\classes\custom_post_types\RT_PERSON_SLUG;
 
 if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 	/**
@@ -75,71 +73,10 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		private function __construct() {
 
-			$this->register_scripts();
 			$this->register_hooks();
 			$this->register_custom_post_types();
 			$this->register_custom_taxonomies();
 			flush_rewrite_rules();
-
-		}
-
-		/**
-		 * This function is used to register all the scripts.
-		 * It will register the admin script.
-		 * It will set the translation for the admin script.
-		 *
-		 * @return void
-		 */
-		private function register_scripts(): void {
-
-			wp_register_script(
-				'movie-library-image-video-upload',
-				MLB_PLUGIN_URL . 'admin/js/movie-library-image-video-upload.js',
-				array( 'wp-i18n', 'jquery' ),
-				MLB_PLUGIN_VERSION,
-				true
-			);
-
-			wp_register_script(
-				'movie-library-custom-label',
-				MLB_PLUGIN_URL . 'admin/js/movie-library-custom-label.js',
-				array(
-					'wp-hooks',
-					'wp-i18n',
-				),
-				MLB_PLUGIN_VERSION,
-				true
-			);
-
-			wp_register_script(
-				'movie-library-character',
-				MLB_PLUGIN_URL . 'admin/js/movie-library-character.js',
-				array(
-					'wp-i18n',
-				),
-				MLB_PLUGIN_VERSION,
-				true
-			);
-
-			wp_register_script(
-				'movie-library-rt-movie-validation',
-				MLB_PLUGIN_URL . 'admin/js/movie-library-rt-movie-validation.js',
-				array(
-					'wp-i18n',
-				),
-				MLB_PLUGIN_VERSION,
-				true
-			);
-
-			wp_register_script(
-				'movie-library-rt-person-validation',
-				MLB_PLUGIN_URL . 'admin/js/movie-library-rt-person-validation.js',
-				array(
-					'wp-i18n',
-				),
-				MLB_PLUGIN_VERSION,
-				true
-			);
 
 		}
 
@@ -149,23 +86,20 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 * @return void
 		 */
 		private function register_hooks(): void {
-			$movie_library_activation    = new Activation();
-			$movie_library_deactivation  = new Deactivation();
-			$movie_library_save_post     = new Movie_Library_Save_Post();
-			$movie_library_settings_page = new Settings_Page();
+			$movie_library_save_post     = Movie_Library_Save_Post::instance();
+			$movie_library_settings_page = Settings_Page::instance();
 
-			register_activation_hook( MLB_PLUGIN_FILE, array( $movie_library_activation, 'activate' ) );
-			register_deactivation_hook( MLB_PLUGIN_FILE, array( $movie_library_deactivation, 'deactivate' ) );
+			$asset = Asset::instance();
 
 			add_action( 'init', array( $this, 'setup_environment' ) );
 			add_action( 'plugins_loaded', array( $this, 'load_plugin_text_domain' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_css' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_image_video_upload_script' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_custom_label_character_script' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_validation_script' ) );
-			add_action( 'wp_enqueue_scripts', array( $this, 'wp_enqueue_scripts' ) );
-			add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
-			add_action( 'save_post', array( $movie_library_save_post, 'save_post' ), 10, 3 );
+			add_action( 'admin_enqueue_scripts', array( $asset, 'enqueue_admin_css' ) );
+			add_action( 'admin_enqueue_scripts', array( $asset, 'enqueue_image_video_upload_script' ) );
+			add_action( 'admin_enqueue_scripts', array( $asset, 'enqueue_custom_label_character_script' ) );
+			add_action( 'admin_enqueue_scripts', array( $asset, 'enqueue_validation_script' ) );
+			add_action( 'wp_enqueue_scripts', array( $asset, 'enqueue_frontend_scripts' ) );
+			add_action( 'add_meta_boxes', array( $this, 'add_custom_meta_boxes' ) );
+			add_action( 'save_post', array( $movie_library_save_post, 'save_custom_post' ), 10, 3 );
 			add_action(
 				'admin_menu',
 				array(
@@ -185,10 +119,10 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		private function register_custom_post_types(): void {
 
-			$rt_movie = new RT_Movie();
+			$rt_movie = RT_Movie::instance();
 			$rt_movie->register();
 
-			$rt_person = new Rt_Person();
+			$rt_person = RT_Person::instance();
 			$rt_person->register();
 
 		}
@@ -200,25 +134,25 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		private function register_custom_taxonomies(): void {
 
-			$rt_movie_genre = new Movie_Genre();
+			$rt_movie_genre = Movie_Genre::instance();
 			$rt_movie_genre->register();
 
-			$rt_movie_language = new Movie_Language();
+			$rt_movie_language = Movie_Language::instance();
 			$rt_movie_language->register();
 
-			$rt_movie_label = new Movie_Label();
+			$rt_movie_label = Movie_Label::instance();
 			$rt_movie_label->register();
 
-			$rt_movie_person = new Movie_Person();
+			$rt_movie_person = Movie_Person::instance();
 			$rt_movie_person->register();
 
-			$rt_movie_production_company = new Movie_Production_Company();
+			$rt_movie_production_company = Movie_Production_Company::instance();
 			$rt_movie_production_company->register();
 
-			$rt_movie_tag = new Movie_Tag();
+			$rt_movie_tag = Movie_Tag::instance();
 			$rt_movie_tag->register();
 
-			$rt_person_career = new Person_Career();
+			$rt_person_career = Person_Career::instance();
 			$rt_person_career->register();
 
 		}
@@ -230,8 +164,11 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		public function setup_environment(): void {
 
-			$shortcode = new Shortcodes();
-			$shortcode->register_shortcodes();
+			$movie_shortcode = Movie_Shortcode::instance();
+			$movie_shortcode->register();
+
+			$person_shortcode = Person_Shortcode::instance();
+			$person_shortcode->register();
 
 		}
 
@@ -247,97 +184,19 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		}
 
 		/**
-		 * This function is used to enqueue the admin CSS.
-		 *
-		 * @return void
-		 */
-		public function enqueue_admin_css(): void {
-
-			wp_enqueue_style( 'movie-library-admin', MLB_PLUGIN_URL . 'admin/css/movie-library-admin.css', array(), MLB_PLUGIN_VERSION );
-
-		}
-
-		/**
-		 * This function Enqueues image, video upload script.
-		 *
-		 * @return void
-		 */
-		public function enqueue_image_video_upload_script(): void {
-
-			wp_enqueue_script( 'movie-library-image-video-upload' );
-			wp_set_script_translations( 'movie-library-image-video-upload', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
-			wp_enqueue_media();
-
-		}
-
-		/**
-		 * This function Enqueues custom label script.
-		 *
-		 * @return void
-		 */
-		public function enqueue_custom_label_character_script(): void {
-
-			if ( get_post_type() === RT_MOVIE_SLUG ) {
-
-				wp_enqueue_script( 'movie-library-custom-label' );
-				wp_set_script_translations( 'movie-library-custom-label', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
-
-				wp_enqueue_script( 'movie-library-character' );
-				wp_set_script_translations( 'movie-library-character', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
-
-			}
-
-		}
-
-		/**
-		 * This function Enqueues validation script.
-		 *
-		 * @return void
-		 */
-		public function enqueue_validation_script(): void {
-
-			$post_type = get_post_type();
-
-			if ( RT_MOVIE_SLUG === $post_type ) {
-
-				wp_enqueue_script( 'movie-library-rt-movie-validation' );
-				wp_set_script_translations( 'movie-library-rt-movie-validation', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
-
-			} elseif ( RT_PERSON_SLUG === $post_type ) {
-
-				wp_enqueue_script( 'movie-library-rt-person-validation' );
-				wp_set_script_translations( 'movie-library-rt-person-validation', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
-
-			}
-
-		}
-
-		/**
-		 *  Enqueue frontend scripts.
-		 *
-		 * @return void
-		 */
-		public function wp_enqueue_scripts(): void {
-
-			wp_enqueue_style( 'movie-library-frontend', MLB_PLUGIN_URL . 'public/css/movie-library-frontend.css', array(), MLB_PLUGIN_VERSION );
-			wp_enqueue_script( 'movie-library-frontend', MLB_PLUGIN_URL . 'public/js/movie-library-frontend.js', array(), MLB_PLUGIN_VERSION, true );
-
-		}
-
-		/**
 		 * This function is used to add all the meta-boxes.
 		 *
 		 * @return void
 		 */
-		public function add_meta_boxes(): void {
+		public function add_custom_meta_boxes(): void {
 
-			$rt_movie_meta_box = new RT_Movie_Meta_Box();
+			$rt_movie_meta_box = RT_Movie_Meta_Box::instance();
 			$rt_movie_meta_box->create_meta_box();
 
-			$rt_person_meta_box = new RT_Person_Meta_Box();
+			$rt_person_meta_box = RT_Person_Meta_Box::instance();
 			$rt_person_meta_box->create_meta_box();
 
-			$rt_media_meta_box = new RT_Media_Meta_Box();
+			$rt_media_meta_box = RT_Media_Meta_Box::instance();
 			$rt_media_meta_box->create_meta_box();
 
 		}
@@ -355,11 +214,11 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		public function change_title_text( $title, $post ): string {
 
-			if ( RT_MOVIE_SLUG === $post->post_type ) {
+			if ( RT_Movie::SLUG === $post->post_type ) {
 
 				$title = __( 'Title', 'movie-library' );
 
-			} elseif ( RT_PERSON_SLUG === $post->post_type ) {
+			} elseif ( RT_Person::SLUG === $post->post_type ) {
 
 				$title = __( 'Name', 'movie-library' );
 
@@ -381,11 +240,11 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		public function change_post_content_text( $title, $post ): string {
 
-			if ( RT_MOVIE_SLUG === $post->post_type ) {
+			if ( RT_Movie::SLUG === $post->post_type ) {
 
 				$title = __( 'Plot', 'movie-library' );
 
-			} elseif ( RT_PERSON_SLUG === $post->post_type ) {
+			} elseif ( RT_Person::SLUG === $post->post_type ) {
 
 				$title = __( 'Biography', 'movie-library' );
 

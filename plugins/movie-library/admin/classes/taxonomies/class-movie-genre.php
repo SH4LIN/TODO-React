@@ -7,17 +7,12 @@
 
 namespace MovieLib\admin\classes\taxonomies;
 
-use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
+use MovieLib\admin\classes\custom_post_types\RT_Movie;
 
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
-
-/**
- * RT_MOVIE_GENRE_SLUG
- */
-const RT_MOVIE_GENRE_SLUG = 'rt-movie-genre';
 
 if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Genre' ) ) {
 
@@ -27,14 +22,48 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Genre' ) ) {
 	class Movie_Genre {
 
 		/**
+		 * RT_MOVIE_GENRE_SLUG
+		 */
+		const SLUG = 'rt-movie-genre';
+
+		/**
+		 * Variable instance.
+		 *
+		 * @var ?Movie_Genre $instance The single instance of the class.
+		 */
+		protected static ?Movie_Genre $instance = null;
+
+		/**
+		 *  Main Movie_Genre Instance.
+		 *  Ensures only one instance of Movie_Genre is loaded or can be loaded.
+		 *
+		 * @return Movie_Genre - Main instance.
+		 */
+		public static function instance(): Movie_Genre {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * Movie_Genre Constructor.
+		 */
+		private function __construct() {}
+
+		/**
 		 * This function is used to register rt-movie-genre taxonomy.
 		 *
 		 * @return void
 		 */
 		public function register():void {
 			$rt_movie_genre = array(
-				'taxonomy'  => RT_MOVIE_GENRE_SLUG,
-				'post_type' => array( RT_MOVIE_SLUG ),
+				'taxonomy'  => self::SLUG,
+				'post_type' => array( RT_Movie::SLUG ),
 				'args'      => array(
 					'labels'             => array(
 						'name'                       => _x( 'Genres', 'taxonomy general name', 'movie-library' ),

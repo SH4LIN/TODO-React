@@ -12,17 +12,46 @@ namespace MovieLib\admin\classes\custom_post_types;
  */
 defined( 'ABSPATH' ) || exit;
 
-/**
- * RT_PERSON_SLUG
- */
-const RT_PERSON_SLUG = 'rt-person';
-
-if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\Rt_Person' ) ) {
+if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Person' ) ) {
 
 	/**
 	 * This class is used to create rt-person custom post type.
 	 */
-	class Rt_Person {
+	class RT_Person {
+
+		/**
+		 * RT_PERSON_SLUG
+		 */
+		const SLUG = 'rt-person';
+
+		/**
+		 * Variable instance.
+		 *
+		 * @var ?RT_Person $instance The single instance of the class.
+		 */
+		protected static ?RT_Person $instance = null;
+
+		/**
+		 *  Main Rt_Person Instance.
+		 *  Ensures only one instance of Rt_Person is loaded or can be loaded.
+		 *
+		 * @return RT_Person - Main instance.
+		 */
+		public static function instance(): RT_Person {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * RT_Person Constructor.
+		 */
+		private function __construct() {}
 
 		/**
 		 * This function is used to register rt-person custom post type.
@@ -32,10 +61,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\Rt_Person' ) ) {
 		public function register(): void {
 			$args = array(
 				'labels'             => array(
-					'name'                  => _x( 'People', 'Post type general name', 'movie-library' ),
-					'singular_name'         => _x( 'Person', 'Post type singular name', 'movie-library' ),
-					'menu_name'             => _x( 'People', 'Admin Menu text', 'movie-library' ),
-					'name_admin_bar'        => _x( 'Person', 'Add New on Toolbar', 'movie-library' ),
+					'name'                  => __( 'People', 'movie-library' ),
+					'singular_name'         => __( 'Person', 'movie-library' ),
+					'menu_name'             => __( 'People', 'movie-library' ),
+					'name_admin_bar'        => __( 'Person', 'movie-library' ),
 					'add_new'               => __( 'Add New', 'movie-library' ),
 					'add_new_item'          => __( 'Add New Person', 'movie-library' ),
 					'new_item'              => __( 'New Person', 'movie-library' ),
@@ -73,7 +102,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\Rt_Person' ) ) {
 
 			);
 
-			register_post_type( RT_PERSON_SLUG, $args );
+			register_post_type( self::SLUG, $args ); // phpcs:ignore WordPress.NamingConventions.ValidPostTypeSlug.NotStringLiteral
 
 		}
 	}

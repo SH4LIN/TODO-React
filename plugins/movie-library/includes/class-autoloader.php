@@ -16,6 +16,7 @@ defined( 'ABSPATH' ) || exit;
  * This class is used to autoload the classes of the plugin.
  */
 class Autoloader {
+
 	/**
 	 * This function will register the autoloader function.
 	 * spl_autoload_register() will register the autoloader callback function.
@@ -24,7 +25,7 @@ class Autoloader {
 	 */
 	public static function register(): void {
 
-		spl_autoload_register( [ new self(), 'load_classes' ] );
+		spl_autoload_register( array( new self(), 'load_classes' ) );
 
 	}
 

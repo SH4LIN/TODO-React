@@ -7,17 +7,12 @@
 
 namespace MovieLib\admin\classes\taxonomies;
 
-use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
+use MovieLib\admin\classes\custom_post_types\RT_Movie;
 
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
-
-/**
- * RT_MOVIE_PRODUCTION_COMPANY_SLUG
- */
-const RT_MOVIE_PRODUCTION_COMPANY_SLUG = 'rt-movie-production-company';
 
 if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Production_Company' ) ) {
 
@@ -27,14 +22,48 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Production_Company
 	class Movie_Production_Company {
 
 		/**
+		 * RT_MOVIE_PRODUCTION_COMPANY_SLUG
+		 */
+		const SLUG = 'rt-movie-production-company';
+
+		/**
+		 * Variable instance.
+		 *
+		 * @var ?Movie_Production_Company $instance The single instance of the class.
+		 */
+		protected static ?Movie_Production_Company $instance = null;
+
+		/**
+		 *  Main Movie_Production_Company Instance.
+		 *  Ensures only one instance of Movie_Production_Company is loaded or can be loaded.
+		 *
+		 * @return Movie_Production_Company - Main instance.
+		 */
+		public static function instance(): Movie_Production_Company {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * Movie_Production_Company Constructor.
+		 */
+		private function __construct() {}
+
+		/**
 		 * This function is used to register rt-movie-production-company taxonomy.
 		 *
 		 * @return void
 		 */
 		public function register():void {
 			$rt_movie_production_company = array(
-				'taxonomy'  => RT_MOVIE_PRODUCTION_COMPANY_SLUG,
-				'post_type' => array( RT_MOVIE_SLUG ),
+				'taxonomy'  => self::SLUG,
+				'post_type' => array( RT_Movie::SLUG ),
 				'args'      => array(
 					'labels'             => array(
 						'name'                       => _x(

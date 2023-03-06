@@ -7,20 +7,17 @@
 
 namespace MovieLib\admin\classes\meta_boxes;
 
+use MovieLib\admin\classes\custom_post_types\RT_Movie;
+use MovieLib\admin\classes\custom_post_types\RT_Person;
+use MovieLib\admin\classes\taxonomies\Movie_Person;
+use MovieLib\admin\classes\taxonomies\Person_Career;
 use WP_Post;
 use WP_Query;
-use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
-use const MovieLib\admin\classes\custom_post_types\RT_PERSON_SLUG;
-use const MovieLib\admin\classes\taxonomies\RT_MOVIE_PERSON_SLUG;
-use const MovieLib\admin\classes\taxonomies\RT_PERSON_CAREER_SLUG;
 
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
-
-const RT_MOVIE_META_BASIC_SLUG = 'rt-movie-meta-basic';
-const RT_MOVIE_META_CREW_SLUG  = 'rt-movie-meta-crew';
 
 if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 
@@ -30,6 +27,45 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 	class RT_Movie_Meta_Box {
 
 		/**
+		 * RT_MOVIE_META_BASIC_SLUG
+		 */
+		const MOVIE_META_BASIC_SLUG = 'rt-movie-meta-basic';
+
+		/**
+		 * RT_MOVIE_META_CREW_SLUG
+		 */
+		const MOVIE_META_CREW_SLUG = 'rt-movie-meta-crew';
+
+		/**
+		 * Variable instance.
+		 *
+		 * @var ?RT_Movie_Meta_Box $instance The single instance of the class.
+		 */
+		protected static ?RT_Movie_Meta_Box $instance = null;
+
+		/**
+		 *  Main RT_Movie_Meta_Box Instance.
+		 *  Ensures only one instance of RT_Movie_Meta_Box is loaded or can be loaded.
+		 *
+		 * @return RT_Movie_Meta_Box - Main instance.
+		 */
+		public static function instance(): RT_Movie_Meta_Box {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * RT_Movie_Meta_Box Constructor.
+		 */
+		private function __construct() {}
+
+		/**
 		 * This function is used to create the meta-box for basic information and crew information.
 		 *
 		 * @return void
@@ -37,19 +73,19 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 		public function create_meta_box():void {
 
 			add_meta_box(
-				RT_MOVIE_META_BASIC_SLUG,
+				self::MOVIE_META_BASIC_SLUG,
 				__( 'Basic', 'movie-library' ),
 				array( $this, 'rt_movie_meta_basic' ),
-				array( RT_MOVIE_SLUG ),
+				array( RT_Movie::SLUG ),
 				'side',
 				'high'
 			);
 
 				add_meta_box(
-					RT_MOVIE_META_CREW_SLUG,
+					self::MOVIE_META_CREW_SLUG,
 					__( 'Crew', 'movie-library' ),
 					array( $this, 'rt_movie_meta_crew' ),
-					array( RT_MOVIE_SLUG ),
+					array( RT_Movie::SLUG ),
 					'side',
 					'high'
 				);
@@ -80,14 +116,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 			?>
 
 			<div class = "rt-movie-meta-fields rt-movie-meta-basic-fields">
-
 				<div class = "rt-movie-meta-container rt-movie-meta-basic-container rt-movie-meta-basic-rating-container">
-
 					<label class = "rt-movie-meta-label rt-movie-meta-basic-label rt-movie-meta-basic-rating-label"
 						for = "<?php echo esc_attr( $rt_movie_meta_basic_key['rating'] ); ?>">
-
 						<?php esc_html_e( 'Rating (Between 0-10)', 'movie-library' ); ?>
-
 					</label>
 
 					<?php
@@ -106,16 +138,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 						min = "0" />
 
 					<span class = "rt-movie-meta-field-error rt-movie-meta-basic-field-error rt-movie-meta-basic-rating-field-error" id="rt-movie-meta-basic-rating-field-error"></span>
-
 				</div>
 
 				<div class = "rt-movie-meta-container rt-movie-meta-basic-container rt-movie-meta-basic-runtime-container">
-
 					<label class = "rt-movie-meta-label rt-movie-meta-basic-label rt-movie-meta-basic-runtime-label"
 						for    = "<?php echo esc_attr( $rt_movie_meta_basic_key['runtime'] ); ?>" >
-
 						<?php esc_html_e( 'Runtime (Minutes)', 'movie-library' ); ?>
-
 					</label>
 
 					<?php
@@ -134,16 +162,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 						max   = "1000" />
 
 					<span class = "rt-movie-meta-field-error rt-movie-meta-basic-field-error rt-movie-meta-basic-runtime-field-error" id="rt-movie-meta-basic-runtime-field-error"></span>
-
 				</div>
 
 				<div class = "rt-movie-meta-container rt-movie-meta-basic-container rt-movie-meta-basic-release-date-container">
-
 					<label class = "rt-movie-meta-label rt-movie-meta-basic-label rt-movie-meta-basic-release-date-label"
 						for    = "<?php echo esc_attr( $rt_movie_meta_basic_key['release-date'] ); ?> ">
-
 						<?php esc_html_e( 'Release Date', 'movie-library' ); ?>
-
 					</label>
 
 					<?php
@@ -160,7 +184,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 						id    = "<?php echo esc_attr( $rt_movie_meta_basic_key['release-date'] ); ?>" />
 
 				</div>
-
 			</div>
 
 			<?php
@@ -176,7 +199,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 		public function rt_movie_meta_crew( WP_Post $post ): void {
 			$rt_career_terms = get_terms(
 				array(
-					'taxonomy'   => RT_PERSON_CAREER_SLUG,
+					'taxonomy'   => Person_Career::SLUG,
 					'hide_empty' => false,
 				)
 			);
@@ -231,13 +254,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 
 					<div class = "rt-movie-meta-container rt-movie-meta-crew-container
 					<?php echo esc_attr( strtolower( 'rt-movie-meta-crew-' . $key . '-container' ) ); ?> ">
-
 						<label class = "rt-movie-meta-label rt-movie-meta-crew-label
 								<?php echo esc_attr( strtolower( 'rt-movie-meta-crew-' . $key . '-label' ) ); ?>"
 							for = "<?php echo esc_attr( strtolower( str_replace( '-', '_', 'rt-movie-meta-crew-' . $key ) ) ); ?>">
-
 							<?php echo esc_html( $key ); ?>
-
 						</label>
 
 						<select class = "rt-movie-meta-field rt-movie-meta-crew-field
@@ -284,20 +304,14 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 							<div id = "rt_movie_meta_crew_actor_character_container">
 
 								<?php
-
 								if ( isset( $rt_movie_meta_crew_data['rt-movie-meta-crew-actor'] ) ) {
-
 									foreach ( $rt_movie_meta_crew_data['rt-movie-meta-crew-actor'] as $rt_character_data ) {
-
 										?>
 
 										<div class = "rt-movie-meta-crew-actor-character-container">
-
 											<label class = "rt-movie-meta-label rt-movie-meta-crew-label "
 												for = "<?php echo esc_attr( $rt_character_data['person_id'] ); ?>">
-
 												<?php echo esc_html( $rt_character_data['person_name'] . ( ' (Character Name)' ) ); ?>
-
 											</label>
 
 											<input type = "text"
@@ -311,11 +325,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 												name = "<?php echo esc_attr( $rt_character_data['person_id'] . '-name' ); ?>"
 												id = "<?php echo esc_attr( $rt_character_data['person_id'] . '-name' ); ?>"
 												value = "<?php echo esc_attr( $rt_character_data['person_name'] ); ?>"/>
-
 										</div>
 
 									<?php } ?>
-
 								<?php } ?>
 
 							</div>
@@ -362,14 +374,14 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 
 			/** OK, it's safe for us to save the data now. */
 
-			$rt_media_meta_box = new RT_Media_Meta_Box();
+			$rt_media_meta_box = RT_Media_Meta_Box::instance();
 			$rt_media_meta_box->save_rt_movie_meta_images( $post_id );
 			$rt_media_meta_box->save_rt_movie_meta_videos( $post_id );
 
 			// Get all the rt-person-career terms.
 			$rt_career_terms = get_terms(
 				array(
-					'taxonomy'   => RT_PERSON_CAREER_SLUG,
+					'taxonomy'   => Person_Career::SLUG,
 					'hide_empty' => true,
 				)
 			);
@@ -391,7 +403,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 					$does_any_crew_exist = true;
 
 					// Getting the crew data from $_POST.
-					$rt_movie_meta_crew_data = sanitize_meta( $meta_key, wp_unslash( $_POST[ $meta_key ] ), RT_MOVIE_SLUG );
+					$rt_movie_meta_crew_data = sanitize_meta( $meta_key, wp_unslash( $_POST[ $meta_key ] ), RT_Movie::SLUG );
 
 					// Checking if the crew data is array or not.
 					if ( is_array( $rt_movie_meta_crew_data ) && count( $rt_movie_meta_crew_data ) > 0 ) {
@@ -464,11 +476,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 			}
 
 			// If there is no crew data then it will delete the term_relationships.
-			wp_delete_object_term_relationships( $post_id, RT_MOVIE_PERSON_SLUG );
+			wp_delete_object_term_relationships( $post_id, Movie_Person::SLUG );
 
 			if ( $does_any_crew_exist ) {
 
-				wp_set_object_terms( $post_id, $shadow_terms, RT_MOVIE_PERSON_SLUG, true );
+				wp_set_object_terms( $post_id, $shadow_terms, Movie_Person::SLUG, true );
 
 			}
 
@@ -549,11 +561,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 
 			$rt_person_query = new WP_Query(
 				array(
-					'post_type' => RT_PERSON_SLUG,
+					'post_type' => RT_Person::SLUG,
 					'per_page'  => 10,
 					'tax_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 									array(
-											'taxonomy' => RT_PERSON_CAREER_SLUG,
+											'taxonomy' => Person_Career::SLUG,
 											'field'    => 'term_id',
 											'terms'    => $rt_career_term->term_id,
 									),

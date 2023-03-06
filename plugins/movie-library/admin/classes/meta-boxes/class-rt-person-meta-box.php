@@ -7,16 +7,13 @@
 
 namespace MovieLib\admin\classes\meta_boxes;
 
+use MovieLib\admin\classes\custom_post_types\RT_Person;
 use WP_Post;
-use const MovieLib\admin\classes\custom_post_types\RT_PERSON_SLUG;
 
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
-
-const RT_PERSON_META_BASIC_SLUG  = 'rt-person-meta-basic';
-const RT_PERSON_META_SOCIAL_SLUG = 'rt-person-meta-social';
 
 if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) {
 
@@ -26,6 +23,45 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 	class RT_Person_Meta_Box {
 
 		/**
+		 * RT_PERSON_META_BASIC_SLUG
+		 */
+		const PERSON_META_BASIC_SLUG = 'rt-person-meta-basic';
+
+		/**
+		 * RT_PERSON_META_SOCIAL_SLUG
+		 */
+		const PERSON_META_SOCIAL_SLUG = 'rt-person-meta-social';
+
+		/**
+		 * Variable instance.
+		 *
+		 * @var ?RT_Person_Meta_Box $instance The single instance of the class.
+		 */
+		protected static ?RT_Person_Meta_Box $instance = null;
+
+		/**
+		 *  Main RT_Person_Meta_Box Instance.
+		 *  Ensures only one instance of RT_Person_Meta_Box is loaded or can be loaded.
+		 *
+		 * @return RT_Person_Meta_Box - Main instance.
+		 */
+		public static function instance(): RT_Person_Meta_Box {
+
+			if ( is_null( self::$instance ) ) {
+
+				self::$instance = new self();
+
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * RT_Person_Meta_Box Constructor.
+		 */
+		private function __construct() {}
+
+		/**
 		 * This function is used to create the meta-box for basic information and social information.
 		 *
 		 * @return void
@@ -33,19 +69,19 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 		public function create_meta_box():void {
 
 			add_meta_box(
-				RT_PERSON_META_BASIC_SLUG,
+				self::PERSON_META_BASIC_SLUG,
 				__( 'Basic', 'movie-library' ),
 				array( $this, 'rt_person_meta_basic' ),
-				array( RT_PERSON_SLUG ),
+				array( RT_Person::SLUG ),
 				'side',
 				'high'
 			);
 
 			add_meta_box(
-				RT_PERSON_META_SOCIAL_SLUG,
+				self::PERSON_META_SOCIAL_SLUG,
 				__( 'Social', 'movie-library' ),
 				array( $this, 'rt_person_meta_social' ),
-				array( RT_PERSON_SLUG ),
+				array( RT_Person::SLUG ),
 				'side',
 				'high'
 			);
@@ -75,14 +111,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 			?>
 
 			<div class = "rt-person-meta-fields rt-person-meta-basic-fields">
-
 				<div class = "rt-person-meta-container rt-person-meta-basic-container rt-person-meta-basic-birth-date-container">
-
 					<label class = "rt-person-meta-label rt-person-meta-basic-label rt-person-meta-basic-birth-date-label"
 						for = "<?php echo esc_attr( $rt_person_meta_basic_key['birth-date'] ); ?>">
-
 						<?php esc_html_e( 'Birth Date', 'movie-library' ); ?>
-
 					</label>
 
 					<input type = "date"
@@ -90,16 +122,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 						class = "rt-person-meta-field rt-person-meta-basic-field rt-person-meta-basic-birth-date-field"
 						name = "<?php echo esc_attr( $rt_person_meta_basic_key['birth-date'] ); ?>"
 						id = "<?php echo esc_attr( $rt_person_meta_basic_key['birth-date'] ); ?>" />
-
 				</div>
 
 				<div class = "rt-person-meta-container rt-person-meta-basic-container rt-person-meta-basic-birth-place-container">
-
 					<label class = "rt-person-meta-label rt-person-meta-basic-label rt-person-meta-basic-birth-place-label"
 						for = "<?php echo esc_attr( $rt_person_meta_basic_key['birth-place'] ); ?>">
-
 						<?php esc_html_e( 'Birth Place', 'movie-library' ); ?>
-
 					</label>
 
 					<input type = "text"
@@ -107,10 +135,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 						class = "rt-person-meta-field rt-person-meta-basic-field rt-person-meta-basic-birth-place-field"
 						name = "<?php echo esc_attr( $rt_person_meta_basic_key['birth-place'] ); ?>"
 						id = "<?php echo esc_attr( $rt_person_meta_basic_key['birth-place'] ); ?>" />
-
 				</div>
-
-
 			</div>
 
 			<?php
@@ -139,14 +164,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 			?>
 
 			<div class = "rt-person-meta-fields rt-person-meta-social-fields">
-
 				<div class = "rt-person-meta-container rt-person-meta-social-container rt-person-meta-social-twitter-container">
-
 					<label class = "rt-person-meta-label rt-person-meta-social-label rt-person-meta-social-twitter-label"
 						for = "<?php echo esc_attr( $rt_person_meta_social_key['twitter'] ); ?>">
-
 						<?php esc_html_e( 'Twitter', 'movie-library' ); ?>
-
 					</label>
 
 					<input type = "text"
@@ -156,16 +177,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 						id = "<?php echo esc_attr( $rt_person_meta_social_key['twitter'] ); ?>"/>
 
 					<span class = "rt-person-meta-field-error rt-person-meta-social-field-error rt-person-meta-social-twitter-field-error" id="rt-person-meta-social-twitter-field-error"></span>
-
 				</div>
 
 				<div class = "rt-person-meta-container rt-person-meta-social-container rt-person-meta-social-facebook-container">
-
 					<label class = "rt-person-meta-label rt-person-meta-social-label rt-person-meta-social-facebook-label"
 						for = "<?php echo esc_attr( $rt_person_meta_social_key['facebook'] ); ?>">
-
 						<?php esc_html_e( 'Facebook', 'movie-library' ); ?>
-
 					</label>
 
 					<input type = "text"
@@ -175,16 +192,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 						id = "<?php echo esc_attr( $rt_person_meta_social_key['facebook'] ); ?>"/>
 
 					<span class = "rt-person-meta-field-error rt-person-meta-social-field-error rt-person-meta-social-facebook-field-error" id="rt-person-meta-social-facebook-field-error"></span>
-
 				</div>
 
 				<div class = "rt-person-meta-container rt-person-meta-social-container rt-person-meta-social-instagram-container">
-
 					<label class = "rt-person-meta-label rt-person-meta-social-label rt-person-meta-social-instagram-label"
 						for = "<?php echo esc_attr( $rt_person_meta_social_key['instagram'] ); ?>">
-
 						<?php esc_html_e( 'Instagram', 'movie-library' ); ?>
-
 					</label>
 
 					<input type = "text"
@@ -194,16 +207,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 						id = "<?php echo esc_attr( $rt_person_meta_social_key['instagram'] ); ?>"/>
 
 					<span class = "rt-person-meta-field-error rt-person-meta-social-field-error rt-person-meta-social-instagram-field-error" id="rt-person-meta-social-instagram-field-error"></span>
-
 				</div>
 
 				<div class = "rt-person-meta-container rt-person-meta-social-container rt-person-meta-social-website-container">
-
 					<label class = "rt-person-meta-label rt-person-meta-social-label rt-person-meta-social-website-label"
 						for = "<?php echo esc_attr( $rt_person_meta_social_key['Website'] ); ?>">
-
 						<?php esc_html_e( 'Website', 'movie-library' ); ?>
-
 					</label>
 
 					<input type = "text"
@@ -213,9 +222,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 						id = "<?php echo esc_attr( $rt_person_meta_social_key['website'] ); ?>" />
 
 					<span class = "rt-person-meta-field-error rt-person-meta-social-field-error rt-person-meta-social-website-field-error" id="rt-person-meta-social-website-field-error"></span>
-
 				</div>
-
 			</div>
 
 			<?php
@@ -250,7 +257,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 
 			/** OK, it's safe for us to save the data now. */
 
-			$rt_media_meta_box = new RT_Media_Meta_Box();
+			$rt_media_meta_box = RT_Media_Meta_Box::instance();
 			$rt_media_meta_box->save_rt_movie_meta_images( $post_id );
 			$rt_media_meta_box->save_rt_movie_meta_videos( $post_id );
 
