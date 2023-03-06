@@ -8,6 +8,7 @@
 namespace MovieLib\admin\classes\taxonomies;
 
 use MovieLib\admin\classes\custom_post_types\RT_Person;
+use MovieLib\includes\Singleton;
 
 /**
  * This is a security measure to prevent direct access to the file.
@@ -21,39 +22,23 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Person_Career' ) ) {
 	 */
 	class Person_Career {
 
+		use Singleton;
+
 		/**
 		 * RT_PERSON_CAREER_SLUG
 		 */
 		const SLUG = 'rt-person-career';
 
 		/**
-		 * Variable instance.
+		 * Person_Career init method.
 		 *
-		 * @var ?Person_Career $instance The single instance of the class.
+		 * @return void
 		 */
-		protected static ?Person_Career $instance = null;
+		protected function init(): void {
 
-		/**
-		 *  Main Person_Career Instance.
-		 *  Ensures only one instance of Person_Career is loaded or can be loaded.
-		 *
-		 * @return Person_Career - Main instance.
-		 */
-		public static function instance(): Person_Career {
+			$this->register();
 
-			if ( is_null( self::$instance ) ) {
-
-				self::$instance = new self();
-
-			}
-
-			return self::$instance;
 		}
-
-		/**
-		 * Person_Career Constructor.
-		 */
-		private function __construct() {}
 
 		/**
 		 * This function is used to register rt-person-career taxonomy.
@@ -66,8 +51,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Person_Career' ) ) {
 				'post_type' => array( RT_Person::SLUG ),
 				'args'      => array(
 					'labels'             => array(
-						'name'                       => _x( 'Careers', 'taxonomy general name', 'movie-library' ),
-						'singular_name'              => _x( 'Career', 'taxonomy singular name', 'movie-library' ),
+						'name'                       => __( 'Careers', 'movie-library' ),
+						'singular_name'              => __( 'Career', 'movie-library' ),
 						'search_items'               => __( 'Search Careers', 'movie-library' ),
 						'popular_items'              => __( 'Popular Careers', 'movie-library' ),
 						'all_items'                  => __( 'All Career', 'movie-library' ),

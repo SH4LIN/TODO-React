@@ -9,6 +9,7 @@ namespace MovieLib\admin\classes\shortcodes;
 
 use MovieLib\admin\classes\custom_post_types\RT_Person;
 use MovieLib\admin\classes\taxonomies\Person_Career;
+use MovieLib\includes\Singleton;
 use WP_Query;
 
 /**
@@ -23,34 +24,18 @@ if ( ! class_exists( 'MovieLib\admin\classes\shortcodes\Person_Shortcode' ) ) {
 	 */
 	class Person_Shortcode {
 
-		/**
-		 * Variable instance.
-		 *
-		 * @var ?Person_Shortcode $instance The single instance of the class.
-		 */
-		protected static ?Person_Shortcode $instance = null;
+		use Singleton;
 
 		/**
-		 *  Main Person_Shortcode Instance.
-		 *  Ensures only one instance of Person_Shortcode is loaded or can be loaded.
+		 * Person_Shortcode init method.
 		 *
-		 * @return Person_Shortcode - Main instance.
+		 * @return void
 		 */
-		public static function instance(): Person_Shortcode {
+		protected function init(): void {
 
-			if ( is_null( self::$instance ) ) {
+			add_action( 'init', array( $this, 'register' ) );
 
-				self::$instance = new self();
-
-			}
-
-			return self::$instance;
 		}
-
-		/**
-		 * Person_Shortcode Constructor.
-		 */
-		private function __construct() {}
 
 		/**
 		 * This function is used to register person shortcode.

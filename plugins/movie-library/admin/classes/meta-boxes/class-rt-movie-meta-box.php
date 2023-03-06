@@ -11,6 +11,7 @@ use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\custom_post_types\RT_Person;
 use MovieLib\admin\classes\taxonomies\Movie_Person;
 use MovieLib\admin\classes\taxonomies\Person_Career;
+use MovieLib\includes\Singleton;
 use WP_Post;
 use WP_Query;
 
@@ -26,6 +27,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 	 */
 	class RT_Movie_Meta_Box {
 
+		use Singleton;
+
 		/**
 		 * RT_MOVIE_META_BASIC_SLUG
 		 */
@@ -37,33 +40,15 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 		const MOVIE_META_CREW_SLUG = 'rt-movie-meta-crew';
 
 		/**
-		 * Variable instance.
+		 * RT_Movie_Meta_Box init method.
 		 *
-		 * @var ?RT_Movie_Meta_Box $instance The single instance of the class.
+		 * @return void
 		 */
-		protected static ?RT_Movie_Meta_Box $instance = null;
+		protected function init(): void {
 
-		/**
-		 *  Main RT_Movie_Meta_Box Instance.
-		 *  Ensures only one instance of RT_Movie_Meta_Box is loaded or can be loaded.
-		 *
-		 * @return RT_Movie_Meta_Box - Main instance.
-		 */
-		public static function instance(): RT_Movie_Meta_Box {
+			add_action( 'add_meta_boxes', array( $this, 'create_meta_box' ) );
 
-			if ( is_null( self::$instance ) ) {
-
-				self::$instance = new self();
-
-			}
-
-			return self::$instance;
 		}
-
-		/**
-		 * RT_Movie_Meta_Box Constructor.
-		 */
-		private function __construct() {}
 
 		/**
 		 * This function is used to create the meta-box for basic information and crew information.
@@ -81,14 +66,14 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 				'high'
 			);
 
-				add_meta_box(
-					self::MOVIE_META_CREW_SLUG,
-					__( 'Crew', 'movie-library' ),
-					array( $this, 'rt_movie_meta_crew' ),
-					array( RT_Movie::SLUG ),
-					'side',
-					'high'
-				);
+			add_meta_box(
+				self::MOVIE_META_CREW_SLUG,
+				__( 'Crew', 'movie-library' ),
+				array( $this, 'rt_movie_meta_crew' ),
+				array( RT_Movie::SLUG ),
+				'side',
+				'high'
+			);
 		}
 
 		/**

@@ -8,6 +8,7 @@
 namespace MovieLib\admin\classes\taxonomies;
 
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
+use MovieLib\includes\Singleton;
 
 /**
  * This is a security measure to prevent direct access to the file.
@@ -21,39 +22,23 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Production_Company
 	 */
 	class Movie_Production_Company {
 
+		use Singleton;
+
 		/**
 		 * RT_MOVIE_PRODUCTION_COMPANY_SLUG
 		 */
 		const SLUG = 'rt-movie-production-company';
 
 		/**
-		 * Variable instance.
+		 * Movie_Production_Company init method.
 		 *
-		 * @var ?Movie_Production_Company $instance The single instance of the class.
+		 * @return void
 		 */
-		protected static ?Movie_Production_Company $instance = null;
+		protected function init(): void {
 
-		/**
-		 *  Main Movie_Production_Company Instance.
-		 *  Ensures only one instance of Movie_Production_Company is loaded or can be loaded.
-		 *
-		 * @return Movie_Production_Company - Main instance.
-		 */
-		public static function instance(): Movie_Production_Company {
+			$this->register();
 
-			if ( is_null( self::$instance ) ) {
-
-				self::$instance = new self();
-
-			}
-
-			return self::$instance;
 		}
-
-		/**
-		 * Movie_Production_Company Constructor.
-		 */
-		private function __construct() {}
 
 		/**
 		 * This function is used to register rt-movie-production-company taxonomy.
@@ -66,14 +51,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Production_Company
 				'post_type' => array( RT_Movie::SLUG ),
 				'args'      => array(
 					'labels'             => array(
-						'name'                       => _x(
+						'name'                       => __(
 							'Production companies',
-							'taxonomy general name',
 							'movie-library'
 						),
-						'singular_name'              => _x(
+						'singular_name'              => __(
 							'Production company',
-							'taxonomy singular name',
 							'movie-library'
 						),
 						'search_items'               => __( 'Search Production companies', 'movie-library' ),

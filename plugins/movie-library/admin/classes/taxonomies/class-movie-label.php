@@ -8,6 +8,7 @@
 namespace MovieLib\admin\classes\taxonomies;
 
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
+use MovieLib\includes\Singleton;
 
 /**
  * This is a security measure to prevent direct access to the file.
@@ -21,39 +22,23 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Label' ) ) {
 	 */
 	class Movie_Label {
 
+		use Singleton;
+
 		/**
 		 * RT_MOVIE_LABEL_SLUG
 		 */
 		const SLUG = 'rt-movie-label';
 
 		/**
-		 * Variable instance.
+		 * Movie_Label init method.
 		 *
-		 * @var ?Movie_Label $instance The single instance of the class.
+		 * @return void
 		 */
-		protected static ?Movie_Label $instance = null;
+		protected function init(): void {
 
-		/**
-		 *  Main Movie_Label Instance.
-		 *  Ensures only one instance of Movie_Label is loaded or can be loaded.
-		 *
-		 * @return Movie_Label - Main instance.
-		 */
-		public static function instance(): Movie_Label {
+			$this->register();
 
-			if ( is_null( self::$instance ) ) {
-
-				self::$instance = new self();
-
-			}
-
-			return self::$instance;
 		}
-
-		/**
-		 * Movie_Label Constructor.
-		 */
-		private function __construct() {}
 
 		/**
 		 * This function is used to register rt-movie-label taxonomy.
@@ -66,8 +51,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Label' ) ) {
 				'post_type' => array( RT_Movie::SLUG ),
 				'args'      => array(
 					'labels'             => array(
-						'name'                       => _x( 'Labels', 'taxonomy general name', 'movie-library' ),
-						'singular_name'              => _x( 'Label', 'taxonomy singular name', 'movie-library' ),
+						'name'                       => __( 'Labels', 'movie-library' ),
+						'singular_name'              => __( 'Label', 'movie-library' ),
 						'search_items'               => __( 'Search Labels', 'movie-library' ),
 						'popular_items'              => __( 'Popular Labels', 'movie-library' ),
 						'all_items'                  => __( 'All Labels', 'movie-library' ),
@@ -75,7 +60,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Label' ) ) {
 						'parent_item_colon'          => __( 'Parent Label:', 'movie-library' ),
 						'edit_item'                  => __( 'Edit Label', 'movie-library' ),
 						'update_item'                => __( 'Update Label', 'movie-library' ),
-						'add_new_item'               => __( 'Add New Genre', 'movie-library' ),
+						'add_new_item'               => __( 'Add New Label', 'movie-library' ),
 						'new_item_name'              => __( 'New Genre Name', 'movie-library' ),
 						'separate_items_with_commas' => __( 'Separate labels with commas', 'movie-library' ),
 						'add_or_remove_items'        => __( 'Add or remove labels', 'movie-library' ),

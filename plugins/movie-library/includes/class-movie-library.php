@@ -35,6 +35,7 @@ use MovieLib\admin\classes\taxonomies\Person_Career;
 use WP_Post;
 
 if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
+
 	/**
 	 * This is the main class of the plugin. It is used to initialize the plugin.
 	 * It will include all the required files and will register activation and deactivation hooks.
@@ -43,39 +44,21 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 	 */
 	class Movie_Library {
 
-		/**
-		 * Variable instance.
-		 *
-		 * @var ?Movie_Library $instance The single instance of the class.
-		 */
-		protected static ?Movie_Library $instance = null;
-
-		/**
-		 * Main Movie_Library Instance.
-		 *  Ensures only one instance of Movie_Library is loaded or can be loaded.
-		 *
-		 * @return Movie_Library - Main instance.
-		 */
-		public static function instance(): Movie_Library {
-
-			if ( is_null( self::$instance ) ) {
-
-				self::$instance = new self();
-
-			}
-
-			return self::$instance;
-		}
+		use Singleton;
 
 		/**
 		 * Movie_Library Constructor.
 		 * This constructor will include all the required files and will register activation and deactivation hooks.
+		 *
+		 * @return void
 		 */
-		private function __construct() {
+		protected function init(): void {
 
 			$this->register_hooks();
 			$this->register_custom_post_types();
 			$this->register_custom_taxonomies();
+			$this->add_custom_meta_boxes();
+			$this->setup_environment();
 			flush_rewrite_rules();
 
 		}
@@ -91,14 +74,12 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 
 			$asset = Asset::instance();
 
-			add_action( 'init', array( $this, 'setup_environment' ) );
 			add_action( 'plugins_loaded', array( $this, 'load_plugin_text_domain' ) );
 			add_action( 'admin_enqueue_scripts', array( $asset, 'enqueue_admin_css' ) );
 			add_action( 'admin_enqueue_scripts', array( $asset, 'enqueue_image_video_upload_script' ) );
 			add_action( 'admin_enqueue_scripts', array( $asset, 'enqueue_custom_label_character_script' ) );
 			add_action( 'admin_enqueue_scripts', array( $asset, 'enqueue_validation_script' ) );
 			add_action( 'wp_enqueue_scripts', array( $asset, 'enqueue_frontend_scripts' ) );
-			add_action( 'add_meta_boxes', array( $this, 'add_custom_meta_boxes' ) );
 			add_action( 'save_post', array( $movie_library_save_post, 'save_custom_post' ), 10, 3 );
 			add_action(
 				'admin_menu',
@@ -119,11 +100,8 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		private function register_custom_post_types(): void {
 
-			$rt_movie = RT_Movie::instance();
-			$rt_movie->register();
-
-			$rt_person = RT_Person::instance();
-			$rt_person->register();
+			RT_Movie::instance();
+			RT_Person::instance();
 
 		}
 
@@ -134,26 +112,13 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		private function register_custom_taxonomies(): void {
 
-			$rt_movie_genre = Movie_Genre::instance();
-			$rt_movie_genre->register();
-
-			$rt_movie_language = Movie_Language::instance();
-			$rt_movie_language->register();
-
-			$rt_movie_label = Movie_Label::instance();
-			$rt_movie_label->register();
-
-			$rt_movie_person = Movie_Person::instance();
-			$rt_movie_person->register();
-
-			$rt_movie_production_company = Movie_Production_Company::instance();
-			$rt_movie_production_company->register();
-
-			$rt_movie_tag = Movie_Tag::instance();
-			$rt_movie_tag->register();
-
-			$rt_person_career = Person_Career::instance();
-			$rt_person_career->register();
+			Movie_Genre::instance();
+			Movie_Language::instance();
+			Movie_Label::instance();
+			Movie_Person::instance();
+			Movie_Production_Company::instance();
+			Movie_Tag::instance();
+			Person_Career::instance();
 
 		}
 
@@ -164,11 +129,8 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		public function setup_environment(): void {
 
-			$movie_shortcode = Movie_Shortcode::instance();
-			$movie_shortcode->register();
-
-			$person_shortcode = Person_Shortcode::instance();
-			$person_shortcode->register();
+			Movie_Shortcode::instance();
+			Person_Shortcode::instance();
 
 		}
 
@@ -190,14 +152,9 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		public function add_custom_meta_boxes(): void {
 
-			$rt_movie_meta_box = RT_Movie_Meta_Box::instance();
-			$rt_movie_meta_box->create_meta_box();
-
-			$rt_person_meta_box = RT_Person_Meta_Box::instance();
-			$rt_person_meta_box->create_meta_box();
-
-			$rt_media_meta_box = RT_Media_Meta_Box::instance();
-			$rt_media_meta_box->create_meta_box();
+			RT_Movie_Meta_Box::instance();
+			RT_Person_Meta_Box::instance();
+			RT_Media_Meta_Box::instance();
 
 		}
 

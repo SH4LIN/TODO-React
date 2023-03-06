@@ -9,6 +9,7 @@ namespace MovieLib\admin\classes;
 
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\custom_post_types\RT_Person;
+use MovieLib\includes\Singleton;
 
 /**
  * This is a security measure to prevent direct access to the file.
@@ -22,35 +23,17 @@ if ( ! class_exists( 'MovieLib\admin\classes\Asset' ) ) {
 	 */
 	class Asset {
 
+		use Singleton;
+
 		/**
-		 * Variable instance.
+		 * Asset init method.
 		 *
-		 * @var ?Asset $instance The single instance of the class.
+		 * @return void
 		 */
-		protected static ?Asset $instance = null;
+		protected function init(): void {
 
-		/**
-		 *  Main Asset Instance.
-		 *  Ensures only one instance of Asset is loaded or can be loaded.
-		 *
-		 * @return Asset - Main instance.
-		 */
-		public static function instance(): Asset {
-
-			if ( is_null( self::$instance ) ) {
-
-				self::$instance = new self();
-
-			}
-
-			return self::$instance;
-		}
-
-		/**
-		 * Movie_Library_Save_Post Constructor.
-		 */
-		private function __construct() {
 			$this->register_scripts();
+
 		}
 
 		/**
@@ -66,7 +49,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Asset' ) ) {
 				'movie-library-image-video-upload',
 				MLB_PLUGIN_URL . 'admin/js/movie-library-image-video-upload.js',
 				array( 'wp-i18n', 'jquery' ),
-				MLB_PLUGIN_VERSION,
+				filemtime( MLB_PLUGIN_DIR . 'admin/js/movie-library-image-video-upload.js' ),
 				true
 			);
 
@@ -77,7 +60,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Asset' ) ) {
 					'wp-hooks',
 					'wp-i18n',
 				),
-				MLB_PLUGIN_VERSION,
+				filemtime( MLB_PLUGIN_DIR . 'admin/js/movie-library-custom-label.js' ),
 				true
 			);
 
@@ -87,7 +70,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Asset' ) ) {
 				array(
 					'wp-i18n',
 				),
-				MLB_PLUGIN_VERSION,
+				filemtime( MLB_PLUGIN_DIR . 'admin/js/movie-library-character.js' ),
 				true
 			);
 
@@ -97,7 +80,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Asset' ) ) {
 				array(
 					'wp-i18n',
 				),
-				MLB_PLUGIN_VERSION,
+				filemtime( MLB_PLUGIN_DIR . 'admin/js/movie-library-rt-movie-validation.js' ),
 				true
 			);
 
@@ -107,7 +90,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Asset' ) ) {
 				array(
 					'wp-i18n',
 				),
-				MLB_PLUGIN_VERSION,
+				filemtime( MLB_PLUGIN_DIR . 'admin/js/movie-library-rt-person-validation.js' ),
 				true
 			);
 
@@ -120,7 +103,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Asset' ) ) {
 		 */
 		public function enqueue_admin_css(): void {
 
-			wp_enqueue_style( 'movie-library-admin', MLB_PLUGIN_URL . 'admin/css/movie-library-admin.css', array(), MLB_PLUGIN_VERSION );
+			wp_enqueue_style( 'movie-library-admin', MLB_PLUGIN_URL . 'admin/css/movie-library-admin.css', array(), filemtime( MLB_PLUGIN_DIR . 'admin/css/movie-library-admin.css' ) );
 
 		}
 
@@ -186,8 +169,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\Asset' ) ) {
 		 */
 		public function enqueue_frontend_scripts(): void {
 
-			wp_enqueue_style( 'movie-library-frontend', MLB_PLUGIN_URL . 'public/css/movie-library-frontend.css', array(), MLB_PLUGIN_VERSION );
-			wp_enqueue_script( 'movie-library-frontend', MLB_PLUGIN_URL . 'public/js/movie-library-frontend.js', array(), MLB_PLUGIN_VERSION, true );
+			wp_enqueue_style( 'movie-library-frontend', MLB_PLUGIN_URL . 'public/css/movie-library-frontend.css', array(), filemtime( MLB_PLUGIN_DIR . 'public/css/movie-library-frontend.css' ) );
+			wp_enqueue_script( 'movie-library-frontend', MLB_PLUGIN_URL . 'public/js/movie-library-frontend.js', array(), filemtime( MLB_PLUGIN_DIR . 'public/js/movie-library-frontend.js' ), true );
 
 		}
 

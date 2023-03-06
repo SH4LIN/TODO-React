@@ -12,6 +12,8 @@ use MovieLib\admin\classes\custom_post_types\RT_Person;
 use MovieLib\admin\classes\taxonomies\Movie_Genre;
 use MovieLib\admin\classes\taxonomies\Movie_Label;
 use MovieLib\admin\classes\taxonomies\Movie_Language;
+use MovieLib\admin\classes\taxonomies\Movie_Person;
+use MovieLib\includes\Singleton;
 use WP_Query;
 
 /**
@@ -26,34 +28,18 @@ if ( ! class_exists( 'MovieLib\admin\classes\shortcodes\Movie_Shortcode' ) ) {
 	 */
 	class Movie_Shortcode {
 
-		/**
-		 * Variable instance.
-		 *
-		 * @var ?Movie_Shortcode $instance The single instance of the class.
-		 */
-		protected static ?Movie_Shortcode $instance = null;
+		use Singleton;
 
 		/**
-		 *  Main Movie_Shortcode Instance.
-		 *  Ensures only one instance of Movie_Shortcode is loaded or can be loaded.
+		 * Movie_Shortcode init method.
 		 *
-		 * @return Movie_Shortcode - Main instance.
+		 * @return void
 		 */
-		public static function instance(): Movie_Shortcode {
+		protected function init(): void {
 
-			if ( is_null( self::$instance ) ) {
+			add_action( 'init', array( $this, 'register' ) );
 
-				self::$instance = new self();
-
-			}
-
-			return self::$instance;
 		}
-
-		/**
-		 * Movie_Shortcode Constructor.
-		 */
-		private function __construct() {}
 
 		/**
 		 * This function is used to register movie shortcode.

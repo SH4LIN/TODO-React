@@ -7,6 +7,8 @@
 
 namespace MovieLib\admin\classes\custom_post_types;
 
+use MovieLib\includes\Singleton;
+
 /**
  * This is a security measure to prevent direct access to the file.
  */
@@ -19,39 +21,23 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Person' ) ) {
 	 */
 	class RT_Person {
 
+		use Singleton;
+
 		/**
 		 * RT_PERSON_SLUG
 		 */
 		const SLUG = 'rt-person';
 
 		/**
-		 * Variable instance.
+		 * RT_Person init method.
 		 *
-		 * @var ?RT_Person $instance The single instance of the class.
+		 * @return void
 		 */
-		protected static ?RT_Person $instance = null;
+		protected function init():void {
 
-		/**
-		 *  Main Rt_Person Instance.
-		 *  Ensures only one instance of Rt_Person is loaded or can be loaded.
-		 *
-		 * @return RT_Person - Main instance.
-		 */
-		public static function instance(): RT_Person {
+			$this->register();
 
-			if ( is_null( self::$instance ) ) {
-
-				self::$instance = new self();
-
-			}
-
-			return self::$instance;
 		}
-
-		/**
-		 * RT_Person Constructor.
-		 */
-		private function __construct() {}
 
 		/**
 		 * This function is used to register rt-person custom post type.
@@ -61,27 +47,26 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Person' ) ) {
 		public function register(): void {
 			$args = array(
 				'labels'             => array(
-					'name'                  => __( 'People', 'movie-library' ),
+					'name'                  => __( 'Persons', 'movie-library' ),
 					'singular_name'         => __( 'Person', 'movie-library' ),
-					'menu_name'             => __( 'People', 'movie-library' ),
+					'menu_name'             => __( 'Persons', 'movie-library' ),
 					'name_admin_bar'        => __( 'Person', 'movie-library' ),
 					'add_new'               => __( 'Add New', 'movie-library' ),
 					'add_new_item'          => __( 'Add New Person', 'movie-library' ),
 					'new_item'              => __( 'New Person', 'movie-library' ),
 					'edit_item'             => __( 'Edit Person', 'movie-library' ),
 					'view_item'             => __( 'View Person', 'movie-library' ),
-					'all_items'             => __( 'All People', 'movie-library' ),
-					'search_items'          => __( 'Search People', 'movie-library' ),
-					'parent_item_colon'     => __( 'Parent People:', 'movie-library' ),
-					'not_found'             => __( 'No people found.', 'movie-library' ),
-					'not_found_in_trash'    => __( 'No people found in Trash.', 'movie-library' ),
-					'featured_image'        => _x( 'Profile picture', 'person', 'movie-library' ),
-					'set_featured_image'    => _x( 'Set Profile picture', 'person', 'movie-library' ),
-					'remove_featured_image' => _x( 'Remove Profile picture', 'person', 'movie-library' ),
-					'use_featured_image'    => _x( 'Use as Profile picture', 'person', 'movie-library' ),
-					'archives'              => _x(
+					'all_items'             => __( 'All Persons', 'movie-library' ),
+					'search_items'          => __( 'Search Persons', 'movie-library' ),
+					'parent_item_colon'     => __( 'Parent Persons:', 'movie-library' ),
+					'not_found'             => __( 'No Persons found.', 'movie-library' ),
+					'not_found_in_trash'    => __( 'No Persons found in Trash.', 'movie-library' ),
+					'featured_image'        => __( 'Profile picture', 'movie-library' ),
+					'set_featured_image'    => __( 'Set Profile picture', 'movie-library' ),
+					'remove_featured_image' => __( 'Remove Profile picture', 'movie-library' ),
+					'use_featured_image'    => __( 'Use as Profile picture', 'movie-library' ),
+					'archives'              => __(
 						'Person archives',
-						'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4',
 						'movie-library'
 					),
 				),
@@ -93,7 +78,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Person' ) ) {
 				'query_var'          => true,
 				'rewrite'            => false,
 				'capability_type'    => 'post',
-				'has_archive'        => 'people',
+				'has_archive'        => 'Persons',
 				'hierarchical'       => false,
 				'menu_position'      => null,
 				'menu_icon'          => 'dashicons-businessman',

@@ -8,6 +8,7 @@
 namespace MovieLib\admin\classes\taxonomies;
 
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
+use MovieLib\includes\Singleton;
 
 /**
  * This is a security measure to prevent direct access to the file.
@@ -21,39 +22,23 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Language' ) ) {
 	 */
 	class Movie_Language {
 
+		use Singleton;
+
 		/**
 		 * RT_MOVIE_LANGUAGE_SLUG
 		 */
 		const SLUG = 'rt-movie-language';
 
 		/**
-		 * Variable instance.
+		 * Movie_Language init method.
 		 *
-		 * @var ?Movie_Language $instance The single instance of the class.
+		 * @return void
 		 */
-		protected static ?Movie_Language $instance = null;
+		protected function init(): void {
 
-		/**
-		 *  Main Movie_Language Instance.
-		 *  Ensures only one instance of Movie_Language is loaded or can be loaded.
-		 *
-		 * @return Movie_Language - Main instance.
-		 */
-		public static function instance(): Movie_Language {
+			$this->register();
 
-			if ( is_null( self::$instance ) ) {
-
-				self::$instance = new self();
-
-			}
-
-			return self::$instance;
 		}
-
-		/**
-		 * Movie_Language Constructor.
-		 */
-		private function __construct() {}
 
 		/**
 		 * This function is used to register rt-movie-language taxonomy.
@@ -66,8 +51,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Language' ) ) {
 				'post_type' => array( RT_Movie::SLUG ),
 				'args'      => array(
 					'labels'             => array(
-						'name'                       => _x( 'Languages', 'taxonomy general name', 'movie-library' ),
-						'singular_name'              => _x( 'Language', 'taxonomy singular name', 'movie-library' ),
+						'name'                       => __( 'Languages', 'movie-library' ),
+						'singular_name'              => __( 'Language', 'movie-library' ),
 						'search_items'               => __( 'Search Languages', 'movie-library' ),
 						'popular_items'              => __( 'Popular Languages', 'movie-library' ),
 						'all_items'                  => __( 'All Languages', 'movie-library' ),

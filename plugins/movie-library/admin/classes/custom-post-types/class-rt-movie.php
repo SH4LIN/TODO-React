@@ -7,6 +7,8 @@
 
 namespace MovieLib\admin\classes\custom_post_types;
 
+use MovieLib\includes\Singleton;
+
 /**
  * This is a security measure to prevent direct access to the file.
  */
@@ -19,39 +21,23 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 	 */
 	class RT_Movie {
 
+		use Singleton;
+
 		/**
 		 * RT_MOVIE_SLUG
 		 */
 		const SLUG = 'rt-movie';
 
 		/**
-		 * Variable instance.
+		 * RT_Movie init method.
 		 *
-		 * @var ?RT_Movie $instance The single instance of the class.
+		 * @return void
 		 */
-		protected static ?RT_Movie $instance = null;
+		protected function init(): void {
 
-		/**
-		 *  Main RT_Movie Instance.
-		 *  Ensures only one instance of RT_MOVIE is loaded or can be loaded.
-		 *
-		 * @return RT_Movie - Main instance.
-		 */
-		public static function instance(): RT_Movie {
+			$this->register();
 
-			if ( is_null( self::$instance ) ) {
-
-				self::$instance = new self();
-
-			}
-
-			return self::$instance;
 		}
-
-		/**
-		 * RT_Movie Constructor.
-		 */
-		private function __construct() {}
 
 		/**
 		 * This function is used to register rt-movie custom post type.
@@ -75,13 +61,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 					'parent_item_colon'     => __( 'Parent Movies:', 'movie-library' ),
 					'not_found'             => __( 'No movies found.', 'movie-library' ),
 					'not_found_in_trash'    => __( 'No movies found in Trash.', 'movie-library' ),
-					'featured_image'        => _x( 'Movie Poster', 'movie', 'movie-library' ),
-					'set_featured_image'    => _x( 'Set Movie Poster', 'movie', 'movie-library' ),
-					'remove_featured_image' => _x( 'Remove Movie Poster', 'movie', 'movie-library' ),
-					'use_featured_image'    => _x( 'Use as Movie Poster', 'movie', 'movie-library' ),
-					'archives'              => _x(
+					'featured_image'        => __( 'Movie Poster', 'movie-library' ),
+					'set_featured_image'    => __( 'Set Movie Poster', 'movie-library' ),
+					'remove_featured_image' => __( 'Remove Movie Poster', 'movie-library' ),
+					'use_featured_image'    => __( 'Use as Movie Poster', 'movie-library' ),
+					'archives'              => __(
 						'Movie archives',
-						'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4',
 						'movie-library'
 					),
 				),

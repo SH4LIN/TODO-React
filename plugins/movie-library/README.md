@@ -115,6 +115,60 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 6. **Settings page created**
 ---
    	The settings page is created with a checkbox for the user to check and a proper warning of what will happen if the user checks that checkbox.
+
+## Directory Structure
+```bash
+.
+|-- README.md
+|-- admin
+|   |-- classes
+|   |   |-- class-asset.php
+|   |   |-- class-movie-library-save-post.php
+|   |   |-- class-settings-page.php
+|   |   |-- custom-post-types
+|   |   |   |-- class-rt-movie.php
+|   |   |   `-- class-rt-person.php
+|   |   |-- meta-boxes
+|   |   |   |-- class-rt-media-meta-box.php
+|   |   |   |-- class-rt-movie-meta-box.php
+|   |   |   `-- class-rt-person-meta-box.php
+|   |   |-- shortcodes
+|   |   |   |-- class-movie-shortcode.php
+|   |   |   `-- class-person-shortcode.php
+|   |   `-- taxonomies
+|   |       |-- class-movie-genre.php
+|   |       |-- class-movie-label.php
+|   |       |-- class-movie-language.php
+|   |       |-- class-movie-person.php
+|   |       |-- class-movie-production-company.php
+|   |       |-- class-movie-tag.php
+|   |       `-- class-person-career.php
+|   |-- css
+|   |   `-- movie-library-admin.css
+|   `-- js
+|       |-- movie-library-character.js
+|       |-- movie-library-custom-label.js
+|       |-- movie-library-image-video-upload.js
+|       |-- movie-library-rt-movie-validation.js
+|       `-- movie-library-rt-person-validation.js
+|-- includes
+|   |-- class-autoloader.php
+|   |-- class-movie-library.php
+|   `-- class-singleton.php
+|-- index.php
+|-- languages
+|   `-- movie-library.pot
+|-- movie-library.php
+|-- public
+|   |-- classes
+|   |-- css
+|   |   `-- movie-library-frontend.css
+|   `-- js
+|       `-- movie-library-frontend.js
+`-- uninstall.php
+
+15 directories, 34 files
+```
 ## Built with
 ​
 -   **PHP**
