@@ -101,7 +101,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 				'show_in_rest'       => true,
 			);
 
-			register_post_type( self::SLUG, $args );
+			register_post_type( self::SLUG, $args ); // phpcs:ignore WordPress.NamingConventions.ValidPostTypeSlug.NotStringLiteral
 		}
 	}
 }
