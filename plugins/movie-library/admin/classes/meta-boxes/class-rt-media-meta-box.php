@@ -112,16 +112,17 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 
 				<?php
 				if ( isset( $rt_media_meta_images_data_attachment_ids ) && ! empty( $rt_media_meta_images_data_attachment_ids[0] ) ) {
+
 					?>
+
 					<input name = "rt-media-meta-uploaded-images"
 						value = "<?php echo esc_attr( wp_json_encode( $rt_media_meta_images_data_attachment_ids[0] ) ); ?>"
 						hidden = "hidden">
 
 					<h3 class = "rt-media-meta-heading rt-media-meta-images-heading rt-media-meta-uploaded-images-heading">
-
 						<?php esc_html_e( 'Uploaded Images', 'movie-library' ); ?>
-
 					</h3>
+
 					<?php
 				}
 				?>
@@ -143,20 +144,15 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 							?>
 
 							<div class = "rt-media-meta rt-media-meta-image rt-media-meta-uploaded-image">
-
 								<img src = "<?php echo esc_url( $image_url ); ?>" alt = "">
 
 								<span class = "rt-media-meta-remove rt-media-meta-image-remove rt-media-meta-uploaded-image-remove"
 									data-id = "<?php echo esc_attr( $rt_media_meta_image_attachment_id ); ?>">
-
 										X
-
 								</span>
-
 							</div>
 
 							<?php
-
 						}
 
 						?>
@@ -173,16 +169,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 
 			<div class = "rt-media-meta-container rt-media-meta-images-container rt-media-meta-selected-images-container"
 				id = "rt-media-meta-selected-images-container">
-
 			</div>
 
 			<input name = "rt-media-meta-selected-images" hidden = "hidden">
 
 			<button class = "rt-media-meta-add rt-media-meta-add rt-media-meta-images-add"
 				type = "button">
-
 				<?php esc_html_e( 'Add Images', 'movie-library' ); ?>
-
 			</button>
 
 			<?php
@@ -212,7 +205,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 			?>
 
 			<div class = "rt-media-meta-fields rt-media-meta-videos">
-
 				<div class = "rt-media-meta-container rt-media-meta-videos-container rt-media-meta-uploaded-videos-container">
 
 					<?php
@@ -226,9 +218,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 							hidden = "hidden">
 
 						<h3 class = "rt-media-meta-heading rt-media-meta-videos-heading rt-media-meta-uploaded-videos-heading">
-
 							<?php esc_html_e( 'Uploaded Videos', 'movie-library' ); ?>
-
 						</h3>
 
 						<?php
@@ -244,20 +234,14 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 							?>
 
 							<div class = "rt-media-meta rt-media-meta-video rt-media-meta-uploaded-video">
-
 								<video>
-
 									<source src = "<?php echo esc_url( $video_url ); ?>">
-
 								</video>
 
 								<span class = "rt-media-meta-remove rt-media-meta-video-remove rt-media-meta-uploaded-video-remove"
 									data-id = "<?php echo esc_attr( $rt_media_meta_video_attachment_id ); ?>">
-
 										X
-
 								</span>
-
 							</div>
 
 							<?php
@@ -276,14 +260,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 
 				<div class = "rt-media-meta-container rt-media-meta-videos-container rt-media-meta-selected-videos-container"
 					id = "rt-media-meta-selected-videos-container">
-
 				</div>
 
 				<button class = "rt-media-meta-add rt-media-meta-add rt-media-meta-videos-add"
 					type = "button">
-
 					<?php esc_html_e( 'Add Videos', 'movie-library' ); ?>
-
 				</button>
 
 				<input name = "rt-media-meta-selected-videos" hidden = "hidden">

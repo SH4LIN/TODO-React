@@ -175,7 +175,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Settings_Page' ) ) {
 			$this->form_submission_callback             = array( $this, 'remove_plugin_data_settings_submit' );
 			$this->admin_init_callback                  = array( $this, 'movie_library_settings' );
 			$this->remove_plugin_data_section_id        = 'remove_plugin_data_section';
-			$this->remove_plugin_data_section_title     = 'Remove Data';
+			$this->remove_plugin_data_section_title     = __( 'Remove Data', 'movie-library' );
 			$this->remove_plugin_data_section_callback  = array( $this, 'remove_plugin_data_section_callback' );
 			$this->remove_plugin_data_field_callback    = array( $this, 'remove_plugin_data_field_callback' );
 			$this->remove_plugin_data_field_title       = __( 'Remove Plugin Data', 'movie-library' );

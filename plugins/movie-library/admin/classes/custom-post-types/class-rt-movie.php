@@ -61,10 +61,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 		public function register(): void {
 			$args = array(
 				'labels'             => array(
-					'name'                  => _x( 'Movies', 'Post type general name', 'movie-library' ),
-					'singular_name'         => _x( 'Movie', 'Post type singular name', 'movie-library' ),
-					'menu_name'             => _x( 'Movies', 'Admin Menu text', 'movie-library' ),
-					'name_admin_bar'        => _x( 'Movie', 'Add New on Toolbar', 'movie-library' ),
+					'name'                  => __( 'Movies', 'movie-library' ),
+					'singular_name'         => __( 'Movie', 'movie-library' ),
+					'menu_name'             => __( 'Movies', 'movie-library' ),
+					'name_admin_bar'        => __( 'Movie', 'movie-library' ),
 					'add_new'               => __( 'Add New', 'movie-library' ),
 					'add_new_item'          => __( 'Add New Movie', 'movie-library' ),
 					'new_item'              => __( 'New Movie', 'movie-library' ),

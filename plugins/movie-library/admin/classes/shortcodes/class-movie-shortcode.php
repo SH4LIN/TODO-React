@@ -1,70 +1,68 @@
 <?php
 /**
- * This file is used to register shortcodes for the plugin.
+ * This file is used to create movie shortcode.
  *
- * @package MovieLib\admin\classes
+ * @package MovieLib\admin\classes\shortcodes
  */
 
-namespace MovieLib\admin\classes;
+namespace MovieLib\admin\classes\shortcodes;
+
+use MovieLib\admin\classes\custom_post_types\RT_Movie;
+use MovieLib\admin\classes\custom_post_types\RT_Person;
+use MovieLib\admin\classes\taxonomies\Movie_Genre;
+use MovieLib\admin\classes\taxonomies\Movie_Label;
+use MovieLib\admin\classes\taxonomies\Movie_Language;
+use WP_Query;
 
 /**
  * This is a security measure to prevent direct access to the file.
  */
 defined( 'ABSPATH' ) || exit;
 
-use WP_Query;
-use const MovieLib\admin\classes\custom_post_types\RT_MOVIE_SLUG;
-use const MovieLib\admin\classes\custom_post_types\RT_PERSON_SLUG;
-use const MovieLib\admin\classes\taxonomies\RT_MOVIE_GENRE_SLUG;
-use const MovieLib\admin\classes\taxonomies\RT_MOVIE_LABEL_SLUG;
-use const MovieLib\admin\classes\taxonomies\RT_MOVIE_LANGUAGE_SLUG;
-use const MovieLib\admin\classes\taxonomies\RT_MOVIE_PERSON_SLUG;
-use const MovieLib\admin\classes\taxonomies\RT_PERSON_CAREER_SLUG;
+if ( ! class_exists( 'MovieLib\admin\classes\shortcodes\Movie_Shortcode' ) ) {
 
-if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 	/**
-	 * This class is used to register shortcodes for the plugin.
-	 *
-	 * @version 1.0.0
+	 * This class is used to create movie shortcode.
 	 */
-	class Shortcodes {
+	class Movie_Shortcode {
 
 		/**
-		 * This function is used to register shortcodes for the plugin.
+		 * Variable instance.
 		 *
-		 * @return void
+		 * @var ?Movie_Shortcode $instance The single instance of the class.
 		 */
-		public function register_shortcodes(): void {
+		protected static ?Movie_Shortcode $instance = null;
 
-			$shortcodes = $this->get_shortcodes();
+		/**
+		 *  Main Movie_Shortcode Instance.
+		 *  Ensures only one instance of Movie_Shortcode is loaded or can be loaded.
+		 *
+		 * @return Movie_Shortcode - Main instance.
+		 */
+		public static function instance(): Movie_Shortcode {
 
-			foreach ( $shortcodes as $shortcode => $data ) {
+			if ( is_null( self::$instance ) ) {
 
-				if ( ! shortcode_exists( $shortcode ) ) {
+				self::$instance = new self();
 
-					add_shortcode( $shortcode, $data['callback'] );
-
-				}
 			}
 
+			return self::$instance;
 		}
 
 		/**
-		 * This function is used to get the shortcodes for the plugin.
-		 * For future reference if you want to add some more shortcode just add it here.
-		 *
-		 * @return array[]
+		 * Movie_Shortcode Constructor.
 		 */
-		private function get_shortcodes(): array {
+		private function __construct() {}
 
-			return array(
-				'movie'  => array(
-					'callback' => array( $this, 'movie_library_movie_shortcode' ),
-				),
-				'person' => array(
-					'callback' => array( $this, 'movie_library_person_shortcode' ),
-				),
-			);
+		/**
+		 * This function is used to register movie shortcode.
+		 *
+		 * @return void
+		 */
+		public function register(): void {
+
+			add_shortcode( 'movie', array( $this, 'movie_library_movie_shortcode' ) );
 
 		}
 
@@ -102,7 +100,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 
 				$person = new Wp_Query(
 					array(
-						'post_type' => RT_PERSON_SLUG,
+						'post_type' => RT_Person::SLUG,
 						'title'     => $name,
 						'fields'    => 'ids',
 					)
@@ -112,7 +110,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 
 					$person = new Wp_Query(
 						array(
-							'post_type' => RT_PERSON_SLUG,
+							'post_type' => RT_Person::SLUG,
 							'name'      => $name,
 							'fields'    => 'ids',
 						)
@@ -126,7 +124,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 				}
 
 				$search_query[] = array(
-					'taxonomy' => RT_MOVIE_PERSON_SLUG,
+					'taxonomy' => Movie_Person::SLUG,
 					'field'    => 'slug',
 					'terms'    => $person->get_posts(),
 				);
@@ -138,21 +136,21 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 			if ( ! empty( $attributes['genre'] ) ) {
 
 				$terms          = sanitize_text_field( $attributes['genre'] );
-				$search_query[] = $this->get_search_query( $terms, RT_MOVIE_GENRE_SLUG );
+				$search_query[] = $this->get_search_query( $terms, Movie_Genre::SLUG );
 
 			}
 
 			if ( ! empty( $attributes['label'] ) ) {
 
 				$terms          = sanitize_text_field( $attributes['label'] );
-				$search_query[] = $this->get_search_query( $terms, RT_MOVIE_LABEL_SLUG );
+				$search_query[] = $this->get_search_query( $terms, Movie_Label::SLUG );
 
 			}
 
 			if ( ! empty( $attributes['language'] ) ) {
 
 				$terms          = sanitize_text_field( $attributes['language'] );
-				$search_query[] = $this->get_search_query( $terms, RT_MOVIE_LANGUAGE_SLUG );
+				$search_query[] = $this->get_search_query( $terms, Movie_Language::SLUG );
 
 			}
 
@@ -166,7 +164,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 
 				$query = new WP_Query(
 					array(
-						'post_type' => RT_MOVIE_SLUG,
+						'post_type' => RT_Movie::SLUG,
 						'tax_query' => $search_query, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 					)
 				);
@@ -175,7 +173,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 
 				$query = new WP_Query(
 					array(
-						'post_type' => RT_MOVIE_SLUG,
+						'post_type' => RT_Movie::SLUG,
 					)
 				);
 
@@ -227,7 +225,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 
 							foreach ( $movie_crew_director[0] as $value ) {
 
-								$directors[] = get_the_title( $value );
+								$directors[] = get_the_title( $value['person_id'] );
 
 							}
 
@@ -235,7 +233,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 
 						} else {
 
-							$movie_detail['Director'] = get_the_title( $movie_crew_director[0] );
+							$movie_detail['Director'] = get_the_title( $movie_crew_director[0]['person_id'] );
 
 						}
 					}
@@ -256,7 +254,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 
 							foreach ( $movie_crew_actor[0] as $value ) {
 
-								$actors[] = get_the_title( $value );
+								$actors[] = get_the_title( $value['person_id'] );
 
 							}
 
@@ -264,7 +262,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 
 						} else {
 
-							$movie_detail['Actor'] = get_the_title( $movie_crew_actor[0] );
+							$movie_detail['Actor'] = get_the_title( $movie_crew_actor[0]['person_id'] );
 
 						}
 					}
@@ -285,138 +283,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 			<div class="movie-list-container">
 
 				<?php $this->display_movies( $movie_details ); ?>
-
-			</div>
-
-			<?php
-
-			return ob_get_clean();
-
-		}
-
-		/**
-		 * This function is callback function for the person shortcode.
-		 * It will be called when the shortcode is used in the page.
-		 * It will display the list of people.
-		 *
-		 * @param array  $attributes attributes from the shortcode.
-		 * @param string $content content from the shortcode.
-		 * @param string $tag shortcode name.
-		 *
-		 * @return string|false
-		 */
-		public function movie_library_person_shortcode( $attributes = array(), $content = null, $tag = '' ) {
-
-			$attributes = array_change_key_case( (array) $attributes );
-
-			$attributes = shortcode_atts(
-				array(
-					'career' => '',
-				),
-				$attributes,
-				$tag
-			);
-
-			$search_query = array();
-
-			if ( ! empty( $attributes['career'] ) ) {
-
-				$terms          = sanitize_text_field( $attributes['career'] );
-				$search_query[] = $this->get_search_query( $terms, RT_PERSON_CAREER_SLUG );
-
-			}
-
-			if ( ! empty( $search_query ) ) {
-
-				if ( count( $search_query ) > 1 ) {
-
-					$search_query['relation'] = 'AND';
-
-				}
-
-				$query = new WP_Query(
-					array(
-						'post_type' => RT_PERSON_SLUG,
-						'tax_query' => $search_query, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-					)
-				);
-
-			} else {
-
-				$query = new WP_Query(
-					array(
-						'post_type' => RT_PERSON_SLUG,
-					)
-				);
-
-			}
-
-			$people_details = array();
-
-			if ( $query->have_posts() ) {
-
-				while ( $query->have_posts() ) {
-
-					$person_details = array();
-					$query->the_post();
-					$person_id              = get_the_ID();
-					$person_name            = get_the_title();
-					$person_details['Name'] = $person_name;
-
-					if ( has_post_thumbnail( $person_id ) ) {
-
-						$person_poster                     =
-							wp_get_attachment_image_src( get_post_thumbnail_id( $person_id ), 'full' );
-						$person_poster                     = $person_poster[0];
-						$person_details['Profile Picture'] = $person_poster;
-
-					} else {
-
-						$person_details['Profile Picture'] =
-							'https://via.placeholder.com/500';
-
-					}
-
-					$person_career_details = get_the_terms( $person_id, RT_PERSON_CAREER_SLUG );
-
-					if ( ! empty( $person_career_details ) ) {
-
-						if ( is_array( $person_career_details ) ) {
-
-							$careers = array();
-
-							foreach ( $person_career_details as $value ) {
-
-								$careers[] = $value->name;
-
-							}
-
-							$person_details['Career'] = implode( ', ', $careers );
-
-						} else {
-
-							$person_details['Career'] = $person_career_details->title;
-
-						}
-					}
-
-					$people_details[] = $person_details;
-
-				}
-			} else {
-
-				return $this->show_no_people_found_message();
-
-			}
-
-			wp_reset_postdata();
-			ob_start();
-
-			?>
-
-			<div class="movie-list-container">
-
-				<?php $this->display_people( $people_details ); ?>
 
 			</div>
 
@@ -514,65 +380,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 		}
 
 		/**
-		 * This function is used to provide the HTML for the people list.
-		 *
-		 * @param array $people_details People details.
-		 */
-		private function display_people( array $people_details ): void {
-
-			foreach ( $people_details as $person_detail ) {
-
-				?>
-
-				<div class="movie-list-item">
-
-					<div class="movie-list-item-image">
-
-						<img class="movie-image"
-							src="<?php echo esc_url( $person_detail['Profile Picture'] ); ?>"
-							alt="<?php echo esc_attr( $person_detail['Name'] ); ?>">
-
-					</div>
-
-					<div class="movie-list-item-details">
-
-						<div class="movie-list-item-title">
-
-							<?php
-
-							// translators: %1$s is person name.
-							printf( esc_html__( 'Name: %1$s', 'movie-library' ), esc_html( $person_detail['Name'] ) );
-
-							?>
-
-						</div>
-
-						<?php if ( isset( $person_detail['Career'] ) ) : ?>
-
-							<div class="movie-list-item-director">
-
-								<?php
-
-								// translators: %1$s is the career of person.
-								printf( esc_html__( 'Career: %1$s', 'movie-library' ), esc_html( $person_detail['Career'] ) );
-
-								?>
-
-							</div>
-
-						<?php endif; ?>
-
-					</div>
-
-				</div>
-
-				<?php
-
-			}
-
-		}
-
-		/**
 		 * This function will display the message when no movies are found.
 		 *
 		 * @return string|false
@@ -586,29 +393,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 			<p>
 
 				<?php esc_html_e( 'No movies found.', 'movie-library' ); ?>
-
-			</p>
-
-			<?php
-
-			return ob_get_clean();
-
-		}
-
-		/**
-		 * This function will display the message when no people are found.
-		 *
-		 * @return string|false
-		 */
-		private function show_no_people_found_message() {
-
-			ob_start();
-
-			?>
-
-			<p>
-
-				<?php esc_html_e( 'No people found.', 'movie-library' ); ?>
 
 			</p>
 
@@ -647,6 +431,5 @@ if ( ! class_exists( 'MovieLib\admin\classes\Shortcodes' ) ) {
 			);
 
 		}
-
 	}
 }

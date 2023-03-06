@@ -111,14 +111,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 			?>
 
 			<div class = "rt-person-meta-fields rt-person-meta-basic-fields">
-
 				<div class = "rt-person-meta-container rt-person-meta-basic-container rt-person-meta-basic-birth-date-container">
-
 					<label class = "rt-person-meta-label rt-person-meta-basic-label rt-person-meta-basic-birth-date-label"
 						for = "<?php echo esc_attr( $rt_person_meta_basic_key['birth-date'] ); ?>">
-
 						<?php esc_html_e( 'Birth Date', 'movie-library' ); ?>
-
 					</label>
 
 					<input type = "date"
@@ -126,16 +122,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 						class = "rt-person-meta-field rt-person-meta-basic-field rt-person-meta-basic-birth-date-field"
 						name = "<?php echo esc_attr( $rt_person_meta_basic_key['birth-date'] ); ?>"
 						id = "<?php echo esc_attr( $rt_person_meta_basic_key['birth-date'] ); ?>" />
-
 				</div>
 
 				<div class = "rt-person-meta-container rt-person-meta-basic-container rt-person-meta-basic-birth-place-container">
-
 					<label class = "rt-person-meta-label rt-person-meta-basic-label rt-person-meta-basic-birth-place-label"
 						for = "<?php echo esc_attr( $rt_person_meta_basic_key['birth-place'] ); ?>">
-
 						<?php esc_html_e( 'Birth Place', 'movie-library' ); ?>
-
 					</label>
 
 					<input type = "text"
@@ -143,10 +135,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 						class = "rt-person-meta-field rt-person-meta-basic-field rt-person-meta-basic-birth-place-field"
 						name = "<?php echo esc_attr( $rt_person_meta_basic_key['birth-place'] ); ?>"
 						id = "<?php echo esc_attr( $rt_person_meta_basic_key['birth-place'] ); ?>" />
-
 				</div>
-
-
 			</div>
 
 			<?php
@@ -175,14 +164,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 			?>
 
 			<div class = "rt-person-meta-fields rt-person-meta-social-fields">
-
 				<div class = "rt-person-meta-container rt-person-meta-social-container rt-person-meta-social-twitter-container">
-
 					<label class = "rt-person-meta-label rt-person-meta-social-label rt-person-meta-social-twitter-label"
 						for = "<?php echo esc_attr( $rt_person_meta_social_key['twitter'] ); ?>">
-
 						<?php esc_html_e( 'Twitter', 'movie-library' ); ?>
-
 					</label>
 
 					<input type = "text"
@@ -192,16 +177,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 						id = "<?php echo esc_attr( $rt_person_meta_social_key['twitter'] ); ?>"/>
 
 					<span class = "rt-person-meta-field-error rt-person-meta-social-field-error rt-person-meta-social-twitter-field-error" id="rt-person-meta-social-twitter-field-error"></span>
-
 				</div>
 
 				<div class = "rt-person-meta-container rt-person-meta-social-container rt-person-meta-social-facebook-container">
-
 					<label class = "rt-person-meta-label rt-person-meta-social-label rt-person-meta-social-facebook-label"
 						for = "<?php echo esc_attr( $rt_person_meta_social_key['facebook'] ); ?>">
-
 						<?php esc_html_e( 'Facebook', 'movie-library' ); ?>
-
 					</label>
 
 					<input type = "text"
@@ -211,16 +192,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 						id = "<?php echo esc_attr( $rt_person_meta_social_key['facebook'] ); ?>"/>
 
 					<span class = "rt-person-meta-field-error rt-person-meta-social-field-error rt-person-meta-social-facebook-field-error" id="rt-person-meta-social-facebook-field-error"></span>
-
 				</div>
 
 				<div class = "rt-person-meta-container rt-person-meta-social-container rt-person-meta-social-instagram-container">
-
 					<label class = "rt-person-meta-label rt-person-meta-social-label rt-person-meta-social-instagram-label"
 						for = "<?php echo esc_attr( $rt_person_meta_social_key['instagram'] ); ?>">
-
 						<?php esc_html_e( 'Instagram', 'movie-library' ); ?>
-
 					</label>
 
 					<input type = "text"
@@ -230,16 +207,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 						id = "<?php echo esc_attr( $rt_person_meta_social_key['instagram'] ); ?>"/>
 
 					<span class = "rt-person-meta-field-error rt-person-meta-social-field-error rt-person-meta-social-instagram-field-error" id="rt-person-meta-social-instagram-field-error"></span>
-
 				</div>
 
 				<div class = "rt-person-meta-container rt-person-meta-social-container rt-person-meta-social-website-container">
-
 					<label class = "rt-person-meta-label rt-person-meta-social-label rt-person-meta-social-website-label"
 						for = "<?php echo esc_attr( $rt_person_meta_social_key['Website'] ); ?>">
-
 						<?php esc_html_e( 'Website', 'movie-library' ); ?>
-
 					</label>
 
 					<input type = "text"
@@ -249,9 +222,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 						id = "<?php echo esc_attr( $rt_person_meta_social_key['website'] ); ?>" />
 
 					<span class = "rt-person-meta-field-error rt-person-meta-social-field-error rt-person-meta-social-website-field-error" id="rt-person-meta-social-website-field-error"></span>
-
 				</div>
-
 			</div>
 
 			<?php

@@ -22,7 +22,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Person_Career' ) ) {
 	class Person_Career {
 
 		/**
-		 * RT_MOVIE_TAG_SLUG
+		 * RT_PERSON_CAREER_SLUG
 		 */
 		const SLUG = 'rt-person-career';
 
