@@ -1,0 +1,785 @@
+# Copyright (C) 2023 rtCamp
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Movie Library 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/movie-library\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2023-03-01T07:44:50+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: movie-library\n"
+
+#. Plugin Name of the plugin
+msgid "Movie Library"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "https://learn.rtcamp.com"
+msgstr ""
+
+#. Description of the plugin
+msgid "This plugin provides features to create movie library."
+msgstr ""
+
+#. Author of the plugin
+msgid "rtCamp"
+msgstr ""
+
+#: admin/classes/class-settings-page.php:143
+#: admin/classes/class-settings-page.php:144
+msgid "Movie Library Settings"
+msgstr ""
+
+#: admin/classes/class-settings-page.php:149
+msgid "Save Changes"
+msgstr ""
+
+#: admin/classes/class-settings-page.php:157
+msgid "Remove Plugin Data"
+msgstr ""
+
+#: admin/classes/class-settings-page.php:239
+msgid "Check the checkbox to remove all the data from the database when you uninstall the plugin."
+msgstr ""
+
+#: admin/classes/class-settings-page.php:275
+msgid "Below setting will delete the plugin data when you uninstall the plugin!"
+msgstr ""
+
+#: admin/classes/class-settings-page.php:327
+msgid "Settings saved."
+msgstr ""
+
+#. translators: %1$s is the movie title.
+#: admin/classes/class-shortcodes.php:455
+msgid "Title: %1$s"
+msgstr ""
+
+#. translators: %1$s is the movie director.
+#: admin/classes/class-shortcodes.php:468
+msgid "Director: %1$s"
+msgstr ""
+
+#. translators: %1$s is the movie actor.
+#: admin/classes/class-shortcodes.php:483
+msgid "Actor: %1$s"
+msgstr ""
+
+#. translators: %1$s is the movie runtime.
+#: admin/classes/class-shortcodes.php:498
+msgid "Runtime: %1$s Minutes"
+msgstr ""
+
+#. translators: %1$s is person name.
+#: admin/classes/class-shortcodes.php:544
+msgid "Name: %1$s"
+msgstr ""
+
+#. translators: %1$s is the career of person.
+#: admin/classes/class-shortcodes.php:557
+msgid "Career: %1$s"
+msgstr ""
+
+#: admin/classes/class-shortcodes.php:588
+#: admin/classes/custom-post-types/class-rt-movie.php:47
+msgid "No movies found."
+msgstr ""
+
+#: admin/classes/class-shortcodes.php:611
+#: admin/classes/custom-post-types/class-rt-person.php:47
+msgid "No people found."
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:35
+msgctxt "Post type general name"
+msgid "Movies"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:36
+msgctxt "Post type singular name"
+msgid "Movie"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:37
+msgctxt "Admin Menu text"
+msgid "Movies"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:38
+msgctxt "Add New on Toolbar"
+msgid "Movie"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:39
+#: admin/classes/custom-post-types/class-rt-person.php:39
+msgid "Add New"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:40
+msgid "Add New Movie"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:41
+msgid "New Movie"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:42
+msgid "Edit Movie"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:43
+msgid "View Movie"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:44
+msgid "All Movies"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:45
+msgid "Search Movies"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:46
+msgid "Parent Movies:"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:48
+msgid "No movies found in Trash."
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:49
+msgctxt "movie"
+msgid "Movie Poster"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:50
+msgctxt "movie"
+msgid "Set Movie Poster"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:51
+msgctxt "movie"
+msgid "Remove Movie Poster"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:52
+msgctxt "movie"
+msgid "Use as Movie Poster"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:53
+msgctxt "The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4"
+msgid "Movie archives"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-movie.php:59
+#: admin/classes/custom-post-types/class-rt-person.php:59
+msgid "Description."
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-person.php:35
+msgctxt "Post type general name"
+msgid "People"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-person.php:36
+msgctxt "Post type singular name"
+msgid "Person"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-person.php:37
+msgctxt "Admin Menu text"
+msgid "People"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-person.php:38
+msgctxt "Add New on Toolbar"
+msgid "Person"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-person.php:40
+msgid "Add New Person"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-person.php:41
+msgid "New Person"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-person.php:42
+msgid "Edit Person"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-person.php:43
+msgid "View Person"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-person.php:44
+msgid "All People"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-person.php:45
+msgid "Search People"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-person.php:46
+msgid "Parent People:"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-person.php:48
+msgid "No people found in Trash."
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-person.php:49
+msgctxt "person"
+msgid "Profile picture"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-person.php:50
+msgctxt "person"
+msgid "Set Profile picture"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-person.php:51
+msgctxt "person"
+msgid "Remove Profile picture"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-person.php:52
+msgctxt "person"
+msgid "Use as Profile picture"
+msgstr ""
+
+#: admin/classes/custom-post-types/class-rt-person.php:53
+msgctxt "The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4"
+msgid "Person archives"
+msgstr ""
+
+#: admin/classes/meta-boxes/class-rt-media-meta-box.php:38
+msgid "Photos"
+msgstr ""
+
+#: admin/classes/meta-boxes/class-rt-media-meta-box.php:47
+msgid "Videos"
+msgstr ""
+
+#: admin/classes/meta-boxes/class-rt-media-meta-box.php:86
+msgid "Uploaded Images"
+msgstr ""
+
+#: admin/classes/meta-boxes/class-rt-media-meta-box.php:148
+msgid "Add Images"
+msgstr ""
+
+#: admin/classes/meta-boxes/class-rt-media-meta-box.php:194
+msgid "Uploaded Videos"
+msgstr ""
+
+#: admin/classes/meta-boxes/class-rt-media-meta-box.php:249
+msgid "Add Videos"
+msgstr ""
+
+#: admin/classes/meta-boxes/class-rt-movie-meta-box.php:41
+#: admin/classes/meta-boxes/class-rt-person-meta-box.php:37
+msgid "Basic"
+msgstr ""
+
+#: admin/classes/meta-boxes/class-rt-movie-meta-box.php:50
+msgid "Crew"
+msgstr ""
+
+#: admin/classes/meta-boxes/class-rt-movie-meta-box.php:89
+msgid "Rating (Between 0-10)"
+msgstr ""
+
+#: admin/classes/meta-boxes/class-rt-movie-meta-box.php:117
+msgid "Runtime (Minutes)"
+msgstr ""
+
+#: admin/classes/meta-boxes/class-rt-movie-meta-box.php:145
+msgid "Release Date"
+msgstr ""
+
+#: admin/classes/meta-boxes/class-rt-person-meta-box.php:46
+msgid "Social"
+msgstr ""
+
+#: admin/classes/meta-boxes/class-rt-person-meta-box.php:84
+msgid "Birth Date"
+msgstr ""
+
+#: admin/classes/meta-boxes/class-rt-person-meta-box.php:101
+msgid "Birth Place"
+msgstr ""
+
+#: admin/classes/meta-boxes/class-rt-person-meta-box.php:148
+msgid "Twitter"
+msgstr ""
+
+#: admin/classes/meta-boxes/class-rt-person-meta-box.php:167
+msgid "Facebook"
+msgstr ""
+
+#: admin/classes/meta-boxes/class-rt-person-meta-box.php:186
+msgid "Instagram"
+msgstr ""
+
+#: admin/classes/meta-boxes/class-rt-person-meta-box.php:205
+msgid "Website"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-genre.php:40
+msgctxt "taxonomy general name"
+msgid "Genres"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-genre.php:41
+msgctxt "taxonomy singular name"
+msgid "Genre"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-genre.php:42
+msgid "Search Genres"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-genre.php:43
+msgid "Popular Genres"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-genre.php:44
+msgid "All Genres"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-genre.php:45
+msgid "Parent Genre"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-genre.php:46
+msgid "Parent Genre:"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-genre.php:47
+msgid "Edit Genre"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-genre.php:48
+msgid "Update Genre"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-genre.php:49
+#: admin/classes/taxonomies/class-movie-label.php:49
+msgid "Add New Genre"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-genre.php:50
+#: admin/classes/taxonomies/class-movie-label.php:50
+msgid "New Genre Name"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-genre.php:51
+msgid "Separate genres with commas"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-genre.php:52
+msgid "Add or remove genres"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-genre.php:53
+msgid "Choose from the most used genres"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-genre.php:54
+msgid "No genres found."
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-genre.php:55
+msgid "Genres"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-label.php:40
+msgctxt "taxonomy general name"
+msgid "Labels"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-label.php:41
+msgctxt "taxonomy singular name"
+msgid "Label"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-label.php:42
+msgid "Search Labels"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-label.php:43
+msgid "Popular Labels"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-label.php:44
+msgid "All Labels"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-label.php:45
+msgid "Parent Label"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-label.php:46
+msgid "Parent Label:"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-label.php:47
+msgid "Edit Label"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-label.php:48
+msgid "Update Label"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-label.php:51
+msgid "Separate labels with commas"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-label.php:52
+msgid "Add or remove labels"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-label.php:53
+msgid "Choose from the most used labels"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-label.php:54
+msgid "No labels found."
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-label.php:55
+msgid "Labels"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-language.php:40
+msgctxt "taxonomy general name"
+msgid "Languages"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-language.php:41
+msgctxt "taxonomy singular name"
+msgid "Language"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-language.php:42
+msgid "Search Languages"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-language.php:43
+msgid "Popular Languages"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-language.php:44
+msgid "All Languages"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-language.php:45
+msgid "Parent Language"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-language.php:46
+msgid "Parent Language:"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-language.php:47
+msgid "Edit Language"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-language.php:48
+msgid "Update Language"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-language.php:49
+msgid "Add New Language"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-language.php:50
+msgid "New Language Name"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-language.php:51
+msgid "Separate Languages with commas"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-language.php:52
+msgid "Add or remove Languages"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-language.php:53
+msgid "Choose from the most used Languages"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-language.php:57
+msgid "No Languages found."
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-language.php:58
+msgid "Languages"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-person.php:39
+msgid "Internal Markers"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-production-company.php:40
+msgctxt "taxonomy general name"
+msgid "Production companies"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-production-company.php:45
+msgctxt "taxonomy singular name"
+msgid "Production company"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-production-company.php:50
+msgid "Search Production companies"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-production-company.php:51
+msgid "Popular Production companies"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-production-company.php:52
+msgid "All Production company"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-production-company.php:53
+msgid "Parent Production company"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-production-company.php:54
+msgid "Parent Production company:"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-production-company.php:55
+msgid "Edit Production company"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-production-company.php:56
+msgid "Update Production company"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-production-company.php:57
+msgid "Add New Production company"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-production-company.php:58
+msgid "New Production company Name"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-production-company.php:59
+msgid "Separate Production companies with commas"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-production-company.php:63
+msgid "Add or remove Production companies"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-production-company.php:64
+msgid "Choose from the most used Production companies"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-production-company.php:68
+msgid "No Production companies found."
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-production-company.php:69
+msgid "Production companies"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-tag.php:40
+msgctxt "taxonomy general name"
+msgid "Tags"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-tag.php:41
+msgctxt "taxonomy singular name"
+msgid "Tag"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-tag.php:42
+msgid "Search Tags"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-tag.php:43
+msgid "Popular Tags"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-tag.php:44
+msgid "All Tag"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-tag.php:45
+msgid "Parent Tag"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-tag.php:46
+msgid "Parent Tag:"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-tag.php:47
+msgid "Edit Tag"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-tag.php:48
+msgid "Update Tag"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-tag.php:49
+msgid "Add New Tag"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-tag.php:50
+msgid "New Tag Name"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-tag.php:51
+msgid "Separate Tags with commas"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-tag.php:52
+msgid "Add or remove Tags"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-tag.php:53
+msgid "Choose from the most used Tags"
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-tag.php:54
+msgid "No Tags found."
+msgstr ""
+
+#: admin/classes/taxonomies/class-movie-tag.php:55
+msgid "Tags"
+msgstr ""
+
+#: admin/classes/taxonomies/class-person-career.php:40
+msgctxt "taxonomy general name"
+msgid "Careers"
+msgstr ""
+
+#: admin/classes/taxonomies/class-person-career.php:41
+msgctxt "taxonomy singular name"
+msgid "Career"
+msgstr ""
+
+#: admin/classes/taxonomies/class-person-career.php:42
+msgid "Search Careers"
+msgstr ""
+
+#: admin/classes/taxonomies/class-person-career.php:43
+msgid "Popular Careers"
+msgstr ""
+
+#: admin/classes/taxonomies/class-person-career.php:44
+msgid "All Career"
+msgstr ""
+
+#: admin/classes/taxonomies/class-person-career.php:45
+msgid "Parent Career"
+msgstr ""
+
+#: admin/classes/taxonomies/class-person-career.php:46
+msgid "Parent Career:"
+msgstr ""
+
+#: admin/classes/taxonomies/class-person-career.php:47
+msgid "Edit Career"
+msgstr ""
+
+#: admin/classes/taxonomies/class-person-career.php:48
+msgid "Update Career"
+msgstr ""
+
+#: admin/classes/taxonomies/class-person-career.php:49
+msgid "Add New Career"
+msgstr ""
+
+#: admin/classes/taxonomies/class-person-career.php:50
+msgid "New Career Name"
+msgstr ""
+
+#: admin/classes/taxonomies/class-person-career.php:51
+msgid "Separate Careers with commas"
+msgstr ""
+
+#: admin/classes/taxonomies/class-person-career.php:52
+msgid "Add or remove Careers"
+msgstr ""
+
+#: admin/classes/taxonomies/class-person-career.php:53
+msgid "Choose from the most used Careers"
+msgstr ""
+
+#: admin/classes/taxonomies/class-person-career.php:54
+msgid "No Careers found."
+msgstr ""
+
+#: admin/classes/taxonomies/class-person-career.php:55
+msgid "Careers"
+msgstr ""
+
+#: includes/class-movie-library.php:360
+msgid "Title"
+msgstr ""
+
+#: includes/class-movie-library.php:364
+msgid "Name"
+msgstr ""
+
+#: includes/class-movie-library.php:386
+msgid "Plot"
+msgstr ""
+
+#: includes/class-movie-library.php:390
+msgid "Biography"
+msgstr ""
+
+#: admin/js/movie-library-custom-label.js:21
+msgid "Synopsis"
+msgstr ""
+
+#: admin/js/movie-library-custom-label.js:25
+msgid "Write a synopsis"
+msgstr ""
+
+#: admin/js/movie-library-image-video-upload.js:78
+#: admin/js/movie-library-image-video-upload.js:80
+msgid "Select Images"
+msgstr ""
+
+#: admin/js/movie-library-image-video-upload.js:101
+msgid "Selected Images"
+msgstr ""
+
+#: admin/js/movie-library-image-video-upload.js:237
+#: admin/js/movie-library-image-video-upload.js:239
+msgid "Select Videos"
+msgstr ""
+
+#: admin/js/movie-library-image-video-upload.js:260
+msgid "Selected Videos"
+msgstr ""
+
+#: admin/js/movie-library-rt-movie-validation.js:39
+msgid "Value should be between 0 and 10"
+msgstr ""
+
+#: admin/js/movie-library-rt-movie-validation.js:72
+msgid "Value should be between 1 and 1000"
+msgstr ""
+
+#: admin/js/movie-library-rt-person-validation.js:37
+#: admin/js/movie-library-rt-person-validation.js:66
+#: admin/js/movie-library-rt-person-validation.js:95
+#: admin/js/movie-library-rt-person-validation.js:124
+msgid "Please enter a valid url"
+msgstr ""

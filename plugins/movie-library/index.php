@@ -1,6 +1,7 @@
 <?php
-/**
- * Silence is golden.
+/** Index file for the plugin.
  *
  * @package MovieLib
  */
+
+

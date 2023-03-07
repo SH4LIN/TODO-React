@@ -24,3 +24,9 @@ node_modules/
 # Lint report files
 lint-css-report.json
 lint-js-report.json
+
+# PHPDoc
+.phpdoc
+
+# Ignoring the redis-cache plugin
+plugins/redis-cache/*
