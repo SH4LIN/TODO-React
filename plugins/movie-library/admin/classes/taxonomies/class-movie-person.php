@@ -36,7 +36,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Person' ) ) {
 		 */
 		protected function init(): void {
 
-			$this->register();
+			add_action( 'init', array( $this, 'register' ) );
 
 		}
 

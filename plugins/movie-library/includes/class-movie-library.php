@@ -54,12 +54,13 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 */
 		protected function init(): void {
 
-			$this->register_hooks();
 			$this->register_custom_post_types();
 			$this->register_custom_taxonomies();
+			flush_rewrite_rules();
+			$this->register_hooks();
 			$this->add_custom_meta_boxes();
 			$this->setup_environment();
-			flush_rewrite_rules();
+
 
 		}
 

@@ -27,6 +27,7 @@ Domain Path:  /languages
 	--primary-color: #1f1f1f;
 	--secondary-color: #2a2a2a;
 	--primary-font-color: #fff;
+	--navbar-color: #111111;
 	--secondary-font-color: rgba(255, 255, 255, 0.5);
 
 	/* Font Sizes */
@@ -38,70 +39,4 @@ Domain Path:  /languages
 .primary-text {
 	color: var(--primary-font-color);
 	font-family: var(--primary-font-family);
-}
-
-.screen-time-header {
-	background-color: var(--secondary-color);
-	max-width: 100%;
-	margin: 0 auto;
-	padding: 32px;
-	display: flex;
-	position: relative;
-	justify-content: space-around;
-	align-items: center;
-}
-
-.screen-time-logo-container {
-	text-align: center;
-}
-
-.screen-time-logo-text {
-	font-family: var(--heading-font-family);
-	font-size: var(--logo-text-font-size);
-	font-weight: 700;
-}
-
-.screen-time-logo-first-half-text {
-	color: var(--primary-font-color);
-}
-
-.heading-text {
-	font-size: 16px;
-}
-
-.screen-time-logo-last-half-text {
-	color: #d13223;
-}
-
-.header-actions {
-	display: flex;
-}
-
-.menu-action {
-	display: none;
-}
-
-.language-action {
-	margin-left: 34px;
-}
-
-.sign-in-action,
-.language-action {
-	display: block;
-}
-
-@media (max-width: 600px) {
-
-	.menu-action {
-		display: block;
-	}
-
-	.language-action,
-	.sign-in-action {
-		display: none;
-	}
-
-	.search-text {
-		display: none;
-	}
 }

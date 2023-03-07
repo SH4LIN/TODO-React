@@ -1,0 +1,122 @@
+.screen-time-header {
+	background-color: var(--secondary-color);
+	max-width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.screen-time-header-container {
+	display: flex;
+	position: relative;
+	justify-content: space-between;
+	align-items: center;
+	padding: 32px 112px;
+}
+
+.screen-time-logo-container {
+	text-align: center;
+	margin: 0 auto;
+}
+
+.screen-time-logo-text {
+	font-family: var(--heading-font-family);
+	font-size: var(--logo-text-font-size);
+	font-weight: 700;
+}
+
+.screen-time-logo-first-half-text {
+	color: var(--primary-font-color);
+}
+
+.screen-time-logo-last-half-text {
+	color: #d13223;
+}
+
+.heading-text {
+	font-size: 16px;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+
+.search-container,
+.sign-in-container,
+.language-container {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: nowrap;
+	white-space: nowrap;
+}
+
+.header-actions {
+	display: flex;
+	gap: 34px;
+	flex-wrap: nowrap;
+	align-items: center;
+}
+
+.search-text {
+	display: block;
+}
+
+.menu-container {
+	display: none;
+}
+
+.screen-time-logo-text {
+	text-transform: uppercase;
+}
+
+.screen-time-primary-menu-container {
+	display: block;
+	background-color: var(--navbar-color);
+	padding: 8px 0;
+}
+
+.screen-time-primary-navigation-list {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 42px;
+	flex-wrap: nowrap;
+	white-space: nowrap;
+	overflow: hidden;
+	list-style-type: none;
+}
+
+.screen-time-primary-navigation-list li a {
+	text-decoration: none;
+	font-family: var(--primary-font-family);
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 16px;
+	color: var(--primary-font-color);
+}
+
+@media (max-width: 600px) {
+
+	.screen-time-header-container {
+		display: flex;
+		position: relative;
+		justify-content: space-between;
+		align-items: center;
+		padding: 32px 24px;
+	}
+
+	.menu-container {
+		display: block;
+	}
+
+	.header-actions {
+		display: none;
+	}
+
+	.search-text {
+		display: none;
+	}
+
+	.screen-time-primary-menu-container {
+		display: none;
+	}
+}

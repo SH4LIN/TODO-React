@@ -36,11 +36,8 @@ if ( ! function_exists( 'twenty_twenty_one_child_setup' ) ) :
 		// Register navigation menus uses wp_nav_menu in five places.
 		register_nav_menus(
 			array(
-				'primary'  => __( 'Primary Menu', 'twentytwentyone-child' ),
-				'footer'   => __( 'Footer Menu', 'twentytwentyone-child' ),
-				'social'   => __( 'Social Menu', 'twentytwentyone-child' ),
-				'handheld' => __( 'Handheld Menu', 'twentytwentyone-child' ),
-				'expanded' => __( 'Expanded Menu', 'twentytwentyone-child' ),
+				'header' => __( 'Header Menu', 'screen-time' ),
+				'footer' => __( 'Footer Menu', 'screen-time' ),
 			)
 		);
 
@@ -90,7 +87,8 @@ if ( ! function_exists( 'twenty_twenty_one_child_scripts' ) ) :
 	 * @return void
 	 */
 	function twenty_twenty_one_child_scripts(): void {
-		wp_enqueue_style( 'twenty-twenty-one-child-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
+		wp_enqueue_style( 'twenty-twenty-one-child-style', get_stylesheet_uri(), array(), filemtime( get_stylesheet_directory() . '/style.css' ) );
+		wp_enqueue_style( 'twenty-twenty-one-header-style', get_stylesheet_directory_uri() . '/assets/css/header.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/header.css' ) );
 	}
 
 endif;

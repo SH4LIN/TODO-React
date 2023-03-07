@@ -35,7 +35,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Person' ) ) {
 		 */
 		protected function init():void {
 
-			$this->register();
+			add_action( 'init', array( $this, 'register' ) );
 
 		}
 
@@ -76,11 +76,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Person' ) ) {
 				'show_ui'            => true,
 				'show_in_menu'       => true,
 				'query_var'          => true,
-				'rewrite'            => false,
 				'capability_type'    => 'post',
 				'has_archive'        => 'Persons',
-				'hierarchical'       => false,
-				'menu_position'      => null,
 				'menu_icon'          => 'dashicons-businessman',
 				'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
 				'show_in_rest'       => true,
