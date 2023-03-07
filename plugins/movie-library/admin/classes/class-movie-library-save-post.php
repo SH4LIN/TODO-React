@@ -9,6 +9,7 @@ namespace MovieLib\admin\classes;
 
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\custom_post_types\RT_Person;
+use MovieLib\includes\Singleton;
 use WP_Post;
 use MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box;
@@ -27,34 +28,14 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Save_Post' ) ) {
 	 */
 	class Movie_Library_Save_Post {
 
+		use Singleton;
+
 		/**
-		 * Variable instance.
+		 * Movie_Library_Save_Post init method.
 		 *
-		 * @var ?Movie_Library_Save_Post $instance The single instance of the class.
+		 * @return void
 		 */
-		protected static ?Movie_Library_Save_Post $instance = null;
-
-		/**
-		 *  Main Movie_Library_Save_Post Instance.
-		 *  Ensures only one instance of Movie_Library_Save_Post is loaded or can be loaded.
-		 *
-		 * @return Movie_Library_Save_Post - Main instance.
-		 */
-		public static function instance(): Movie_Library_Save_Post {
-
-			if ( is_null( self::$instance ) ) {
-
-				self::$instance = new self();
-
-			}
-
-			return self::$instance;
-		}
-
-		/**
-		 * Movie_Library_Save_Post Constructor.
-		 */
-		private function __construct() {}
+		private function init(): void {}
 
 		/**
 		 * This function is used to save the post.

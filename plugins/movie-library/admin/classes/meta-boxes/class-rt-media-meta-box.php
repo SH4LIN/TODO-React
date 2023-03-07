@@ -9,6 +9,7 @@ namespace MovieLib\admin\classes\meta_boxes;
 
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\custom_post_types\RT_Person;
+use MovieLib\includes\Singleton;
 use WP_Post;
 
 /**
@@ -23,6 +24,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 	 */
 	class RT_Media_Meta_Box {
 
+		use Singleton;
+
 		/**
 		 * RT_MEDIA_META_IMAGES_SLUG
 		 */
@@ -34,33 +37,15 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 		const VIDEOS_SLUG = 'rt-media-meta-videos';
 
 		/**
-		 * Variable instance.
+		 * RT_Media_Meta_Box init method.
 		 *
-		 * @var ?RT_Media_Meta_Box $instance The single instance of the class.
+		 * @return void
 		 */
-		protected static ?RT_Media_Meta_Box $instance = null;
+		protected function init():void {
 
-		/**
-		 *  Main RT_Media_Meta_Box Instance.
-		 *  Ensures only one instance of RT_Media_Meta_Box is loaded or can be loaded.
-		 *
-		 * @return RT_Media_Meta_Box - Main instance.
-		 */
-		public static function instance(): RT_Media_Meta_Box {
+			add_action( 'add_meta_boxes', array( $this, 'create_meta_box' ) );
 
-			if ( is_null( self::$instance ) ) {
-
-				self::$instance = new self();
-
-			}
-
-			return self::$instance;
 		}
-
-		/**
-		 * RT_Media_Meta_Box Constructor.
-		 */
-		private function __construct() {}
 
 		/**
 		 * This function is used to create the meta-box for photos and videos.

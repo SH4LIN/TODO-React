@@ -8,6 +8,7 @@
 namespace MovieLib\admin\classes\taxonomies;
 
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
+use MovieLib\includes\Singleton;
 
 /**
  * This is a security measure to prevent direct access to the file.
@@ -21,39 +22,23 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Person' ) ) {
 	 */
 	class Movie_Person {
 
+		use Singleton;
+
 		/**
 		 * RT_MOVIE_PERSON_SLUG
 		 */
 		const SLUG = '_rt-movie-person';
 
 		/**
-		 * Variable instance.
+		 * Movie_Person init method.
 		 *
-		 * @var ?Movie_Person $instance The single instance of the class.
+		 * @return void
 		 */
-		protected static ?Movie_Person $instance = null;
+		protected function init(): void {
 
-		/**
-		 *  Main Movie_Person Instance.
-		 *  Ensures only one instance of Movie_Person is loaded or can be loaded.
-		 *
-		 * @return Movie_Person - Main instance.
-		 */
-		public static function instance(): Movie_Person {
+			$this->register();
 
-			if ( is_null( self::$instance ) ) {
-
-				self::$instance = new self();
-
-			}
-
-			return self::$instance;
 		}
-
-		/**
-		 * Movie_Person Constructor.
-		 */
-		private function __construct() {}
 
 		/**
 		 * This function is used to register rt-movie-person shadow taxonomy.

@@ -8,6 +8,7 @@
 namespace MovieLib\admin\classes\taxonomies;
 
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
+use MovieLib\includes\Singleton;
 
 /**
  * This is a security measure to prevent direct access to the file.
@@ -21,39 +22,23 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Genre' ) ) {
 	 */
 	class Movie_Genre {
 
+		use Singleton;
+
 		/**
 		 * RT_MOVIE_GENRE_SLUG
 		 */
 		const SLUG = 'rt-movie-genre';
 
 		/**
-		 * Variable instance.
+		 * Movie_Genre init method.
 		 *
-		 * @var ?Movie_Genre $instance The single instance of the class.
+		 * @return void
 		 */
-		protected static ?Movie_Genre $instance = null;
+		protected function init(): void {
 
-		/**
-		 *  Main Movie_Genre Instance.
-		 *  Ensures only one instance of Movie_Genre is loaded or can be loaded.
-		 *
-		 * @return Movie_Genre - Main instance.
-		 */
-		public static function instance(): Movie_Genre {
+			$this->register();
 
-			if ( is_null( self::$instance ) ) {
-
-				self::$instance = new self();
-
-			}
-
-			return self::$instance;
 		}
-
-		/**
-		 * Movie_Genre Constructor.
-		 */
-		private function __construct() {}
 
 		/**
 		 * This function is used to register rt-movie-genre taxonomy.
@@ -66,8 +51,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Genre' ) ) {
 				'post_type' => array( RT_Movie::SLUG ),
 				'args'      => array(
 					'labels'             => array(
-						'name'                       => _x( 'Genres', 'taxonomy general name', 'movie-library' ),
-						'singular_name'              => _x( 'Genre', 'taxonomy singular name', 'movie-library' ),
+						'name'                       => __( 'Genres', 'movie-library' ),
+						'singular_name'              => __( 'Genre', 'movie-library' ),
 						'search_items'               => __( 'Search Genres', 'movie-library' ),
 						'popular_items'              => __( 'Popular Genres', 'movie-library' ),
 						'all_items'                  => __( 'All Genres', 'movie-library' ),

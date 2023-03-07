@@ -8,6 +8,7 @@
 namespace MovieLib\admin\classes\taxonomies;
 
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
+use MovieLib\includes\Singleton;
 
 /**
  * This is a security measure to prevent direct access to the file.
@@ -21,39 +22,23 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Tag' ) ) {
 	 */
 	class Movie_Tag {
 
+		use Singleton;
+
 		/**
 		 * RT_MOVIE_TAG_SLUG
 		 */
 		const SLUG = 'rt-movie-tag';
 
 		/**
-		 * Variable instance.
+		 * Movie_Tag init method.
 		 *
-		 * @var ?Movie_Tag $instance The single instance of the class.
+		 * @return void
 		 */
-		protected static ?Movie_Tag $instance = null;
+		protected function init(): void {
 
-		/**
-		 *  Main Movie_Tag Instance.
-		 *  Ensures only one instance of Movie_Tag is loaded or can be loaded.
-		 *
-		 * @return Movie_Tag - Main instance.
-		 */
-		public static function instance(): Movie_Tag {
+			$this->register();
 
-			if ( is_null( self::$instance ) ) {
-
-				self::$instance = new self();
-
-			}
-
-			return self::$instance;
 		}
-
-		/**
-		 * Movie_Tag Constructor.
-		 */
-		private function __construct() {}
 
 		/**
 		 * This function is used to register rt-movie-tag taxonomy.
@@ -66,8 +51,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Tag' ) ) {
 				'post_type' => array( RT_Movie::SLUG ),
 				'args'      => array(
 					'labels'             => array(
-						'name'                       => _x( 'Tags', 'taxonomy general name', 'movie-library' ),
-						'singular_name'              => _x( 'Tag', 'taxonomy singular name', 'movie-library' ),
+						'name'                       => __( 'Tags', 'movie-library' ),
+						'singular_name'              => __( 'Tag', 'movie-library' ),
 						'search_items'               => __( 'Search Tags', 'movie-library' ),
 						'popular_items'              => __( 'Popular Tags', 'movie-library' ),
 						'all_items'                  => __( 'All Tag', 'movie-library' ),
