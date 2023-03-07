@@ -4,5 +4,4 @@
  *
  * @package twentytwentyone-child
  */
-
-echo 'Hello World!';
+die('This is a test');
