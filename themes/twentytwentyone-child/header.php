@@ -26,6 +26,6 @@
 
 	<?php get_template_part( 'template-parts/header/site-header' ); ?>
 
-	<div id="content" class="screen-time-site-content">
-		<div id="primary" class="screen-time-content-area">
-			<main id="main" class="screen-time-site-main" role="main">
+	<div id="content" class="st-site-content">
+		<div id="primary" class="st-content-area">
+			<main id="main" class="st-site-main" role="main">

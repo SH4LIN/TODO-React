@@ -9,8 +9,8 @@
 
 ?>
 
-<div id="logo" class="screen-time-logo-container">
-	<span class="screen-time-logo-text">
-		<span class="screen-time-logo-last-half-text"><?php esc_html_e( 'Screen' ); ?></span><span class="screen-time-logo-first-half-text"><?php esc_html_e( ' Time' ); ?></span>
+<div id="logo" class="st-logo-container">
+	<span class="st-logo-text">
+		<span class="st-logo-last-half-text"><?php esc_html_e( 'Screen' ); ?></span><span class="st-logo-first-half-text"><?php esc_html_e( ' Time' ); ?></span>
 	</span>
 </div>
