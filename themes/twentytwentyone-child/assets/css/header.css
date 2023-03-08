@@ -1,5 +1,5 @@
 .screen-time-header {
-	background-color: var(--secondary-color);
+	background-color: var(--primary-color);
 	max-width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -22,6 +22,7 @@
 	font-family: var(--heading-font-family);
 	font-size: var(--logo-text-font-size);
 	font-weight: 700;
+	line-height: 56px;
 }
 
 .screen-time-logo-first-half-text {
@@ -79,10 +80,9 @@
 	justify-content: center;
 	align-items: center;
 	gap: 42px;
-	flex-wrap: nowrap;
-	white-space: nowrap;
-	overflow: hidden;
+	flex-wrap: wrap;
 	list-style-type: none;
+	padding: 0;
 }
 
 .screen-time-primary-navigation-list li a {
@@ -97,10 +97,6 @@
 @media (max-width: 600px) {
 
 	.screen-time-header-container {
-		display: flex;
-		position: relative;
-		justify-content: space-between;
-		align-items: center;
 		padding: 32px 24px;
 	}
 

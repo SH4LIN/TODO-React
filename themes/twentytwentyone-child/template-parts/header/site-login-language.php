@@ -12,11 +12,11 @@
 <div class="header-actions">
 	<div class="sign-in-container">
 		<img class="ic_user" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_user.svg' ); ?>" />
-		<span class="primary-text heading-text sign-in-text"><?php esc_html_e( 'Sign in' ); ?></span>
+		<span class="primary-text-primary-font heading-text sign-in-text"><?php esc_html_e( 'Sign in' ); ?></span>
 	</div>
 
 	<div class="language-container">
-		<span class="primary-text heading-text language-text"><?php esc_html_e( 'Eng' ); ?></span>
+		<span class="primary-text-primary-font heading-text language-text"><?php esc_html_e( 'Eng' ); ?></span>
 		<img class="ic_down" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_down.svg' ); ?>" />
 	</div>
 </div>

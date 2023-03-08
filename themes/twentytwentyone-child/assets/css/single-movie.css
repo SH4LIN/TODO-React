@@ -1,0 +1,363 @@
+.screen-time-site-main {
+	width: 100%;
+	max-width: 100%;
+	margin: 0;
+	padding: 35px 112px;
+	display: flex;
+	flex-direction: column;
+}
+
+.screen-time-single-movie-info-container {
+	display: flex;
+	gap: 34px;
+	position: relative;
+	align-items: center;
+}
+
+.screen-time-single-movie-poster {
+	max-width: 600px;
+	max-height: 875px;
+	min-width: 300px;
+	min-height: 450px;
+	flex-shrink: 0;
+}
+
+.screen-time-single-movie-info-stats-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.screen-time-single-movie-title {
+	font-size: 88px;
+	font-weight: 600;
+	line-height: 96px;
+}
+
+.screen-time-single-movie-stats-items {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 64px;
+	padding: 0;
+	list-style: none;
+	gap: 18px;
+	position: relative;
+	color: #fff;
+	width: 100%;
+}
+
+.screen-time-single-movie-rating {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+}
+
+.screen-time-single-movie-rating-text {
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 24px;
+}
+
+.screen-time-single-movie-stats-list-item {
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 24px;
+	display: flex;
+	position: relative;
+	list-style: none;
+	align-items: center;
+}
+
+
+.screen-time-single-movie-stats-list-item:not(:first-child):before {
+	position: relative;
+	content: "";
+	width: 5px;
+	height: 5px;
+	background-color: #fff;
+	border-radius: 50%;
+	left: -35%;
+	top: 35%;
+}
+
+.screen-time-single-movie-description {
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 32px;
+	margin-top: 32px;
+}
+
+.screen-time-single-movie-genres-container {
+	display: flex;
+	gap: 15px;
+	margin-top: 40px;
+}
+
+.screen-time-single-movie-genre-item {
+	padding: 8px 16px;
+	border: 1px solid var(--primary-font-color);
+	border-radius: 24px;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+.screen-time-single-movie-directors-container {
+	display: flex;
+	margin-top: 56px;
+}
+
+.screen-time-single-movie-director-text {
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 32px;
+	margin-right: 12px;
+
+}
+
+.screen-time-single-movie-director-item {
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 32px;
+}
+
+.screen-time-single-movie-director-item:not(:last-child){
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 32px;
+	margin-right: 24px;
+}
+
+.screen-time-single-movie-watch-trailer-container {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	margin-top: 56px;
+}
+
+.screen-time-single-movie-watch-trailer-text-container {
+	position: absolute;
+	line-height: 24px;
+	padding: 16px 40px 16px 120px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 8px;
+	border: 1px solid #FFFFFF;
+	border-radius: 32px;
+}
+
+.screen-time-single-movie-watch-trailer-text {
+	font-size: 16px;
+	font-weight: 500;
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+	z-index: 0;
+}
+
+.ic-play-circle-container {
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+	z-index: 1;
+}
+
+.screen-time-single-movie-plot-quick-links-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 120px;
+}
+
+.st-sm-plot-container {
+	display: flex;
+	flex-direction: column;
+	flex: 2;
+	gap: 48px;
+	margin-right: 136px;
+}
+
+.st-sm-plot-heading {
+	font-size: 32px;
+	font-weight: 700;
+	line-height: 40px;
+	border-left: 4px solid #d13223;
+	padding-left: 12px
+}
+
+.st-sm-plot-text {
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 32px;
+}
+
+.st-sm-quick-links-container {
+	background-color: #2b2b2b;
+	padding: 24px 126px 0 32px;
+	height: fit-content;
+}
+
+.st-sm-quick-links-heading {
+	font-size: 32px;
+	font-weight: 700;
+	line-height: 32px;
+}
+
+.st-sm-quick-links-list-container {
+	margin-top: 32px;
+}
+
+.st-sm-quick-links-list {
+	list-style-image: url(../images/ic_arrow.svg);
+	color: #fff;
+	padding: 0;
+	list-style-position: inside;
+}
+
+.st-sm-quick-links-list-item {
+	margin-bottom: 24px;
+}
+
+.st-sm-quick-links-list-item-link {
+	text-decoration: none;
+}
+
+.st-sm-cast-crew-container {
+	margin-top: 120px;
+}
+
+.st-sm-cast-crew-heading-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.st-sm-cast-crew-heading {
+	font-size: 32px;
+	font-weight: 700;
+	line-height: 40px;
+	padding-left: 12px;
+	border-left: 4px solid #d13223;
+}
+
+.st-sm-cast-crew-view-all-link {
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 32px;
+	text-decoration: none;
+	color: #E46D62;
+}
+
+.st-sm-cast-crew-list-container {
+	margin-top: 48px;
+}
+
+.st-sm-cast-crew-list-items {
+	display: grid;
+	grid-template-columns: repeat(4, auto);
+	grid-gap: 32px;
+}
+
+.st-sm-cast-crew-list-item-image-container img {
+	width: 100%;
+}
+
+.st-sm-cast-crew-list-item-name-container {
+	background-color: #2b2b2b;
+	padding: 24px 0;
+	text-align: center;
+}
+
+.st-sm-cast-crew-list-item-name {
+	font-size: 22px;
+	font-weight: 500;
+	line-height: 22px;
+}
+
+.st-sm-snapshots-container {
+	margin-top: 120px;
+}
+
+.st-sm-snapshots-heading {
+	font-size: 32px;
+	font-weight: 700;
+	line-height: 40px;
+	padding-left: 12px;
+	border-left: 4px solid #d13223;
+}
+
+.st-sm-snapshots-list-items {
+	display: flex;
+	gap: 24px 32px;
+	flex-wrap: wrap;
+	margin-top: 48px;
+}
+
+.st-sm-trailer-clips-container {
+	margin-top: 120px;
+}
+
+.st-sm-trailer-clips-heading {
+	font-size: 32px;
+	font-weight: 700;
+	line-height: 40px;
+	padding-left: 12px;
+	border-left: 4px solid #d13223;
+}
+
+.st-sm-trailer-clips-list-container {
+	margin-top: 48px;
+}
+
+.st-sm-trailer-clips-list-items {
+	display: flex;
+	gap: 32px;
+	flex-wrap: wrap;
+}
+
+.st-sm-trailer-clips-list-item-image-container img {
+	width: 100%;
+}
+
+.st-sm-reviews-container {
+	margin-top: 120px;
+}
+
+.st-sm-reviews-heading {
+	font-size: 32px;
+	font-weight: 700;
+	line-height: 40px;
+	padding-left: 12px;
+	border-left: 4px solid #d13223;
+}
+
+.st-sm-reviews-list-container {
+	margin-top: 48px;
+}
+
+.st-sm-reviews-list {
+	display: flex;
+	gap: 32px;
+	flex-wrap: wrap;
+}
+
+
+
+@media (max-width: 600px) {
+
+	.screen-time-site-main {
+		padding: 0 24px;
+	}
+
+	.screen-time-single-movie-info-container {
+		display: flex;
+		gap: 34px;
+		flex-direction: column;
+		position: relative;
+		align-items: center;
+	}
+
+}

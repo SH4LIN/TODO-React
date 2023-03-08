@@ -13,10 +13,7 @@ Domain Path:  /languages
  */
 
 /* Font Faces */
-@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Heebo&family=Orbitron&display=swap");
-
-/* Variables */
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100;200;300;400;500;600;700;800;900&family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap');/* Variables */
 :root {
 
 	/* Font Family */
@@ -35,8 +32,21 @@ Domain Path:  /languages
 	--movie-title-font-size: 24px;
 }
 
+body {
+	background-color: var(--primary-color) !important;
+}
 
-.primary-text {
+.primary-text-primary-font {
 	color: var(--primary-font-color);
+	font-family: var(--primary-font-family);
+}
+
+.primary-text-heading-font {
+	color: var(--primary-font-color);
+	font-family: var(--heading-font-family);
+}
+
+.secondary-text-primary-font {
+	color: var(--secondary-font-color);
 	font-family: var(--primary-font-family);
 }
