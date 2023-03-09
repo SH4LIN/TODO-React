@@ -24,4 +24,5 @@ while ( have_posts() ) :
 	</div>
 	<?php
 endwhile;
+wp_reset_postdata();
 ?>

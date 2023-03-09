@@ -14,7 +14,13 @@
 <div class="st-sm-info-container">
 
 		<div class="st-sm-poster">
-			<?php the_post_thumbnail( 'large' ); ?>
+			<?php
+			if ( has_post_thumbnail( get_the_ID() ) ) {
+				the_post_thumbnail( 'full' );
+			} else {
+				echo '<img src="' . esc_url( get_stylesheet_directory_uri() ) . '/assets/src/images/placeholder.webp" alt="' . esc_attr( get_the_title( $current_id ) ) . '" />';
+			}
+			?>
 		</div>
 
 		<div class="st-sm-info-stats-container">
@@ -43,8 +49,8 @@
 					$release_year = $date->format( 'Y' );
 					?>
 					<li class="st-sm-stats-list-item st-sm-release-date">
-								<span class="primary-text-primary-font st-sm-release-date-text"><?php echo esc_html( $release_year ); ?></span>
-							</li>
+						<span class="primary-text-primary-font st-sm-release-date-text"><?php echo esc_html( $release_year ); ?></span>
+					</li>
 					<?php
 				}
 				?>
@@ -73,11 +79,26 @@
 				?>
 			</ul>
 
+			<div class="st-sm-genres-container-mobile">
+				<?php
+				$genres = get_the_terms( get_the_ID(), 'rt-movie-genre' );
+				if ( ! empty( $genres ) ) {
+					foreach ( $genres as $genre ) {
+						?>
+						<div class="primary-text-primary-font st-sm-genre-item">
+							<?php echo esc_html( $genre->name ); ?>
+						</div>
+						<?php
+					}
+				}
+				?>
+			</div>
+
 		<div class="primary-text-primary-font st-sm-description">
 			<?php the_excerpt(); ?>
 		</div>
 
-		<div class="st-sm-genres-container">
+		<div class="st-sm-genres-container-desktop">
 			<?php
 			$genres = get_the_terms( get_the_ID(), 'rt-movie-genre' );
 			if ( ! empty( $genres ) ) {
@@ -98,14 +119,18 @@
 			if ( ! empty( $directors ) ) {
 				?>
 				<span class="primary-text-primary-font st-sm-director-text"> <?php esc_html_e( 'Directors:' ); ?></span>
+				<ul class="st-sm-director-list">
 					<?php
 					foreach ( $directors[0] as $director ) {
 						?>
-					<span class="primary-text-primary-font st-sm-director-item">
+						<li class="primary-text-primary-font st-sm-director-item">
 							<?php echo esc_html( ( get_the_title( $director ['person_id'] ) ) ); ?>
-						</span>
+						</li>
 						<?php
 					}
+					?>
+				</ul>
+				<?php
 			}
 			?>
 		</div>

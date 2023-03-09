@@ -14,11 +14,12 @@
 }
 
 .st-logo-container {
-	text-align: center;
+
 	margin: 0 auto;
 }
 
 .st-logo-text {
+	text-align: center;
 	font-family: var(--heading-font-family);
 	font-size: var(--logo-text-font-size);
 	font-weight: 700;
@@ -94,7 +95,7 @@
 	color: var(--primary-font-color);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 375px) {
 
 	.st-header-container {
 		padding: 32px 24px;
@@ -104,15 +105,10 @@
 		display: block;
 	}
 
-	.header-actions {
-		display: none;
-	}
-
-	.search-text {
-		display: none;
-	}
-
+	.header-actions,
+	.search-text,
 	.st-primary-menu-container {
 		display: none;
 	}
+
 }

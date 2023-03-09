@@ -1,0 +1,162 @@
+.st-am-container {
+	width: 100%;
+	height: 100%;
+}
+.st-am-slider-container {
+	width: 100%;
+	height: 100%;
+}
+
+.st-am-slider {
+	display: flex;
+	overflow: hidden;
+}
+
+.st-am-slider-item {
+	flex: 0 0 100%;
+	position: relative;
+}
+
+.st-am-slider-item-image-container img {
+	width: 100%;
+	height: 600px;
+	object-fit: fill;
+}
+
+.st-am-site-content {
+	display: flex;
+	margin: 120px 112px;
+	flex-direction: column;
+	gap: 120px;
+}
+
+.st-am-upcoming-movies-list-container {
+	margin-top: 48px;
+}
+
+.st-am-upcoming-movies-list-item-image-container img {
+	width: 100%;
+	max-width: 100%;
+	max-height: 400px;
+	object-fit: cover;
+	object-position: top;
+}
+
+.st-am-trending-movies-list-item-image-container img {
+	width: 100%;
+	max-width: 100%;
+	max-height: 400px;
+	object-fit: cover;
+	object-position: top;
+}
+
+.st-am-upcoming-movies-list,
+.st-am-trending-movies-list {
+	display: grid;
+	grid-template-columns: repeat(3, 33.33%);
+	grid-gap: 17px 0;
+}
+
+.st-am-trending-movies-list-container {
+	margin-top: 48px;
+}
+
+.st-am-trending-movies-list-item:not(:first-child):not(:nth-child(3n+1)) {
+	margin-left: 32px;
+}
+
+.st-am-upcoming-movies-list-item:not(:nth-child(3n+1)) {
+	margin-left: 32px;
+}
+
+.st-am-upcoming-movies-list-item-content-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.st-am-genres-container {
+	display: flex;
+	flex-direction: row;
+	gap: 8px;
+}
+
+.st-am-genre-text {
+	font-size: 16px;
+	font-weight: 400;
+	color: var(--secondary-font-color);
+}
+
+.st-am-release-date-text {
+	font-size: 16px;
+	font-weight: 400;
+	color: var(--secondary-font-color);
+}
+
+.st-am-movie-title-text {
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 32px;
+	color: var(--primary-font-color);
+}
+
+.st-am-upcoming-movies-list-item-content-container,
+.st-am-trending-movies-list-item-content-container {
+	padding: 24px 16px;
+	background-color: #2b2b2b;
+}
+
+.st-am-upcoming-movies-list-item-content-heading-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.st-am-upcoming-movies-list-item-content-stats-container,
+.st-am-trending-movies-list-item-content-stats-container {
+	margin-top: 16px;
+}
+
+.st-am-upcoming-movies-list-item-content-stats-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.st-am-content-rating-text {
+	font-size: 16px;
+	font-weight: 400;
+	color: var(--secondary-font-color);
+}
+
+.st-am-content-rating {
+	align-self: end;
+}
+
+.st-am-trending-movies-list-item-content-heading-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.st-am-runtime-text {
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 32px;
+	color: var(--secondary-font-color);
+}
+
+.st-am-trending-movies-list-item-content-stats-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.st-am-release-date-text {
+	font-size: 16px;
+	font-weight: 400;
+	color: var(--secondary-font-color);
+}
