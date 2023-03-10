@@ -1,0 +1,347 @@
+@media (max-width: 375px) {
+	.st-sp-container {
+		padding-bottom: 64px;
+	}
+
+	.st-sp-hero-container {
+		display: flex;
+		position: relative;
+		flex-direction: column;
+	}
+
+	.st-sp-profile-container {
+		padding-left: 66px;
+		padding-right: 65px;
+	}
+
+	.st-sp-profile-container img {
+		width: 244px !important;
+		height: 286px !important;
+		object-fit: cover;
+		-o-object-fit: cover;
+		object-position: top;
+	}
+
+	.st-sp-identification-container {
+		padding-top: 16px;
+		text-align: center;
+	}
+
+	.st-sp-full-name-container {
+		margin-top: 8px;
+	}
+
+	.st-sp-personal-details-container {
+		padding-top: 31px;
+		display: flex;
+		flex-direction: column;
+		align-content: center;
+		padding-left: 24px;
+		padding-right: 24px;
+	}
+
+	.st-sp-occupation-details-container {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.st-sp-occupation-text-container {
+		flex: 50%;
+	}
+
+	.st-sp-occupation-container {
+		flex: 50%;
+	}
+
+	.st-sp-birth-date-details-container {
+		margin-top: 24px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.st-sp-birth-date-text-container {
+		flex: 50%;
+	}
+
+	.st-sp-birth-date-container {
+		flex: 50%;
+	}
+
+	.st-sp-birth-place-details-container {
+		margin-top: 24px;
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: space-between;
+	}
+
+	.st-sp-birth-place-text-container {
+		flex: 50%;
+	}
+
+	.st-sp-birth-place-container {
+		flex: 50%;
+	}
+
+	.st-sp-years-active-details-container {
+		margin-top: 24px;
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: space-between;
+	}
+
+	.st-sp-years-active-text-container {
+		flex: 50%;
+	}
+
+	.st-sp-years-active-container {
+		flex: 50%;
+	}
+
+	.st-sp-debut-movie-details-container {
+		margin-top: 24px;
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: space-between;
+	}
+
+	.st-sp-debut-movie-text-container {
+		flex: 50%;
+	}
+
+	.st-sp-debut-movie-container {
+		flex: 50%;
+	}
+
+	.st-sp-upcoming-movies-details-container {
+		margin-top: 24px;
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: space-between;
+	}
+
+	.st-sp-upcoming-movies-text-container {
+		flex: 50%;
+	}
+
+	.st-sp-upcoming-movies-container {
+		flex: 50%;
+	}
+
+	.st-sp-social-details-container {
+		margin-top: 24px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.st-sp-social-text-container {
+		flex: 50%;
+	}
+
+	.st-sp-social-container {
+		flex: 50%;
+		display: flex;
+		align-items: flex-start;
+	}
+
+	.st-sp-social-items {
+		line-height: 0;
+	}
+
+	.st-sp-social-items:not(:last-child) {
+		margin-right: 24.84px;
+		height: fit-content;
+		line-height: 0;
+		width: auto;
+	}
+
+	.st-sp-about-container {
+		padding:64px 24px 0 24px ;
+	}
+
+	.st-sp-about-heading-container {
+		border-left: 4px #d13223 solid;
+		padding-left: 12px;
+	}
+
+	.st-sp-about-content-container {
+		margin-top: 48px;
+	}
+
+	.st-sp-about-content-container a {
+		font-size: 14px;
+		color: #e46d62;
+		text-decoration: underline;
+	}
+
+	.st-sp-popular-movies-container {
+		margin: 64px 24px 0 24px;
+	}
+
+	.st-sp-popular-movies-heading-container {
+		border-left: 4px #d13223 solid;
+		padding-left: 12px;
+	}
+
+	.st-sp-popular-movies-items-container {
+		margin-top: 48px;
+		display: flex;
+		align-items: flex-start;
+		justify-content: flex-start;
+		padding-bottom: 32px;
+		overflow: scroll;
+
+	}
+
+	.st-sp-popular-movie-item-container:not(:last-child) {
+		margin-right: 17px;
+	}
+
+	.st-sp-popular-movie-item-poster-container img {
+		width: 155px !important;
+		height: 166px !important;
+		max-width: 155px !important;
+		object-fit: cover;
+		object-position: top;
+		-o-object-fit: cover;
+	}
+
+	.st-sp-popular-movie-item-info-container {
+		padding: 8px;
+		width: 100%;
+		background-color: #2b2b2b;
+	}
+
+	.st-sp-popular-movie-item-name-runtime-container {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.st-sp-popular-movie-item-name-container {
+		margin-right: 8px;
+	}
+
+	.st-sp-popular-movie-item-runtime-container {}
+
+	.st-sp-popular-movie-item-genre-release-container {
+		display: flex;
+		margin-top: 12px;
+		justify-content: space-between;
+	}
+
+	.st-sp-popular-movie-item-genre-container {
+		margin-right: 8px;
+	}
+
+	.st-sp-popular-movie-item-genre-list {
+		padding: 0;
+		margin: 0;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		list-style: none;
+	}
+
+	.st-sp-popular-movie-item-genre-item:not(:last-child) {
+		margin-right: 4px;
+	}
+
+	.st-sp-popular-movie-item-genre-item:not(:first-child):before {
+		content: "•";
+		color: var(--secondary-font-color);
+		font-size: 8px;
+		margin-right: 2px;
+		line-height: 11.75px;
+	}
+
+	.st-sp-popular-movie-item-release-container {
+		margin-left: auto;
+	}
+
+	.st-sp-snapshots-container {
+		margin: 64px 24px 0 24px;
+	}
+
+	.st-sp-snapshots-heading-container {
+		border-left: 4px #d13223 solid;
+		padding-left: 12px;
+	}
+
+	.st-sp-snapshots-list-container {
+		margin-top: 48px;
+	}
+
+	.st-sp-snapshots-list {
+		display: grid;
+		grid-gap: 16px;
+		grid-template-columns: auto auto;
+	}
+
+	.st-sp-snapshots-list-item {
+		max-width: 327px;
+		max-height: 152px;
+		min-width: 155px;
+		min-height: 152px;
+	}
+
+	.st-sp-snapshots-list-item img {
+		width: 100% !important;
+		object-fit: cover;
+		-o-object-fit: cover;
+		object-position: top;
+	}
+
+	.st-sp-videos-container {
+		margin: 64px 24px 0 24px;
+	}
+
+	.st-sp-videos-heading-container {
+		border-left: 4px #d13223 solid;
+		padding-left: 12px;
+	}
+
+	.st-sp-videos-list-container {
+		margin-top: 48px;
+	}
+
+	.st-sp-videos-list {
+		display: grid;
+		grid-gap: 16px;
+		grid-template-columns: auto;
+	}
+
+	.st-sp-videos-list-item {
+		max-width: 100%;
+		max-height: 210px;
+		position: relative;
+	}
+
+	.st-sp-videos-list-item img {
+		width: 100% !important;
+		height: 100% !important;
+		object-fit: fill;
+	}
+
+	.st-sp-videos-play-button {
+		width: 39.74px;
+		height: 39.74px;
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+
+		display: block;
+		margin: auto;
+	}
+
+}

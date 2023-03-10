@@ -40,6 +40,21 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 		const MOVIE_META_CREW_SLUG = 'rt-movie-meta-crew';
 
 		/**
+		 * MOVIE_META_BASIC_RATING_SLUG
+		 */
+		const MOVIE_META_BASIC_RATING_SLUG = 'rt-movie-meta-basic-rating';
+
+		/**
+		 * MOVIE_META_BASIC_RATING_SLUG
+		 */
+		const MOVIE_META_BASIC_RUNTIME_SLUG = 'rt-movie-meta-basic-runtime';
+
+		/**
+		 * MOVIE_META_BASIC_RATING_SLUG
+		 */
+		const MOVIE_META_BASIC_RELEASE_DATE_SLUG = 'rt-movie-meta-basic-release-date';
+
+		/**
 		 * RT_Movie_Meta_Box init method.
 		 *
 		 * @return void
@@ -88,13 +103,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 			// This will get the movie basic meta-data.
 			$rt_movie_meta_basic_data = get_post_meta( $post->ID );
 
-			// This will create the meta key for the movie basic meta-data.
-			$rt_movie_meta_basic_key = array(
-				'rating'       => 'rt-movie-meta-basic-rating',
-				'runtime'      => 'rt-movie-meta-basic-runtime',
-				'release-date' => 'rt-movie-meta-basic-release-date',
-			);
-
 			// This will add the nonce field for the movie basic meta-data.
 			wp_nonce_field( 'rt_movie_meta_nonce', 'rt_movie_meta_nonce' );
 
@@ -103,22 +111,22 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 			<div class = "rt-movie-meta-fields rt-movie-meta-basic-fields">
 				<div class = "rt-movie-meta-container rt-movie-meta-basic-container rt-movie-meta-basic-rating-container">
 					<label class = "rt-movie-meta-label rt-movie-meta-basic-label rt-movie-meta-basic-rating-label"
-						for = "<?php echo esc_attr( $rt_movie_meta_basic_key['rating'] ); ?>">
+						for = "<?php echo esc_attr( self::MOVIE_META_BASIC_RATING_SLUG ); ?>">
 						<?php esc_html_e( 'Rating (Between 0-10)', 'movie-library' ); ?>
 					</label>
 
 					<?php
 					$rating = '';
-					if ( isset( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['rating'] ] ) ) {
-						$rating = $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['rating'] ][0];
+					if ( isset( $rt_movie_meta_basic_data[ self::MOVIE_META_BASIC_RATING_SLUG ] ) ) {
+						$rating = $rt_movie_meta_basic_data[ self::MOVIE_META_BASIC_RATING_SLUG ][0];
 					}
 					?>
 
 					<input type = "number"
 						value = "<?php echo esc_attr( $rating ); ?>"
 						class = "rt-movie-meta-field rt-movie-meta-basic-field rt-movie-meta-basic-rating-field"
-						name = "<?php echo esc_attr( $rt_movie_meta_basic_key['rating'] ); ?>"
-						id = "<?php echo esc_attr( $rt_movie_meta_basic_key['rating'] ); ?>"
+						name = "<?php echo esc_attr( self::MOVIE_META_BASIC_RATING_SLUG ); ?>"
+						id = "<?php echo esc_attr( self::MOVIE_META_BASIC_RATING_SLUG ); ?>"
 						max = "10"
 						min = "0" />
 
@@ -127,22 +135,22 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 
 				<div class = "rt-movie-meta-container rt-movie-meta-basic-container rt-movie-meta-basic-runtime-container">
 					<label class = "rt-movie-meta-label rt-movie-meta-basic-label rt-movie-meta-basic-runtime-label"
-						for    = "<?php echo esc_attr( $rt_movie_meta_basic_key['runtime'] ); ?>" >
+						for    = "<?php echo esc_attr( self::MOVIE_META_BASIC_RUNTIME_SLUG ); ?>" >
 						<?php esc_html_e( 'Runtime (Minutes)', 'movie-library' ); ?>
 					</label>
 
 					<?php
 					$runtime = '';
-					if ( isset( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['runtime'] ] ) ) {
-						$runtime = $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['runtime'] ][0];
+					if ( isset( $rt_movie_meta_basic_data[ self::MOVIE_META_BASIC_RUNTIME_SLUG ] ) ) {
+						$runtime = $rt_movie_meta_basic_data[ self::MOVIE_META_BASIC_RUNTIME_SLUG ][0];
 					}
 					?>
 
 					<input type = "number"
 						value = "<?php echo esc_attr( $runtime ); ?>"
 						class = "rt-movie-meta-field rt-movie-meta-basic-field rt-movie-meta-basic-runtime-field"
-						name  = "<?php echo esc_attr( $rt_movie_meta_basic_key['runtime'] ); ?>"
-						id    = "<?php echo esc_attr( $rt_movie_meta_basic_key['runtime'] ); ?>"
+						name  = "<?php echo esc_attr( self::MOVIE_META_BASIC_RUNTIME_SLUG ); ?>"
+						id    = "<?php echo esc_attr( self::MOVIE_META_BASIC_RUNTIME_SLUG ); ?>"
 						min   = "1"
 						max   = "1000" />
 
@@ -151,22 +159,22 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 
 				<div class = "rt-movie-meta-container rt-movie-meta-basic-container rt-movie-meta-basic-release-date-container">
 					<label class = "rt-movie-meta-label rt-movie-meta-basic-label rt-movie-meta-basic-release-date-label"
-						for    = "<?php echo esc_attr( $rt_movie_meta_basic_key['release-date'] ); ?> ">
+						for    = "<?php echo esc_attr( self::MOVIE_META_BASIC_RELEASE_DATE_SLUG ); ?> ">
 						<?php esc_html_e( 'Release Date', 'movie-library' ); ?>
 					</label>
 
 					<?php
 					$release_date = '';
-					if ( isset( $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['release-date'] ] ) ) {
-						$release_date = $rt_movie_meta_basic_data[ $rt_movie_meta_basic_key['release-date'] ][0];
+					if ( isset( $rt_movie_meta_basic_data[ self::MOVIE_META_BASIC_RELEASE_DATE_SLUG ] ) ) {
+						$release_date = $rt_movie_meta_basic_data[ self::MOVIE_META_BASIC_RELEASE_DATE_SLUG ][0];
 					}
 					?>
 
 					<input type = "date"
 						value = "<?php echo esc_attr( $release_date ); ?>"
 						class = "rt-movie-meta-field rt-movie-meta-basic-field rt-movie-meta-basic-release-date-field"
-						name  = "<?php echo esc_attr( $rt_movie_meta_basic_key['release-date'] ); ?>"
-						id    = "<?php echo esc_attr( $rt_movie_meta_basic_key['release-date'] ); ?>" />
+						name  = "<?php echo esc_attr( self::MOVIE_META_BASIC_RELEASE_DATE_SLUG ); ?>"
+						id    = "<?php echo esc_attr( self::MOVIE_META_BASIC_RELEASE_DATE_SLUG ); ?>" />
 
 				</div>
 			</div>
@@ -470,10 +478,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 			}
 
 			// Checking if rt-movie-meta-basic-rating is available in $_POST.
-			if ( isset( $_POST['rt-movie-meta-basic-rating'] ) ) {
+			if ( isset( $_POST[ self::MOVIE_META_BASIC_RATING_SLUG ] ) ) {
 
 				// Sanitize user input.
-				$rt_movie_meta_basic_rating = sanitize_text_field( wp_unslash( $_POST['rt-movie-meta-basic-rating'] ) );
+				$rt_movie_meta_basic_rating = sanitize_text_field( wp_unslash( $_POST[ self::MOVIE_META_BASIC_RATING_SLUG ] ) );
 
 				// If value is not numeric than doing explicit type casting.
 				if ( ! is_numeric( $rt_movie_meta_basic_rating ) ) {
@@ -497,15 +505,15 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 				}
 
 				// Update the meta field in the database.
-				update_post_meta( $post_id, 'rt-movie-meta-basic-rating', $rt_movie_meta_basic_rating );
+				update_post_meta( $post_id, self::MOVIE_META_BASIC_RATING_SLUG, $rt_movie_meta_basic_rating );
 
 			}
 
 			// Checking if rt-movie-meta-basic-runtime is available in $_POST.
-			if ( isset( $_POST['rt-movie-meta-basic-runtime'] ) ) {
+			if ( isset( $_POST[ self::MOVIE_META_BASIC_RUNTIME_SLUG ] ) ) {
 
 				// Sanitize user input.
-				$rt_movie_meta_basic_runtime = sanitize_text_field( wp_unslash( $_POST['rt-movie-meta-basic-runtime'] ) );
+				$rt_movie_meta_basic_runtime = sanitize_text_field( wp_unslash( $_POST[ self::MOVIE_META_BASIC_RUNTIME_SLUG ] ) );
 
 				// If value is not numeric than doing explicit type casting.
 				if ( ! is_numeric( $rt_movie_meta_basic_runtime ) ) {
@@ -516,19 +524,19 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 
 				if ( $rt_movie_meta_basic_runtime > 0 && $rt_movie_meta_basic_runtime <= 1000 ) {
 
-					update_post_meta( $post_id, 'rt-movie-meta-basic-runtime', $rt_movie_meta_basic_runtime );
+					update_post_meta( $post_id, self::MOVIE_META_BASIC_RUNTIME_SLUG, $rt_movie_meta_basic_runtime );
 
 				}
 			}
 
 			// Checking if rt-movie-meta-basic-release-date is available in $_POST.
-			if ( isset( $_POST['rt-movie-meta-basic-release-date'] ) ) {
+			if ( isset( $_POST[ self::MOVIE_META_BASIC_RELEASE_DATE_SLUG ] ) ) {
 
 				// Sanitize user input.
-				$rt_movie_meta_basic_release_date = sanitize_text_field( wp_unslash( $_POST['rt-movie-meta-basic-release-date'] ) );
+				$rt_movie_meta_basic_release_date = sanitize_text_field( wp_unslash( $_POST[ self::MOVIE_META_BASIC_RELEASE_DATE_SLUG ] ) );
 
 				// Update the meta field in the database.
-				update_post_meta( $post_id, 'rt-movie-meta-basic-release-date', $rt_movie_meta_basic_release_date );
+				update_post_meta( $post_id, self::MOVIE_META_BASIC_RELEASE_DATE_SLUG, $rt_movie_meta_basic_release_date );
 
 			}
 		}

@@ -92,6 +92,7 @@ if ( ! function_exists( 'twenty_twenty_one_child_scripts' ) ) :
 		wp_enqueue_style( 'twenty-twenty-one-header-style', get_stylesheet_directory_uri() . '/assets/css/header.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/header.css' ) );
 		wp_enqueue_style( 'twenty-twenty-one-footer-style', get_stylesheet_directory_uri() . '/assets/css/footer.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/footer.css' ) );
 		wp_enqueue_style( 'twenty-twenty-one-single-movie-style', get_stylesheet_directory_uri() . '/assets/css/single-movie.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/single-movie.css' ) );
+		wp_enqueue_style( 'twenty-twenty-one-single-person-style', get_stylesheet_directory_uri() . '/assets/css/single-person.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/single-person.css' ) );
 		wp_enqueue_style( 'twenty-twenty-one-archive-movie-style', get_stylesheet_directory_uri() . '/assets/css/archive-movie.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/archive-movie.css' ) );
 
 		wp_register_script( 'archive-movie', get_stylesheet_directory_uri() . '/assets/js/archive-movie.js', array(), filemtime( get_stylesheet_directory() . '/assets/js/archive-movie.js' ), true );

@@ -38,7 +38,7 @@
 										<?php
 										$minutes = get_post_meta( get_the_ID(), 'rt-movie-meta-basic-runtime', true );
 										if ( ! empty( $minutes ) ) {
-											$runtime = intdiv( $minutes, 60 ) . __( 'hr ' ) . ( $minutes % 60 ) . __( 'min' );
+											$runtime = intdiv( $minutes, 60 ) . __( ' hr ' ) . ( $minutes % 60 ) . __( ' min' );
 											?>
 											<div class="st-am-stats-list-item st-am-runtime">
 												<span class="primary-text-primary-font st-am-runtime-text"><?php echo esc_html( $runtime ); ?></span>

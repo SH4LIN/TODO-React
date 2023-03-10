@@ -16,6 +16,10 @@ body {
 	color: #ffffff;
 }
 
+ul {
+	padding: 0 !important;
+}
+
 h1,
 h2,
 h3,
@@ -485,15 +489,7 @@ ul {
 	outline: 0;
 	cursor: pointer;
 }
-.st-single-cover-trailer__btn::after {
-	position: absolute;
-	content: url(../../src/images/play.svg);
-	top: 56%;
-	left: 51%;
-	transform: translate(-36%, -50%);
-	z-index: 1;
-	transition: all 0.3s ease;
-}
+
 .st-single-cover-trailer__btn::before {
 	position: absolute;
 	content: "Watch Trailer";
@@ -560,19 +556,7 @@ ul {
 		margin-bottom: 16px;
 	}
 }
-.st-single-trailer__content-inner-list-item::before {
-	position: absolute;
-	content: url(../../src/images/play.svg);
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	line-height: 0;
-	padding: 16px 20PX;
-	border-radius: 50%;
-	background-color: #D13223;
-	z-index: 1;
-	cursor: pointer;
-}
+
 .st-single-trailer__content-inner-list-item video {
 	height: 100%;
 	-o-object-fit: cover;
@@ -605,15 +589,7 @@ ul {
 		grid-template-columns: 100%;
 	}
 }
-.st-single-plot__sidebar {
-	position: sticky;
-	top: 0;
-	right: 0;
-	height: -moz-fit-content;
-	height: fit-content;
-	padding: 24px 32px;
-	background-color: #2B2B2B;
-}
+
 @media screen and (max-width: 991px) {
 	.st-single-plot__sidebar {
 		display: none;
@@ -639,12 +615,7 @@ ul {
 .st-single-plot__sidebar-list-item:hover a {
 	color: #D13223;
 }
-.st-single-plot__sidebar-list-item::after {
-	position: absolute;
-	content: url(../../src/images/arrow-right.svg);
-	left: -15%;
-	top: 10%;
-}
+
 .st-single-crew__header {
 	display: flex;
 	justify-content: space-between;
@@ -696,4 +667,4 @@ ul {
 	.st-single-crew__content-inner-list-item__title {
 		font-size: 14px;
 	}
-}/*# sourceMappingURL=main.css.map */
+}

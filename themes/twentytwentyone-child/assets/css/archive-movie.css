@@ -92,13 +92,6 @@
 	color: var(--secondary-font-color);
 }
 
-.st-am-movie-title-text {
-	font-size: 24px;
-	font-weight: 700;
-	line-height: 32px;
-	color: var(--primary-font-color);
-}
-
 .st-am-upcoming-movies-list-item-content-container,
 .st-am-trending-movies-list-item-content-container {
 	padding: 24px 16px;
@@ -109,7 +102,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-start;
 }
 
 .st-am-upcoming-movies-list-item-content-stats-container,
@@ -121,7 +114,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-start;
 }
 
 .st-am-content-rating-text {
@@ -130,18 +123,23 @@
 	color: var(--secondary-font-color);
 }
 
-.st-am-content-rating {
-	align-self: end;
-}
-
 .st-am-trending-movies-list-item-content-heading-container {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-start;
+}
+
+.st-am-movie-title-text {
+	flex: 1;
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 32px;
+	color: var(--primary-font-color);
 }
 
 .st-am-runtime-text {
+	flex: 2;
 	font-size: 20px;
 	font-weight: 400;
 	line-height: 32px;

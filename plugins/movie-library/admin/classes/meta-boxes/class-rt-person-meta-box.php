@@ -36,6 +36,46 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 		const PERSON_META_SOCIAL_SLUG = 'rt-person-meta-social';
 
 		/**
+		 * PERSON_META_BASIC_BIRTH_DATE_SLUG
+		 */
+		const PERSON_META_BASIC_BIRTH_DATE_SLUG = 'rt-person-meta-basic-birth-date';
+
+		/**
+		 * PERSON_META_BASIC_BIRTH_PLACE_SLUG
+		 */
+		const PERSON_META_BASIC_BIRTH_PLACE_SLUG = 'rt-person-meta-basic-birth-place';
+
+		/**
+		 * PERSON_META_BASIC_BIRTH_DATE_SLUG
+		 */
+		const PERSON_META_BASIC_FULL_NAME_SLUG = 'rt-person-meta-basic-full-name';
+
+		/**
+		 * PERSON_META_BASIC_BIRTH_DATE_SLUG
+		 */
+		const PERSON_META_BASIC_START_YEAR_SLUG = 'rt-person-meta-basic-start-year';
+
+		/**
+		 * PERSON_META_SOCIAL_TWITTER_SLUG
+		 */
+		const PERSON_META_SOCIAL_TWITTER_SLUG = 'rt-person-meta-social-twitter';
+
+		/**
+		 * PERSON_META_SOCIAL_FACEBOOK_SLUG
+		 */
+		const PERSON_META_SOCIAL_FACEBOOK_SLUG = 'rt-person-meta-social-facebook';
+
+		/**
+		 * PERSON_META_SOCIAL_INSTAGRAM_SLUG
+		 */
+		const PERSON_META_SOCIAL_INSTAGRAM_SLUG = 'rt-person-meta-social-instagram';
+
+		/**
+		 * PERSON_META_SOCIAL_WEB_SLUG
+		 */
+		const PERSON_META_SOCIAL_WEB_SLUG = 'rt-person-meta-social-web';
+
+		/**
 		 * RT_Person_Meta_Box init method.
 		 *
 		 * @return void
@@ -85,10 +125,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 			$rt_person_meta_basic_data = get_post_meta( $post->ID );
 
 			// This will create the array of the person meta basic keys.
-			$rt_person_meta_basic_key = array(
-				'birth-date'  => 'rt-person-meta-basic-birth-date',
-				'birth-place' => 'rt-person-meta-basic-birth-place',
-			);
 
 			// This will be used to add the nonce field.
 			wp_nonce_field( 'rt_person_meta_nonce', 'rt_person_meta_nonce' );
@@ -98,28 +134,82 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 			<div class = "rt-person-meta-fields rt-person-meta-basic-fields">
 				<div class = "rt-person-meta-container rt-person-meta-basic-container rt-person-meta-basic-birth-date-container">
 					<label class = "rt-person-meta-label rt-person-meta-basic-label rt-person-meta-basic-birth-date-label"
-						for = "<?php echo esc_attr( $rt_person_meta_basic_key['birth-date'] ); ?>">
+						for = "<?php echo esc_attr( self::PERSON_META_BASIC_BIRTH_DATE_SLUG ); ?>">
 						<?php esc_html_e( 'Birth Date', 'movie-library' ); ?>
 					</label>
 
+					<?php
+					$birth_date = '';
+					if ( isset( $rt_person_meta_basic_data[ self::PERSON_META_BASIC_BIRTH_DATE_SLUG ] ) ) {
+						$birth_date = $rt_person_meta_basic_data[ self::PERSON_META_BASIC_BIRTH_DATE_SLUG ][0];
+					}
+					?>
+
 					<input type = "date"
-						value = "<?php echo esc_attr( $rt_person_meta_basic_data[ $rt_person_meta_basic_key['birth-date'] ][0] ); ?>"
+						value = "<?php echo esc_attr( $birth_date ); ?>"
 						class = "rt-person-meta-field rt-person-meta-basic-field rt-person-meta-basic-birth-date-field"
-						name = "<?php echo esc_attr( $rt_person_meta_basic_key['birth-date'] ); ?>"
-						id = "<?php echo esc_attr( $rt_person_meta_basic_key['birth-date'] ); ?>" />
+						name = "<?php echo esc_attr( self::PERSON_META_BASIC_BIRTH_DATE_SLUG ); ?>"
+						id = "<?php echo esc_attr( self::PERSON_META_BASIC_BIRTH_DATE_SLUG ); ?>" />
 				</div>
 
 				<div class = "rt-person-meta-container rt-person-meta-basic-container rt-person-meta-basic-birth-place-container">
 					<label class = "rt-person-meta-label rt-person-meta-basic-label rt-person-meta-basic-birth-place-label"
-						for = "<?php echo esc_attr( $rt_person_meta_basic_key['birth-place'] ); ?>">
+						for = "<?php echo esc_attr( self::PERSON_META_BASIC_BIRTH_PLACE_SLUG ); ?>">
 						<?php esc_html_e( 'Birth Place', 'movie-library' ); ?>
 					</label>
 
+					<?php
+					$birth_place = '';
+					if ( isset( $rt_person_meta_basic_data[ self::PERSON_META_BASIC_BIRTH_PLACE_SLUG ] ) ) {
+						$birth_place = $rt_person_meta_basic_data[ self::PERSON_META_BASIC_BIRTH_PLACE_SLUG ][0];
+					}
+					?>
+
 					<input type = "text"
-						value = "<?php echo esc_attr( $rt_person_meta_basic_data[ $rt_person_meta_basic_key['birth-place'] ][0] ); ?>"
+						value = "<?php echo esc_attr( $birth_place ); ?>"
 						class = "rt-person-meta-field rt-person-meta-basic-field rt-person-meta-basic-birth-place-field"
-						name = "<?php echo esc_attr( $rt_person_meta_basic_key['birth-place'] ); ?>"
-						id = "<?php echo esc_attr( $rt_person_meta_basic_key['birth-place'] ); ?>" />
+						name = "<?php echo esc_attr( self::PERSON_META_BASIC_BIRTH_PLACE_SLUG ); ?>"
+						id = "<?php echo esc_attr( self::PERSON_META_BASIC_BIRTH_PLACE_SLUG ); ?>" />
+				</div>
+
+				<div class = "rt-person-meta-container rt-person-meta-basic-container rt-person-meta-basic-full-name-container">
+					<label class = "rt-person-meta-label rt-person-meta-basic-label rt-person-meta-basic-full-name-label"
+						for = "<?php echo esc_attr( self::PERSON_META_BASIC_FULL_NAME_SLUG ); ?>">
+						<?php esc_html_e( 'Full Name', 'movie-library' ); ?>
+					</label>
+
+					<?php
+					$full_name = '';
+					if ( isset( $rt_person_meta_basic_data[ self::PERSON_META_BASIC_FULL_NAME_SLUG ] ) ) {
+						$full_name = $rt_person_meta_basic_data[ self::PERSON_META_BASIC_FULL_NAME_SLUG ][0];
+					}
+					?>
+
+					<input type = "text"
+						value = "<?php echo esc_attr( $full_name ); ?>"
+						class = "rt-person-meta-field rt-person-meta-basic-field rt-person-meta-basic-full-name-field"
+						name = "<?php echo esc_attr( self::PERSON_META_BASIC_FULL_NAME_SLUG ); ?>"
+						id = "<?php echo esc_attr( self::PERSON_META_BASIC_FULL_NAME_SLUG ); ?>" />
+				</div>
+
+				<div class = "rt-person-meta-container rt-person-meta-basic-container rt-person-meta-basic-start-year-container">
+					<label class = "rt-person-meta-label rt-person-meta-basic-label rt-person-meta-basic-start-year-label"
+						for = "<?php echo esc_attr( self::PERSON_META_BASIC_START_YEAR_SLUG ); ?>">
+						<?php esc_html_e( 'Started Career', 'movie-library' ); ?>
+					</label>
+
+					<?php
+					$start_year = '';
+					if ( isset( $rt_person_meta_basic_data[ self::PERSON_META_BASIC_START_YEAR_SLUG ] ) ) {
+						$start_year = $rt_person_meta_basic_data[ self::PERSON_META_BASIC_START_YEAR_SLUG ][0];
+					}
+					?>
+
+					<input type = "date"
+						value = "<?php echo esc_attr( $start_year ); ?>"
+						class = "rt-person-meta-field rt-person-meta-basic-field rt-person-meta-basic-start-year-field"
+						name = "<?php echo esc_attr( self::PERSON_META_BASIC_START_YEAR_SLUG ); ?>"
+						id = "<?php echo esc_attr( self::PERSON_META_BASIC_START_YEAR_SLUG ); ?>" />
 				</div>
 			</div>
 
@@ -137,13 +227,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 
 			$rt_person_meta_social_data = get_post_meta( $post->ID );
 
-			$rt_person_meta_social_key = array(
-				'twitter'   => 'rt-person-meta-social-twitter',
-				'facebook'  => 'rt-person-meta-social-facebook',
-				'instagram' => 'rt-person-meta-social-instagram',
-				'website'   => 'rt-person-meta-social-web',
-			);
-
 			wp_nonce_field( 'rt_person_meta_nonce', 'rt_person_meta_nonce' );
 
 			?>
@@ -151,60 +234,88 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 			<div class = "rt-person-meta-fields rt-person-meta-social-fields">
 				<div class = "rt-person-meta-container rt-person-meta-social-container rt-person-meta-social-twitter-container">
 					<label class = "rt-person-meta-label rt-person-meta-social-label rt-person-meta-social-twitter-label"
-						for = "<?php echo esc_attr( $rt_person_meta_social_key['twitter'] ); ?>">
+						for = "<?php echo esc_attr( self::PERSON_META_SOCIAL_TWITTER_SLUG ); ?>">
 						<?php esc_html_e( 'Twitter', 'movie-library' ); ?>
 					</label>
 
+					<?php
+					$twitter = '';
+					if ( isset( $rt_person_meta_social_data[ self::PERSON_META_SOCIAL_TWITTER_SLUG ] ) ) {
+						$twitter = $rt_person_meta_social_data[ self::PERSON_META_SOCIAL_TWITTER_SLUG ][0];
+					}
+					?>
+
 					<input type = "text"
-						value = "<?php echo esc_url( $rt_person_meta_social_data[ $rt_person_meta_social_key['twitter'] ][0] ); ?>"
+						value = "<?php echo esc_url( $twitter ); ?>"
 						class = "rt-person-meta-field rt-person-meta-social-field rt-person-meta-social-twitter-field"
-						name = "<?php echo esc_attr( $rt_person_meta_social_key['twitter'] ); ?>"
-						id = "<?php echo esc_attr( $rt_person_meta_social_key['twitter'] ); ?>"/>
+						name = "<?php echo esc_attr( self::PERSON_META_SOCIAL_TWITTER_SLUG ); ?>"
+						id = "<?php echo esc_attr( self::PERSON_META_SOCIAL_TWITTER_SLUG ); ?>"/>
 
 					<span class = "rt-person-meta-field-error rt-person-meta-social-field-error rt-person-meta-social-twitter-field-error" id="rt-person-meta-social-twitter-field-error"></span>
 				</div>
 
 				<div class = "rt-person-meta-container rt-person-meta-social-container rt-person-meta-social-facebook-container">
 					<label class = "rt-person-meta-label rt-person-meta-social-label rt-person-meta-social-facebook-label"
-						for = "<?php echo esc_attr( $rt_person_meta_social_key['facebook'] ); ?>">
+						for = "<?php echo esc_attr( self::PERSON_META_SOCIAL_FACEBOOK_SLUG ); ?>">
 						<?php esc_html_e( 'Facebook', 'movie-library' ); ?>
 					</label>
 
+					<?php
+					$facebook = '';
+					if ( isset( $rt_person_meta_social_data[ self::PERSON_META_SOCIAL_FACEBOOK_SLUG ] ) ) {
+						$facebook = $rt_person_meta_social_data[ self::PERSON_META_SOCIAL_FACEBOOK_SLUG ][0];
+					}
+					?>
+
 					<input type = "text"
-						value = "<?php echo esc_url( $rt_person_meta_social_data[ $rt_person_meta_social_key['facebook'] ][0] ); ?>"
+						value = "<?php echo esc_url( $facebook ); ?>"
 						class = "rt-person-meta-field rt-person-meta-social-field rt-person-meta-social-facebook-field"
-						name = "<?php echo esc_attr( $rt_person_meta_social_key['facebook'] ); ?>"
-						id = "<?php echo esc_attr( $rt_person_meta_social_key['facebook'] ); ?>"/>
+						name = "<?php echo esc_attr( self::PERSON_META_SOCIAL_FACEBOOK_SLUG ); ?>"
+						id = "<?php echo esc_attr( self::PERSON_META_SOCIAL_FACEBOOK_SLUG ); ?>"/>
 
 					<span class = "rt-person-meta-field-error rt-person-meta-social-field-error rt-person-meta-social-facebook-field-error" id="rt-person-meta-social-facebook-field-error"></span>
 				</div>
 
 				<div class = "rt-person-meta-container rt-person-meta-social-container rt-person-meta-social-instagram-container">
 					<label class = "rt-person-meta-label rt-person-meta-social-label rt-person-meta-social-instagram-label"
-						for = "<?php echo esc_attr( $rt_person_meta_social_key['instagram'] ); ?>">
+						for = "<?php echo esc_attr( self::PERSON_META_SOCIAL_INSTAGRAM_SLUG ); ?>">
 						<?php esc_html_e( 'Instagram', 'movie-library' ); ?>
 					</label>
 
+					<?php
+					$instagram = '';
+					if ( isset( $rt_person_meta_social_data[ self::PERSON_META_SOCIAL_INSTAGRAM_SLUG ] ) ) {
+						$instagram = $rt_person_meta_social_data[ self::PERSON_META_SOCIAL_INSTAGRAM_SLUG ][0];
+					}
+					?>
+
 					<input type = "text"
-						value = "<?php echo esc_url( $rt_person_meta_social_data[ $rt_person_meta_social_key['instagram'] ][0] ); ?>"
+						value = "<?php echo esc_url( $instagram ); ?>"
 						class = "rt-person-meta-field rt-person-meta-social-field rt-person-meta-social-instagram-field"
-						name = "<?php echo esc_attr( $rt_person_meta_social_key['instagram'] ); ?>"
-						id = "<?php echo esc_attr( $rt_person_meta_social_key['instagram'] ); ?>"/>
+						name = "<?php echo esc_attr( self::PERSON_META_SOCIAL_INSTAGRAM_SLUG ); ?>"
+						id = "<?php echo esc_attr( self::PERSON_META_SOCIAL_INSTAGRAM_SLUG ); ?>"/>
 
 					<span class = "rt-person-meta-field-error rt-person-meta-social-field-error rt-person-meta-social-instagram-field-error" id="rt-person-meta-social-instagram-field-error"></span>
 				</div>
 
 				<div class = "rt-person-meta-container rt-person-meta-social-container rt-person-meta-social-website-container">
 					<label class = "rt-person-meta-label rt-person-meta-social-label rt-person-meta-social-website-label"
-						for = "<?php echo esc_attr( $rt_person_meta_social_key['Website'] ); ?>">
+						for = "<?php echo esc_attr( self::PERSON_META_SOCIAL_WEB_SLUG ); ?>">
 						<?php esc_html_e( 'Website', 'movie-library' ); ?>
 					</label>
 
+					<?php
+					$website = '';
+					if ( isset( $rt_person_meta_social_data[ self::PERSON_META_SOCIAL_WEB_SLUG ] ) ) {
+						$website = $rt_person_meta_social_data[ self::PERSON_META_SOCIAL_WEB_SLUG ][0];
+					}
+					?>
+
 					<input type = "text"
-						value = "<?php echo esc_url( $rt_person_meta_social_data[ $rt_person_meta_social_key['website'] ][0] ); ?>"
+						value = "<?php echo esc_url( $website ); ?>"
 						class = "rt-person-meta-field rt-person-meta-social-field rt-person-meta-social-website-field"
-						name = "<?php echo esc_attr( $rt_person_meta_social_key['website'] ); ?>"
-						id = "<?php echo esc_attr( $rt_person_meta_social_key['website'] ); ?>" />
+						name = "<?php echo esc_attr( self::PERSON_META_SOCIAL_WEB_SLUG ); ?>"
+						id = "<?php echo esc_attr( self::PERSON_META_SOCIAL_WEB_SLUG ); ?>" />
 
 					<span class = "rt-person-meta-field-error rt-person-meta-social-field-error rt-person-meta-social-website-field-error" id="rt-person-meta-social-website-field-error"></span>
 				</div>
@@ -246,71 +357,109 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 			$rt_media_meta_box->save_rt_movie_meta_images( $post_id );
 			$rt_media_meta_box->save_rt_movie_meta_videos( $post_id );
 
-			// Check if rt-person-meta-basic-birth-date is set. If it is set then sanitize the data and save it.
-			if ( isset( $_POST['rt-person-meta-basic-birth-date'] ) ) {
+			// Check if self::PERSON_META_BASIC_BIRTH_DATE_SLUG is set. If it is set then sanitize the data and save it.
+			if ( isset( $_POST[ self::PERSON_META_BASIC_BIRTH_DATE_SLUG ] ) ) {
 
-				$rt_person_meta_basic_birth_date = sanitize_text_field( wp_unslash( $_POST['rt-person-meta-basic-birth-date'] ) );
+				$rt_person_meta_basic_birth_date = sanitize_text_field( wp_unslash( $_POST[ self::PERSON_META_BASIC_BIRTH_DATE_SLUG ] ) );
 
-				update_post_meta( $post_id, 'rt-person-meta-basic-birth-date', $rt_person_meta_basic_birth_date );
+				update_post_meta( $post_id, self::PERSON_META_BASIC_BIRTH_DATE_SLUG, $rt_person_meta_basic_birth_date );
 
 			}
 
-			// Check if rt-person-meta-basic-birth-place is set. If it is set then sanitize the data and save it.
-			if ( isset( $_POST['rt-person-meta-basic-birth-place'] ) ) {
+			// Check if self::PERSON_META_BASIC_BIRTH_PLACE_SLUG is set. If it is set then sanitize the data and save it.
+			if ( isset( $_POST[ self::PERSON_META_BASIC_BIRTH_PLACE_SLUG ] ) ) {
 
-				$rt_person_meta_basic_birth_place = sanitize_text_field( wp_unslash( $_POST['rt-person-meta-basic-birth-place'] ) );
+				$rt_person_meta_basic_birth_place = sanitize_text_field( wp_unslash( $_POST[ self::PERSON_META_BASIC_BIRTH_PLACE_SLUG ] ) );
 
 				if ( ! is_numeric( $rt_person_meta_basic_birth_place ) ) {
 
-					update_post_meta( $post_id, 'rt-person-meta-basic-birth-place', $rt_person_meta_basic_birth_place );
+					update_post_meta( $post_id, self::PERSON_META_BASIC_BIRTH_PLACE_SLUG, $rt_person_meta_basic_birth_place );
 
 				}
 			}
 
-			// Check if rt-person-meta-social-twitter url is set. If it is set then sanitize url the data validate the data and save it.
-			if ( isset( $_POST['rt-person-meta-social-twitter'] ) ) {
+			if ( isset( $_POST[ self::PERSON_META_BASIC_FULL_NAME_SLUG ] ) ) {
 
-				$rt_person_meta_social_twitter = filter_var( wp_unslash( $_POST['rt-person-meta-social-twitter'] ), FILTER_SANITIZE_URL );
+				$rt_person_meta_basic_full_name = sanitize_text_field( wp_unslash( $_POST[ self::PERSON_META_BASIC_FULL_NAME_SLUG ] ) );
+
+				if ( ! is_numeric( $rt_person_meta_basic_full_name ) ) {
+
+					update_post_meta( $post_id, self::PERSON_META_BASIC_FULL_NAME_SLUG, $rt_person_meta_basic_full_name );
+
+				}
+			}
+
+			if ( isset( $_POST[ self::PERSON_META_BASIC_START_YEAR_SLUG ] ) ) {
+
+				$rt_person_meta_basic_full_name = sanitize_text_field( wp_unslash( $_POST[ self::PERSON_META_BASIC_START_YEAR_SLUG ] ) );
+
+				if ( ! is_numeric( $rt_person_meta_basic_full_name ) ) {
+
+					update_post_meta( $post_id, self::PERSON_META_BASIC_START_YEAR_SLUG, $rt_person_meta_basic_full_name );
+
+				}
+			}
+
+			// Check if self::PERSON_META_SOCIAL_TWITTER_SLUG url is set. If it is set then sanitize url the data validate the data and save it.
+			if ( isset( $_POST[ self::PERSON_META_SOCIAL_TWITTER_SLUG ] ) ) {
+
+				$rt_person_meta_social_twitter = filter_var( wp_unslash( $_POST[ self::PERSON_META_SOCIAL_TWITTER_SLUG ] ), FILTER_SANITIZE_URL );
 
 				if ( filter_var( $rt_person_meta_social_twitter, FILTER_VALIDATE_URL ) ) {
 
-					update_post_meta( $post_id, 'rt-person-meta-social-twitter', $rt_person_meta_social_twitter );
+					update_post_meta( $post_id, self::PERSON_META_SOCIAL_TWITTER_SLUG, $rt_person_meta_social_twitter );
+
+				} else {
+
+					update_post_meta( $post_id, self::PERSON_META_SOCIAL_TWITTER_SLUG, '' );
 
 				}
 			}
 
-			// Check if rt-person-meta-social-facebook url is set. If it is set then sanitize url the data validate the data and save it.
-			if ( isset( $_POST['rt-person-meta-social-facebook'] ) ) {
+			// Check if self::PERSON_META_SOCIAL_FACEBOOK_SLUG url is set. If it is set then sanitize url the data validate the data and save it.
+			if ( isset( $_POST[ self::PERSON_META_SOCIAL_FACEBOOK_SLUG ] ) ) {
 
-				$rt_person_meta_social_facebook = filter_var( wp_unslash( $_POST['rt-person-meta-social-facebook'] ), FILTER_SANITIZE_URL );
+				$rt_person_meta_social_facebook = filter_var( wp_unslash( $_POST[ self::PERSON_META_SOCIAL_FACEBOOK_SLUG ] ), FILTER_SANITIZE_URL );
 
 				if ( filter_var( $rt_person_meta_social_facebook, FILTER_VALIDATE_URL ) ) {
 
-					update_post_meta( $post_id, 'rt-person-meta-social-facebook', $rt_person_meta_social_facebook );
+					update_post_meta( $post_id, self::PERSON_META_SOCIAL_FACEBOOK_SLUG, $rt_person_meta_social_facebook );
+
+				} else {
+
+					update_post_meta( $post_id, self::PERSON_META_SOCIAL_FACEBOOK_SLUG, '' );
 
 				}
 			}
 
-			// Check if rt-person-meta-social-instagram url is set. If it is set then sanitize url the data validate the data and save it.
-			if ( isset( $_POST['rt-person-meta-social-instagram'] ) ) {
+			// Check if self::PERSON_META_SOCIAL_INSTAGRAM_SLUG url is set. If it is set then sanitize url the data validate the data and save it.
+			if ( isset( $_POST[ self::PERSON_META_SOCIAL_INSTAGRAM_SLUG ] ) ) {
 
-				$rt_person_meta_social_instagram = filter_var( wp_unslash( $_POST['rt-person-meta-social-instagram'] ), FILTER_SANITIZE_URL );
+				$rt_person_meta_social_instagram = filter_var( wp_unslash( $_POST[ self::PERSON_META_SOCIAL_INSTAGRAM_SLUG ] ), FILTER_SANITIZE_URL );
 
 				if ( filter_var( $rt_person_meta_social_instagram, FILTER_VALIDATE_URL ) ) {
 
-					update_post_meta( $post_id, 'rt-person-meta-social-instagram', $rt_person_meta_social_instagram );
+					update_post_meta( $post_id, self::PERSON_META_SOCIAL_INSTAGRAM_SLUG, $rt_person_meta_social_instagram );
+
+				} else {
+
+					update_post_meta( $post_id, self::PERSON_META_SOCIAL_INSTAGRAM_SLUG, '' );
 
 				}
 			}
 
-			// Check if rt-person-meta-social-web url is set. If it is set then sanitize url the data validate the data and save it.
-			if ( isset( $_POST['rt-person-meta-social-web'] ) ) {
+			// Check if self::PERSON_META_SOCIAL_WEB_SLUG url is set. If it is set then sanitize url the data validate the data and save it.
+			if ( isset( $_POST[ self::PERSON_META_SOCIAL_WEB_SLUG ] ) ) {
 
-				$rt_person_meta_social_web = filter_var( wp_unslash( $_POST['rt-person-meta-social-web'] ), FILTER_SANITIZE_URL );
+				$rt_person_meta_social_web = filter_var( wp_unslash( $_POST[ self::PERSON_META_SOCIAL_WEB_SLUG ] ), FILTER_SANITIZE_URL );
 
 				if ( filter_var( $rt_person_meta_social_web, FILTER_VALIDATE_URL ) ) {
 
-					update_post_meta( $post_id, 'rt-person-meta-social-web', $rt_person_meta_social_web );
+					update_post_meta( $post_id, self::PERSON_META_SOCIAL_WEB_SLUG, $rt_person_meta_social_web );
+
+				} else {
+
+					update_post_meta( $post_id, self::PERSON_META_SOCIAL_WEB_SLUG, '' );
 
 				}
 			}
