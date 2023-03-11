@@ -22,6 +22,5 @@ get_template_part(
 		'rt_movie_query' => $rt_movie_query,
 	)
 );
-get_footer();
 
 

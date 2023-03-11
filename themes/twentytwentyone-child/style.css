@@ -24,9 +24,10 @@ Domain Path:  /languages
 	--primary-color: #1f1f1f;
 	--secondary-color: #2a2a2a;
 	--primary-font-color: #fff;
-	--navbar-color: #111111;
 	--secondary-font-color: rgba(255, 255, 255, 0.5);
-	--tag-font-color: #dddddd
+	--navbar-color: #111111;
+	--tag-font-color: #dddddd;
+	--border-color: #d13223;
 }
 
 *,
@@ -43,6 +44,10 @@ body {
 	margin: 0;
 	padding: 0;
 	background-color: #1F1F1F !important;
+}
+
+ul {
+	padding: 0;
 }
 
 ::-webkit-scrollbar {

@@ -9,5 +9,4 @@
 
 get_header();
 get_template_part( 'template-parts/post/rt-person/single/single-rt-person-template' );
-get_footer();
 
