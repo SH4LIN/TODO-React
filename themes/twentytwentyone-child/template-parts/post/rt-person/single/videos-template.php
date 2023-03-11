@@ -34,7 +34,7 @@ if ( $videos && is_array( $videos ) && count( $videos ) > 0 ) :
 						?>
 
 						<div class="st-sp-videos-list-item">
-							<img src="<?php echo wp_get_attachment_image_url( $video, 'full' ); ?>" />
+							<img src="<?php echo esc_url( wp_get_attachment_image_url( $video, 'full' ) ); ?>" />
 							<div class="st-sp-videos-play-button">
 								<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_play.svg' ); ?>" />
 							</div>

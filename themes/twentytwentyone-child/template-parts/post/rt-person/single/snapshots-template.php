@@ -33,7 +33,7 @@ if ( $snapshots && is_array( $snapshots ) && count( $snapshots ) > 0 ) :
 						?>
 
 						<div class="st-sp-snapshots-list-item">
-							<img src="<?php echo wp_get_attachment_image_url( $snapshot, 'full' ); ?>" />
+							<img src="<?php echo esc_url( wp_get_attachment_image_url( $snapshot, 'full' ) ); ?>" />
 						</div>
 
 						<?php
