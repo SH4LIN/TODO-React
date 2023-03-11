@@ -15,7 +15,7 @@
 		</div>
 
 		<div class="primary-text-primary-font st-sm-plot-text">
-			<?php the_content(); ?>
+			<?php wp_kses_post( the_content() ); ?>
 		</div>
 	</div>
 

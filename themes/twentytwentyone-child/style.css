@@ -26,6 +26,7 @@ Domain Path:  /languages
 	--primary-font-color: #fff;
 	--navbar-color: #111111;
 	--secondary-font-color: rgba(255, 255, 255, 0.5);
+	--tag-font-color: #dddddd
 }
 
 *,
@@ -64,6 +65,16 @@ body {
 
 .primary-text-secondary-font {
 	color: var(--primary-font-color);
+	font-family: var(--secondary-font-family);
+}
+
+.primary-text-tag-font {
+	color: var(--tag-font-color);
+	font-family: var(--primary-font-family);
+}
+
+.secondary-text-secondary-font {
+	color: var(--tag-font-color);
 	font-family: var(--secondary-font-family);
 }
 
