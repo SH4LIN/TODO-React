@@ -355,6 +355,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 
 			$rt_media_meta_box = RT_Media_Meta_Box::instance();
 			$rt_media_meta_box->save_rt_movie_meta_images( $post_id );
+			$rt_media_meta_box->save_rt_movie_meta_banner_images( $post_id );
 			$rt_media_meta_box->save_rt_movie_meta_videos( $post_id );
 
 			// Check if self::PERSON_META_BASIC_BIRTH_DATE_SLUG is set. If it is set then sanitize the data and save it.

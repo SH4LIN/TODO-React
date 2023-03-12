@@ -7,20 +7,7 @@
  * @since Twenty Twenty-One Child 1.0
  */
 
-$rt_movie_query = new WP_Query(
-	array(
-		'post_type'      => 'rt-movie',
-		'posts_per_page' => 13,
-	)
-);
-
 get_header();
-get_template_part(
-	'template-parts/post/rt-movie/archive/archive-rt-movie-template',
-	null,
-	array(
-		'rt_movie_query' => $rt_movie_query,
-	)
-);
+get_template_part( 'template-parts/post/rt-movie/archive/archive-rt-movie-template' );
 
 

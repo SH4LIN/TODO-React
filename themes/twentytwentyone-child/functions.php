@@ -94,6 +94,7 @@ if ( ! function_exists( 'twenty_twenty_one_child_scripts' ) ) :
 		wp_enqueue_style( 'twenty-twenty-one-single-movie-style', get_stylesheet_directory_uri() . '/assets/css/single-movie.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/single-movie.css' ) );
 		wp_enqueue_style( 'twenty-twenty-one-single-person-style', get_stylesheet_directory_uri() . '/assets/css/single-person.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/single-person.css' ) );
 		wp_enqueue_style( 'twenty-twenty-one-archive-movie-style', get_stylesheet_directory_uri() . '/assets/css/archive-movie.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/archive-movie.css' ) );
+		wp_enqueue_style( 'twenty-twenty-one-archive-person-style', get_stylesheet_directory_uri() . '/assets/css/archive-person.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/archive-person.css' ) );
 
 		wp_register_script( 'archive-movie', get_stylesheet_directory_uri() . '/assets/js/archive-movie.js', array(), filemtime( get_stylesheet_directory() . '/assets/js/archive-movie.js' ), true );
 		wp_enqueue_script( 'archive-movie' );

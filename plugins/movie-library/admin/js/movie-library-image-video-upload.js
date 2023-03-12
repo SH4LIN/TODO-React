@@ -12,6 +12,7 @@
 'use strict';
 
 setupMediaMetaImagesUploader();
+setupMediaMetaBannerImagesUploader();
 setupMediaMetaVideosUploader();
 
 /**
@@ -168,6 +169,163 @@ function setupMediaMetaImagesUploader() {
 			});
 
 			rtMediaMetaImagesFrame.open();
+		});
+}
+
+/**
+ * This function will be called when document is ready and it will set all the required event listeners for uploading banner images.
+ */
+function setupMediaMetaBannerImagesUploader() {
+	const { __ } = wp.i18n;
+
+	let rtMediaMetaBannerImages = [];
+	const rtMediaMetaSelectedBannerImagesContainer = document.querySelector(
+		'.rt-media-meta-selected-banner-images-container'
+	);
+	let rtMediaMetaBannerImagesFrame;
+
+	setInputValue(
+		'input[name="rt-media-meta-selected-banner-images"]',
+		JSON.stringify(rtMediaMetaBannerImages)
+	);
+
+	if (
+		document.querySelector('.rt-media-meta-uploaded-banner-image-remove') !== null
+	) {
+		document
+			.querySelectorAll('.rt-media-meta-uploaded-banner-image-remove')
+			.forEach((span) => {
+				span.addEventListener('click', function (e) {
+					let rtUploadedBannerImages = getInputValue(
+						'input[name="rt-media-meta-uploaded-banner-images"]'
+					);
+
+					e.preventDefault();
+
+					rtUploadedBannerImages = rtUploadedBannerImages.filter(function (item) {
+						return item !== +e.target.dataset.id;
+					});
+
+					e.target.parentElement.remove();
+
+					if (rtUploadedBannerImages.length === 0) {
+						document
+							.querySelector(
+								'.rt-media-meta-uploaded-banner-images-heading'
+							)
+							.remove();
+					}
+
+					setInputValue(
+						'input[name="rt-media-meta-uploaded-banner-images"]',
+						JSON.stringify(rtUploadedBannerImages)
+					);
+				});
+			});
+	}
+
+	document
+		.querySelector('.rt-media-meta-banner-images-add')
+		.addEventListener('click', function () {
+			if (rtMediaMetaBannerImagesFrame) {
+				rtMediaMetaBannerImagesFrame.open();
+				return;
+			}
+
+			rtMediaMetaBannerImagesFrame = wp.media({
+				title: __('Select Images', 'movie-library'),
+				button: {
+					text: __('Select Images', 'movie-library'),
+				},
+				library: {
+					type: 'image',
+				},
+				multiple: true,
+			});
+
+			rtMediaMetaBannerImagesFrame.on('select', function () {
+				const rtMediaMetaBannerImagesAttachment = rtMediaMetaBannerImagesFrame
+					.state()
+					.get('selection')
+					.toJSON();
+
+				if (rtMediaMetaBannerImages.length === 0) {
+					const heading = document.createElement('h3');
+					heading.classList.add(
+						'rt-media-meta-heading',
+						'rt-media-meta-banner-images-heading',
+						'rt-media-meta-selected-banner-images-heading'
+					);
+					heading.innerText = __('Selected Movie Banners', 'movie-library');
+					document
+						.querySelector('.rt-media-meta-banner-images')
+						.appendChild(heading);
+				}
+
+				rtMediaMetaBannerImagesAttachment.forEach(function (value) {
+					rtMediaMetaBannerImages.push(value.id);
+
+					const bannerImageContainer = document.createElement('div');
+					bannerImageContainer.classList.add(
+						'rt-media-meta',
+						'rt-media-meta-banner-image',
+						'rt-media-meta-selected-banner-image'
+					);
+
+					const image = document.createElement('img');
+					image.src = encodeURI(value.sizes.thumbnail.url);
+					image.alt = '';
+					bannerImageContainer.appendChild(image);
+
+					const closeButton = document.createElement('span');
+					closeButton.classList.add(
+						'rt-media-meta-remove',
+						'rt-media-meta-banner-image-remove',
+						'rt-media-meta-selected-banner-image-remove'
+					);
+					closeButton.dataset.id = value.id;
+					closeButton.innerText = 'X';
+					bannerImageContainer.appendChild(closeButton);
+
+					rtMediaMetaSelectedBannerImagesContainer.appendChild(
+						bannerImageContainer
+					);
+				});
+
+				document
+					.querySelectorAll('.rt-media-meta-selected-banner-image-remove')
+					.forEach((span) => {
+						span.addEventListener('click', function (evt) {
+							rtMediaMetaBannerImages = rtMediaMetaBannerImages.filter(
+								function (item) {
+									return item !== +evt.target.dataset.id;
+								}
+							);
+
+							evt.target.parentElement.remove();
+
+							if (rtMediaMetaBannerImages.length === 0) {
+								document
+									.querySelector(
+										'.rt-media-meta-selected-banner-images-heading'
+									)
+									.remove();
+							}
+
+							setInputValue(
+								'input[name="rt-media-meta-selected-banner-images"]',
+								JSON.stringify(rtMediaMetaBannerImages)
+							);
+						});
+					});
+
+				setInputValue(
+					'input[name="rt-media-meta-selected-banner-images"]',
+					JSON.stringify(rtMediaMetaBannerImages)
+				);
+			});
+
+			rtMediaMetaBannerImagesFrame.open();
 		});
 }
 

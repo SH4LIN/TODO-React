@@ -369,6 +369,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 
 			$rt_media_meta_box = RT_Media_Meta_Box::instance();
 			$rt_media_meta_box->save_rt_movie_meta_images( $post_id );
+			$rt_media_meta_box->save_rt_movie_meta_banner_images( $post_id );
 			$rt_media_meta_box->save_rt_movie_meta_videos( $post_id );
 
 			// Get all the rt-person-career terms.
