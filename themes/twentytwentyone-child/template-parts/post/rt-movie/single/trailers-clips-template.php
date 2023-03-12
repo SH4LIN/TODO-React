@@ -10,7 +10,7 @@
 ?>
 <div class="st-sm-trailer-clips-container">
 	<div class="st-sm-trailer-clips-heading-container">
-		<div class="primary-text-heading-font st-sm-trailer-clips-heading">
+		<div class="primary-text-secondary-font section-heading-text st-sm-trailer-clips-heading">
 			<?php esc_html_e( 'Trailer & Clips' ); ?>
 		</div>
 	</div>
@@ -26,7 +26,9 @@
 						<div class="st-sm-trailer-clips-list-item-image-container">
 							<img src="<?php echo esc_url( wp_get_attachment_url( $trailer_clip ) ); ?>" class="st-sm-trailer-clips-list-item-image"/>
 						</div>
-
+						<div class="st-sm-videos-play-button">
+							<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_play.svg' ); ?>" />
+						</div>
 					</div>
 					<?php
 				}

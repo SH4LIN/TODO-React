@@ -10,11 +10,11 @@
 ?>
 <div class="st-sm-cast-crew-container">
 	<div class="st-sm-cast-crew-heading-container">
-		<div class="primary-text-heading-font st-sm-cast-crew-heading">
+		<div class="primary-text-secondary-font section-heading-text st-sm-cast-crew-heading">
 			<?php esc_html_e( 'Cast & Crew' ); ?>
 		</div>
 
-		<div class="st-sm-cast-crew-view-all-container">
+		<div class="st-sm-cast-crew-view-all-container-desktop">
 			<a href="#" class="primary-text-primary-font st-sm-cast-crew-view-all-link">
 				<?php esc_html_e( 'View All' ); ?>
 			</a>
@@ -30,7 +30,7 @@
 					?>
 					<div class="st-sm-cast-crew-list-item">
 						<div class="st-sm-cast-crew-list-item-image-container">
-							<img src="<?php echo esc_url( get_the_post_thumbnail_url( $cast_member['person_id'] ) ); ?>" class="st-sm-cast-crew-list-item-image"/>
+							<img src="<?php echo esc_url( get_the_post_thumbnail_url( $cast_member['person_id'], 'gull' ) ); ?>" class="st-sm-cast-crew-list-item-image"/>
 						</div>
 
 						<div class="st-sm-cast-crew-list-item-name-container">
@@ -44,5 +44,11 @@
 			}
 			?>
 		</div>
+	</div>
+
+	<div class="st-sm-cast-crew-view-all-container-mobile">
+			<a href="#" class="primary-text-primary-font st-sm-cast-crew-view-all-link">
+				<?php esc_html_e( 'View All' ); ?>
+			</a>
 	</div>
 </div>

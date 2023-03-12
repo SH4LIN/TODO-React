@@ -1,5 +1,7 @@
 .st-sp-container {
 	padding-bottom: 64px;
+	padding-left: 24px;
+	padding-right: 24px;
 }
 
 .st-sp-hero-container {
@@ -9,8 +11,8 @@
 }
 
 .st-sp-profile-container {
-	padding-left: 66px;
-	padding-right: 65px;
+
+	text-align: center;
 }
 
 .st-sp-profile-container img {
@@ -26,8 +28,6 @@
 .st-sp-data-container {
 	display: flex;
 	flex-direction: column;
-	padding-left: 24px;
-	padding-right: 24px;
 }
 
 .st-sp-identification-container {
@@ -174,7 +174,7 @@
 }
 
 .st-sp-about-quick-links-container {
-	padding: 64px 24px 0 24px ;
+	padding-top: 64px;
 }
 
 .st-sp-about-heading-container {
@@ -182,11 +182,7 @@
 	padding-left: 12px;
 }
 
-.section-heading-text {
-	font-size: 24px;
-	line-height: 32px;
-	font-weight: 700;
-}
+
 
 .st-sp-about-content-container {
 	margin-top: 48px;
@@ -209,7 +205,7 @@
 }
 
 .st-sp-popular-movies-container {
-	margin: 64px 24px 0 24px;
+	padding-top: 64px;
 }
 
 .st-sp-popular-movies-heading-container {
@@ -311,7 +307,7 @@
 }
 
 .st-sp-snapshots-container {
-	margin: 64px 24px 0 24px;
+	padding-top: 64px
 }
 
 .st-sp-snapshots-heading-container {
@@ -342,7 +338,7 @@
 }
 
 .st-sp-videos-container {
-	margin: 64px 24px 0 24px;
+	padding-top: 64px
 }
 
 .st-sp-videos-heading-container {
@@ -556,11 +552,6 @@
 		padding-right: 136px;
 	}
 
-	.section-heading-text {
-		font-size: 32px;
-		line-height: 40px;
-	}
-
 	.about-text {
 		font-size: 18px;
 		line-height: 32px;
@@ -592,6 +583,7 @@
 	}
 
 	.st-sp-quick-links {
+		padding: 0;
 		list-style: none;
 	}
 
@@ -686,6 +678,19 @@
 
 	.st-sp-videos-list-item {
 		position: relative;
+	}
+
+	.st-sp-videos-play-button {
+		width: 49.67px;
+		height: 49.67px;
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+
+		display: block;
+		margin: auto;
 	}
 
 	.personal-details-text {

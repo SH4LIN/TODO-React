@@ -28,6 +28,7 @@ Domain Path:  /languages
 	--navbar-color: #111111;
 	--tag-font-color: #dddddd;
 	--border-color: #d13223;
+	--link-color: #e46d62;
 }
 
 *,
@@ -40,10 +41,10 @@ html {
 	scroll-behavior: smooth;
 }
 
-body {
+.site {
 	margin: 0;
 	padding: 0;
-	background-color: #1F1F1F !important;
+	background-color: #1F1F1F;
 }
 
 ul {
@@ -92,6 +93,14 @@ ul {
 	color: var(--secondary-font-color);
 	font-family: var(--secondary-font-family);
 }
+
+.section-heading-text {
+	font-size: 24px;
+	line-height: 32px;
+	font-weight: 700;
+}
+
+
 
 .font-8-normal {
 	font-size: 8px;
@@ -149,4 +158,11 @@ ul {
 	font-size: 32px;
 	font-weight: 600;
 	line-height: 40px;
+}
+
+@media only screen and (min-width: 1025px) {
+	.section-heading-text {
+		font-size: 32px;
+		line-height: 40px;
+	}
 }

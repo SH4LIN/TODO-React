@@ -10,7 +10,7 @@
 ?>
 <div class="st-sm-reviews-container">
 	<div class="st-sm-reviews-heading-container">
-		<div class="primary-text-heading-font st-sm-reviews-heading">
+		<div class="primary-text-secondary-font section-heading-text st-sm-reviews-heading">
 			<?php esc_html_e( 'Reviews' ); ?>
 		</div>
 	</div>

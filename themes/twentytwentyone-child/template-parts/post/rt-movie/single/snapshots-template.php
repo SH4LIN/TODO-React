@@ -10,7 +10,7 @@
 ?>
 <div class="st-sm-snapshots-container">
 	<div class="st-sm-snapshots-heading-container">
-		<div class="primary-text-heading-font st-sm-snapshots-heading">
+		<div class="primary-text-secondary-font section-heading-text st-sm-snapshots-heading">
 			<?php esc_html_e( 'Snapshots' ); ?>
 		</div>
 	</div>
