@@ -93,6 +93,13 @@ if ( count( $movies_worked ) > 4 ) {
 	$popular_movies = array_slice( $query->posts, 0 );
 }
 
+$movie_name_release_date = array();
+foreach ( $movies_worked as $movie ) {
+	$movie_name_release_date [] = array(
+		'movie_name'   => $movie->post_title,
+		'release_date' => get_post_meta( $movie->ID, RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, true ),
+	);
+}
 
 /**
  * This function is used to sort the movie array by release date.
@@ -123,14 +130,6 @@ function sort_by_release_date( $a, $b ): int {
 		return -1;
 	}
 	return 0;
-}
-
-$movie_name_release_date = array();
-foreach ( $movies_worked as $movie ) {
-	$movie_name_release_date [] = array(
-		'movie_name'   => $movie->post_title,
-		'release_date' => get_post_meta( $movie->ID, RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, true ),
-	);
 }
 
 usort( $movie_name_release_date, 'sort_by_release_date' );

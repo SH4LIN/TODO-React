@@ -9,5 +9,6 @@
 
 get_header();
 get_template_part( 'template-parts/post/rt-movie/archive/archive-rt-movie-template' );
+get_footer();
 
 
