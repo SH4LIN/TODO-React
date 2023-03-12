@@ -180,6 +180,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	flex-wrap: wrap;
 	align-items: flex-start;
 }
 
@@ -261,6 +262,7 @@
 	display: flex;
 	align-items: center;
 	flex-direction: row;
+	flex-wrap: wrap;
 	justify-content: space-between;
 }
 
@@ -275,6 +277,7 @@
 	align-items: center;
 	flex-direction: row;
 	justify-content: space-between;
+	flex-wrap: wrap;
 	margin-top: 12px;
 }
 
@@ -409,7 +412,106 @@
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
-		padding-bottom: 32px;
-		gap: 16px;
+		padding-bottom: 0;
+		overflow: hidden;
+		gap: 32px;
+	}
+
+	.st-am-upcoming-movies-list-item-image-container {
+		min-width: 384px;
+		min-height: 411px;
+	}
+
+	.st-am-upcoming-movies-list-item-content-container {
+		padding: 18px 16px 24px 16px;
+		width: 100%;
+		background-color: #2b2b2b;
+	}
+
+	.st-am-movie-title-text {
+		max-width: 231px;
+		font-size: 24px;
+		line-height: 32px;
+	}
+
+	.st-am-genre-text {
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.st-am-upcoming-movies-list-item-content-stats-container {
+		margin-top: 16px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-start;
+	}
+
+	.st-am-release-date-text {
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.st-am-content-rating-text {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
+		text-transform: uppercase;
+	}
+
+	.st-am-trending-movies-container {
+		padding: 0 112px;
+	}
+
+	.st-am-trending-movies-list {
+		display: flex;
+		flex-direction: row;
+		gap: 32px;
+		overflow: hidden;
+		flex-wrap: wrap;
+		padding-bottom: 0;
+	}
+
+	.st-am-trending-movies-list-item-image-container {
+		min-width: 384px;
+		min-height: 411px;
+	}
+
+	.st-am-trending-movies-list-item-content-container {
+		padding: 16px 24px;
+	}
+
+	.st-am-runtime-text {
+		font-size: 20px;
+		line-height: 32px;
+	}
+
+	.st-am-trending-movies-list-item-content-stats-container {
+		margin-top: 16px;
+	}
+
+	.st-am-genres-container {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.st-am-genre-text:not(:first-child):before {
+		content: "•";
+		margin-right: 4px;
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.st-am-genre-text {
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.st-am-release-date-text {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
 	}
 }

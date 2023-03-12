@@ -35,6 +35,7 @@
 .st-header-logo-first-half-text {
 	color: var(--primary-font-color);
 	font-weight: 700;
+	text-transform: uppercase;
 	font-size: 34.3456px;
 	line-height: 40px;
 }
@@ -42,6 +43,7 @@
 .st-header-logo-last-half-text {
 	color: var(--border-color);
 	font-weight: 700;
+	text-transform: uppercase;
 	font-size: 34.3456px;
 	line-height: 40px;
 }
@@ -137,7 +139,6 @@
 	}
 
 	.st-header-language-container > img {
-
 		font-size: 16px;
 		line-height: 32px;
 	}
