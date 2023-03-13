@@ -7,6 +7,8 @@
  * @since Twenty Twenty-One Child 1.0
  */
 
+use MovieLib\admin\classes\custom_post_types\RT_Person;
+
 ?>
 <div class="st-sm-cast-crew-container">
 	<div class="st-sm-cast-crew-heading-container">
@@ -15,7 +17,7 @@
 		</div>
 
 		<div class="st-sm-cast-crew-view-all-container-desktop">
-			<a href="#" class="primary-text-primary-font st-sm-cast-crew-view-all-link">
+			<a href="<?php echo esc_url( get_post_type_archive_link( RT_Person::SLUG ) . '?movie_id=' . get_the_ID() ); ?>" class="primary-text-primary-font st-sm-cast-crew-view-all-link">
 				<?php esc_html_e( 'View All' ); ?>
 			</a>
 		</div>
@@ -47,7 +49,7 @@
 	</div>
 
 	<div class="st-sm-cast-crew-view-all-container-mobile">
-			<a href="#" class="primary-text-primary-font st-sm-cast-crew-view-all-link">
+			<a href="<?php echo esc_url( get_post_type_archive_link( RT_Person::SLUG ) . '?movie_id=' . get_the_ID() ); ?>" class="primary-text-primary-font st-sm-cast-crew-view-all-link">
 				<?php esc_html_e( 'View All' ); ?>
 			</a>
 	</div>

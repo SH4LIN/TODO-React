@@ -556,7 +556,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 			$rt_person_query = new WP_Query(
 				array(
 					'post_type' => RT_Person::SLUG,
-					'per_page'  => 10,
+					'posts_per_page'  => -1,
 					'tax_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 									array(
 											'taxonomy' => Person_Career::SLUG,

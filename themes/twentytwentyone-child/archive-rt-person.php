@@ -7,53 +7,112 @@
  * @since Twenty Twenty-One Child 1.0
  */
 
+use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\custom_post_types\RT_Person;
 use MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box;
 
-$person_args = array(
-	'post_type'      => RT_Person::SLUG,
-	'posts_per_page' => '12',
-);
 
-$person_query = new WP_Query( $person_args );
-$persons      = $person_query->posts;
 
 $persons_details = array();
 
-if ( $persons && is_array( $persons ) && count( $persons ) > 0 ) {
-	foreach ( $persons as $person_data ) {
-		$person = array();
+if ( isset( $_GET['movie_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$movie_id = sanitize_text_field( wp_unslash( $_GET['movie_id'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$actors   = get_post_meta( $movie_id, 'rt-movie-meta-crew-actor' );
 
-		$thumbnail_id   = get_post_thumbnail_id( $person_data->ID );
-		$attachment_url = wp_get_attachment_url( $thumbnail_id );
+	if ( $actors && ! empty( $actors ) && ! empty( $actors[0] ) ) {
 
-		$person['profile_picture'] = get_stylesheet_directory_uri() . '/assets/images/placeholder.webp';
+		foreach ( $actors[0] as $actor ) {
+			$person = array();
 
-		if ( $attachment_url ) {
-			$person['profile_picture'] = $attachment_url;
+			$thumbnail_id   = get_post_thumbnail_id( $actor['person_id'] );
+			$attachment_url = wp_get_attachment_url( $thumbnail_id );
+
+			$person['profile_picture'] = get_stylesheet_directory_uri() . '/assets/images/placeholder.webp';
+
+			if ( $attachment_url ) {
+				$person['profile_picture'] = $attachment_url;
+			}
+
+
+
+			if ( ! empty( $actor['character_name'] ) ) {
+				$character_name_html  = '<span class="st-ap-cast-crew-character-name-text">';
+				$character_name_html .= '(' . $actor['character_name'] . ')';
+				$character_name_html .= '</span>';
+				$person['name']       = sprintf( '%1$s%2$s', $actor['person_name'], $character_name_html, );
+			} else {
+				$person['name'] = sprintf( '%1$s', $actor['person_name'] );
+			}
+
+
+
+			$birth_date_str       = get_post_meta( $actor['person_id'], RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG, true );
+			$person['birth_date'] = '';
+
+			if ( ! empty( $birth_date_str ) ) {
+				$birth_date           = DateTime::createFromFormat( 'Y-m-d', $birth_date_str )->format( 'd F Y' );
+				$born_birth_date_str  = sprintf( __( 'Born - %1$s', 'screen-time' ), $birth_date );
+				$person['birth_date'] = $born_birth_date_str;
+			}
+
+			$excerpt           = get_the_excerpt( $actor['person_id'] );
+			$person['excerpt'] = '';
+
+			if ( ! empty( $excerpt ) ) {
+				$person['excerpt'] = $excerpt;
+			}
+
+			$persons_details[] = $person;
 		}
+	}
+} else {
+	$person_args = array(
+		'post_type'      => RT_Person::SLUG,
+		'posts_per_page' => '12',
+	);
 
-		$person['name'] = $person_data->post_title;
+	$person_query = new WP_Query( $person_args );
+	$persons      = $person_query->posts;
 
-		$birth_date_str       = get_post_meta( $person_data->ID, RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG, true );
-		$person['birth_date'] = '';
+	if ( $persons && is_array( $persons ) && count( $persons ) > 0 ) {
+		foreach ( $persons as $person_data ) {
+			$person = array();
 
-		if ( ! empty( $birth_date_str ) ) {
-			$birth_date           = DateTime::createFromFormat( 'Y-m-d', $birth_date_str )->format( 'd F Y' );
-			$born_birth_date_str  = sprintf( __( 'Born - %1$s', 'screen-time' ), $birth_date );
-			$person['birth_date'] = $born_birth_date_str;
+			$thumbnail_id   = get_post_thumbnail_id( $person_data->ID );
+			$attachment_url = wp_get_attachment_url( $thumbnail_id );
+
+			$person['profile_picture'] = get_stylesheet_directory_uri() . '/assets/images/placeholder.webp';
+
+			if ( $attachment_url ) {
+				$person['profile_picture'] = $attachment_url;
+			}
+
+			$person['name'] = $person_data->post_title;
+
+			$birth_date_str       = get_post_meta( $person_data->ID, RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG, true );
+			$person['birth_date'] = '';
+
+			if ( ! empty( $birth_date_str ) ) {
+				$birth_date           = DateTime::createFromFormat( 'Y-m-d', $birth_date_str )->format( 'd F Y' );
+				$born_birth_date_str  = sprintf( __( 'Born - %1$s', 'screen-time' ), $birth_date );
+				$person['birth_date'] = $born_birth_date_str;
+			}
+
+			$excerpt           = $person_data->post_excerpt;
+			$person['excerpt'] = '';
+
+			if ( ! empty( $excerpt ) ) {
+				$person['excerpt'] = $excerpt;
+			}
+
+			$persons_details[] = $person;
 		}
-
-		$excerpt           = $person_data->post_excerpt;
-		$person['excerpt'] = '';
-
-		if ( ! empty( $excerpt ) ) {
-			$person['excerpt'] = $excerpt;
-		}
-
-		$persons_details[] = $person;
 	}
 }
+
+
+
+
 
 get_header();
 ?>
@@ -78,7 +137,7 @@ get_header();
 					<div class="st-ap-cast-crew-details-container">
 
 						<div class="primary-text-secondary-font st-ap-cast-crew-name-text">
-							<?php echo esc_html( $person['name'] ); ?>
+							<?php echo wp_kses( $person['name'], array( 'span' => array( 'class' => array() ) ) ); ?>
 						</div>
 
 						<?php if ( ! empty( $person['birth_date'] ) ) : ?>
@@ -107,7 +166,7 @@ get_header();
 				<?php endif; ?>
 
 				<div class="primary-text-primary-font st-ap-cast-crew-learn-more-text-mobile">
-					<?php echo esc_html_e( 'Learn more', 'screen-time' ); ?>
+					<?php esc_html_e( 'Learn more', 'screen-time' ); ?>
 				</div>
 			</div>
 			<?php endforeach; ?>
@@ -115,7 +174,7 @@ get_header();
 
 		<div class="st-ap-cast-crew-load-more-container">
 			<div class="primary-text-primary-font st-ap-cast-crew-load-more-text">
-				<?php esc_html_e( 'Load More','screen-time' ); ?>
+				<?php esc_html_e( 'Load More', 'screen-time' ); ?>
 			</div>
 		</div>
 	</div>
