@@ -19,8 +19,9 @@
 				<?php get_template_part( 'template-parts/header/site-login-language' ); ?>
 			</div>
 
-			<div class="st-header-primary-menu-container">
+			<div class="st-header-primary-menu">
 				<?php get_template_part( 'template-parts/header/site-nav' ); ?>
+				<?php get_template_part( 'template-parts/header/site-nav-expanded' ); ?>
 			</div>
 	</div>
 

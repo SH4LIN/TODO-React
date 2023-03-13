@@ -21,8 +21,14 @@
 
 .st-ap-cast-crew-list-container {
 	display: grid;
-	grid-template-columns: 100%;
+	grid-template-columns: 1fr;
 	gap: 16px;
+}
+
+.st-ap-cast-crew-list-mobile {
+	display: flex;
+	flex-direction: column;
+	background: #2a2a2a;
 }
 
 .st-ap-cast-crew-poster-container {
@@ -104,12 +110,6 @@
 	display: none;
 }
 
-.st-ap-cast-crew-list-mobile {
-	display: flex;
-	flex-direction: column;
-	background: #2a2a2a;
-}
-
 .st-ap-cast-crew-list-item {
 	display: flex;
 	flex-direction: row;
@@ -130,13 +130,18 @@
 	}
 
 	.st-ap-cast-crew-list-container {
-		grid-template-columns: repeat(2, 50%);
+		grid-template-columns: repeat(2, 1fr);
 		gap: 32px;
+	}
+
+	.st-ap-cast-crew-list-mobile {
+		display: flex;
+		flex-direction: row;
 	}
 
 	.st-ap-cast-crew-poster-container {
 		width: 153px;
-		height: 224px;
+		height: 100%;
 	}
 
 	.st-ap-cast-crew-details-container {
@@ -147,6 +152,7 @@
 
 	.st-ap-cast-crew-name-text {
 		display: flex;
+		flex-wrap: wrap;
 		flex-direction: row;
 		font-size: 32px;
 		line-height: 40px;
