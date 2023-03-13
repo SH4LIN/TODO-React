@@ -104,66 +104,6 @@ a {
 	font-weight: 700;
 }
 
-
-
-.font-8-normal {
-	font-size: 8px;
-	font-weight: 400;
-	line-height: 11.75px;
-}
-
-.font-12-normal {
-	font-size: 12px;
-	font-weight: 400;
-	line-height: 16px;
-}
-
-.font-12-bold {
-	font-size: 12px;
-	font-weight: 700;
-	line-height: 16px;
-}
-
-.font-14-normal {
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 24px;
-}
-
-.font-14-normal-lh-14 {
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 14px;
-}
-
-.font-16-normal {
-	font-size: 16px;
-	font-weight: 400;
-}
-
-.font-24-normal {
-	font-size: 24px;
-	font-weight: 400;
-	line-height: 32px;
-}
-
-.font-24-bold {
-	font-size: 24px;
-	font-weight: 700;
-	line-height: 32px;
-}
-
-.font-32-normal {
-	font-size: 32px;
-	font-weight: 400;
-}
-
-.font-32-bold-lh-40 {
-	font-size: 32px;
-	font-weight: 600;
-	line-height: 40px;
-}
-
 @media only screen and (min-width: 1025px) {
 	.section-heading-text {
 		font-size: 32px;

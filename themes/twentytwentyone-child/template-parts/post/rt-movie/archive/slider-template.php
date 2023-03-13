@@ -4,7 +4,7 @@
  *
  * @package WordPress
  * @subpackage Twenty_Twenty_One_Child
- * @since Twenty Twenty-One Child 1.0
+ * @since 1.0.0
  */
 
 use MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box;
@@ -82,56 +82,58 @@ $count = count( $movie_details );
 		foreach ( $movie_details as $movie ) :
 			?>
 			<li class="st-am-slider-item">
-				<div class="st-am-slider-item-image-container">
-					<img src="<?php echo esc_url( $movie['banner'] ); ?>" class="st-am-slider-item-image">
-				</div>
+				<a href="<?php echo esc_url( get_permalink( $movie['id'] ) ); ?>">
 
-				<div class="st-am-slider-item-movie-info-container">
-					<div class="primary-text-secondary-font st-am-slider-item-image-title">
-						<?php echo esc_html( $movie['title'] ); ?>
+					<div class="st-am-slider-item-image-container">
+						<img src="<?php echo esc_url( $movie['banner'] ); ?>" class="st-am-slider-item-image">
 					</div>
 
-					<?php if ( ! empty( $movie['synopsis'] ) ) : ?>
-						<div class="primary-text-primary-font st-am-slider-item-image-synopsis">
-							<?php echo esc_html( $movie['synopsis'] ); ?>
+					<div class="st-am-slider-item-movie-info-container">
+						<div class="primary-text-secondary-font st-am-slider-item-image-title">
+							<?php echo esc_html( $movie['title'] ); ?>
 						</div>
-					<?php endif; ?>
 
-					<?php if ( ! empty( $movie['release_year'] ) || ! empty( $movie['age_rating'] ) || ! empty( $movie['runtime'] ) ) : ?>
-						<div class="st-am-slider-item-movie-stats-container">
-							<ul class="st-am-slider-item-movie-stats">
-								<?php if ( ! empty( $movie['release_year'] ) ) : ?>
-								<li class="primary-text-primary-font st-am-slider-item-movie-stat">
-									<?php echo esc_html( $movie['release_year'] ); ?>
-								</li>
-								<?php endif; ?>
+						<?php if ( ! empty( $movie['synopsis'] ) ) : ?>
+							<div class="primary-text-primary-font st-am-slider-item-image-synopsis">
+								<?php echo esc_html( $movie['synopsis'] ); ?>
+							</div>
+						<?php endif; ?>
 
-								<?php if ( ! empty( $movie['age_rating'] ) ) : ?>
+						<?php if ( ! empty( $movie['release_year'] ) || ! empty( $movie['age_rating'] ) || ! empty( $movie['runtime'] ) ) : ?>
+							<div class="st-am-slider-item-movie-stats-container">
+								<ul class="st-am-slider-item-movie-stats">
+									<?php if ( ! empty( $movie['release_year'] ) ) : ?>
 									<li class="primary-text-primary-font st-am-slider-item-movie-stat">
-										<?php echo esc_html( $movie['age_rating'] ); ?>
+										<?php echo esc_html( $movie['release_year'] ); ?>
 									</li>
-								<?php endif; ?>
+									<?php endif; ?>
 
-								<?php if ( ! empty( $movie['runtime'] ) ) : ?>
-									<li class="primary-text-primary-font st-am-slider-item-movie-stat">
-										<?php echo esc_html( $movie['runtime'] ); ?>
-								</li>
-								<?php endif; ?>
-							</ul>
-						</div>
-					<?php endif; ?>
+									<?php if ( ! empty( $movie['age_rating'] ) ) : ?>
+										<li class="primary-text-primary-font st-am-slider-item-movie-stat">
+											<?php echo esc_html( $movie['age_rating'] ); ?>
+										</li>
+									<?php endif; ?>
 
-					<?php if ( ! empty( $movie['genre'] ) ) : ?>
-						<div class="st-am-slider-item-movie-genre-container">
-							<?php foreach ( $movie['genre'] as $genre ) : ?>
-								<div class="primary-text-primary-font st-am-slider-item-movie-genre">
-									<?php echo esc_html( $genre->name ); ?>
-								</div>
-							<?php endforeach; ?>
-						</div>
-					<?php endif; ?>
-				</div>
+									<?php if ( ! empty( $movie['runtime'] ) ) : ?>
+										<li class="primary-text-primary-font st-am-slider-item-movie-stat">
+											<?php echo esc_html( $movie['runtime'] ); ?>
+									</li>
+									<?php endif; ?>
+								</ul>
+							</div>
+						<?php endif; ?>
 
+						<?php if ( ! empty( $movie['genre'] ) ) : ?>
+							<div class="st-am-slider-item-movie-genre-container">
+								<?php foreach ( $movie['genre'] as $genre ) : ?>
+									<div class="primary-text-primary-font st-am-slider-item-movie-genre">
+										<?php echo esc_html( $genre->name ); ?>
+									</div>
+								<?php endforeach; ?>
+							</div>
+						<?php endif; ?>
+					</div>
+				</a>
 			</li>
 			<?php
 			++$i;

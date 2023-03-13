@@ -4,7 +4,7 @@
  *
  * @package WordPress
  * @subpackage TwentyTwentyOneChild
- * @since Twenty Twenty-One Child 1.0
+ * @since 1.0.0
  */
 
 if ( ! function_exists( 'twenty_twenty_one_child_setup' ) ) :
@@ -16,7 +16,7 @@ if ( ! function_exists( 'twenty_twenty_one_child_setup' ) ) :
 	 * runs before the init hook. The init hook is too late for some features, such
 	 * as indicating support for post thumbnails.
 	 *
-	 * @since Twenty Twenty-One Child 1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -83,7 +83,7 @@ if ( ! function_exists( 'twenty_twenty_one_child_scripts' ) ) :
 	/**
 	 * Enqueue scripts and styles.
 	 *
-	 * @since Twenty Twenty-One Child 1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */

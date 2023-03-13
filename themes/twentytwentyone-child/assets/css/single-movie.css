@@ -2,6 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 64px;
+	padding-bottom: 64px;
 }
 
 .st-sm-info-container {}
@@ -374,11 +375,92 @@
 	padding-top: 42px;
 }
 
+.st-sm-reviews-list-items {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 16px;
+}
+
+.st-sm-reviews-list-item {
+	padding: 16px;
+	background-color: #2a2a2a;
+}
+
+.st-sm-reviews-list-item-image-name-rating-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.st-sm-reviews-list-item-image-name-container {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+	line-height: 100%;
+}
+
+.st-sm-reviews-list-item-name-text {
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 20.56px;
+}
+
+.st-sm-reviews-list-item-image-name-container > img {
+	width: 31px;
+	height: 31px;
+	border-radius: 50%;
+}
+
+
+.st-sm-reviews-list-item-rating-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+
+.st-sm-reviews-list-item-rating-container > img {
+	width: 20px;
+	height: 20px;
+}
+
+.st-sm-reviews-list-item-rating-text {
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 100%;
+}
+
+.st-sm-reviews-list-item-content-container {
+	margin-top: 12px;
+}
+
+.st-sm-reviews-list-item-content {
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 24px;
+}
+
+.st-sm-reviews-list-item-date-container {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-top: 24px;
+}
+
+.st-sm-reviews-list-item-date {
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 20.56px;
+}
+
 @media only screen and (min-width: 1025px) {
 	.st-sm-container {
 		display: flex;
 		flex-direction: column;
-		padding: 0 112px;
+		padding: 0 112px 120px  112px;
 		gap: 120px;
 	}
 
@@ -682,5 +764,52 @@
 	.st-sm-reviews-list-container {
 		padding-top: 48px;
 	}
+
+	.st-sm-reviews-list-items {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 32px;
+	}
+
+	.st-sm-reviews-list-item {
+		padding: 24px 32px;
+	}
+
+	.st-sm-reviews-list-item-image-name-container {
+		gap: 12px;
+	}
+
+	.st-sm-reviews-list-item-name-text {
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.st-sm-reviews-list-item-image-name-container > img {
+		width: 59px;
+		height: 59px;
+		border-radius: 50%;
+	}
+
+	.st-sm-reviews-list-item-rating-text {
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 32px;
+	}
+
+	.st-sm-reviews-list-item-content-container {
+		margin-top: 16px;
+	}
+
+	.st-sm-reviews-list-item-content {
+		font-size: 18px;
+		line-height: 32px;
+	}
+
+	.st-sm-reviews-list-item-date {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
+	}
+
 
 }

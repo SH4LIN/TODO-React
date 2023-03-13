@@ -4,7 +4,7 @@
  *
  * @package WordPress
  * @subpackage Twenty_Twenty_One_Child
- * @since Twenty Twenty-One Child 1.0
+ * @since 1.0.0
  */
 $movies = $args['movies'];
 ?>
@@ -18,10 +18,10 @@ $movies = $args['movies'];
 			<div class="st-am-trending-movies-list-container">
 				<div class="st-am-trending-movies-list">
 					<?php
-					foreach ( $movies as $movie ) {
-
+					foreach ( $movies as $movie ) :
 
 						?>
+						<a href="<?php echo esc_url( get_permalink( $movie->ID ) ); ?>">
 							<div class="st-am-trending-movies-list-item">
 								<div class="st-am-trending-movies-list-item-image-container">
 									<img src="<?php echo esc_url( get_the_post_thumbnail_url( $movie->ID, 'full' ) ); ?>" class="st-am-trending-movies-list-item-image">
@@ -78,8 +78,9 @@ $movies = $args['movies'];
 									</div>
 								</div>
 							</div>
-							<?php
-					}
+						</a>
+						<?php
+					endforeach;
 					?>
 				</div>
 			</div>

@@ -4,7 +4,7 @@
  *
  * @package WordPress
  * @subpackage Twenty_Twenty_One_Child
- * @since Twenty Twenty-One Child 1.0
+ * @since 1.0.0
  */
 
 
