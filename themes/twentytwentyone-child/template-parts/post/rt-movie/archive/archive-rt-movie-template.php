@@ -2,8 +2,7 @@
 /**
  * This file is template for the archive rt-movie post type it will call all the other parts of the templates.
  *
- * @package WordPress
- * @subpackage Twenty_Twenty_One_Child
+ * @package Twenty_Twenty_One_Child
  * @since 1.0.0
  */
 

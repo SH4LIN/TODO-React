@@ -9,21 +9,17 @@
 /**
  * This is a security measure to prevent direct access to the file.
  */
+defined( 'ABSPATH' ) || exit;
 
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\taxonomies\Movie_Label;
 
-defined( 'ABSPATH' ) || exit;
-
 require_once get_stylesheet_directory() . '/classes/trait-singleton.php';
-
-
-
 
 if ( ! class_exists( 'Archive_RT_Movie_Data' ) ) :
 
 	/**
-	 * This class is used to fetch the single rt person data.
+	 * This class is used to fetch the archive rt movie data.
 	 */
 	class Archive_RT_Movie_Data {
 		use Singleton;
@@ -38,7 +34,7 @@ if ( ! class_exists( 'Archive_RT_Movie_Data' ) ) :
 		/**
 		 * This function is used to fetch the all slider movies data.
 		 *
-		 * @return array $hero_data The hero data for the archive rt-movie post.
+		 * @return array The hero data for the archive rt-movie post.
 		 */
 		public function get_slider_movies(): array {
 			$slider_movies_args = array(
@@ -53,17 +49,14 @@ if ( ! class_exists( 'Archive_RT_Movie_Data' ) ) :
 			);
 
 			$slider_movies_query = new WP_Query( $slider_movies_args );
-			$slider_movies       = $slider_movies_query->posts;
 
-			wp_reset_postdata();
-
-			return $slider_movies;
+			return $slider_movies_query->posts;
 		}
 
 		/**
-		 * This function is used to fetch the all upcoming movies data.
+		 * This function is used to fetch the all upcoming movies' data.
 		 *
-		 * @return array The hero data for the archive rt-movie post.
+		 * @return array All upcoming movies' data for the archive rt-movie post.
 		 */
 		public function get_upcoming_movies(): array {
 			$upcoming_movies_args = array(
@@ -78,17 +71,14 @@ if ( ! class_exists( 'Archive_RT_Movie_Data' ) ) :
 			);
 
 			$upcoming_movies_query = new WP_Query( $upcoming_movies_args );
-			$upcoming_movies       = $upcoming_movies_query->posts;
 
-			wp_reset_postdata();
-
-			return $upcoming_movies;
+			return $upcoming_movies_query->posts;
 		}
 
 		/**
-		 * This function is used to fetch the all upcoming movies data.
+		 * This function is used to fetch the all upcoming movies' data.
 		 *
-		 * @return array The hero data for the archive rt-movie post.
+		 * @return array All upcoming movies' data for the archive rt-movie post.
 		 */
 		public function get_trending_movies(): array {
 			$trending_movies_args = array(
@@ -103,11 +93,8 @@ if ( ! class_exists( 'Archive_RT_Movie_Data' ) ) :
 			);
 
 			$trending_movies_query = new WP_Query( $trending_movies_args );
-			$trending_movies       = $trending_movies_query->posts;
 
-			wp_reset_postdata();
-
-			return $trending_movies;
+			return $trending_movies_query->posts;
 		}
 
 	}

@@ -16,6 +16,7 @@ use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box;
+use MovieLib\admin\classes\taxonomies\Movie_Label;
 use MovieLib\admin\classes\taxonomies\Movie_Person;
 use MovieLib\admin\classes\taxonomies\Person_Career;
 
@@ -40,7 +41,7 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 		 * This function is used to fetch the hero data for the single rt-person post.
 		 *
 		 * @param int $current_id The current post id.
-		 * @return array $hero_data The hero data for the single rt-person post.
+		 * @return array The hero data for the single rt-person post.
 		 */
 		public function get_hero_data( $current_id ): array {
 			$hero_data = array();
@@ -214,7 +215,7 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 		 * This function is used to fetch the about data for the single rt-person post.
 		 *
 		 * @param int $current_id The current post id.
-		 * @return array $about_data The about data for the single rt-person post.
+		 * @return array The about data for the single rt-person post.
 		 */
 		public function get_about_data( $current_id ): array {
 			$about_data       = array();
@@ -231,14 +232,20 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 		 * This function is used to fetch the popular movies data for the single rt-person post.
 		 *
 		 * @param int $current_id The current post id.
-		 * @return array $about_data The about data for the single rt-person post.
+		 * @return array Popular movies of specific person.
 		 */
 		public function get_popular_movies( $current_id ): array {
 			$search_query = array(
+				'relation' => 'AND',
 				array(
 					'taxonomy' => Movie_Person::SLUG,
 					'field'    => 'slug',
 					'terms'    => array( $current_id ),
+				),
+				array(
+					'taxonomy' => Movie_Label::SLUG,
+					'field'    => 'slug',
+					'terms'    => array( 'popular' ),
 				),
 			);
 
@@ -249,8 +256,7 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 				)
 			);
 
-			$movies_worked  = $query->posts;
-			$popular_movies = '';
+			$movies_worked = $query->posts;
 			if ( count( $movies_worked ) > 4 ) {
 				$popular_movies = array_slice( $query->posts, 0, 3 );
 			} else {
@@ -267,7 +273,7 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 		 * This function is used to fetch the snapshots data for the single rt-person post.
 		 *
 		 * @param int $current_id The current post id.
-		 * @return array $snapshots_data The snapshots data for the single rt-person post.
+		 * @return array The snapshots data for the single rt-person post.
 		 */
 		public function get_snapshots( $current_id ): array {
 			$snapshots_data['id']        = $current_id;
@@ -284,7 +290,7 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 		 * This function is used to fetch the videos data for the single rt-person post.
 		 *
 		 * @param int $current_id The current post id.
-		 * @return array $snapshots_data The snapshots data for the single rt-person post.
+		 * @return array The snapshots data for the single rt-person post.
 		 */
 		public function get_videos( $current_id ): array {
 			$videos_data['id']     = $current_id;

@@ -2,8 +2,7 @@
 /**
  * This file is used to display the slider on the archive page of the rt-movie post type.
  *
- * @package WordPress
- * @subpackage Twenty_Twenty_One_Child
+ * @package Twenty_Twenty_One_Child
  * @since 1.0.0
  */
 
@@ -79,73 +78,73 @@ foreach ( $movies as $movie ) {
 $count = count( $movie_details );
 
 ?>
-<div class="st-am-slider-container">
-	<ul class="st-am-slider">
+<div class="st-am-slider-container"> <!-- slider container -->
+	<ul class="st-am-slider"> <!-- slider -->
 		<?php
 		$i = 0;
 		foreach ( $movie_details as $movie ) :
 			?>
-			<li class="st-am-slider-item">
+			<li class="st-am-slider-item"> <!-- slider-item -->
 				<a href="<?php echo esc_url( get_permalink( $movie['id'] ) ); ?>">
 
-					<div class="st-am-slider-item-image-container">
+					<div class="st-am-slider-item-image-container"> <!-- slider-item-image-container -->
 						<img src="<?php echo esc_url( $movie['banner'] ); ?>" class="st-am-slider-item-image">
-					</div>
+					</div> <!-- slider-item-image-container -->
 
-					<div class="st-am-slider-item-movie-info-container">
-						<div class="primary-text-secondary-font st-am-slider-item-image-title">
+					<div class="st-am-slider-item-movie-info-container"> <!-- slider-item-movie-info-container -->
+						<div class="primary-text-secondary-font st-am-slider-item-image-title"> <!-- slider-item-image-title -->
 							<?php echo esc_html( $movie['title'] ); ?>
-						</div>
+						</div> <!-- slider-item-image-title -->
 
 						<?php if ( ! empty( $movie['synopsis'] ) ) : ?>
-							<div class="primary-text-primary-font st-am-slider-item-image-synopsis">
+							<div class="primary-text-primary-font st-am-slider-item-image-synopsis"> <!-- slider-item-image-synopsis -->
 								<?php echo esc_html( $movie['synopsis'] ); ?>
-							</div>
+							</div> <!-- slider-item-image-synopsis -->
 						<?php endif; ?>
 
 						<?php if ( ! empty( $movie['release_year'] ) || ! empty( $movie['age_rating'] ) || ! empty( $movie['runtime'] ) ) : ?>
-							<div class="st-am-slider-item-movie-stats-container">
-								<ul class="st-am-slider-item-movie-stats">
+							<div class="st-am-slider-item-movie-stats-container"> <!-- slider-item-movie-stats-container -->
+								<ul class="st-am-slider-item-movie-stats"> <!-- slider-item-movie-stats -->
 									<?php if ( ! empty( $movie['release_year'] ) ) : ?>
-									<li class="primary-text-primary-font st-am-slider-item-movie-stat">
+									<li class="primary-text-primary-font st-am-slider-item-movie-stat"> <!-- slider-item-movie-stat -->
 										<?php echo esc_html( $movie['release_year'] ); ?>
-									</li>
+									</li> <!-- slider-item-movie-stat -->
 									<?php endif; ?>
 
 									<?php if ( ! empty( $movie['age_rating'] ) ) : ?>
-										<li class="primary-text-primary-font st-am-slider-item-movie-stat">
+										<li class="primary-text-primary-font st-am-slider-item-movie-stat"> <!-- slider-item-movie-stat -->
 											<?php echo esc_html( $movie['age_rating'] ); ?>
-										</li>
+										</li> <!-- slider-item-movie-stat -->
 									<?php endif; ?>
 
 									<?php if ( ! empty( $movie['runtime'] ) ) : ?>
-										<li class="primary-text-primary-font st-am-slider-item-movie-stat">
+										<li class="primary-text-primary-font st-am-slider-item-movie-stat"> <!-- slider-item-movie-stat -->
 											<?php echo esc_html( $movie['runtime'] ); ?>
-									</li>
+										</li> <!-- slider-item-movie-stat -->
 									<?php endif; ?>
-								</ul>
-							</div>
+								</ul> <!-- slider-item-movie-stats -->
+							</div> <!-- slider-item-movie-stats-container -->
 						<?php endif; ?>
 
 						<?php if ( ! empty( $movie['genre'] ) ) : ?>
-							<div class="st-am-slider-item-movie-genre-container">
+							<div class="st-am-slider-item-movie-genre-container"> <!-- slider-item-movie-genre-container -->
 								<?php foreach ( $movie['genre'] as $genre ) : ?>
-									<div class="primary-text-primary-font st-am-slider-item-movie-genre">
+									<div class="primary-text-primary-font st-am-slider-item-movie-genre"> <!-- slider-item-movie-genre -->
 										<?php echo esc_html( $genre->name ); ?>
-									</div>
+									</div> <!-- slider-item-movie-genre -->
 								<?php endforeach; ?>
-							</div>
+							</div> <!-- slider-item-movie-genre-container -->
 						<?php endif; ?>
-					</div>
+					</div> <!-- slider-item-movie-info-container -->
 				</a>
-			</li>
+			</li> <!-- slider-item -->
 			<?php
 			++$i;
 		endforeach;
 		?>
-	</ul>
+	</ul> <!-- slider -->
 
-	<div class="slider-dots-container">
+	<div class="slider-dots-container"> <!-- slider-dots-container -->
 		<?php
 		for ( $i = 0; $i < $count; $i++ ) {
 			?>
@@ -155,11 +154,11 @@ $count = count( $movie_details );
 				echo esc_attr( 'active' );
 			endif;
 			?>
-			" data-position="<?php echo esc_attr( $i ); ?>">
+			" data-position="<?php echo esc_attr( $i ); ?>"> <!-- slider-dots -->
 
-			</div>
+			</div> <!-- slider-dots -->
 			<?php
 		}
 		?>
-	</div>
-</div>
+	</div> <!-- slider-dots-container -->
+</div> <!-- slider container -->

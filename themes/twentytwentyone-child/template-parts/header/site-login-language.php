@@ -9,7 +9,7 @@
 
 ?>
 
-<div class="st-header-actions-menu-container">
+<div class="st-header-actions-menu-container"> <!-- header-actions-menu-container -->
 	<div class="st-header-actions-container">
 		<div class="st-header-sign-in-container">
 			<img class="ic_user" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_user.svg' ); ?>" />
@@ -26,4 +26,4 @@
 		<img id="hamburger_menu_icon" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_menu.svg' ); ?>" />
 		<img id="close_menu_icon" class="hidden" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_close.svg' ); ?>" />
 	</div>
-</div>
+</div> <!-- /header-actions-menu-container -->

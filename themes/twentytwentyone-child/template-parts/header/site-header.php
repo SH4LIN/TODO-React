@@ -8,21 +8,21 @@
 
 ?>
 
-<header id="masthead" class="st-header">
+<header id="masthead" class="st-header"> <!-- header -->
 
-	<div class="st-header-navigation-container">
+	<div class="st-header-navigation-container"> <!-- header-navigation-container -->
 
-			<div class="st-header-container">
-				<?php get_template_part( 'template-parts/header/site-search' ); ?>
-				<?php get_template_part( 'template-parts/header/site-logo' ); ?>
-				<?php get_template_part( 'template-parts/header/site-login-language' ); ?>
-			</div>
+		<div class="st-header-container"> <!-- header-container -->
+			<?php get_template_part( 'template-parts/header/site-search' ); ?>
+			<?php get_template_part( 'template-parts/header/site-logo' ); ?>
+			<?php get_template_part( 'template-parts/header/site-login-language' ); ?>
+		</div> <!-- /header-container -->
 
-			<div class="st-header-primary-menu">
-				<?php get_template_part( 'template-parts/header/site-nav' ); ?>
-				<?php get_template_part( 'template-parts/header/site-nav-expanded' ); ?>
-			</div>
-	</div>
+		<div class="st-header-primary-menu"> <!-- header-primary-menu -->
+			<?php get_template_part( 'template-parts/header/site-nav' ); ?>
+			<?php get_template_part( 'template-parts/header/site-nav-expanded' ); ?>
+		</div> <!-- /header-primary-menu -->
+	</div> <!-- /header-navigation-container -->
 
 
-</header><!-- #masthead -->
+</header> <!-- /header -->

@@ -7,7 +7,7 @@
  */
 
 ?>
-<div class="st-header-primary-menu-container">
+<div class="st-header-primary-menu-container"> <!-- header-primary-menu-container -->
 	<?php
 	wp_nav_menu(
 		array(
@@ -19,5 +19,5 @@
 		)
 	);
 	?>
-</div>
+</div> <!-- header-primary-menu-container -->
 

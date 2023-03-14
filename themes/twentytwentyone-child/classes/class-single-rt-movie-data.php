@@ -9,16 +9,12 @@
 /**
  * This is a security measure to prevent direct access to the file.
  */
+defined( 'ABSPATH' ) || exit;
 
 use MovieLib\admin\classes\custom_post_types\RT_Person;
 use MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box;
 
-defined( 'ABSPATH' ) || exit;
-
 require_once get_stylesheet_directory() . '/classes/trait-singleton.php';
-
-
-
 
 if ( ! class_exists( 'Single_RT_Movie_Data' ) ) :
 
@@ -104,7 +100,7 @@ if ( ! class_exists( 'Single_RT_Movie_Data' ) ) :
 		 * This function is used to fetch the plot data for the single rt-movie post.
 		 *
 		 * @param int $current_id The current post id.
-		 * @return array $about_data The plot data for the single rt-movie post.
+		 * @return array The plot data for the single rt-movie post.
 		 */
 		public function get_plot_data( $current_id ): array {
 			$plot_data = array();
@@ -124,7 +120,7 @@ if ( ! class_exists( 'Single_RT_Movie_Data' ) ) :
 		 * This function is used to fetch the crew data for the single rt-movie post.
 		 *
 		 * @param int $current_id The current post id.
-		 * @return array $crew_data The crew data for the single rt-movie post.
+		 * @return array The crew data for the single rt-movie post.
 		 */
 		public function get_crew_data( $current_id ): array {
 			$crew_data = array();
@@ -144,7 +140,7 @@ if ( ! class_exists( 'Single_RT_Movie_Data' ) ) :
 		 * This function is used to fetch the snapshots data for the single rt-movie post.
 		 *
 		 * @param int $current_id The current post id.
-		 * @return array $snapshots_data The snapshots data for the single rt-movie post.
+		 * @return array The snapshots data for the single rt-movie post.
 		 */
 		public function get_snapshot_data( $current_id ): array {
 			$snapshots_data = array();
@@ -164,7 +160,7 @@ if ( ! class_exists( 'Single_RT_Movie_Data' ) ) :
 		 * This function is used to fetch the videos data for the single rt-movie post.
 		 *
 		 * @param int $current_id The current post id.
-		 * @return array $video_data The snapshots data for the single rt-movie post.
+		 * @return array The snapshots data for the single rt-movie post.
 		 */
 		public function get_video_data( $current_id ): array {
 			$videos_data = array();
@@ -185,7 +181,7 @@ if ( ! class_exists( 'Single_RT_Movie_Data' ) ) :
 		 * This function is used to fetch the comment data for the single rt-movie post.
 		 *
 		 * @param int $current_id The current post id.
-		 * @return array $video_data The comment data for the single rt-movie post.
+		 * @return array The comment data for the single rt-movie post.
 		 */
 		public function get_comment_data( $current_id ): array {
 			$comments_data = array();

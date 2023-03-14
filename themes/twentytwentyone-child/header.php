@@ -6,26 +6,26 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package WordPress
- * @subpackage Twenty_Twenty_One
+ * @package Twenty_Twenty_One
  * @since 1.0.0
  */
 
 ?>
 <!doctype html>
-<html <?php language_attributes(); ?>>
-<head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<?php wp_head(); ?>
-</head>
+<html <?php language_attributes(); ?>> <!-- html -->
+	<head> <!-- head -->
+		<meta charset="<?php bloginfo( 'charset' ); ?>" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<?php wp_head(); ?>
+	</head>
 
-<body <?php body_class(); ?>>
-<?php wp_body_open(); ?>
-<div id="page" class="site">
+	<body <?php body_class(); ?>> <!-- body -->
+		<?php wp_body_open(); ?>
 
-	<?php get_template_part( 'template-parts/header/site-header' ); ?>
+		<div id="page" class="site"> <!-- site -->
 
-	<div id="content" class="st-site-content">
-		<div id="primary" class="st-content-area">
-			<main id="main" class="st-site-main" role="main">
+		<?php get_template_part( 'template-parts/header/site-header' ); ?>
+
+		<div id="content" class="st-site-content"> <!-- site-content -->
+			<div id="primary" class="st-content-area"> <!-- site-content-area -->
+				<main id="main" class="st-site-main" role="main"> <!-- site-main -->

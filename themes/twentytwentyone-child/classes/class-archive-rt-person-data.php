@@ -12,6 +12,7 @@
 defined( 'ABSPATH' ) || exit;
 
 require_once get_stylesheet_directory() . '/classes/trait-singleton.php';
+
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\custom_post_types\RT_Person;
 use MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box;
@@ -25,7 +26,7 @@ use MovieLib\admin\classes\taxonomies\Person_Career;
 if ( ! class_exists( 'Archive_RT_Person_Data' ) ) :
 
 	/**
-	 * This class is used to fetch the single rt person data.
+	 * This class is used to fetch the archive rt person data.
 	 */
 	class Archive_RT_Person_Data {
 		use Singleton;
@@ -38,10 +39,10 @@ if ( ! class_exists( 'Archive_RT_Person_Data' ) ) :
 		protected function init(): void {}
 
 		/**
-		 * This function is used to fetch the all person data.
+		 * This function is used to fetch the all person data based on movie_id.
 		 *
 		 * @param int $movie_id The current post id.
-		 * @return array $hero_data The hero data for the single rt-person post.
+		 * @return array All person data specific to a movie_id.
 		 */
 		public function get_movie_person_archive_data( $movie_id ): array {
 			$persons_details = array();
@@ -98,9 +99,9 @@ if ( ! class_exists( 'Archive_RT_Person_Data' ) ) :
 		}
 
 		/**
-		 * This function is used to fetch person data related to some specific movie.
+		 * This function is used to fetch person data.
 		 *
-		 * @return array $about_data The about data for the single rt-person post.
+		 * @return array  All person data.
 		 */
 		public function get_person_archive_data(): array {
 			$persons_details = array();

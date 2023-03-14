@@ -9,7 +9,7 @@
 
 ?>
 
-<div class="st-header-primary-menu-expanded-container hidden">
+<div class="st-header-primary-menu-expanded-container hidden"> <!-- header-primary-menu-expanded-container -->
 	<div class="st-header-primary-menu-expanded">
 		<div class="st-header-primary-menu-expanded-login-register-actions">
 			<div class="primary-text-primary-font st-header-primary-menu-expanded-login-action">
@@ -90,4 +90,4 @@
 		</div>
 
 	</div>
-</div>
+</div> <!-- header-primary-menu-expanded-container -->

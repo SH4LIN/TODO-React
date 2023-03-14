@@ -2,8 +2,7 @@
 /**
  * Twenty Twenty-One Child functions and definitions
  *
- * @package WordPress
- * @subpackage TwentyTwentyOneChild
+ * @package TwentyTwentyOneChild
  * @since 1.0.0
  */
 
