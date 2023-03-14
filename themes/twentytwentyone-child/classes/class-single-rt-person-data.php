@@ -245,7 +245,7 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 				array(
 					'taxonomy' => Movie_Label::SLUG,
 					'field'    => 'slug',
-					'terms'    => array( 'popular-movies' ),
+					'terms'    => array( 'most-popular' ),
 				),
 			);
 
