@@ -18,7 +18,7 @@ if ( ! empty( $args['trailers'] ) && ! empty( $args['trailers'][0] ) ) :
 	<div class="st-sm-trailer-clips-container">
 		<div class="st-sm-trailer-clips-heading-container">
 			<div class="primary-text-secondary-font section-heading-text st-sm-trailer-clips-heading">
-				<?php esc_html_e( 'Trailer & Clips' ); ?>
+				<?php esc_html_e( 'Trailer & Clips', 'screen-time' ); ?>
 			</div>
 		</div>
 
@@ -44,11 +44,9 @@ if ( ! empty( $args['trailers'] ) && ! empty( $args['trailers'][0] ) ) :
 	</div>
 
 	<div id="lightbox" class="display-none">
-	    <button id="lightbox-close-btn" class="close-btn">
-	        <img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/ic_close.svg'; ?>" alt="close" />
-	    </button>
-	    <div id="lightbox-video">
-
-	    </div>
+		<button id="lightbox-close-btn" class="close-btn">
+			<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_close.svg' ); ?>" alt="close" />
+		</button>
+		<div id="lightbox-video"></div>
 	</div>
 <?php endif; ?>

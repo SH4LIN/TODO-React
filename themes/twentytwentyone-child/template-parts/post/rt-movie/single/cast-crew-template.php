@@ -21,12 +21,12 @@ if ( ! empty( $args['crew'] ) && ! empty( $args['crew'][0] ) ) :
 <div class="st-sm-cast-crew-container">
 	<div class="st-sm-cast-crew-heading-container">
 		<div class="primary-text-secondary-font section-heading-text st-sm-cast-crew-heading">
-			<?php esc_html_e( 'Cast & Crew' ); ?>
+			<?php esc_html_e( 'Cast & Crew', 'screen-time' ); ?>
 		</div>
 
 		<div class="st-sm-cast-crew-view-all-container-desktop">
 			<a href="<?php echo esc_url( $args['link'] ); ?>" class="primary-text-primary-font st-sm-cast-crew-view-all-link">
-				<?php esc_html_e( 'View All' ); ?>
+				<?php esc_html_e( 'View All', 'screen-time' ); ?>
 			</a>
 		</div>
 	</div>
@@ -55,7 +55,7 @@ if ( ! empty( $args['crew'] ) && ! empty( $args['crew'][0] ) ) :
 
 	<div class="st-sm-cast-crew-view-all-container-mobile">
 		<a href="<?php echo esc_url( $args['link'] ); ?>" class="primary-text-primary-font st-sm-cast-crew-view-all-link">
-			<?php esc_html_e( 'View All' ); ?>
+			<?php esc_html_e( 'View All', 'screen-time' ); ?>
 		</a>
 	</div>
 </div>

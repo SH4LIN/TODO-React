@@ -1,15 +1,15 @@
 <?php
 /**
- * This file is template file for the archive rt-person post type. It will call all the other template parts
+ * This file is template file for the archive rt-person post type.
+ * It will call all the other template parts
  *
- * @package WordPress
- * @subpackage Twenty_Twenty_One_Child
+ * @package Twenty_Twenty_One_Child
  * @since 1.0.0
  */
 
-require_once get_stylesheet_directory() . '/classes/class-archive-rt-person-data.php';
-
 $persons_details = array();
+
+require_once get_stylesheet_directory() . '/classes/class-archive-rt-person-data.php';
 
 if ( isset( $_GET['movie_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	$movie_id        = sanitize_text_field( wp_unslash( $_GET['movie_id'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended

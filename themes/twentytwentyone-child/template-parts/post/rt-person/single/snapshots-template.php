@@ -19,7 +19,7 @@ if ( ! empty( $snapshots ) && ! empty( $snapshots[0] ) ) :
 	<div class="st-sp-snapshots-container">
 			<div class="st-sp-snapshots-heading-container">
 				<p class="primary-text-secondary-font section-heading-text">
-					<?php esc_html_e( 'Snapshots' ); ?>
+					<?php esc_html_e( 'Snapshots', 'screen-time' ); ?>
 				</p>
 			</div>
 

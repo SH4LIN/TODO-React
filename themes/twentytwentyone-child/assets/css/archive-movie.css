@@ -44,15 +44,17 @@
 
 }
 
-.st-am-slider-item-image-container:after {
+.st-am-slider-item-image-container::after {
 	content: "";
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
 	background: rgba(0, 0, 0, 0.4);
 	position: absolute;
-	left: 0; right: 0;
-	top: 0; bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
 }
 
 .st-am-slider-item-movie-info-container {
@@ -95,7 +97,7 @@
 	line-height: 21px;
 }
 
-.st-am-slider-item-movie-stat:not(:first-child):before {
+.st-am-slider-item-movie-stat:not(:first-child)::before {
 	content: "•";
 	color: var(--primary-font-color);
 	font-weight: 400;
@@ -115,7 +117,7 @@
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 24px;
-	border: 1px solid #FFFFFF;
+	border: 1px solid #fff;
 	border-radius: 24px;
 }
 
@@ -144,6 +146,7 @@
 	display: flex;
 	flex-direction: column;
 }
+
 .st-am-upcoming-movies-heading-container {
 	border-left: 4px solid var(--border-color);
 	padding-left: 12px;
@@ -292,7 +295,7 @@
 	gap: 4px;
 }
 
-.st-am-genre-text:not(:first-child):before {
+.st-am-genre-text:not(:first-child)::before {
 	content: "•";
 	margin-right: 2px;
 	font-weight: 400;
@@ -300,19 +303,8 @@
 	line-height: 12px;
 }
 
-.st-am-genre-text {
-	font-weight: 400;
-	font-size: 8px;
-	line-height: 12px;
-}
-
-.st-am-release-date-text {
-	font-weight: 400;
-	font-size: 8px;
-	line-height: 12px;
-}
-
 @media only screen and (min-width: 1025px) {
+
 	.st-am-container {
 		gap: 120px;
 		padding-bottom: 64px;
@@ -335,15 +327,17 @@
 		object-position: top;
 	}
 
-	.st-am-slider-item-image-container:after {
+	.st-am-slider-item-image-container::after {
 		content: "";
 		width: 100%;
 		height: 100%;
 		overflow: hidden;
 		background: rgba(0, 0, 0, 0);
 		position: absolute;
-		left: 0; right: 0;
-		top: 0; bottom: 0;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
 	}
 
 	.st-am-slider-item-movie-info-container {
@@ -383,7 +377,7 @@
 		line-height: 24px;
 	}
 
-	.st-am-slider-item-movie-stat:not(:first-child):before {
+	.st-am-slider-item-movie-stat:not(:first-child)::before {
 		content: "•";
 		color: var(--primary-font-color);
 		font-weight: 400;
@@ -401,7 +395,7 @@
 		font-weight: 400;
 		font-size: 14px;
 		line-height: 24px;
-		border: 1px solid #FFFFFF;
+		border: 1px solid #fff;
 		border-radius: 24px;
 	}
 
@@ -465,6 +459,7 @@
 	}
 
 	.st-am-release-date-text {
+		font-weight: 400;
 		font-size: 16px;
 		line-height: 24px;
 	}
@@ -514,20 +509,9 @@
 		gap: 8px;
 	}
 
-	.st-am-genre-text:not(:first-child):before {
+	.st-am-genre-text:not(:first-child)::before {
 		content: "•";
 		margin-right: 4px;
-		font-size: 16px;
-		line-height: 24px;
-	}
-
-	.st-am-genre-text {
-		font-size: 16px;
-		line-height: 24px;
-	}
-
-	.st-am-release-date-text {
-		font-weight: 400;
 		font-size: 16px;
 		line-height: 24px;
 	}

@@ -190,7 +190,9 @@ function setupMediaMetaBannerImagesUploader() {
 	);
 
 	if (
-		document.querySelector('.rt-media-meta-uploaded-banner-image-remove') !== null
+		document.querySelector(
+			'.rt-media-meta-uploaded-banner-image-remove'
+		) !== null
 	) {
 		document
 			.querySelectorAll('.rt-media-meta-uploaded-banner-image-remove')
@@ -202,9 +204,11 @@ function setupMediaMetaBannerImagesUploader() {
 
 					e.preventDefault();
 
-					rtUploadedBannerImages = rtUploadedBannerImages.filter(function (item) {
-						return item !== +e.target.dataset.id;
-					});
+					rtUploadedBannerImages = rtUploadedBannerImages.filter(
+						function (item) {
+							return item !== +e.target.dataset.id;
+						}
+					);
 
 					e.target.parentElement.remove();
 
@@ -244,10 +248,11 @@ function setupMediaMetaBannerImagesUploader() {
 			});
 
 			rtMediaMetaBannerImagesFrame.on('select', function () {
-				const rtMediaMetaBannerImagesAttachment = rtMediaMetaBannerImagesFrame
-					.state()
-					.get('selection')
-					.toJSON();
+				const rtMediaMetaBannerImagesAttachment =
+					rtMediaMetaBannerImagesFrame
+						.state()
+						.get('selection')
+						.toJSON();
 
 				if (rtMediaMetaBannerImages.length === 0) {
 					const heading = document.createElement('h3');
@@ -256,7 +261,10 @@ function setupMediaMetaBannerImagesUploader() {
 						'rt-media-meta-banner-images-heading',
 						'rt-media-meta-selected-banner-images-heading'
 					);
-					heading.innerText = __('Selected Movie Banners', 'movie-library');
+					heading.innerText = __(
+						'Selected Movie Banners',
+						'movie-library'
+					);
 					document
 						.querySelector('.rt-media-meta-banner-images')
 						.appendChild(heading);
@@ -293,14 +301,15 @@ function setupMediaMetaBannerImagesUploader() {
 				});
 
 				document
-					.querySelectorAll('.rt-media-meta-selected-banner-image-remove')
+					.querySelectorAll(
+						'.rt-media-meta-selected-banner-image-remove'
+					)
 					.forEach((span) => {
 						span.addEventListener('click', function (evt) {
-							rtMediaMetaBannerImages = rtMediaMetaBannerImages.filter(
-								function (item) {
+							rtMediaMetaBannerImages =
+								rtMediaMetaBannerImages.filter(function (item) {
 									return item !== +evt.target.dataset.id;
-								}
-							);
+								});
 
 							evt.target.parentElement.remove();
 

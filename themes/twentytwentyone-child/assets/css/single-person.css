@@ -182,8 +182,6 @@
 	padding-left: 12px;
 }
 
-
-
 .st-sp-about-content-container {
 	margin-top: 48px;
 }
@@ -253,8 +251,6 @@
 	font-weight: 700;
 }
 
-.st-sp-popular-movie-item-runtime-container {}
-
 .st-sp-popular-movie-runtime {
 	font-size: 8px;
 	line-height: 11.75px;
@@ -290,7 +286,7 @@
 	margin-right: 4px;
 }
 
-.st-sp-popular-movie-item-genre-item:not(:first-child):before {
+.st-sp-popular-movie-item-genre-item:not(:first-child)::before {
 	content: "•";
 	color: var(--secondary-font-color);
 	margin-right: 2px;
@@ -307,7 +303,7 @@
 }
 
 .st-sp-snapshots-container {
-	padding-top: 64px
+	padding-top: 64px;
 }
 
 .st-sp-snapshots-heading-container {
@@ -338,7 +334,7 @@
 }
 
 .st-sp-videos-container {
-	padding-top: 64px
+	padding-top: 64px;
 }
 
 .st-sp-videos-heading-container {
@@ -397,8 +393,8 @@
 	bottom: 0;
 	right: 0;
 	padding: 4px 8px;
-	background-color: #000000;
-	color: #ffffff;
+	background-color: #000;
+	color: #fff;
 	font-size: 8px;
 	line-height: 11.75px;
 	font-weight: 400;
@@ -411,6 +407,7 @@
 }
 
 @media only screen and (min-width: 1025px) {
+
 	/* For desktop: */
 	.st-sp-container {
 		padding: 0 112px 120px 112px;
@@ -616,7 +613,7 @@
 		justify-items: center;
 	}
 
-	.st-sp-quick-link:before {
+	.st-sp-quick-link::before {
 		content: url(../images/ic_arrow.svg);
 		margin-right: 8px;
 		line-height: 0;
@@ -721,8 +718,6 @@
 		display: block;
 		margin: auto;
 	}
-
-
 
 	.personal-details-text {
 		font-size: 18px;

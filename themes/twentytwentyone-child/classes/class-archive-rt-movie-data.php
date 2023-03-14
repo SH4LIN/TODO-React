@@ -94,11 +94,11 @@ if ( ! class_exists( 'Archive_RT_Movie_Data' ) ) :
 			$trending_movies_args = array(
 				'post_type' => RT_Movie::SLUG,
 				'tax_query' => array( // phpcs:ignore: WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-									  array(
-										  'taxonomy' => Movie_Label::SLUG,
-										  'field'    => 'slug',
-										  'terms'    => 'trending-now',
-									  ),
+									array(
+										'taxonomy' => Movie_Label::SLUG,
+										'field'    => 'slug',
+										'terms'    => 'trending-now',
+									),
 				),
 			);
 

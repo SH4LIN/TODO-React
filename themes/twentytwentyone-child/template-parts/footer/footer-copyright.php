@@ -1,6 +1,9 @@
 <?php
 /**
  * This file contains the markup for the footer copyright text.
+ *
+ * @package TwentyTwentyOneChild
+ * @since 1.0.0
  */
 
 ?>

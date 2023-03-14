@@ -7,9 +7,9 @@
  * @since 1.0.0
  */
 
-require_once get_stylesheet_directory() . '/classes/class-single-rt-person-data.php';
-
 $current_id = get_the_ID();
+
+require_once get_stylesheet_directory() . '/classes/class-single-rt-person-data.php';
 
 $single_rt_person_data = Single_RT_Person_Data::instance();
 ?>

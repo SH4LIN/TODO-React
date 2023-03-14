@@ -116,7 +116,7 @@ if (
 			if ( ! empty( $args['directors'] ) && ! empty( $args['directors'][0] ) ) :
 				?>
 				<div class="st-sm-directors-container">
-					<span class="primary-text-primary-font st-sm-director-text"> <?php esc_html_e( 'Directors:' ); ?></span>
+					<span class="primary-text-primary-font st-sm-director-text"> <?php esc_html_e( 'Directors:', 'screen-time' ); ?></span>
 					<ul class="st-sm-director-list">
 						<?php
 						foreach ( $args['directors'][0] as $director ) :
@@ -139,7 +139,7 @@ if (
 					<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_play.svg' ); ?>"/>
 				</div>
 				<div class="st-sm-watch-trailer-text-container">
-					<p class="primary-text-primary-font st-sm-watch-trailer-text"> <?php esc_html_e( 'Watch Trailer' ); ?></p>
+					<p class="primary-text-primary-font st-sm-watch-trailer-text"> <?php esc_html_e( 'Watch Trailer', 'screen-time' ); ?></p>
 				</div>
 			</div>
 

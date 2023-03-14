@@ -76,7 +76,9 @@ if ( ! class_exists( 'Archive_RT_Person_Data' ) ) :
 					$person['birth_date'] = '';
 
 					if ( ! empty( $birth_date_str ) ) {
-						$birth_date           = DateTime::createFromFormat( 'Y-m-d', $birth_date_str )->format( 'd F Y' );
+						$birth_date = DateTime::createFromFormat( 'Y-m-d', $birth_date_str )->format( 'd F Y' );
+
+						// translators: %1$s is the birth date.
 						$born_birth_date_str  = sprintf( __( 'Born - %1$s', 'screen-time' ), $birth_date );
 						$person['birth_date'] = $born_birth_date_str;
 					}
@@ -98,7 +100,6 @@ if ( ! class_exists( 'Archive_RT_Person_Data' ) ) :
 		/**
 		 * This function is used to fetch person data related to some specific movie.
 		 *
-		 * @param int $current_id The current post id.
 		 * @return array $about_data The about data for the single rt-person post.
 		 */
 		public function get_person_archive_data(): array {
@@ -132,7 +133,9 @@ if ( ! class_exists( 'Archive_RT_Person_Data' ) ) :
 					$person['birth_date'] = '';
 
 					if ( ! empty( $birth_date_str ) ) {
-						$birth_date           = DateTime::createFromFormat( 'Y-m-d', $birth_date_str )->format( 'd F Y' );
+						$birth_date = DateTime::createFromFormat( 'Y-m-d', $birth_date_str )->format( 'd F Y' );
+
+						// translators: %1$s is the birth date.
 						$born_birth_date_str  = sprintf( __( 'Born - %1$s', 'screen-time' ), $birth_date );
 						$person['birth_date'] = $born_birth_date_str;
 					}

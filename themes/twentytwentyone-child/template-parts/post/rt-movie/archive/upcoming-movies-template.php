@@ -7,6 +7,8 @@
  * @since 1.0.0
  */
 
+use MovieLib\admin\classes\taxonomies\Movie_Genre;
+
 if ( ! isset( $args['movies'] ) ) {
 	return;
 }
@@ -16,7 +18,7 @@ $movies = $args['movies'];
 <div class="st-am-upcoming-movies-container">
 			<div class="st-am-upcoming-movies-heading-container">
 				<div class="primary-text-secondary-font section-heading-text">
-					<?php esc_html_e( 'Upcoming Movies' ); ?>
+					<?php esc_html_e( 'Upcoming Movies', 'screen-time' ); ?>
 				</div>
 			</div>
 
@@ -40,7 +42,7 @@ $movies = $args['movies'];
 
 										<div class="st-am-genres-container">
 										<?php
-										$genres = get_the_terms( $movie->ID, 'rt-movie-genre' );
+										$genres = get_the_terms( $movie->ID, Movie_Genre::SLUG );
 										if ( ! empty( $genres ) ) {
 											foreach ( $genres as $genre ) {
 												?>
@@ -59,10 +61,10 @@ $movies = $args['movies'];
 										<?php
 										$release_year = get_post_meta( $movie->ID, 'rt-movie-meta-basic-release-date', true );
 										if ( ! empty( $release_year ) ) {
-											$formatted_date = date( 'jS M Y', strtotime( $release_year ) );
+											$formatted_date = gmdate( 'jS M Y', strtotime( $release_year ) );
 											?>
 												<div class="st-am-stats-list-item secondary-text-primary-font st-am-release-date-text">
-													<?php echo esc_html__( 'Release: ' ) . esc_html( $formatted_date ); ?>
+													<?php echo esc_html__( 'Release: ', 'screen-time' ) . esc_html( $formatted_date ); ?>
 												</div>
 												<?php
 										}

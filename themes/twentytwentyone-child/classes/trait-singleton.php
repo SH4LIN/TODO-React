@@ -7,7 +7,6 @@
  * @package MovieLib\includes
  */
 
-
 /**
  * This is a security measure to prevent direct access to the file.
  */

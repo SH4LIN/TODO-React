@@ -16,7 +16,7 @@ if ( ! empty( $args['about'] ) ) :
 		<div class="st-sp-about-container">
 			<div class="st-sp-about-heading-container">
 				<p class="primary-text-secondary-font section-heading-text about-heading-text">
-					<?php esc_html_e( 'About' ); ?>
+					<?php esc_html_e( 'About', 'screen-time' ); ?>
 				</p>
 			</div>
 
@@ -30,7 +30,7 @@ if ( ! empty( $args['about'] ) ) :
 		<div class="st-sp-quick-links-container">
 			<div class="st-sp-quick-links-heading-container">
 				<p class="primary-text-secondary-font quick-links-heading-text">
-					<?php esc_html_e( 'Quick Links' ); ?>
+					<?php esc_html_e( 'Quick Links', 'screen-time' ); ?>
 				</p>
 			</div>
 
@@ -38,24 +38,24 @@ if ( ! empty( $args['about'] ) ) :
 				<ul class="st-sp-quick-links">
 					<li class="st-sp-quick-link">
 						<a class="primary-text-primary-font" href="#">
-							<?php esc_html_e( 'About' ); ?>
+							<?php esc_html_e( 'About', 'screen-time' ); ?>
 						</a>
 					</li>
 					<li class="st-sp-quick-link">
 						<a class="primary-text-primary-font" href="#">
-							<?php esc_html_e( 'Family' ); ?>
-						</a>
-					</li>
-
-					<li class="st-sp-quick-link">
-						<a class="primary-text-primary-font" href="#">
-							<?php esc_html_e( 'Snapshots' ); ?>
+							<?php esc_html_e( 'Family', 'screen-time' ); ?>
 						</a>
 					</li>
 
 					<li class="st-sp-quick-link">
 						<a class="primary-text-primary-font" href="#">
-							<?php esc_html_e( 'Videos' ); ?>
+							<?php esc_html_e( 'Snapshots', 'screen-time' ); ?>
+						</a>
+					</li>
+
+					<li class="st-sp-quick-link">
+						<a class="primary-text-primary-font" href="#">
+							<?php esc_html_e( 'Videos', 'screen-time' ); ?>
 						</a>
 					</li>
 				</ul>

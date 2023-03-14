@@ -105,17 +105,21 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 					new WP_Error( $e->getMessage() );
 				}
 
-				$birth_date     = $birth_date_format->format( 'j F Y' );
-				$birth_date_age = sprintf( __( '%1$s (age %2$s years)' ), $birth_date, $age );
+				$birth_date = $birth_date_format->format( 'j F Y' );
+
+				// translators: %1$s: birth date, %2$s: age.
+				$birth_date_age = sprintf( __( '%1$s (age %2$s years)', 'screen-time' ), $birth_date, $age );
 
 				$hero_data['birth_date_age'] = $birth_date_age;
 			}
 
 			$start_year_str = get_post_meta( $current_id, RT_Person_Meta_Box::PERSON_META_BASIC_START_YEAR_SLUG, true );
 			if ( ! empty( $start_year_str ) ) {
-				$start_year_format  = DateTime::createFromFormat( 'Y-m-d', $start_year_str );
-				$start_year         = $start_year_format->format( 'Y' );
-				$start_year_present = sprintf( __( '%1$s-present' ), $start_year );
+				$start_year_format = DateTime::createFromFormat( 'Y-m-d', $start_year_str );
+				$start_year        = $start_year_format->format( 'Y' );
+
+				// translators: %1$s: start year.
+				$start_year_present = sprintf( __( '%1$s-present', 'screen-time' ), $start_year );
 
 				$hero_data['start_year_present'] = $start_year_present;
 			}

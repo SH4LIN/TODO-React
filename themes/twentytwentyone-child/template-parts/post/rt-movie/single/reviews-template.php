@@ -20,7 +20,7 @@ if ( ! empty( $args['comments'] ) ) :
 <div class="st-sm-reviews-container">
 	<div class="st-sm-reviews-heading-container">
 		<div class="primary-text-secondary-font section-heading-text st-sm-reviews-heading">
-			<?php esc_html_e( 'Reviews' ); ?>
+			<?php esc_html_e( 'Reviews', 'screen-time' ); ?>
 		</div>
 	</div>
 
@@ -44,7 +44,7 @@ if ( ! empty( $args['comments'] ) ) :
 								<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_star.svg' ); ?>" class="st-sm-reviews-list-item-image"/>
 
 								<span class="primary-text-primary-font st-sm-reviews-list-item-rating-text">
-								<?php esc_html_e( '8.4/10' ); ?>
+								<?php esc_html_e( '8.4/10', 'screen-time' ); ?>
 								</span>
 							</div>
 						</div>

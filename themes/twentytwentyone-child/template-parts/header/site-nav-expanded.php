@@ -66,7 +66,8 @@
 			<div class="st-header-primary-menu-expanded-settings-menu">
 				<ul class="st-header-primary-menu-expanded-settings-menu-list">
 					<li>
-						<?php esc_html_e( 'Language: ' ); ?><span class="language"><?php esc_html_e( 'ENG ' ); ?></span>
+						<?php esc_html_e( 'Language: ', 'screen-time' ); ?>
+						<span class="language"><?php esc_html_e( 'ENG ', 'screen-time' ); ?></span>
 					</li>
 					<li>
 						<a href="http://www.google.com">
@@ -85,7 +86,7 @@
 		<div class="st-header-primary-menu-expanded-separator"></div>
 
 		<div class="primary-text-tag-font st-header-primary-menu-expanded-version-text">
-			<?php esc_html_e( 'Version: 3.9.2' ); ?>
+			<?php esc_html_e( 'Version: 3.9.2', 'screen-time' ); ?>
 		</div>
 
 	</div>

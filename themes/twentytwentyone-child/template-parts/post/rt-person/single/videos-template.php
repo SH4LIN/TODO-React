@@ -7,7 +7,6 @@
  * @since 1.0.0
  */
 
-
 if ( ! isset( $args['id'] ) || ! isset( $args['videos'] ) ) {
 	return;
 }
@@ -20,7 +19,7 @@ if ( ! empty( $videos ) && ! empty( $videos[0] ) ) :
 		<div class="st-sp-videos-container">
 			<div class="st-sp-videos-heading-container">
 				<p class="primary-text-secondary-font section-heading-text">
-					<?php esc_html_e( 'Videos' ); ?>
+					<?php esc_html_e( 'Videos', 'screen-time' ); ?>
 				</p>
 			</div>
 
@@ -52,12 +51,11 @@ if ( ! empty( $videos ) && ! empty( $videos[0] ) ) :
 		</div>
 
 	<div id="lightbox" class="display-none">
-	    <button id="lightbox-close-btn" class="close-btn">
-	        <img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/ic_close.svg'; ?>" alt="close" />
-	    </button>
-	    <div id="lightbox-video">
-
-	    </div>
+		<button id="lightbox-close-btn" class="close-btn">
+			<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_close.svg' ); ?>" alt="close" />
+		</button>
+		<div id="lightbox-video">
+		</div>
 	</div>
 
 	<?php

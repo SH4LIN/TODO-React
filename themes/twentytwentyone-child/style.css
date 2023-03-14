@@ -13,9 +13,10 @@ Domain Path:  /languages
  */
 
 /* Font Faces */
-@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100;200;300;400;500;600;700;800;900&family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100;200;300;400;500;600;700;800;900&family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 :root {
+
 	/* Font Family */
 	--primary-font-family: "Heebo", sans-serif;
 	--secondary-font-family: "Big Shoulders Display", sans-serif;
@@ -25,8 +26,8 @@ Domain Path:  /languages
 	--secondary-color: #2a2a2a;
 	--primary-font-color: #fff;
 	--secondary-font-color: rgba(255, 255, 255, 0.5);
-	--navbar-color: #111111;
-	--tag-font-color: #dddddd;
+	--navbar-color: #111;
+	--tag-font-color: #ddd;
 	--border-color: #d13223;
 	--link-color: #e46d62;
 }
@@ -59,17 +60,55 @@ a {
 	height: 2px;
 	width: 0;
 }
+
 /* Track */
 ::-webkit-scrollbar-track {
 	background: #494949;
 }
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #D13223;
+	var(--border-color);
 }
 
 .site {
 	margin: auto;
+}
+
+.primary-text-primary-font {
+	color: var(--primary-font-color);
+	font-family: var(--primary-font-family);
+}
+
+.primary-text-secondary-font {
+	color: var(--primary-font-color);
+	font-family: var(--secondary-font-family);
+}
+
+.primary-text-tag-font {
+	color: var(--tag-font-color);
+	font-family: var(--primary-font-family);
+}
+
+.secondary-text-tag-font {
+	color: var(--tag-font-color);
+	font-family: var(--secondary-font-family);
+}
+
+.secondary-text-primary-font {
+	color: var(--secondary-font-color);
+	font-family: var(--primary-font-family);
+}
+
+.secondary-text-secondary-font {
+	color: var(--secondary-font-color);
+	font-family: var(--secondary-font-family);
+}
+
+.section-heading-text {
+	font-size: 24px;
+	line-height: 32px;
+	font-weight: 700;
 }
 
 #lightbox {
@@ -98,43 +137,8 @@ a {
 	max-height: 100%;
 }
 
-.primary-text-primary-font {
-	color: var(--primary-font-color);
-	font-family: var(--primary-font-family);
-}
-
-.primary-text-secondary-font {
-	color: var(--primary-font-color);
-	font-family: var(--secondary-font-family);
-}
-
-.primary-text-tag-font {
-	color: var(--tag-font-color);
-	font-family: var(--primary-font-family);
-}
-
-.secondary-text-secondary-font {
-	color: var(--tag-font-color);
-	font-family: var(--secondary-font-family);
-}
-
-.secondary-text-primary-font {
-	color: var(--secondary-font-color);
-	font-family: var(--primary-font-family);
-}
-
-.secondary-text-secondary-font {
-	color: var(--secondary-font-color);
-	font-family: var(--secondary-font-family);
-}
-
-.section-heading-text {
-	font-size: 24px;
-	line-height: 32px;
-	font-weight: 700;
-}
-
 @media only screen and (min-width: 1025px) {
+
 	.section-heading-text {
 		font-size: 32px;
 		line-height: 40px;

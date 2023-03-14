@@ -20,7 +20,7 @@ if ( ! empty( $popular_movies ) ) : ?>
 	<div class="st-sp-popular-movies-container">
 		<div class="st-sp-popular-movies-heading-container">
 			<p class="primary-text-secondary-font section-heading-text">
-				<?php esc_html_e( 'Popular Movies' ); ?>
+				<?php esc_html_e( 'Popular Movies', 'screen-time' ); ?>
 			</p>
 		</div>
 

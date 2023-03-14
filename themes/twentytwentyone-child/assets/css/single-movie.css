@@ -5,12 +5,6 @@
 	padding-bottom: 64px;
 }
 
-.st-sm-info-container {}
-
-.st-sm-poster-container {
-
-}
-
 .st-sm-poster-container > img {
 	max-height: 286px;
 	width: 100%;
@@ -42,14 +36,13 @@
 	order: 2;
 }
 
-.st-sm-stats-list-item:not(:first-child):before {
+.st-sm-stats-list-item:not(:first-child)::before {
 	content: "•";
 	font-size: 14px;
 	line-height: 20.56px;
 	color: var(--primary-font-color);
 	margin-right: 2px;
 }
-
 
 .st-sm-rating > img {
 	position: relative;
@@ -141,7 +134,7 @@
 	line-height: 21px;
 }
 
-.st-sm-director-item:not(:first-child):before {
+.st-sm-director-item:not(:first-child)::before {
 	content: "•";
 	margin-right: 4px;
 }
@@ -180,8 +173,6 @@
 .st-sm-plot-quick-links-container {
 	padding: 0 24px 0 24px;
 }
-
-.st-sm-plot-container {}
 
 .st-sm-plot-heading {
 	display: none;
@@ -283,7 +274,7 @@
 	padding-top: 32px;
 }
 
-.st-sm-cast-crew-view-all-container-mobile:after {
+.st-sm-cast-crew-view-all-container-mobile::after {
 	content: url(../images/ic_arrow_red.svg);
 	line-height: 0;
 	height: 20px;
@@ -414,7 +405,6 @@
 	align-items: center;
 	gap: 8px;
 	flex-wrap: wrap;
-	line-height: 100%;
 }
 
 .st-sm-reviews-list-item-name-text {
@@ -446,7 +436,6 @@
 .st-sm-reviews-list-item-rating-text {
 	font-weight: 700;
 	font-size: 14px;
-	line-height: 100%;
 }
 
 .st-sm-reviews-list-item-content-container {
@@ -473,6 +462,7 @@
 }
 
 @media only screen and (min-width: 1025px) {
+
 	.st-sm-container {
 		display: flex;
 		flex-direction: column;
@@ -513,7 +503,7 @@
 		gap: 18px;
 	}
 
-	.st-sm-stats-list-item:not(:first-child):before {
+	.st-sm-stats-list-item:not(:first-child)::before {
 		content: "•";
 		font-size: 24px;
 		line-height: 24px;
@@ -592,7 +582,7 @@
 		line-height: 32px;
 	}
 
-	.st-sm-director-item:not(:first-child):before {
+	.st-sm-director-item:not(:first-child)::before {
 		content: "•";
 		margin-right: 4px;
 	}
@@ -686,7 +676,7 @@
 		justify-items: center;
 	}
 
-	.st-sm-quick-link:before {
+	.st-sm-quick-link::before {
 		content: url(../images/ic_arrow.svg);
 		margin-right: 8px;
 		line-height: 0;
@@ -706,14 +696,12 @@
 		padding: 0;
 	}
 
-
-
 	.st-sm-cast-crew-view-all-container-desktop {
 		display: flex;
 		align-items: center;
 	}
 
-	.st-sm-cast-crew-view-all-container-desktop:after {
+	.st-sm-cast-crew-view-all-container-desktop::after {
 		content: url(../images/ic_arrow_red.svg);
 		line-height: 0;
 		height: 20px;
@@ -856,6 +844,4 @@
 		font-size: 16px;
 		line-height: 24px;
 	}
-
-
 }

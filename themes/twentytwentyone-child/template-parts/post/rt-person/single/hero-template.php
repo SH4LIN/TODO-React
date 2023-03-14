@@ -7,8 +7,7 @@
  * @since 1.0.0
  */
 
-if(
-	! isset( $args['id'] ) ||
+if ( ! isset( $args['id'] ) ||
 	! isset( $args['name'] ) ||
 	! isset( $args['full_name'] ) ||
 	! isset( $args['occupation'] ) ||
@@ -17,21 +16,20 @@ if(
 	! isset( $args['start_year_present'] ) ||
 	! isset( $args['debut_movie_name_year'] ) ||
 	! isset( $args['upcoming_movies'] ) ||
-	! isset( $args['social_urls'] )
-){
+	! isset( $args['social_urls'] ) ) {
 	return;
 }
 
-$current_id = $args['id'];
-$name = $args['name'];
-$full_name = $args['full_name'];
-$occupation = $args['occupation'];
-$birth_date_age = $args['birth_date_age'];
-$birth_place = $args['birth_place'];
-$start_year_present = $args['start_year_present'];
+$current_id            = $args['id'];
+$name                  = $args['name'];
+$full_name             = $args['full_name'];
+$occupation            = $args['occupation'];
+$birth_date_age        = $args['birth_date_age'];
+$birth_place           = $args['birth_place'];
+$start_year_present    = $args['start_year_present'];
 $debut_movie_name_year = $args['debut_movie_name_year'];
-$upcoming_movies = $args['upcoming_movies'];
-$social_urls = $args['social_urls'];
+$upcoming_movies       = $args['upcoming_movies'];
+$social_urls           = $args['social_urls'];
 
 ?>
 <div class="st-sp-hero-container">
@@ -63,7 +61,7 @@ $social_urls = $args['social_urls'];
 					<div class="st-sp-occupation-details-container">
 					<div class="st-sp-occupation-text-container">
 						<p class="primary-text-tag-font personal-details-text">
-							<?php esc_html_e( 'Occupation: ' ); ?>
+							<?php esc_html_e( 'Occupation: ', 'screen-time' ); ?>
 						</p>
 					</div>
 
@@ -79,7 +77,7 @@ $social_urls = $args['social_urls'];
 					<div class="st-sp-birth-date-details-container">
 					<div class= "st-sp-birth-date-text-container">
 						<p class="primary-text-tag-font personal-details-text">
-							<?php esc_html_e( 'Born: ' ); ?>
+							<?php esc_html_e( 'Born: ', 'screen-time' ); ?>
 						</p>
 					</div>
 
@@ -95,7 +93,7 @@ $social_urls = $args['social_urls'];
 					<div class="st-sp-birth-place-details-container">
 					<div class= "st-sp-birth-place-text-container">
 						<p class="primary-text-tag-font personal-details-text">
-							<?php esc_html_e( 'Birthplace: ' ); ?>
+							<?php esc_html_e( 'Birthplace: ', 'screen-time' ); ?>
 						</p>
 					</div>
 
@@ -111,7 +109,7 @@ $social_urls = $args['social_urls'];
 					<div class="st-sp-years-active-details-container">
 					<div class= "st-sp-years-active-text-container">
 						<p class="primary-text-tag-font personal-details-text">
-							<?php esc_html_e( 'Years active: ' ); ?>
+							<?php esc_html_e( 'Years active: ', 'screen-time' ); ?>
 						</p>
 					</div>
 
@@ -127,7 +125,7 @@ $social_urls = $args['social_urls'];
 					<div class="st-sp-debut-movie-details-container">
 					<div class= "st-sp-debut-movie-text-container">
 						<p class="primary-text-tag-font personal-details-text">
-							<?php esc_html_e( 'Debut Movie: ' ); ?>
+							<?php esc_html_e( 'Debut Movie: ', 'screen-time' ); ?>
 						</p>
 					</div>
 
@@ -143,7 +141,7 @@ $social_urls = $args['social_urls'];
 					<div class="st-sp-upcoming-movies-details-container">
 					<div class= "st-sp-upcoming-movies-text-container">
 						<p class="primary-text-tag-font personal-details-text">
-							<?php esc_html_e( 'Upcoming Movies: ' ); ?>
+							<?php esc_html_e( 'Upcoming Movies: ', 'screen-time' ); ?>
 						</p>
 					</div>
 
@@ -155,52 +153,52 @@ $social_urls = $args['social_urls'];
 				</div>
 				<?php endif; ?>
 
-				<?php if (  count( $social_urls ) > 0 ) : ?>
+				<?php if ( count( $social_urls ) > 0 ) : ?>
 					<div class="st-sp-social-details-container">
 					<div class= "st-sp-social-text-container">
 						<p class="primary-text-tag-font personal-details-text">
-							<?php esc_html_e( 'Socials: ' ); ?>
+							<?php esc_html_e( 'Socials: ', 'screen-time' ); ?>
 						</p>
 					</div>
 
 					<div class= "st-sp-social-container">
 						<?php
-						foreach( $social_urls as $social_url ) {
-							if ( $social_url['social'] === 'twitter' ){
+						foreach ( $social_urls as $social_url ) {
+							if ( 'twitter' === $social_url['social'] ) {
 								?>
 								<div class="st-sp-social-items">
-									<a href="<?php echo esc_url($social_url['url']) ?>" >
-										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_twitter.svg'); ?>">
+									<a href="<?php echo esc_url( $social_url['url'] ); ?>" >
+										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_twitter.svg' ); ?>">
 									</a>
 								</div>
 								<?php
 							}
 
-							if ( $social_url['social'] === 'facebook' ){
+							if ( 'facebook' === $social_url['social'] ) {
 								?>
 								<div class="st-sp-social-items">
-									<a href="<?php echo esc_url($social_url['url']) ?>" >
-										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_twitter.svg'); ?>">
+									<a href="<?php echo esc_url( $social_url['url'] ); ?>" >
+										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_twitter.svg' ); ?>">
 									</a>
 								</div>
 								<?php
 							}
 
-							if ( $social_url['social'] === 'instagram' ){
+							if ( 'instagram' === $social_url['social'] ) {
 								?>
 								<div class="st-sp-social-items">
-									<a href="<?php echo esc_url($social_url['url']) ?>" >
-										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_instagram.svg'); ?>">
+									<a href="<?php echo esc_url( $social_url['url'] ); ?>" >
+										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_instagram.svg' ); ?>">
 									</a>
 								</div>
 								<?php
 							}
 
-							if ( $social_url['social'] === 'web' ){
+							if ( 'web' === $social_url['social'] ) {
 								?>
 								<div class="st-sp-social-items">
-									<a href="<?php echo esc_url($social_url['url']) ?>" >
-										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_twitter.svg'); ?>">
+									<a href="<?php echo esc_url( $social_url['url'] ); ?>" >
+										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_twitter.svg' ); ?>">
 									</a>
 								</div>
 								<?php

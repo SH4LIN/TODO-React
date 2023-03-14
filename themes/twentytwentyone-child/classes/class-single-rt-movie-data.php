@@ -76,7 +76,7 @@ if ( ! class_exists( 'Single_RT_Movie_Data' ) ) :
 
 			$minutes = get_post_meta( $current_id, 'rt-movie-meta-basic-runtime', true );
 			if ( ! empty( $minutes ) ) {
-				$poster_title_data['runtime'] = intdiv( $minutes, 60 ) . __( 'H ' ) . ( $minutes % 60 ) . __( 'M' );
+				$poster_title_data['runtime'] = intdiv( $minutes, 60 ) . __( 'H ', 'screen-time' ) . ( $minutes % 60 ) . __( 'M', 'screen-time' );
 			}
 
 			$poster_title_data['genres'] = '';

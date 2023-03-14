@@ -16,7 +16,7 @@ $movies = $args['movies'];
 <div class="st-am-trending-movies-container">
 			<div class="st-am-trending-movies-heading-container">
 				<div class="primary-text-secondary-font section-heading-text">
-					<?php esc_html_e( 'Trending Movies' ); ?>
+					<?php esc_html_e( 'Trending Movies', 'screen-time' ); ?>
 				</div>
 			</div>
 
@@ -41,7 +41,7 @@ $movies = $args['movies'];
 									<?php
 									$minutes = get_post_meta( $movie->ID, 'rt-movie-meta-basic-runtime', true );
 									if ( ! empty( $minutes ) ) {
-										$runtime = intdiv( $minutes, 60 ) . __( ' hr ' ) . ( $minutes % 60 ) . __( ' min' );
+										$runtime = intdiv( $minutes, 60 ) . __( ' hr ', 'screen-time' ) . ( $minutes % 60 ) . __( ' min', 'screen-time' );
 										?>
 											<div class="st-am-stats-list-item secondary-text-primary-font st-am-runtime-text">
 											<?php echo esc_html( $runtime ); ?>
