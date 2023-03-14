@@ -38,7 +38,7 @@ foreach ( $movies as $movie ) {
 		$movie_detail['release_year'] = $release_year;
 	}
 
-	$movie_detail['age_rating'] = 'PG-13';
+	$movie_detail['age_rating'] = 'PG-13'; // Right now it is static but it will be dynamic in the future. So not internationalizing this.
 
 	$movie_detail['runtime'] = null;
 
