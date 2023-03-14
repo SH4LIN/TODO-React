@@ -14,7 +14,7 @@ if (
 	return;
 }
 
-if ( ! empty( $args['snapshots'] ) ) :
+if ( ! empty( $args['snapshots'] ) && ! empty( $args['snapshots'][0] ) ) :
 	?>
 
 	<div class="st-sm-snapshots-container">

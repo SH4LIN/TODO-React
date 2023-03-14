@@ -13,7 +13,7 @@ if (
 ) {
 	return;
 }
-if ( ! empty( $args['trailers'] ) ) :
+if ( ! empty( $args['trailers'] ) && ! empty( $args['trailers'][0] ) ) :
 	?>
 	<div class="st-sm-trailer-clips-container">
 		<div class="st-sm-trailer-clips-heading-container">
@@ -30,7 +30,7 @@ if ( ! empty( $args['trailers'] ) ) :
 					?>
 						<div class="st-sm-trailer-clips-list-item">
 							<div class="st-sm-trailer-clips-list-item-image-container">
-								<img src="<?php echo esc_url( wp_get_attachment_url( $trailer_clip ) ); ?>" class="st-sm-trailer-clips-list-item-image"/>
+								<video src="<?php echo esc_url( wp_get_attachment_url( $trailer_clip ) ); ?>" class="st-sm-trailer-clips-list-item-image"></video>
 							</div>
 							<div class="st-sm-videos-play-button">
 								<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_play.svg' ); ?>" />

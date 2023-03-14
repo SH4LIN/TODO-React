@@ -15,7 +15,8 @@ if (
 	return;
 }
 
-if ( ! empty( $args['crew'] ) ) :
+if ( ! empty( $args['crew'] ) && ! empty( $args['crew'][0] ) ) :
+
 	?>
 <div class="st-sm-cast-crew-container">
 	<div class="st-sm-cast-crew-heading-container">
@@ -42,7 +43,7 @@ if ( ! empty( $args['crew'] ) ) :
 
 						<div class="st-sm-cast-crew-list-item-name-container">
 							<span class="primary-text-primary-font st-sm-cast-crew-list-item-name">
-							<?php echo esc_html( get_the_title( $cast_member['person_id'] ) ); ?>
+								<?php echo esc_html( get_the_title( $cast_member['person_id'] ) ); ?>
 							</span>
 						</div>
 					</div>
@@ -53,9 +54,9 @@ if ( ! empty( $args['crew'] ) ) :
 	</div>
 
 	<div class="st-sm-cast-crew-view-all-container-mobile">
-			<a href="<?php echo esc_url( $args['link'] ); ?>" class="primary-text-primary-font st-sm-cast-crew-view-all-link">
-				<?php esc_html_e( 'View All' ); ?>
-			</a>
+		<a href="<?php echo esc_url( $args['link'] ); ?>" class="primary-text-primary-font st-sm-cast-crew-view-all-link">
+			<?php esc_html_e( 'View All' ); ?>
+		</a>
 	</div>
 </div>
 <?php endif; ?>

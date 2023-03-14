@@ -13,7 +13,7 @@ if ( ! isset( $args['id'] ) || ! isset( $args['snapshots'] ) ) {
 
 $snapshots = $args['snapshots'];
 
-if ( ! empty( $snapshots ) ) :
+if ( ! empty( $snapshots ) && ! empty( $snapshots[0] ) ) :
 	?>
 
 	<div class="st-sp-snapshots-container">

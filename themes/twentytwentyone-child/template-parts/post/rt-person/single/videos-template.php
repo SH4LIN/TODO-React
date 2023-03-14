@@ -14,7 +14,7 @@ if ( ! isset( $args['id'] ) || ! isset( $args['videos'] ) ) {
 
 $videos = $args['videos'];
 
-if ( ! empty( $videos ) ) :
+if ( ! empty( $videos ) && ! empty( $videos[0] ) ) :
 	?>
 
 		<div class="st-sp-videos-container">

@@ -135,7 +135,7 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 				)
 			);
 
-			$movies_worked  = $query->posts;
+			$movies_worked = $query->posts;
 
 			$movie_name_release_date = array();
 			foreach ( $movies_worked as $movie ) {

@@ -68,6 +68,11 @@ a {
 	background: #D13223;
 }
 
+.site {
+
+	margin: auto;
+}
+
 .primary-text-primary-font {
 	color: var(--primary-font-color);
 	font-family: var(--primary-font-family);

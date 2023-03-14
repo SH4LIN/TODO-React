@@ -151,7 +151,7 @@ $count = count( $movie_details );
 			?>
 			<div class="st-am-slider-dots 
 			<?php
-			if ( $i === 0 ) :
+			if ( 0 === $i ) :
 				echo esc_attr( 'active' );
 			endif;
 			?>
