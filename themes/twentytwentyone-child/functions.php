@@ -116,6 +116,9 @@ if ( ! function_exists( 'twenty_twenty_one_child_scripts' ) ) :
 			wp_enqueue_style( 'twenty-twenty-one-archive-person-style', get_stylesheet_directory_uri() . '/assets/css/archive-person.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/archive-person.css' ) );
 		}
 
+		// Ignoring the version number because it's a Google font.
+		wp_enqueue_style( 'font-families', 'https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100;200;300;400;500;600;700;800;900&family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap', array(), null ); // phpcs:ignore:WordPress.WP.EnqueuedResourceParameters.MissingVersion
+
 		wp_enqueue_script( 'menu-expand', get_stylesheet_directory_uri() . '/assets/js/menu-expand.js', array(), filemtime( get_stylesheet_directory() . '/assets/js/menu-expand.js' ), true );
 		wp_enqueue_script( 'menu-expand' );
 	}
