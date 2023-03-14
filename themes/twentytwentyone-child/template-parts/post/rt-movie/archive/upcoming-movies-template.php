@@ -29,7 +29,7 @@ $movies = $args['movies'];
 				<a href="<?php echo esc_url( get_permalink( $movie->ID ) ); ?>">
 					<div class="st-am-upcoming-movies-list-item"> <!-- upcoming-movies-list-item -->
 						<div class="st-am-upcoming-movies-list-item-image-container"> <!-- upcoming-movies-list-item-image-container -->
-							<img src="<?php echo esc_url( get_the_post_thumbnail_url( $movie->ID, 'full' ) ); ?>" class="st-am-upcoming-movies-list-item-image">
+							<img src="<?php echo esc_url( get_the_post_thumbnail_url( $movie->ID, 'full' ) ); ?>" class="st-am-upcoming-movies-list-item-image" loading="lazy" />
 						</div> <!-- /upcoming-movies-list-item-image-container -->
 
 						<div class="st-am-upcoming-movies-list-item-content-container"> <!-- upcoming-movies-list-item-content-container -->

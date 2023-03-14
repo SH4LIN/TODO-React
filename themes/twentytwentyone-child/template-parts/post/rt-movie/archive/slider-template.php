@@ -88,7 +88,7 @@ $count = count( $movie_details );
 				<a href="<?php echo esc_url( get_permalink( $movie['id'] ) ); ?>">
 
 					<div class="st-am-slider-item-image-container"> <!-- slider-item-image-container -->
-						<img src="<?php echo esc_url( $movie['banner'] ); ?>" class="st-am-slider-item-image">
+						<img src="<?php echo esc_url( $movie['banner'] ); ?>" class="st-am-slider-item-image" loading="lazy" />
 					</div> <!-- slider-item-image-container -->
 
 					<div class="st-am-slider-item-movie-info-container"> <!-- slider-item-movie-info-container -->

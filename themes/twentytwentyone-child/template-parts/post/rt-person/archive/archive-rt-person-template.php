@@ -34,7 +34,7 @@ if ( isset( $_GET['movie_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVeri
 					<div class="st-ap-cast-crew-list-mobile"> <!-- cast-crew-list-mobile -->
 						<div class="st-ap-cast-crew-list-item"> <!-- cast-crew-list-item -->
 							<div class="st-ap-cast-crew-poster-container"> <!-- cast-crew-poster-container -->
-								<img src="<?php echo esc_url( $person['profile_picture'] ); ?>"/>
+								<img src="<?php echo esc_url( $person['profile_picture'] ); ?>" loading="lazy" />
 							</div> <!-- /cast-crew-poster-container -->
 
 							<div class="st-ap-cast-crew-details-container"> <!-- cast-crew-details-container -->

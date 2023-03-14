@@ -41,7 +41,7 @@ if (
 			if ( ! empty( $args['rating'] ) ) :
 				?>
 				<div class="st-sm-stats-list-item st-sm-rating"> <!-- rating -->
-					<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_star.svg' ); ?>"/>
+					<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_star.svg' ); ?>" loading="lazy" />
 					<span class="primary-text-primary-font st-sm-rating-text"> <!-- rating-text -->
 						<?php echo esc_html( $args['rating'] ); ?>
 					</span> <!-- /rating-text -->

@@ -37,7 +37,7 @@ if ( ! empty( $args['crew'] ) && ! empty( $args['crew'][0] ) ) :
 				?>
 					<div class="st-sm-cast-crew-list-item"> <!-- cast-crew-list-item -->
 						<div class="st-sm-cast-crew-list-item-image-container"> <!-- cast-crew-list-item-image-container -->
-							<img src="<?php echo esc_url( get_the_post_thumbnail_url( $cast_member['person_id'], 'gull' ) ); ?>" class="st-sm-cast-crew-list-item-image"/>
+							<img src="<?php echo esc_url( get_the_post_thumbnail_url( $cast_member['person_id'], 'gull' ) ); ?>" class="st-sm-cast-crew-list-item-image" loading="lazy" />
 						</div> <!-- /cast-crew-list-item-image-container -->
 
 						<div class="st-sm-cast-crew-list-item-name-container"> <!-- cast-crew-list-item-name-container -->

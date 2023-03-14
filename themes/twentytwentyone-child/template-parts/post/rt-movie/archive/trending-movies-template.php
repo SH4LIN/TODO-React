@@ -27,7 +27,7 @@ $movies = $args['movies'];
 				<a href="<?php echo esc_url( get_permalink( $movie->ID ) ); ?>">
 					<div class="st-am-trending-movies-list-item"> <!-- trending-movies-list-item -->
 						<div class="st-am-trending-movies-list-item-image-container"> <!-- trending-movies-list-item-image-container -->
-							<img src="<?php echo esc_url( get_the_post_thumbnail_url( $movie->ID, 'full' ) ); ?>" class="st-am-trending-movies-list-item-image">
+							<img src="<?php echo esc_url( get_the_post_thumbnail_url( $movie->ID, 'full' ) ); ?>" class="st-am-trending-movies-list-item-image" loading="lazy" />
 						</div> <!-- /trending-movies-list-item-image-container -->
 
 						<div class="st-am-trending-movies-list-item-content-container"> <!-- trending-movies-list-item-content-container -->

@@ -30,7 +30,7 @@ if ( ! empty( $args['snapshots'] ) && ! empty( $args['snapshots'][0] ) ) :
 					?>
 						<div class="st-sm-snapshots-list-item"> <!-- snapshots-list-item -->
 							<div class="st-sm-snapshots-list-item-image-container"> <!-- snapshots-list-item-image-container -->
-								<img src="<?php echo esc_url( wp_get_attachment_url( $snapshot ) ); ?>" class="st-sm-snapshots-list-item-image"/>
+								<img src="<?php echo esc_url( wp_get_attachment_url( $snapshot ) ); ?>" class="st-sm-snapshots-list-item-image" loading="lazy"/>
 							</div> <!-- /snapshots-list-item-image-container -->
 						</div> <!-- /snapshots-list-item -->
 						<?php

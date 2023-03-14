@@ -26,7 +26,7 @@ if ( ! empty( $snapshots ) && ! empty( $snapshots[0] ) ) : ?>
 				foreach ( $snapshots[0] as $snapshot ) :
 					?>
 					<div class="st-sp-snapshots-list-item">
-						<img src="<?php echo esc_url( wp_get_attachment_image_url( $snapshot, 'full' ) ); ?>" />
+						<img src="<?php echo esc_url( wp_get_attachment_image_url( $snapshot, 'full' ) ); ?>" loading="lazy" />
 					</div>
 					<?php
 				endforeach;

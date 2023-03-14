@@ -55,7 +55,7 @@ if ( ! empty( $args['comments'] ) ) :
 
 						<div class="st-sm-reviews-list-item-date-container"> <!-- reviews-list-item-date-container -->
 							<div class="secondary-text-primary-font st-sm-reviews-list-item-date"> <!-- reviews-list-item-date -->
-								<?php echo esc_html( $post_comment->comment_date ); ?>
+								<?php echo wp_kses( '12<sup>th</sup> Dec 2022', array( 'sup' => array() ) ); ?>
 							</div> <!-- /reviews-list-item-date -->
 						</div> <!-- /reviews-list-item-date-container -->
 					</div> <!-- /reviews-list-item -->

@@ -32,7 +32,7 @@ if ( ! empty( $popular_movies ) ) : ?>
 							echo wp_kses_post( get_the_post_thumbnail( $popular_movie->ID ) );
 						} else {
 							?>
-							<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/placeholder.webp' ); ?>" />
+							<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/placeholder.webp' ); ?>" loading="lazy" />
 							<?php
 						}
 						?>
