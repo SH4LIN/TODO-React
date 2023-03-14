@@ -169,12 +169,19 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 				}
 			}
 
+			$instagram_url = get_post_meta( $current_id, RT_Person_Meta_Box::PERSON_META_SOCIAL_INSTAGRAM_SLUG, true );
 			$twitter_url   = get_post_meta( $current_id, RT_Person_Meta_Box::PERSON_META_SOCIAL_TWITTER_SLUG, true );
 			$facebook_url  = get_post_meta( $current_id, RT_Person_Meta_Box::PERSON_META_SOCIAL_FACEBOOK_SLUG, true );
-			$instagram_url = get_post_meta( $current_id, RT_Person_Meta_Box::PERSON_META_SOCIAL_INSTAGRAM_SLUG, true );
 			$web_url       = get_post_meta( $current_id, RT_Person_Meta_Box::PERSON_META_SOCIAL_WEB_SLUG, true );
 
 			$social_urls = array();
+
+			if ( ! empty( $instagram_url ) ) {
+				$social_urls[] = array(
+					'social' => 'instagram',
+					'url'    => $instagram_url,
+				);
+			}
 
 			if ( ! empty( $twitter_url ) ) {
 				$social_urls[] = array(
@@ -187,13 +194,6 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 				$social_urls[] = array(
 					'social' => 'facebook',
 					'url'    => $facebook_url,
-				);
-			}
-
-			if ( ! empty( $instagram_url ) ) {
-				$social_urls[] = array(
-					'social' => 'instagram',
-					'url'    => $instagram_url,
 				);
 			}
 
@@ -245,7 +245,7 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 				array(
 					'taxonomy' => Movie_Label::SLUG,
 					'field'    => 'slug',
-					'terms'    => array( 'popular' ),
+					'terms'    => array( 'popular-movies' ),
 				),
 			);
 

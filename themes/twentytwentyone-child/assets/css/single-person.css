@@ -467,6 +467,7 @@
 		font-size: 16px;
 		line-height: 32px;
 		font-weight: 400;
+		color: var(--tag-font-color);
 	}
 
 	.st-sp-personal-details-container {
