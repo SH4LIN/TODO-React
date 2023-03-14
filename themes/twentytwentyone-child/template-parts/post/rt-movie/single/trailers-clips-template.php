@@ -29,8 +29,8 @@ if ( ! empty( $args['trailers'] ) && ! empty( $args['trailers'][0] ) ) :
 				foreach ( $args['trailers'][0] as $trailer_clip ) :
 					?>
 						<div class="st-sm-trailer-clips-list-item">
-							<div class="st-sm-trailer-clips-list-item-image-container">
-								<video src="<?php echo esc_url( wp_get_attachment_url( $trailer_clip ) ); ?>" class="st-sm-trailer-clips-list-item-image"></video>
+							<div class="st-sm-trailer-clips-list-item-container">
+								<video src="<?php echo esc_url( wp_get_attachment_url( $trailer_clip ) ); ?>" class="st-sm-trailer-clips-list-item-image st-sp-video"></video>
 							</div>
 							<div class="st-sm-videos-play-button">
 								<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_play.svg' ); ?>" />
@@ -41,5 +41,14 @@ if ( ! empty( $args['trailers'] ) && ! empty( $args['trailers'][0] ) ) :
 				?>
 			</div>
 		</div>
+	</div>
+
+	<div id="lightbox" class="display-none">
+	    <button id="lightbox-close-btn" class="close-btn">
+	        <img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/ic_close.svg'; ?>" alt="close" />
+	    </button>
+	    <div id="lightbox-video">
+
+	    </div>
 	</div>
 <?php endif; ?>
