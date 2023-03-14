@@ -6,9 +6,10 @@
  * @since 1.0.0
  */
 
+$current_id = get_the_ID();
+
 require_once get_stylesheet_directory() . '/classes/class-single-rt-movie-data.php';
 
-$current_id = get_the_ID();
 
 ?>
 
