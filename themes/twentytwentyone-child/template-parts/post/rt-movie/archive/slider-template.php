@@ -11,6 +11,10 @@ use MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box;
 use MovieLib\admin\classes\taxonomies\Movie_Genre;
 
+if ( ! isset( $args['movies'] ) ) {
+	return;
+}
+
 $movies        = $args['movies'];
 $movie_details = array();
 

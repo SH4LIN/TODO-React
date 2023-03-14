@@ -26,6 +26,10 @@
 	position: relative;
 }
 
+.st-am-slider-item > a {
+	width: 100%;
+}
+
 .st-am-slider-item-image-container {
 	min-height: 286px;
 	position: relative;
@@ -312,6 +316,10 @@
 	.st-am-container {
 		gap: 120px;
 		padding-bottom: 64px;
+	}
+
+	.st-am-slider-item > a {
+		width: 100%;
 	}
 
 	.st-am-slider-item-image-container {

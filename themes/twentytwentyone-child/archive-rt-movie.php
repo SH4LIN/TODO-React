@@ -2,8 +2,7 @@
 /**
  * This file is used to display the archive page for the rt-movie post type.
  *
- * @package WordPress
- * @subpackage Twenty_Twenty_One_Child
+ * @package Twenty_Twenty_One_Child
  * @since 1.0.0
  */
 

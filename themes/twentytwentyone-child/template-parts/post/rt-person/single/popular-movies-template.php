@@ -10,16 +10,13 @@
 use MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box;
 use MovieLib\admin\classes\taxonomies\Movie_Genre;
 
-$args = wp_parse_args(
-	$args,
-	array(
-		'popular_movies' => '',
-	)
-);
+if ( ! isset( $args['id'] ) || ! isset( $args['movies'] ) ) {
+	return;
+}
 
-$popular_movies = $args['popular_movies'];
+$popular_movies = $args['movies'];
 
-if ( $popular_movies && is_array( $popular_movies ) && count( $popular_movies ) > 0 ) : ?>
+if ( ! empty( $popular_movies ) ) : ?>
 	<div class="st-sp-popular-movies-container">
 		<div class="st-sp-popular-movies-heading-container">
 			<p class="primary-text-secondary-font section-heading-text">

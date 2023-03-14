@@ -6,6 +6,11 @@
  * @subpackage Twenty_Twenty_One_Child
  * @since 1.0.0
  */
+
+if ( ! isset( $args['movies'] ) ) {
+	return;
+}
+
 $movies = $args['movies'];
 ?>
 <div class="st-am-trending-movies-container">

@@ -2,8 +2,7 @@
 /**
  * This file is used to display the navigation menu.
  *
- * @package WordPress
- * @subpackage TwentyTwentyOneChild
+ * @package TwentyTwentyOneChild
  * @since 1.0.0
  */
 

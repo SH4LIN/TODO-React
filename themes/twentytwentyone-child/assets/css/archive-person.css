@@ -137,6 +137,7 @@
 	.st-ap-cast-crew-list-mobile {
 		display: flex;
 		flex-direction: row;
+		height: 100%;
 	}
 
 	.st-ap-cast-crew-poster-container {

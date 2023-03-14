@@ -7,23 +7,25 @@
  * @since 1.0.0
  */
 
-$args = wp_parse_args( $args, array(
-	'current_id'            => '',
-	'full_name'             => '',
-	'occupation'            => '',
-	'birth_date_str'        => '',
-	'birth_date_age'        => '',
-	'birth_place'           => '',
-	'start_year_present'    => '',
-	'debut_movie_name_year' => '',
-	'upcoming_movies'       => '',
-	'social_urls'           => '',
-) );
+if(
+	! isset( $args['id'] ) ||
+	! isset( $args['name'] ) ||
+	! isset( $args['full_name'] ) ||
+	! isset( $args['occupation'] ) ||
+	! isset( $args['birth_date_age'] ) ||
+	! isset( $args['birth_place'] ) ||
+	! isset( $args['start_year_present'] ) ||
+	! isset( $args['debut_movie_name_year'] ) ||
+	! isset( $args['upcoming_movies'] ) ||
+	! isset( $args['social_urls'] )
+){
+	return;
+}
 
-$current_id = $args['current_id'];
+$current_id = $args['id'];
+$name = $args['name'];
 $full_name = $args['full_name'];
 $occupation = $args['occupation'];
-$birth_date_str = $args['birth_date_str'];
 $birth_date_age = $args['birth_date_age'];
 $birth_place = $args['birth_place'];
 $start_year_present = $args['start_year_present'];
@@ -45,7 +47,7 @@ $social_urls = $args['social_urls'];
 			<div class="st-sp-identification-container">
 				<div class= "st-sp-name-container">
 					<p class="primary-text-secondary-font identification-section-text name-text">
-						<?php echo esc_html( get_the_title() ); ?>
+						<?php echo esc_html( $name ); ?>
 					</p>
 				</div>
 
@@ -73,7 +75,7 @@ $social_urls = $args['social_urls'];
 				</div>
 				<?php endif; ?>
 
-				<?php if ( ! empty( $birth_date_str ) ) : ?>
+				<?php if ( ! empty( $birth_date_age ) ) : ?>
 					<div class="st-sp-birth-date-details-container">
 					<div class= "st-sp-birth-date-text-container">
 						<p class="primary-text-tag-font personal-details-text">

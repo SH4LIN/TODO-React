@@ -8,16 +8,13 @@
  */
 
 
-$args = wp_parse_args(
-	$args,
-	array(
-		'videos' => '',
-	)
-);
+if ( ! isset( $args['id'] ) || ! isset( $args['videos'] ) ) {
+	return;
+}
 
 $videos = $args['videos'];
 
-if ( $videos && is_array( $videos ) && count( $videos ) > 0 ) :
+if ( ! empty( $videos ) ) :
 	?>
 
 		<div class="st-sp-videos-container">

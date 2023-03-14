@@ -60,7 +60,7 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 			$this->register_hooks();
 			$this->add_custom_meta_boxes();
 			$this->setup_environment();
-
+			$this->load_all_scripts();
 
 		}
 
@@ -73,14 +73,7 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 			$movie_library_save_post     = Movie_Library_Save_Post::instance();
 			$movie_library_settings_page = Settings_Page::instance();
 
-			$asset = Asset::instance();
-
 			add_action( 'plugins_loaded', array( $this, 'load_plugin_text_domain' ) );
-			add_action( 'admin_enqueue_scripts', array( $asset, 'enqueue_admin_css' ) );
-			add_action( 'admin_enqueue_scripts', array( $asset, 'enqueue_image_video_upload_script' ) );
-			add_action( 'admin_enqueue_scripts', array( $asset, 'enqueue_custom_label_character_script' ) );
-			add_action( 'admin_enqueue_scripts', array( $asset, 'enqueue_validation_script' ) );
-			add_action( 'wp_enqueue_scripts', array( $asset, 'enqueue_frontend_scripts' ) );
 			add_action( 'save_post', array( $movie_library_save_post, 'save_custom_post' ), 10, 3 );
 			add_action(
 				'admin_menu',
@@ -92,6 +85,17 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 
 			add_filter( 'enter_title_here', array( $this, 'change_title_text' ), 10, 2 );
 			add_filter( 'write_your_story', array( $this, 'change_post_content_text' ), 10, 2 );
+		}
+
+		/**
+		 * This function is used to load scripts and styles.
+		 *
+		 * @return void
+		 */
+		private function load_all_scripts(): void {
+
+			Asset::instance();
+
 		}
 
 		/**

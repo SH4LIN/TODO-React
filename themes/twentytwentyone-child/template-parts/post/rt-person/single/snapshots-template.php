@@ -7,16 +7,13 @@
  * @since 1.0.0
  */
 
-$args = wp_parse_args(
-	$args,
-	array(
-		'snapshots' => '',
-	)
-);
+if ( ! isset( $args['id'] ) || ! isset( $args['snapshots'] ) ) {
+	return;
+}
 
 $snapshots = $args['snapshots'];
 
-if ( $snapshots && is_array( $snapshots ) && count( $snapshots ) > 0 ) :
+if ( ! empty( $snapshots ) ) :
 	?>
 
 	<div class="st-sp-snapshots-container">

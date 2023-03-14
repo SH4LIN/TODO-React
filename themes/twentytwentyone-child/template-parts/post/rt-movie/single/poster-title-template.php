@@ -9,128 +9,130 @@
  * @since 1.0.0
  */
 
-$current_id        = get_the_ID();
-$post_thumbnail_id = get_post_thumbnail_id( $current_id );
-$poster_url        = '';
-if ( $post_thumbnail_id ) {
-	$poster_url = wp_get_attachment_image_url( $post_thumbnail_id, 'full' );
+if (
+	! isset( $args['id'] ) ||
+	! isset( $args['name'] ) ||
+	! isset( $args['poster'] ) ||
+	! isset( $args['rating'] ) ||
+	! isset( $args['release_year'] ) ||
+	! isset( $args['content_rating'] ) ||
+	! isset( $args['runtime'] ) ||
+	! isset( $args['genres'] ) ||
+	! isset( $args['synopsis'] ) ||
+	! isset( $args['directors'] )
+) {
+	return;
 }
-
 
 ?>
 
 <div class="st-sm-info-container">
 
 		<div class="st-sm-poster-container">
-			<?php
-			if ( !empty( $poster_url )  ) {
-				?>
-				<img src="<?php echo esc_url( $poster_url ); ?>" />
-				<?php
-			} else {
-				?>
-				<img src="<?php echo esc_url( get_stylesheet_directory_uri() ) . '/assets/src/images/placeholder.webp" alt="' . esc_attr( get_the_title( $current_id ) ); ?>" />
-				<?php
-			}
-			?>
+			<img src="<?php echo esc_url( $args['poster'] ); ?>" />
 		</div>
 
 		<div class="st-sm-info-stats-container">
 			<div class="primary-text-secondary-font st-sm-title">
-				<?php the_title(); ?>
+				<?php echo esc_html( $args['name'] ); ?>
 			</div>
 
 			<div class="st-sm-stats-items">
 				<?php
-				$rating = get_post_meta( get_the_ID(), 'rt-movie-meta-basic-rating', true );
-				if ( ! empty( $rating ) ) {
-					$rating = $rating . '/10';
+				if ( ! empty( $args['rating'] ) ) :
 					?>
 					<div class="st-sm-stats-list-item st-sm-rating">
 						<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_star.svg' ); ?>"/>
-						<span class="primary-text-primary-font st-sm-rating-text"><?php echo esc_html( $rating ); ?></span>
+						<span class="primary-text-primary-font st-sm-rating-text"><?php echo esc_html( $args['rating'] ); ?></span>
 					</div>
 					<?php
-				}
+				endif;
 				?>
 
 				<?php
-				$release_year = get_post_meta( get_the_ID(), 'rt-movie-meta-basic-release-date', true );
-				if ( ! empty( $release_year ) ) {
-					$date         = DateTime::createFromFormat( 'Y-m-d', $release_year );
-					$release_year = $date->format( 'Y' );
+				if ( ! empty( $args['release_year'] ) ) :
 					?>
 					<div class="st-sm-stats-list-item st-sm-release-date">
-						<span class="primary-text-primary-font st-sm-release-date-text"><?php echo esc_html( $release_year ); ?></span>
+						<span class="primary-text-primary-font st-sm-release-date-text"><?php echo esc_html( $args['release_year'] ); ?></span>
 					</div>
 					<?php
-				}
+				endif;
 				?>
 
 				<?php
-				$content_rating = 'PG-13';
-				if ( ! empty( $content_rating ) ) {
+				if ( ! empty( $args['content_rating'] ) ) :
 					?>
 					<div class="st-sm-stats-list-item st-sm-content-rating">
-						<span class="primary-text-primary-font st-sm-content-rating-text"><?php echo esc_html( $content_rating ); ?></span>
+						<span class="primary-text-primary-font st-sm-content-rating-text"><?php echo esc_html( $args['content_rating'] ); ?></span>
 					</div>
 					<?php
-				}
+				endif;
 				?>
 
 				<?php
-				$minutes = get_post_meta( get_the_ID(), 'rt-movie-meta-basic-runtime', true );
-				if ( ! empty( $minutes ) ) {
-					$runtime = intdiv( $minutes, 60 ) . __( 'H ' ) . ( $minutes % 60 ) . __( 'M' );
+				if ( ! empty( $args['runtime'] ) ) :
 					?>
 					<div class="st-sm-stats-list-item st-sm-runtime">
-						<span class="primary-text-primary-font st-sm-runtime-text"><?php echo esc_html( $runtime ); ?></span>
+						<span class="primary-text-primary-font st-sm-runtime-text"><?php echo esc_html( $args['runtime'] ); ?></span>
 					</div>
 					<?php
-				}
+				endif;
 				?>
 			</div>
 
-			<div class="st-sm-genres-container">
-				<?php
-				$genres = get_the_terms( get_the_ID(), 'rt-movie-genre' );
-				if ( ! empty( $genres ) ) {
-					foreach ( $genres as $genre ) {
+
+			<?php
+			if ( ! empty( $args['genres'] ) ) :
+				?>
+				<div class="st-sm-genres-container">
+					<?php
+					foreach ( $args['genres'] as $genre ) :
 						?>
 						<div class="primary-text-primary-font st-sm-genre-item-container">
 							<?php echo esc_html( $genre->name ); ?>
 						</div>
 						<?php
-					}
-				}
-				?>
-			</div>
-
-			<div class="primary-text-primary-font st-sm-description-container">
-				<?php the_excerpt(); ?>
-			</div>
-
-			<div class="st-sm-directors-container">
-				<?php
-				$directors = get_post_meta( get_the_ID(), 'rt-movie-meta-crew-director' );
-				if ( ! empty( $directors ) ) {
+					endforeach;
 					?>
+				</div>
+				<?php
+			endif;
+			?>
+
+
+			<?php
+			if ( ! empty( $args['synopsis'] ) ) :
+				?>
+				<div class="primary-text-primary-font st-sm-description-container">
+					<?php echo esc_html( $args['synopsis'] ); ?>
+				</div>
+				<?php
+			endif;
+			?>
+
+
+
+			<?php
+			if ( ! empty( $args['directors'] ) && ! empty( $args['directors'][0] ) ) :
+				?>
+				<div class="st-sm-directors-container">
 					<span class="primary-text-primary-font st-sm-director-text"> <?php esc_html_e( 'Directors:' ); ?></span>
 					<ul class="st-sm-director-list">
 						<?php
-						foreach ( $directors[0] as $director ) {
+						foreach ( $args['directors'][0] as $director ) :
 							?>
 							<li class="primary-text-primary-font st-sm-director-item">
 								<?php echo esc_html( ( get_the_title( $director ['person_id'] ) ) ); ?>
 							</li>
 							<?php
-						}
+						endforeach;
 						?>
 					</ul>
-					<?php
-				}
-				?>
-			</div>
+				</div>
+				<?php
+			endif;
+			?>
+
 
 			<div class="st-sm-watch-trailer-container">
 				<div class="ic-play-circle-container">
