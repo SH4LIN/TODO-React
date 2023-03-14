@@ -3,8 +3,7 @@
  * This page is template page for the single rt-person post type.
  * It will call all the other template for the rt-person post type.
  *
- * @package WordPress
- * @subpackage Twenty_Twenty_One_Child
+ * @package Twenty_Twenty_One_Child
  * @since 1.0.0
  */
 

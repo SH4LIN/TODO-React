@@ -9,6 +9,7 @@
 /**
  * This is a security measure to prevent direct access to the file.
  */
+defined( 'ABSPATH' ) || exit;
 
 require_once get_stylesheet_directory() . '/classes/trait-singleton.php';
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
@@ -18,7 +19,7 @@ use MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box;
 use MovieLib\admin\classes\taxonomies\Movie_Person;
 use MovieLib\admin\classes\taxonomies\Person_Career;
 
-defined( 'ABSPATH' ) || exit;
+
 
 if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 
@@ -135,12 +136,6 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 			);
 
 			$movies_worked  = $query->posts;
-			$popular_movies = '';
-			if ( count( $movies_worked ) > 4 ) {
-				$popular_movies = array_slice( $query->posts, 0, 3 );
-			} else {
-				$popular_movies = array_slice( $query->posts, 0 );
-			}
 
 			$movie_name_release_date = array();
 			foreach ( $movies_worked as $movie ) {
@@ -263,8 +258,6 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 
 			return $popular_movies_data;
 		}
-
-
 
 		/**
 		 * This function is used to fetch the snapshots data for the single rt-person post.
