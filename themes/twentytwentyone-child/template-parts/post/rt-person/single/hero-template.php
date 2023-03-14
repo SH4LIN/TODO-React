@@ -32,32 +32,32 @@ $social_urls           = $args['social_urls'];
 
 ?>
 <div class="st-sp-hero-container">
-		<div class="st-sp-profile-container">
-			<?php
-			if ( has_post_thumbnail( $current_id ) ) {
-				the_post_thumbnail();
-			}
-			?>
-		</div>
+	<div class="st-sp-profile-container">
+		<?php
+		if ( has_post_thumbnail( $current_id ) ) {
+			the_post_thumbnail();
+		}
+		?>
+	</div>
 
-		<div class="st-sp-data-container">
-			<div class="st-sp-identification-container">
-				<div class= "st-sp-name-container">
-					<p class="primary-text-secondary-font identification-section-text name-text">
-						<?php echo esc_html( $name ); ?>
-					</p>
-				</div>
-
-				<div class="st-sp-full-name-container">
-					<p class="primary-text-primary-font identification-section-text full-name-text">
-						<?php echo esc_html( $full_name ); ?>
-					</p>
-				</div>
+	<div class="st-sp-data-container">
+		<div class="st-sp-identification-container">
+			<div class= "st-sp-name-container">
+				<p class="primary-text-secondary-font identification-section-text name-text">
+					<?php echo esc_html( $name ); ?>
+				</p>
 			</div>
 
-			<div class="st-sp-personal-details-container">
-				<?php if ( ! empty( $occupation ) ) : ?>
-					<div class="st-sp-occupation-details-container">
+			<div class="st-sp-full-name-container">
+				<p class="primary-text-primary-font identification-section-text full-name-text">
+					<?php echo esc_html( $full_name ); ?>
+				</p>
+			</div>
+		</div>
+
+		<div class="st-sp-personal-details-container">
+			<?php if ( ! empty( $occupation ) ) : ?>
+				<div class="st-sp-occupation-details-container">
 					<div class="st-sp-occupation-text-container">
 						<p class="primary-text-tag-font personal-details-text">
 							<?php esc_html_e( 'Occupation: ', 'screen-time' ); ?>
@@ -70,10 +70,10 @@ $social_urls           = $args['social_urls'];
 						</p>
 					</div>
 				</div>
-				<?php endif; ?>
+			<?php endif; ?>
 
-				<?php if ( ! empty( $birth_date_age ) ) : ?>
-					<div class="st-sp-birth-date-details-container">
+			<?php if ( ! empty( $birth_date_age ) ) : ?>
+				<div class="st-sp-birth-date-details-container">
 					<div class= "st-sp-birth-date-text-container">
 						<p class="primary-text-tag-font personal-details-text">
 							<?php esc_html_e( 'Born: ', 'screen-time' ); ?>
@@ -86,10 +86,10 @@ $social_urls           = $args['social_urls'];
 						</p>
 					</div>
 				</div>
-				<?php endif; ?>
+			<?php endif; ?>
 
-				<?php if ( ! empty( $birth_place ) ) : ?>
-					<div class="st-sp-birth-place-details-container">
+			<?php if ( ! empty( $birth_place ) ) : ?>
+				<div class="st-sp-birth-place-details-container">
 					<div class= "st-sp-birth-place-text-container">
 						<p class="primary-text-tag-font personal-details-text">
 							<?php esc_html_e( 'Birthplace: ', 'screen-time' ); ?>
@@ -102,10 +102,10 @@ $social_urls           = $args['social_urls'];
 						</p>
 					</div>
 				</div>
-				<?php endif; ?>
+			<?php endif; ?>
 
-				<?php if ( ! empty( $start_year_present ) ) : ?>
-					<div class="st-sp-years-active-details-container">
+			<?php if ( ! empty( $start_year_present ) ) : ?>
+				<div class="st-sp-years-active-details-container">
 					<div class= "st-sp-years-active-text-container">
 						<p class="primary-text-tag-font personal-details-text">
 							<?php esc_html_e( 'Years active: ', 'screen-time' ); ?>
@@ -118,10 +118,10 @@ $social_urls           = $args['social_urls'];
 						</p>
 					</div>
 				</div>
-				<?php endif; ?>
+			<?php endif; ?>
 
-				<?php if ( ! empty( $debut_movie_name_year ) ) : ?>
-					<div class="st-sp-debut-movie-details-container">
+			<?php if ( ! empty( $debut_movie_name_year ) ) : ?>
+				<div class="st-sp-debut-movie-details-container">
 					<div class= "st-sp-debut-movie-text-container">
 						<p class="primary-text-tag-font personal-details-text">
 							<?php esc_html_e( 'Debut Movie: ', 'screen-time' ); ?>
@@ -134,10 +134,10 @@ $social_urls           = $args['social_urls'];
 						</p>
 					</div>
 				</div>
-				<?php endif; ?>
+			<?php endif; ?>
 
-				<?php if ( ! empty( $upcoming_movies ) ) : ?>
-					<div class="st-sp-upcoming-movies-details-container">
+			<?php if ( ! empty( $upcoming_movies ) ) : ?>
+				<div class="st-sp-upcoming-movies-details-container">
 					<div class= "st-sp-upcoming-movies-text-container">
 						<p class="primary-text-tag-font personal-details-text">
 							<?php esc_html_e( 'Upcoming Movies: ', 'screen-time' ); ?>
@@ -150,10 +150,10 @@ $social_urls           = $args['social_urls'];
 						</p>
 					</div>
 				</div>
-				<?php endif; ?>
+			<?php endif; ?>
 
-				<?php if ( count( $social_urls ) > 0 ) : ?>
-					<div class="st-sp-social-details-container">
+			<?php if ( count( $social_urls ) > 0 ) : ?>
+				<div class="st-sp-social-details-container">
 					<div class= "st-sp-social-text-container">
 						<p class="primary-text-tag-font personal-details-text">
 							<?php esc_html_e( 'Socials: ', 'screen-time' ); ?>
@@ -162,8 +162,8 @@ $social_urls           = $args['social_urls'];
 
 					<div class= "st-sp-social-container">
 						<?php
-						foreach ( $social_urls as $social_url ) {
-							if ( 'twitter' === $social_url['social'] ) {
+						foreach ( $social_urls as $social_url ) :
+							if ( 'twitter' === $social_url['social'] ) :
 								?>
 								<div class="st-sp-social-items">
 									<a href="<?php echo esc_url( $social_url['url'] ); ?>" >
@@ -171,9 +171,9 @@ $social_urls           = $args['social_urls'];
 									</a>
 								</div>
 								<?php
-							}
+							endif;
 
-							if ( 'facebook' === $social_url['social'] ) {
+							if ( 'facebook' === $social_url['social'] ) :
 								?>
 								<div class="st-sp-social-items">
 									<a href="<?php echo esc_url( $social_url['url'] ); ?>" >
@@ -181,9 +181,9 @@ $social_urls           = $args['social_urls'];
 									</a>
 								</div>
 								<?php
-							}
+							endif;
 
-							if ( 'instagram' === $social_url['social'] ) {
+							if ( 'instagram' === $social_url['social'] ) :
 								?>
 								<div class="st-sp-social-items">
 									<a href="<?php echo esc_url( $social_url['url'] ); ?>" >
@@ -191,9 +191,9 @@ $social_urls           = $args['social_urls'];
 									</a>
 								</div>
 								<?php
-							}
+							endif;
 
-							if ( 'web' === $social_url['social'] ) {
+							if ( 'web' === $social_url['social'] ) :
 								?>
 								<div class="st-sp-social-items">
 									<a href="<?php echo esc_url( $social_url['url'] ); ?>" >
@@ -201,13 +201,13 @@ $social_urls           = $args['social_urls'];
 									</a>
 								</div>
 								<?php
-							}
-						}
+							endif;
+						endforeach;
 						?>
 					</div>
 				</div>
-				<?php endif; ?>
-			</div>
+			<?php endif; ?>
 		</div>
+	</div>
 </div>
 

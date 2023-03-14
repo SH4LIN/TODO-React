@@ -69,13 +69,15 @@
 						<?php esc_html_e( 'Language: ', 'screen-time' ); ?>
 						<span class="language"><?php esc_html_e( 'ENG ', 'screen-time' ); ?></span>
 					</li>
+
 					<li>
-						<a href="http://www.google.com">
+						<a href="<?php esc_url( 'http://www.google.com' ); ?>">
 							<?php esc_html_e( 'preference', 'screen-time' ); ?>
 						</a>
 					</li>
+
 					<li>
-						<a href="http://www.google.com">
+						<a href="<?php esc_url( 'http://www.google.com' ); ?>">
 							<?php esc_html_e( 'location', 'screen-time' ); ?>
 						</a>
 					</li>

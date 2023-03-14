@@ -27,131 +27,127 @@ if (
 
 <div class="st-sm-info-container"> <!-- info-container -->
 
-		<div class="st-sm-poster-container"> <!-- poster-container -->
-			<img src="<?php echo esc_url( $args['poster'] ); ?>" />
-		</div>  <!-- /poster-container -->
+	<div class="st-sm-poster-container"> <!-- poster-container -->
+		<img src="<?php echo esc_url( $args['poster'] ); ?>" />
+	</div>  <!-- /poster-container -->
 
-		<div class="st-sm-info-stats-container"> <!-- info-stats-container -->
-			<div class="primary-text-secondary-font st-sm-title"> <!-- title -->
-				<?php echo esc_html( $args['name'] ); ?>
-			</div> <!-- /title -->
+	<div class="st-sm-info-stats-container"> <!-- info-stats-container -->
+		<div class="primary-text-secondary-font st-sm-title"> <!-- title -->
+			<?php echo esc_html( $args['name'] ); ?>
+		</div> <!-- /title -->
 
-			<div class="st-sm-stats-items"> <!-- stats-items -->
-				<?php
-				if ( ! empty( $args['rating'] ) ) :
-					?>
-					<div class="st-sm-stats-list-item st-sm-rating"> <!-- rating -->
-						<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_star.svg' ); ?>"/>
-						<span class="primary-text-primary-font st-sm-rating-text"> <!-- rating-text -->
-							<?php echo esc_html( $args['rating'] ); ?>
-						</span> <!-- /rating-text -->
-					</div> <!-- /rating -->
-					<?php
-				endif;
+		<div class="st-sm-stats-items"> <!-- stats-items -->
+			<?php
+			if ( ! empty( $args['rating'] ) ) :
 				?>
-
+				<div class="st-sm-stats-list-item st-sm-rating"> <!-- rating -->
+					<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_star.svg' ); ?>"/>
+					<span class="primary-text-primary-font st-sm-rating-text"> <!-- rating-text -->
+						<?php echo esc_html( $args['rating'] ); ?>
+					</span> <!-- /rating-text -->
+				</div> <!-- /rating -->
 				<?php
-				if ( ! empty( $args['release_year'] ) ) :
-					?>
-					<div class="st-sm-stats-list-item st-sm-release-date"> <!-- release-date -->
-						<span class="primary-text-primary-font st-sm-release-date-text"> <!-- release-date-text -->
-							<?php echo esc_html( $args['release_year'] ); ?>
-						</span> <!-- /release-date-text -->
-					</div> <!-- /release-date -->
-					<?php
-				endif;
-				?>
-
-				<?php
-				if ( ! empty( $args['content_rating'] ) ) :
-					?>
-					<div class="st-sm-stats-list-item st-sm-content-rating"> <!-- content-rating -->
-						<span class="primary-text-primary-font st-sm-content-rating-text"> <!-- content-rating-text -->
-							<?php echo esc_html( $args['content_rating'] ); ?>
-						</span> <!-- /content-rating-text -->
-					</div> <!-- /content-rating -->
-					<?php
-				endif;
-				?>
-
-				<?php
-				if ( ! empty( $args['runtime'] ) ) :
-					?>
-					<div class="st-sm-stats-list-item st-sm-runtime"> <!-- runtime -->
-						<span class="primary-text-primary-font st-sm-runtime-text"> <!-- runtime-text -->
-							<?php echo esc_html( $args['runtime'] ); ?>
-						</span> <!-- /runtime-text -->
-					</div> <!-- /runtime -->
-					<?php
-				endif;
-				?>
-			</div> <!-- /stats-items -->
-
+			endif;
+			?>
 
 			<?php
-			if ( ! empty( $args['genres'] ) ) :
+			if ( ! empty( $args['release_year'] ) ) :
 				?>
-				<div class="st-sm-genres-container"> <!-- genres-container -->
+				<div class="st-sm-stats-list-item st-sm-release-date"> <!-- release-date -->
+					<span class="primary-text-primary-font st-sm-release-date-text"> <!-- release-date-text -->
+						<?php echo esc_html( $args['release_year'] ); ?>
+					</span> <!-- /release-date-text -->
+				</div> <!-- /release-date -->
+				<?php
+			endif;
+			?>
+
+			<?php
+			if ( ! empty( $args['content_rating'] ) ) :
+				?>
+				<div class="st-sm-stats-list-item st-sm-content-rating"> <!-- content-rating -->
+					<span class="primary-text-primary-font st-sm-content-rating-text"> <!-- content-rating-text -->
+						<?php echo esc_html( $args['content_rating'] ); ?>
+					</span> <!-- /content-rating-text -->
+				</div> <!-- /content-rating -->
+				<?php
+			endif;
+			?>
+
+			<?php
+			if ( ! empty( $args['runtime'] ) ) :
+				?>
+				<div class="st-sm-stats-list-item st-sm-runtime"> <!-- runtime -->
+					<span class="primary-text-primary-font st-sm-runtime-text"> <!-- runtime-text -->
+						<?php echo esc_html( $args['runtime'] ); ?>
+					</span> <!-- /runtime-text -->
+				</div> <!-- /runtime -->
+				<?php
+			endif;
+			?>
+		</div> <!-- /stats-items -->
+
+		<?php
+		if ( ! empty( $args['genres'] ) ) :
+			?>
+			<div class="st-sm-genres-container"> <!-- genres-container -->
+				<?php
+				foreach ( $args['genres'] as $genre ) :
+					?>
+					<div class="primary-text-primary-font st-sm-genre-item-container"> <!-- genre-item-container -->
+						<?php echo esc_html( $genre->name ); ?>
+					</div> <!-- /genre-item-container -->
 					<?php
-					foreach ( $args['genres'] as $genre ) :
+				endforeach;
+				?>
+			</div> <!-- /genres-container -->
+			<?php
+		endif;
+		?>
+
+		<?php
+		if ( ! empty( $args['synopsis'] ) ) :
+			?>
+			<div class="primary-text-primary-font st-sm-description-container"> <!-- description-container -->
+				<?php echo esc_html( $args['synopsis'] ); ?>
+			</div> <!-- /description-container -->
+			<?php
+		endif;
+		?>
+
+		<?php
+		if ( ! empty( $args['directors'] ) && ! empty( $args['directors'][0] ) ) :
+			?>
+			<div class="st-sm-directors-container"> <!-- directors-container -->
+				<span class="primary-text-primary-font st-sm-director-text"> <!-- director-text -->
+					<?php esc_html_e( 'Directors:', 'screen-time' ); ?>
+				</span> <!-- /director-text -->
+				<ul class="st-sm-director-list"> <!-- director-list -->
+					<?php
+					foreach ( $args['directors'][0] as $director ) :
 						?>
-						<div class="primary-text-primary-font st-sm-genre-item-container"> <!-- genre-item-container -->
-							<?php echo esc_html( $genre->name ); ?>
-						</div> <!-- /genre-item-container -->
+						<li class="primary-text-primary-font st-sm-director-item"> <!-- director-item -->
+							<?php echo esc_html( ( get_the_title( $director ['person_id'] ) ) ); ?>
+						</li> <!-- /director-item -->
 						<?php
 					endforeach;
 					?>
-				</div> <!-- /genres-container -->
-				<?php
-			endif;
-			?>
-
-
+				</ul> <!-- /director-list -->
+			</div> <!-- /directors-container -->
 			<?php
-			if ( ! empty( $args['synopsis'] ) ) :
-				?>
-				<div class="primary-text-primary-font st-sm-description-container"> <!-- description-container -->
-					<?php echo esc_html( $args['synopsis'] ); ?>
-				</div> <!-- /description-container -->
-				<?php
-			endif;
-			?>
+		endif;
+		?>
 
+		<div class="st-sm-watch-trailer-container"> <!-- watch-trailer-container -->
+			<div class="ic-play-circle-container"> <!-- ic-play-circle-container -->
+				<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_play.svg' ); ?>"/>
+			</div> <!-- /ic-play-circle-container -->
 
-
-			<?php
-			if ( ! empty( $args['directors'] ) && ! empty( $args['directors'][0] ) ) :
-				?>
-				<div class="st-sm-directors-container"> <!-- directors-container -->
-					<span class="primary-text-primary-font st-sm-director-text"> <!-- director-text -->
-						<?php esc_html_e( 'Directors:', 'screen-time' ); ?>
-					</span> <!-- /director-text -->
-					<ul class="st-sm-director-list"> <!-- director-list -->
-						<?php
-						foreach ( $args['directors'][0] as $director ) :
-							?>
-							<li class="primary-text-primary-font st-sm-director-item"> <!-- director-item -->
-								<?php echo esc_html( ( get_the_title( $director ['person_id'] ) ) ); ?>
-							</li> <!-- /director-item -->
-							<?php
-						endforeach;
-						?>
-					</ul> <!-- /director-list -->
-				</div> <!-- /directors-container -->
-				<?php
-			endif;
-			?>
-
-
-			<div class="st-sm-watch-trailer-container"> <!-- watch-trailer-container -->
-				<div class="ic-play-circle-container"> <!-- ic-play-circle-container -->
-					<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_play.svg' ); ?>"/>
-				</div> <!-- /ic-play-circle-container -->
-				<div class="st-sm-watch-trailer-text-container"> <!-- watch-trailer-text-container -->
-					<p class="primary-text-primary-font st-sm-watch-trailer-text"> <!-- watch-trailer-text -->
-						<?php esc_html_e( 'Watch Trailer', 'screen-time' ); ?>
-					</p> <!-- /watch-trailer-text -->
-				</div> <!-- /watch-trailer-text-container -->
-			</div> <!-- /watch-trailer-container -->
+			<div class="st-sm-watch-trailer-text-container"> <!-- watch-trailer-text-container -->
+				<p class="primary-text-primary-font st-sm-watch-trailer-text"> <!-- watch-trailer-text -->
+					<?php esc_html_e( 'Watch Trailer', 'screen-time' ); ?>
+				</p> <!-- /watch-trailer-text -->
+			</div> <!-- /watch-trailer-text-container -->
+		</div> <!-- /watch-trailer-container -->
 	</div> <!-- /info-stats-container -->
 </div> <!-- /info-container -->

@@ -40,6 +40,7 @@ if ( ! empty( $args['about'] ) ) :
 							<?php esc_html_e( 'About', 'screen-time' ); ?>
 						</a>
 					</li> <!-- /quick-link -->
+
 					<li class="st-sp-quick-link">  <!-- quick-link -->
 						<a class="primary-text-primary-font" href="#">
 							<?php esc_html_e( 'Family', 'screen-time' ); ?>

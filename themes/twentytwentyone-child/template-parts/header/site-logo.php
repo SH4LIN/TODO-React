@@ -13,6 +13,7 @@
 	<span class="primary-text-secondary-font st-header-logo-first-half-text">
 		<?php esc_html_e( 'Screen', 'screen-time' ); ?>
 	</span>
+
 	<span class="primary-text-secondary-font st-header-logo-last-half-text">
 		<?php esc_html_e( ' Time', 'screen-time' ); ?>
 	</span>

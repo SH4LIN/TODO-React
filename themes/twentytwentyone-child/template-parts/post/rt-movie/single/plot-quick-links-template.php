@@ -19,6 +19,7 @@ if ( ! empty( $args['plot'] ) ) :
 			<div class="primary-text-secondary-font section-heading-text st-sm-plot-heading"> <!-- plot-heading -->
 				<?php esc_html_e( 'Plot', 'screen-time' ); ?>
 			</div> <!-- /plot-heading -->
+
 			<div class="primary-text-secondary-font section-heading-text st-sm-synopsis-heading"> <!-- synopsis-heading -->
 				<?php esc_html_e( 'Synopsis', 'screen-time' ); ?>
 			</div> <!-- /synopsis-heading -->
@@ -68,4 +69,4 @@ if ( ! empty( $args['plot'] ) ) :
 			</div> <!-- /quick-links-list-container -->
 		</div> <!-- /quick-links-container -->
 	</div> <!-- /plot-quick-links-container -->
-	<?php endif; ?>
+<?php endif; ?>

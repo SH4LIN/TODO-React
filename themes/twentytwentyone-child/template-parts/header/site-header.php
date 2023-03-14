@@ -9,7 +9,6 @@
 ?>
 
 <header id="masthead" class="st-header"> <!-- header -->
-
 	<div class="st-header-navigation-container"> <!-- header-navigation-container -->
 
 		<div class="st-header-container"> <!-- header-container -->
@@ -23,6 +22,4 @@
 			<?php get_template_part( 'template-parts/header/site-nav-expanded' ); ?>
 		</div> <!-- /header-primary-menu -->
 	</div> <!-- /header-navigation-container -->
-
-
 </header> <!-- /header -->
