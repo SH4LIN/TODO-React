@@ -105,7 +105,7 @@ if ( ! function_exists( 'twenty_twenty_one_child_scripts' ) ) :
 			wp_enqueue_script( 'video-player' );
 		}
 
-		if ( is_post_type_archive( RT_Movie::SLUG ) ) {
+		if ( is_post_type_archive( RT_Movie::SLUG ) || is_home() ) {
 			wp_enqueue_style( 'twenty-twenty-one-archive-movie-style', get_stylesheet_directory_uri() . '/assets/css/archive-movie.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/archive-movie.css' ) );
 			wp_register_script( 'movie-slider', get_stylesheet_directory_uri() . '/assets/js/movie-slider.js', array(), filemtime( get_stylesheet_directory() . '/assets/js/movie-slider.js' ), true );
 			wp_enqueue_script( 'movie-slider' );
@@ -121,6 +121,8 @@ if ( ! function_exists( 'twenty_twenty_one_child_scripts' ) ) :
 
 		wp_enqueue_script( 'menu-expand', get_stylesheet_directory_uri() . '/assets/js/menu-expand.js', array(), filemtime( get_stylesheet_directory() . '/assets/js/menu-expand.js' ), true );
 		wp_enqueue_script( 'menu-expand' );
+
+
 	}
 
 endif;

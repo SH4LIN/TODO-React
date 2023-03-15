@@ -32,5 +32,6 @@ lint-js-report.json
 plugins/redis-cache/*
 
 # Ignoring other themes
+themes/twentytwentyone/*
 themes/twentytwentythree/*
 themes/twentytwentytwo/*
