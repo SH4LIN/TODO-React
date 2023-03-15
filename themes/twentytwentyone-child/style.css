@@ -47,7 +47,7 @@ Domain Path:  /languages
 
 /* Handle */
 *::-webkit-scrollbar-thumb {
-	var(--border-color);
+	background-color: var(--border-color);
 }
 
 html {
