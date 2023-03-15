@@ -122,7 +122,6 @@ if ( ! function_exists( 'twenty_twenty_one_child_scripts' ) ) :
 		wp_enqueue_script( 'menu-expand', get_stylesheet_directory_uri() . '/assets/js/menu-expand.js', array(), filemtime( get_stylesheet_directory() . '/assets/js/menu-expand.js' ), true );
 		wp_enqueue_script( 'menu-expand' );
 
-
 	}
 
 endif;

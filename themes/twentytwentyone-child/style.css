@@ -35,6 +35,21 @@ Domain Path:  /languages
 	box-sizing: border-box;
 }
 
+*::-webkit-scrollbar {
+	height: 2px;
+	width: 0;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+	background: #494949;
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+	var(--border-color);
+}
+
 html {
 	scroll-behavior: smooth;
 }
@@ -51,21 +66,6 @@ ul {
 
 a {
 	text-decoration: none;
-}
-
-::-webkit-scrollbar {
-	height: 2px;
-	width: 0;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-	background: #494949;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-	var(--border-color);
 }
 
 .site {
