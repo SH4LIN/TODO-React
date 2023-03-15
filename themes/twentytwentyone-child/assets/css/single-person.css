@@ -641,10 +641,15 @@
 		padding-bottom: 0;
 	}
 
+	.st-sp-popular-movie-item-poster-container {
+		width: 384px;
+		height: 411px;
+		max-width: 384px;
+	}
+
 	.st-sp-popular-movie-item-poster-container img {
-		width: 384px !important;
-		height: 411px !important;
-		max-width: 384px !important;
+		width: 100% !important;
+		height: 100% !important;
 		object-fit: cover;
 		object-position: top;
 		-o-object-fit: cover;

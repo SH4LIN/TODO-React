@@ -429,8 +429,8 @@
 	}
 
 	.st-am-upcoming-movies-list-item-image-container {
-		min-width: 384px;
-		min-height: 411px;
+		width: 384px;
+		height: 411px;
 	}
 
 	.st-am-upcoming-movies-list-item-content-container {
@@ -485,8 +485,8 @@
 	}
 
 	.st-am-trending-movies-list-item-image-container {
-		min-width: 384px;
-		min-height: 411px;
+		width: 384px;
+		height: 411px;
 	}
 
 	.st-am-trending-movies-list-item-content-container {
