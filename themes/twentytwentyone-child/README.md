@@ -232,9 +232,8 @@ It is a theme for the Movie Library plugin. It has four templates
 
 ​
 ## Authors
-​
+
 -   [rtCamp](https://github.com/rtCamp)
-    ​
 ## Feedback
 ​
 Please feel free to discuss anything about rt Movie Plugin to shalin.shah@rtcamp.com
