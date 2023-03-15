@@ -316,7 +316,12 @@
 		list-style: none;
 		justify-content: center;
 		gap: 42px;
+		padding: 0;
 		align-items: center;
+	}
+
+	.st-primary-navigation-list > li {
+		line-height: 32px;
 	}
 
 	.st-primary-navigation-list > li > a {
