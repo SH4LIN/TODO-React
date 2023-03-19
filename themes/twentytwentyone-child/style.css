@@ -32,6 +32,8 @@ Domain Path:  /languages
 *,
 *::after,
 *::before {
+	margin: 0;
+	padding: 0;
 	box-sizing: border-box;
 }
 
@@ -58,21 +60,6 @@ body {
 	margin: 0;
 	padding: 0;
 	background-color: #1f1f1f !important;
-}
-
-ul {
-	padding: 0;
-	margin: 0;
-}
-
-p {
-	margin: 0;
-	padding: 0;
-}
-
-div {
-	margin: 0;
-	padding: 0;
 }
 
 a {
