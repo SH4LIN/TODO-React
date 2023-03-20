@@ -197,7 +197,7 @@ It is a theme for the Movie Library plugin. It has four templates
         |       |-- reviews-template.php
         |       |-- single-rt-movie-template.php
         |       |-- snapshots-template.php
-        |       `-- trailers-clips-template.php
+        |       `-- videos-template.php
         `-- rt-person
             |-- archive
             |   `-- archive-rt-person-template.php

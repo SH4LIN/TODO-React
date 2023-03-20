@@ -305,6 +305,8 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 				$snapshots_data['snapshots'] = $snapshots;
 			}
 
+			$snapshots_data['heading'] = __( 'Snapshots', 'screen-time' );
+
 			return $snapshots_data;
 		}
 
@@ -321,6 +323,8 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 			if ( ! empty( $videos ) ) {
 				$videos_data['videos'] = $videos;
 			}
+
+			$videos_data['heading'] = __( 'Videos', 'screen-time' );
 
 			return $videos_data;
 		}

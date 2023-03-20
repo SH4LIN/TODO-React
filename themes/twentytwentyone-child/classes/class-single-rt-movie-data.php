@@ -179,6 +179,8 @@ if ( ! class_exists( 'Single_RT_Movie_Data' ) ) :
 				$snapshots_data['snapshots'] = $snapshots;
 			}
 
+			$snapshots_data['heading'] = __( 'Snapshots', 'screen-time' );
+
 			return $snapshots_data;
 		}
 
@@ -195,10 +197,12 @@ if ( ! class_exists( 'Single_RT_Movie_Data' ) ) :
 
 			$trailer_clips = get_post_meta( $current_id, 'rt-media-meta-videos' );
 
-			$videos_data['trailers'] = '';
+			$videos_data['videos'] = '';
 			if ( ! empty( $trailer_clips ) ) {
-				$videos_data['trailers'] = $trailer_clips;
+				$videos_data['videos'] = $trailer_clips;
 			}
+
+			$videos_data['heading'] = __( 'Trailer & Clips', 'screen-time' );
 
 			return $videos_data;
 		}

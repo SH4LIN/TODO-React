@@ -26,6 +26,6 @@
 
 		<?php get_template_part( 'template-parts/header/site-header' ); ?>
 
-		<div id="content" class= "site-content"> <!-- site-content -->
-			<div id="primary" class= "content-area"> <!-- site-content-area -->
-				<main id="main" class= "site-main" role="main"> <!-- site-main -->
+		<div id="content" class= "st-site-content"> <!-- site-content -->
+			<div id="primary" class= "st-content-area"> <!-- site-content-area -->
+				<main id="main" class= "st-site-main" role="main"> <!-- site-main -->

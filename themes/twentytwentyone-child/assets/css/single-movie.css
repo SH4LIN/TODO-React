@@ -1,4 +1,6 @@
 @import "./about-quick-links.css";
+@import "./snapshots.css";
+@import "./videos.css";
 
 .sm-wrapper {
 	display: flex;
@@ -256,85 +258,6 @@
 	font-size: 16px;
 	line-height: 32px;
 	padding-right: 8px;
-}
-
-.st-sm-snapshots-container {
-	padding: 0 24px;
-}
-
-.st-sm-snapshots-heading-container {
-	border-left: 4px solid var(--border-color);
-	padding-left: 12px;
-}
-
-.st-sm-snapshots-list-container {
-	padding-top: 48px;
-}
-
-.st-sm-snapshots-list-items {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	gap: 16px;
-}
-
-.st-sm-snapshots-list-item {
-	margin: auto;
-}
-
-.st-sm-snapshots-list-item-image-container > img {
-	width: 100%;
-	object-fit: cover;
-	object-position: top;
-}
-
-.st-sm-trailer-clips-container {
-	padding: 0 24px;
-}
-
-.st-sm-trailer-clips-heading-container {
-	border-left: 4px solid var(--border-color);
-	padding-left: 12px;
-}
-
-.st-sm-trailer-clips-list-container {
-	padding-top: 40px;
-}
-
-.st-sm-trailer-clips-list-items {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap: 16px;
-}
-
-.st-sm-trailer-clips-list-item {
-	position: relative;
-}
-
-.st-sm-trailer-clips-list-item-container {
-	max-width: 327px;
-	height: 210px;
-	position: relative;
-}
-
-.st-sm-trailer-clips-list-item-container > video {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-.st-sm-videos-play-button > img {
-	width: 39.74px;
-	height: 39.74px;
-	position: absolute;
-	left: 0;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	display: block;
-	margin: auto;
 }
 
 .st-sm-reviews-container {
@@ -632,53 +555,9 @@
 		display: none;
 	}
 
-	.st-sm-snapshots-container {
-		padding: 0;
-	}
 
-	.st-sm-snapshots-list-items {
-		gap: 24px 32px;
-	}
 
-	.st-sm-snapshots-list-item {
-		margin: 0;
-	}
 
-	.st-sm-trailer-clips-container {
-		padding: 0;
-	}
-
-	.st-sm-trailer-clips-list-container {
-		padding-top: 48px;
-	}
-
-	.st-sm-trailer-clips-list-items {
-		gap: 32px;
-		justify-content: flex-start;
-	}
-
-	.st-sm-trailer-clips-list-item-container {
-		max-width: 384px;
-		height: 246px;
-	}
-
-	.st-sm-trailer-clips-list-item-container > video {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-
-	.st-sm-videos-play-button > img {
-		width: 46.67px;
-		height: 39.74px;
-		position: absolute;
-		left: 0;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		display: block;
-		margin: auto;
-	}
 
 	.st-sm-reviews-container {
 		padding: 0;

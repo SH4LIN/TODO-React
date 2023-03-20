@@ -19,8 +19,8 @@ $single_rt_movie_data = Single_RT_Movie_Data::instance();
 	<?php get_template_part( 'template-parts/post/rt-movie/single/poster-title-template', null, $single_rt_movie_data->get_poster_title_data( $current_id ) ); ?>
 	<?php get_template_part( 'template-parts/post/about-quick-links-template', null, $single_rt_movie_data->get_plot_data( $current_id ) ); ?>
 	<?php get_template_part( 'template-parts/post/rt-movie/single/cast-crew-template', null, $single_rt_movie_data->get_crew_data( $current_id ) ); ?>
-	<?php get_template_part( 'template-parts/post/rt-movie/single/snapshots-template', null, $single_rt_movie_data->get_snapshot_data( $current_id ) ); ?>
-	<?php get_template_part( 'template-parts/post/rt-movie/single/trailers-clips-template', null, $single_rt_movie_data->get_video_data( $current_id ) ); ?>
+	<?php get_template_part( 'template-parts/post/snapshots-template', null, $single_rt_movie_data->get_snapshot_data( $current_id ) ); ?>
+	<?php get_template_part( 'template-parts/post/videos-template', null, $single_rt_movie_data->get_video_data( $current_id ) ); ?>
 	<?php get_template_part( 'template-parts/post/rt-movie/single/reviews-template', null, $single_rt_movie_data->get_comment_data( $current_id ) ); ?>
 
 </div> <!-- /sm-container -->

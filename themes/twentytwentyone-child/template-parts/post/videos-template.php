@@ -8,23 +8,24 @@
 
 if (
 	! isset( $args['id'] ) ||
-	! isset( $args['trailers'] )
+	! isset( $args['videos'] ) ||
+	! isset( $args['heading'] )
 ) {
 	return;
 }
-if ( ! empty( $args['trailers'] ) && ! empty( $args['trailers'][0] ) ) :
+if ( ! empty( $args['videos'] ) && ! empty( $args['videos'][0] ) ) :
 	?>
 	<div class="st-sm-trailer-clips-container"> <!-- trailer-clips-container -->
 		<div class="st-sm-trailer-clips-heading-container"> <!-- trailer-clips-heading-container -->
 			<div class="primary-text-secondary-font section-heading-text st-sm-trailer-clips-heading"> <!-- trailer-clips-heading -->
-				<?php esc_html_e( 'Trailer & Clips', 'screen-time' ); ?>
+				<?php echo esc_html( $args['heading'] ); ?>
 			</div> <!-- /trailer-clips-heading -->
 		</div> <!-- /trailer-clips-heading-container -->
 
 		<div class="st-sm-trailer-clips-list-container"> <!-- trailer-clips-list-container -->
 			<div class="st-sm-trailer-clips-list-items"> <!-- trailer-clips-list-items -->
 				<?php
-				foreach ( $args['trailers'][0] as $trailer_clip ) :
+				foreach ( $args['videos'][0] as $trailer_clip ) :
 					?>
 						<div class="st-sm-trailer-clips-list-item"> <!-- trailer-clips-list-item -->
 							<div class="st-sm-trailer-clips-list-item-container"> <!-- trailer-clips-list-item-container -->

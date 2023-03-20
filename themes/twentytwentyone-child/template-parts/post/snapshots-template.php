@@ -19,7 +19,7 @@ if ( ! empty( $args['snapshots'] ) && ! empty( $args['snapshots'][0] ) ) :
 	<div class="st-sm-snapshots-container"> <!-- snapshots-container -->
 		<div class="st-sm-snapshots-heading-container"> <!-- snapshots-heading-container -->
 			<div class="primary-text-secondary-font section-heading-text st-sm-snapshots-heading"> <!-- snapshots-heading -->
-				<?php esc_html_e( 'Snapshots', 'screen-time' ); ?>
+				<?php echo esc_html( $args['heading'] ); ?>
 			</div> <!-- /snapshots-heading -->
 		</div> <!-- /snapshots-heading-container -->
 
