@@ -202,7 +202,7 @@ It is a theme for the Movie Library plugin. It has four templates
             |-- archive
             |   `-- archive-rt-person-template.php
             `-- single
-                |-- about-quick-links-template.php
+                |-- about-template.php
                 |-- hero-template.php
                 |-- popular-movies-template.php
                 |-- single-rt-person-template.php
