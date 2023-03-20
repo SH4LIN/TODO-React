@@ -1,7 +1,8 @@
 .st-sp-container {
-	padding-bottom: 64px;
-	padding-left: 24px;
-	padding-right: 24px;
+	display: flex;
+	flex-direction: column;
+	gap: 64px;
+	padding: 0 24px 64px;
 }
 
 .st-sp-hero-container {
@@ -11,14 +12,14 @@
 }
 
 .st-sp-profile-container {
-	text-align: center;
+	align-self: center;
+	height: 286px;
+	width: 244px;
 }
 
 .st-sp-profile-container img {
 	width: 100%;
-	height: 286px;
-	max-width: 244px;
-	max-height: 286px;
+	height: 100%;
 	object-fit: cover;
 	-o-object-fit: cover;
 	object-position: top;
@@ -172,10 +173,6 @@
 	width: auto;
 }
 
-.st-sp-about-quick-links-container {
-	padding-top: 64px;
-}
-
 .st-sp-about-heading-container {
 	border-left: 4px #d13223 solid;
 	padding-left: 12px;
@@ -201,10 +198,6 @@
 	display: none;
 }
 
-.st-sp-popular-movies-container {
-	padding-top: 64px;
-}
-
 .st-sp-popular-movies-heading-container {
 	border-left: 4px #d13223 solid;
 	padding-left: 12px;
@@ -221,8 +214,8 @@
 }
 
 .st-sp-popular-movie-item-poster-container img {
-	width: 155px !important;
-	height: 166px !important;
+	width: 155px;
+	height: 166px;
 	object-fit: cover;
 	object-position: top;
 	-o-object-fit: cover;
@@ -300,10 +293,6 @@
 	font-weight: 400;
 }
 
-.st-sp-snapshots-container {
-	padding-top: 64px;
-}
-
 .st-sp-snapshots-heading-container {
 	border-left: 4px #d13223 solid;
 	padding-left: 12px;
@@ -329,10 +318,6 @@
 	height: 100%;
 	object-fit: cover;
 	-o-object-fit: cover;
-}
-
-.st-sp-videos-container {
-	padding-top: 64px;
 }
 
 .st-sp-videos-heading-container {
@@ -408,7 +393,8 @@
 
 	/* For desktop: */
 	.st-sp-container {
-		padding: 0 112px 120px 112px;
+		gap: 120px;
+		padding: 0 112px 120px;
 	}
 
 	.st-sp-hero-container {
@@ -420,13 +406,13 @@
 	.st-sp-profile-container {
 		padding-left: 0;
 		padding-right: 0;
+		height: 572px;
+		width: 488px;
 	}
 
 	.st-sp-profile-container img {
 		width: 100%;
-		height: 572px;
-		max-width: 488px;
-		max-height: 572px;
+		height: 100%;
 		object-fit: cover;
 		-o-object-fit: cover;
 		object-position: top;
@@ -564,7 +550,7 @@
 
 	.st-sp-about-quick-links-container {
 		display: flex;
-		padding: 120px 0 0 0;
+
 	}
 
 	.st-sp-about-container {
@@ -628,10 +614,6 @@
 		font-weight: 400;
 	}
 
-	.st-sp-popular-movies-container {
-		margin: 120px 0 0 0;
-	}
-
 	.st-sp-popular-movies-items-container {
 		overflow: visible;
 		flex-wrap: wrap;
@@ -646,8 +628,8 @@
 	}
 
 	.st-sp-popular-movie-item-poster-container img {
-		width: 100% !important;
-		height: 100% !important;
+		width: 100%;
+		height: 100%;
 		object-fit: cover;
 		object-position: top;
 		-o-object-fit: cover;
@@ -680,20 +662,12 @@
 		line-height: 23.5px;
 	}
 
-	.st-sp-snapshots-container {
-		margin: 120px 0 0 0;
-	}
-
 	.st-sp-snapshots-list {
 		gap: 24px 32px;
 	}
 
 	.st-sp-snapshots-list-item {
 		margin: 0;
-	}
-
-	.st-sp-videos-container {
-		margin: 120px 0 0 0;
 	}
 
 	.st-sp-videos-list {

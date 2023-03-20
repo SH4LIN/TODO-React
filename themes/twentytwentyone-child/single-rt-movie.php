@@ -24,4 +24,5 @@ require_once get_stylesheet_directory() . '/classes/class-single-rt-movie-data.p
 	<?php get_template_part( 'template-parts/post/rt-movie/single/reviews-template', null, Single_RT_Movie_Data::instance()->get_comment_data( $current_id ) ); ?>
 
 </div> <!-- /sm-container -->
+<?php
 get_footer();
