@@ -30,14 +30,18 @@ $debut_movie_name_year = $args['debut_movie_name_year'];
 $upcoming_movies       = $args['upcoming_movies'];
 $social_urls           = $args['social_urls'];
 
+$post_thumbnail_id = get_post_thumbnail_id( $current_id );
+$poster_url        = '';
+if ( $post_thumbnail_id ) {
+	$poster_url = wp_get_attachment_image_url( $post_thumbnail_id, 'full' );
+} else {
+	$poster_url = get_stylesheet_directory_uri() . '/assets/src/images/placeholder.webp';
+}
+
 ?>
 <div class="st-sp-hero-container">
 	<div class="st-sp-profile-container">
-		<?php
-		if ( has_post_thumbnail( $current_id ) ) {
-			the_post_thumbnail();
-		}
-		?>
+		<img src="<?php echo esc_url( $poster_url ); ?>" />
 	</div>
 
 	<div class="st-sp-data-container">

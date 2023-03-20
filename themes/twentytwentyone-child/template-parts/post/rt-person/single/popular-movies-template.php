@@ -28,14 +28,15 @@ if ( ! empty( $popular_movies ) ) : ?>
 				<div class="st-sp-popular-movie-item-container">
 					<div class="st-sp-popular-movie-item-poster-container">
 						<?php
-						if ( has_post_thumbnail( $popular_movie->ID ) ) {
-							echo wp_kses_post( get_the_post_thumbnail( $popular_movie->ID ) );
+						$post_thumbnail_id = get_post_thumbnail_id( $popular_movie->ID );
+						$poster_url        = '';
+						if ( $post_thumbnail_id ) {
+							$poster_url = wp_get_attachment_image_url( $post_thumbnail_id, 'full' );
 						} else {
-							?>
-							<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/placeholder.webp' ); ?>" loading="lazy" />
-							<?php
+							$poster_url = get_stylesheet_directory_uri() . '/assets/src/images/placeholder.webp';
 						}
 						?>
+						<img src="<?php echo esc_url( $poster_url ); ?>" loading="lazy" />
 					</div>
 
 					<div class="st-sp-popular-movie-item-info-container">
