@@ -19,7 +19,7 @@ if ( isset( $_GET['movie_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVeri
 }
 
 ?>
-<div class="st-ap-container"> <!-- ap-container -->
+<div class="ap-wrapper"> <!-- ap-container -->
 	<?php if ( count( $persons_details ) > 0 ) : ?>
 		<div class="st-ap-cast-crew-container"> <!-- cast-crew-container -->
 			<div class="st-ap-cast-crew-heading-container"> <!-- cast-crew-heading-container -->

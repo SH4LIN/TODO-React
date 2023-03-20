@@ -8,7 +8,7 @@
 
 ?>
 
-<header id="masthead" class="st-header"> <!-- header -->
+<header id="masthead" class= "header-wrapper"> <!-- header -->
 	<div class="st-header-navigation-container"> <!-- header-navigation-container -->
 
 		<div class="st-header-container"> <!-- header-container -->
@@ -54,7 +54,20 @@
 		</div> <!-- /header-container -->
 
 		<div class="st-header-primary-menu"> <!-- header-primary-menu -->
-			<?php get_template_part( 'template-parts/header/site-nav' ); ?>
+			<div class="st-header-primary-menu-container"> <!-- header-primary-menu-container -->
+				<?php
+				wp_nav_menu(
+					array(
+						'theme_location'  => 'header',
+						'menu_class'      => 'st-primary-navigation-list',
+						'container'       => 'nav',
+						'container_class' => 'st-primary-navigation',
+						'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+					)
+				);
+				?>
+			</div> <!-- header-primary-menu-container -->
+
 			<?php get_template_part( 'template-parts/header/site-nav-expanded' ); ?>
 		</div> <!-- /header-primary-menu -->
 	</div> <!-- /header-navigation-container -->

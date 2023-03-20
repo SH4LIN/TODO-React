@@ -225,6 +225,28 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 				$about_data['about'] = $content;
 			}
 
+			$about_data['desktop_heading'] = __( 'About', 'screen-time' );
+			$about_data['mobile_heading']  = __( 'About', 'screen-time' );
+
+			$about_data['quick_links'] = array(
+				array(
+					'title' => __( 'About', 'screen-time' ),
+					'url'   => '#about',
+				),
+				array(
+					'title' => __( 'Family', 'screen-time' ),
+					'url'   => '#family',
+				),
+				array(
+					'title' => __( 'Snapshots', 'screen-time' ),
+					'url'   => '#snapshots',
+				),
+				array(
+					'title' => __( 'Videos', 'screen-time' ),
+					'url'   => '#videos',
+				),
+			);
+
 			return $about_data;
 		}
 

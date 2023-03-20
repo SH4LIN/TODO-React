@@ -15,10 +15,10 @@ require_once get_stylesheet_directory() . '/classes/class-single-rt-person-data.
 $single_rt_person_data = Single_RT_Person_Data::instance();
 ?>
 
-<div class="st-sp-container">
+<div class="sp-wrapper">
 
 	<?php get_template_part( 'template-parts/post/rt-person/single/hero-template', null, $single_rt_person_data->get_hero_data( $current_id ) ); ?>
-	<?php get_template_part( 'template-parts/post/rt-person/single/about-quick-links-template', null, $single_rt_person_data->get_about_data( $current_id ) ); ?>
+	<?php get_template_part( 'template-parts/post/about-quick-links-template', null, $single_rt_person_data->get_about_data( $current_id ) ); ?>
 	<?php get_template_part( 'template-parts/post/rt-person/single/popular-movies-template', null, $single_rt_person_data->get_popular_movies( $current_id ) ); ?>
 	<?php get_template_part( 'template-parts/post/rt-person/single/snapshots-template', null, $single_rt_person_data->get_snapshots( $current_id ) ); ?>
 	<?php get_template_part( 'template-parts/post/rt-person/single/videos-template', null, $single_rt_person_data->get_videos( $current_id ) ); ?>

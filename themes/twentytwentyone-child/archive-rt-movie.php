@@ -18,7 +18,7 @@ $trending_movies = Archive_RT_Movie_Data::instance()->get_trending_movies();
 get_header();
 ?>
 
-<div class="st-am-container">
+<div class="am-wrapper">
 
 	<?php if ( $slider_movies && count( $slider_movies ) > 0 ) : ?>
 		<?php get_template_part( 'template-parts/post/rt-movie/archive/slider-template', null, array( 'movies' => $slider_movies ) ); ?>

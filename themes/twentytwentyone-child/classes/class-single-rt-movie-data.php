@@ -107,11 +107,37 @@ if ( ! class_exists( 'Single_RT_Movie_Data' ) ) :
 
 			$plot_data['id'] = $current_id;
 
-			$plot              = get_the_content( $current_id );
-			$plot_data['plot'] = '';
+			$plot               = get_the_content( $current_id );
+			$plot_data['about'] = '';
 			if ( ! empty( $plot ) ) {
-				$plot_data['plot'] = $plot;
+				$plot_data['about'] = $plot;
 			}
+
+			$plot_data['desktop_heading'] = __( 'Plot', 'screen-time' );
+			$plot_data['mobile_heading']  = __( 'Synopsis', 'screen-time' );
+
+			$plot_data['quick_links'] = array(
+				array(
+					'title' => __( 'Synopsis', 'screen-time' ),
+					'url'   => '#synopsis',
+				),
+				array(
+					'title' => __( 'Cast & Crew', 'screen-time' ),
+					'url'   => '#cast-crew',
+				),
+				array(
+					'title' => __( 'Snapshots', 'screen-time' ),
+					'url'   => '#snapshots',
+				),
+				array(
+					'title' => __( 'Trailer & Clips', 'screen-time' ),
+					'url'   => '#trailer-clips',
+				),
+				array(
+					'title' => __( 'Reviews', 'screen-time' ),
+					'url'   => '#reviews',
+				),
+			);
 
 			return $plot_data;
 		}

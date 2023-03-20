@@ -1,4 +1,4 @@
-.st-ap-container {
+.ap-wrapper {
 	padding: 64px 24px;
 }
 
@@ -117,7 +117,7 @@
 
 @media only screen and (min-width: 1025px) {
 
-	.st-ap-container {
+	.ap-wrapper {
 		padding: 120px 112px;
 	}
 

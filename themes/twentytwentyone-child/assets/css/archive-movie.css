@@ -1,4 +1,4 @@
-.st-am-container {
+.am-wrapper {
 	display: flex;
 	flex-direction: column;
 	gap: 64px;
@@ -307,7 +307,7 @@
 
 @media only screen and (min-width: 1025px) {
 
-	.st-am-container {
+	.am-wrapper {
 		gap: 120px;
 		padding-bottom: 64px;
 	}

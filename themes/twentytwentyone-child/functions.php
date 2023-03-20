@@ -90,9 +90,14 @@ if ( ! function_exists( 'twenty_twenty_one_child_scripts' ) ) :
 	 * @return void
 	 */
 	function twenty_twenty_one_child_scripts(): void {
+		// Ignoring the version number because it's a Google font.
+		wp_enqueue_style( 'font-families', 'https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100;200;300;400;500;600;700;800;900&family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap', array(), null ); // phpcs:ignore:WordPress.WP.EnqueuedResourceParameters.MissingVersion
+
 		wp_enqueue_style( 'twenty-twenty-one-child-style', get_stylesheet_uri(), array(), filemtime( get_stylesheet_directory() . '/style.css' ) );
+		wp_enqueue_style( 'twenty-twenty-one-common-style', get_stylesheet_directory_uri() . '/assets/css/common.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/common.css' ) );
 		wp_enqueue_style( 'twenty-twenty-one-header-style', get_stylesheet_directory_uri() . '/assets/css/header.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/header.css' ) );
 		wp_enqueue_style( 'twenty-twenty-one-footer-style', get_stylesheet_directory_uri() . '/assets/css/footer.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/footer.css' ) );
+
 		if ( is_singular( RT_Movie::SLUG ) ) {
 			wp_enqueue_style( 'twenty-twenty-one-single-movie-style', get_stylesheet_directory_uri() . '/assets/css/single-movie.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/single-movie.css' ) );
 			wp_register_script( 'video-player', get_stylesheet_directory_uri() . '/assets/js/video-player.js', array(), filemtime( get_stylesheet_directory() . '/assets/js/video-player.js' ), true );
@@ -115,9 +120,6 @@ if ( ! function_exists( 'twenty_twenty_one_child_scripts' ) ) :
 		if ( is_post_type_archive( RT_Person::SLUG ) ) {
 			wp_enqueue_style( 'twenty-twenty-one-archive-person-style', get_stylesheet_directory_uri() . '/assets/css/archive-person.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/archive-person.css' ) );
 		}
-
-		// Ignoring the version number because it's a Google font.
-		wp_enqueue_style( 'font-families', 'https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100;200;300;400;500;600;700;800;900&family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap', array(), null ); // phpcs:ignore:WordPress.WP.EnqueuedResourceParameters.MissingVersion
 
 		wp_enqueue_script( 'menu-expand', get_stylesheet_directory_uri() . '/assets/js/menu-expand.js', array(), filemtime( get_stylesheet_directory() . '/assets/js/menu-expand.js' ), true );
 		wp_enqueue_script( 'menu-expand' );
