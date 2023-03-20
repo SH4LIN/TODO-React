@@ -18,7 +18,7 @@ if ( ! empty( $args['videos'] ) && ! empty( $args['videos'][0] ) ) :
 	<div class="videos-container"> <!-- trailer-clips-container -->
 		<div class="videos-heading-container"> <!-- trailer-clips-heading-container -->
 			<p class="primary-text-secondary-font section-heading-text"> <!-- trailer-clips-heading -->
-				<?php echo esc_html( $args['heading'] ); ?>x
+				<?php echo esc_html( $args['heading'] ); ?>
 			</p> <!-- /trailer-clips-heading -->
 		</div> <!-- /trailer-clips-heading-container -->
 

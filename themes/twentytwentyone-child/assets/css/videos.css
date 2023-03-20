@@ -39,7 +39,7 @@
 	object-fit: cover;
 }
 
-.st-sm-videos-play-button > img {
+.video-play-button > img {
 	width: 39.74px;
 	height: 39.74px;
 	position: absolute;
@@ -76,7 +76,7 @@
 		object-fit: cover;
 	}
 
-	.st-sm-videos-play-button > img {
+	.video-play-button > img {
 		width: 46.67px;
 		height: 39.74px;
 		position: absolute;
