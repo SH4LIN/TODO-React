@@ -1,7 +1,12 @@
+/**
+ * This file contains the stylesheet for the archive-person template
+ */
+
 .ap-wrapper {
 	padding: 64px 24px;
 }
 
+/* Cast & Crew Section Starts */
 .st-ap-cast-crew-container {
 	display: flex;
 	flex-direction: column;
@@ -115,12 +120,15 @@
 	flex-direction: row;
 }
 
+/* Cast & Crew Section Ends */
+
 @media only screen and (min-width: 1025px) {
 
 	.ap-wrapper {
 		padding: 120px 112px;
 	}
 
+	/* Cast & Crew Section Starts */
 	.st-ap-cast-crew-container {
 		gap: 80px;
 	}
@@ -220,4 +228,6 @@
 		border: 1px solid #fff;
 		border-radius: 99px;
 	}
+
+	/* Cast & Crew Section Ends */
 }

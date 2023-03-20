@@ -1,17 +1,22 @@
-.sm-wrapper .about-section {
+/**
+ * This file contains the stylesheet for the about template
+ */
+
+.sm-wrapper > .about-section {
 	padding: 0 24px;
 }
 
-.st-sp-about-heading-container {
+ /* About Section Starts */
+.about-heading-container {
 	border-left: 4px solid var(--border-color);
 	padding-left: 12px;
 }
 
-.st-sm-desktop-heading {
+.about-desktop-heading {
 	display: none;
 }
 
-.st-sp-about-content-container {
+.about-content-container {
 	margin-top: 48px;
 }
 
@@ -27,15 +32,21 @@
 	text-decoration: underline;
 }
 
-.st-sp-quick-links-container {
+/* About Section Ends */
+
+/* Quick Links Section Starts */
+.quick-links-container {
 	display: none;
 }
 
+/* Quick Links Section Starts */
+
 @media only screen and (min-width: 1025px) {
-	.sm-wrapper .about-section {
+	.sm-wrapper > .about-section {
 		padding: 0;
 	}
 
+	/* About Section Starts */
 	.about-section {
 		display: flex;
 	}
@@ -44,11 +55,11 @@
 		padding-right: 136px;
 	}
 
-	.st-sm-desktop-heading {
+	.about-desktop-heading {
 		display: block;
 	}
 
-	.st-sm-mobile-heading {
+	.about-mobile-heading {
 		display: none;
 	}
 
@@ -61,7 +72,10 @@
 		font-size: 18px;
 	}
 
-	.st-sp-quick-links-container {
+	/* About Section ends */
+
+	/* Quick Links Section Starts */
+	.quick-links-container {
 		display: block;
 		width: 280px;
 		height: 100%;
@@ -78,34 +92,36 @@
 		font-weight: 700;
 	}
 
-	.st-sp-quick-links-list-container {
+	.quick-links-list-container {
 		margin-top: 32px;
 	}
 
-	.st-sp-quick-links {
+	.quick-links-list {
 		padding: 0;
 		list-style: none;
 	}
 
-	.st-sp-quick-link {
+	.quick-link-item {
 		display: flex;
 		align-items: center;
 		justify-items: center;
 	}
 
-	.st-sp-quick-link::before {
+	.quick-link-item::before {
 		content: url(../images/ic_arrow.svg);
 		margin-right: 8px;
 		line-height: 0;
 	}
 
-	.st-sp-quick-link:not(:first-child) {
+	.quick-link-item:not(:first-child) {
 		margin-top: 24px;
 	}
 
-	.st-sp-quick-link a {
+	.quick-link-item a {
 		font-size: 20px;
 		line-height: 32px;
 		font-weight: 400;
 	}
+
+	/* Quick Links Section Ends */
 }

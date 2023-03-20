@@ -16,20 +16,20 @@ if (
 if ( ! empty( $args['snapshots'] ) && ! empty( $args['snapshots'][0] ) ) :
 	?>
 
-	<div class="st-sm-snapshots-container"> <!-- snapshots-container -->
-		<div class="st-sm-snapshots-heading-container"> <!-- snapshots-heading-container -->
-			<div class="primary-text-secondary-font section-heading-text st-sm-snapshots-heading"> <!-- snapshots-heading -->
+	<div class="snapshots-container"> <!-- snapshots-container -->
+		<div class="snapshots-heading-container"> <!-- snapshots-heading-container -->
+			<div class="primary-text-secondary-font section-heading-text"> <!-- snapshots-heading -->
 				<?php echo esc_html( $args['heading'] ); ?>
 			</div> <!-- /snapshots-heading -->
 		</div> <!-- /snapshots-heading-container -->
 
-		<div class="st-sm-snapshots-list-container"> <!-- snapshots-list-container -->
-			<div class="st-sm-snapshots-list-items"> <!-- snapshots-list-items -->
+		<div class="snapshots-list-container"> <!-- snapshots-list-container -->
+			<div class="snapshots-list"> <!-- snapshots-list-items -->
 				<?php
 				foreach ( $args['snapshots'][0] as $snapshot ) {
 					?>
-						<div class="st-sm-snapshots-list-item"> <!-- snapshots-list-item -->
-							<div class="st-sm-snapshots-list-item-image-container"> <!-- snapshots-list-item-image-container -->
+						<div class="snapshots-item-container"> <!-- snapshots-list-item -->
+							<div class= "snapshots-item-image-container"> <!-- snapshots-list-item-image-container -->
 								<img src="<?php echo esc_url( wp_get_attachment_url( $snapshot ) ); ?>" class="st-sm-snapshots-list-item-image" loading="lazy"/>
 							</div> <!-- /snapshots-list-item-image-container -->
 						</div> <!-- /snapshots-list-item -->

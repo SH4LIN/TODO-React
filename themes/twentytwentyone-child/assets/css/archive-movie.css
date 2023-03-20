@@ -1,3 +1,7 @@
+/**
+ * This file contains the stylesheet for the archive-movie template
+ */
+
 .am-wrapper {
 	display: flex;
 	flex-direction: column;
@@ -5,6 +9,7 @@
 	padding-bottom: 64px;
 }
 
+/* Slider Section Starts */
 .st-am-slider-container {
 	height: auto;
 	width: 100%;
@@ -142,6 +147,9 @@
 	background-color: var(--border-color);
 }
 
+/* Slider Section Ends */
+
+/* Upcoming Movies Section Starts */
 .st-am-upcoming-movies-container {
 	padding: 0 24px;
 	display: flex;
@@ -228,6 +236,9 @@
 	text-transform: uppercase;
 }
 
+/* Upcoming Movies Section Starts */
+
+/* Trending Movies Section Starts */
 .st-am-trending-movies-container {
 	padding: 0 24px;
 }
@@ -305,6 +316,8 @@
 	line-height: 12px;
 }
 
+/* Trending Movies Section Ends */
+
 @media only screen and (min-width: 1025px) {
 
 	.am-wrapper {
@@ -312,6 +325,7 @@
 		padding-bottom: 64px;
 	}
 
+	/* Slider Section Starts */
 	.st-am-slider-item > a {
 		width: 100%;
 	}
@@ -412,9 +426,11 @@
 	.st-am-slider-dots {
 		width: 14px;
 		height: 14px;
-
 	}
 
+	/* Slider Section Ends */
+
+	/* Upcoming Movies Section Starts */
 	.st-am-upcoming-movies-container {
 		padding: 0 112px;
 		display: flex;
@@ -473,6 +489,9 @@
 		text-transform: uppercase;
 	}
 
+	/* Upcoming Movies Section Ends */
+
+	/* Trending Movies Section Starts */
 	.st-am-trending-movies-container {
 		padding: 0 112px;
 	}
@@ -517,4 +536,6 @@
 		font-size: 16px;
 		line-height: 24px;
 	}
+
+	/* Trending Movies Section Ends */
 }

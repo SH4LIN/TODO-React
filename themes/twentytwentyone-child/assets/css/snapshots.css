@@ -1,24 +1,28 @@
-.st-sm-snapshots-container {
+/**
+ * This file contains the stylesheet for the snapshots template
+ */
+
+.snapshots-container {
 	padding: 0 24px;
 }
 
-.st-sm-snapshots-heading-container {
+.snapshots-heading-container {
 	border-left: 4px solid var(--border-color);
 	padding-left: 12px;
 }
 
-.st-sm-snapshots-list-container {
+.snapshots-list-container {
 	padding-top: 48px;
 }
 
-.st-sm-snapshots-list-items {
+.snapshots-list {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	gap: 16px;
 }
 
-.st-sm-snapshots-list-item {
+.snapshots-item-container {
 	margin: auto;
 }
 
@@ -29,15 +33,15 @@
 }
 
 @media only screen and (min-width: 1025px) {
-	.st-sm-snapshots-container {
+	.snapshots-container {
 		padding: 0;
 	}
 
-	.st-sm-snapshots-list-items {
+	.snapshots-list {
 		gap: 24px 32px;
 	}
 
-	.st-sm-snapshots-list-item {
+	.snapshots-item-container {
 		margin: 0;
 	}
 }

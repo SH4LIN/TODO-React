@@ -1,4 +1,8 @@
-@import "./about-quick-links.css";
+/**
+ * This file contains the stylesheet for the single-movie template
+ */
+
+@import "./about.css";
 @import "./snapshots.css";
 @import "./videos.css";
 
@@ -9,6 +13,7 @@
 	padding-bottom: 64px;
 }
 
+/* Hero Section Starts */
 .st-sm-poster-container > img {
 	max-height: 286px;
 	width: 100%;
@@ -154,7 +159,6 @@
 .ic-play-circle-container {
 	position: absolute;
 	left: 0;
-
 }
 
 .ic-play-circle-container > img {
@@ -174,6 +178,9 @@
 	line-height: 24px;
 }
 
+/* Hero Section Ends */
+
+/* Cast & Crew Section Starts */
 .st-sm-cast-crew-container {
 	padding: 0 24px 0 24px;
 }
@@ -260,6 +267,9 @@
 	padding-right: 8px;
 }
 
+/* Cast & Crew Section Ends */
+
+/* Reviews Section Starts */
 .st-sm-reviews-container {
 	padding: 0 24px;
 }
@@ -352,6 +362,8 @@
 	line-height: 20.56px;
 }
 
+/* Reviews Section Ends */
+
 @media only screen and (min-width: 1025px) {
 
 	.sm-wrapper {
@@ -361,6 +373,7 @@
 		gap: 120px;
 	}
 
+	/* Hero Section Starts */
 	.st-sm-info-container {
 		padding: 35px 0;
 		display: grid;
@@ -504,6 +517,9 @@
 		text-align: end;
 	}
 
+	/* Hero Section Ends */
+
+	/* Cast & Crew Section Starts */
 	.st-sm-cast-crew-container {
 		padding: 0;
 	}
@@ -531,7 +547,6 @@
 		gap: 32px;
 	}
 
-
 	.st-sm-cast-crew-list-item-image-container {
 		width: 100%;
 		height: 248.32px;
@@ -555,10 +570,9 @@
 		display: none;
 	}
 
+	/* Cast & Crew Section Ends */
 
-
-
-
+	/* Reviews Section Starts */
 	.st-sm-reviews-container {
 		padding: 0;
 	}
@@ -612,4 +626,6 @@
 		font-size: 16px;
 		line-height: 24px;
 	}
+
+	/* Reviews Section Ends */
 }

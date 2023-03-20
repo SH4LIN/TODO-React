@@ -19,17 +19,17 @@ if ( ! empty( $args['about'] ) ) :
 	?>
 	<div class="about-section"> <!-- about-quick-links-container -->
 		<div class="about-wrapper"> <!-- about-container -->
-			<div class="st-sp-about-heading-container"> <!-- about-heading-container -->
-				<p class="primary-text-secondary-font section-heading-text st-sm-desktop-heading"> <!-- plot-heading -->
+			<div class="about-heading-container"> <!-- about-heading-container -->
+				<p class="primary-text-secondary-font section-heading-text about-desktop-heading"> <!-- plot-heading -->
 					<?php echo esc_html( $args['desktop_heading'] ); ?>
 				</p> <!-- /plot-heading -->
 
-				<p class="primary-text-secondary-font section-heading-text st-sm-mobile-heading"> <!-- synopsis-heading -->
+				<p class="primary-text-secondary-font section-heading-text about-mobile-heading"> <!-- synopsis-heading -->
 					<?php echo esc_html( $args['mobile_heading'] ); ?>
 				</p> <!-- /synopsis-heading -->
 			</div> <!-- /about-heading-container -->
 
-			<div class="st-sp-about-content-container"> <!-- about-content-container -->
+			<div class="about-content-container"> <!-- about-content-container -->
 				<span class="primary-text-primary-font about-text"> <!-- about-text -->
 					<?php echo wp_kses_post( $args['about'] ); ?>
 				</span> <!-- /about-text -->
@@ -39,19 +39,19 @@ if ( ! empty( $args['about'] ) ) :
 		<?php
 		if ( ! empty( $args['quick_links'] ) ) :
 			?>
-			<div class="st-sp-quick-links-container"> <!-- quick-links-container -->
-				<div class="st-sp-quick-links-heading-container"> <!-- quick-links-heading-container -->
+			<div class="quick-links-container"> <!-- quick-links-container -->
+				<div class= "quick-links-heading-container"> <!-- quick-links-heading-container -->
 					<p class="primary-text-secondary-font quick-links-heading-text"> <!-- quick-links-heading-text -->
 						<?php esc_html_e( 'Quick Links', 'screen-time' ); ?>
 					</p> <!-- /quick-links-heading-text -->
 				</div> <!-- /quick-links-heading-container -->
 
-				<div class="st-sp-quick-links-list-container"> <!-- quick-links-list-container -->
-					<ul class="st-sp-quick-links"> <!-- quick-links -->
+				<div class="quick-links-list-container"> <!-- quick-links-list-container -->
+					<ul class="quick-links-list"> <!-- quick-links -->
 						<?php
 						foreach ( $args['quick_links'] as $quick_link ) :
 							?>
-							<li class="st-sp-quick-link"> <!-- quick-link -->
+							<li class="quick-link-item"> <!-- quick-link -->
 								<a class="primary-text-primary-font" href="<?php echo esc_url( $quick_link['url'] ); ?>">
 									<?php echo esc_html( $quick_link['title'] ); ?>
 								</a>

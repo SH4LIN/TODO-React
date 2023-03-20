@@ -1,4 +1,8 @@
-@import "./about-quick-links.css";
+/**
+ * This file contains the stylesheet for the single-person template
+ */
+
+@import "./about.css";
 @import "./snapshots.css";
 @import "./videos.css";
 
@@ -9,6 +13,7 @@
 	padding: 0 24px 64px;
 }
 
+/* Hero Section Starts */
 .st-sp-hero-container {
 	display: flex;
 	position: relative;
@@ -54,7 +59,6 @@
 	line-height: 14px;
 	font-weight: 400;
 }
-
 
 .st-sp-personal-details-container {
 	padding-top: 31px;
@@ -177,6 +181,7 @@
 	width: auto;
 }
 
+/* Popular Movies Section Starts */
 .st-sp-popular-movies-heading-container {
 	border-left: 4px #d13223 solid;
 	padding-left: 12px;
@@ -271,6 +276,7 @@
 	line-height: 11.75px;
 	font-weight: 400;
 }
+/* Popular Movies Section Ends */
 
 .personal-details-text {
 	font-size: 14px;
@@ -286,6 +292,7 @@
 		padding: 0 112px 120px;
 	}
 
+	/* Hero Section Starts */
 	.st-sp-hero-container {
 		flex-direction: row;
 		align-items: center;
@@ -437,6 +444,9 @@
 		width: auto;
 	}
 
+	/* Hero Section Ends */
+
+	/* Popular Movies Section Starts */
 	.st-sp-popular-movies-items-container {
 		overflow: visible;
 		flex-wrap: wrap;
@@ -485,10 +495,11 @@
 		line-height: 23.5px;
 	}
 
+	/* Popular Movies Section Ends */
+
 	.personal-details-text {
 		font-size: 18px;
 		line-height: 32px;
 		font-weight: 400;
 	}
-
 }

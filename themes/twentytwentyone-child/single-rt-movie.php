@@ -17,7 +17,7 @@ $single_rt_movie_data = Single_RT_Movie_Data::instance();
 <div class="sm-wrapper"> <!-- sm-container -->
 
 	<?php get_template_part( 'template-parts/post/rt-movie/single/poster-title-template', null, $single_rt_movie_data->get_poster_title_data( $current_id ) ); ?>
-	<?php get_template_part( 'template-parts/post/about-template.php', null, $single_rt_movie_data->get_plot_data( $current_id ) ); ?>
+	<?php get_template_part( 'template-parts/post/about-template', null, $single_rt_movie_data->get_plot_data( $current_id ) ); ?>
 	<?php get_template_part( 'template-parts/post/rt-movie/single/cast-crew-template', null, $single_rt_movie_data->get_crew_data( $current_id ) ); ?>
 	<?php get_template_part( 'template-parts/post/snapshots-template', null, $single_rt_movie_data->get_snapshot_data( $current_id ) ); ?>
 	<?php get_template_part( 'template-parts/post/videos-template', null, $single_rt_movie_data->get_video_data( $current_id ) ); ?>
