@@ -220,6 +220,7 @@
 		display: flex;
 		justify-content: center;
 		flex-direction: row;
+		cursor: pointer;
 	}
 
 	.st-ap-cast-crew-load-more-text {
@@ -227,6 +228,11 @@
 		padding: 16px 40px;
 		border: 1px solid #fff;
 		border-radius: 99px;
+	}
+
+	.st-ap-cast-crew-load-more-text:hover {
+		background-color: var(--border-color);
+		border: 1px solid var(--border-color);
 	}
 
 	/* Cast & Crew Section Ends */
