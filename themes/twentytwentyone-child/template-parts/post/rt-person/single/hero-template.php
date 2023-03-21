@@ -39,36 +39,36 @@ if ( $post_thumbnail_id ) {
 }
 
 ?>
-<div class="st-sp-hero-container">
-	<div class="st-sp-profile-container">
+<div class="hero-wrapper">
+	<div class="profile-wrapper">
 		<img src="<?php echo esc_url( $poster_url ); ?>" />
 	</div>
 
-	<div class="st-sp-data-container">
-		<div class="st-sp-identification-container">
-			<div class= "st-sp-name-container">
+	<div class="data-wrapper">
+		<div class="identification-wrapper">
+			<div class="name-wrapper">
 				<p class="primary-text-secondary-font identification-section-text name-text">
 					<?php echo esc_html( $name ); ?>
 				</p>
 			</div>
 
-			<div class="st-sp-full-name-container">
+			<div class="full-name-wrapper">
 				<p class="primary-text-primary-font identification-section-text full-name-text">
 					<?php echo esc_html( $full_name ); ?>
 				</p>
 			</div>
 		</div>
 
-		<div class="st-sp-personal-details-container">
+		<div class="personal-details-wrapper">
 			<?php if ( ! empty( $occupation ) ) : ?>
-				<div class="st-sp-occupation-details-container">
-					<div class="st-sp-occupation-text-container">
+				<div class="occupation-details-wrapper">
+					<div class="occupation-text-wrapper">
 						<p class="primary-text-tag-font personal-details-text">
 							<?php esc_html_e( 'Occupation: ', 'screen-time' ); ?>
 						</p>
 					</div>
 
-					<div class= "st-sp-occupation-container">
+					<div class= "occupation-wrapper">
 						<p class="primary-text-primary-font personal-details-text">
 							<?php echo esc_html( $occupation ); ?>
 						</p>
@@ -77,14 +77,14 @@ if ( $post_thumbnail_id ) {
 			<?php endif; ?>
 
 			<?php if ( ! empty( $birth_date_age ) ) : ?>
-				<div class="st-sp-birth-date-details-container">
-					<div class= "st-sp-birth-date-text-container">
+				<div class="birth-date-details-wrapper">
+					<div class= "birth-date-text-wrapper">
 						<p class="primary-text-tag-font personal-details-text">
 							<?php esc_html_e( 'Born: ', 'screen-time' ); ?>
 						</p>
 					</div>
 
-					<div class= "st-sp-birth-date-container">
+					<div class= "birth-date-wrapper">
 						<p class="primary-text-primary-font personal-details-text">
 							<?php echo esc_html( $birth_date_age ); ?>
 						</p>
@@ -93,14 +93,14 @@ if ( $post_thumbnail_id ) {
 			<?php endif; ?>
 
 			<?php if ( ! empty( $birth_place ) ) : ?>
-				<div class="st-sp-birth-place-details-container">
-					<div class= "st-sp-birth-place-text-container">
+				<div class="birth-place-details-wrapper">
+					<div class= "birth-place-text-wrapper">
 						<p class="primary-text-tag-font personal-details-text">
 							<?php esc_html_e( 'Birthplace: ', 'screen-time' ); ?>
 						</p>
 					</div>
 
-					<div class= "st-sp-birth-place-container">
+					<div class= "birth-place-wrapper">
 						<p class="primary-text-primary-font personal-details-text">
 							<?php echo esc_html( $birth_place ); ?>
 						</p>
@@ -109,14 +109,14 @@ if ( $post_thumbnail_id ) {
 			<?php endif; ?>
 
 			<?php if ( ! empty( $start_year_present ) ) : ?>
-				<div class="st-sp-years-active-details-container">
-					<div class= "st-sp-years-active-text-container">
+				<div class="years-active-details-wrapper">
+					<div class= "years-active-text-wrapper">
 						<p class="primary-text-tag-font personal-details-text">
 							<?php esc_html_e( 'Years active: ', 'screen-time' ); ?>
 						</p>
 					</div>
 
-					<div class= "st-sp-years-active-container">
+					<div class= "years-active-wrapper">
 						<p class="primary-text-primary-font personal-details-text">
 							<?php echo esc_html( $start_year_present ); ?>
 						</p>
@@ -125,14 +125,14 @@ if ( $post_thumbnail_id ) {
 			<?php endif; ?>
 
 			<?php if ( ! empty( $debut_movie_name_year ) ) : ?>
-				<div class="st-sp-debut-movie-details-container">
-					<div class= "st-sp-debut-movie-text-container">
+				<div class="debut-movie-details-wrapper">
+					<div class= "debut-movie-text-wrapper">
 						<p class="primary-text-tag-font personal-details-text">
 							<?php esc_html_e( 'Debut Movie: ', 'screen-time' ); ?>
 						</p>
 					</div>
 
-					<div class= "st-sp-debut-movie-container">
+					<div class= "debut-movie-wrapper">
 						<p class="primary-text-primary-font personal-details-text">
 							<?php echo esc_html( $debut_movie_name_year ); ?>
 						</p>
@@ -141,14 +141,14 @@ if ( $post_thumbnail_id ) {
 			<?php endif; ?>
 
 			<?php if ( ! empty( $upcoming_movies ) ) : ?>
-				<div class="st-sp-upcoming-movies-details-container">
-					<div class= "st-sp-upcoming-movies-text-container">
+				<div class="upcoming-movies-details-wrapper">
+					<div class= "upcoming-movies-text-wrapper">
 						<p class="primary-text-tag-font personal-details-text">
 							<?php esc_html_e( 'Upcoming Movies: ', 'screen-time' ); ?>
 						</p>
 					</div>
 
-					<div class= "st-sp-upcoming-movies-container">
+					<div class= "st-sp-upcoming-movies-wrapper">
 						<p class="primary-text-primary-font personal-details-text">
 							<?php echo esc_html( $upcoming_movies ); ?>
 						</p>
@@ -157,19 +157,19 @@ if ( $post_thumbnail_id ) {
 			<?php endif; ?>
 
 			<?php if ( count( $social_urls ) > 0 ) : ?>
-				<div class="st-sp-social-details-container">
-					<div class= "st-sp-social-text-container">
+				<div class="social-details-wrapper">
+					<div class= "social-text-wrapper">
 						<p class="primary-text-tag-font personal-details-text">
 							<?php esc_html_e( 'Socials: ', 'screen-time' ); ?>
 						</p>
 					</div>
 
-					<div class= "st-sp-social-container">
+					<div class= "social-wrapper">
 						<?php
 						foreach ( $social_urls as $social_url ) :
 							if ( 'twitter' === $social_url['social'] ) :
 								?>
-								<div class="st-sp-social-items">
+								<div class="social-item">
 									<a href="<?php echo esc_url( $social_url['url'] ); ?>" >
 										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_twitter.svg' ); ?>">
 									</a>
@@ -179,7 +179,7 @@ if ( $post_thumbnail_id ) {
 
 							if ( 'facebook' === $social_url['social'] ) :
 								?>
-								<div class="st-sp-social-items">
+								<div class="social-item">
 									<a href="<?php echo esc_url( $social_url['url'] ); ?>" >
 										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_twitter.svg' ); ?>">
 									</a>
@@ -189,7 +189,7 @@ if ( $post_thumbnail_id ) {
 
 							if ( 'instagram' === $social_url['social'] ) :
 								?>
-								<div class="st-sp-social-items">
+								<div class="social-item">
 									<a href="<?php echo esc_url( $social_url['url'] ); ?>" >
 										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_instagram.svg' ); ?>">
 									</a>
@@ -199,7 +199,7 @@ if ( $post_thumbnail_id ) {
 
 							if ( 'web' === $social_url['social'] ) :
 								?>
-								<div class="st-sp-social-items">
+								<div class="social-item">
 									<a href="<?php echo esc_url( $social_url['url'] ); ?>" >
 										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_twitter.svg' ); ?>">
 									</a>

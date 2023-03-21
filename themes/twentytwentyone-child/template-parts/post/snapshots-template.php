@@ -29,9 +29,7 @@ if ( ! empty( $args['snapshots'] ) && ! empty( $args['snapshots'][0] ) ) :
 				foreach ( $args['snapshots'][0] as $snapshot ) {
 					?>
 						<div class="snapshots-item-container"> <!-- snapshots-list-item -->
-							<div class= "snapshots-item-image-container"> <!-- snapshots-list-item-image-container -->
-								<img src="<?php echo esc_url( wp_get_attachment_url( $snapshot ) ); ?>" class="st-sm-snapshots-list-item-image" loading="lazy"/>
-							</div> <!-- /snapshots-list-item-image-container -->
+							<img src="<?php echo esc_url( wp_get_attachment_url( $snapshot ) ); ?>" loading="lazy"/>
 						</div> <!-- /snapshots-list-item -->
 						<?php
 				}

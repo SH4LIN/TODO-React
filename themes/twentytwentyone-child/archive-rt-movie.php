@@ -29,7 +29,22 @@ get_header();
 	<?php endif; ?>
 
 	<?php if ( $trending_movies && count( $trending_movies ) > 0 ) : ?>
-		<?php get_template_part( 'template-parts/post/rt-movie/archive/trending-movies-template', null, array( 'movies' => $trending_movies ) ); ?>
+		<div class="trending-movies-wrapper"> <!-- trending-movies-container -->
+			<div class="heading-wrapper"> <!-- trending-movies-heading-container -->
+				<div class="primary-text-secondary-font section-heading-text"> <!-- trending-movies-heading -->
+					<?php esc_html_e( 'Trending Movies', 'screen-time' ); ?>
+				</div> <!-- /trending-movies-heading -->
+			</div> <!-- /trending-movies-heading-container -->
+
+
+			<div class="trending-movies-list"> <!-- trending-movies-list -->
+				<?php
+				foreach ( $trending_movies as $movie ) :
+					get_template_part( 'template-parts/post/movie-template', null, array( 'movie' => $movie ) );
+				endforeach;
+				?>
+			</div> <!-- /trending-movies-list -->
+		</div> <!-- /trending-movies-list-container -->
 	<?php endif; ?>
 
 </div>

@@ -2,9 +2,9 @@
  * This file is used to provide carousel sliding functionality to the movie slider.
  */
 (function () {
-	window.addEventListener('load', function () {
-		const slides = document.querySelectorAll('.st-am-slider-item');
-		const sliderDots = document.querySelectorAll('.st-am-slider-dots');
+	window.addEventListener('DOMContentLoaded', function () {
+		const slides = document.querySelectorAll('.slide');
+		const sliderDots = document.querySelectorAll('.slider-dots');
 		if (
 			sliderDots !== null &&
 			sliderDots.length > 0 &&

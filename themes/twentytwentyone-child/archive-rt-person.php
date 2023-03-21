@@ -30,17 +30,20 @@ if ( isset( $_GET['movie_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVeri
 
 			<div class="st-ap-cast-crew-list-container"> <!-- cast-crew-list-container -->
 				<?php foreach ( $persons_details as $person ) : ?>
-					<a href="<?php echo esc_url( get_permalink( $person['id'] ) ); ?>">
 					<div class="st-ap-cast-crew-list-mobile"> <!-- cast-crew-list-mobile -->
 						<div class="st-ap-cast-crew-list-item"> <!-- cast-crew-list-item -->
-							<div class="st-ap-cast-crew-poster-container"> <!-- cast-crew-poster-container -->
-								<img src="<?php echo esc_url( $person['profile_picture'] ); ?>" loading="lazy" />
-							</div> <!-- /cast-crew-poster-container -->
+							<a href="<?php echo esc_url( get_permalink( $person['id'] ) ); ?>">
+								<div class="st-ap-cast-crew-poster-container"> <!-- cast-crew-poster-container -->
+									<img src="<?php echo esc_url( $person['profile_picture'] ); ?>" loading="lazy" />
+								</div> <!-- /cast-crew-poster-container -->
+							</a>
 
 							<div class="st-ap-cast-crew-details-container"> <!-- cast-crew-details-container -->
-								<div class="primary-text-secondary-font st-ap-cast-crew-name-text"> <!-- cast-crew-name-text -->
-									<?php echo wp_kses( $person['name'], array( 'span' => array( 'class' => array() ) ) ); ?>
-								</div> <!-- /cast-crew-name-text -->
+								<a href="<?php echo esc_url( get_permalink( $person['id'] ) ); ?>">
+									<div class="primary-text-secondary-font st-ap-cast-crew-name-text"> <!-- cast-crew-name-text -->
+										<?php echo wp_kses( $person['name'], array( 'span' => array( 'class' => array() ) ) ); ?>
+									</div> <!-- /cast-crew-name-text -->
+								</a>
 
 								<?php if ( ! empty( $person['birth_date'] ) ) : ?>
 									<div class="secondary-text-primary-font st-ap-cast-crew-birth-date-text"> <!-- cast-crew-birth-date-text -->
@@ -54,9 +57,11 @@ if ( isset( $_GET['movie_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVeri
 									</div> <!-- /cast-crew-excerpt-text -->
 								<?php endif; ?>
 
-								<div class="primary-text-primary-font st-ap-cast-crew-learn-more-text"> <!-- cast-crew-learn-more-text -->
-									<?php esc_html_e( 'Learn more', 'screen-time' ); ?>
-								</div> <!-- /cast-crew-learn-more-text -->
+								<a href="<?php echo esc_url( get_permalink( $person['id'] ) ); ?>">
+									<div class="primary-text-primary-font st-ap-cast-crew-learn-more-text"> <!-- cast-crew-learn-more-text -->
+										<?php esc_html_e( 'Learn more', 'screen-time' ); ?>
+									</div> <!-- /cast-crew-learn-more-text -->
+								</a>
 
 							</div> <!-- /cast-crew-details-container -->
 						</div> <!-- /cast-crew-list-item -->
@@ -67,11 +72,12 @@ if ( isset( $_GET['movie_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVeri
 							</div> <!-- /cast-crew-excerpt-text-mobile -->
 						<?php endif; ?>
 
-						<div class="primary-text-primary-font st-ap-cast-crew-learn-more-text-mobile"> <!-- cast-crew-learn-more-text-mobile -->
-							<?php esc_html_e( 'Learn more', 'screen-time' ); ?>
-						</div> <!-- /cast-crew-learn-more-text-mobile -->
+						<a href="<?php echo esc_url( get_permalink( $person['id'] ) ); ?>">
+							<div class="primary-text-primary-font st-ap-cast-crew-learn-more-text-mobile"> <!-- cast-crew-learn-more-text-mobile -->
+								<?php esc_html_e( 'Learn more', 'screen-time' ); ?>
+							</div> <!-- /cast-crew-learn-more-text-mobile -->
+						</a>
 					</div> <!-- /cast-crew-list-mobile -->
-				</a>
 				<?php endforeach; ?>
 			</div> <!-- /cast-crew-list-container -->
 

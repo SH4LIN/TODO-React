@@ -18,6 +18,7 @@ if (
 	! isset( $args['runtime'] ) ||
 	! isset( $args['genres'] ) ||
 	! isset( $args['synopsis'] ) ||
+	! isset( $args['trailer'] ) ||
 	! isset( $args['directors'] )
 ) {
 	return;
@@ -94,9 +95,11 @@ if (
 				<?php
 				foreach ( $args['genres'] as $genre ) :
 					?>
-					<div class="primary-text-primary-font st-sm-genre-item-container"> <!-- genre-item-container -->
-						<?php echo esc_html( $genre->name ); ?>
-					</div> <!-- /genre-item-container -->
+					<a href="<?php echo esc_url( get_term_link( $genre ) ); ?>">
+						<p class="primary-text-primary-font"> <!-- genre-item-container -->
+							<?php echo esc_html( $genre->name ); ?>
+						</p> <!-- /genre-item-container -->
+					</a>
 					<?php
 				endforeach;
 				?>
@@ -138,16 +141,18 @@ if (
 		endif;
 		?>
 
-		<div class="st-sm-watch-trailer-container"> <!-- watch-trailer-container -->
-			<div class="ic-play-circle-container"> <!-- ic-play-circle-container -->
-				<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_play.svg' ); ?>"/>
-			</div> <!-- /ic-play-circle-container -->
+		<?php if ( ! empty( $args['trailer'] ) ) : ?>
+			<div class="st-sm-watch-trailer-container" data-src="<?php echo esc_url( wp_get_attachment_url( $args['trailer'] ) ); ?>"> <!-- watch-trailer-container -->
+				<div class="ic-play-circle-container"> <!-- ic-play-circle-container -->
+					<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_play.svg' ); ?>"/>
+				</div> <!-- /ic-play-circle-container -->
 
-			<div class="st-sm-watch-trailer-text-container"> <!-- watch-trailer-text-container -->
-				<p class="primary-text-primary-font st-sm-watch-trailer-text"> <!-- watch-trailer-text -->
-					<?php esc_html_e( 'Watch Trailer', 'screen-time' ); ?>
-				</p> <!-- /watch-trailer-text -->
-			</div> <!-- /watch-trailer-text-container -->
-		</div> <!-- /watch-trailer-container -->
+				<div class="st-sm-watch-trailer-text-container"> <!-- watch-trailer-text-container -->
+					<p class="primary-text-primary-font"> <!-- watch-trailer-text -->
+						<?php esc_html_e( 'Watch Trailer', 'screen-time' ); ?>
+					</p> <!-- /watch-trailer-text -->
+				</div> <!-- /watch-trailer-text-container -->
+			</div> <!-- /watch-trailer-container -->
+		<?php endif; ?>
 	</div> <!-- /info-stats-container -->
 </div> <!-- /info-container -->

@@ -93,6 +93,13 @@ if ( ! class_exists( 'Single_RT_Movie_Data' ) ) :
 				$poster_title_data['directors'] = $directors;
 			}
 
+			$trailer_clips = $this->get_video_data( $current_id );
+
+			$poster_title_data['trailer'] = '';
+			if ( ! empty( $trailer_clips['videos'] ) ) {
+				$poster_title_data['trailer'] = $trailer_clips['videos'][0];
+			}
+
 			return $poster_title_data;
 		}
 
@@ -198,8 +205,8 @@ if ( ! class_exists( 'Single_RT_Movie_Data' ) ) :
 			$trailer_clips = get_post_meta( $current_id, 'rt-media-meta-videos' );
 
 			$videos_data['videos'] = '';
-			if ( ! empty( $trailer_clips ) ) {
-				$videos_data['videos'] = $trailer_clips;
+			if ( ! empty( $trailer_clips ) && ! empty( $trailer_clips[0] ) ) {
+				$videos_data['videos'] = $trailer_clips[0];
 			}
 
 			$videos_data['heading'] = __( 'Trailer & Clips', 'screen-time' );

@@ -278,17 +278,7 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 				)
 			);
 
-			$movies_worked = $query->posts;
-			if ( count( $movies_worked ) > 4 ) {
-				$popular_movies = array_slice( $query->posts, 0, 3 );
-			} else {
-				$popular_movies = array_slice( $query->posts, 0 );
-			}
-
-			$popular_movies_data['id']     = $current_id;
-			$popular_movies_data['movies'] = $popular_movies;
-
-			return $popular_movies_data;
+			return $query->posts;
 		}
 
 		/**
@@ -320,8 +310,8 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 			$videos_data['id']     = $current_id;
 			$videos_data['videos'] = '';
 			$videos                = get_post_meta( $current_id, RT_Media_Meta_Box::VIDEOS_SLUG );
-			if ( ! empty( $videos ) ) {
-				$videos_data['videos'] = $videos;
+			if ( ! empty( $videos ) && ! empty( $videos[0] ) ) {
+				$videos_data['videos'] = $videos[0];
 			}
 
 			$videos_data['heading'] = __( 'Videos', 'screen-time' );

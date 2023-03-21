@@ -2,12 +2,12 @@
  * This file contains the stylesheet for the about template
  */
 
-.sm-wrapper > .about-section {
+.sm-wrapper > .about-quick-links-section {
 	padding: 0 24px;
 }
 
  /* About Section Starts */
-.about-heading-container {
+.about-heading-wrapper {
 	border-left: 4px solid var(--border-color);
 	padding-left: 12px;
 }
@@ -35,19 +35,19 @@
 /* About Section Ends */
 
 /* Quick Links Section Starts */
-.quick-links-container {
+.quick-links-wrapper {
 	display: none;
 }
 
 /* Quick Links Section Starts */
 
 @media only screen and (min-width: 1025px) {
-	.sm-wrapper > .about-section {
+	.sm-wrapper > .about-quick-links-section {
 		padding: 0;
 	}
 
 	/* About Section Starts */
-	.about-section {
+	.about-quick-links-section {
 		display: flex;
 	}
 
@@ -75,7 +75,7 @@
 	/* About Section ends */
 
 	/* Quick Links Section Starts */
-	.quick-links-container {
+	.quick-links-wrapper {
 		display: block;
 		width: 280px;
 		height: 100%;
@@ -86,7 +86,7 @@
 		flex-shrink: 0;
 	}
 
-	.quick-links-heading-text {
+	.quick-links-heading {
 		font-size: 32px;
 		line-height: 32px;
 		font-weight: 700;

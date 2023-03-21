@@ -17,9 +17,9 @@ if (
 }
 if ( ! empty( $args['about'] ) ) :
 	?>
-	<div class="about-section"> <!-- about-quick-links-container -->
+	<section class="about-quick-links-section"> <!-- about-quick-links-container -->
 		<div class="about-wrapper"> <!-- about-container -->
-			<div class="about-heading-container"> <!-- about-heading-container -->
+			<div class="about-heading-wrapper"> <!-- about-heading-container -->
 				<p class="primary-text-secondary-font section-heading-text about-desktop-heading"> <!-- plot-heading -->
 					<?php echo esc_html( $args['desktop_heading'] ); ?>
 				</p> <!-- /plot-heading -->
@@ -39,9 +39,9 @@ if ( ! empty( $args['about'] ) ) :
 		<?php
 		if ( ! empty( $args['quick_links'] ) ) :
 			?>
-			<div class="quick-links-container"> <!-- quick-links-container -->
-				<div class= "quick-links-heading-container"> <!-- quick-links-heading-container -->
-					<p class="primary-text-secondary-font quick-links-heading-text"> <!-- quick-links-heading-text -->
+			<div class="quick-links-wrapper"> <!-- quick-links-container -->
+				<div class= "quick-links-heading-wrapper"> <!-- quick-links-heading-container -->
+					<p class="primary-text-secondary-font quick-links-heading"> <!-- quick-links-heading-text -->
 						<?php esc_html_e( 'Quick Links', 'screen-time' ); ?>
 					</p> <!-- /quick-links-heading-text -->
 				</div> <!-- /quick-links-heading-container -->
@@ -60,6 +60,6 @@ if ( ! empty( $args['about'] ) ) :
 					</ul> <!-- /quick-links -->
 				</div> <!-- /quick-links-list-container -->
 			</div> <!-- /quick-links-container -->
-		</div> <!-- /about-quick-links-container -->
+		</section> <!-- /about-quick-links-container -->
 	<?php endif; ?>
 <?php endif; ?>

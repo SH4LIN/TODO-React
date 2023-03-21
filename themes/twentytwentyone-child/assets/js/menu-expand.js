@@ -2,7 +2,7 @@
  * This file is used to open and close the header menu in mobile view.
  */
 (function () {
-	window.addEventListener('load', function () {
+	window.addEventListener('DOMContentLoaded', function () {
 		const menu = document.querySelector('.st-header-menu-container');
 		if (menu !== null) {
 			menu.addEventListener('click', function () {

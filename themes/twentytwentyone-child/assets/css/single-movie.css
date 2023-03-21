@@ -94,14 +94,18 @@
 	gap: 24px;
 }
 
-.st-sm-genre-item-container {
+.st-sm-genres-container p {
 	padding: 4px 12px;
 	border: 1px solid var(--primary-font-color);
 	border-radius: 24px;
-
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 24px;
+}
+
+.st-sm-genres-container p:hover {
+	background-color: var(--border-color);
+	border: 1px solid var(--border-color);
 }
 
 .st-sm-description-container {
@@ -154,6 +158,7 @@
 	position: relative;
 	display: flex;
 	align-items: center;
+	cursor: pointer;
 }
 
 .ic-play-circle-container {
@@ -178,80 +183,85 @@
 	line-height: 24px;
 }
 
+.st-sm-watch-trailer-text-container:hover {
+	background-color: var(--border-color);
+	border: 1px solid var(--border-color);
+}
+
 /* Hero Section Ends */
 
 /* Cast & Crew Section Starts */
-.st-sm-cast-crew-container {
+.cast-crew-wrapper {
 	padding: 0 24px 0 24px;
 }
 
-.st-sm-cast-crew-heading-container {
+.cast-crew-heading-wrapper {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
-.st-sm-cast-crew-heading {
+.cast-crew-heading-wrapper p {
 	border-left: 4px solid var(--border-color);
 	padding-left: 12px;
 }
 
-.st-sm-cast-crew-view-all-container-desktop {
+.view-all-wrapper-desktop {
 	display: none;
 }
 
-.st-sm-cast-crew-list-container {
+.cast-crew-list-wrapper {
 	padding-top: 48px;
 }
 
-.st-sm-cast-crew-list-items {
+.cast-crew-items {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
 	gap: 16px;
 }
 
-.st-sm-cast-crew-list-item:not(:nth-child(2n + 1)) {
+.cast-crew-item:not(:nth-child(2n + 1)) {
 	min-width: 156px;
 	max-width: 280px;
 }
 
-.st-sm-cast-crew-list-item:not(:nth-child(2n)) {
+.cast-crew-item:not(:nth-child(2n)) {
 	min-width: 155px;
 	max-width: 280px;
 }
 
-.st-sm-cast-crew-list-item-image-container {
+.cast-crew-image-wrapper {
 	height: 138.22px;
 }
 
-.st-sm-cast-crew-list-item-image-container > img {
+.cast-crew-image-wrapper > img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	object-position: top;
 }
 
-.st-sm-cast-crew-list-item-name-container {
+.cast-crew-name-wrapper {
 	padding: 8px 16px;
 	background-color: #2b2b2b;
 	text-align: center;
 	overflow-wrap: break-word;
 }
 
-.st-sm-cast-crew-list-item-name {
+.cast-crew-name-wrapper span {
 	font-size: 14px;
 	line-height: 14px;
 	font-weight: 500;
 }
 
-.st-sm-cast-crew-view-all-container-mobile {
+.view-all-wrapper-mobile {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
 	padding-top: 32px;
 }
 
-.st-sm-cast-crew-view-all-container-mobile::after {
+.view-all-wrapper-mobile::after {
 	content: url(../images/ic_arrow_red.svg);
 	line-height: 0;
 	height: 20px;
@@ -444,7 +454,7 @@
 		gap: 31px;
 	}
 
-	.st-sm-genre-item-container {
+	.st-sm-genres-container p {
 		padding: 8px 16px;
 		font-size: 16px;
 		line-height: 24px;
@@ -503,7 +513,6 @@
 	.ic-play-circle-container {
 		position: absolute;
 		left: 0;
-
 	}
 
 	.ic-play-circle-container > img {
@@ -520,16 +529,16 @@
 	/* Hero Section Ends */
 
 	/* Cast & Crew Section Starts */
-	.st-sm-cast-crew-container {
+	.cast-crew-wrapper {
 		padding: 0;
 	}
 
-	.st-sm-cast-crew-view-all-container-desktop {
+	.view-all-wrapper-desktop {
 		display: flex;
 		align-items: center;
 	}
 
-	.st-sm-cast-crew-view-all-container-desktop::after {
+	.view-all-wrapper-desktop::after {
 		content: url(../images/ic_arrow_red.svg);
 		line-height: 0;
 		height: 20px;
@@ -541,18 +550,18 @@
 		font-size: 20px;
 	}
 
-	.st-sm-cast-crew-list-items {
+	.cast-crew-items {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 		gap: 32px;
 	}
 
-	.st-sm-cast-crew-list-item-image-container {
+	.cast-crew-image-wrapper {
 		width: 100%;
 		height: 248.32px;
 	}
 
-	.st-sm-cast-crew-list-item-name-container {
+	.cast-crew-name-wrapper {
 		width: 100%;
 		padding: 24px 44px;
 		background-color: #2b2b2b;
@@ -560,13 +569,13 @@
 		overflow-wrap: break-word;
 	}
 
-	.st-sm-cast-crew-list-item-name {
+	.cast-crew-name-wrapper span {
 		font-size: 22px;
 		line-height: 22px;
 		font-weight: 500;
 	}
 
-	.st-sm-cast-crew-view-all-container-mobile {
+	.view-all-wrapper-mobile {
 		display: none;
 	}
 

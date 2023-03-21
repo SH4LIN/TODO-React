@@ -188,8 +188,8 @@ It is a theme for the Movie Library plugin. It has four templates
         |   |-- archive
         |   |   |-- archive-rt-movie-template.php
         |   |   |-- slider-template.php
-        |   |   |-- trending-movies-template.php
-        |   |   `-- upcoming-movies-template.php
+        |   |   |-- movie-template.php
+        |   |   `-- upcoming-movie-template.php
         |   `-- single
         |       |-- cast-crew-template.php
         |       |-- plot-quick-links-template.php
@@ -204,7 +204,7 @@ It is a theme for the Movie Library plugin. It has four templates
             `-- single
                 |-- about-template.php
                 |-- hero-template.php
-                |-- popular-movies-template.php
+                |-- popular-movie-template.php
                 |-- single-rt-person-template.php
                 |-- snapshots-template.php
                 `-- videos-template.php

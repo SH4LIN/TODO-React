@@ -78,65 +78,66 @@ foreach ( $movies as $movie ) {
 $count = count( $movie_details );
 
 ?>
-<div class="st-am-slider-container"> <!-- slider container -->
-	<ul class="st-am-slider"> <!-- slider -->
+<div class="am-slider-wrapper"> <!-- slider container -->
+	<ul> <!-- slider -->
 		<?php
 		$i = 0;
 		foreach ( $movie_details as $movie ) :
 			?>
-			<li class="st-am-slider-item"> <!-- slider-item -->
-				<a href="<?php echo esc_url( get_permalink( $movie['id'] ) ); ?>">
-
-					<div class="st-am-slider-item-image-container"> <!-- slider-item-image-container -->
-						<img src="<?php echo esc_url( $movie['banner'] ); ?>" class="st-am-slider-item-image" loading="lazy" />
+			<li class="slide"> <!-- slider-item -->
+				<a href="">
+					<div class="slider-image-wrapper"> <!-- slider-item-image-container -->
+						<img src="<?php echo esc_url( $movie['banner'] ); ?>" loading="lazy" />
 					</div> <!-- slider-item-image-container -->
+				</a>
 
-					<div class="st-am-slider-item-movie-info-container"> <!-- slider-item-movie-info-container -->
-						<div class="primary-text-secondary-font st-am-slider-item-image-title"> <!-- slider-item-image-title -->
-							<?php echo esc_html( $movie['title'] ); ?>
-						</div> <!-- slider-item-image-title -->
+				<div class="slider-movie-info-wrapper" onclick="location.href='<?php echo esc_url( get_permalink( $movie['id'] ) ); ?>'"> <!-- slider-item-movie-info-container -->
+					<div class="primary-text-secondary-font title"> <!-- slider-item-image-title -->
+						<?php echo esc_html( $movie['title'] ); ?>
+					</div> <!-- slider-item-image-title -->
 
-						<?php if ( ! empty( $movie['synopsis'] ) ) : ?>
-							<div class="primary-text-primary-font st-am-slider-item-image-synopsis"> <!-- slider-item-image-synopsis -->
-								<?php echo esc_html( $movie['synopsis'] ); ?>
-							</div> <!-- slider-item-image-synopsis -->
-						<?php endif; ?>
+					<?php if ( ! empty( $movie['synopsis'] ) ) : ?>
+						<div class="primary-text-primary-font synopsis"> <!-- slider-item-image-synopsis -->
+							<?php echo esc_html( $movie['synopsis'] ); ?>
+						</div> <!-- slider-item-image-synopsis -->
+					<?php endif; ?>
 
-						<?php if ( ! empty( $movie['release_year'] ) || ! empty( $movie['age_rating'] ) || ! empty( $movie['runtime'] ) ) : ?>
-							<div class="st-am-slider-item-movie-stats-container"> <!-- slider-item-movie-stats-container -->
-								<ul class="st-am-slider-item-movie-stats"> <!-- slider-item-movie-stats -->
-									<?php if ( ! empty( $movie['release_year'] ) ) : ?>
-									<li class="primary-text-primary-font st-am-slider-item-movie-stat"> <!-- slider-item-movie-stat -->
+					<?php if ( ! empty( $movie['release_year'] ) || ! empty( $movie['age_rating'] ) || ! empty( $movie['runtime'] ) ) : ?>
+						<div class="slider-movie-stats-wrapper"> <!-- slider-item-movie-stats-container -->
+							<ul> <!-- slider-item-movie-stats -->
+								<?php if ( ! empty( $movie['release_year'] ) ) : ?>
+									<li class="primary-text-primary-font"> <!-- slider-item-movie-stat -->
 										<?php echo esc_html( $movie['release_year'] ); ?>
 									</li> <!-- slider-item-movie-stat -->
-									<?php endif; ?>
+								<?php endif; ?>
 
-									<?php if ( ! empty( $movie['age_rating'] ) ) : ?>
-										<li class="primary-text-primary-font st-am-slider-item-movie-stat"> <!-- slider-item-movie-stat -->
-											<?php echo esc_html( $movie['age_rating'] ); ?>
-										</li> <!-- slider-item-movie-stat -->
-									<?php endif; ?>
+								<?php if ( ! empty( $movie['age_rating'] ) ) : ?>
+									<li class="primary-text-primary-font"> <!-- slider-item-movie-stat -->
+										<?php echo esc_html( $movie['age_rating'] ); ?>
+									</li> <!-- slider-item-movie-stat -->
+								<?php endif; ?>
 
-									<?php if ( ! empty( $movie['runtime'] ) ) : ?>
-										<li class="primary-text-primary-font st-am-slider-item-movie-stat"> <!-- slider-item-movie-stat -->
-											<?php echo esc_html( $movie['runtime'] ); ?>
-										</li> <!-- slider-item-movie-stat -->
-									<?php endif; ?>
-								</ul> <!-- slider-item-movie-stats -->
-							</div> <!-- slider-item-movie-stats-container -->
-						<?php endif; ?>
+								<?php if ( ! empty( $movie['runtime'] ) ) : ?>
+									<li class="primary-text-primary-font"> <!-- slider-item-movie-stat -->
+										<?php echo esc_html( $movie['runtime'] ); ?>
+									</li> <!-- slider-item-movie-stat -->
+								<?php endif; ?>
+							</ul> <!-- slider-item-movie-stats -->
+						</div> <!-- slider-item-movie-stats-container -->
+					<?php endif; ?>
 
-						<?php if ( ! empty( $movie['genre'] ) ) : ?>
-							<div class="st-am-slider-item-movie-genre-container"> <!-- slider-item-movie-genre-container -->
-								<?php foreach ( $movie['genre'] as $genre ) : ?>
-									<div class="primary-text-primary-font st-am-slider-item-movie-genre"> <!-- slider-item-movie-genre -->
+					<?php if ( ! empty( $movie['genre'] ) ) : ?>
+						<div class="slider-movie-genre-wrapper"> <!-- slider-item-movie-genre-container -->
+							<?php foreach ( $movie['genre'] as $genre ) : ?>
+								<a href="<?php echo esc_url( get_term_link( $genre ) ); ?>">
+									<p class="primary-text-primary-font"> <!-- slider-item-movie-genre -->
 										<?php echo esc_html( $genre->name ); ?>
-									</div> <!-- slider-item-movie-genre -->
-								<?php endforeach; ?>
-							</div> <!-- slider-item-movie-genre-container -->
-						<?php endif; ?>
-					</div> <!-- slider-item-movie-info-container -->
-				</a>
+									</p> <!-- slider-item-movie-genre -->
+								</a>
+							<?php endforeach; ?>
+						</div> <!-- slider-item-movie-genre-container -->
+					<?php endif; ?>
+				</div> <!-- slider-item-movie-info-container -->
 			</li> <!-- slider-item -->
 			<?php
 			++$i;
@@ -144,17 +145,15 @@ $count = count( $movie_details );
 		?>
 	</ul> <!-- slider -->
 
-	<div class="slider-dots-container"> <!-- slider-dots-container -->
+	<div class="slider-dots-wrapper"> <!-- slider-dots-container -->
 		<?php
 		for ( $i = 0; $i < $count; $i++ ) {
+			$class_to_add = '';
+			if ( 0 === $i ) {
+				$class_to_add = 'active';
+			}
 			?>
-			<div class="st-am-slider-dots 
-			<?php
-			if ( 0 === $i ) :
-				echo esc_attr( 'active' );
-			endif;
-			?>
-			" data-position="<?php echo esc_attr( $i ); ?>"> <!-- slider-dots -->
+			<div class="slider-dots <?php echo esc_attr( $class_to_add ); ?>" data-position="<?php echo esc_attr( $i ); ?>"> <!-- slider-dots -->
 
 			</div> <!-- slider-dots -->
 			<?php

@@ -13,7 +13,7 @@ if (
 ) {
 	return;
 }
-if ( ! empty( $args['videos'] ) && ! empty( $args['videos'][0] ) ) :
+if ( ! empty( $args['videos'] ) ) :
 	?>
 	<div class="videos-container"> <!-- trailer-clips-container -->
 		<div class="videos-heading-container"> <!-- trailer-clips-heading-container -->
@@ -25,11 +25,11 @@ if ( ! empty( $args['videos'] ) && ! empty( $args['videos'][0] ) ) :
 		<div class="videos-list-container"> <!-- trailer-clips-list-container -->
 			<div class="videos-list"> <!-- trailer-clips-list-items -->
 				<?php
-				foreach ( $args['videos'][0] as $trailer_clip ) :
+				foreach ( $args['videos'] as $trailer_clip ) :
 					?>
 						<div class="video-item-container"> <!-- trailer-clips-list-item -->
 							<div class="video-item"> <!-- trailer-clips-list-item-container -->
-								<video src="<?php echo esc_url( wp_get_attachment_url( $trailer_clip ) ); ?>" class="st-sm-trailer-clips-list-item-image st-sp-video"></video>
+								<video src="<?php echo esc_url( wp_get_attachment_url( $trailer_clip ) ); ?>" class="video"></video>
 							</div> <!-- /trailer-clips-list-item-container -->
 							<div class= "video-play-button"> <!-- videos-play-button -->
 								<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_play.svg' ); ?>" />

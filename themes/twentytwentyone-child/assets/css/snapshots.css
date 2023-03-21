@@ -24,9 +24,10 @@
 
 .snapshots-item-container {
 	margin: auto;
+	max-width: 100%;
 }
 
-.st-sm-snapshots-list-item-image-container > img {
+.snapshots-item-container > img {
 	width: 100%;
 	object-fit: cover;
 	object-position: top;
@@ -43,5 +44,12 @@
 
 	.snapshots-item-container {
 		margin: 0;
+		max-width: 100%;
+	}
+
+	.snapshots-item-container > img {
+		width: 100%;
+		object-fit: cover;
+		object-position: top;
 	}
 }
