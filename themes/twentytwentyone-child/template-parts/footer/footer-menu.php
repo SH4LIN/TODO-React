@@ -14,7 +14,7 @@ $name         = $args['name'];
 $display_menu = $args['menu'];
 ?>
 
-<span class="primary-text-primary-font st-footer-company-navigation">
+<span class="primary-text-primary-font footer-company-navigation">
 	<?php echo esc_html( $name ); ?>
 </span>
 

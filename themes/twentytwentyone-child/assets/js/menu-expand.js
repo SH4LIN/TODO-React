@@ -3,11 +3,11 @@
  */
 (function () {
 	window.addEventListener('DOMContentLoaded', function () {
-		const menu = document.querySelector('.st-header-menu-container');
+		const menu = document.querySelector('.header-menu-container');
 		if (menu !== null) {
 			menu.addEventListener('click', function () {
 				const expandedMenu = document.querySelector(
-					'.st-header-primary-menu-expanded-container'
+					'.primary-menu-expanded-container'
 				);
 				if (expandedMenu !== null) {
 					expandedMenu.classList.toggle('hidden');

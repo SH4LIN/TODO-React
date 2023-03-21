@@ -40,7 +40,7 @@ if ( $post_thumbnail_id ) {
 
 ?>
 <div class="hero-wrapper">
-	<div class="profile-wrapper">
+	<div class="sp-profile-wrapper">
 		<img src="<?php echo esc_url( $poster_url ); ?>" />
 	</div>
 

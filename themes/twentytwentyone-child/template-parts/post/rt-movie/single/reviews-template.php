@@ -16,47 +16,47 @@ if (
 if ( ! empty( $args['comments'] ) ) :
 
 	?>
-<div class="st-sm-reviews-container"> <!-- reviews-container -->
-	<div class="st-sm-reviews-heading-container"> <!-- reviews-heading-container -->
-		<div class="primary-text-secondary-font section-heading-text st-sm-reviews-heading"> <!-- reviews-heading -->
+<div class="reviews-wrapper"> <!-- reviews-container -->
+	<div class="reviews-heading-wrapper"> <!-- reviews-heading-container -->
+		<p class="primary-text-secondary-font section-heading-text"> <!-- reviews-heading -->
 			<?php esc_html_e( 'Reviews', 'screen-time' ); ?>
-		</div> <!-- /reviews-heading -->
+		</p> <!-- /reviews-heading -->
 	</div> <!-- /reviews-heading-container -->
 
-	<div class="st-sm-reviews-list-container"> <!-- reviews-list-container -->
-		<div class="st-sm-reviews-list-items"> <!-- reviews-list-items -->
+	<div class="reviews-list-wrapper"> <!-- reviews-list-container -->
+		<div class="reviews-list"> <!-- reviews-list-items -->
 			<?php
 			foreach ( $args['comments'] as $post_comment ) :
 				?>
-					<div class="st-sm-reviews-list-item"> <!-- reviews-list-item -->
-						<div class="st-sm-reviews-list-item-image-name-rating-container"> <!-- reviews-list-item-image-name-rating-container -->
-							<div class="st-sm-reviews-list-item-image-name-container"> <!-- reviews-list-item-image-name-container -->
-								<img src="<?php echo esc_url( get_avatar_url( $post_comment->comment_author_email ) ); ?>" class="st-sm-reviews-list-item-image"/>
+					<div class="review-list-item"> <!-- reviews-list-item -->
+						<div class="review-profile-wrapper"> <!-- reviews-list-item-image-name-rating-container -->
+							<div class="profile-picture-name-wrapper"> <!-- reviews-list-item-image-name-container -->
+								<img src="<?php echo esc_url( get_avatar_url( $post_comment->comment_author_email ) ); ?>"/>
 
-								<span class="secondary-text-primary-font st-sm-reviews-list-item-name-text"> <!-- reviews-list-item-name-text -->
+								<span class="secondary-text-primary-font"> <!-- reviews-list-item-name-text -->
 									<?php echo esc_html( $post_comment->comment_author ); ?>
 								</span> <!-- /reviews-list-item-name-text -->
 							</div> <!-- /reviews-list-item-image-name-container -->
 
-							<div class="st-sm-reviews-list-item-rating-container"> <!-- reviews-list-item-rating-container -->
-								<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_star.svg' ); ?>" class="st-sm-reviews-list-item-image"/>
+							<div class="review-rating-wrapper"> <!-- reviews-list-item-rating-container -->
+								<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_star.svg' ); ?>" />
 
-								<span class="primary-text-primary-font st-sm-reviews-list-item-rating-text"> <!-- reviews-list-item-rating-text -->
+								<span class="primary-text-primary-font"> <!-- reviews-list-item-rating-text -->
 									<?php esc_html_e( '8.4/10', 'screen-time' ); ?>
 								</span> <!-- /reviews-list-item-rating-text -->
 							</div> <!-- /reviews-list-item-rating-container -->
 						</div> <!-- /reviews-list-item-image-name-rating-container -->
 
-						<div class="st-sm-reviews-list-item-content-container"> <!-- reviews-list-item-content-container -->
-							<div class="primary-text-primary-font st-sm-reviews-list-item-content"> <!-- reviews-list-item-content -->
+						<div class="review-content-wrapper"> <!-- reviews-list-item-content-container -->
+							<p class="primary-text-primary-font st-sm-reviews-list-item-content"> <!-- reviews-list-item-content -->
 								<?php echo esc_html( $post_comment->comment_content ); ?>
-							</div> <!-- /reviews-list-item-content -->
+							</p> <!-- /reviews-list-item-content -->
 						</div> <!-- /reviews-list-item-content-container -->
 
-						<div class="st-sm-reviews-list-item-date-container"> <!-- reviews-list-item-date-container -->
-							<div class="secondary-text-primary-font st-sm-reviews-list-item-date"> <!-- reviews-list-item-date -->
+						<div class="review-date-wrapper"> <!-- reviews-list-item-date-container -->
+							<p class="secondary-text-primary-font"> <!-- reviews-list-item-date -->
 								<?php echo wp_kses( '12<sup>th</sup> Dec 2022', array( 'sup' => array() ) ); ?>
-							</div> <!-- /reviews-list-item-date -->
+							</p> <!-- /reviews-list-item-date -->
 						</div> <!-- /reviews-list-item-date-container -->
 					</div> <!-- /reviews-list-item -->
 					<?php

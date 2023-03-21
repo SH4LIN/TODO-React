@@ -15,32 +15,32 @@ if (
 }
 if ( ! empty( $args['videos'] ) ) :
 	?>
-	<div class="videos-container"> <!-- trailer-clips-container -->
-		<div class="videos-heading-container"> <!-- trailer-clips-heading-container -->
-			<p class="primary-text-secondary-font section-heading-text"> <!-- trailer-clips-heading -->
+	<div class="videos-container">
+		<div class="videos-heading-container">
+			<p class="primary-text-secondary-font section-heading-text">
 				<?php echo esc_html( $args['heading'] ); ?>
-			</p> <!-- /trailer-clips-heading -->
-		</div> <!-- /trailer-clips-heading-container -->
+			</p>
+		</div>
 
-		<div class="videos-list-container"> <!-- trailer-clips-list-container -->
-			<div class="videos-list"> <!-- trailer-clips-list-items -->
+		<div class="videos-list-container">
+			<div class="videos-list">
 				<?php
 				foreach ( $args['videos'] as $trailer_clip ) :
 					?>
-						<div class="video-item-container"> <!-- trailer-clips-list-item -->
-							<div class="video-item"> <!-- trailer-clips-list-item-container -->
+						<div class="video-item-container">
+							<div class="video-item">
 								<video src="<?php echo esc_url( wp_get_attachment_url( $trailer_clip ) ); ?>" class="video"></video>
-							</div> <!-- /trailer-clips-list-item-container -->
-							<div class= "video-play-button"> <!-- videos-play-button -->
+							</div>
+							<div class= "video-play-button">
 								<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_play.svg' ); ?>" />
-							</div> <!-- /videos-play-button -->
-						</div> <!-- /trailer-clips-list-item -->
+							</div>
+						</div>
 						<?php
 					endforeach;
 				?>
-			</div> <!-- /trailer-clips-list-items -->
-		</div> <!-- /trailer-clips-list-container -->
-	</div> <!-- /trailer-clips-container -->
+			</div>
+		</div>
+	</div>
 
 	<div id="lightbox" class="display-none"> <!-- lightbox -->
 		<button id="lightbox-close-btn" class="close-btn"> <!-- lightbox-close-btn -->

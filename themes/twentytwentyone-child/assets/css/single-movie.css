@@ -280,58 +280,58 @@
 /* Cast & Crew Section Ends */
 
 /* Reviews Section Starts */
-.st-sm-reviews-container {
+.reviews-wrapper {
 	padding: 0 24px;
 }
 
-.st-sm-reviews-heading-container {
+.reviews-heading-wrapper {
 	border-left: 4px solid var(--border-color);
 	padding-left: 12px;
 }
 
-.st-sm-reviews-list-container {
+.reviews-list-wrapper {
 	padding-top: 42px;
 }
 
-.st-sm-reviews-list-items {
+.reviews-list {
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 16px;
 }
 
-.st-sm-reviews-list-item {
+.review-list-item {
 	padding: 16px;
 	background-color: #2a2a2a;
 }
 
-.st-sm-reviews-list-item-image-name-rating-container {
+.review-profile-wrapper {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.st-sm-reviews-list-item-image-name-container {
+.profile-picture-name-wrapper {
 	display: flex;
 	align-items: center;
 	gap: 8px;
 	flex-wrap: wrap;
 }
 
-.st-sm-reviews-list-item-name-text {
+.profile-picture-name-wrapper > span {
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 20.56px;
 }
 
-.st-sm-reviews-list-item-image-name-container > img {
+.profile-picture-name-wrapper > img {
 	width: 31px;
 	height: 31px;
 	border-radius: 50%;
 }
 
 
-.st-sm-reviews-list-item-rating-container {
+.review-rating-wrapper {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -339,34 +339,34 @@
 	gap: 8px;
 }
 
-.st-sm-reviews-list-item-rating-container > img {
+.review-rating-wrapper > img {
 	width: 20px;
 	height: 20px;
 }
 
-.st-sm-reviews-list-item-rating-text {
+.review-rating-wrapper span {
 	font-weight: 700;
 	font-size: 14px;
 }
 
-.st-sm-reviews-list-item-content-container {
+.review-content-wrapper {
 	margin-top: 12px;
 }
 
-.st-sm-reviews-list-item-content {
+.review-content-wrapper p {
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 24px;
 }
 
-.st-sm-reviews-list-item-date-container {
+.review-date-wrapper {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 	margin-top: 24px;
 }
 
-.st-sm-reviews-list-item-date {
+.review-date-wrapper p {
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 20.56px;
@@ -582,55 +582,55 @@
 	/* Cast & Crew Section Ends */
 
 	/* Reviews Section Starts */
-	.st-sm-reviews-container {
+	.reviews-wrapper {
 		padding: 0;
 	}
 
-	.st-sm-reviews-list-container {
+	.reviews-list-wrapper {
 		padding-top: 48px;
 	}
 
-	.st-sm-reviews-list-items {
+	.reviews-list {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 32px;
 	}
 
-	.st-sm-reviews-list-item {
+	.review-list-item {
 		padding: 24px 32px;
 	}
 
-	.st-sm-reviews-list-item-image-name-container {
+	.profile-picture-name-wrapper {
 		gap: 12px;
 	}
 
-	.st-sm-reviews-list-item-name-text {
-		font-size: 16px;
-		line-height: 24px;
-	}
-
-	.st-sm-reviews-list-item-image-name-container > img {
+	.profile-picture-name-wrapper > img {
 		width: 59px;
 		height: 59px;
 		border-radius: 50%;
 	}
 
-	.st-sm-reviews-list-item-rating-text {
+	.profile-picture-name-wrapper > span {
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.review-rating-wrapper span {
 		font-weight: 500;
 		font-size: 16px;
 		line-height: 32px;
 	}
 
-	.st-sm-reviews-list-item-content-container {
+	.review-content-wrapper {
 		margin-top: 16px;
 	}
 
-	.st-sm-reviews-list-item-content {
+	.review-content-wrapper p {
 		font-size: 18px;
 		line-height: 32px;
 	}
 
-	.st-sm-reviews-list-item-date {
+	.review-date-wrapper p {
 		font-weight: 400;
 		font-size: 16px;
 		line-height: 24px;

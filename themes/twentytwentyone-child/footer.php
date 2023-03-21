@@ -39,23 +39,23 @@ $explore_menu = wp_nav_menu(
 	</div>
 
 	<footer>
-		<div class="st-footer-container">
-			<div class="st-footer-content-container">
-				<div class="st-footer-logo-text-container">
-					<span class="primary-text-secondary-font st-footer-logo-first-half-text">
+		<div class="footer-wrapper">
+			<div class="footer-content-wrapper">
+				<div class="footer-logo-text-wrapper">
+					<span class="primary-text-secondary-font footer-logo-first-half-text">
 						<?php esc_html_e( 'Screen', 'screen-time' ); ?>
 					</span>
 
-					<span class="primary-text-secondary-font st-footer-logo-second-half-text">
+					<span class="primary-text-secondary-font footer-logo-second-half-text">
 						<?php esc_html_e( 'Time', 'screen-time' ); ?>
 					</span>
 				</div>
 
-				<div class="primary-text-primary-font st-footer-follow-text">
+				<p class="primary-text-primary-font footer-follow-text">
 					<?php esc_html_e( 'Follow us', 'screen-time' ); ?>
-				</div>
+				</p>
 
-				<div class="st-footer-social-container">
+				<div class="footer-social-container">
 					<a href="<?php echo esc_url( 'www.facebook.com' ); ?>"><img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_facebook_filled.svg' ); ?>" /></a>
 					<a href="<?php echo esc_url( 'www.twitter.com' ); ?>"><img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_twitter_filled.svg' ); ?>" /></a>
 					<a href="<?php echo esc_url( 'www.youtube.com' ); ?>"><img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_youtube_filled.svg' ); ?>" /></a>
@@ -72,7 +72,7 @@ $explore_menu = wp_nav_menu(
 				);
 				?>
 
-				<div class="st-footer-company-navigation-container">
+				<div class="footer-company-navigation-wrapper">
 					<?php get_template_part( 'template-parts/footer/footer-menu', null, $display_menu ); ?>
 				</div>
 
@@ -86,15 +86,15 @@ $explore_menu = wp_nav_menu(
 				);
 				?>
 
-				<div class="st-footer-explore-navigation-container">
+				<div class="footer-explore-navigation-wrapper">
 					<?php get_template_part( 'template-parts/footer/footer-menu', null, $display_menu ); ?>
 				</div>
 
 			<?php endif; ?>
 
-			<div class="st-footer-separator"></div>
+			<div class="footer-separator"></div>
 
-			<div class="primary-text-primary-font st-footer-rights-reserved-text">
+			<div class="primary-text-primary-font footer-rights-reserved-text">
 				<?php
 				esc_html_e(
 					'© 2022 ScreenTime. All Rights Reserved.

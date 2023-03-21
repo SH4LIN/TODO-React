@@ -21,13 +21,13 @@
 	flex-direction: column;
 }
 
-.profile-wrapper {
+.sp-profile-wrapper {
 	align-self: center;
 	height: 286px;
 	width: 244px;
 }
 
-.profile-wrapper img {
+.sp-profile-wrapper img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
@@ -221,14 +221,14 @@
 		padding: 35px 0;
 	}
 
-	.profile-wrapper {
+	.sp-profile-wrapper {
 		padding-left: 0;
 		padding-right: 0;
 		height: 572px;
 		width: 488px;
 	}
 
-	.profile-wrapper img {
+	.sp-profile-wrapper img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
