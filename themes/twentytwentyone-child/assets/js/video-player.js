@@ -25,7 +25,6 @@
 						video.setAttribute('autoplay', 'autoplay');
 
 						const src = this.getAttribute('data-src');
-						console.log(src);
 						video.setAttribute('src', src);
 
 						lightboxVideo.replaceChildren(video);

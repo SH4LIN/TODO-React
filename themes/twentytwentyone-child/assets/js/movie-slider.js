@@ -18,7 +18,7 @@
 						slides[i].style.display = 'none';
 						sliderDots[i].classList.remove('active');
 					}
-					slides[index].style.display = 'flex';
+					slides[index].style.display = 'unset';
 					sliderDots[index].classList.add('active');
 				});
 			});
