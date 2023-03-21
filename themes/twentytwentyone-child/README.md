@@ -116,18 +116,22 @@ It is a theme for the Movie Library plugin. It has four templates
 ## Directory Structure
 ```bash
 .
-.
 |-- README.md
 |-- archive-rt-movie.php
 |-- archive-rt-person.php
 |-- assets
 |   |-- css
+|   |   |-- about.css
 |   |   |-- archive-movie.css
 |   |   |-- archive-person.css
+|   |   |-- common.css
 |   |   |-- footer.css
 |   |   |-- header.css
+|   |   |-- movies.css
 |   |   |-- single-movie.css
-|   |   `-- single-person.css
+|   |   |-- single-person.css
+|   |   |-- snapshots.css
+|   |   `-- videos.css
 |   |-- images
 |   |   |-- ic_arrow.svg
 |   |   |-- ic_arrow_red.svg
@@ -162,7 +166,6 @@ It is a theme for the Movie Library plugin. It has four templates
 |-- functions.php
 |-- header.php
 |-- inc
-|-- index.php
 |-- languages
 |   `-- screen-time.pot
 |-- single-rt-movie.php
@@ -170,46 +173,31 @@ It is a theme for the Movie Library plugin. It has four templates
 |-- style.css
 `-- template-parts
     |-- footer
-    |   |-- footer-content.php
-    |   |-- footer-copyright.php
-    |   |-- footer-menu.php
-    |   `-- site-footer.php
+    |   `-- footer-menu.php
     |-- header
     |   |-- site-header.php
-    |   |-- site-login-language.php
-    |   |-- site-logo.php
-    |   |-- site-nav-expanded.php
-    |   |-- site-nav.php
-    |   `-- site-search.php
+    |   `-- site-nav-expanded.php
     |-- navigation
     |-- page
     `-- post
+        |-- about-template.php
+        |-- movie-template.php
         |-- rt-movie
         |   |-- archive
-        |   |   |-- archive-rt-movie-template.php
         |   |   |-- slider-template.php
-        |   |   |-- movie-template.php
-        |   |   `-- upcoming-movie-template.php
+        |   |   `-- upcoming-movies-template.php
         |   `-- single
         |       |-- cast-crew-template.php
-        |       |-- plot-quick-links-template.php
         |       |-- poster-title-template.php
-        |       |-- reviews-template.php
-        |       |-- single-rt-movie-template.php
-        |       |-- snapshots-template.php
-        |       `-- videos-template.php
-        `-- rt-person
-            |-- archive
-            |   `-- archive-rt-person-template.php
-            `-- single
-                |-- about-template.php
-                |-- hero-template.php
-                |-- popular-movie-template.php
-                |-- single-rt-person-template.php
-                |-- snapshots-template.php
-                `-- videos-template.php
+        |       `-- reviews-template.php
+        |-- rt-person
+        |   `-- single
+        |       `-- hero-template.php
+        |-- snapshots-template.php
+        `-- videos-template.php
 
-20 directories, 73 files
+19 directories, 61 files
+
 
 ```
 ## Built with
