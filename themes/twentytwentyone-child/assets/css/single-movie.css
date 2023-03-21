@@ -103,11 +103,6 @@
 	line-height: 24px;
 }
 
-.st-sm-genres-container p:hover {
-	background-color: var(--border-color);
-	border: 1px solid var(--border-color);
-}
-
 .st-sm-description-container {
 	order: 4;
 	padding-top: 24px;
@@ -373,6 +368,11 @@
 }
 
 /* Reviews Section Ends */
+
+.st-sm-genres-container p:hover {
+	background-color: var(--border-color);
+	border: 1px solid var(--border-color);
+}
 
 @media only screen and (min-width: 1025px) {
 
