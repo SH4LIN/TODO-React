@@ -11,6 +11,9 @@
 	flex-direction: column;
 	gap: 64px;
 	padding-bottom: 64px;
+	max-width: 1440px;
+	width: 100%;
+	margin: 0 auto;
 }
 
 /* Hero Section Starts */

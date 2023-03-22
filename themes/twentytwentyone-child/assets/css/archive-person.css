@@ -4,6 +4,9 @@
 
 .ap-wrapper {
 	padding: 64px 24px;
+	max-width: 1440px;
+	width: 100%;
+	margin: 0 auto;
 }
 
 /* Cast & Crew Section Starts */

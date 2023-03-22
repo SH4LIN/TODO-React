@@ -72,6 +72,9 @@
 	flex-direction: column;
 	padding: 110px 0 31px 24px;
 	cursor: pointer;
+	max-width: 1440px;
+	width: 100%;
+	margin: 0 auto;
 }
 
 .slider-movie-info-wrapper > .title {
@@ -157,6 +160,9 @@
 	padding: 0 24px;
 	display: flex;
 	flex-direction: column;
+	max-width: 1440px;
+	width: 100%;
+	margin: 0 auto;
 }
 
 .upcoming-movies-heading-wrapper {
@@ -243,6 +249,9 @@
 /* Trending Movies Section Starts */
 .trending-movies-wrapper {
 	padding: 0 24px;
+	max-width: 1440px;
+	width: 100%;
+	margin: 0 auto;
 }
 
 .heading-wrapper {

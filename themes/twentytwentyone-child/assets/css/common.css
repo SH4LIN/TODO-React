@@ -50,12 +50,6 @@ html {
 	min-height: 100vh;
 }
 
-.st-content-area {
-	max-width: 1440px;
-	width: 100%;
-	margin: 0 auto;
-}
-
 a {
 	text-decoration: none;
 }
