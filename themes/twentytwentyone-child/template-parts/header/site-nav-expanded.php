@@ -9,7 +9,7 @@
 
 ?>
 
-<div class="primary-menu-expanded-container hidden"> <!-- header-primary-menu-expanded-container -->
+<div class="primary-menu-expanded-container"> <!-- header-primary-menu-expanded-container -->
 	<div class="primary-menu-expanded">
 		<div class="primary-menu-expanded-login-register-actions">
 			<p class="primary-text-primary-font primary-menu-expanded-login-action">

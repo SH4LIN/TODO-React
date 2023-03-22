@@ -121,8 +121,7 @@ if ( ! function_exists( 'twenty_twenty_one_child_scripts' ) ) :
 			wp_enqueue_style( 'twenty-twenty-one-archive-person-style', get_stylesheet_directory_uri() . '/assets/css/archive-person.css', array(), filemtime( get_stylesheet_directory() . '/assets/css/archive-person.css' ) );
 		}
 
-		wp_enqueue_script( 'menu-expand', get_stylesheet_directory_uri() . '/assets/js/menu-expand.js', array(), filemtime( get_stylesheet_directory() . '/assets/js/menu-expand.js' ), true );
-		wp_enqueue_script( 'menu-expand' );
+		wp_enqueue_script( 'site-header', get_stylesheet_directory_uri() . '/assets/js/site-header.js', array(), filemtime( get_stylesheet_directory() . '/assets/js/site-header.js' ), true );
 
 	}
 

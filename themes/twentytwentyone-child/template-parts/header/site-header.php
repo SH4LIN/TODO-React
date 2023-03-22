@@ -21,13 +21,17 @@
 			</div> <!-- /header-search-container -->
 
 			<div id="logo" class="header-logo-container"> <!-- header-logo-container -->
-				<span class="primary-text-secondary-font header-logo-first-half-text">
-					<?php esc_html_e( 'Screen', 'screen-time' ); ?>
-				</span>
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+					<span class="primary-text-secondary-font header-logo-first-half-text">
+						<?php esc_html_e( 'Screen', 'screen-time' ); ?>
+					</span>
+				</a>
 
-				<span class="primary-text-secondary-font header-logo-last-half-text">
-					<?php esc_html_e( ' Time', 'screen-time' ); ?>
-				</span>
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+					<span class="primary-text-secondary-font header-logo-last-half-text">
+						<?php esc_html_e( ' Time', 'screen-time' ); ?>
+					</span>
+				</a>
 			</div> <!-- /header-logo-container -->
 
 			<div class="header-actions-menu-container"> <!-- header-actions-menu-container -->
@@ -39,9 +43,9 @@
 					</div>
 
 					<div class="header-language-container">
-						<span class= "primary-text-primary-font header-text header-language-text"><?php esc_html_e( 'Eng', 'screen-time' ); ?></span>
+						<span class="primary-text-primary-font header-text header-language-text"><?php esc_html_e( 'Eng', 'screen-time' ); ?></span>
 
-						<img class="ic_down" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_down.svg' ); ?>" />
+						<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_down.svg' ); ?>" />
 					</div>
 				</div>
 

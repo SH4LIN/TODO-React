@@ -42,13 +42,17 @@ $explore_menu = wp_nav_menu(
 		<div class="footer-wrapper">
 			<div class="footer-content-wrapper">
 				<div class="footer-logo-text-wrapper">
-					<span class="primary-text-secondary-font footer-logo-first-half-text">
-						<?php esc_html_e( 'Screen', 'screen-time' ); ?>
-					</span>
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+						<span class="primary-text-secondary-font footer-logo-first-half-text">
+							<?php esc_html_e( 'Screen', 'screen-time' ); ?>
+						</span>
+					</a>
 
-					<span class="primary-text-secondary-font footer-logo-second-half-text">
-						<?php esc_html_e( 'Time', 'screen-time' ); ?>
-					</span>
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+						<span class="primary-text-secondary-font footer-logo-second-half-text">
+							<?php esc_html_e( 'Time', 'screen-time' ); ?>
+						</span>
+					</a>
 				</div>
 
 				<p class="primary-text-primary-font footer-follow-text">
