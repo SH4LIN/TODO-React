@@ -153,8 +153,8 @@ It is a theme for the Movie Library plugin. It has four templates
 |   |   |-- placeholder-banner.png
 |   |   `-- placeholder.webp
 |   `-- js
-|       |-- menu-expand.js
 |       |-- movie-slider.js
+|       |-- site-header.js
 |       `-- video-player.js
 |-- classes
 |   |-- class-archive-rt-movie-data.php
@@ -196,9 +196,7 @@ It is a theme for the Movie Library plugin. It has four templates
         |-- snapshots-template.php
         `-- videos-template.php
 
-19 directories, 61 files
-
-
+19 directories, 62 files
 ```
 ## Built with
 ​
