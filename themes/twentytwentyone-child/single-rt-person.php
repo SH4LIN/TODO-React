@@ -27,7 +27,7 @@ $single_rt_person_data = Single_RT_Person_Data::instance();
 		?>
 		<div class= "popular-movies-wrapper">
 		<div class="heading-wrapper">
-			<p class="primary-text-secondary-font section-heading-text">
+			<p class="primary-text-secondary-font section-heading">
 				<?php esc_html_e( 'Popular Movies', 'screen-time' ); ?>
 			</p>
 		</div>

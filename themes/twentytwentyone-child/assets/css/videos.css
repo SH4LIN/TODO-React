@@ -2,20 +2,20 @@
  * This file contains the stylesheet for the videos template
  */
 
-.videos-container {
+.videos-wrapper {
 	padding: 0 24px;
 }
 
-.videos-heading-container {
+.videos-heading-wrapper {
 	border-left: 4px solid var(--border-color);
 	padding-left: 12px;
 }
 
-.videos-list-container {
+.video-list-wrapper {
 	padding-top: 40px;
 }
 
-.videos-list {
+.video-list {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -23,7 +23,7 @@
 	gap: 16px;
 }
 
-.video-item-container {
+.video-item-wrapper {
 	position: relative;
 	cursor: pointer;
 }
@@ -82,15 +82,15 @@
 
 @media only screen and (min-width: 1025px) {
 
-	.videos-container {
+	.videos-wrapper {
 		padding: 0;
 	}
 
-	.videos-list-container {
+	.video-list-wrapper {
 		padding-top: 48px;
 	}
 
-	.videos-list {
+	.video-list {
 		gap: 32px;
 		justify-content: flex-start;
 	}

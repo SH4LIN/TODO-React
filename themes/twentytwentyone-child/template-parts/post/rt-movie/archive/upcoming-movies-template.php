@@ -17,7 +17,7 @@ $movies = $args['movies'];
 ?>
 <div class="upcoming-movies-wrapper"> <!-- upcoming-movies-container -->
 	<div class="upcoming-movies-heading-wrapper"> <!-- upcoming-movies-heading-container -->
-		<div class="primary-text-secondary-font section-heading-text"> <!-- upcoming-movies-heading -->
+		<div class="primary-text-secondary-font section-heading"> <!-- upcoming-movies-heading -->
 			<?php esc_html_e( 'Upcoming Movies', 'screen-time' ); ?>
 		</div> <!-- /upcoming-movies-heading -->
 	</div> <!-- /upcoming-movies-heading-container -->

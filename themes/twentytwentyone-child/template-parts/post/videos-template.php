@@ -15,19 +15,19 @@ if (
 }
 if ( ! empty( $args['videos'] ) ) :
 	?>
-	<div class="videos-container">
-		<div class="videos-heading-container">
-			<p class="primary-text-secondary-font section-heading-text">
+	<div class="videos-wrapper" id="videos">
+		<div class="videos-heading-wrapper">
+			<p class="primary-text-secondary-font section-heading">
 				<?php echo esc_html( $args['heading'] ); ?>
 			</p>
 		</div>
 
-		<div class="videos-list-container">
-			<div class="videos-list">
+		<div class="video-list-wrapper">
+			<div class="video-list">
 				<?php
 				foreach ( $args['videos'] as $trailer_clip ) :
 					?>
-						<div class="video-item-container">
+						<div class="video-item-wrapper">
 							<div class="video-item">
 								<video src="<?php echo esc_url( wp_get_attachment_url( $trailer_clip ) ); ?>" data-src="<?php echo esc_url( wp_get_attachment_url( $trailer_clip ) ); ?>"></video>
 							</div>

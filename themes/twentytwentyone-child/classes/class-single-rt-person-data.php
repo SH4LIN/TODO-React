@@ -230,12 +230,12 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 
 			$about_data['quick_links'] = array(
 				array(
-					'title' => __( 'About', 'screen-time' ),
-					'url'   => '#about',
+					'title' => __( 'Poster', 'screen-time' ),
+					'url'   => '#poster',
 				),
 				array(
-					'title' => __( 'Family', 'screen-time' ),
-					'url'   => '#family',
+					'title' => __( 'About', 'screen-time' ),
+					'url'   => '#about',
 				),
 				array(
 					'title' => __( 'Snapshots', 'screen-time' ),

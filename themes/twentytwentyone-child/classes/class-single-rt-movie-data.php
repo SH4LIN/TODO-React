@@ -125,8 +125,8 @@ if ( ! class_exists( 'Single_RT_Movie_Data' ) ) :
 
 			$plot_data['quick_links'] = array(
 				array(
-					'title' => __( 'Synopsis', 'screen-time' ),
-					'url'   => '#synopsis',
+					'title' => __( 'Poster', 'screen-time' ),
+					'url'   => '#poster',
 				),
 				array(
 					'title' => __( 'Cast & Crew', 'screen-time' ),
@@ -138,7 +138,7 @@ if ( ! class_exists( 'Single_RT_Movie_Data' ) ) :
 				),
 				array(
 					'title' => __( 'Trailer & Clips', 'screen-time' ),
-					'url'   => '#trailer-clips',
+					'url'   => '#videos',
 				),
 				array(
 					'title' => __( 'Reviews', 'screen-time' ),

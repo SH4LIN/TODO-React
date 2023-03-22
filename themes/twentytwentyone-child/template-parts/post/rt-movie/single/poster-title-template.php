@@ -28,7 +28,7 @@ if (
 
 <div class="sm-info-wrapper"> <!-- info-container -->
 
-	<div class="sm-poster-wrapper"> <!-- poster-container -->
+	<div class="sm-poster-wrapper" id="poster"> <!-- poster-container -->
 		<img src="<?php echo esc_url( $args['poster'] ); ?>" />
 	</div>  <!-- /poster-container -->
 
@@ -130,9 +130,11 @@ if (
 					<?php
 					foreach ( $args['directors'][0] as $director ) :
 						?>
-						<li class="primary-text-primary-font"> <!-- director-item -->
-							<?php echo esc_html( ( get_the_title( $director ['person_id'] ) ) ); ?>
-						</li> <!-- /director-item -->
+						<a href="<?php echo esc_url( get_permalink( $director['person_id'] ) ); ?>" >
+							<li class="primary-text-primary-font"> <!-- director-item -->
+								<?php echo esc_html( ( get_the_title( $director ['person_id'] ) ) ); ?>
+							</li> <!-- /director-item -->
+						</a>
 						<?php
 					endforeach;
 					?>

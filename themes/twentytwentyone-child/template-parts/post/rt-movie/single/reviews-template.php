@@ -16,9 +16,9 @@ if (
 if ( ! empty( $args['comments'] ) ) :
 
 	?>
-<div class="reviews-wrapper"> <!-- reviews-container -->
+<div class="reviews-wrapper" id="reviews"> <!-- reviews-container -->
 	<div class="reviews-heading-wrapper"> <!-- reviews-heading-container -->
-		<p class="primary-text-secondary-font section-heading-text"> <!-- reviews-heading -->
+		<p class="primary-text-secondary-font section-heading"> <!-- reviews-heading -->
 			<?php esc_html_e( 'Reviews', 'screen-time' ); ?>
 		</p> <!-- /reviews-heading -->
 	</div> <!-- /reviews-heading-container -->

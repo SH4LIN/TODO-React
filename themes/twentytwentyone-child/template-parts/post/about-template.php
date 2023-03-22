@@ -17,14 +17,14 @@ if (
 }
 if ( ! empty( $args['about'] ) ) :
 	?>
-	<section class="about-quick-links-section"> <!-- about-quick-links-container -->
+	<section class="about-quick-links-section" id="about"> <!-- about-quick-links-container -->
 		<div class="about-wrapper"> <!-- about-container -->
 			<div class="about-heading-wrapper"> <!-- about-heading-container -->
-				<p class="primary-text-secondary-font section-heading-text about-desktop-heading"> <!-- plot-heading -->
+				<p class="primary-text-secondary-font section-heading about-desktop-heading"> <!-- plot-heading -->
 					<?php echo esc_html( $args['desktop_heading'] ); ?>
 				</p> <!-- /plot-heading -->
 
-				<p class="primary-text-secondary-font section-heading-text about-mobile-heading"> <!-- synopsis-heading -->
+				<p class="primary-text-secondary-font section-heading about-mobile-heading"> <!-- synopsis-heading -->
 					<?php echo esc_html( $args['mobile_heading'] ); ?>
 				</p> <!-- /synopsis-heading -->
 			</div> <!-- /about-heading-container -->

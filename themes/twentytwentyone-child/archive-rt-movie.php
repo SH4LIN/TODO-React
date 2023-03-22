@@ -31,7 +31,7 @@ get_header();
 	<?php if ( $trending_movies && count( $trending_movies ) > 0 ) : ?>
 		<div class="trending-movies-wrapper"> <!-- trending-movies-container -->
 			<div class="heading-wrapper"> <!-- trending-movies-heading-container -->
-				<div class="primary-text-secondary-font section-heading-text"> <!-- trending-movies-heading -->
+				<div class="primary-text-secondary-font section-heading"> <!-- trending-movies-heading -->
 					<?php esc_html_e( 'Trending Movies', 'screen-time' ); ?>
 				</div> <!-- /trending-movies-heading -->
 			</div> <!-- /trending-movies-heading-container -->

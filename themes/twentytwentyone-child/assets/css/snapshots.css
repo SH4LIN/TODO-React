@@ -2,32 +2,32 @@
  * This file contains the stylesheet for the snapshots template
  */
 
-.snapshots-container {
+.snapshots-wrapper {
 	padding: 0 24px;
 }
 
-.snapshots-heading-container {
+.snapshots-heading-wrapper {
 	border-left: 4px solid var(--border-color);
 	padding-left: 12px;
 }
 
-.snapshots-list-container {
+.snapshot-list-wrapper {
 	padding-top: 48px;
 }
 
-.snapshots-list {
+.snapshot-list {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	gap: 16px;
 }
 
-.snapshots-item-container {
+.snapshot-item-wrapper {
 	margin: auto;
 	max-width: 100%;
 }
 
-.snapshots-item-container > img {
+.snapshot-item-wrapper > img {
 	width: 100%;
 	object-fit: cover;
 	object-position: top;
@@ -35,20 +35,20 @@
 
 @media only screen and (min-width: 1025px) {
 
-	.snapshots-container {
+	.snapshots-wrapper {
 		padding: 0;
 	}
 
-	.snapshots-list {
+	.snapshot-list {
 		gap: 24px 32px;
 	}
 
-	.snapshots-item-container {
+	.snapshot-item-wrapper {
 		margin: 0;
 		max-width: 100%;
 	}
 
-	.snapshots-item-container > img {
+	.snapshot-item-wrapper > img {
 		width: 100%;
 		object-fit: cover;
 		object-position: top;

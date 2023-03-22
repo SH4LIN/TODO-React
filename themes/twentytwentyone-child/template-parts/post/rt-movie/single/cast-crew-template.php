@@ -17,9 +17,9 @@ if (
 if ( ! empty( $args['crew'] ) && ! empty( $args['crew'][0] ) ) :
 
 	?>
-<div class="cast-crew-wrapper"> <!-- cast-crew-container -->
+<div class="cast-crew-wrapper" id="cast-crew"> <!-- cast-crew-container -->
 	<div class="cast-crew-heading-wrapper"> <!-- cast-crew-heading-container -->
-		<p class="primary-text-secondary-font section-heading-text"> <!-- cast-crew-heading -->
+		<p class="primary-text-secondary-font section-heading"> <!-- cast-crew-heading -->
 			<?php esc_html_e( 'Cast & Crew', 'screen-time' ); ?>
 		</p> <!-- /cast-crew-heading -->
 
