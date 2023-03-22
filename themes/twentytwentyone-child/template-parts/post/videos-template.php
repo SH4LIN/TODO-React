@@ -29,9 +29,9 @@ if ( ! empty( $args['videos'] ) ) :
 					?>
 						<div class="video-item-container">
 							<div class="video-item">
-								<video src="<?php echo esc_url( wp_get_attachment_url( $trailer_clip ) ); ?>" class="video"></video>
+								<video src="<?php echo esc_url( wp_get_attachment_url( $trailer_clip ) ); ?>" data-src="<?php echo esc_url( wp_get_attachment_url( $trailer_clip ) ); ?>"></video>
 							</div>
-							<div class= "video-play-button">
+							<div class= "video-play-button" data-src="<?php echo esc_url( wp_get_attachment_url( $trailer_clip ) ); ?>">
 								<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_play.svg' ); ?>" />
 							</div>
 						</div>

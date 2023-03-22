@@ -26,24 +26,24 @@ if (
 
 ?>
 
-<div class="st-sm-info-container"> <!-- info-container -->
+<div class="sm-info-wrapper"> <!-- info-container -->
 
-	<div class="st-sm-poster-container"> <!-- poster-container -->
+	<div class="sm-poster-wrapper"> <!-- poster-container -->
 		<img src="<?php echo esc_url( $args['poster'] ); ?>" />
 	</div>  <!-- /poster-container -->
 
-	<div class="st-sm-info-stats-container"> <!-- info-stats-container -->
-		<div class="primary-text-secondary-font st-sm-title"> <!-- title -->
+	<div class="sm-info-stats-wrapper"> <!-- info-stats-container -->
+		<p class="primary-text-secondary-font sm-movie-title"> <!-- title -->
 			<?php echo esc_html( $args['name'] ); ?>
-		</div> <!-- /title -->
+		</p> <!-- /title -->
 
-		<div class="st-sm-stats-items"> <!-- stats-items -->
+		<div class="sm-stats-wrapper"> <!-- stats-items -->
 			<?php
 			if ( ! empty( $args['rating'] ) ) :
 				?>
-				<div class="st-sm-stats-list-item st-sm-rating"> <!-- rating -->
+				<div class= "sm-stats-item sm-rating"> <!-- rating -->
 					<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_star.svg' ); ?>" loading="lazy" />
-					<span class="primary-text-primary-font st-sm-rating-text"> <!-- rating-text -->
+					<span class="primary-text-primary-font"> <!-- rating-text -->
 						<?php echo esc_html( $args['rating'] ); ?>
 					</span> <!-- /rating-text -->
 				</div> <!-- /rating -->
@@ -54,8 +54,8 @@ if (
 			<?php
 			if ( ! empty( $args['release_year'] ) ) :
 				?>
-				<div class="st-sm-stats-list-item st-sm-release-date"> <!-- release-date -->
-					<span class="primary-text-primary-font st-sm-release-date-text"> <!-- release-date-text -->
+				<div class= "sm-stats-item sm-release-date"> <!-- release-date -->
+					<span class="primary-text-primary-font"> <!-- release-date-text -->
 						<?php echo esc_html( $args['release_year'] ); ?>
 					</span> <!-- /release-date-text -->
 				</div> <!-- /release-date -->
@@ -66,8 +66,8 @@ if (
 			<?php
 			if ( ! empty( $args['content_rating'] ) ) :
 				?>
-				<div class="st-sm-stats-list-item st-sm-content-rating"> <!-- content-rating -->
-					<span class="primary-text-primary-font st-sm-content-rating-text"> <!-- content-rating-text -->
+				<div class= "sm-stats-item sm-content-rating"> <!-- content-rating -->
+					<span class="primary-text-primary-font"> <!-- content-rating-text -->
 						<?php echo esc_html( $args['content_rating'] ); ?>
 					</span> <!-- /content-rating-text -->
 				</div> <!-- /content-rating -->
@@ -78,8 +78,8 @@ if (
 			<?php
 			if ( ! empty( $args['runtime'] ) ) :
 				?>
-				<div class="st-sm-stats-list-item st-sm-runtime"> <!-- runtime -->
-					<span class="primary-text-primary-font st-sm-runtime-text"> <!-- runtime-text -->
+				<div class= "sm-stats-item sm-runtime"> <!-- runtime -->
+					<span class="primary-text-primary-font"> <!-- runtime-text -->
 						<?php echo esc_html( $args['runtime'] ); ?>
 					</span> <!-- /runtime-text -->
 				</div> <!-- /runtime -->
@@ -91,7 +91,7 @@ if (
 		<?php
 		if ( ! empty( $args['genres'] ) ) :
 			?>
-			<div class="st-sm-genres-container"> <!-- genres-container -->
+			<div class="sm-genres-wrapper"> <!-- genres-container -->
 				<?php
 				foreach ( $args['genres'] as $genre ) :
 					?>
@@ -111,9 +111,9 @@ if (
 		<?php
 		if ( ! empty( $args['synopsis'] ) ) :
 			?>
-			<div class="primary-text-primary-font st-sm-description-container"> <!-- description-container -->
+			<p class="primary-text-primary-font sm-description"> <!-- description-container -->
 				<?php echo esc_html( $args['synopsis'] ); ?>
-			</div> <!-- /description-container -->
+			</p> <!-- /description-container -->
 			<?php
 		endif;
 		?>
@@ -121,15 +121,16 @@ if (
 		<?php
 		if ( ! empty( $args['directors'] ) && ! empty( $args['directors'][0] ) ) :
 			?>
-			<div class="st-sm-directors-container"> <!-- directors-container -->
-				<span class="primary-text-primary-font st-sm-director-text"> <!-- director-text -->
+			<div class="sm-directors-wrapper"> <!-- directors-container -->
+				<span class="primary-text-primary-font"> <!-- director-text -->
 					<?php esc_html_e( 'Directors:', 'screen-time' ); ?>
 				</span> <!-- /director-text -->
-				<ul class="st-sm-director-list"> <!-- director-list -->
+
+				<ul class="sm-director-list"> <!-- director-list -->
 					<?php
 					foreach ( $args['directors'][0] as $director ) :
 						?>
-						<li class="primary-text-primary-font st-sm-director-item"> <!-- director-item -->
+						<li class="primary-text-primary-font"> <!-- director-item -->
 							<?php echo esc_html( ( get_the_title( $director ['person_id'] ) ) ); ?>
 						</li> <!-- /director-item -->
 						<?php
@@ -142,12 +143,12 @@ if (
 		?>
 
 		<?php if ( ! empty( $args['trailer'] ) ) : ?>
-			<div class="st-sm-watch-trailer-container" data-src="<?php echo esc_url( wp_get_attachment_url( $args['trailer'] ) ); ?>"> <!-- watch-trailer-container -->
-				<div class="ic-play-circle-container"> <!-- ic-play-circle-container -->
+			<div class="sm-watch-trailer-wrapper" data-src="<?php echo esc_url( wp_get_attachment_url( $args['trailer'] ) ); ?>"> <!-- watch-trailer-container -->
+				<div class="ic-play-circle-wrapper"> <!-- ic-play-circle-container -->
 					<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_play.svg' ); ?>"/>
 				</div> <!-- /ic-play-circle-container -->
 
-				<div class="st-sm-watch-trailer-text-container"> <!-- watch-trailer-text-container -->
+				<div class="sm-watch-trailer-text-wrapper"> <!-- watch-trailer-text-container -->
 					<p class="primary-text-primary-font"> <!-- watch-trailer-text -->
 						<?php esc_html_e( 'Watch Trailer', 'screen-time' ); ?>
 					</p> <!-- /watch-trailer-text -->

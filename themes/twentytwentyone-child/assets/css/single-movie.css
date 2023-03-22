@@ -17,7 +17,7 @@
 }
 
 /* Hero Section Starts */
-.st-sm-poster-container > img {
+.sm-poster-wrapper > img {
 	max-height: 286px;
 	width: 100%;
 	height: 100%;
@@ -25,20 +25,20 @@
 	object-position: top;
 }
 
-.st-sm-info-stats-container {
+.sm-info-stats-wrapper {
 	padding: 16px 24px 0 24px;
 	display: flex;
 	flex-direction: column;
 }
 
-.st-sm-title {
+.sm-movie-title {
 	font-weight: 600;
 	font-size: 32px;
 	line-height: 40px;
 	order: 1;
 }
 
-.st-sm-stats-items {
+.sm-stats-wrapper {
 	padding: 16px 0 0;
 	display: flex;
 	flex-direction: row;
@@ -48,7 +48,7 @@
 	order: 2;
 }
 
-.st-sm-stats-list-item:not(:first-child)::before {
+.sm-stats-item:not(:first-child)::before {
 	content: "•";
 	font-size: 14px;
 	line-height: 20.56px;
@@ -65,31 +65,31 @@
 	top: -1.1px;
 }
 
-.st-sm-rating-text {
+.sm-rating span {
 	font-weight: 700;
 	font-size: 14px;
 	line-height: 20.56px;
 }
 
-.st-sm-release-date-text {
+.sm-release-date span {
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 20.56px;
 }
 
-.st-sm-content-rating-text {
+.sm-content-rating span {
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 20.56px;
 }
 
-.st-sm-runtime-text {
+.sm-runtime span {
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 20.56px;
 }
 
-.st-sm-genres-container {
+.sm-genres-wrapper {
 	padding-top: 16px;
 	order: 3;
 	display: flex;
@@ -97,7 +97,7 @@
 	gap: 24px;
 }
 
-.st-sm-genres-container p {
+.sm-genres-wrapper p {
 	padding: 4px 12px;
 	border: 1px solid var(--primary-font-color);
 	border-radius: 24px;
@@ -106,16 +106,15 @@
 	line-height: 24px;
 }
 
-.st-sm-description-container {
+.sm-description {
 	order: 4;
 	padding-top: 24px;
-
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 24px;
 }
 
-.st-sm-directors-container {
+.sm-directors-wrapper {
 	order: 5;
 	padding-top: 24px;
 	display: flex;
@@ -124,13 +123,13 @@
 	gap: 8px;
 }
 
-.st-sm-director-text {
+.sm-directors-wrapper span {
 	font-weight: 700;
 	font-size: 14px;
 	line-height: 21px;
 }
 
-.st-sm-director-list {
+.sm-director-list {
 	padding: 0;
 	display: flex;
 	flex-direction: row;
@@ -139,18 +138,18 @@
 	gap: 8px;
 }
 
-.st-sm-director-item {
+.sm-director-list li {
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 21px;
 }
 
-.st-sm-director-item:not(:first-child)::before {
+.sm-director-list li:not(:first-child)::before {
 	content: "•";
 	margin-right: 4px;
 }
 
-.st-sm-watch-trailer-container {
+.sm-watch-trailer-wrapper {
 	order: 6;
 	margin-top: 44px;
 	position: relative;
@@ -159,17 +158,17 @@
 	cursor: pointer;
 }
 
-.ic-play-circle-container {
+.ic-play-circle-wrapper {
 	position: absolute;
 	left: 0;
 }
 
-.ic-play-circle-container > img {
+.ic-play-circle-wrapper > img {
 	height: 70px;
 	width: 70px;
 }
 
-.st-sm-watch-trailer-text-container {
+.sm-watch-trailer-text-wrapper {
 	width: 100%;
 	padding: 12px 24px;
 	border: 1px solid var(--primary-font-color);
@@ -181,7 +180,7 @@
 	line-height: 24px;
 }
 
-.st-sm-watch-trailer-text-container:hover {
+.sm-watch-trailer-text-wrapper:hover {
 	background-color: var(--border-color);
 	border: 1px solid var(--border-color);
 }
@@ -372,7 +371,7 @@
 
 /* Reviews Section Ends */
 
-.st-sm-genres-container p:hover {
+.sm-genres-wrapper p:hover {
 	background-color: var(--border-color);
 	border: 1px solid var(--border-color);
 }
@@ -387,7 +386,7 @@
 	}
 
 	/* Hero Section Starts */
-	.st-sm-info-container {
+	.sm-info-wrapper {
 		padding: 35px 0;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -395,32 +394,32 @@
 		align-items: center;
 	}
 
-	.st-sm-poster-container {
+	.sm-poster-wrapper {
 		max-height: 876px;
 		max-width: 592px;
 	}
 
-	.st-sm-poster-container > img {
+	.sm-poster-wrapper > img {
 		max-height: none;
 	}
 
-	.st-sm-info-stats-container {
+	.sm-info-stats-wrapper {
 		padding: 0;
 		justify-content: center;
 	}
 
-	.st-sm-title {
+	.sm-movie-title {
 		font-size: 88px;
 		line-height: 96px;
 	}
 
-	.st-sm-stats-items {
+	.sm-stats-wrapper {
 		padding: 64px 0 0;
 		flex-wrap: wrap;
 		gap: 18px;
 	}
 
-	.st-sm-stats-list-item:not(:first-child)::before {
+	.sm-stats-item:not(:first-child)::before {
 		content: "•";
 		font-size: 24px;
 		line-height: 24px;
@@ -428,27 +427,27 @@
 		margin-right: 8px;
 	}
 
-	.st-sm-rating-text {
+	.sm-rating span {
 		font-size: 24px;
 		line-height: 24px;
 	}
 
-	.st-sm-release-date-text {
+	.sm-release-date span {
 		font-size: 24px;
 		line-height: 24px;
 	}
 
-	.st-sm-content-rating-text {
+	.sm-content-rating span {
 		font-size: 24px;
 		line-height: 24px;
 	}
 
-	.st-sm-runtime-text {
+	.sm-runtime span {
 		font-size: 24px;
 		line-height: 24px;
 	}
 
-	.st-sm-genres-container {
+	.sm-genres-wrapper {
 		padding-top: 40px;
 		order: 4;
 		display: flex;
@@ -457,20 +456,20 @@
 		gap: 31px;
 	}
 
-	.st-sm-genres-container p {
+	.sm-genres-wrapper p {
 		padding: 8px 16px;
 		font-size: 16px;
 		line-height: 24px;
 	}
 
-	.st-sm-description-container {
+	.sm-description {
 		order: 3;
 		padding-top: 36px;
 		font-size: 18px;
 		line-height: 32px;
 	}
 
-	.st-sm-directors-container {
+	.sm-directors-wrapper {
 		order: 5;
 		padding-top: 64px;
 		display: flex;
@@ -479,12 +478,12 @@
 		gap: 12px;
 	}
 
-	.st-sm-director-text {
+	.sm-directors-wrapper span {
 		font-size: 18px;
 		line-height: 32px;
 	}
 
-	.st-sm-director-list {
+	.sm-director-list {
 		padding: 0;
 		display: flex;
 		flex-direction: row;
@@ -493,18 +492,18 @@
 		gap: 12px;
 	}
 
-	.st-sm-director-item {
+	.sm-director-list li {
 		font-weight: 400;
 		font-size: 18px;
 		line-height: 32px;
 	}
 
-	.st-sm-director-item:not(:first-child)::before {
+	.sm-director-list li:not(:first-child)::before {
 		content: "•";
 		margin-right: 4px;
 	}
 
-	.st-sm-watch-trailer-container {
+	.sm-watch-trailer-wrapper {
 		order: 6;
 		margin-top: 65px;
 		position: relative;
@@ -513,17 +512,17 @@
 		justify-content: flex-start;
 	}
 
-	.ic-play-circle-container {
+	.ic-play-circle-wrapper {
 		position: absolute;
 		left: 0;
 	}
 
-	.ic-play-circle-container > img {
+	.ic-play-circle-wrapper > img {
 		height: 100px;
 		width: 100px;
 	}
 
-	.st-sm-watch-trailer-text-container {
+	.sm-watch-trailer-text-wrapper {
 		padding: 16px 40px;
 		flex: 0 0 264px;
 		text-align: end;
