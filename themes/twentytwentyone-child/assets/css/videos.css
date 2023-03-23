@@ -2,12 +2,13 @@
  * This file contains the stylesheet for the videos template
  */
 
-.sp-wrapper .videos-wrapper {
-	padding: 0;
-}
 
 .videos-wrapper {
 	padding: 0 24px;
+}
+
+.sp-wrapper .videos-wrapper {
+	padding: 0;
 }
 
 .videos-heading-wrapper {
