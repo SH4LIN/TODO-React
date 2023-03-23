@@ -177,7 +177,7 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 				foreach ( $upcoming_movies_array as $upcoming_movie ) {
 					$upcoming_movie_date = get_post_meta( $upcoming_movie->ID, RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, true );
 					if ( ! empty( $upcoming_movie_date ) ) {
-						$release_year = DateTime::createFromFormat( 'Y-m-d', $debut_movie_date )->format( 'Y' );
+						$release_year = DateTime::createFromFormat( 'Y-m-d', $upcoming_movie_date )->format( 'Y' );
 
 						$upcoming_movies .= sprintf( '%1$s (%2$s), ', $upcoming_movie->post_title, $release_year );
 					}
