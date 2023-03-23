@@ -66,7 +66,7 @@ $movies = $args['movies'];
 								$formatted_date = gmdate( 'jS M Y', strtotime( $release_year ) );
 								?>
 								<div class="secondary-text-primary-font movie-release-date"> <!-- release-date-text -->
-									<?php echo esc_html__( 'Release: ', 'screen-time' ) . esc_html( $formatted_date ); ?>
+									<?php esc_html_e( sprintf( 'Release: %s', $formatted_date ), 'screen-time' ); ?>
 								</div> <!-- /release-date-text -->
 								<?php
 							}
