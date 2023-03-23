@@ -17,8 +17,8 @@ function languageSwitcher() {
 		'.header-language-container img'
 	);
 	let down = true;
-	if (languageSwitch !== null && dropDownButton !== null) {
-		languageSwitch.addEventListener('click', function () {
+	if (dropDownButton !== null) {
+		languageSwitch?.addEventListener('click', function () {
 			if (down) {
 				dropDownButton.style.transform = 'rotate(180deg)';
 				down = false;
@@ -36,30 +36,29 @@ function languageSwitcher() {
 function expandMenu() {
 	const menu = document.querySelector('.header-menu-container');
 	let isExpandedMenuHidden = true;
-	if (menu !== null) {
-		menu.addEventListener('click', function () {
-			const expandedMenu = document.querySelector(
-				'.primary-menu-expanded-container'
-			);
-			if (expandedMenu !== null) {
-				if (!isExpandedMenuHidden) {
-					expandedMenu.style.height = '0';
-					isExpandedMenuHidden = true;
-				} else {
-					expandedMenu.style.height = '1000px';
-					isExpandedMenuHidden = false;
-				}
+
+	menu?.addEventListener('click', function () {
+		const expandedMenu = document.querySelector(
+			'.primary-menu-expanded-container'
+		);
+		if (expandedMenu !== null) {
+			if (!isExpandedMenuHidden) {
+				expandedMenu.style.height = '0';
+				isExpandedMenuHidden = true;
+			} else {
+				expandedMenu.style.height = '1000px';
+				isExpandedMenuHidden = false;
 			}
-			const hamburgerMenuIcon = document.querySelector(
-				'#hamburger_menu_icon'
-			);
-			if (hamburgerMenuIcon !== null) {
-				hamburgerMenuIcon.classList.toggle('hidden');
-			}
-			const closeMenuIcon = document.querySelector('#close_menu_icon');
-			if (closeMenuIcon !== null) {
-				closeMenuIcon.classList.toggle('hidden');
-			}
-		});
-	}
+		}
+		const hamburgerMenuIcon = document.querySelector(
+			'#hamburger_menu_icon'
+		);
+		if (hamburgerMenuIcon !== null) {
+			hamburgerMenuIcon.classList.toggle('hidden');
+		}
+		const closeMenuIcon = document.querySelector('#close_menu_icon');
+		if (closeMenuIcon !== null) {
+			closeMenuIcon.classList.toggle('hidden');
+		}
+	});
 }

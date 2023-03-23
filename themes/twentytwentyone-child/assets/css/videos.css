@@ -2,6 +2,10 @@
  * This file contains the stylesheet for the videos template
  */
 
+.sp-wrapper .videos-wrapper {
+	padding: 0;
+}
+
 .videos-wrapper {
 	padding: 0 24px;
 }
@@ -24,12 +28,11 @@
 }
 
 .video-item-wrapper {
-	position: relative;
 	cursor: pointer;
+	flex: 1 1 327px;
 }
 
 .video-item {
-	max-width: 327px;
 	height: 210px;
 	position: relative;
 }
@@ -93,10 +96,10 @@
 	.video-list {
 		gap: 32px;
 		justify-content: flex-start;
+		flex: 1 1 384px;
 	}
 
 	.video-item {
-		max-width: 384px;
 		height: 246px;
 	}
 

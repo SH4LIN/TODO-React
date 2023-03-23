@@ -102,26 +102,28 @@
 		list-style: none;
 	}
 
-	.quick-link-item {
+	.quick-links-list li {
 		display: flex;
 		align-items: center;
 		justify-items: center;
 	}
 
-	.quick-link-item::before {
+	.quick-links-list li::before {
 		content: url(../images/ic_arrow.svg);
 		margin-right: 8px;
 		line-height: 0;
 	}
 
-	.quick-link-item:not(:first-child) {
+	.quick-links-list li:not(:first-child) {
 		margin-top: 24px;
 	}
 
-	.quick-link-item a {
+	.quick-links-list li a {
 		font-size: 20px;
 		line-height: 32px;
 		font-weight: 400;
+		color: var(--primary-font-color);
+		font-family: var(--primary-font-family);
 	}
 
 	/* Quick Links Section Ends */

@@ -148,7 +148,7 @@ if ( $post_thumbnail_id ) {
 						</p>
 					</div>
 
-					<div class= "st-sp-upcoming-movies-wrapper">
+					<div class= "sp-upcoming-movies-wrapper">
 						<p class="primary-text-primary-font personal-details-text">
 							<?php echo esc_html( $upcoming_movies ); ?>
 						</p>

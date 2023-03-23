@@ -2,6 +2,10 @@
  * This file contains the stylesheet for the snapshots template
  */
 
+.sp-wrapper .snapshots-wrapper {
+	padding: 0;
+}
+
 .snapshots-wrapper {
 	padding: 0 24px;
 }

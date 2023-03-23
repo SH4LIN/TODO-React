@@ -141,13 +141,13 @@ footer {
 		text-transform: uppercase;
 	}
 
-	.st-company-navigation-list {
+	.company-navigation-list {
 		margin-top: 24px;
 		list-style: none;
 		padding: 0;
 	}
 
-	.st-company-navigation-list > li > a {
+	.company-navigation-list > li > a {
 		font-weight: 400;
 		font-size: 16px;
 		line-height: 40px;
@@ -165,20 +165,20 @@ footer {
 		display: block;
 	}
 
-	.st-footer-explore-navigation {
+	.footer-explore-navigation {
 		font-weight: 700;
 		font-size: 16px;
 		line-height: 32px;
 		text-transform: uppercase;
 	}
 
-	.st-explore-navigation-list {
+	.explore-navigation-list {
 		margin-top: 24px;
 		list-style: none;
 		padding: 0;
 	}
 
-	.st-explore-navigation-list > li > a {
+	.explore-navigation-list > li > a {
 		font-weight: 400;
 		font-size: 16px;
 		line-height: 40px;

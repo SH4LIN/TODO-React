@@ -7,7 +7,6 @@
  */
 
 if (
-	! isset( $args['id'] ) ||
 	! isset( $args['snapshots'] )
 ) {
 	return;
