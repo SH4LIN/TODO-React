@@ -35,6 +35,8 @@ function languageSwitcher() {
  */
 function expandMenu() {
 	const menu = document.querySelector('.header-menu-container');
+	const hamburgerMenuIcon = document.querySelector('#hamburger_menu_icon');
+	const closeMenuIcon = document.querySelector('#close_menu_icon');
 	let isExpandedMenuHidden = true;
 
 	menu?.addEventListener('click', function () {
@@ -50,15 +52,9 @@ function expandMenu() {
 				isExpandedMenuHidden = false;
 			}
 		}
-		const hamburgerMenuIcon = document.querySelector(
-			'#hamburger_menu_icon'
-		);
-		if (hamburgerMenuIcon !== null) {
-			hamburgerMenuIcon.classList.toggle('hidden');
-		}
-		const closeMenuIcon = document.querySelector('#close_menu_icon');
-		if (closeMenuIcon !== null) {
-			closeMenuIcon.classList.toggle('hidden');
-		}
+
+		hamburgerMenuIcon?.classList.toggle('hidden');
+
+		closeMenuIcon?.classList.toggle('hidden');
 	});
 }

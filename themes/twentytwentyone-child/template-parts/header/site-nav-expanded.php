@@ -39,8 +39,8 @@
 				array(
 					'menu'            => 'explore',
 					'theme_location'  => 'footer',
-					'container_class' => 'header-primary-menu-expanded-explore-menu',
-					'menu_class'      => 'header-primary-menu-expanded-explore-menu-list',
+					'container_class' => 'primary-menu-expanded-explore-menu',
+					'menu_class'      => 'primary-menu-expanded-explore-menu-list',
 					'container'       => 'nav',
 					'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
 					'fallback'        => false,

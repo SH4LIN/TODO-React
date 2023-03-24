@@ -57,8 +57,8 @@
 			</div> <!-- /header-actions-menu-container -->
 		</div> <!-- /header-container -->
 
-		<div class="header-primary-menu"> <!-- header-primary-menu -->
-			<div class="header-primary-menu-container"> <!-- header-primary-menu-container -->
+		<div class="primary-menu"> <!-- header-primary-menu -->
+			<div class="primary-menu-container"> <!-- header-primary-menu-container -->
 				<?php
 				wp_nav_menu(
 					array(
