@@ -1,0 +1,235 @@
+.social-buttons {
+  clear: both;
+}
+.social-buttons .social-buttons__share span {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  color: #415058;
+  display: inline-block;
+  padding-top: 12px;
+  border-top: 1px solid #ddd;
+}
+.social-buttons .social-buttons__share .share-buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+.social-buttons .social-buttons__share .share-buttons a {
+  margin: 0 5px 5px 0;
+}
+.social-buttons .social-buttons__share .share-buttons button {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  border-radius: 3px;
+  color: #656565;
+  background: #f8f8f8;
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+  text-shadow: none;
+  line-height: 23px;
+  padding: 1px 8px 0 5px;
+}
+.social-buttons .social-buttons__share .share-buttons button:hover {
+  background: #f1f1f1;
+  border-color: #999;
+  color: #222;
+}
+.social-buttons .social-buttons__share .share-buttons button i:before {
+  font-size: 18px;
+}
+.social-buttons .social-buttons__like {
+  margin: 16px 0;
+}
+.social-buttons .social-buttons__like span {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  color: #415058;
+  display: inline-block;
+  padding-top: 12px;
+  border-top: 1px solid #ddd;
+}
+.social-buttons .social-buttons__like .like-button {
+  display: flex;
+  flex-wrap: wrap;
+}
+.social-buttons .social-buttons__like .like-button a {
+  margin: 1px 7px 8px 1px;
+}
+.social-buttons .social-buttons__like .like-button button {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 500;
+  border-radius: 3px;
+  color: #656565;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+  text-shadow: none;
+  line-height: 23px;
+  padding: 4px 10px 3px;
+}
+.social-buttons .social-buttons__like .like-button button:hover {
+  background: #f1f1f1;
+  border-color: #999;
+  color: #222;
+}
+.social-buttons .social-buttons__like .like-button button i:before {
+  font-size: 16px;
+}
+.social-buttons .social-buttons__like p {
+  font-size: 11px;
+  font-weight: 400;
+  font-family: "Open Sans", sans-serif;
+}
+
+.single-post-wrapper {
+  padding: 20px 20px 0 20px;
+}
+.single-post-wrapper .breadcrumb-wrapper {
+  margin: 30px auto 0;
+}
+@media (min-width: 1025px) {
+  .single-post-wrapper .breadcrumb-wrapper {
+    max-width: 1100px;
+    margin-top: 40px;
+    padding: 0;
+  }
+}
+@media (min-width: 1025px) {
+  .single-post-wrapper .post-data > * {
+    max-width: 740px;
+    margin: 0 auto;
+  }
+}
+.single-post-wrapper .post-title {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  color: #415058;
+  font-weight: 200;
+  line-height: 1.4;
+}
+@media (min-width: 1025px) {
+  .single-post-wrapper .post-title {
+    font-size: 40px;
+    margin-top: 40px;
+    margin-bottom: 48px;
+  }
+}
+.single-post-wrapper .post-meta {
+  display: flex;
+  flex-direction: column;
+  margin-top: 14.4px;
+  margin-bottom: 28.8px;
+}
+@media (min-width: 1025px) {
+  .single-post-wrapper .post-meta {
+    display: block;
+  }
+}
+.single-post-wrapper .post-meta .post-author {
+  font-size: 14.4px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  color: #999;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.single-post-wrapper .post-meta .post-author a {
+  color: #999;
+  font-weight: 400;
+  text-decoration: none;
+  line-height: 1.6;
+}
+.single-post-wrapper .post-meta .post-author a:hover {
+  color: #3278bd;
+  text-decoration: underline;
+}
+.single-post-wrapper .post-meta .post-author span {
+  line-height: 1.6;
+  color: #999;
+  font-weight: 400;
+  text-decoration: none;
+}
+.single-post-wrapper .post-meta .post-category {
+  font-size: 14.4px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  color: #999;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.single-post-wrapper .post-meta .post-category a {
+  color: #999;
+  font-weight: 400;
+  text-decoration: none;
+  line-height: 1.6;
+}
+.single-post-wrapper .post-meta .post-category a:hover {
+  color: #3278bd;
+  text-decoration: underline;
+}
+.single-post-wrapper .post-meta .post-tag {
+  font-size: 14.4px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  color: #999;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.single-post-wrapper .post-meta .post-tag a {
+  color: #999;
+  font-weight: 400;
+  text-decoration: none;
+  line-height: 1.6;
+}
+.single-post-wrapper .post-meta .post-tag a:hover {
+  color: #3278bd;
+  text-decoration: underline;
+}
+.single-post-wrapper .post-content-wrapper p {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.single-post-wrapper .post-content-wrapper h2 {
+  margin-top: 36px;
+  margin-bottom: 24px;
+}
+.single-post-wrapper .post-content-wrapper h3 {
+  margin: 17.6px 0;
+}
+.single-post-wrapper .post-content-wrapper h4 {
+  margin: 16px 0;
+}
+.single-post-wrapper .related-section {
+  padding-top: 16px;
+  margin: 24px 0;
+}
+.single-post-wrapper .related-section p {
+  margin: 17.6px 0;
+  font-size: 22px;
+  line-height: 1.4;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-weight: 300;
+  color: #415058;
+}
+.single-post-wrapper .related-section .related-posts-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.single-post-wrapper .related-section .related-posts-wrapper .related-post .post-title {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/*# sourceMappingURL=single-post.css.map */

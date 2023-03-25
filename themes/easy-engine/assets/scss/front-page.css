@@ -1,0 +1,199 @@
+.front-page-wrapper {
+  padding: 20px;
+}
+@media (min-width: 1025px) {
+  .front-page-wrapper {
+    padding: 0 24px;
+  }
+}
+.front-page-wrapper .get-started-btn {
+  margin: 20px 0 30px;
+}
+@media (min-width: 1025px) {
+  .front-page-wrapper .get-started-btn {
+    margin: 27px;
+  }
+}
+.front-page-wrapper .get-started-btn a:hover {
+  background-color: #fff;
+  color: #3278bd;
+}
+.front-page-wrapper .get-started-btn a {
+  background-color: #3278bd;
+  border: 2px solid #3278bd;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-weight: 500;
+  line-height: 16px;
+  color: #fff;
+}
+@media (min-width: 1025px) {
+  .front-page-wrapper .content-wrapper {
+    max-width: 740px;
+    margin: 0 auto;
+  }
+}
+.front-page-wrapper .content-wrapper > h2 {
+  margin: 24px 0;
+}
+.front-page-wrapper .content-wrapper p {
+  margin: 16px 0;
+  font-size: 16px;
+  line-height: 25.6px;
+  font-weight: 400;
+  color: #1f292e;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+@media (min-width: 1025px) {
+  .front-page-wrapper .details > * {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+}
+.front-page-wrapper .features-section > h2 {
+  font-size: 24px;
+  margin-top: 36px;
+  margin-bottom: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  text-align: center;
+}
+.front-page-wrapper .features-section .features-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .front-page-wrapper .features-section .features-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.front-page-wrapper .features-section .features-wrapper .feature-post {
+  padding: 0 10px;
+}
+.front-page-wrapper .features-section .features-wrapper .feature-post h2 {
+  font-size: 22px;
+  margin: 0 0 17.6px;
+}
+.front-page-wrapper .features-section .features-wrapper .feature-post p {
+  font-size: 16px;
+  font-weight: 300;
+  color: #1f292e;
+  margin-bottom: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+.front-page-wrapper .advantages-section > h2 {
+  font-size: 24px;
+  margin-top: 36px;
+  margin-bottom: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  text-align: center;
+}
+.front-page-wrapper .advantages-section .advantages-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .front-page-wrapper .advantages-section .advantages-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.front-page-wrapper .advantages-section .advantages-wrapper .advantage-post {
+  padding: 0 10px;
+}
+.front-page-wrapper .advantages-section .advantages-wrapper .advantage-post h2 {
+  font-size: 22px;
+  margin: 0 0 17.6px;
+}
+.front-page-wrapper .advantages-section .advantages-wrapper .advantage-post p {
+  font-size: 16px;
+  font-weight: 300;
+  color: #1f292e;
+  margin-bottom: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+.front-page-wrapper .ted-talks-section > h2 {
+  font-size: 24px;
+  margin-top: 36px;
+  margin-bottom: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  text-align: center;
+}
+.front-page-wrapper .ted-talks-section .ted-talks-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .front-page-wrapper .ted-talks-section .ted-talks-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.front-page-wrapper .ted-talks-section .ted-talks-wrapper .ted-talks-post figcaption {
+  font-size: 16px;
+  font-weight: 300;
+  color: #1f292e;
+  margin-bottom: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  text-align: center;
+}
+.front-page-wrapper .testimonials-section > h2 {
+  font-size: 24px;
+  margin-top: 36px;
+  margin-bottom: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  text-align: center;
+}
+.front-page-wrapper .testimonials-section .testimonials-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .front-page-wrapper .testimonials-section .testimonials-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.front-page-wrapper .testimonials-section .testimonials-wrapper .testimonials-post {
+  padding: 0 10px;
+}
+.front-page-wrapper .help-section > h2 {
+  font-size: 24px;
+  margin-top: 36px;
+  margin-bottom: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  text-align: center;
+}
+.front-page-wrapper .help-section .help-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .front-page-wrapper .help-section .help-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.front-page-wrapper .help-section .help-wrapper .help-post {
+  padding: 0 10px;
+}
+.front-page-wrapper .help-section .help-wrapper .help-post h2 {
+  font-size: 22px;
+  margin: 0 0 17.6px;
+}
+.front-page-wrapper .help-section .help-wrapper .help-post p {
+  font-size: 16px;
+  font-weight: 300;
+  color: #1f292e;
+  margin-bottom: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+.front-page-wrapper .get-started-btn-wrapper {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+/*# sourceMappingURL=front-page.css.map */

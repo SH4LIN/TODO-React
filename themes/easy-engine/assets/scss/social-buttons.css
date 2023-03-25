@@ -1,0 +1,18 @@
+.social_buttons .social_buttons__share {
+  display: flex;
+  flex-wrap: wrap;
+}
+.social_buttons .social_buttons__share button {
+  margin: 0 5px 5px 0;
+  padding: 0 8px 0 5px;
+  background: unset;
+  font-size: 12px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  border-radius: 3px;
+  color: #656565;
+  background: #f8f8f8;
+  border: 1px solid #ccc;
+}
+
+/*# sourceMappingURL=social-buttons.css.map */

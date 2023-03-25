@@ -1,0 +1,230 @@
+@import "variables";
+.front-page-wrapper {
+  padding: 20px;
+
+  @media (min-width: 1025px) {
+    padding: 0 24px;
+  }
+
+  .get-started-btn {
+    margin: 20px 0 30px;
+
+    @media (min-width: 1025px) {
+      margin: 27px;
+    }
+
+    & a:hover {
+      background-color: $background-color;
+      color: $button-color;
+    }
+
+    a {
+      background-color: $button-color;
+      border: 2px solid $button-border;
+      padding: 12px 30px;
+      font-size: 16px;
+      font-family: $font-family;
+      font-weight: 500;
+      line-height: 16px;
+      color: $background-color;
+    }
+  }
+
+  .content-wrapper {
+    @media (min-width: 1025px) {
+      max-width: 740px;
+        margin: 0 auto;
+    }
+    > h2 {
+      margin: 24px 0;
+    }
+
+    p {
+      margin: 16px 0;
+      font-size: 16px;
+      line-height: 25.6px;
+      font-weight: 400;
+      color: $pre-text-color;
+      font-family: $font-family;
+    }
+  }
+
+  .details > * {
+    @media (min-width: 1025px) {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+  }
+
+  .features-section {
+   > h2 {
+      font-size: 24px;
+      margin-top: 36px;
+      margin-bottom: 24px;
+      font-family: $font-family;
+      text-align: center;
+    }
+
+    .features-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+
+      @media (min-width: 768px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .feature-post {
+        padding: 0 10px;
+        h2 {
+          font-size: 22px;
+          margin: 0 0 17.6px;
+        }
+
+        p {
+            font-size: 16px;
+            font-weight: 300;
+            color: $pre-text-color;
+            margin-bottom: 16px;
+            font-family: $font-family;
+        }
+      }
+
+    }
+  }
+
+  .advantages-section {
+    > h2 {
+      font-size: 24px;
+      margin-top: 36px;
+      margin-bottom: 24px;
+      font-family: $font-family;
+      text-align: center;
+    }
+
+    .advantages-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+
+      @media (min-width: 768px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .advantage-post {
+        padding: 0 10px;
+        h2 {
+          font-size: 22px;
+          margin: 0 0 17.6px;
+        }
+
+        p {
+          font-size: 16px;
+          font-weight: 300;
+          color: $pre-text-color;
+          margin-bottom: 16px;
+          font-family: $font-family;
+        }
+      }
+
+    }
+  }
+
+  .ted-talks-section {
+    > h2 {
+      font-size: 24px;
+      margin-top: 36px;
+      margin-bottom: 24px;
+      font-family: $font-family;
+      text-align: center;
+    }
+
+    .ted-talks-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+
+      @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .ted-talks-post {
+        figcaption {
+          font-size: 16px;
+          font-weight: 300;
+          color: $pre-text-color;
+          margin-bottom: 16px;
+          font-family: $font-family;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .testimonials-section {
+    > h2 {
+      font-size: 24px;
+      margin-top: 36px;
+      margin-bottom: 24px;
+      font-family: $font-family;
+      text-align: center;
+    }
+
+    .testimonials-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+
+      @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .testimonials-post {
+        padding: 0 10px;
+      }
+    }
+  }
+
+  .help-section {
+    > h2 {
+      font-size: 24px;
+      margin-top: 36px;
+      margin-bottom: 24px;
+      font-family: $font-family;
+      text-align: center;
+    }
+
+    .help-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+
+      @media (min-width: 768px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .help-post {
+        padding: 0 10px;
+        h2 {
+          font-size: 22px;
+          margin: 0 0 17.6px;
+        }
+
+        p {
+          font-size: 16px;
+          font-weight: 300;
+          color: $pre-text-color;
+          margin-bottom: 16px;
+          font-family: $font-family;
+        }
+      }
+
+    }
+  }
+  .get-started-btn-wrapper {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+  }
+}

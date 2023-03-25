@@ -1,0 +1,100 @@
+@import "variables";
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: $link-color;
+    transition: 0.3s;
+}
+
+body {
+    background-color: $background-color;
+    font-family: $font-family;
+    line-height: 1.6;
+    color: $pre-text-color;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: unset;
+}
+
+h2 {
+    font-size: 24px;
+    font-family: $font-family;
+    color: $primary-font-color;
+    line-height: 1.4;
+    font-weight: 300;
+}
+
+h3 {
+    font-size: 22px;
+    font-family: $font-family;
+    color: $primary-font-color;
+    font-weight: 300;
+    line-height: 1.4;
+}
+
+h4 {
+    font-size: 20px;
+    font-family: $font-family;
+    color: $primary-font-color;
+    font-weight: 300;
+    line-height: 1.4;
+}
+
+pre {
+    margin: 13px auto;
+    padding: 18px 25px;
+    background-color: $pre-background-color;
+    border: 1px solid $border-color;
+    font-size: 13px;
+    color: $pre-text-color;
+    line-height: 20.8px;
+    font-family: monospace;
+    overflow-y: scroll;
+    -ms-overflow-y: scroll;
+
+    @media (min-width: 767px) {
+        max-width: 740px;
+    }
+}
+
+ul,li {
+    list-style-position: inside;
+}
+
+code {
+    font-size: 16px;
+    color: $pre-text-color;
+    line-height: 20.8px;
+    font-family: monospace;
+    overflow-wrap: break-word;
+}
+
+#breadcrumbs {
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 300;
+    font-family: $font-family;
+    a {
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

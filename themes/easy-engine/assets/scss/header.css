@@ -1,0 +1,186 @@
+.site-header {
+  background-color: #fff;
+  padding-top: 10px;
+  width: 100%;
+  position: relative;
+}
+
+.header-inner {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  padding: 5px 0;
+}
+@media (min-width: 1025px) {
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+}
+.header-inner__branding {
+  width: 182px;
+  height: auto;
+  margin-left: 12px;
+}
+.header-inner__branding .custom-logo-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.header-inner__navigation {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 12px;
+}
+.header-inner__navigation .menu-action {
+  padding: 12px 30px;
+}
+.header-inner__navigation i:after {
+  height: 20px;
+  width: 20px;
+}
+.header-inner__navigation .primary-menu-wrapper {
+  margin-right: 30px;
+}
+.header-inner__navigation .primary-menu-wrapper .primary-menu-inner {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+.header-inner__navigation .primary-menu-wrapper .primary-menu-inner li {
+  padding: 15px 15px;
+  position: relative;
+}
+.header-inner__navigation .primary-menu-wrapper .primary-menu-inner li a {
+  color: #415058;
+  font-size: 20px;
+  font-weight: 300;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  white-space: nowrap;
+}
+.header-inner__navigation .primary-menu-wrapper .primary-menu-inner li a:hover {
+  color: #3278bd;
+}
+.header-inner__navigation .primary-menu-wrapper .primary-menu-inner li ul {
+  list-style: none;
+  display: none;
+}
+.header-inner__navigation .primary-menu-wrapper .primary-menu-inner li ul li {
+  padding: 7px 15px;
+  overflow-wrap: break-word;
+  position: relative;
+}
+.header-inner__navigation .primary-menu-wrapper .primary-menu-inner li ul li a {
+  color: #415058;
+  font-size: 20px;
+  line-height: 32px;
+  font-weight: 300;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  display: flex;
+  white-space: normal;
+  align-items: center;
+}
+.header-inner__navigation .primary-menu-wrapper .primary-menu-inner li ul li a:hover {
+  color: #3278bd;
+}
+.header-inner__navigation .primary-menu-wrapper .primary-menu-inner li ul li:has(ul) > a:after {
+  margin-left: 8px;
+  height: 8px;
+  width: 8px;
+  display: inline-block;
+  background: url(../svgs/down-arrow.svg) no-repeat;
+  content: "";
+  transform: rotate(270deg);
+  vertical-align: center;
+}
+.header-inner__navigation .primary-menu-wrapper .primary-menu-inner li ul li:hover ul {
+  position: relative;
+  display: block;
+  margin-top: 15px;
+  width: 220px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+}
+.header-inner__navigation .primary-menu-wrapper .primary-menu-inner li ul li:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+}
+.header-inner__navigation .primary-menu-wrapper .primary-menu-inner li:has(ul) > a:after {
+  margin-left: 8px;
+  height: 8px;
+  width: 8px;
+  display: inline-block;
+  background: url(../svgs/down-arrow.svg) no-repeat;
+  content: "";
+  vertical-align: center;
+}
+.header-inner__navigation .primary-menu-wrapper .primary-menu-inner li:hover > ul {
+  position: absolute;
+  display: block;
+  margin-top: 15px;
+  width: 220px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.expanded-menu-wrapper {
+  width: 0;
+  overflow: hidden;
+  right: 0;
+  transition: width 0.3s ease-in-out;
+  border-top: 1px solid #ddd;
+  position: absolute;
+  background-color: #fff;
+  z-index: 999;
+}
+.expanded-menu-wrapper ul {
+  list-style: none;
+}
+.expanded-menu-wrapper .expanded-menu-inner li a {
+  display: block;
+  color: #415058;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 25.6px;
+  padding: 10px 30px;
+  border: 1px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  border-bottom: 1px solid #ddd;
+}
+.expanded-menu-wrapper .expanded-menu-inner li a:hover {
+  color: #3278bd;
+}
+.expanded-menu-wrapper .expanded-menu-inner li .sub-menu li a {
+  display: block;
+  color: #415058;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 25.6px;
+  padding: 10px 30px 10px 45px;
+  border: 1px;
+  border-bottom: 1px solid #ddd;
+}
+.expanded-menu-wrapper .expanded-menu-inner li .sub-menu li a:hover {
+  color: #3278bd;
+}
+
+.mobile-visible {
+  display: unset;
+}
+@media (min-width: 1025px) {
+  .mobile-visible {
+    display: none;
+  }
+}
+
+.desktop-visible {
+  display: none;
+}
+@media (min-width: 1025px) {
+  .desktop-visible {
+    display: unset;
+  }
+}
+
+/*# sourceMappingURL=header.css.map */
