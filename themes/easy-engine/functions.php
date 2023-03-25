@@ -115,7 +115,7 @@ if ( ! function_exists( 'get_breadcrumbs' ) ) :
 				}
 				echo $before . 'Archive by category "' . single_cat_title( '', false ) . '"' . $after;
 			} elseif ( is_search() ) {
-				echo $before . 'Search results for "' . get_search_query() . '"' . $after;
+				echo $before . 'You Searched for "' . get_search_query() . '"' . $after;
 			} elseif ( is_day() ) {
 				echo '<a href="' . get_year_link( get_the_time( 'Y' ) ) . '">' . get_the_time( 'Y' ) . '</a> ' . $delimiter . ' ';
 				echo '<a href="' . get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) . '">' . get_the_time( 'F' ) . '</a> ' . $delimiter . ' ';
@@ -212,13 +212,13 @@ if ( ! function_exists( 'ee_theme_scripts' ) ) :
 	 */
 	function ee_theme_scripts(): void {
 		// Ignoring the version number because it's a Google font.
-		wp_enqueue_style(
+		wp_enqueue_style( // phpcs:ignore:WordPress.WP.EnqueuedResourceParameters.MissingVersion
 			'font-families',
 			'https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100;200;300;400;500;600;700;800;900&family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap',
 			array(),
 			null
-		); // phpcs:ignore:WordPress.WP.EnqueuedResourceParameters.MissingVersion
-		wp_enqueue_style(
+		);
+		wp_enqueue_style( // phpcs:ignore:WordPress.WP.EnqueuedResourceParameters.MissingVersion
 			'font-awesome',
 			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css',
 			array(),
@@ -232,8 +232,10 @@ if ( ! function_exists( 'ee_theme_scripts' ) ) :
 		wp_enqueue_style( 'ee-blog-style', get_template_directory_uri() . '/assets/scss/blog.css', array(), filemtime( get_template_directory() . '/assets/scss/blog.css' ) );
 		wp_enqueue_style( 'ee-single-post-style', get_template_directory_uri() . '/assets/scss/single-post.css', array(), filemtime( get_template_directory() . '/assets/scss/single-post.css' ) );
 		wp_enqueue_style( 'ee-front-page-style', get_template_directory_uri() . '/assets/scss/front-page.css', array(), filemtime( get_template_directory() . '/assets/scss/front-page.css' ) );
+		wp_enqueue_style( 'ee-search-style', get_template_directory_uri() . '/assets/scss/search.css', array(), filemtime( get_template_directory() . '/assets/scss/search.css' ) );
 
 		wp_enqueue_script( 'ee-expand-menu', get_template_directory_uri() . '/assets/js/expand-menu.js', array(), filemtime( get_template_directory() . '/assets/js/expand-menu.js' ), true );
+		wp_enqueue_script( 'ee-search-form', get_template_directory_uri() . '/assets/js/search-form.js', array(), filemtime( get_template_directory() . '/assets/js/search-form.js' ), true );
 
 	}
 	add_action( 'wp_enqueue_scripts', 'ee_theme_scripts' );

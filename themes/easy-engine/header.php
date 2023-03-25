@@ -67,9 +67,7 @@
 						?>
 
 
-						<button id="search" class="search-toggle" aria-controls="search-container" aria-expanded="false">
-							<i class="fas fa-search fa-lg"></i>
-						</button>
+						<?php get_search_form(); ?>
 					</nav>
 				</div>
 
