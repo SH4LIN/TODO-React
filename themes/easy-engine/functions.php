@@ -5,6 +5,8 @@
  * @package EasyEngine
  */
 
+require_once get_template_directory() . '/functionality/settings-page.php';
+
 if ( ! function_exists( 'ee_theme_setup' ) ) :
 
 	/**
@@ -74,6 +76,8 @@ if ( ! function_exists( 'ee_theme_setup' ) ) :
 
 	add_action( 'after_setup_theme', 'ee_theme_setup' );
 endif;
+
+add_action( 'admin_menu', 'add_ee_sub_menu' );
 
 if ( ! function_exists( 'get_breadcrumbs' ) ) :
 

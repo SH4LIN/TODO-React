@@ -19,6 +19,7 @@
 
 					if (searchForm != null) {
 						searchForm.style.width = "200px";
+						searchForm.style.opacity = "1";
 						searchForm.style.overflow = "visible";
 					}
 				} else {
@@ -27,6 +28,7 @@
 
 					if (searchForm != null) {
 						searchForm.style.width = "0";
+						searchForm.style.opacity = "0";
 						searchForm.style.overflow = "hidden";
 					}
 				}

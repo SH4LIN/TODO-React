@@ -8,6 +8,24 @@
  * @since 1.0.0
  */
 
+function remove_search( $query, $error = true ): void {
+
+	if ( is_search() & ! is_admin() ) {
+		$query->is_search       = false;
+		$query->query_vars['s'] = false;
+		$query->query['s']      = false;
+
+		if ( true === $error ) {
+			$query->is_404 = true;
+		}
+	}
+}
+
+$search_option = get_option( 'ee-search-setting-checkbox' );
+if ( ! $search_option || 'off' === $search_option ) {
+	add_action( 'parse_query', 'remove_search' );
+}
+
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>> <!-- html -->
@@ -67,7 +85,11 @@
 						?>
 
 
-						<?php get_search_form(); ?>
+						<?php
+						if ( 'on' === $search_option ) {
+							get_search_form();
+						}
+						?>
 					</nav>
 				</div>
 

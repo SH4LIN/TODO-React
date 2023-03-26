@@ -165,6 +165,14 @@
   color: #3278bd;
 }
 
+#search {
+  cursor: pointer;
+}
+
+#search-close {
+  cursor: pointer;
+}
+
 .search-container {
   position: relative;
 }
@@ -173,9 +181,11 @@
   position: absolute;
   right: 0;
   width: 0;
-  transition: width 0.3s ease-in-out;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
   overflow: hidden;
   top: 40px;
+  z-index: 10;
 }
 .search-form .search-input {
   display: flex;
@@ -197,6 +207,9 @@
 }
 .search-form .search-input input:focus {
   outline: none;
+}
+.search-form .search-input .search-submit {
+  cursor: pointer;
 }
 
 .mobile-visible {

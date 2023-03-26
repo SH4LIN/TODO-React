@@ -36,19 +36,16 @@ get_header();
 			<?php
 			while ( have_posts() ) :
 				the_post();
-				?>
-				<div class="search-result-item">
-					<h2 class="search-result-item-title">
-						<a href="<?php the_permalink(); ?>">
-							<?php the_title(); ?>
-						</a>
-					</h2>
-					<div class="search-result-item-content">
-						<?php the_excerpt(); ?>
-					</div>
-				</div>
-				<?php
+				get_template_part( 'template-parts/blog-template' );
 			endwhile;
+			// Previous/next page navigation.
+			the_posts_pagination(
+				array(
+					'mid_size'  => 2,
+					'prev_text' => __( '&laquo; Previous', 'easy-engine' ),
+					'next_text' => __( 'Next &raquo;', 'easy-engine' ),
+				)
+			);
 			?>
 			</div>
 			<?php

@@ -206,6 +206,14 @@
     }
 }
 
+#search {
+    cursor: pointer;
+}
+
+#search-close {
+    cursor: pointer;
+}
+
 .search-container {
     position: relative;
 }
@@ -214,9 +222,11 @@
     position: absolute;
     right: 0;
     width: 0;
-    transition: width 0.3s ease-in-out;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
     overflow: hidden;
     top: 40px;
+    z-index: 10;
 
     .search-input {
         display: flex;
@@ -239,6 +249,10 @@
             &:focus {
                 outline: none;
             }
+        }
+
+        .search-submit {
+            cursor: pointer;
         }
     }
 }
