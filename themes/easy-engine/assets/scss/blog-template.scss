@@ -5,7 +5,7 @@
   margin: 24px 0;
 
 
-  @media (min-width: 1025px) {
+  @media (min-width: 768px) {
     grid-template-columns: 15% auto;
     gap: 20px;
   }
@@ -20,7 +20,7 @@
       font-weight: 400;
     }
 
-    @media (min-width: 1025px) {
+    @media (min-width: 768px) {
       padding: 7.2px 17.2px 7.2px 0;
     }
   }
@@ -50,6 +50,12 @@
     .post-meta {
       display: flex;
       flex-direction: column;
+
+        @media (min-width: 768px) {
+          gap: 4px;
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
     }
     .post-author {
       font-size: 14px;
@@ -74,7 +80,7 @@
       line-height: 1.6;
       font-weight: 600;
       color: $meta-color;
-      display: inline-block;
+
 
       a {
         color: $meta-color;
@@ -92,7 +98,6 @@
       line-height: 1.6;
       font-weight: 600;
       color: $meta-color;
-      display: inline-block;
 
       a {
         color: $meta-color;

@@ -2,7 +2,15 @@
 .social-buttons {
   clear: both;
 
+  button {
+    cursor: pointer;
+  }
+
   .social-buttons__share {
+    margin: 16px 0;
+    @media (min-width: 768px) {
+      margin: 18px 0;
+    }
     span {
       font-size: 12px;
       font-weight: 700;
@@ -17,11 +25,8 @@
       display: flex;
       flex-wrap: wrap;
 
-      a {
-        margin: 0 5px 5px 0;
-      }
-
       button {
+        margin: 0 5px 5px 0;
         text-decoration: none;
         display: flex;
         align-items: center;
@@ -67,11 +72,8 @@
       display: flex;
       flex-wrap: wrap;
 
-      a {
-        margin: 1px 7px 8px 1px;
-      }
-
       button {
+        margin: 1px 7px 8px 1px;
         text-decoration: none;
         display: flex;
         align-items: center;
@@ -105,5 +107,92 @@
       font-weight: 400;
       font-family: "Open Sans", sans-serif;
     }
+  }
+}
+
+.email-wrapper {
+  position: relative;
+}
+
+.email-dialog {
+  width: 342px;
+  position: absolute;
+  z-index: 1001;
+  border: 1px solid #ccc;
+  padding: 15px;
+  background: #fff;
+  box-shadow: 0 5px 20px rgba(0,0,0,.2);
+  text-align: left;
+  display: none;
+}
+
+.email-form {
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+
+  label {
+    font-size: 12px;
+    color: #333;
+    font-weight: 700;
+    display: block;
+    padding: 0 0 4px 0;
+    text-align: left;
+    text-shadow: none;
+    font-family: $font-family;
+  }
+
+  input[type=email],
+  input[type=text] {
+    width: 100%;
+    border: 1px solid #ccc;
+    margin-bottom: 1em;
+    background: #fff;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #333;
+    max-width: none;
+    padding: 1px 3px;
+    font-family: $font-family;
+  }
+
+  .button-container {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+
+    a {
+      font-size: 12px;
+      cursor: pointer;
+    }
+  }
+
+  .email-error-message {
+    color: #fff;
+    background-color: #771a09;
+    font-family: $font-family;
+    font-size: 12px;
+    padding: 5px 8px;
+    line-height: 1;
+    margin: 10px 0 0 0;
+    display: none;
+  }
+}
+
+.email-success {
+  display: none;
+  width: 100%;
+  color: $primary-font-color;
+  background-color: $background-color;
+  font-family: $font-family;
+  font-size: 12px;
+  padding: 5px 8px;
+  line-height: 1;
+  margin: 10px 0 0 0;
+  flex-direction: column;
+  gap: 12px;
+
+  a {
+    cursor: pointer;
   }
 }

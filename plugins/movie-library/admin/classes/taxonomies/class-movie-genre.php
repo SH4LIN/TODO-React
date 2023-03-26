@@ -36,7 +36,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Genre' ) ) {
 		 */
 		protected function init(): void {
 
-			$this->register();
+			add_action( 'init', array( $this, 'register' ) );
 
 		}
 
@@ -78,7 +78,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Genre' ) ) {
 					'query_var'          => true,
 					'public'             => true,
 					'publicly_queryable' => true,
-					'rewrite'            => false,
 				),
 			);
 

@@ -9,7 +9,25 @@ if ( have_posts() ){
 	the_post();
 }
 
+$related_posts = get_posts(
+	array(
+		'category__in' => wp_get_post_categories( get_the_ID() ),
+		'posts_per_page'  => 4,
+	)
+);
 
+if ( ! empty( $related_posts ) ) {
+	$related_posts = array_filter(
+		$related_posts,
+		function( $post ) {
+			return $post->ID !== get_the_ID();
+		}
+	);
+
+	if ( ! empty( $related_posts ) ) {
+		$related_posts = array_slice( $related_posts, 0, 3 );
+	}
+}
 
 get_header();
 ?>
@@ -82,13 +100,13 @@ get_header();
 						}
 						?>
 						<div class="related-post">
-							<div class="post-title">
-								<a href="<?php the_permalink(); ?>">
+							<div class="related-post-title">
+								<a href="<?php the_permalink( $related_post->ID ); ?>">
 									<?php echo esc_html( $related_post->post_title ); ?>
 								</a>
 							</div>
-							<div class="post-date">
-								<?php echo esc_html( $related_post->post_date_gmt ); ?>
+							<div class="related-post-date">
+								<?php echo esc_html( get_the_date( '', $related_post->ID ) ); ?>
 							</div>
 						</div>
 						<?php

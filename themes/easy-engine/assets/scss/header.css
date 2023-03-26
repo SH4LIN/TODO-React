@@ -9,7 +9,7 @@
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
-  padding: 5px 0;
+  padding: 5px 20px;
 }
 @media (min-width: 1025px) {
   .header-inner {
@@ -20,7 +20,6 @@
 .header-inner__branding {
   width: 182px;
   height: auto;
-  margin-left: 12px;
 }
 .header-inner__branding .custom-logo-link img {
   display: block;
@@ -32,7 +31,6 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding-right: 12px;
 }
 .header-inner__navigation .menu-action {
   padding: 12px 30px;

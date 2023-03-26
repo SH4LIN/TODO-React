@@ -61,6 +61,19 @@ if ( ! function_exists( 'ee_theme_setup' ) ) :
 			)
 		);
 
+		add_theme_support(
+			'custom-logo',
+			array(
+				'width'       => 180,
+				'height'      => 60,
+				'flex-width'  => true,
+				'flex-height' => true,
+			)
+		);
+
+		// Customize Selective Refresh Widgets.
+		add_theme_support( 'customize-selective-refresh-widgets' );
+
 		add_theme_support( 'custom-spacing' );
 		add_theme_support( 'custom-units' );
 		add_theme_support( 'wp-block-styles' );
@@ -87,122 +100,82 @@ if ( ! function_exists( 'get_breadcrumbs' ) ) :
 	 * @return void
 	 * @since 1.0.0
 	 */
-	function get_breadcrumbs(): void {
-		$show_on_home = 0; // 1 - show breadcrumbs on the homepage, 0 - don't show.
-		$delimiter    = '&raquo;'; // delimiter between crumbs.
-		$home         = __( 'Home', 'easy-engine' ); // text for the 'Home' link.
-		$show_current = 1; // 1 - show current post/page title in breadcrumbs, 0 - don't show.
-		$before       = '<span class="current">'; // tag before the current crumb.
-		$after        = '</span>'; // tag after the current crumb.
+	function get_breadcrumbs() {
+		// breadcrumb function.
+		$delimiter = '&nbsp;&nbsp;&#187;&nbsp;&nbsp;';
+		?>
+		<div id="#breadcrumbs">
+			<a href="<?php echo esc_url( home_url() ); ?>" rel="nofollow">
+				<?php esc_html_e( 'Home', 'easy-engine' ); ?>
+			</a>
+			<?php
+			if ( is_home() ) {
+				// translators: %s is the delimiter.
+				echo esc_html( sprintf( __( '%1$s Blog', 'easy-engine' ), $delimiter ) );
+			}
 
-		global $post;
-		$home_link = get_bloginfo( 'url' );
-		if ( is_home() || is_front_page() ) {
-			if ( 1 === $show_on_home ) {
+			if ( is_category() || is_single() ) {
+				if ( is_single() ) {
+					?>
+					<?php
+					$cat           = get_the_category()[0];
+					$cat_parent_id = $cat->parent;
+					if ( 0 !== $cat_parent_id ) {
+						// translators: 1. %s is the delimiter, 2. %s is the category name.
+						echo esc_html( sprintf( '%1$s %2$s', $delimiter, get_category( $cat_parent_id )->name ) );
+					} else {
+						// translators: 1. %s is the delimiter, 2. %s is the category name.
+						echo esc_html( sprintf( '%1$s %2$s', $delimiter, $cat->name ) );
+					}
+
+					?>
+
+					<span class="current">
+						<?php
+						echo esc_html( $delimiter );
+						the_title();
+						?>
+					</span>
+					<?php
+				} else {
+					?>
+					<span class="current">
+						<?php
+						// translators: 1. %s is the delimiter, 2. %s is the category name.
+						echo esc_html( $delimiter );
+						$category = get_the_category();
+						if ( $category[0] ) {
+							$category_name = $category[0]->name;
+							echo esc_html( $category_name );
+						}
+						?>
+					</span>
+					<?php
+				}
+			} elseif ( is_page() ) {
 				?>
-				<div id="breadcrumbs">
-					<a href="<?php echo esc_url( $home_link ); ?>">
-						<?php esc_html( $home ); ?>
-					</a>
-				</div>
+				<span class="current">
+					<?php
+					echo esc_html( $delimiter );
+					the_title();
+					?>
+				</span>
+							<?php
+			} elseif ( is_search() ) {
+				?>
+				<span class="current">
+					<?php
+					echo esc_html( $delimiter );
+					?>
+					<em>
+						<?php the_search_query(); ?>
+					</em>
+				</span>
 				<?php
 			}
-		} else {
 			?>
-			<div id="breadcrumbs">
-				<a href="<?php echo esc_url( $home_link ); ?>"> <?php echo esc_html( $home ); ?></a> <?php echo esc_html( $delimiter ); ?>
-			<?php
-			if ( is_category() ) {
-				$this_cat = get_category( get_query_var( 'cat' ), false );
-				if ( 0 !== $this_cat->parent ) {
-					echo esc_html( get_category_parents( $this_cat->parent, true, ' ' . $delimiter . ' ' ) );
-				}
-				echo $before . 'Archive by category "' . single_cat_title( '', false ) . '"' . $after;
-			} elseif ( is_search() ) {
-				echo $before . 'You Searched for "' . get_search_query() . '"' . $after;
-			} elseif ( is_day() ) {
-				echo '<a href="' . get_year_link( get_the_time( 'Y' ) ) . '">' . get_the_time( 'Y' ) . '</a> ' . $delimiter . ' ';
-				echo '<a href="' . get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) . '">' . get_the_time( 'F' ) . '</a> ' . $delimiter . ' ';
-				echo $before . get_the_time( 'd' ) . $after;
-			} elseif ( is_month() ) {
-				echo '<a href="' . get_year_link( get_the_time( 'Y' ) ) . '">' . get_the_time( 'Y' ) . '</a> ' . $delimiter . ' ';
-				echo $before . get_the_time( 'F' ) . $after;
-			} elseif ( is_year() ) {
-				echo $before . get_the_time( 'Y' ) . $after;
-			} elseif ( is_single() && ! is_attachment() ) {
-				if ( get_post_type() != 'post' ) {
-					$post_type = get_post_type_object( get_post_type() );
-					$slug      = $post_type->rewrite;
-					echo '<a href="' . $home_link . '/' . $slug['slug'] . '/">' . $post_type->labels->singular_name . '</a>';
-					if ( $show_current == 1 ) {
-						echo ' ' . $delimiter . ' ' . $before . get_the_title() . $after;
-					}
-				} else {
-					$cat  = get_the_category();
-					$cat  = $cat[0];
-					$cats = get_category_parents( $cat, true, ' ' . $delimiter . ' ' );
-					if ( $show_current == 0 ) {
-						$cats = preg_replace( "#^(.+)\s$delimiter\s$#", '$1', $cats );
-					}
-					echo $cats;
-					if ( $show_current == 1 ) {
-						echo $before . get_the_title() . $after;
-					}
-				}
-			} elseif ( ! is_single() && ! is_page() && get_post_type() != 'post' && ! is_404() ) {
-				$post_type = get_post_type_object( get_post_type() );
-				echo $before . $post_type->labels->singular_name . $after;
-			} elseif ( is_attachment() ) {
-				$parent = get_post( $post->post_parent );
-				$cat    = get_the_category( $parent->ID );
-				$cat    = $cat[0];
-				echo get_category_parents( $cat, true, ' ' . $delimiter . ' ' );
-				echo '<a href="' . get_permalink( $parent ) . '">' . $parent->post_title . '</a>';
-				if ( $show_current == 1 ) {
-					echo ' ' . $delimiter . ' ' . $before . get_the_title() . $after;
-				}
-			} elseif ( is_page() && ! $post->post_parent ) {
-				if ( $show_current == 1 ) {
-					echo $before . get_the_title() . $after;
-				}
-			} elseif ( is_page() && $post->post_parent ) {
-				$parent_id   = $post->post_parent;
-				$breadcrumbs = array();
-				while ( $parent_id ) {
-					$page          = get_post( $parent_id );
-					$breadcrumbs[] = '<a href="' . get_permalink( $page->ID ) . '">' . get_the_title( $page->ID ) . '</a>';
-					$parent_id     = $page->post_parent;
-				}
-				$breadcrumbs = array_reverse( $breadcrumbs );
-				for ( $i = 0; $i < count( $breadcrumbs ); $i++ ) {
-					echo $breadcrumbs[ $i ];
-					if ( $i != count( $breadcrumbs ) - 1 ) {
-						echo ' ' . $delimiter . ' ';
-					}
-				}
-				if ( $show_current == 1 ) {
-					echo ' ' . $delimiter . ' ' . $before . get_the_title() . $after;
-				}
-			} elseif ( is_tag() ) {
-				echo $before . 'Posts tagged "' . single_tag_title( '', false ) . '"' . $after;
-			} elseif ( is_author() ) {
-				global $author;
-				$userdata = get_userdata( $author );
-				echo $before . 'Articles posted by ' . $userdata->display_name . $after;
-			} elseif ( is_404() ) {
-				echo $before . 'Error 404' . $after;
-			}
-			if ( get_query_var( 'paged' ) ) {
-				if ( is_category() || is_day() || is_month() || is_year() || is_search() || is_tag() || is_author() ) {
-					echo ' (';
-				}
-				echo __( 'Page' ) . ' ' . get_query_var( 'paged' );
-				if ( is_category() || is_day() || is_month() || is_year() || is_search() || is_tag() || is_author() ) {
-					echo ')';
-				}
-			}
-			echo '</div>';
-		}
+		</div>
+		<?php
 	}
 endif;
 
@@ -240,8 +213,28 @@ if ( ! function_exists( 'ee_theme_scripts' ) ) :
 
 		wp_enqueue_script( 'ee-expand-menu', get_template_directory_uri() . '/assets/js/expand-menu.js', array(), filemtime( get_template_directory() . '/assets/js/expand-menu.js' ), true );
 		wp_enqueue_script( 'ee-search-form', get_template_directory_uri() . '/assets/js/search-form.js', array(), filemtime( get_template_directory() . '/assets/js/search-form.js' ), true );
+		wp_enqueue_script( 'ee-share-buttons', get_template_directory_uri() . '/assets/js/share-buttons.js', array( 'wp-i18n' ), filemtime( get_template_directory() . '/assets/js/share-buttons.js' ), true );
 
 	}
 	add_action( 'wp_enqueue_scripts', 'ee_theme_scripts' );
+endif;
+
+if ( ! function_exists( 'change_blog_posts' ) ) :
+
+	/**
+	 * Change the category of post to display on the blog page.
+	 *
+	 * @param WP_Query $query The query object.
+	 * @return void
+	 * @since 1.0.0
+	 */
+	function change_blog_posts( $query ) {
+		if ( $query->is_main_query() && ! is_admin() && is_home() ) {
+			$query->set( 'category_name', 'blog' );
+			$query->set( 'ignore_sticky_posts', true );
+		}
+	}
+	add_action( 'pre_get_posts', 'change_blog_posts' );
+
 endif;
 

@@ -5,15 +5,15 @@
 
   .breadcrumb-wrapper {
     margin: 30px auto 0;
-    @media (min-width: 1025px) {
+    padding: 0 20px;
+    @media (min-width: 768px) {
       max-width: 1100px;
       margin-top: 40px;
-      padding: 0;
     }
   }
 
   .post-data > * {
-    @media (min-width: 1025px) {
+    @media (min-width: 768px) {
       max-width: 740px;
       margin: 0 auto;
     }
@@ -28,7 +28,7 @@
     font-weight: 200;
     line-height: 1.4;
 
-    @media (min-width: 1025px) {
+    @media (min-width: 768px) {
       font-size: 40px;
       margin-top: 40px;
       margin-bottom: 48px;
@@ -41,7 +41,7 @@
     margin-top: 14.4px;
     margin-bottom: 28.8px;
 
-    @media (min-width: 1025px) {
+    @media (min-width: 768px) {
       display: block;
     }
 
@@ -134,7 +134,7 @@
 
   .related-section {
     padding-top: 16px;
-    margin: 24px 0;
+    margin: 24px auto;
     p {
       margin: 17.6px 0;
       font-size: 22px;
@@ -145,11 +145,19 @@
     }
 
     .related-posts-wrapper {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
 
       .related-post {
-        .post-title {
+        margin-bottom: 14px;
+
+        &-title {
+          font-size: 14px;
+          line-height: 20px;
+        }
+
+        &-date {
           font-size: 14px;
           line-height: 20px;
         }

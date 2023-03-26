@@ -5,40 +5,6 @@
  * This file is a template file for the front page.
  */
 
-$features = new WP_Query(
-	array(
-		'post_type'     => 'post',
-		'category_name' => 'features',
-	)
-);
-
-$advantages = new WP_Query(
-	array(
-		'post_type'     => 'post',
-		'category_name' => 'pros',
-	)
-);
-
-$ted_talks = new WP_Query(
-	array(
-		'post_type'     => 'post',
-		'category_name' => 'ted-talks',
-	)
-);
-
-$testimonials = new WP_Query(
-	array(
-		'post_type'     => 'post',
-		'category_name' => 'testimonial',
-	)
-);
-
-$need_help = new WP_Query(
-	array(
-		'post_type'     => 'post',
-		'category_name' => 'need-help',
-	)
-);
 
 get_header();
 ?>
@@ -51,6 +17,14 @@ get_header();
 		?>
 	</div>
 	<div class="details">
+		<?php
+		$features = new WP_Query(
+			array(
+				'post_type'     => 'post',
+				'category_name' => 'features',
+			)
+		);
+		?>
 		<?php if ( $features->have_posts() ) : ?>
 			<section class="features-section">
 				<h2>
@@ -73,6 +47,14 @@ get_header();
 			</section>
 		<?php endif; ?>
 
+		<?php
+		$advantages = new WP_Query(
+			array(
+				'post_type'     => 'post',
+				'category_name' => 'pros',
+			)
+		);
+		?>
 		<?php if ( $advantages->have_posts() ) : ?>
 			<section class="advantages-section">
 				<h2>
@@ -95,6 +77,14 @@ get_header();
 			</section>
 		<?php endif; ?>
 
+		<?php
+		$ted_talks = new WP_Query(
+			array(
+				'post_type'     => 'post',
+				'category_name' => 'ted-talks',
+			)
+		);
+		?>
 		<?php if ( $ted_talks->have_posts() ) : ?>
 			<section class="ted-talks-section">
 				<h2>
@@ -116,6 +106,14 @@ get_header();
 			</section>
 		<?php endif; ?>
 
+		<?php
+		$testimonials = new WP_Query(
+			array(
+				'post_type'     => 'post',
+				'category_name' => 'testimonial',
+			)
+		);
+		?>
 		<?php if ( $testimonials->have_posts() ) : ?>
 			<section class="testimonials-section">
 				<h2>
@@ -137,6 +135,14 @@ get_header();
 			</section>
 		<?php endif; ?>
 
+		<?php
+		$need_help = new WP_Query(
+			array(
+				'post_type'     => 'post',
+				'category_name' => 'need-help',
+			)
+		);
+		?>
 		<?php if ( $need_help->have_posts() ) : ?>
 			<section class="help-section">
 				<h2>

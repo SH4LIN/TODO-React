@@ -11,7 +11,7 @@
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
-    padding: 5px 0;
+    padding: 5px 20px;
 
     @media (min-width: 1025px) {
         max-width: 1100px;
@@ -21,7 +21,6 @@
     &__branding{
         width: 182px;
         height: auto;
-        margin-left: 12px;
 
         .custom-logo-link img {
             display: block;
@@ -36,7 +35,6 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        padding-right: 12px;
 
         .menu-action {
             padding: 12px 30px;
