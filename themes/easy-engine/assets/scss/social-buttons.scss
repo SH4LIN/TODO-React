@@ -1,198 +1,204 @@
 @import "variables";
+
 .social-buttons {
-  clear: both;
+	clear: both;
 
-  button {
-    cursor: pointer;
-  }
+	button {
+		cursor: pointer;
+	}
 
-  .social-buttons__share {
-    margin: 16px 0;
-    @media (min-width: 768px) {
-      margin: 18px 0;
-    }
-    span {
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 12px;
-      color: $primary-font-color;
-      display: inline-block;
-      padding-top: 12px;
-      border-top: 1px solid $border-color;
-    }
-    .share-buttons {
-      display: flex;
-      flex-wrap: wrap;
+	.social-buttons__share {
+		margin: 16px 0;
 
-      button {
-        margin: 0 5px 5px 0;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 12px;
-        font-family: "Open Sans", sans-serif;
-        font-weight: 400;
-        border-radius: 3px;
-        color: #656565;
-        background: #f8f8f8;
-        border: 1px solid #ccc;
-        box-shadow: 0 1px 0 rgba(0, 0, 0, .08);
-        text-shadow: none;
-        line-height: 23px;
-        padding: 1px 8px 0 5px;
+		@media (min-width: 768px) {
+			margin: 18px 0;
+		}
 
-        &:hover {
-          background: #f1f1f1;
-          border-color: #999;
-          color: #222;
-        }
+		span {
+			font-size: 12px;
+			font-weight: 700;
+			line-height: 1.2;
+			margin-bottom: 12px;
+			color: $primary-font-color;
+			display: inline-block;
+			padding-top: 12px;
+			border-top: 1px solid $border-color;
+		}
 
-        i:before {
-          font-size: 18px;
-        }
-      }
-    }
-  }
+		.share-buttons {
+			display: flex;
+			flex-wrap: wrap;
 
-  .social-buttons__like {
-    margin: 16px 0;
-    span {
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 12px;
-      color: $primary-font-color;
-      display: inline-block;
-      padding-top: 12px;
-      border-top: 1px solid $border-color;
-    }
-    .like-button {
-      display: flex;
-      flex-wrap: wrap;
+			button {
+				margin: 0 5px 5px 0;
+				text-decoration: none;
+				display: flex;
+				align-items: center;
+				gap: 6px;
+				font-size: 12px;
+				font-family: "Open Sans", sans-serif;
+				font-weight: 400;
+				border-radius: 3px;
+				color: #656565;
+				background: #f8f8f8;
+				border: 1px solid #ccc;
+				box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+				text-shadow: none;
+				line-height: 23px;
+				padding: 1px 8px 0 5px;
 
-      button {
-        margin: 1px 7px 8px 1px;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 13px;
-        font-family: "Open Sans", sans-serif;
-        font-weight: 500;
-        border-radius: 3px;
-        color: #656565;
-        background-color: $background-color;
-        border: 1px solid #ccc;
-        box-shadow: 0 1px 0 rgba(0, 0, 0, .08);
-        text-shadow: none;
-        line-height: 23px;
-        padding: 4px 10px 3px;
+				&:hover {
+					background: #f1f1f1;
+					border-color: #999;
+					color: #222;
+				}
 
-        &:hover {
-          background: #f1f1f1;
-          border-color: #999;
-          color: #222;
-        }
+				i::before {
+					font-size: 18px;
+				}
+			}
+		}
+	}
 
-        i:before {
-          font-size: 16px;
-        }
-      }
-    }
+	.social-buttons__like {
+		margin: 16px 0;
 
-    p {
-      font-size: 11px;
-      font-weight: 400;
-      font-family: "Open Sans", sans-serif;
-    }
-  }
+		span {
+			font-size: 12px;
+			font-weight: 700;
+			line-height: 1.2;
+			margin-bottom: 12px;
+			color: $primary-font-color;
+			display: inline-block;
+			padding-top: 12px;
+			border-top: 1px solid $border-color;
+		}
+
+		.like-button {
+			display: flex;
+			flex-wrap: wrap;
+
+			button {
+				margin: 1px 7px 8px 1px;
+				text-decoration: none;
+				display: flex;
+				align-items: center;
+				gap: 6px;
+				font-size: 13px;
+				font-family: "Open Sans", sans-serif;
+				font-weight: 500;
+				border-radius: 3px;
+				color: #656565;
+				background-color: $background-color;
+				border: 1px solid #ccc;
+				box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+				text-shadow: none;
+				line-height: 23px;
+				padding: 4px 10px 3px;
+
+				i::before {
+					font-size: 16px;
+				}
+			}
+
+			button:hover {
+				background: #f1f1f1;
+				border-color: #999;
+				color: #222;
+			}
+		}
+
+		p {
+			font-size: 11px;
+			font-weight: 400;
+			font-family: "Open Sans", sans-serif;
+		}
+	}
 }
 
 .email-wrapper {
-  position: relative;
+	position: relative;
 }
 
 .email-dialog {
-  width: 342px;
-  position: absolute;
-  z-index: 1001;
-  border: 1px solid #ccc;
-  padding: 15px;
-  background: #fff;
-  box-shadow: 0 5px 20px rgba(0,0,0,.2);
-  text-align: left;
-  display: none;
-}
-
-.email-form {
-  width: 100%;
-  flex-direction: column;
-  display: flex;
-
-  label {
-    font-size: 12px;
-    color: #333;
-    font-weight: 700;
-    display: block;
-    padding: 0 0 4px 0;
-    text-align: left;
-    text-shadow: none;
-    font-family: $font-family;
-  }
-
-  input[type=email],
-  input[type=text] {
-    width: 100%;
-    border: 1px solid #ccc;
-    margin-bottom: 1em;
-    background: #fff;
-    font-size: 12px;
-    line-height: 1.6;
-    color: #333;
-    max-width: none;
-    padding: 1px 3px;
-    font-family: $font-family;
-  }
-
-  .button-container {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-
-    a {
-      font-size: 12px;
-      cursor: pointer;
-    }
-  }
-
-  .email-error-message {
-    color: #fff;
-    background-color: #771a09;
-    font-family: $font-family;
-    font-size: 12px;
-    padding: 5px 8px;
-    line-height: 1;
-    margin: 10px 0 0 0;
-    display: none;
-  }
+	width: 342px;
+	position: absolute;
+	z-index: 1001;
+	border: 1px solid #ccc;
+	padding: 15px;
+	background: #fff;
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+	text-align: left;
+	display: none;
 }
 
 .email-success {
-  display: none;
-  width: 100%;
-  color: $primary-font-color;
-  background-color: $background-color;
-  font-family: $font-family;
-  font-size: 12px;
-  padding: 5px 8px;
-  line-height: 1;
-  margin: 10px 0 0 0;
-  flex-direction: column;
-  gap: 12px;
+	display: none;
+	width: 100%;
+	color: $primary-font-color;
+	background-color: $background-color;
+	font-family: $font-family;
+	font-size: 12px;
+	padding: 5px 8px;
+	line-height: 1;
+	margin: 10px 0 0 0;
+	flex-direction: column;
+	gap: 12px;
 
-  a {
-    cursor: pointer;
-  }
+	a {
+		cursor: pointer;
+	}
+}
+
+.email-form {
+	width: 100%;
+	flex-direction: column;
+	display: flex;
+
+	label {
+		font-size: 12px;
+		color: #333;
+		font-weight: 700;
+		display: block;
+		padding: 0 0 4px 0;
+		text-align: left;
+		text-shadow: none;
+		font-family: $font-family;
+	}
+
+	input[type="email"],
+	input[type="text"] {
+		width: 100%;
+		border: 1px solid #ccc;
+		margin-bottom: 1em;
+		background: #fff;
+		font-size: 12px;
+		line-height: 1.6;
+		color: #333;
+		max-width: none;
+		padding: 1px 3px;
+		font-family: $font-family;
+	}
+
+	.button-container {
+		display: flex;
+		gap: 12px;
+		align-items: center;
+
+		a {
+			font-size: 12px;
+			cursor: pointer;
+		}
+	}
+
+	.email-error-message {
+		color: #fff;
+		background-color: #771a09;
+		font-family: $font-family;
+		font-size: 12px;
+		padding: 5px 8px;
+		line-height: 1;
+		margin: 10px 0 0 0;
+		display: none;
+	}
 }

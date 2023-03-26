@@ -14,7 +14,6 @@
 
 <footer id="mast-foot" class="site-footer" role="contentinfo">
 	<div class="footer-inner">
-
 		<?php if ( has_nav_menu( 'documentation' ) ) : ?>
 			<section>
 				<h4><?php echo esc_html( wp_get_nav_menu_name( 'documentation' ) ); ?></h4>
@@ -31,9 +30,7 @@
 				);
 				?>
 				</section>
-			<?php endif; ?>
-
-
+		<?php endif; ?>
 
 		<?php if ( has_nav_menu( 'community' ) ) : ?>
 			<section>
@@ -52,7 +49,6 @@
 				?>
 			</section>
 		<?php endif; ?>
-
 
 		<?php if ( has_nav_menu( 'easy-engine' ) ) : ?>
 			<section>
@@ -83,9 +79,7 @@
 					<input type="submit" class="button" value="<?php esc_attr_e( 'Sign me up', 'easy-engine' ); ?>"/>
 				</div>
 			</form>
-
-			</section>
-
+		</section>
 	</div>
 
 	<div class="copyrights">
@@ -93,8 +87,6 @@
 			<?php echo esc_html( sprintf( '&copy; %1$s-%2$s', wp_get_theme()->get( 'Author' ), wp_date( 'Y' ) ) ); ?>
 			<a href="<?php echo esc_url( wp_get_theme()->get( 'AuthorURI' ) ); ?>" target="_blank"><?php echo esc_html( wp_get_theme()->get( 'Author' ) ); ?></a>
 		</span>
-
-
 		<?php
 		if ( has_nav_menu( 'primary-menu' ) ) :
 			wp_nav_menu(
@@ -110,7 +102,6 @@
 			);
 		endif;
 		?>
-
 	</div>
 </footer>
 

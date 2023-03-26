@@ -15,15 +15,15 @@
 				menuButton.setAttribute('aria-expanded', 'true');
 				closeButton?.setAttribute('aria-expanded', 'true');
 
-				if(menuWrapper != null){
-					menuWrapper.style.width = "100%";
+				if (menuWrapper !== null) {
+					menuWrapper.style.width = '100%';
 				}
-			}else {
+			} else {
 				menuButton.setAttribute('aria-expanded', 'false');
 				closeButton?.setAttribute('aria-expanded', 'false');
 
-				if(menuWrapper != null){
-					menuWrapper.style.width = "0";
+				if (menuWrapper !== null) {
+					menuWrapper.style.width = '0';
 				}
 			}
 

@@ -64,7 +64,7 @@ if ( ! $search_option || 'off' === $search_option ) {
 
 					<nav class="header-inner__navigation">
 						<div class="mobile-visible menu-action">
-							<button id="menu" aria-controls="primary-menu" aria-expanded="false">
+							<button id="menu" class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
 								<i class="fas fa-bars fa-lg"></i>
 							</button>
 

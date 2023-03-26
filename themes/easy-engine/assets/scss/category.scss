@@ -2,20 +2,21 @@
 @import "blog-template";
 
 .category-wrapper {
-  padding: 0 20px;
-  @media (min-width: 1025px) {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
+	padding: 0 20px;
 
-  .breadcrumb-wrapper {
-    margin-top: 30px;
-  }
+	@media (min-width: 1025px) {
+		max-width: 1100px;
+		margin: 0 auto;
+	}
 
-  .posts-wrapper {
-    padding-top: 10px;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
-  }
+	.breadcrumb-wrapper {
+		margin-top: 30px;
+	}
+
+	.posts-wrapper {
+		padding-top: 10px;
+		width: 100%;
+		display: grid;
+		grid-template-columns: 1fr;
+	}
 }

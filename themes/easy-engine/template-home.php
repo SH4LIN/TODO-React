@@ -167,10 +167,8 @@ get_header();
 			</section>
 		<?php endif; ?>
 
-		<div class="get-started-btn-wrapper">
-			<div class="get-started-btn">
-				<a>Get Started</a>
-			</div>
+		<div class="get-started-btn">
+			<a>Get Started</a>
 		</div>
 	</div>
 </section>

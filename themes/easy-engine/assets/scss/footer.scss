@@ -1,184 +1,179 @@
 @import "variables";
+
 .site-footer {
-  padding: 14px 20px;
+	padding: 0 20px;
 
-  @media (min-width: 1025px) {
-    padding: 16px 12px;
-  }
+	.footer-inner {
 
-  .footer-inner {
-    @media (min-width: 1025px) {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    grid-template-rows: auto;
+		padding: 1rem 0;
 
-    section {
-      display: flex;
-      flex-direction: column;
+		@media (min-width: 1025px) {
+			max-width: 1100px;
+			margin: 0 auto;
+		}
 
-      h4 {
-        font-size: 17.78px;
-        font-weight: 200;
-        line-height: 1.4;
-        font-family: $font-family;
-        color: $primary-font-color;
-        margin-top: 16.002px;
-        margin-bottom: 14.224px;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+		grid-template-rows: auto;
 
-        @media (min-width: 1025px) {
-          font-size: 21px;
-          margin-top: 32px;
-          margin-bottom: 17px;
-        }
-      }
+		section {
+			display: flex;
+			flex-direction: column;
 
-      nav ul {
-        list-style-position: inside;
-        margin-bottom: 14.224px;
+			h4 {
+				margin-top: 16px;
+				margin-bottom: 14.2px;
+			}
 
-        li a {
-          font-family: $font-family;
-          font-size: 14.224px;
-          line-height: 1.8;
-          font-weight: 400;
+			nav ul {
+				list-style: disc outside;
+				padding-left: 18px;
+				margin-bottom: 14.224px;
 
-          @media (min-width: 1025px) {
-            font-size: 16px;
-          }
+				li a {
+					font-family: $font-family;
+					font-size: 14.224px;
+					line-height: 1.8;
+					font-weight: 400;
 
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
+					@media (min-width: 1025px) {
+						font-size: 16px;
+					}
 
-      form {
-        display: flex;
-        flex-direction: column;
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+			}
 
-        .email-label {
-          width: 100%;
-          font-size: 14.224px;
-          line-height: 1.8;
-          font-weight: 300;
-          color: $pre-text-color;
-          font-family: $font-family;
-          margin-bottom: 8px;
-        }
+			form {
+				display: flex;
+				flex-direction: column;
 
-        .email-input {
-          padding: 7px 10px;
-          border: 1px solid $border-color;
-          font-size: 14px;
-          font-family: $font-family;
-          line-height: 1.6;
-          font-weight: 400;
-          color: $primary-font-color;
-          letter-spacing: normal;
-        }
+				.email-label {
+					margin-bottom: 8px;
+				}
 
-        .sign-me-up-btn-wrapper {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin-top: 16px;
-          padding: 16px 0 10px 0;
+				.email-input {
+					padding: 7px 10px;
+					border: 1px solid $border-color;
+					font-size: 14px;
+					font-family: $font-family;
+					line-height: 1.6;
+					font-weight: 400;
+					color: $primary-font-color;
+					letter-spacing: normal;
 
-          input {
-            padding: 12px 30px;
-            border: 2px solid $button-border;
-            margin-bottom: 16px;
-            font-family: $font-family;
-            font-size: 14px;
-            line-height: 1;
-            font-weight: 500;
-            text-transform: uppercase;
-            background-color: $button-color;
-            color: $background-color;
-            transition: 0.3s;
-            cursor: pointer;
+					@media (min-width: 768px) {
+						font-size: 16px;
+					}
+				}
 
-            &:hover {
-              background-color: $background-color;
-              color: $button-color;
-            }
-          }
-        }
-      }
-    }
-  }
+				.sign-me-up-btn-wrapper {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					margin-top: 16px;
+					padding: 16px 0 10px 0;
 
-  .copyrights {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 16px 0;
+					input {
+						padding: 12px 30px;
+						border: 2px solid $button-border;
+						margin-bottom: 16px;
+						font-family: $font-family;
+						font-size: 14px;
+						line-height: 1;
+						font-weight: 500;
+						text-transform: uppercase;
+						background-color: $button-color;
+						color: $background-color;
+						transition: 0.3s;
+						cursor: pointer;
 
-    @media (min-width: 1025px) {
-      max-width: 1100px;
-      margin: 0 auto;
-      justify-content: space-between;
-    }
+						&:hover {
+							background-color: $background-color;
+							color: $button-color;
+						}
+					}
+				}
+			}
+		}
+	}
 
-    span {
-      font-size: 14px;
-      line-height: 1.8;
-      font-weight: 300;
-      color: $pre-text-color;
-      font-family: $font-family;
+	.copyrights {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding-bottom: 30px;
 
-      @media (min-width: 1025px) {
-        font-size: 16px;
-      }
+		@media (min-width: 768px) {
+			padding: 16px 0;
+		}
 
-      a {
-        font-size: 14px;
-        line-height: 1.8;
-        font-weight: 400;
-        font-family: $font-family;
+		@media (min-width: 1025px) {
+			max-width: 1100px;
+			margin: 0 auto;
+			justify-content: space-between;
+		}
 
-        @media (min-width: 1025px) {
-          font-size: 16px;
-        }
+		span {
+			font-size: 14px;
+			line-height: 1.8;
+			font-weight: 300;
+			color: $pre-text-color;
+			font-family: $font-family;
 
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
+			@media (min-width: 1025px) {
+				font-size: 16px;
+			}
 
-    .primary-menu-wrapper {
-      .primary-menu {
-        display: flex;
-        align-items: center;
-        list-style: none;
+			a {
+				font-size: 14px;
+				line-height: 1.8;
+				font-weight: 400;
+				font-family: $font-family;
 
-        li {
-          display: flex;
-          align-items: center;
-          a {
-            font-size: 16px;
-            line-height: 1.8;
-            font-weight: 400;
-            font-family: $font-family;
-            margin: 0 12px;
+				@media (min-width: 1025px) {
+					font-size: 16px;
+				}
 
-            &:hover {
-              text-decoration: underline;
-            }
-          }
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
 
-          &:not(:last-child):after {
-            content: "\00B7";
-            display: inline-block;
-            font-size: 30px;
-            line-height: 12px;
-          }
-        }
-      }
-    }
-  }
+		.primary-menu-wrapper {
+
+			.primary-menu {
+				display: flex;
+				align-items: center;
+				list-style: none;
+
+				li {
+					display: flex;
+					align-items: center;
+
+					a {
+						font-size: 16px;
+						line-height: 1.8;
+						font-weight: 400;
+						font-family: $font-family;
+						margin: 0 12px;
+
+						&:hover {
+							text-decoration: underline;
+						}
+					}
+
+					&:not(:last-child)::after {
+						content: "\00B7";
+						display: inline-block;
+						font-size: 30px;
+						line-height: 12px;
+					}
+				}
+			}
+		}
+	}
 }
