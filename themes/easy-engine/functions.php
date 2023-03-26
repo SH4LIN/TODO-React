@@ -3,9 +3,8 @@
  * This file is used to setup theme enqueue scripts and styles.
  *
  * @package EasyEngine
+ * @since 1.0.0
  */
-
-require_once get_template_directory() . '/functionality/settings-page.php';
 
 if ( ! function_exists( 'ee_theme_setup' ) ) :
 
@@ -37,12 +36,12 @@ if ( ! function_exists( 'ee_theme_setup' ) ) :
 		// Register navigation menus uses wp_nav_menu in five places.
 		register_nav_menus(
 			array(
-				'primary-menu'  => __( 'Header Menu', 'screen-time' ),
-				'social-menu'   => __( 'Social Menu', 'screen-time' ),
-				'documentation' => __( 'Documentation Menu', 'screen-time' ),
-				'community'     => __( 'Community Menu', 'screen-time' ),
-				'easy-engine'   => __( 'EasyEngine', 'screen-time' ),
-				'footer'        => __( 'Footer Menu', 'screen-time' ),
+				'primary-menu'  => __( 'Header Menu', 'easy-engine' ),
+				'social-menu'   => __( 'Social Menu', 'easy-engine' ),
+				'documentation' => __( 'Documentation Menu', 'easy-engine' ),
+				'community'     => __( 'Community Menu', 'easy-engine' ),
+				'easy-engine'   => __( 'EasyEngine', 'easy-engine' ),
+				'footer'        => __( 'Footer Menu', 'easy-engine' ),
 			)
 		);
 
@@ -90,6 +89,7 @@ if ( ! function_exists( 'ee_theme_setup' ) ) :
 	add_action( 'after_setup_theme', 'ee_theme_setup' );
 endif;
 
+require_once get_template_directory() . '/settings/settings-page.php';
 add_action( 'admin_menu', 'add_ee_sub_menu' );
 
 if ( ! function_exists( 'get_breadcrumbs' ) ) :

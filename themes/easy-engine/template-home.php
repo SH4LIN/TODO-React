@@ -1,10 +1,12 @@
 <?php
-/* Template Name: Front Page */
-
 /**
+ * Template Name:Home
+ *
  * This file is a template file for the front page.
+ *
+ * @package EasyEngine
+ * @since 1.0.0
  */
-
 
 get_header();
 ?>

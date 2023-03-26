@@ -20,7 +20,7 @@
 			<div class="post-title">
 				<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 			</div>
-		<?php
+			<?php
 		endif;
 		?>
 
@@ -29,29 +29,29 @@
 			if ( ! empty( get_the_author() ) ) :
 				?>
 				<div class="post-author">
-					<?php esc_html_e( 'Posted by' ); ?>  <?php the_author_link(); ?>
+					<?php esc_html_e( 'Posted by', 'easy-engine' ); ?>  <?php the_author_link(); ?>
 				</div>
-			<?php
+				<?php
 			endif;
 			?>
 
 			<?php
-			if (  has_category() ) :
+			if ( has_category() ) :
 				?>
 				<div class="post-category">
-					<?php esc_html_e( 'Category' ); ?> <?php the_category( ', ' ); ?>
+					<?php esc_html_e( 'Category', 'easy-engine' ); ?> <?php the_category( ', ' ); ?>
 				</div>
-			<?php
+				<?php
 			endif;
 			?>
 
 			<?php
-			if (  has_tag() ) :
+			if ( has_tag() ) :
 				?>
 				<div class="post-tag">
-					<?php esc_html_e( 'Tagged' ); ?> <?php the_tags('', ', '); ?>
+					<?php esc_html_e( 'Tagged', 'easy-engine' ); ?> <?php the_tags( '', ', ' ); ?>
 				</div>
-			<?php
+				<?php
 			endif;
 			?>
 		</div>

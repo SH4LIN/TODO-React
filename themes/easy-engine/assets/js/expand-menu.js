@@ -1,5 +1,5 @@
 /**
- * This file contains the code for the expanded menu open close functionality.
+ * This file contains the code for the expanded menu open close settings.
  */
 (function () {
 	window.addEventListener('DOMContentLoaded', function () {

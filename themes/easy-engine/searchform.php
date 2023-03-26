@@ -1,6 +1,9 @@
 <?php
 /**
  * Search Form Template.
+ *
+ * @package EasyEngine
+ * @since 1.0.0
  */
 
 ?>

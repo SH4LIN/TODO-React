@@ -5,14 +5,15 @@
  * @package EasyEngine
  * @since 1.0.0
  */
-if ( have_posts() ){
+
+if ( have_posts() ) {
 	the_post();
 }
 
 $related_posts = get_posts(
 	array(
-		'category__in' => wp_get_post_categories( get_the_ID() ),
-		'posts_per_page'  => 4,
+		'category__in'   => wp_get_post_categories( get_the_ID() ),
+		'posts_per_page' => 4,
 	)
 );
 
@@ -20,7 +21,7 @@ if ( ! empty( $related_posts ) ) {
 	$related_posts = array_filter(
 		$related_posts,
 		function( $post ) {
-			return $post->ID !== get_the_ID();
+			return get_the_ID() !== $post->ID;
 		}
 	);
 
@@ -37,8 +38,7 @@ get_header();
 	</div>
 
 	<div class="post-data">
-		<?php the_title( '<h1 class="post-title">','</h1>' ); ?>
-
+		<?php the_title( '<h1 class="post-title">', '</h1>' ); ?>
 
 		<div class="post-meta">
 			<?php
@@ -46,12 +46,12 @@ get_header();
 				?>
 				<span class="post-author">
 					<?php
-					esc_html_e( 'Posted by' );
+					esc_html_e( 'Posted by', 'easy-engine' );
 					?>
 
 					<?php the_author_link(); ?>
 					<span>
-						<?php esc_html_e( 'on' ); ?>
+						<?php esc_html_e( 'on', 'easy-engine' ); ?>
 						<?php the_date(); ?>
 					</span>
 				</span>
@@ -60,20 +60,20 @@ get_header();
 			?>
 
 			<?php
-			if (  has_category() ) :
+			if ( has_category() ) :
 				?>
 				<span class="post-category">
-					<?php esc_html_e( 'Category' ); ?> <?php the_category( ', ' ); ?>
+					<?php esc_html_e( 'Category', 'easy-engine' ); ?> <?php the_category( ', ' ); ?>
 				</span>
 				<?php
 			endif;
 			?>
 
 			<?php
-			if (  has_tag() ) :
+			if ( has_tag() ) :
 				?>
 				<span class="post-tag">
-					<?php esc_html_e( 'Tagged' ); ?> <?php the_tags('', ', '); ?>
+					<?php esc_html_e( 'Tagged', 'easy-engine' ); ?> <?php the_tags( '', ', ' ); ?>
 				</span>
 				<?php
 			endif;
@@ -95,7 +95,7 @@ get_header();
 				<div class="related-posts-wrapper">
 					<?php
 					foreach ( $related_posts as $related_post ) {
-						if ( $related_post->ID === get_the_ID() ) {
+						if ( get_the_ID() === $related_post->ID ) {
 							continue;
 						}
 						?>

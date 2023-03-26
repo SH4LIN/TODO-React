@@ -15,7 +15,7 @@
 <footer id="mast-foot" class="site-footer" role="contentinfo">
 	<div class="footer-inner">
 
-		<?php if ( has_nav_menu( 'documentation' ) ): ?>
+		<?php if ( has_nav_menu( 'documentation' ) ) : ?>
 			<section>
 				<h4><?php echo esc_html( wp_get_nav_menu_name( 'documentation' ) ); ?></h4>
 				<?php
@@ -35,13 +35,13 @@
 
 
 
-		<?php if ( has_nav_menu( 'community' ) ): ?>
+		<?php if ( has_nav_menu( 'community' ) ) : ?>
 			<section>
 				<h4><?php echo esc_html( wp_get_nav_menu_name( 'community' ) ); ?></h4>
 				<?php
 				wp_nav_menu(
 					array(
-						'theme_location'         => 'community',
+						'theme_location'  => 'community',
 						'menu_class'      => 'menu-community',
 						'container'       => 'nav',
 						'container_class' => 'menu-community-wrapper',
@@ -54,13 +54,13 @@
 		<?php endif; ?>
 
 
-		<?php if ( has_nav_menu( 'easy-engine' ) ): ?>
+		<?php if ( has_nav_menu( 'easy-engine' ) ) : ?>
 			<section>
 				<h4><?php echo esc_html( wp_get_nav_menu_name( 'easy-engine' ) ); ?></h4>
 				<?php
 				wp_nav_menu(
 					array(
-						'theme_location'         => 'easy-engine',
+						'theme_location'  => 'easy-engine',
 						'menu_class'      => 'menu-easy-engine',
 						'container'       => 'nav',
 						'container_class' => 'menu-easy-engine-wrapper',

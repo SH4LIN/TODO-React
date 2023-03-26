@@ -1,6 +1,9 @@
 <?php
 /**
  * This file is used to display the social share buttons.
+ *
+ * @package EasyEngine
+ * @since 1.0.0
  */
 
 $facebook_share_link = 'https://www.facebook.com/sharer/sharer.php?u=' . get_permalink();

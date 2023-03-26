@@ -1,13 +1,19 @@
 <?php
 /**
- * The header.
- *
  * This is the template that displays all of the <head> section and everything up until main.
  *
  * @package EasyEngine
  * @since 1.0.0
  */
 
+/**
+ * This function is used to remove search from the site.
+ *
+ * @param WP_Query $query Query To Modify.
+ * @param bool     $error Whether to return 404 or not.
+ *
+ * @return void
+ */
 function remove_search( $query, $error = true ): void {
 
 	if ( is_search() & ! is_admin() ) {

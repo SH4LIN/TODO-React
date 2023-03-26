@@ -1,6 +1,6 @@
 <?php
 /**
- *  Non-production environment functionality.
+ *  Non-production environment settings.
  *
  * @package project-name
  */
