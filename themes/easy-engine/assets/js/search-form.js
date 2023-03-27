@@ -5,6 +5,7 @@
 	window.addEventListener('DOMContentLoaded', function () {
 		const searchButton = document.getElementById('search');
 		const closeButton = document.getElementById('search-close');
+		const searchInput = document.getElementById('search-input');
 		const searchForm = document.querySelector('.search-form');
 
 		searchButton?.addEventListener('click', toggleSearch);
@@ -19,6 +20,7 @@
 					searchForm.style.width = '200px';
 					searchForm.style.opacity = '1';
 					searchForm.style.overflow = 'visible';
+					searchInput?.focus();
 				}
 			} else {
 				searchButton?.setAttribute('aria-expanded', 'false');
@@ -28,6 +30,7 @@
 					searchForm.style.width = '0';
 					searchForm.style.opacity = '0';
 					searchForm.style.overflow = 'hidden';
+					searchInput?.blur();
 				}
 			}
 

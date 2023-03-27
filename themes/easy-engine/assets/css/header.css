@@ -191,7 +191,12 @@
   display: flex;
   border: 1px solid #ddd;
   border-radius: 4px;
-  padding: 12px 12px;
+  padding: 12px 8px;
+  gap: 8px;
+  max-width: 260px;
+}
+.search-form .search-input .search-submit {
+  cursor: pointer;
 }
 .search-form .search-input input {
   padding: 0;
@@ -199,17 +204,13 @@
   transition: width 0.3s ease-in-out;
   color: #415058;
   font-size: 14px;
-  max-width: 220px;
-  font-weight: 300;
+  font-weight: 400;
   font-family: -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   background-color: transparent;
-  margin-right: 10px;
+  flex: 0 1 180px;
 }
 .search-form .search-input input:focus {
   outline: none;
-}
-.search-form .search-input .search-submit {
-  cursor: pointer;
 }
 
 .mobile-visible {
