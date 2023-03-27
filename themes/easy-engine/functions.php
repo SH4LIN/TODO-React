@@ -111,7 +111,7 @@ if ( ! function_exists( 'get_breadcrumbs' ) ) :
 			<?php
 			if ( is_home() ) {
 				// translators: %s is the delimiter.
-				echo esc_html( sprintf( __( '%1$s Blog', 'easy-engine' ), $delimiter ) );
+				echo esc_html( sprintf( __( '%1$sBlog', 'easy-engine' ), $delimiter ) );
 			}
 
 			if ( is_category() || is_single() ) {
@@ -122,10 +122,10 @@ if ( ! function_exists( 'get_breadcrumbs' ) ) :
 					$cat_parent_id = $cat->parent;
 					if ( 0 !== $cat_parent_id ) {
 						// translators: 1. %s is the delimiter, 2. %s is the category name.
-						echo esc_html( sprintf( '%1$s %2$s', $delimiter, get_category( $cat_parent_id )->name ) );
+						echo esc_html( sprintf( '%1$s%2$s', $delimiter, get_category( $cat_parent_id )->name ) );
 					} else {
 						// translators: 1. %s is the delimiter, 2. %s is the category name.
-						echo esc_html( sprintf( '%1$s %2$s', $delimiter, $cat->name ) );
+						echo esc_html( sprintf( '%1$s%2$s', $delimiter, $cat->name ) );
 					}
 
 					?>
@@ -143,10 +143,9 @@ if ( ! function_exists( 'get_breadcrumbs' ) ) :
 						<?php
 						// translators: 1. %s is the delimiter, 2. %s is the category name.
 						echo esc_html( $delimiter );
-						$category = get_the_category();
-						if ( $category[0] ) {
-							$category_name = $category[0]->name;
-							echo esc_html( $category_name );
+						$category = single_cat_title();
+						if ( $category ) {
+							echo esc_html( $category );
 						}
 						?>
 					</span>

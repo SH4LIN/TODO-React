@@ -88,7 +88,7 @@ i {
 
 ul,
 ol {
-  list-style: inside;
+  list-style-position: inside;
   -ms-word-wrap: break-word;
   word-wrap: break-word;
 }

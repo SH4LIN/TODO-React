@@ -134,26 +134,26 @@
 .copyrights span a:hover {
   text-decoration: underline;
 }
-.copyrights > .primary-menu-wrapper .primary-menu {
+.copyrights > .primary-menu-footer-wrapper .primary-menu-footer {
   display: flex;
   align-items: center;
   list-style: none;
 }
-.copyrights > .primary-menu-wrapper .primary-menu li {
+.copyrights > .primary-menu-footer-wrapper .primary-menu-footer li {
   display: flex;
   align-items: center;
 }
-.copyrights > .primary-menu-wrapper .primary-menu li a {
+.copyrights > .primary-menu-footer-wrapper .primary-menu-footer li a {
   font-size: 16px;
   line-height: 1.8;
   font-weight: 400;
   font-family: -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   margin: 0 12px;
 }
-.copyrights > .primary-menu-wrapper .primary-menu li a:hover {
+.copyrights > .primary-menu-footer-wrapper .primary-menu-footer li a:hover {
   text-decoration: underline;
 }
-.copyrights > .primary-menu-wrapper .primary-menu li:not(:last-child)::after {
+.copyrights > .primary-menu-footer-wrapper .primary-menu-footer li:not(:last-child)::after {
   content: "·";
   display: inline-block;
   font-size: 30px;

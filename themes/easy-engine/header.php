@@ -36,6 +36,7 @@ if ( ! $search_option || 'off' === $search_option ) {
 <!doctype html>
 <html <?php language_attributes(); ?>> <!-- html -->
 	<head> <!-- head -->
+		<title class="site-title"><?php bloginfo( 'name' ); ?></title>
 		<meta charset="<?php bloginfo( 'charset' ); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<?php wp_head(); ?>
@@ -83,7 +84,7 @@ if ( ! $search_option || 'off' === $search_option ) {
 									'container'       => 'nav',
 									'container_class' => 'desktop-visible primary-menu-wrapper',
 									'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-									'depth'           => 2,
+									'depth'           => 10,
 									'fallback'        => false,
 								)
 							);

@@ -92,9 +92,9 @@
 			wp_nav_menu(
 				array(
 					'theme_location'  => 'primary-menu',
-					'menu_class'      => 'primary-menu',
+					'menu_class'      => 'primary-menu-footer',
 					'container'       => 'nav',
-					'container_class' => 'desktop-visible primary-menu-wrapper',
+					'container_class' => 'desktop-visible primary-menu-footer-wrapper',
 					'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
 					'depth'           => 1,
 					'fallback'        => false,
