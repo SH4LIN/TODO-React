@@ -225,11 +225,6 @@ if ( ! function_exists( 'ee_theme_scripts' ) ) :
 			wp_enqueue_style( 'ee-search-style', get_template_directory_uri() . '/assets/css/search.css', array(), filemtime( get_template_directory() . '/assets/css/search.css' ) );
 		}
 
-		if ( is_category() ) {
-			wp_enqueue_style( 'ee-category-style', get_template_directory_uri() . '/assets/css/category.css', array(), filemtime( get_template_directory() . '/assets/css/category.css' ) );
-
-		}
-
 		wp_enqueue_script( 'ee-expand-menu', get_template_directory_uri() . '/assets/js/expand-menu.js', array(), filemtime( get_template_directory() . '/assets/js/expand-menu.js' ), true );
 		wp_enqueue_script( 'ee-search-form', get_template_directory_uri() . '/assets/js/search-form.js', array(), filemtime( get_template_directory() . '/assets/js/search-form.js' ), true );
 		wp_enqueue_script( 'ee-share-buttons', get_template_directory_uri() . '/assets/js/share-buttons.js', array( 'wp-i18n' ), filemtime( get_template_directory() . '/assets/js/share-buttons.js' ), true );
@@ -237,25 +232,3 @@ if ( ! function_exists( 'ee_theme_scripts' ) ) :
 	}
 	add_action( 'wp_enqueue_scripts', 'ee_theme_scripts' );
 endif;
-
-if ( ! function_exists( 'change_blog_posts' ) ) :
-
-	/**
-	 * Change the category of post to display on the blog page.
-	 *
-	 * @param WP_Query $query The query object.
-	 * @return void
-	 * @since 1.0.0
-	 */
-	function change_blog_posts( $query ) {
-		/*
-		if ( $query->is_main_query() && ! is_admin() && is_home() ) {
-			$query->set( 'category_name', 'blog' );
-			$query->set( 'ignore_sticky_posts', true );
-		}*/
-
-	}
-	add_action( 'pre_get_posts', 'change_blog_posts' );
-
-endif;
-

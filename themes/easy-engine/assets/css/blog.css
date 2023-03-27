@@ -1,17 +1,17 @@
 @import "../css/blog-template.css";
-.blog-wrapper {
+.archive-wrapper {
   padding: 0 20px;
 }
 @media (min-width: 1025px) {
-  .blog-wrapper {
+  .archive-wrapper {
     max-width: 1100px;
     margin: 0 auto;
   }
 }
-.blog-wrapper > .breadcrumb-wrapper {
+.archive-wrapper > .breadcrumb-wrapper {
   margin-top: 30px;
 }
-.blog-wrapper > .posts-wrapper {
+.archive-wrapper > .posts-wrapper {
   padding-top: 10px;
   width: 100%;
   display: grid;

@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is used to display the category page.
+ * This file is used to add the tag archive page template.
  *
  * @package EasyEngine
  * @since 1.0.0
