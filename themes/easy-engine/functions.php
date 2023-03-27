@@ -104,7 +104,7 @@ if ( ! function_exists( 'get_breadcrumbs' ) ) :
 		// breadcrumb function.
 		$delimiter = '&nbsp;&#187;&nbsp;';
 		?>
-		<div class="#breadcrumbs">
+		<div class="breadcrumbs">
 			<a href="<?php echo esc_url( home_url() ); ?>" rel="nofollow">
 				<?php esc_html_e( 'Home', 'easy-engine' ); ?>
 			</a>

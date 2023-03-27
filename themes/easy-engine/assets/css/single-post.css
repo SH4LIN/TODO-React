@@ -4,6 +4,7 @@
 }
 .single-post-wrapper .breadcrumb-wrapper {
   margin: 30px auto 0;
+  max-width: 100%;
 }
 @media (min-width: 768px) {
   .single-post-wrapper .breadcrumb-wrapper {

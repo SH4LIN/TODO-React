@@ -11,21 +11,16 @@
 }
 
 .post-date {
-  padding: 6.4px 0;
+  padding: 0.5em 1.2em 0.5em 0;
 }
 .post-date a {
   color: #8a9ea8;
   font-size: 0.8em;
   font-weight: 400;
 }
-@media (min-width: 768px) {
-  .post-date {
-    padding: 7.2px 17.2px 7.2px 0;
-  }
-}
 
 .post-data {
-  padding-bottom: 32px;
+  padding-bottom: 2rem;
   border-bottom: 1px solid #ddd;
 }
 .post-data * {
@@ -37,16 +32,15 @@
   }
 }
 .post-data .post-title {
-  overflow-wrap: break-word;
   font-size: 1.65em;
   margin-bottom: 0.625em;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .post-data .post-title a {
-  width: 100%;
   white-space: break-spaces;
-  display: inline-block;
+  word-wrap: break-word;
+  word-break: break-all;
+  width: 100%;
+  display: block;
   font-family: -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   line-height: 1.5;
   font-weight: 300;

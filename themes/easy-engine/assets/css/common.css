@@ -31,10 +31,12 @@ body {
   font-family: -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   line-height: 1.6;
   font-size: 1em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 @media (min-width: 768px) {
   body {
-    font-size: 1.225em;
+    font-size: 1.125em;
   }
 }
 
@@ -71,8 +73,8 @@ pre {
   padding: 18px;
   font-size: 13px;
   font-family: monospace;
-  overflow-y: scroll;
-  -ms-overflow-y: scroll;
+  overflow-x: scroll;
+  -ms-overflow-x: scroll;
 }
 @media (min-width: 768px) {
   pre {
@@ -87,7 +89,8 @@ i {
 ul,
 ol {
   list-style: inside;
-  overflow-wrap: break-word;
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
 }
 
 code {
@@ -95,7 +98,8 @@ code {
   color: #1f292e;
   line-height: 20.8px;
   font-family: monospace;
-  overflow-wrap: break-word;
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .hidden {
@@ -106,17 +110,11 @@ code {
   display: unset;
 }
 
-#breadcrumbs {
-  font-size: 16px;
-  text-overflow: ellipsis;
-  overflow: hidden;
+.breadcrumbs {
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
 }
-@media (min-width: 768px) {
-  #breadcrumbs {
-    font-size: 18px;
-  }
-}
-#breadcrumbs a:hover {
+.breadcrumbs a:hover {
   text-decoration: underline;
 }
 
