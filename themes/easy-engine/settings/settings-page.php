@@ -60,7 +60,7 @@ if ( ! function_exists( 'ee_theme_settings_page' ) ) {
 					<?php
 					settings_fields( 'ee-search-setting-group' );
 					do_settings_sections( 'ee-settings' );
-					submit_button( __( 'Save Changes', 'movie-library' ) );
+					submit_button( __( 'Save Changes', 'easy-engine' ) );
 					?>
 				</form>
 			</div>
@@ -125,11 +125,11 @@ if ( ! function_exists( 'ee_search_setting_data_field_callback' ) ) {
 
 		?>
 
-		<label for="<?php echo esc_attr( 'ee-search-setting-checkbox' ); ?>">
+		<label for="ee-search-setting-checkbox">
 
-			<input type="<?php echo esc_attr( 'checkbox' ); ?>"
-				name="<?php echo esc_attr( 'ee-search-setting-checkbox' ); ?>"
-				id="<?php echo esc_attr( 'ee-search-setting-checkbox' ); ?>"
+			<input type="checkbox"
+				name="ee-search-setting-checkbox"
+				id="ee-search-setting-checkbox"
 				value="<?php echo esc_attr( $value ); ?>" <?php echo esc_attr( $checked ); ?>/>
 		</label>
 		<?php
@@ -179,7 +179,7 @@ if ( ! function_exists( 'ee_search_setting_submit' ) ) {
 			update_option( 'ee-search-setting-checkbox', $checkbox_data );
 
 			$class   = 'notice notice-success is-dismissible';
-			$message = __( 'Settings saved.', 'movie-library' );
+			$message = __( 'Settings saved.', 'easy-engine' );
 
 			printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
 		}

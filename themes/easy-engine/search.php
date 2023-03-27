@@ -27,8 +27,18 @@ get_header();
 			</h1>
 			<div class="search-result-count">
 				<?php
-				/* translators: %s: search result count. */
-				echo esc_html( sprintf( __( '%s Results Found', 'easy-engine' ), $wp_query->found_posts ) );
+				echo esc_html(
+					sprintf(
+					/* translators: %s: search result count. */
+						_n(
+							'%s Result Found',
+							'%s Results Found',
+							$wp_query->found_posts,
+							'easy-engine'
+						),
+						number_format_i18n( $wp_query->found_posts )
+					)
+				);
 				?>
 			</div>
 
@@ -39,6 +49,7 @@ get_header();
 				?>
 				<div class="post-wrapper">
 					<div class="post-date">
+						<!-- Using get_the_date() because the_date() was not giving the date of multiple post of the same date -->
 						<a href="<?php the_permalink(); ?>"><?php echo esc_html( get_the_date() ); ?></a>
 					</div>
 
@@ -68,7 +79,9 @@ get_header();
 							if ( has_category() ) :
 								?>
 								<div class="post-category">
-									<?php esc_html_e( 'Category', 'easy-engine' ); ?> <?php the_category( ', ' ); ?>
+									<?php esc_html_e( 'Category', 'easy-engine' ); ?>
+
+									<?php the_category( ', ' ); ?>
 								</div>
 								<?php
 							endif;
@@ -78,7 +91,9 @@ get_header();
 							if ( has_tag() ) :
 								?>
 								<div class="post-tag">
-									<?php esc_html_e( 'Tagged', 'easy-engine' ); ?> <?php the_tags( '', ', ' ); ?>
+									<?php esc_html_e( 'Tagged', 'easy-engine' ); ?>
+
+									<?php the_tags( '', ', ' ); ?>
 								</div>
 								<?php
 							endif;
@@ -104,7 +119,7 @@ get_header();
 			<h1 class="search-result-title">
 				<?php
 				/* translators: %s: search query. */
-				printf( esc_html__( 'No Results Found for: %s', 'easy-engine' ), '<span>' . get_search_query() . '</span>' );
+				printf( esc_html__( 'No Results Found for: %s', 'easy-engine' ), get_search_query() );
 				?>
 			</h1>
 			<?php

@@ -60,15 +60,7 @@ if ( ! function_exists( 'ee_theme_setup' ) ) :
 			)
 		);
 
-		add_theme_support(
-			'custom-logo',
-			array(
-				'width'       => 180,
-				'height'      => 60,
-				'flex-width'  => true,
-				'flex-height' => true,
-			)
-		);
+		add_theme_support( 'custom-logo', );
 
 		// Customize Selective Refresh Widgets.
 		add_theme_support( 'customize-selective-refresh-widgets' );
@@ -81,8 +73,6 @@ if ( ! function_exists( 'ee_theme_setup' ) ) :
 
 		// Add support for responsive embedded content.
 		add_theme_support( 'responsive-embeds' );
-
-		add_theme_support( 'widgets' );
 
 	}
 
@@ -224,7 +214,6 @@ if ( ! function_exists( 'ee_theme_scripts' ) ) :
 
 		if ( is_front_page() && ! is_admin() ) {
 			wp_enqueue_style( 'ee-front-page-style', get_template_directory_uri() . '/assets/css/front-page.css', array(), filemtime( get_template_directory() . '/assets/css/front-page.css' ) );
-
 		}
 
 		if ( is_search() ) {

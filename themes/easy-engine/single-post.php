@@ -50,8 +50,10 @@ get_header();
 					?>
 
 					<?php the_author_link(); ?>
+
 					<span>
 						<?php esc_html_e( 'on', 'easy-engine' ); ?>
+
 						<?php the_date(); ?>
 					</span>
 				</span>
@@ -63,7 +65,9 @@ get_header();
 			if ( has_category() ) :
 				?>
 				<span class="post-category">
-					<?php esc_html_e( 'Category', 'easy-engine' ); ?> <?php the_category( ', ' ); ?>
+					<?php esc_html_e( 'Category', 'easy-engine' ); ?>
+
+					<?php the_category( ', ' ); ?>
 				</span>
 				<?php
 			endif;
@@ -73,7 +77,9 @@ get_header();
 			if ( has_tag() ) :
 				?>
 				<span class="post-tag">
-					<?php esc_html_e( 'Tagged', 'easy-engine' ); ?> <?php the_tags( '', ', ' ); ?>
+					<?php esc_html_e( 'Tagged', 'easy-engine' ); ?>
+
+					<?php the_tags( '', ', ' ); ?>
 				</span>
 				<?php
 			endif;
@@ -82,6 +88,7 @@ get_header();
 
 		<div class="post-content-wrapper">
 			<?php the_post_thumbnail(); ?>
+
 			<?php the_content(); ?>
 		</div>
 

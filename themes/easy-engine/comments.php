@@ -16,11 +16,10 @@ if ( have_comments() ) :
 			echo esc_html(
 				sprintf(
 					/* translators: 1: number of comments, 2: post title */
-					_nx(
+					_n(
 						'%1$s response to &ldquo;%2$s&rdquo;',
 						'%1$s responses to &ldquo;%2$s&rdquo;',
 						$comments_number,
-						'comments title',
 						'easy-engine'
 					),
 					number_format_i18n( $comments_number ),
