@@ -3,6 +3,27 @@
 }
 .social-buttons button {
   cursor: pointer;
+  margin: 0 5px 5px 0;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  border-radius: 3px;
+  color: #656565;
+  background: #f8f8f8;
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+  text-shadow: none;
+  line-height: 23px;
+  padding: 1px 8px 0 5px;
+}
+.social-buttons button:hover {
+  background: #f1f1f1;
+  border-color: #999;
+  color: #222;
 }
 .social-buttons .social-buttons__share {
   margin: 16px 0;
@@ -26,30 +47,7 @@
   display: flex;
   flex-wrap: wrap;
 }
-.social-buttons .social-buttons__share .share-buttons button {
-  margin: 0 5px 5px 0;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-family: "Open Sans", sans-serif;
-  font-weight: 400;
-  border-radius: 3px;
-  color: #656565;
-  background: #f8f8f8;
-  border: 1px solid #ccc;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
-  text-shadow: none;
-  line-height: 23px;
-  padding: 1px 8px 0 5px;
-}
-.social-buttons .social-buttons__share .share-buttons button:hover {
-  background: #f1f1f1;
-  border-color: #999;
-  color: #222;
-}
-.social-buttons .social-buttons__share .share-buttons button i::before {
+.social-buttons .social-buttons__share .share-buttons button i {
   font-size: 18px;
 }
 .social-buttons .social-buttons__like {
@@ -69,31 +67,8 @@
   display: flex;
   flex-wrap: wrap;
 }
-.social-buttons .social-buttons__like .like-button button {
-  margin: 1px 7px 8px 1px;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-family: "Open Sans", sans-serif;
-  font-weight: 500;
-  border-radius: 3px;
-  color: #656565;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
-  text-shadow: none;
-  line-height: 23px;
-  padding: 4px 10px 3px;
-}
-.social-buttons .social-buttons__like .like-button button i::before {
+.social-buttons .social-buttons__like .like-button button i {
   font-size: 16px;
-}
-.social-buttons .social-buttons__like .like-button button:hover {
-  background: #f1f1f1;
-  border-color: #999;
-  color: #222;
 }
 .social-buttons .social-buttons__like p {
   font-size: 11px;

@@ -28,8 +28,16 @@
   padding-bottom: 32px;
   border-bottom: 1px solid #ddd;
 }
+.post-data * {
+  max-width: 100%;
+}
+@media (min-width: 768px) {
+  .post-data * {
+    max-width: 1100px;
+  }
+}
 .post-data .post-title {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   margin-bottom: 16.5px;
   overflow: hidden;
   text-overflow: ellipsis;

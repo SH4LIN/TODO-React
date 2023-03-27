@@ -1,12 +1,10 @@
 /* Reset */
-p, h1, h2, h3, h4, h5, h6, ul, li, ol, dl, dt, dd, blockquote, figure, form, fieldset, legend, input, textarea, button, th, td {
+* {
   margin: unset;
   padding: unset;
   margin-block: unset;
   margin-inline: unset;
   box-sizing: border-box;
-  font-weight: unset;
-  font-size: unset;
 }
 
 button {
@@ -32,7 +30,12 @@ body {
   color: #1f292e;
   font-family: -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   line-height: 1.6;
-  font-size: 1rem;
+  font-size: 1em;
+}
+@media (min-width: 768px) {
+  body {
+    font-size: 1.225em;
+  }
 }
 
 h1 {
