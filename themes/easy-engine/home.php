@@ -15,23 +15,23 @@ get_header();
 	</div>
 
 	<article class="posts-wrapper">
-	<?php
-	if ( have_posts() ) {
-		while ( have_posts() ) {
-			the_post();
-			get_template_part( 'template-parts/blog-template' );
-		}
+		<?php
+		if ( have_posts() ) {
+			while ( have_posts() ) {
+				the_post();
+				get_template_part( 'template-parts/blog-template' );
+			}
 
-		// Previous/next page navigation.
-		the_posts_pagination(
-			array(
-				'mid_size'  => 2,
-				'prev_text' => __( '&laquo; Previous', 'easy-engine' ),
-				'next_text' => __( 'Next &raquo;', 'easy-engine' ),
-			)
-		);
-	}
-	?>
+			// Previous/next page navigation.
+			the_posts_pagination(
+				array(
+					'mid_size'  => 2,
+					'prev_text' => __( '&laquo; Previous', 'easy-engine' ),
+					'next_text' => __( 'Next &raquo;', 'easy-engine' ),
+				)
+			);
+		}
+		?>
 	</article>
 </section>
 <?php

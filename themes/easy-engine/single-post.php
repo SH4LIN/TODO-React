@@ -81,6 +81,7 @@ get_header();
 		</div>
 
 		<div class="post-content-wrapper">
+			<?php the_post_thumbnail(); ?>
 			<?php the_content(); ?>
 		</div>
 
@@ -112,8 +113,16 @@ get_header();
 						<?php
 					}
 					?>
+				</div>
 			</section>
 		<?php endif; ?>
+		<section class="comments-section">
+			<?php
+			if ( comments_open() || get_comments_number() ) {
+				comments_template();
+			}
+			?>
+		</section>
 	</div>
 </section>
 

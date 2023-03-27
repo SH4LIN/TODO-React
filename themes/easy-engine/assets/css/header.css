@@ -66,6 +66,7 @@
 .header-inner__navigation .primary-menu-wrapper .primary-menu-inner {
 	display: flex;
 	align-items: center;
+	list-style: none;
 }
 
 .header-inner__navigation .primary-menu-wrapper .primary-menu-inner li {
@@ -89,6 +90,7 @@
 
 .header-inner__navigation .primary-menu-wrapper .primary-menu-inner li ul {
 	display: none;
+	list-style: none;
 }
 
 .header-inner__navigation .primary-menu-wrapper .primary-menu-inner li:hover > ul {
@@ -98,6 +100,7 @@
 	width: 220px;
 	border: 1px solid #ddd;
 	background-color: #fff;
+	list-style: none;
 }
 
 .expanded-menu-wrapper .expanded-menu-inner li a {
