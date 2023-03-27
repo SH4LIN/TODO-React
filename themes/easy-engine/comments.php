@@ -1,6 +1,9 @@
 <?php
 /**
  * This file is used to display the comments.
+ *
+ * @package EasyEngine
+ * @since 1.0.0
  */
 
 if ( have_comments() ) :

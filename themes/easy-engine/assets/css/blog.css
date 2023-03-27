@@ -1,3 +1,7 @@
+/**
+ * This file will be used by all the archive page to display the posts properly.
+ * @package EasyEngine
+ */
 @import "../css/blog-template.css";
 
 .archive-wrapper {

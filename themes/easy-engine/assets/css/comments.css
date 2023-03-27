@@ -1,3 +1,7 @@
+/**
+ * This file contains the styles for the comments template.
+ * @package EasyEngine
+ */
 .comments-wrapper .comments-title {
 	font-size: 22px;
 	line-height: 1.4;
@@ -12,6 +16,33 @@
 
 .comments-wrapper .comment-list .comment-meta {
 	margin-bottom: 20px;
+}
+
+.comments-wrapper .comment-list .comment-author {
+	display: inline-block;
+}
+
+.comments-wrapper .comment-list .comment-author img {
+	border-radius: 50%;
+	margin-right: 10px;
+	transition: box-shadow 0.3s ease-in, -webkit-box-shadow 0.3s ease-in;
+	vertical-align: middle;
+}
+
+.comments-wrapper .comment-list .comment-author .url {
+	color: #415058;
+}
+
+.comments-wrapper .comment-list .comment-metadata {
+	display: inline-block;
+	font-size: 14px;
+}
+
+@media (min-width: 768px) {
+
+	.comments-wrapper .comment-list .comment-metadata {
+		font-size: 16px;
+	}
 }
 
 @media (min-width: 768px) {
@@ -48,36 +79,6 @@
 
 .comments-wrapper .comment-list article {
 	padding: 20px 0;
-}
-
-.comments-wrapper .comment-list .comment-metadata {
-	font-size: 14px;
-}
-
-@media (min-width: 768px) {
-
-	.comments-wrapper .comment-list .comment-metadata {
-		font-size: 16px;
-	}
-}
-
-.comments-wrapper .comment-list .comment-author {
-	display: inline-block;
-}
-
-.comments-wrapper .comment-list .comment-author img {
-	border-radius: 50%;
-	margin-right: 10px;
-	transition: box-shadow 0.3s ease-in, -webkit-box-shadow 0.3s ease-in;
-	vertical-align: middle;
-}
-
-.comments-wrapper .comment-list .comment-author .url {
-	color: #415058;
-}
-
-.comment-metadata {
-	display: inline-block;
 }
 
 .nav-links {

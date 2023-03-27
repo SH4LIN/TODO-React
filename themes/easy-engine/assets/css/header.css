@@ -1,3 +1,7 @@
+/**
+ * This file contains the styles for the header.
+ * @package EasyEngine
+ */
 .site-header {
 	background-color: #fff;
 	padding-top: 10px;
@@ -78,6 +82,15 @@
 	align-items: center;
 }
 
+.expanded-menu-wrapper li a {
+	display: block;
+	color: #415058;
+	font-size: 16px;
+	padding: 10px 30px;
+	border: 1px;
+	border-bottom: 1px solid #ddd;
+}
+
 .primary-menu-inner a:hover {
 	color: #3278bd;
 }
@@ -146,15 +159,6 @@
 
 .expanded-menu-wrapper ul {
 	list-style: none;
-}
-
-.expanded-menu-wrapper li a {
-	display: block;
-	color: #415058;
-	font-size: 16px;
-	padding: 10px 30px;
-	border: 1px;
-	border-bottom: 1px solid #ddd;
 }
 
 .expanded-menu-wrapper li a:hover {
