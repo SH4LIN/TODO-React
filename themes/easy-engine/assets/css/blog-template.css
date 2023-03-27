@@ -15,7 +15,7 @@
 }
 .post-date a {
   color: #8a9ea8;
-  font-size: 13px;
+  font-size: 0.8em;
   font-weight: 400;
 }
 @media (min-width: 768px) {
@@ -38,15 +38,15 @@
 }
 .post-data .post-title {
   overflow-wrap: break-word;
-  margin-bottom: 16.5px;
+  font-size: 1.65em;
+  margin-bottom: 0.625em;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .post-data .post-title a {
   width: 100%;
   white-space: break-spaces;
-  display: block;
-  font-size: 26px;
+  display: inline-block;
   font-family: -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   line-height: 1.5;
   font-weight: 300;
@@ -75,7 +75,7 @@
   text-decoration: underline;
 }
 .post-data .post-meta div {
-  font-size: 14px;
+  font-size: 0.9em;
   font-weight: 600;
   color: #999;
 }
