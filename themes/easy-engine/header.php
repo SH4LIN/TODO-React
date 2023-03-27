@@ -109,7 +109,7 @@ if ( ! $search_option || 'off' === $search_option ) {
 							'container'       => 'nav',
 							'container_class' => 'mobile-visible expanded-menu-wrapper',
 							'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-							'depth'           => 2,
+							'depth'           => 10,
 							'fallback'        => false,
 						)
 					);

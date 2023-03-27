@@ -1,37 +1,43 @@
 @import "../css/blog-template.css";
+
 .search-result-wrapper {
-  padding: 0 20px;
-}
-.search-result-wrapper .breadcrumb-wrapper {
-  margin-top: 30px;
-}
-@media (min-width: 1025px) {
-  .search-result-wrapper .breadcrumb-wrapper {
-    max-width: 1100px;
-    margin-top: 40px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-.search-result-wrapper .content-wrapper {
-  padding-top: 20px;
-}
-@media (min-width: 1025px) {
-  .search-result-wrapper .content-wrapper > * {
-    max-width: 740px;
-    margin: 0 auto;
-  }
-}
-.search-result-wrapper .content-wrapper .search-result-title {
-  margin-top: 20px;
-  margin-bottom: 24px;
-  font-size: 30px;
-  font-family: -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-  color: #415058;
-  font-weight: 200;
-  line-height: 1.4;
-  text-overflow: ellipsis;
-  overflow: hidden;
+	padding: 0 20px;
 }
 
-/*# sourceMappingURL=search.css.map */
+.search-result-wrapper .breadcrumb-wrapper {
+	margin-top: 30px;
+}
+
+@media (min-width: 1025px) {
+
+	.search-result-wrapper .breadcrumb-wrapper {
+		max-width: 1100px;
+		margin-top: 40px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+.search-result-wrapper .content-wrapper {
+	padding-top: 20px;
+}
+
+@media (min-width: 1025px) {
+
+	.search-result-wrapper .content-wrapper > * {
+		max-width: 740px;
+		margin: 0 auto;
+	}
+}
+
+.search-result-wrapper .content-wrapper .search-result-title {
+	margin-top: 20px;
+	margin-bottom: 24px;
+	font-size: 30px;
+	font-family: -apple-system, blinkmacsystemfont, "Segoe UI", Roboto, Oxygen-Sans, Oxygen, "Fira Sans", Ubuntu, Cantarell, "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+	color: #415058;
+	font-weight: 200;
+	line-height: 1.4;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}

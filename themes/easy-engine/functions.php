@@ -114,7 +114,7 @@ if ( ! function_exists( 'get_breadcrumbs' ) ) :
 				echo esc_html( sprintf( __( '%1$sBlog', 'easy-engine' ), $delimiter ) );
 			}
 
-			if ( is_category() || is_single() ) {
+			if ( is_category() || is_single() || is_tag() ) {
 				if ( is_single() ) {
 					?>
 					<?php
@@ -138,18 +138,25 @@ if ( ! function_exists( 'get_breadcrumbs' ) ) :
 					</span>
 					<?php
 				} else {
-					?>
-					<span class="current">
-						<?php
-						// translators: 1. %s is the delimiter, 2. %s is the category name.
-						echo esc_html( $delimiter );
-						$category = single_cat_title();
-						if ( $category ) {
-							echo esc_html( $category );
-						}
+					if ( is_category() ) {
 						?>
-					</span>
-					<?php
+						<span class="current">
+							<?php
+							echo esc_html( $delimiter );
+							echo esc_html( single_cat_title() );
+							?>
+						</span>
+						<?php
+					} else {
+						?>
+						<span class="current">
+							<?php
+							echo esc_html( $delimiter );
+							echo esc_html( single_tag_title() );
+							?>
+						</span>
+						<?php
+					}
 				}
 			} elseif ( is_page() ) {
 				?>
