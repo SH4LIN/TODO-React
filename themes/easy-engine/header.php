@@ -7,6 +7,11 @@
  */
 
 /**
+ * This is security to prevent direct access to the file.
+ */
+defined( 'ABSPATH' ) || exit;
+
+/**
  * This function is used to remove search from the site.
  *
  * @param WP_Query $query Query To Modify.

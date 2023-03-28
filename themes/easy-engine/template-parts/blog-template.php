@@ -6,6 +6,10 @@
  * @since 1.0.0
  */
 
+/**
+ * This is security to prevent direct access to the file.
+ */
+defined( 'ABSPATH' ) || exit;
 ?>
 
 <section class="archive-wrapper">
@@ -41,7 +45,7 @@
 							if ( ! empty( get_the_author() ) ) :
 								?>
 								<div class="post-author">
-									<?php esc_html_e( 'Posted by', 'easy-engine' ); ?>  <?php the_author_link(); ?>
+									<?php esc_html_e( 'Posted by', 'easy-engine' ); ?>  <span><?php the_author_link(); ?></span>
 								</div>
 								<?php
 							endif;

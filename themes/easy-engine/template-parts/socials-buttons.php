@@ -6,6 +6,11 @@
  * @since 1.0.0
  */
 
+/**
+ * This is security to prevent direct access to the file.
+ */
+defined( 'ABSPATH' ) || exit;
+
 $facebook_share_link = 'https://www.facebook.com/sharer/sharer.php?u=' . get_permalink();
 $twitter_share_link  = 'https://twitter.com/intent/tweet?text=' . get_the_title() . '&url=' . get_permalink();
 $reddit_share_link   = 'https://www.reddit.com/submit?url=' . get_permalink() . '&title=' . get_the_title();

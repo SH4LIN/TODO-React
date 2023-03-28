@@ -6,6 +6,11 @@
  * @since 1.0.0
  */
 
+/**
+ * This is security to prevent direct access to the file.
+ */
+defined( 'ABSPATH' ) || exit;
+
 if ( have_posts() ) {
 	the_post();
 }

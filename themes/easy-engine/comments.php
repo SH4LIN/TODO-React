@@ -6,12 +6,16 @@
  * @since 1.0.0
  */
 
+/**
+ * This is security to prevent direct access to the file.
+ */
+defined( 'ABSPATH' ) || exit;
+
 if ( have_comments() ) :
 	?>
 	<div class="comments-wrapper">
 		<h3 class="comments-title">
 			<?php
-			$comments_number = get_comments_number();
 
 			echo esc_html(
 				sprintf(
@@ -19,10 +23,10 @@ if ( have_comments() ) :
 					_n(
 						'%1$s response to &ldquo;%2$s&rdquo;',
 						'%1$s responses to &ldquo;%2$s&rdquo;',
-						$comments_number,
+						get_comments_number(),
 						'easy-engine'
 					),
-					number_format_i18n( $comments_number ),
+					number_format_i18n( get_comments_number() ),
 					get_the_title()
 				)
 			);

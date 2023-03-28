@@ -6,6 +6,11 @@
  * @since 1.0.0
  */
 
+/**
+ * This is security to prevent direct access to the file.
+ */
+defined( 'ABSPATH' ) || exit;
+
 ?>
 <div class="search-container">
 	<button id="search" class="search-toggle" aria-controls="search-container" aria-expanded="false">
