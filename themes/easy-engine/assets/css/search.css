@@ -28,7 +28,7 @@
 @media (min-width: 1025px) {
 
 	.search-result-wrapper .content-wrapper > * {
-		max-width: 740px;
+		max-width: 1100px;
 		margin: 0 auto;
 	}
 }
