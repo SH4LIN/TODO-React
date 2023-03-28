@@ -1,6 +1,6 @@
 /**
- * This file will be used by blog.css.
- * this file contains the styles for the individual blog post.
+ * This file will be used by blog.css
+ * This file contains the styles for the individual blog post.
  * @package EasyEngine
  */
 .post-wrapper {
@@ -86,6 +86,11 @@
 .post-data .post-meta a:hover {
 	color: #3278bd;
 	text-decoration: underline;
+}
+
+.post-data .post-meta span {
+	color: #999;
+	font-weight: 400;
 }
 
 .post-data .post-meta div {
