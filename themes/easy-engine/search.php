@@ -74,7 +74,7 @@ get_header();
 							if ( ! empty( get_the_author() ) ) :
 								?>
 								<div class="post-author">
-									<?php esc_html_e( 'Posted by', 'easy-engine' ); ?>  <?php the_author_link(); ?>
+									<?php esc_html_e( 'Posted by', 'easy-engine' ); ?>  <span><?php the_author_link(); ?></span>
 								</div>
 								<?php
 							endif;
