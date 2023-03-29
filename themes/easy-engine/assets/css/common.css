@@ -118,6 +118,8 @@ i {
  */
 ul,
 ol {
+  margin: revert;
+  padding: revert;
   list-style-position: inside;
   -ms-word-wrap: break-word;
   word-wrap: break-word;
