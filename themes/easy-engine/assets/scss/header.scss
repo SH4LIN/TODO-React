@@ -168,7 +168,7 @@
 	list-style: none;
 }
 
-
+/* stylelint-disable no-descending-specificity */
 .expanded-menu-wrapper li {
 
 	a {
@@ -184,19 +184,21 @@
 		}
 	}
 }
+/* stylelint-enable no-descending-specificity */
 
-.expanded-menu-wrapper {
+/* stylelint-disable no-descending-specificity */
 
-	.expanded-menu-inner {
+.expanded-menu-wrapper.expanded-menu-inner {
 
-		.sub-menu {
+	.sub-menu {
 
-			a {
-				padding-left: 45px;
-			}
+		a {
+			padding-left: 45px;
 		}
 	}
 }
+/* stylelint-enable no-descending-specificity */
+
 
 #search {
 	cursor: pointer;

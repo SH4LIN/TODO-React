@@ -142,6 +142,7 @@
   list-style: none;
 }
 
+/* stylelint-disable no-descending-specificity */
 .expanded-menu-wrapper li a {
   display: block;
   color: #415058;
@@ -154,10 +155,13 @@
   color: #3278bd;
 }
 
-.expanded-menu-wrapper .expanded-menu-inner .sub-menu a {
+/* stylelint-enable no-descending-specificity */
+/* stylelint-disable no-descending-specificity */
+.expanded-menu-wrapper.expanded-menu-inner .sub-menu a {
   padding-left: 45px;
 }
 
+/* stylelint-enable no-descending-specificity */
 #search {
   cursor: pointer;
 }

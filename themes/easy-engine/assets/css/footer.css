@@ -146,8 +146,10 @@
 .primary-menu-footer-wrapper .primary-menu-footer li {
   display: flex;
   align-items: center;
+  /* stylelint-disable no-descending-specificity */
+  /* stylelint-enable no-descending-specificity */
 }
-.primary-menu-footer-wrapper .primary-menu-footer li a { /* es lint-disable-line */
+.primary-menu-footer-wrapper .primary-menu-footer li a {
   font-size: 16px;
   line-height: 1.8;
   font-weight: 400;

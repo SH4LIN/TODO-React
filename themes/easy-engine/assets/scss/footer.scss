@@ -159,7 +159,8 @@
 			display: flex;
 			align-items: center;
 
-			a { /* es lint-disable-line */
+			/* stylelint-disable no-descending-specificity */
+			a {
 				font-size: 16px;
 				line-height: 1.8;
 				font-weight: 400;
@@ -170,6 +171,7 @@
 					text-decoration: underline;
 				}
 			}
+			/* stylelint-enable no-descending-specificity */
 
 			&:not(:last-child)::after {
 				content: "\00B7";
