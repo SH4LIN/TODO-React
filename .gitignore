@@ -30,7 +30,3 @@ lint-js-report.json
 
 # Ignoring the redis-cache plugin
 plugins/redis-cache/*
-
-# Ignoring .scss and .map files
-themes/easy-engine/assets/scss/*
-themes/easy-engine/assets/css/*.map
