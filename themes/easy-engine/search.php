@@ -63,7 +63,7 @@ get_header();
 						if ( ! empty( get_the_title() ) ) :
 							?>
 							<div class="post-title">
-								<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+								<a class="post-title-link" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 							</div>
 							<?php
 						endif;
