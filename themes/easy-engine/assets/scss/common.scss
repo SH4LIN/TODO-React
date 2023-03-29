@@ -1,0 +1,161 @@
+/**
+ * This file contains the common CSS that will be used by entire site.
+ */
+@import "variables";
+
+/* Reset */
+* {
+	margin: 0;
+	padding: 0;
+	margin-block: 0;
+	margin-inline: 0;
+	box-sizing: border-box;
+}
+
+/**
+ * HTML style.
+ */
+html {
+	scroll-behavior: smooth;
+}
+
+/**
+ * Body style.
+ */
+body {
+	background-color: $background-color;
+	color: $pre-text-color;
+	font-family: $font-family;
+	line-height: 1.6;
+	font-size: 1em;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	@media (min-width: 768px) {
+		font-size: 1.125em;
+	}
+}
+
+/**
+ * Button style.
+ */
+button {
+	background-color: transparent;
+	border: none;
+	padding: 0;
+}
+
+/**
+ * Anchor tag style.
+ */
+a {
+	text-decoration: none;
+	color: $link-color;
+	transition: 0.3s;
+	font-weight: 400;
+	font-family: $font-family;
+}
+
+/**
+ * Heading 1 style.
+ */
+h1 {
+	font-size: 30px;
+	color: $primary-font-color;
+	line-height: 1.4;
+	font-weight: 300;
+
+	@media (min-width: 768px) {
+		font-size: 48px;
+	}
+}
+
+
+/**
+ * Label style.
+ */
+label {
+	font-size: 14.224px;
+	line-height: 1.3;
+	font-weight: 400;
+	color: $pre-text-color;
+	font-family: $font-family;
+
+	@media (min-width: 768px) {
+		font-size: 16px;
+	}
+}
+
+/**
+ * pre style.
+ */
+pre {
+	background: #f2f2f3;
+	border: 1px solid #ddd;
+	margin-bottom: 1.6rem;
+	overflow: auto;
+	padding: 18px;
+	font-size: 13px;
+	font-family: monospace;
+	overflow-x: scroll;
+	-ms-overflow-x: scroll;
+
+	@media (min-width: 768px) {
+		font-size: 14px;
+	}
+}
+
+/**
+ * Icons style.
+ */
+i {
+	color: $primary-font-color;
+}
+
+/**
+ * Unordered list and ordered list style.
+ */
+ul,
+ol {
+	list-style: inside;
+	-ms-word-wrap: break-word;
+	word-wrap: break-word;
+}
+
+/**
+ * code style.
+ */
+code {
+	font-size: 16px;
+	color: $pre-text-color;
+	line-height: 20.8px;
+	font-family: monospace;
+	-ms-word-wrap: break-word;
+	word-wrap: break-word;
+}
+
+/**
+ * Element hidden style.
+ */
+.hidden {
+	display: none;
+}
+
+/**
+ * Element visible style.
+ */
+.visible {
+	display: unset;
+}
+
+/**
+ * Breadcrumbs style.
+ */
+.breadcrumbs {
+	-ms-word-wrap: break-word;
+	word-wrap: break-word;
+
+	a:hover {
+		text-decoration: underline;
+	}
+}

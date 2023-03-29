@@ -1,198 +1,167 @@
 @charset "UTF-8";
-
 /**
  * This file contains the styles for the footer.
  */
 .site-footer {
-	padding: 0 20px;
+  padding: 0 20px;
 }
 
 .footer-inner {
-	padding: 1rem 0;
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-	grid-template-rows: auto;
+  padding: 1rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-rows: auto;
 }
-
 @media (min-width: 1025px) {
-
-	.footer-inner {
-		max-width: 1100px;
-		margin: 0 auto;
-	}
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
 }
-
 .footer-inner section {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
-
 .footer-inner section h4 {
-	margin-top: 16px;
-	margin-bottom: 14.2px;
+  margin-top: 16px;
+  margin-bottom: 14.2px;
 }
-
 .footer-inner section ul {
-	list-style: disc outside;
-	padding-left: 18px;
-	margin-bottom: 14.224px;
+  list-style: disc outside;
+  padding-left: 18px;
+  margin-bottom: 14.224px;
 }
-
-.copyrights span a {
-	font-size: 14px;
-	line-height: 1.8;
-	font-weight: 400;
-	font-family: -apple-system, blinkmacsystemfont, "Segoe UI", Roboto, Oxygen-Sans, Oxygen, "Fira Sans", Ubuntu, Cantarell, "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-}
-
 .footer-inner section ul a {
-	font-family: -apple-system, blinkmacsystemfont, "Segoe UI", Roboto, Oxygen-Sans, Oxygen, "Fira Sans", Ubuntu, Cantarell, "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-	font-size: 14.224px;
-	line-height: 1.8;
-	font-weight: 400;
+  font-family: -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-size: 14.224px;
+  line-height: 1.8;
+  font-weight: 400;
 }
-
 @media (min-width: 1025px) {
-
-	.footer-inner section ul a {
-		font-size: 16px;
-	}
+  .footer-inner section ul a {
+    font-size: 16px;
+  }
 }
-
-.copyrights span a:hover {
-	text-decoration: underline;
-}
-
-.primary-menu-footer-wrapper .primary-menu-footer li a {
-	font-size: 16px;
-	line-height: 1.8;
-	font-weight: 400;
-	font-family: -apple-system, blinkmacsystemfont, "Segoe UI", Roboto, Oxygen-Sans, Oxygen, "Fira Sans", Ubuntu, Cantarell, "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-	margin: 0 12px;
-}
-
 .footer-inner section ul a:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
-
 .footer-inner section form {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
-
 .footer-inner section form .email-label {
-	margin-bottom: 8px;
+  margin-bottom: 8px;
 }
-
 .footer-inner section form .email-input {
-	padding: 7px 10px;
-	border: 1px solid #ddd;
-	font-size: 14px;
-	font-family: -apple-system, blinkmacsystemfont, "Segoe UI", Roboto, Oxygen-Sans, Oxygen, "Fira Sans", Ubuntu, Cantarell, "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-	line-height: 1.6;
-	font-weight: 400;
-	color: #415058;
-	letter-spacing: normal;
+  padding: 7px 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  font-family: -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  color: #415058;
+  letter-spacing: normal;
 }
-
 @media (min-width: 768px) {
-
-	.footer-inner section form .email-input {
-		font-size: 16px;
-	}
+  .footer-inner section form .email-input {
+    font-size: 16px;
+  }
 }
-
 .footer-inner section form .sign-me-up-btn-wrapper {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 16px;
-	padding: 16px 0 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+  padding: 16px 0 10px 0;
 }
-
 .footer-inner section form .sign-me-up-btn-wrapper input {
-	padding: 12px 30px;
-	border: 2px solid #3278bd;
-	margin-bottom: 16px;
-	font-family: -apple-system, blinkmacsystemfont, "Segoe UI", Roboto, Oxygen-Sans, Oxygen, "Fira Sans", Ubuntu, Cantarell, "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-	font-size: 14px;
-	line-height: 1;
-	font-weight: 500;
-	text-transform: uppercase;
-	background-color: #3278bd;
-	color: #fff;
-	transition: 0.3s;
-	cursor: pointer;
+  padding: 12px 30px;
+  border: 2px solid #3278bd;
+  margin-bottom: 16px;
+  font-family: -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 500;
+  text-transform: uppercase;
+  background-color: #3278bd;
+  color: #fff;
+  transition: 0.3s;
+  cursor: pointer;
 }
-
 .footer-inner section form .sign-me-up-btn-wrapper input:hover {
-	background-color: #fff;
-	color: #3278bd;
+  background-color: #fff;
+  color: #3278bd;
 }
 
 .copyrights {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
 }
-
 @media (min-width: 768px) {
-
-	.copyrights {
-		padding: 16px 0;
-	}
+  .copyrights {
+    padding: 16px 0;
+  }
 }
-
 @media (min-width: 1025px) {
-
-	.copyrights {
-		max-width: 1100px;
-		margin: 0 auto;
-		justify-content: space-between;
-	}
+  .copyrights {
+    max-width: 1100px;
+    margin: 0 auto;
+    justify-content: space-between;
+  }
 }
-
-.copyrights span {
-	font-size: 14px;
-	line-height: 1.8;
-	font-weight: 300;
-	color: #1f292e;
-	font-family: -apple-system, blinkmacsystemfont, "Segoe UI", Roboto, Oxygen-Sans, Oxygen, "Fira Sans", Ubuntu, Cantarell, "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+.copyrights .copyright-text {
+  font-size: 14px;
+  line-height: 1.8;
+  font-weight: 300;
+  color: #1f292e;
+  font-family: -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
-
 @media (min-width: 1025px) {
-
-	.copyrights span {
-		font-size: 16px;
-	}
+  .copyrights .copyright-text {
+    font-size: 16px;
+  }
 }
-
+.copyrights .copyright-text .copyright-link {
+  font-size: 14px;
+  line-height: 1.8;
+  font-weight: 400;
+  font-family: -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
 @media (min-width: 1025px) {
-
-	.copyrights span a {
-		font-size: 16px;
-	}
+  .copyrights .copyright-text .copyright-link {
+    font-size: 16px;
+  }
+}
+.copyrights .copyright-text .copyright-link:hover {
+  text-decoration: underline;
 }
 
 .primary-menu-footer-wrapper .primary-menu-footer {
-	display: flex;
-	align-items: center;
-	list-style: none;
+  display: flex;
+  align-items: center;
+  list-style: none;
 }
-
 .primary-menu-footer-wrapper .primary-menu-footer li {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
-
+.primary-menu-footer-wrapper .primary-menu-footer li a { /* es lint-disable-line */
+  font-size: 16px;
+  line-height: 1.8;
+  font-weight: 400;
+  font-family: -apple-system, blinkmacsystemfont, "Segoe UI", "Roboto", "Oxygen-Sans", "Oxygen", "Fira Sans", "Ubuntu", "Cantarell", "Droid Sans", "Helvetica Neue", arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  margin: 0 12px;
+}
 .primary-menu-footer-wrapper .primary-menu-footer li a:hover {
-	text-decoration: underline;
+  text-decoration: underline;
+}
+.primary-menu-footer-wrapper .primary-menu-footer li:not(:last-child)::after {
+  content: "·";
+  display: inline-block;
+  font-size: 30px;
+  line-height: 12px;
 }
 
-.primary-menu-footer-wrapper .primary-menu-footer li:not(:last-child)::after {
-	content: "·";
-	display: inline-block;
-	font-size: 30px;
-	line-height: 12px;
-}
+/*# sourceMappingURL=footer.css.map */

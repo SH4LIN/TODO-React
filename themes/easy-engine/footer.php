@@ -88,9 +88,9 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 
 	<div class="copyrights">
-		<span>
+		<span class="copyright-text">
 			<?php echo esc_html( sprintf( '&copy; %1$s-%2$s', wp_get_theme()->get( 'Author' ), wp_date( 'Y' ) ) ); ?>
-			<a href="<?php echo esc_url( wp_get_theme()->get( 'AuthorURI' ) ); ?>" target="_blank"><?php echo esc_html( wp_get_theme()->get( 'Author' ) ); ?></a>
+			<a class="copyright-link" href="<?php echo esc_url( wp_get_theme()->get( 'AuthorURI' ) ); ?>" target="_blank"><?php echo esc_html( wp_get_theme()->get( 'Author' ) ); ?></a>
 		</span>
 		<?php
 		if ( has_nav_menu( 'primary-menu' ) ) :
