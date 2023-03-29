@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Home
+ * Template Name: Front Page
  *
  * This file is a template file for the front page.
  *
