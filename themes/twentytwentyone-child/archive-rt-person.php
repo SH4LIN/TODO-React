@@ -130,9 +130,9 @@ if ( ! empty( $actors ) ) {
 							</div>
 						</div>
 
-						<?php if ( ! empty( $person['excerpt'] ) ) : ?>
+						<?php if ( has_excerpt() ) : ?>
 							<div class="primary-text-primary-font ap-cast-crew-excerpt-mobile">
-								<?php echo esc_html( $person['excerpt'] ); ?>
+								<?php the_excerpt(); ?>
 							</div>
 						<?php endif; ?>
 
