@@ -11,6 +11,8 @@
  */
 defined( 'ABSPATH' ) || exit;
 
+require_once get_template_directory() . '/settings/settings-page.php';
+
 if ( ! function_exists( 'ee_theme_setup' ) ) :
 
 	/**
@@ -80,14 +82,12 @@ if ( ! function_exists( 'ee_theme_setup' ) ) :
 		add_theme_support( 'responsive-embeds' );
 
 	}
-
-	add_action( 'after_setup_theme', 'ee_theme_setup' );
 endif;
+add_action( 'after_setup_theme', 'ee_theme_setup' );
 
-require_once get_template_directory() . '/settings/settings-page.php';
 add_action( 'admin_menu', 'add_ee_sub_menu' );
 
-if ( ! function_exists( 'get_breadcrumbs' ) ) :
+if ( ! function_exists( 'ee_get_breadcrumbs' ) ) :
 
 	/**
 	 * Get the breadcrumbs.
@@ -95,7 +95,7 @@ if ( ! function_exists( 'get_breadcrumbs' ) ) :
 	 * @return void
 	 * @since 1.0.0
 	 */
-	function get_breadcrumbs() {
+	function ee_get_breadcrumbs() {
 		// breadcrumb function.
 		$delimiter = '&nbsp;&#187;&nbsp;';
 		?>
@@ -106,7 +106,7 @@ if ( ! function_exists( 'get_breadcrumbs' ) ) :
 			<?php
 			if ( is_home() ) {
 				// translators: %s is the delimiter.
-				echo esc_html( sprintf( __( '%1$sBlog', 'easy-engine' ), $delimiter ) );
+				echo esc_html( sprintf( __( '%sBlog', 'easy-engine' ), $delimiter ) );
 			}
 
 			if ( is_category() || is_single() || is_tag() ) {
@@ -116,7 +116,7 @@ if ( ! function_exists( 'get_breadcrumbs' ) ) :
 					$cat           = get_the_category()[0];
 					$cat_parent_id = $cat->parent;
 					if ( 0 !== $cat_parent_id ) {
-						// translators: 1. %s is the delimiter, 2. %s is the category name.
+						// translators: 1: %s is the delimiter, 2: %s is the category name.
 						echo esc_html( sprintf( '%1$s%2$s', $delimiter, get_category( $cat_parent_id )->name ) );
 					} else {
 						// translators: 1. %s is the delimiter, 2. %s is the category name.
@@ -189,19 +189,18 @@ if ( ! function_exists( 'ee_theme_scripts' ) ) :
 	 * @since 1.0.0
 	 */
 	function ee_theme_scripts(): void {
-		// Ignoring the version number because it's a Google font.
-		wp_enqueue_style( // phpcs:ignore:WordPress.WP.EnqueuedResourceParameters.MissingVersion
+		wp_enqueue_style( // phpcs:ignore:WordPress.WP.EnqueuedResourceParameters.MissingVersion -- Ignoring the version number because it's a Google font.
 			'font-families',
 			'https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100;200;300;400;500;600;700;800;900&family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap',
 			array(),
 			null
 		);
-		wp_enqueue_style( // phpcs:ignore:WordPress.WP.EnqueuedResourceParameters.MissingVersion
+		wp_enqueue_style( // phpcs:ignore:WordPress.WP.EnqueuedResourceParameters.MissingVersion -- Ignoring the version number because it's a Font Awesome.
 			'font-awesome',
 			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css',
 			array(),
 			null
-		); // phpcs:ignore:WordPress.WP.EnqueuedResourceParameters.MissingVersion
+		);
 
 		wp_enqueue_style( 'ee-style', get_template_directory_uri() . '/style.css', array(), filemtime( get_template_directory() . '/style.css' ) );
 		wp_enqueue_style( 'ee-common-style', get_template_directory_uri() . '/assets/css/common.css', array(), filemtime( get_template_directory() . '/assets/css/common.css' ) );
@@ -230,5 +229,5 @@ if ( ! function_exists( 'ee_theme_scripts' ) ) :
 		wp_enqueue_script( 'ee-share-buttons', get_template_directory_uri() . '/assets/js/share-buttons.js', array( 'wp-i18n' ), filemtime( get_template_directory() . '/assets/js/share-buttons.js' ), true );
 
 	}
-	add_action( 'wp_enqueue_scripts', 'ee_theme_scripts' );
 endif;
+add_action( 'wp_enqueue_scripts', 'ee_theme_scripts' );

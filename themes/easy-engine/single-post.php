@@ -39,7 +39,7 @@ get_header();
 ?>
 <section class="single-post-wrapper">
 	<div class="breadcrumb-wrapper">
-		<?php get_breadcrumbs(); ?>
+		<?php ee_get_breadcrumbs(); ?>
 	</div>
 
 	<div class="post-data">

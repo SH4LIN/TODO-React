@@ -17,7 +17,7 @@ get_header();
 <section class="search-result-wrapper">
 
 	<div class="breadcrumb-wrapper">
-		<?php get_breadcrumbs(); ?>
+		<?php ee_get_breadcrumbs(); ?>
 	</div>
 
 	<div class="content-wrapper">

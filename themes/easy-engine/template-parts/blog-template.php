@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 
 <section class="archive-wrapper">
 	<div class="breadcrumb-wrapper">
-		<?php get_breadcrumbs(); ?>
+		<?php ee_get_breadcrumbs(); ?>
 	</div>
 
 	<article class="posts-wrapper">
