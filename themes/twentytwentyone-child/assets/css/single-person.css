@@ -185,6 +185,11 @@
 	width: auto;
 }
 
+.social-item img {
+	width: 20px;
+	height: 20px;
+}
+
 /* Popular Movies Section Starts */
 .heading-wrapper {
 	border-left: 4px #d13223 solid;
