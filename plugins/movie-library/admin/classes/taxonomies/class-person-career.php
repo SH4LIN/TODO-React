@@ -79,7 +79,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Person_Career' ) ) {
 					'public'             => true,
 					'publicly_queryable' => true,
 					'capabilities'       => array(
-						'manager_terms' => 'manage_person_careers',
+						'manage_terms' => 'manage_person_careers',
 						'edit_terms'    => 'edit_person_careers',
 						'delete_terms'  => 'delete_person_careers',
 						'assign_terms'  => 'assign_person_careers',

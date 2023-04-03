@@ -33,6 +33,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\roles_capabilities\Movie_Manager_Ro
 	 */
 	class Movie_Manager_Role_Capabilities {
 
+		const SLUG = 'movie-manager';
+
 		use Singleton;
 
 		/**
@@ -44,24 +46,33 @@ if ( ! class_exists( 'MovieLib\admin\classes\roles_capabilities\Movie_Manager_Ro
 
 		}
 
+		/**
+		 * This function is used to add the movie manager role and capabilities.
+		 *
+		 * @return void
+		 */
 		public function add_movie_manager_role() {
 			$capabilities = $this->get_movie_manager_capabilities();
-
 			$admin_role = get_role( 'administrator' );
 			foreach ( $capabilities as $capability ) {
 				$admin_role->add_cap( $capability );
 			}
 
 			$capabilities = array_fill_keys( $capabilities, true );
-			add_role( 'movie_manager', __( 'Movie Manager', 'movie-library' ), $capabilities );
-			echo 'Movie Manager role added successfully.';
+			$capabilities['read'] = true;
+
+			add_role( self::SLUG, __( 'Movie Manager', 'movie-library' ), $capabilities );
 
 		}
 
-		private function get_movie_manager_capabilities() {
+		/**
+		 * This function is used to get the movie manager capabilities.
+		 *
+		 * @return array
+		 */
+		public function get_movie_manager_capabilities() {
 			$capabilities = array();
-
-			$post_types = array( RT_Movie::SLUG, RT_Person::SLUG );
+			$post_types   = array( RT_Movie::SLUG, RT_Person::SLUG );
 
 			foreach ( $post_types as $post_type ) {
 				$post_type_object = get_post_type_object( $post_type );
@@ -74,9 +85,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\roles_capabilities\Movie_Manager_Ro
 
 				unset(
 					$post_type_caps['edit_post'],
-					$post_type_caps['read_post'],
 					$post_type_caps['delete_post'],
+					$post_type_caps['read_post'],
 					$post_type_caps['create_posts'],
+					$post_type_caps['read'],
 				);
 
 				$capabilities = array_merge( $capabilities, array_values( $post_type_caps ) );
@@ -106,15 +118,19 @@ if ( ! class_exists( 'MovieLib\admin\classes\roles_capabilities\Movie_Manager_Ro
 			return array_unique( $capabilities );
 		}
 
+		/**
+		 * This function is used to remove the movie manager role and capabilities.
+		 *
+		 * @return void
+		 */
 		public function remove_movie_manager_role() {
 			$capabilities = $this->get_movie_manager_capabilities();
-
 			$admin_role = get_role( 'administrator' );
 			foreach ( $capabilities as $capability ) {
 				$admin_role->remove_cap( $capability );
 			}
 
-			remove_role( 'movie_manager' );
+			remove_role( self::SLUG );
 		}
 
 	}

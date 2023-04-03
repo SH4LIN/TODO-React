@@ -79,7 +79,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Genre' ) ) {
 					'public'             => true,
 					'publicly_queryable' => true,
 					'capabilities'       => array(
-						'manager_terms' => 'manage_genres',
+						'manage_terms' => 'manage_genres',
 						'edit_terms'    => 'edit_genres',
 						'delete_terms'  => 'delete_genres',
 						'assign_terms'  => 'assign_genres',

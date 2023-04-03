@@ -77,11 +77,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 				'show_in_menu'       => true,
 				'query_var'          => true,
 				'has_archive'        => true,
+				'capability_type'    => 'movie',
+				'map_meta_cap'       => true,
 				'menu_icon'          => 'dashicons-format-video',
 				'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
 				'show_in_rest'       => true,
-				'capability_type'    => 'movie',
-				'map_meta_cap'       => true,
 			);
 
 			register_post_type( self::SLUG, $args ); // phpcs:ignore WordPress.NamingConventions.ValidPostTypeSlug.NotStringLiteral
