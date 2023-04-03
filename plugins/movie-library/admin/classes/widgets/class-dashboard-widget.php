@@ -270,7 +270,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\widgets\Dashboard_Widget' ) ) {
 						'poster' => $movie['image'],
 					);
 					++$i;
-					if ( $i === 6 ) {
+					if ( 6 === $i ) {
 						break;
 					}
 				}

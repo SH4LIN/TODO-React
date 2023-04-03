@@ -90,6 +90,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Production_Company
 					'query_var'          => true,
 					'public'             => true,
 					'publicly_queryable' => true,
+					'capabilities'       => array(
+						'manager_terms' => 'manage_production_companies',
+						'edit_terms'    => 'edit_production_companies',
+						'delete_terms'  => 'delete_production_companies',
+						'assign_terms'  => 'assign_production_companies',
+					),
 				),
 			);
 

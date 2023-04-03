@@ -76,16 +76,15 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Person' ) ) {
 				'show_ui'            => true,
 				'show_in_menu'       => true,
 				'query_var'          => true,
-				'capability_type'    => 'post',
+				'capability_type'    => array( 'person', 'people' ),
+				'map_meta_cap'       => true,
 				'has_archive'        => true,
 				'menu_icon'          => 'dashicons-businessman',
 				'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
 				'show_in_rest'       => true,
-
 			);
 
 			register_post_type( self::SLUG, $args ); // phpcs:ignore WordPress.NamingConventions.ValidPostTypeSlug.NotStringLiteral
-
 		}
 	}
 }

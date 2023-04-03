@@ -81,6 +81,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Language' ) ) {
 					'query_var'          => true,
 					'public'             => true,
 					'publicly_queryable' => true,
+					'capabilities'       => array(
+						'manager_terms' => 'manage_languages',
+						'edit_terms'    => 'edit_languages',
+						'delete_terms'  => 'delete_languages',
+						'assign_terms'  => 'assign_languages',
+					),
 				),
 			);
 
