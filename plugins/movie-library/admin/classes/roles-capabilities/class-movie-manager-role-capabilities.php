@@ -61,6 +61,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\roles_capabilities\Movie_Manager_Ro
 			$capabilities = array_fill_keys( $capabilities, true );
 			$capabilities['read'] = true;
 
+			$capabilities['upload_files'] = true;
+
 			add_role( self::SLUG, __( 'Movie Manager', 'movie-library' ), $capabilities );
 
 		}
@@ -114,6 +116,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\roles_capabilities\Movie_Manager_Ro
 
 				$capabilities = array_merge( $capabilities, array_values( $taxonomy_caps ) );
 			}
+
+			$capabilities = array_merge(
+				$capabilities,
+				array( 'mlb_movie_settings' )
+			);
 
 			return array_unique( $capabilities );
 		}
