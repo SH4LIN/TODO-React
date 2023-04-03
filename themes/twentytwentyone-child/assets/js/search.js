@@ -9,7 +9,21 @@
 		searchContainer?.addEventListener('click', function () {
 			const searchForm = document.querySelector('.search-form');
 			const searchInput = document.getElementById('search-input');
-			searchForm.style.display = 'flex';
+
+			if (searchForm !== null) {
+				searchForm.style.display = 'flex';
+			}
+
+			window.document.onkeydown = function (e) {
+				if (!e) {
+					e = event;
+				}
+				if (e.keyCode === 27) {
+					if (searchForm !== null) {
+						searchForm.style.display = 'none';
+					}
+				}
+			};
 
 			searchForm?.addEventListener('click', function () {
 				searchForm.style.display = 'none';
