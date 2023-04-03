@@ -1,0 +1,129 @@
+/**
+ * This file contains the stylesheet for the movies template
+ */
+
+.movie-image-wrapper {
+	min-width: 156px;
+	height: 167px;
+}
+
+.movie-image-wrapper > img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top;
+}
+
+.movie-item-content-wrapper {
+	padding: 8px;
+	background-color: #2b2b2b;
+}
+
+.movie-item-content-heading-wrapper {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.movie-item-content-heading-wrapper .movie-title {
+	max-width: 84.19px;
+	font-weight: 700;
+	font-size: 12px;
+	line-height: 16px;
+}
+
+.movie-item-content-heading-wrapper > .movie-runtime {
+	font-weight: 400;
+	font-size: 8px;
+	line-height: 12px;
+}
+
+.movie-item-content-stats-wrapper {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	margin-top: 12px;
+}
+
+.movie-item-content-stats-wrapper > .genres-wrapper {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+
+.genres-wrapper a {
+	font-weight: 400;
+	font-size: 8px;
+	line-height: 12px;
+}
+
+.genres-wrapper a:not(:first-child)::before {
+	content: "•";
+	margin-right: 2px;
+	font-size: 8px;
+	line-height: 12px;
+}
+
+.movie-release-year {
+	font-weight: 400;
+	font-size: 8px;
+	line-height: 12px;
+}
+
+@media only screen and (min-width: 1025px) {
+
+	.movie-image-wrapper {
+		width: 384px;
+		height: 411px;
+	}
+
+	.movie-item-content-wrapper {
+		padding: 16px 24px;
+	}
+
+	.movie-item-content-heading-wrapper .movie-title {
+		max-width: 231px;
+		font-size: 24px;
+		line-height: 32px;
+	}
+
+	.movie-item-content-heading-wrapper > .movie-runtime {
+		font-size: 20px;
+		line-height: 32px;
+	}
+
+	.movie-item-content-stats-wrapper {
+		margin-top: 16px;
+	}
+
+	.movie-item-content-stats-wrapper > .genres-wrapper {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.genres-wrapper a {
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.genres-wrapper a:not(:first-child)::before {
+		content: "•";
+		margin-right: 4px;
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.movie-release-year {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
+	}
+}
+

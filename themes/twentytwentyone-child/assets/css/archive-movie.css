@@ -1,0 +1,479 @@
+/**
+ * This file contains the stylesheet for the archive-movie template
+ */
+
+@import "./movies.css";
+
+.am-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 64px;
+	padding-bottom: 64px;
+}
+
+/* Slider Section Starts */
+.am-slider-wrapper {
+	height: auto;
+	width: 100%;
+	overflow: hidden;
+}
+
+.am-slider-wrapper ul {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.slide {
+	flex-shrink: 0;
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+	animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+.slider-image-wrapper {
+	min-height: 286px;
+	position: relative;
+}
+
+.slider-image-wrapper > img {
+	width: 100%;
+	height: 100%;
+	min-height: 286px;
+	object-fit: cover;
+	object-position: 10%;
+
+}
+
+.slider-image-wrapper::after {
+	content: "";
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: rgba(0, 0, 0, 0.4);
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.slider-movie-info-wrapper {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	display: flex;
+	gap: 10px;
+	flex-direction: column;
+	padding: 110px 0 31px 24px;
+	cursor: pointer;
+	max-width: 1440px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.slider-movie-info-wrapper > .title {
+	font-size: 32px;
+	line-height: 72px;
+	font-weight: 600;
+}
+
+.slider-movie-info-wrapper > .synopsis {
+	display: none;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 24px;
+	max-width: 414px;
+}
+
+.slider-movie-stats-wrapper ul {
+	display: flex;
+	align-items: center;
+	padding: 0;
+	gap: 8px;
+	list-style: none;
+}
+
+.slider-movie-stats-wrapper ul li {
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 21px;
+}
+
+.slider-movie-stats-wrapper ul li:not(:first-child)::before {
+	content: "•";
+	color: var(--primary-font-color);
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 21px;
+	margin-right: 4px;
+}
+
+.slider-movie-genre-wrapper {
+	display: flex;
+	gap: 12px;
+}
+
+.slider-movie-genre-wrapper p {
+	padding: 4px 12px;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 24px;
+	border: 1px solid #fff;
+	border-radius: 24px;
+}
+
+.slider-movie-genre-wrapper p:hover {
+	background-color: var(--border-color);
+	border: 1px solid var(--border-color);
+}
+
+.slider-dots-wrapper {
+	padding-top: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+}
+
+.slider-dots {
+	width: 8px;
+	height: 8px;
+	border-radius: 32px;
+	background-color: #494949;
+	cursor: pointer;
+}
+
+.active {
+	background-color: var(--border-color);
+}
+
+/* Slider Section Ends */
+
+/* Upcoming Movies Section Starts */
+.upcoming-movies-wrapper {
+	padding: 0 24px;
+	display: flex;
+	flex-direction: column;
+	max-width: 1440px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.upcoming-movies-heading-wrapper {
+	border-left: 4px solid var(--border-color);
+	padding-left: 12px;
+}
+
+.upcoming-movies-list-wrapper {
+	padding-top: 48px;
+}
+
+.upcoming-movies-list {
+	display: flex;
+	flex-direction: row;
+	overflow: scroll;
+	flex-wrap: nowrap;
+	padding-bottom: 32px;
+	gap: 16px;
+}
+
+.upcoming-movie-item-image-wrapper {
+	width: 156px;
+	height: 167px;
+}
+
+.upcoming-movie-item-image-wrapper > img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top;
+}
+
+.upcoming-movie-item-content-wrapper {
+	padding: 8px;
+	width: 156px;
+	background-color: #2b2b2b;
+}
+
+.upcoming-movie-item-content-heading-wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 8px;
+	flex-wrap: wrap;
+	align-items: flex-start;
+}
+
+.upcoming-movie-title {
+	max-width: 84.19px;
+	font-weight: 700;
+	font-size: 12px;
+	line-height: 16px;
+}
+
+.upcoming-movie-genre {
+	font-weight: 400;
+	font-size: 8px;
+	line-height: 12px;
+}
+
+.upcoming-movie-item-stats-wrapper {
+	margin-top: 12px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.movie-release-date {
+	font-weight: 400;
+	font-size: 8px;
+	line-height: 12px;
+}
+
+.movie-age-rating {
+	font-weight: 400;
+	font-size: 8px;
+	line-height: 12px;
+	text-transform: uppercase;
+}
+
+/* Upcoming Movies Section Starts */
+
+/* Trending Movies Section Starts */
+.trending-movies-wrapper {
+	padding: 0 24px;
+	max-width: 1440px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.heading-wrapper {
+	border-left: 4px solid var(--border-color);
+	padding-left: 12px;
+}
+
+.trending-movies-list {
+	margin-top: 48px;
+	display: flex;
+	flex-direction: row;
+	gap: 16px;
+	overflow: scroll;
+	flex-wrap: nowrap;
+	padding-bottom: 32px;
+}
+
+/* Trending Movies Section Ends */
+
+@media only screen and (min-width: 1025px) {
+
+	.am-wrapper {
+		gap: 120px;
+		padding-bottom: 64px;
+	}
+
+	/* Slider Section Starts */
+	.slider-item > a {
+		width: 100%;
+	}
+
+	.slider-image-wrapper {
+		height: 616px;
+		position: relative;
+	}
+
+	.slider-image-wrapper > img {
+		width: 100%;
+		height: 100%;
+		max-height: 616px;
+		object-fit: cover;
+		object-position: top;
+	}
+
+	.slider-image-wrapper::after {
+		content: "";
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		background: rgba(0, 0, 0, 0.4);
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+	}
+
+	.slider-movie-info-wrapper {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 0;
+		display: flex;
+		gap: 0;
+		flex-direction: column;
+		padding: 136px 112px;
+		cursor: pointer;
+	}
+
+	.slider-movie-info-wrapper > .title {
+		font-size: 64px;
+		line-height: 72px;
+		font-weight: 600;
+	}
+
+	.slider-movie-info-wrapper > .synopsis {
+		margin-top: 24px;
+		display: block;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
+		max-width: 414px;
+	}
+
+	.slider-movie-stats-wrapper {
+		padding-top: 32px;
+	}
+
+	.slider-movie-stats-wrapper ul {
+		gap: 12px;
+	}
+
+	.slider-movie-stats-wrapper ul li {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.slider-movie-stats-wrapper ul li:not(:first-child)::before {
+		content: "•";
+		color: var(--primary-font-color);
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
+		margin-right: 8px;
+	}
+
+	.slider-movie-genre-wrapper {
+		padding-top: 32px;
+	}
+
+	.slider-movie-genre-wrapper p {
+		padding: 8px 16px;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
+		border: 1px solid #fff;
+		border-radius: 24px;
+	}
+
+	.slider-dots-wrapper {
+		padding-top: 48px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 16px;
+	}
+
+	.slider-dots {
+		width: 14px;
+		height: 14px;
+	}
+
+	/* Slider Section Ends */
+
+	/* Upcoming Movies Section Starts */
+	.upcoming-movies-wrapper {
+		padding: 0 112px;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.upcoming-movies-list {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		padding-bottom: 0;
+		overflow: hidden;
+		gap: 32px;
+	}
+
+	.upcoming-movie-item-image-wrapper {
+		width: 384px;
+		height: 411px;
+	}
+
+	.upcoming-movie-item-content-wrapper {
+		padding: 18px 16px 24px 16px;
+		width: 384px;
+		background-color: #2b2b2b;
+	}
+
+	.upcoming-movie-title {
+		max-width: 231px;
+		font-size: 24px;
+		line-height: 32px;
+	}
+
+	.upcoming-movie-genre {
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.upcoming-movie-item-stats-wrapper {
+		margin-top: 16px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-start;
+	}
+
+	.movie-release-date {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.movie-age-rating {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
+		text-transform: uppercase;
+	}
+
+	/* Upcoming Movies Section Ends */
+
+	/* Trending Movies Section Starts */
+	.trending-movies-wrapper {
+		padding: 0 112px;
+	}
+
+	.trending-movies-list {
+		display: flex;
+		flex-direction: row;
+		gap: 32px;
+		overflow: hidden;
+		flex-wrap: wrap;
+		padding-bottom: 0;
+	}
+
+	/* Trending Movies Section Ends */
+}

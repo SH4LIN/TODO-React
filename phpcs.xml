@@ -14,6 +14,7 @@
 				<!-- List of text domains used in your plugin and theme -->
 				<element value="movie-library" />
 				<element value="easy-engine" />
+				<element value="screen-time" />
 			</property>
 		</properties>
 	</rule>
