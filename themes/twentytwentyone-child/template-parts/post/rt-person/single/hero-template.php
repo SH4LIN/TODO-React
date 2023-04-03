@@ -171,7 +171,7 @@ if ( $post_thumbnail_id ) {
 								?>
 								<div class="social-item">
 									<a href="<?php echo esc_url( $social_url['url'] ); ?>" >
-										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_twitter.svg' ); ?>">
+										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_web.svg' ); ?>">
 									</a>
 								</div>
 								<?php
@@ -181,7 +181,7 @@ if ( $post_thumbnail_id ) {
 								?>
 								<div class="social-item">
 									<a href="<?php echo esc_url( $social_url['url'] ); ?>" >
-										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_twitter.svg' ); ?>">
+										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_facebook.svg' ); ?>">
 									</a>
 								</div>
 								<?php
