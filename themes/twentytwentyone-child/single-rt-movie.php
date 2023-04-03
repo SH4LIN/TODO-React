@@ -70,7 +70,7 @@ $plot_data['mobile_heading']  = __( 'Synopsis', 'screen-time' );
 
 $plot_data['quick_links'] = wp_nav_menu(
 	array(
-		'menu'            => 'single-movie',
+		'theme_location'  => 'single-movie',
 		'menu_class'      => 'quick-links-list',
 		'container'       => 'nav',
 		'container_class' => 'quick-links-list-container',
