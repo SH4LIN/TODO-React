@@ -5,6 +5,7 @@
 	window.addEventListener('DOMContentLoaded', function () {
 		expandMenu();
 		languageSwitcher();
+		openMenu();
 	});
 })();
 
@@ -56,5 +57,54 @@ function expandMenu() {
 		hamburgerMenuIcon?.classList.toggle('hidden');
 
 		closeMenuIcon?.classList.toggle('hidden');
+	});
+}
+
+/**
+ * This function is used to open and close the individual menus in the header menu in mobile view.
+ */
+function openMenu() {
+	const exploreBtn = document.getElementById('explore-btn');
+	let exploreOpen = true;
+	const exploreMenu = document.querySelector(
+		'.primary-menu-expanded-explore-menu-list'
+	);
+
+	exploreBtn?.addEventListener('click', function () {
+		if (exploreMenu !== null) {
+			if (exploreOpen) {
+				exploreMenu.style.maxHeight = '0';
+				exploreMenu.style.overflow = 'hidden';
+				exploreOpen = false;
+				exploreBtn.style.transform = 'rotate(0deg)';
+			} else {
+				exploreMenu.style.maxHeight = '1000px';
+				exploreMenu.style.overflow = 'visible';
+				exploreOpen = true;
+				exploreBtn.style.transform = 'rotate(180deg)';
+			}
+		}
+	});
+
+	const settingsBtn = document.getElementById('settings-btn');
+	let settingsOpen = true;
+	const settingsMenu = document.querySelector(
+		'.primary-menu-expanded-settings-menu-list'
+	);
+
+	settingsBtn?.addEventListener('click', function () {
+		if (settingsMenu !== null) {
+			if (settingsOpen) {
+				settingsMenu.style.maxHeight = '0';
+				settingsMenu.style.overflow = 'hidden';
+				settingsOpen = false;
+				settingsBtn.style.transform = 'rotate(0deg)';
+			} else {
+				settingsMenu.style.maxHeight = '1000px';
+				settingsMenu.style.overflow = 'visible';
+				settingsOpen = true;
+				settingsBtn.style.transform = 'rotate(0deg)';
+			}
+		}
 	});
 }
