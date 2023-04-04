@@ -67,21 +67,19 @@ function openMenu() {
 	const exploreBtn = document.getElementById('explore-btn');
 	let exploreOpen = true;
 	const exploreMenu = document.querySelector(
-		'.primary-menu-expanded-explore-menu-list'
+		'.primary-menu-expanded-explore-menu'
 	);
 
 	exploreBtn?.addEventListener('click', function () {
 		if (exploreMenu !== null) {
 			if (exploreOpen) {
-				exploreMenu.style.maxHeight = '0';
-				exploreMenu.style.overflow = 'hidden';
-				exploreOpen = false;
+				exploreMenu.style.display = 'none';
 				exploreBtn.style.transform = 'rotate(0deg)';
+				exploreOpen = false;
 			} else {
-				exploreMenu.style.maxHeight = '1000px';
-				exploreMenu.style.overflow = 'visible';
-				exploreOpen = true;
+				exploreMenu.style.display = 'block';
 				exploreBtn.style.transform = 'rotate(180deg)';
+				exploreOpen = true;
 			}
 		}
 	});
@@ -89,21 +87,19 @@ function openMenu() {
 	const settingsBtn = document.getElementById('settings-btn');
 	let settingsOpen = true;
 	const settingsMenu = document.querySelector(
-		'.primary-menu-expanded-settings-menu-list'
+		'.primary-menu-expanded-settings-menu'
 	);
 
 	settingsBtn?.addEventListener('click', function () {
 		if (settingsMenu !== null) {
 			if (settingsOpen) {
-				settingsMenu.style.maxHeight = '0';
-				settingsMenu.style.overflow = 'hidden';
-				settingsOpen = false;
+				settingsMenu.style.display = 'none';
 				settingsBtn.style.transform = 'rotate(0deg)';
+				settingsOpen = false;
 			} else {
-				settingsMenu.style.maxHeight = '1000px';
-				settingsMenu.style.overflow = 'visible';
-				settingsOpen = true;
+				settingsMenu.style.display = 'block';
 				settingsBtn.style.transform = 'rotate(180deg)';
+				settingsOpen = true;
 			}
 		}
 	});

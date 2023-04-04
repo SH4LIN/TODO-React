@@ -143,8 +143,6 @@
 .primary-menu-expanded-explore-menu-list {
 	padding: 0;
 	list-style: none;
-	max-height: 1000px;
-	transition: max-height 0.3s ease-in-out;
 }
 
 .primary-menu-expanded-explore-menu-list > li > a {
@@ -186,8 +184,6 @@
 .primary-menu-expanded-settings-menu-list {
 	padding: 0;
 	list-style: none;
-	max-height: 1000px;
-	transition: max-height 0.3s ease-in-out;
 }
 
 .primary-menu-expanded-settings-menu-list > li {
