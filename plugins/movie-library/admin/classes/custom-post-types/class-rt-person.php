@@ -77,7 +77,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Person' ) ) {
 				'show_in_menu'       => true,
 				'query_var'          => true,
 				'has_archive'        => true,
-				'capability_type'    => array( 'person','people' ),
+				'capability_type'    => array( 'person', 'people' ),
 				'map_meta_cap'       => true,
 				'menu_icon'          => 'dashicons-businessman',
 				'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),

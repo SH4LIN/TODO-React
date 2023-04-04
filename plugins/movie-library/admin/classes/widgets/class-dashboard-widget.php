@@ -192,7 +192,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\widgets\Dashboard_Widget' ) ) {
 			$recent_movies_args = array(
 				'post_type'      => RT_Movie::SLUG,
 				'posts_per_page' => 6,
-				'meta_key'       => RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG,
+				'meta_key'       => RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 				'orderby'        => 'date',
 				'order'          => 'DESC',
 			);
@@ -211,7 +211,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\widgets\Dashboard_Widget' ) ) {
 			$top_rated_movies_args = array(
 				'post_type'      => RT_Movie::SLUG,
 				'posts_per_page' => 6,
-				'meta_key'       => RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG,
+				'meta_key'       => RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 				'orderby'        => 'meta_value',
 				'order'          => 'DESC',
 			);
@@ -224,6 +224,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\widgets\Dashboard_Widget' ) ) {
 		/**
 		 * This function is used to extract the required data from recent movies and top-rated movies.
 		 *
+		 * @param array $movies The array of movies.
 		 * @return array
 		 */
 		private function extract_movie_data( $movies ): array {
@@ -231,7 +232,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\widgets\Dashboard_Widget' ) ) {
 
 			if ( ! empty( $movies ) ) {
 				foreach ( $movies as $movie ) {
-					if ( has_post_thumbnail( $movie->ID ) ){
+					if ( has_post_thumbnail( $movie->ID ) ) {
 						$poster = get_the_post_thumbnail_url( $movie->ID );
 					}
 					$extracted_movies[] = array(

@@ -80,9 +80,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Tag' ) ) {
 					'publicly_queryable' => true,
 					'capabilities'       => array(
 						'manage_terms' => 'manage_tags',
-						'edit_terms'    => 'edit_tags',
-						'delete_terms'  => 'delete_tags',
-						'assign_terms'  => 'assign_tags',
+						'edit_terms'   => 'edit_tags',
+						'delete_terms' => 'delete_tags',
+						'assign_terms' => 'assign_tags',
 					),
 				),
 			);

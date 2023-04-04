@@ -53,12 +53,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\roles_capabilities\Movie_Manager_Ro
 		 */
 		public function add_movie_manager_role() {
 			$capabilities = $this->get_movie_manager_capabilities();
-			$admin_role = get_role( 'administrator' );
+			$admin_role   = get_role( 'administrator' );
 			foreach ( $capabilities as $capability ) {
 				$admin_role->add_cap( $capability );
 			}
 
-			$capabilities = array_fill_keys( $capabilities, true );
+			$capabilities         = array_fill_keys( $capabilities, true );
 			$capabilities['read'] = true;
 
 			$capabilities['upload_files'] = true;
@@ -132,7 +132,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\roles_capabilities\Movie_Manager_Ro
 		 */
 		public function remove_movie_manager_role() {
 			$capabilities = $this->get_movie_manager_capabilities();
-			$admin_role = get_role( 'administrator' );
+			$admin_role   = get_role( 'administrator' );
 			foreach ( $capabilities as $capability ) {
 				$admin_role->remove_cap( $capability );
 			}
