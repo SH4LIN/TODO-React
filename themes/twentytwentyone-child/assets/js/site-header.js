@@ -103,7 +103,7 @@ function openMenu() {
 				settingsMenu.style.maxHeight = '1000px';
 				settingsMenu.style.overflow = 'visible';
 				settingsOpen = true;
-				settingsBtn.style.transform = 'rotate(0deg)';
+				settingsBtn.style.transform = 'rotate(180deg)';
 			}
 		}
 	});
