@@ -105,7 +105,7 @@
 
 .rt-dashboard-widget__recent-movies ul li,
 .rt-dashboard-widget__top-rated-movies ul li,
-.rt-dashboard-widget__upcoming-movies ul li{
+.rt-dashboard-widget__upcoming-movies ul li {
 	width: 100%;
 	height: auto;
 	display: flex;
@@ -114,7 +114,7 @@
 
 .rt-dashboard-widget__recent-movies ul li .widget-action-buttons,
 .rt-dashboard-widget__top-rated-movies ul li .widget-action-buttons,
-.rt-dashboard-widget__upcoming-movies ul li .widget-action-buttons{
+.rt-dashboard-widget__upcoming-movies ul li .widget-action-buttons {
 	display: flex;
 	justify-content: center;
 	align-items: center;

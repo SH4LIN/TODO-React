@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 		<li>
 			<a href="<?php echo esc_url( $movie['poster'] ); ?>">
 				<div class="poster-wrapper">
-					<img src="<?php echo esc_url( $movie['poster'] ); ?>">
+					<img src="<?php echo esc_url( $movie['poster'] ); ?>" alt="<?php echo esc_attr( $movie['title'] ); ?>">
 					<div class="overlay"></div>
 					<p><?php echo esc_html( $movie['title'] ); ?></p>
 				</div>
