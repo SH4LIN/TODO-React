@@ -7,6 +7,7 @@
 
 namespace MovieLib\admin\classes\custom_post_types;
 
+use MovieLib\admin\classes\taxonomies\Movie_Genre;
 use MovieLib\includes\Singleton;
 
 /**
@@ -36,6 +37,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 		protected function init(): void {
 
 			add_action( 'init', array( $this, 'register' ) );
+			add_action( 'init', array( $this, 'change_permalink_structure' ), 11 );
+			add_filter( 'post_type_link', array( $this, 'change_permalink' ), 10, 2 );
 
 		}
 
@@ -85,6 +88,64 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 			);
 
 			register_post_type( self::SLUG, $args ); // phpcs:ignore WordPress.NamingConventions.ValidPostTypeSlug.NotStringLiteral
+		}
+
+		/**
+		 * This function is used to change the permalink structure of rt-movie post type.
+		 *
+		 * @return void
+		 */
+		public function change_permalink_structure() {
+			global $wp_rewrite;
+
+			$args = $wp_rewrite->extra_permastructs[ self::SLUG ];
+
+			remove_permastruct( self::SLUG );
+
+			unset( $args['struct'] );
+
+			$args['with_front'] = false;
+
+			$genre_slug = Movie_Genre::SLUG;
+			$wp_rewrite->add_permastruct( self::SLUG,
+				"/movie/%${genre_slug}%/%rt-movie%-%post_id%",
+				$args
+			);
+		}
+
+		/**
+		 * This function is used to change the permalink of rt-movie post type.
+		 *
+		 * @param string $post_link The post's permalink.
+		 * @param object $post      The post in question.
+		 *
+		 * @return string
+		 */
+		public function change_permalink( $post_link, $post ) {
+
+			if ( self::SLUG !== $post->post_type  ) {
+				return $post_link;
+			}
+
+			$terms = get_the_terms( $post->ID, Movie_Genre::SLUG );
+
+			$terms = wp_list_sort(
+				$terms,
+				'term_id',
+			);
+
+			if ( ! is_wp_error( $terms ) && ! empty( $terms ) && is_object( $terms[0] ) ) {
+				$term = $terms[0]->slug;
+			} else {
+				$term = 'uncategorized';
+			}
+
+			$genre_slug = Movie_Genre::SLUG;
+			$post_link = str_replace( "%${genre_slug}%", $term, $post_link );
+
+			$post_link = str_replace( '%post_id%', $post->ID, $post_link );
+
+			return $post_link;
 		}
 	}
 }
