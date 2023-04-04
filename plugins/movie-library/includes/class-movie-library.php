@@ -87,6 +87,7 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 					'add_movie_library_sub_menu',
 				)
 			);
+			add_action( 'plugins_loaded', array( $this, 'register_custom_tables' ) );
 
 			add_filter( 'enter_title_here', array( $this, 'change_title_text' ), 10, 2 );
 			add_filter( 'write_your_story', array( $this, 'change_post_content_text' ), 10, 2 );
@@ -100,6 +101,19 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		private function load_all_scripts(): void {
 
 			Asset::instance();
+
+		}
+
+		/**
+		 * This function is used to register the custom tables. So it can extend the functionality of METADATA API.
+		 *
+		 * @return void
+		 */
+		public function register_custom_tables(): void {
+			global $wpdb;
+
+			$wpdb->moviemeta  = $wpdb->prefix . 'moviemeta';
+			$wpdb->personmeta = $wpdb->prefix . 'personmeta';
 
 		}
 
