@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit;
 use MovieLib\admin\classes\Asset;
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\custom_post_types\RT_Person;
+use MovieLib\admin\classes\custom_tables\MLB_DB_Helper;
 use MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box;
@@ -74,6 +75,7 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		private function register_hooks(): void {
 			Movie_Library_Activation::instance();
 			Movie_Library_Deactivation::instance();
+			MLB_DB_Helper::instance()->add_hooks();
 
 			$movie_library_save_post     = Movie_Library_Save_Post::instance();
 			$movie_library_settings_page = Settings_Page::instance();
@@ -87,7 +89,6 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 					'add_movie_library_sub_menu',
 				)
 			);
-			add_action( 'plugins_loaded', array( $this, 'register_custom_tables' ) );
 
 			add_filter( 'enter_title_here', array( $this, 'change_title_text' ), 10, 2 );
 			add_filter( 'write_your_story', array( $this, 'change_post_content_text' ), 10, 2 );
@@ -101,19 +102,6 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		private function load_all_scripts(): void {
 
 			Asset::instance();
-
-		}
-
-		/**
-		 * This function is used to register the custom tables. So it can extend the functionality of METADATA API.
-		 *
-		 * @return void
-		 */
-		public function register_custom_tables(): void {
-			global $wpdb;
-
-			$wpdb->moviemeta  = $wpdb->prefix . 'moviemeta';
-			$wpdb->personmeta = $wpdb->prefix . 'personmeta';
 
 		}
 

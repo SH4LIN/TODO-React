@@ -9,6 +9,7 @@ namespace MovieLib\admin\classes;
 
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\custom_post_types\RT_Person;
+use MovieLib\admin\classes\custom_tables\MLB_DB_Helper;
 use MovieLib\admin\classes\custom_tables\Movie_Meta_Table;
 use MovieLib\admin\classes\custom_tables\Person_Meta_Table;
 use MovieLib\admin\classes\roles_capabilities\Movie_Manager_Role_Capabilities;
@@ -83,8 +84,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Activation' ) ) :
 		 * @return void
 		 */
 		private function create_tables() {
-			Movie_Meta_Table::instance();
-			Person_Meta_Table::instance();
+			MLB_DB_Helper::instance()->create_tables();
 		}
 	}
 endif;
