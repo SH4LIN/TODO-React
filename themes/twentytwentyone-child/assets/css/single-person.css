@@ -66,6 +66,7 @@
 
 .personal-details-wrapper {
 	padding-top: 31px;
+	align-self: center;
 }
 
 .occupation-details-wrapper {
@@ -153,7 +154,7 @@
 	min-width: 116px;
 }
 
-.st-sp-upcoming-movies-wrapper {
+.sp-upcoming-movies-wrapper {
 	margin-left: 40px;
 }
 
@@ -183,6 +184,11 @@
 	height: fit-content;
 	line-height: 0;
 	width: auto;
+}
+
+.social-item img {
+	width: 20px;
+	height: 20px;
 }
 
 /* Popular Movies Section Starts */
@@ -343,7 +349,7 @@
 		min-width: 149px;
 	}
 
-	.st-sp-upcoming-movies-wrapper {
+	.sp-upcoming-movies-wrapper {
 		margin-left: 27px;
 	}
 

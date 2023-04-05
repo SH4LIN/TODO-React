@@ -38,9 +38,11 @@ if ( ! function_exists( 'twenty_twenty_one_child_setup' ) ) :
 		// Register navigation menus uses wp_nav_menu in five places.
 		register_nav_menus(
 			array(
-				'header'       => __( 'Header Menu', 'screen-time' ),
-				'footer-col-1' => __( 'Footer First Menu', 'screen-time' ),
-				'footer-col-2' => __( 'Footer Second Menu', 'screen-time' ),
+				'header'        => __( 'Header Menu', 'screen-time' ),
+				'single-movie'  => __( 'Single Movie Menu', 'screen-time' ),
+				'single-person' => __( 'Single Person Menu', 'screen-time' ),
+				'footer-col-1'  => __( 'Footer First Menu', 'screen-time' ),
+				'footer-col-2'  => __( 'Footer Second Menu', 'screen-time' ),
 			)
 		);
 
@@ -122,8 +124,11 @@ if ( ! function_exists( 'twenty_twenty_one_child_scripts' ) ) :
 		}
 
 		wp_enqueue_script( 'site-header', get_stylesheet_directory_uri() . '/assets/js/site-header.js', array(), filemtime( get_stylesheet_directory() . '/assets/js/site-header.js' ), true );
+		wp_enqueue_script( 'search', get_stylesheet_directory_uri() . '/assets/js/search.js', array(), filemtime( get_stylesheet_directory() . '/assets/js/search.js' ), true );
+
+		wp_dequeue_style( 'twenty-twenty-one-style' );
 
 	}
 
 endif;
-add_action( 'wp_enqueue_scripts', 'twenty_twenty_one_child_scripts' );
+add_action( 'wp_enqueue_scripts', 'twenty_twenty_one_child_scripts', 20 );

@@ -116,6 +116,7 @@ It is a theme for the Movie Library plugin. It has four templates
 ## Directory Structure
 ```bash
 .
+.
 |-- README.md
 |-- archive-rt-movie.php
 |-- archive-rt-person.php
@@ -157,15 +158,11 @@ It is a theme for the Movie Library plugin. It has four templates
 |       |-- site-header.js
 |       `-- video-player.js
 |-- classes
-|   |-- class-archive-rt-movie-data.php
-|   |-- class-archive-rt-person-data.php
-|   |-- class-single-rt-movie-data.php
 |   |-- class-single-rt-person-data.php
 |   `-- trait-singleton.php
 |-- footer.php
 |-- functions.php
 |-- header.php
-|-- inc
 |-- languages
 |   `-- screen-time.pot
 |-- single-rt-movie.php
@@ -196,7 +193,7 @@ It is a theme for the Movie Library plugin. It has four templates
         |-- snapshots-template.php
         `-- videos-template.php
 
-19 directories, 62 files
+18 directories, 58 files
 ```
 ## Built with
 ​

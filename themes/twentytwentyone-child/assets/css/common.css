@@ -54,6 +54,10 @@ a {
 	text-decoration: none;
 }
 
+a:focus {
+	background-color: unset;
+}
+
 .site {
 	margin: auto;
 }
