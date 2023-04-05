@@ -76,7 +76,6 @@ const MLB_NAME = 'Movie Library';
 
 require_once MLB_PLUGIN_DIR . 'includes/class-autoloader.php';
 require_once MLB_PLUGIN_DIR . 'includes/mlb-metadata.php';
-require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
 
 use MovieLib\includes\Movie_Library;
