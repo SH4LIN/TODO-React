@@ -2,8 +2,13 @@
  * This file contains the stylesheet for the videos template
  */
 
+
 .videos-wrapper {
 	padding: 0 24px;
+}
+
+.sp-wrapper .videos-wrapper {
+	padding: 0;
 }
 
 .videos-heading-wrapper {
@@ -24,12 +29,11 @@
 }
 
 .video-item-wrapper {
-	position: relative;
 	cursor: pointer;
+	flex: 1 1 327px;
 }
 
 .video-item {
-	max-width: 327px;
 	height: 210px;
 	position: relative;
 }
@@ -80,6 +84,13 @@
 	height: 100%;
 }
 
+.close-btn {
+	background-color: var(--border-color);
+	border: 0;
+	outline: 0;
+	padding: 20px;
+}
+
 @media only screen and (min-width: 1025px) {
 
 	.videos-wrapper {
@@ -93,10 +104,10 @@
 	.video-list {
 		gap: 32px;
 		justify-content: flex-start;
+		flex: 1 1 384px;
 	}
 
 	.video-item {
-		max-width: 384px;
 		height: 246px;
 	}
 

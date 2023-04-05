@@ -9,11 +9,50 @@
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\taxonomies\Movie_Label;
 
-require_once get_stylesheet_directory() . '/classes/class-archive-rt-movie-data.php';
+$slider_movies_args = array(
+	'post_type' => RT_Movie::SLUG,
+	'tax_query' => array( // phpcs:ignore: WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+					array(
+						'taxonomy' => Movie_Label::SLUG,
+						'field'    => 'slug',
+						'terms'    => 'slider',
+					),
+	),
+);
 
-$slider_movies   = Archive_RT_Movie_Data::instance()->get_slider_movies();
-$upcoming_movies = Archive_RT_Movie_Data::instance()->get_upcoming_movies();
-$trending_movies = Archive_RT_Movie_Data::instance()->get_trending_movies();
+$slider_movies_query = new WP_Query( $slider_movies_args );
+
+$slider_movies = $slider_movies_query->posts;
+
+$upcoming_movies_args = array(
+	'post_type' => RT_Movie::SLUG,
+	'tax_query' => array( // phpcs:ignore: WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+					array(
+						'taxonomy' => Movie_Label::SLUG,
+						'field'    => 'slug',
+						'terms'    => 'upcoming-movies',
+					),
+	),
+);
+
+$upcoming_movies_query = new WP_Query( $upcoming_movies_args );
+
+$upcoming_movies = $upcoming_movies_query->posts;
+
+$trending_movies_args = array(
+	'post_type' => RT_Movie::SLUG,
+	'tax_query' => array( // phpcs:ignore: WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+					array(
+						'taxonomy' => Movie_Label::SLUG,
+						'field'    => 'slug',
+						'terms'    => 'trending-now',
+					),
+	),
+);
+
+$trending_movies_query = new WP_Query( $trending_movies_args );
+
+$trending_movies = $trending_movies_query->posts;
 
 get_header();
 ?>

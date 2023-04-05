@@ -148,7 +148,7 @@ if ( $post_thumbnail_id ) {
 						</p>
 					</div>
 
-					<div class= "st-sp-upcoming-movies-wrapper">
+					<div class= "sp-upcoming-movies-wrapper">
 						<p class="primary-text-primary-font personal-details-text">
 							<?php echo esc_html( $upcoming_movies ); ?>
 						</p>
@@ -181,7 +181,7 @@ if ( $post_thumbnail_id ) {
 								?>
 								<div class="social-item">
 									<a href="<?php echo esc_url( $social_url['url'] ); ?>" >
-										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_twitter.svg' ); ?>">
+										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_facebook.svg' ); ?>">
 									</a>
 								</div>
 								<?php
@@ -201,7 +201,7 @@ if ( $post_thumbnail_id ) {
 								?>
 								<div class="social-item">
 									<a href="<?php echo esc_url( $social_url['url'] ); ?>" >
-										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_twitter.svg' ); ?>">
+										<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_web.svg' ); ?>">
 									</a>
 								</div>
 								<?php

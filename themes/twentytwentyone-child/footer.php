@@ -9,10 +9,9 @@
 $company_menu = wp_nav_menu(
 	array(
 		'menu'            => 'company',
-		'theme_location'  => 'footer',
-		'menu_class'      => 'st-company-navigation-list',
+		'menu_class'      => 'company-navigation-list',
 		'container'       => 'nav',
-		'container_class' => 'st-company-navigation',
+		'container_class' => 'company-navigation',
 		'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
 		'fallback'        => false,
 		'echo'            => false,
@@ -22,10 +21,9 @@ $company_menu = wp_nav_menu(
 $explore_menu = wp_nav_menu(
 	array(
 		'menu'            => 'explore',
-		'theme_location'  => 'footer',
-		'menu_class'      => 'st-explore-navigation-list',
+		'menu_class'      => 'explore-navigation-list',
 		'container'       => 'nav',
-		'container_class' => 'st-explore-navigation',
+		'container_class' => 'explore-navigation',
 		'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
 		'fallback'        => false,
 		'echo'            => false,

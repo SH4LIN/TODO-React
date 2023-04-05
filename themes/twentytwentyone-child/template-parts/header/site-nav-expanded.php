@@ -29,7 +29,7 @@
 					<?php esc_html_e( 'Explore', 'screen-time' ); ?>
 				</p>
 
-				<div class="primary-menu-expanded-explore-menu-down-arrow">
+				<div class="primary-menu-expanded-explore-menu-down-arrow" id="explore-btn">
 					<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_down_arrow.svg' ); ?>" />
 				</div>
 			</div>
@@ -39,8 +39,8 @@
 				array(
 					'menu'            => 'explore',
 					'theme_location'  => 'footer',
-					'container_class' => 'st-header-primary-menu-expanded-explore-menu',
-					'menu_class'      => 'st-header-primary-menu-expanded-explore-menu-list',
+					'container_class' => 'primary-menu-expanded-explore-menu',
+					'menu_class'      => 'primary-menu-expanded-explore-menu-list',
 					'container'       => 'nav',
 					'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
 					'fallback'        => false,
@@ -57,7 +57,7 @@
 					<?php esc_html_e( 'Settings', 'screen-time' ); ?>
 				</p>
 
-				<div class="primary-menu-expanded-settings-menu-down-arrow">
+				<div class="primary-menu-expanded-settings-menu-down-arrow" id="settings-btn">
 					<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_down_arrow.svg' ); ?>" />
 				</div>
 			</div>

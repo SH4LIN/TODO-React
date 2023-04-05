@@ -7,6 +7,24 @@
  */
 
 ?>
+<form class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>" method="get">
+	<div class="search-wrapper">
+		<label for="search-input" class="screen-reader-text">
+			<?php esc_html_e( 'Search', 'screen-time' ); ?>
+		</label>
+		<input
+			type="search"
+			id="search-input"
+			class="search-field"
+			placeholder="<?php esc_attr_e( 'Search', 'screen-time' ); ?>"
+			value="<?php echo get_search_query(); ?>"
+			name="s"
+		/>
+		<button type="submit" class="search-submit">
+			<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_search.svg' ); ?>">
+		</button>
+	</div>
+</form>
 
 <header id="masthead" class= "header-wrapper"> <!-- header -->
 	<div class="header-navigation-container"> <!-- header-navigation-container -->
@@ -57,15 +75,15 @@
 			</div> <!-- /header-actions-menu-container -->
 		</div> <!-- /header-container -->
 
-		<div class="header-primary-menu"> <!-- header-primary-menu -->
-			<div class="header-primary-menu-container"> <!-- header-primary-menu-container -->
+		<div class="primary-menu"> <!-- header-primary-menu -->
+			<div class="primary-menu-container"> <!-- header-primary-menu-container -->
 				<?php
 				wp_nav_menu(
 					array(
 						'theme_location'  => 'header',
-						'menu_class'      => 'st-primary-navigation-list',
+						'menu_class'      => 'primary-navigation-list',
 						'container'       => 'nav',
-						'container_class' => 'st-primary-navigation',
+						'container_class' => 'primary-navigation',
 						'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
 					)
 				);

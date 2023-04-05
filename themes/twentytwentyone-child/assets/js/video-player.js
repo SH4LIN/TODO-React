@@ -10,50 +10,45 @@
 		const videos = document.querySelectorAll('.video-item video');
 		const videoPlayButton = document.querySelectorAll('.video-play-button');
 
-		if (closeBtn !== null && lightbox !== null && lightboxVideo !== null) {
-			const videoPlay = function () {
-				const video = document.createElement('video');
-				video.setAttribute('controls', 'controls');
-				video.classList.add('video-player');
-				video.setAttribute('autoplay', 'autoplay');
+		const videoPlay = function () {
+			const video = document.createElement('video');
+			video.setAttribute('controls', 'controls');
+			video.classList.add('video-player');
+			video.setAttribute('autoplay', 'autoplay');
 
-				const src = this.getAttribute('data-src');
-				video.setAttribute('src', src);
+			const src = this.getAttribute('data-src');
+			video.setAttribute('src', src);
 
-				lightboxVideo.replaceChildren(video);
-				lightbox.classList.remove('display-none');
-			};
+			lightboxVideo?.replaceChildren(video);
+			lightbox?.classList.remove('display-none');
+		};
 
-			if (trailerBox !== null) {
-				trailerBox.addEventListener('click', videoPlay);
+		trailerBox?.addEventListener('click', videoPlay);
+		window.document.onkeydown = function (e) {
+			if (!e) {
+				e = event;
 			}
+			if (e.keyCode === 27) {
+				lightbox?.classList.add('display-none');
+				lightboxVideo?.replaceChildren();
+			}
+		};
 
-			window.document.onkeydown = function (e) {
-				if (!e) {
-					e = event;
-				}
-				if (e.keyCode === 27) {
-					lightbox.classList.add('display-none');
-					lightboxVideo.replaceChildren();
-				}
-			};
+		closeBtn?.addEventListener('click', function () {
+			lightbox?.classList.add('display-none');
+			lightboxVideo?.replaceChildren();
+		});
 
-			closeBtn.addEventListener('click', function () {
-				lightbox.classList.add('display-none');
-				lightboxVideo.replaceChildren();
+		if (videos?.length > 0) {
+			videos.forEach(function (item) {
+				item.addEventListener('click', videoPlay);
 			});
+		}
 
-			if (videos !== null && videos.length > 0) {
-				videos.forEach(function (item) {
-					item.addEventListener('click', videoPlay);
-				});
-			}
-
-			if (videoPlayButton !== null && videoPlayButton.length > 0) {
-				videoPlayButton.forEach(function (item) {
-					item.addEventListener('click', videoPlay);
-				});
-			}
+		if (videoPlayButton?.length > 0) {
+			videoPlayButton.forEach(function (item) {
+				item.addEventListener('click', videoPlay);
+			});
 		}
 	});
 })();
