@@ -115,21 +115,21 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_tables\MLB_DB_Helper' ) ) :
 		 * @return string
 		 */
 		public function modify_meta_query( $sql ) {
-
+			global $wpdb;
 			if ( RT_Person::SLUG === get_post_type() ) {
-				$sql = str_replace( 'wp_postmeta.post_id', 'wp_moviemeta.movie_id', $sql );
-				$sql = str_replace( 'wp_postmeta', 'wp_moviemeta', $sql );
-				$sql = str_replace( 'wp_postmeta.meta_value', 'wp_moviemeta.meta_value', $sql );
+				$sql = str_replace( $wpdb->postmeta . '.post_id', 'wp_moviemeta.movie_id', $sql );
+				$sql = str_replace( $wpdb->postmeta, 'wp_moviemeta', $sql );
+				$sql = str_replace( $wpdb->postmeta . '.meta_value', 'wp_moviemeta.meta_value', $sql );
 			} elseif ( RT_Movie::SLUG === get_post_type() ) {
-				$sql = str_replace( 'wp_postmeta.post_id', 'wp_personmeta.person_id', $sql );
-				$sql = str_replace( 'wp_postmeta', 'wp_personmeta', $sql );
-				$sql = str_replace( 'wp_postmeta.meta_value', 'wp_personmeta.meta_value', $sql );
+				$sql = str_replace( $wpdb->postmeta . '.post_id', 'wp_personmeta.person_id', $sql );
+				$sql = str_replace( $wpdb->postmeta, 'wp_personmeta', $sql );
+				$sql = str_replace( $wpdb->postmeta . '.meta_value', 'wp_personmeta.meta_value', $sql );
 			}
 
 			if ( is_admin() ) {
-				$sql = str_replace( 'wp_postmeta.post_id', 'wp_moviemeta.movie_id', $sql );
-				$sql = str_replace( 'wp_postmeta', 'wp_moviemeta', $sql );
-				$sql = str_replace( 'wp_postmeta.meta_value', 'wp_moviemeta.meta_value', $sql );
+				$sql = str_replace( $wpdb->postmeta . '.post_id', 'wp_moviemeta.movie_id', $sql );
+				$sql = str_replace( $wpdb->postmeta, 'wp_moviemeta', $sql );
+				$sql = str_replace( $wpdb->postmeta . '.meta_value', 'wp_moviemeta.meta_value', $sql );
 			}
 
 			return $sql;
