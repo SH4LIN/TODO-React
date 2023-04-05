@@ -97,8 +97,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 		 */
 		public function rt_media_meta_images( WP_Post $post ): void {
 
-			$rt_media_meta_banner_images_data_attachment_ids =
-				get_post_meta( $post->ID, self::BANNER_IMAGES_SLUG );
+			$rt_media_meta_images_data_attachment_ids =
+				get_post_meta( $post->ID, self::IMAGES_SLUG );
 
 			wp_nonce_field( 'rt_media_meta_nonce', 'rt_media_meta_nonce' );
 
@@ -361,7 +361,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 		 * If the uploaded images array is not empty then it will update the meta field in the database.
 		 * If both the arrays are empty then it will delete the meta field from the database.
 		 *
-		 * @param int $post_id   Post ID.
+		 * @param int $post_id Post ID.
 		 *
 		 * @return void
 		 */
