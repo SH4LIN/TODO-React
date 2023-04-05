@@ -38,9 +38,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Deactivation' ) ) {
 		 *
 		 * @return void
 		 */
-		public function deactivate(): void {
-			Movie_Manager_Role_Capabilities::instance()->remove_movie_manager_role();
-		}
+		public function deactivate(): void {}
 
 	}
 }
