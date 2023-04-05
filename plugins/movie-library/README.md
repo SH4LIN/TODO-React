@@ -201,13 +201,6 @@ Custom Tables created:
        This file is used to create table on hook activation and change the table using the filter in meta query.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-## Built with
-​
--   **PHP**
--   **HTML/CSS/Javascript**
--   **Docker**
--   **wp-i18n**
-    ​
 ## Screenshots
 ​
 ![image](https://user-images.githubusercontent.com/56588503/230007471-ec8291f6-c95f-417c-9dc1-fbacf3f2efd8.png)
