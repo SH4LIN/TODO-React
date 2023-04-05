@@ -16,12 +16,6 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 ```bash
   cd php-shalin-shah
 ```
-​
-**Initialize the Lando Environment**
-​
-```bash
-  lando start
-```
 **You can also access the site using the following URL**
 
 [RT Movie Plugin](https://feature-plugin.shalin-shah.tr.rt.gw/)
@@ -123,11 +117,15 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 |-- admin
 |   |-- classes
 |   |   |-- class-asset.php
+|   |   |-- class-movie-library-activation.php
+|   |   |-- class-movie-library-deactivation.php
 |   |   |-- class-movie-library-save-post.php
 |   |   |-- class-settings-page.php
 |   |   |-- custom-post-types
 |   |   |   |-- class-rt-movie.php
 |   |   |   `-- class-rt-person.php
+|   |   |-- custom-tables
+|   |   |   `-- class-mlb-db-helper.php
 |   |   |-- meta-boxes
 |   |   |   |-- class-rt-media-meta-box.php
 |   |   |   |-- class-rt-movie-meta-box.php
@@ -154,33 +152,22 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 |-- includes
 |   |-- class-autoloader.php
 |   |-- class-movie-library.php
-|   `-- class-singleton.php
+|   |-- class-singleton.php
+|   `-- mlb-metadata.php
 |-- index.php
 |-- languages
 |   `-- movie-library.pot
 |-- movie-library.php
 |-- public
-|   |-- classes
 |   |-- css
 |   |   `-- movie-library-frontend.css
 |   `-- js
 |       `-- movie-library-frontend.js
 `-- uninstall.php
 
-15 directories, 34 files
+15 directories, 37 files
 ```
-## Built with
-​
--   **PHP**
--   **HTML/CSS/Javascript**
--   **Lando**
--   **Docker**
--   **wp-i18n**
-    ​
-## Documentation
-​
-[Documentation](https://linktodocumentation)
-​
+
 ## Screenshots
 ​
 <img width="1470" alt="Screenshot 2023-03-06 at 11 24 32 AM" src="https://user-images.githubusercontent.com/56588503/223030141-41281663-f1f9-46e5-9957-dbf56133742f.png">
@@ -189,11 +176,50 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 <img width="1470" alt="Screenshot 2023-03-06 at 11 25 33 AM" src="https://user-images.githubusercontent.com/56588503/223030181-637cc3b0-9e2e-4a66-98e7-5ec9e9cc41e1.png">
 <img width="1470" alt="Screenshot 2023-03-06 at 11 25 37 AM" src="https://user-images.githubusercontent.com/56588503/223030191-1677209e-c48a-4b96-98e0-23011eaaa434.png">
 
+# Movie Library Advance Plugin - Custom Database
+
+The Custom Database feature is used to create custom meta tables to store the CPT metadata.
+
+Custom Tables created:
+1. wp_moviemeta
+2. wp_personmeta
+   ​
+   **You can directly see the Custom Database from below URL**
+
+[Movie Library Advance Plugin - Custom Database](https://feature-custom-database.shalin-shah.tr.rt.gw/wp-admin/)
+
+## Overview
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. **mlb-metadata.php**
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     This file provides the wrapper functions that accommodate fetching, updating, adding, and deleting data from the wp_postmeta table and wp_moviemeta and wp_personmeta table.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3. **class-mlb-db-helper.php**
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+       This file is used to create table on hook activation and change the table using the filter in meta query.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Built with
 ​
-## Authors
-​
--   [rtCamp](https://github.com/rtCamp)
+-   **PHP**
+-   **HTML/CSS/Javascript**
+-   **Docker**
+-   **wp-i18n**
     ​
-## Feedback
+## Screenshots
 ​
+![image](https://user-images.githubusercontent.com/56588503/230007471-ec8291f6-c95f-417c-9dc1-fbacf3f2efd8.png)
+
+## Built with
+-   **PHP**
+-   **HTML/CSS/Javascript**
+-   **Docker**
+-   **wp-i18n**
+
+## Authors
+-   [rtCamp](https://github.com/rtCamp)
+## Feedback
+
 Please feel free to discuss anything about rt Movie Plugin to shalin.shah@rtcamp.com
