@@ -16,12 +16,6 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 ```bash
   cd php-shalin-shah
 ```
-​
-**Initialize the Lando Environment**
-​
-```bash
-  lando start
-```
 **You can also access the site using the following URL**
 
 [RT Movie Plugin](https://feature-plugin.shalin-shah.tr.rt.gw/)
@@ -123,6 +117,8 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 |-- admin
 |   |-- classes
 |   |   |-- class-asset.php
+|   |   |-- class-movie-library-activation.php
+|   |   |-- class-movie-library-deactivation.php
 |   |   |-- class-movie-library-save-post.php
 |   |   |-- class-settings-page.php
 |   |   |-- custom-post-types
@@ -132,6 +128,8 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 |   |   |   |-- class-rt-media-meta-box.php
 |   |   |   |-- class-rt-movie-meta-box.php
 |   |   |   `-- class-rt-person-meta-box.php
+|   |   |-- roles-capabilities
+|   |   |   `-- class-movie-manager-role-capabilities.php
 |   |   |-- shortcodes
 |   |   |   |-- class-movie-shortcode.php
 |   |   |   `-- class-person-shortcode.php
@@ -160,27 +158,15 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 |   `-- movie-library.pot
 |-- movie-library.php
 |-- public
-|   |-- classes
 |   |-- css
 |   |   `-- movie-library-frontend.css
 |   `-- js
 |       `-- movie-library-frontend.js
 `-- uninstall.php
 
-15 directories, 34 files
+15 directories, 36 files
 ```
-## Built with
-​
--   **PHP**
--   **HTML/CSS/Javascript**
--   **Lando**
--   **Docker**
--   **wp-i18n**
-    ​
-## Documentation
-​
-[Documentation](https://linktodocumentation)
-​
+
 ## Screenshots
 ​
 <img width="1470" alt="Screenshot 2023-03-06 at 11 24 32 AM" src="https://user-images.githubusercontent.com/56588503/223030141-41281663-f1f9-46e5-9957-dbf56133742f.png">
@@ -189,11 +175,43 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 <img width="1470" alt="Screenshot 2023-03-06 at 11 25 33 AM" src="https://user-images.githubusercontent.com/56588503/223030181-637cc3b0-9e2e-4a66-98e7-5ec9e9cc41e1.png">
 <img width="1470" alt="Screenshot 2023-03-06 at 11 25 37 AM" src="https://user-images.githubusercontent.com/56588503/223030191-1677209e-c48a-4b96-98e0-23011eaaa434.png">
 
+# Movie Library Advance Plugin - Custom Roles
+
+The Custom Roles feature is used to allow only the admin and movie manager to access the movie CPT and person CPT
 ​
+**You can directly see the Custom Roles from below URL**
+
+[Movie Library Advance Plugin - Custom Roles](https://feature-custom-roles.shalin-shah.tr.rt.gw/wp-admin/)
+
+## Overview
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. **class-movie-manager-role-capabilities.php**
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      This file will create movie-manager role on plugin activation and add all the required capabilities to access the movies and person.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2. **CPT and taxonomies are updated to have custom capability**
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+       1. rt-movie has capability type of movie
+       2. rt-person has capability type of array(person, people).
+       3. Taxonomy capabilities added like manage_{taxonomy}, edit_{taxonomy} , delete_{taxonomy} , assign_{taxonomy} 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+## Screenshots
+​
+![image](https://user-images.githubusercontent.com/56588503/230005089-43f6df4d-4f15-49a4-b4c7-0a04b653f072.png)
+![image](https://user-images.githubusercontent.com/56588503/230005288-7f98e159-236e-4c7c-9708-b35f1d3b3969.png)
+
+## Built with
+-   **PHP**
+-   **HTML/CSS/Javascript**
+-   **Docker**
+-   **wp-i18n**
+
 ## Authors
-​
 -   [rtCamp](https://github.com/rtCamp)
-    ​
 ## Feedback
-​
+
 Please feel free to discuss anything about rt Movie Plugin to shalin.shah@rtcamp.com
