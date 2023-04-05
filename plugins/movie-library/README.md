@@ -16,12 +16,6 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 ```bash
   cd php-shalin-shah
 ```
-​
-**Initialize the Lando Environment**
-​
-```bash
-  lando start
-```
 **You can also access the site using the following URL**
 
 [RT Movie Plugin](https://feature-plugin.shalin-shah.tr.rt.gw/)
@@ -123,6 +117,8 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 |-- admin
 |   |-- classes
 |   |   |-- class-asset.php
+|   |   |-- class-movie-library-activation.php
+|   |   |-- class-movie-library-deactivation.php
 |   |   |-- class-movie-library-save-post.php
 |   |   |-- class-settings-page.php
 |   |   |-- custom-post-types
@@ -160,27 +156,15 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 |   `-- movie-library.pot
 |-- movie-library.php
 |-- public
-|   |-- classes
 |   |-- css
 |   |   `-- movie-library-frontend.css
 |   `-- js
 |       `-- movie-library-frontend.js
 `-- uninstall.php
 
-15 directories, 34 files
+14 directories, 37 files
 ```
-## Built with
-​
--   **PHP**
--   **HTML/CSS/Javascript**
--   **Lando**
--   **Docker**
--   **wp-i18n**
-    ​
-## Documentation
-​
-[Documentation](https://linktodocumentation)
-​
+
 ## Screenshots
 ​
 <img width="1470" alt="Screenshot 2023-03-06 at 11 24 32 AM" src="https://user-images.githubusercontent.com/56588503/223030141-41281663-f1f9-46e5-9957-dbf56133742f.png">
@@ -189,11 +173,47 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 <img width="1470" alt="Screenshot 2023-03-06 at 11 25 33 AM" src="https://user-images.githubusercontent.com/56588503/223030181-637cc3b0-9e2e-4a66-98e7-5ec9e9cc41e1.png">
 <img width="1470" alt="Screenshot 2023-03-06 at 11 25 37 AM" src="https://user-images.githubusercontent.com/56588503/223030191-1677209e-c48a-4b96-98e0-23011eaaa434.png">
 
+# Movie Library Advance Plugin - Rewrite Rules
+
+The Rewrite Rukes feature is used to Change the permalink of the single post as below.
+
+Movie post type URL structure
+
+http://your-site.test/movie/%genre-taxonomy%/%postname%-%post_id%/
+
+Example, http://your-site.test/movie/action/movie-post-slug-postID/
+
+Person post type URL structure
+
+http://your-site.test/person/%career-taxonomy%/%postname%-%post_id%/
+
+Example, http://your-site.test/person/director/person-post-slug-postID/
 ​
+**You can directly see the Rewrite rules below URL**
+
+[Movie Library Advance Plugin - Rewrite Rules](https://feature-rewrite-rules.shalin-shah.tr.rt.gw)
+[Avengers Endgame Movie URL](https://feature-rewrite-rules.shalin-shah.tr.rt.gw/movie/adventure/avengers-endgame-220/)
+
+## Overview
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. **class-rt-movie.php, class-rt-person.php**
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     CPT files are updated with hooks and filters that will be used to update the permalink structure of the post type
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Screenshots
+​
+![image](https://user-images.githubusercontent.com/56588503/230009491-24cad64a-3da6-464f-8935-ef007c6f0ddd.png)
+![image](https://user-images.githubusercontent.com/56588503/230009593-47e6e18f-63df-41ad-a930-54ef6722cffa.png)
+
+## Built with
+-   **PHP**
+-   **HTML/CSS/Javascript**
+-   **Docker**
+-   **wp-i18n**
+
 ## Authors
-​
 -   [rtCamp](https://github.com/rtCamp)
-    ​
 ## Feedback
-​
+
 Please feel free to discuss anything about rt Movie Plugin to shalin.shah@rtcamp.com
