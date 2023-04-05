@@ -78,12 +78,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Label' ) ) {
 					'query_var'          => true,
 					'public'             => true,
 					'publicly_queryable' => true,
-					'capabilities'       => array(
-						'manage_terms' => 'manage_labels',
-						'edit_terms'   => 'edit_labels',
-						'delete_terms' => 'delete_labels',
-						'assign_terms' => 'assign_labels',
-					),
 				),
 			);
 
