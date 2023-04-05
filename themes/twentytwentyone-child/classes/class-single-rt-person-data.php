@@ -120,13 +120,14 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 			}
 
 			$args_debut_movie = array(
-				'post_type'      => RT_Movie::SLUG,
-				'posts_per_page' => 1,
-				'post_status'    => 'publish',
-				'orderby'        => 'meta_value',
-				'order'          => 'ASC',
-				'meta_key'       => 'rt-movie-meta-basic-release-date', //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
-				'tax_query'      => array( //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+				'post_type'        => RT_Movie::SLUG,
+				'posts_per_page'   => 1,
+				'post_status'      => 'publish',
+				'orderby'          => 'meta_value',
+				'order'            => 'ASC',
+				'suppress_filters' => false, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_suppress_filters
+				'meta_key'         => 'rt-movie-meta-basic-release-date', //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+				'tax_query'        => array( //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 					array(
 						'taxonomy' => Movie_Person::SLUG,
 						'field'    => 'slug',
@@ -140,7 +141,7 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 			if ( ! empty( $debut_movie ) ) {
 				$debut_movie_name = $debut_movie[0]->post_title;
 				$debut_movie_date =
-					get_person_meta(
+					get_movie_meta(
 						$debut_movie[0]->ID,
 						RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG,
 						true
@@ -148,20 +149,23 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 				if ( ! empty( $debut_movie_date ) ) {
 					$debut_movie_year = DateTime::createFromFormat( 'Y-m-d', $debut_movie_date )->format( 'Y' );
 
-					$debut_movie_name_year              =
+					$debut_movie_name_year =
 						sprintf( '%1$s (%2$s)', $debut_movie_name, $debut_movie_year );
-					$hero_data['debut_movie_name_year'] = $debut_movie_name_year;
+				} else {
+					$debut_movie_name_year =
+						sprintf( '%1$s', $debut_movie_name );
 				}
+				$hero_data['debut_movie_name_year'] = $debut_movie_name_year;
 			}
 
 			$args_upcoming_movies = array(
-				'post_type'      => RT_Movie::SLUG,
-				'posts_per_page' => 2,
-				'post_status'    => 'publish',
-				'orderby'        => 'meta_value',
-				'order'          => 'ASC',
-				'meta_key'       => 'rt-movie-meta-basic-release-date', //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
-				'tax_query'      => array( //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+				'post_type'        => RT_Movie::SLUG,
+				'posts_per_page'   => 2,
+				'post_status'      => 'publish',
+				'orderby'          => 'meta_value',
+				'order'            => 'ASC',
+				'suppress_filters' => false, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_suppress_filters
+				'tax_query'        => array( //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 					array(
 						'taxonomy' => Movie_Person::SLUG,
 						'field'    => 'slug',
@@ -169,7 +173,7 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 					),
 				),
 				//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
-				'meta_query'     => array(
+				'meta_query'       => array(
 					array(
 						'key'     => RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG,
 						'value'   => gmdate( 'Y-m-d' ),
@@ -179,16 +183,18 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 				),
 			);
 
-			$upcoming_movies_array = new WP_Query( $args_upcoming_movies );
+			$upcoming_movies_array = get_posts( $args_upcoming_movies );
 			$upcoming_movies       = '';
 
 			if ( ! empty( $upcoming_movies_array ) ) {
 				foreach ( $upcoming_movies_array as $upcoming_movie ) {
-					$upcoming_movie_date = get_person_meta( $upcoming_movie->ID, RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, true );
+					$upcoming_movie_date = get_movie_meta( $upcoming_movie->ID, RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, true );
 					if ( ! empty( $upcoming_movie_date ) ) {
 						$release_year = DateTime::createFromFormat( 'Y-m-d', $upcoming_movie_date )->format( 'Y' );
 
 						$upcoming_movies .= sprintf( '%1$s (%2$s), ', $upcoming_movie->post_title, $release_year );
+					} else {
+						$upcoming_movies .= sprintf( '%1$s, ', $upcoming_movie->post_title );
 					}
 				}
 			}
