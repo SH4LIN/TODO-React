@@ -9,15 +9,12 @@
  */
 
 if (
-	! isset( $args['id'] ) ||
-	! isset( $args['name'] ) ||
 	! isset( $args['poster'] ) ||
 	! isset( $args['rating'] ) ||
 	! isset( $args['release_year'] ) ||
 	! isset( $args['content_rating'] ) ||
 	! isset( $args['runtime'] ) ||
 	! isset( $args['genres'] ) ||
-	! isset( $args['synopsis'] ) ||
 	! isset( $args['trailer'] ) ||
 	! isset( $args['directors'] )
 ) {
@@ -34,7 +31,7 @@ if (
 
 	<div class="sm-info-stats-wrapper"> <!-- info-stats-container -->
 		<p class="primary-text-secondary-font sm-movie-title"> <!-- title -->
-			<?php echo esc_html( $args['name'] ); ?>
+			<?php the_title(); ?>
 		</p> <!-- /title -->
 
 		<div class="sm-stats-wrapper"> <!-- stats-items -->
@@ -109,11 +106,11 @@ if (
 		?>
 
 		<?php
-		if ( ! empty( $args['synopsis'] ) ) :
+		if ( has_excerpt() ) :
 			?>
-			<p class="primary-text-primary-font sm-description"> <!-- description-container -->
-				<?php echo esc_html( $args['synopsis'] ); ?>
-			</p> <!-- /description-container -->
+			<div class="primary-text-primary-font sm-description"> <!-- description-container -->
+				<?php the_excerpt(); ?>
+			</div> <!-- /description-container -->
 			<?php
 		endif;
 		?>

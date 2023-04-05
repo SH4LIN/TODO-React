@@ -7,7 +7,6 @@
  */
 
 if (
-	! isset( $args['id'] ) ||
 	! isset( $args['crew'] ) ||
 	! isset( $args['link'] )
 ) {
@@ -24,7 +23,7 @@ if ( ! empty( $args['crew'] ) && ! empty( $args['crew'][0] ) ) :
 		</p> <!-- /cast-crew-heading -->
 
 		<div class="view-all-wrapper-desktop"> <!-- cast-crew-view-all-container-desktop -->
-			<a href="<?php echo esc_url( $args['link'] ); ?>" class="primary-text-primary-font st-sm-cast-crew-view-all-link">
+			<a href="<?php echo esc_url( $args['link'] ); ?>" class="primary-text-primary-font sm-cast-crew-view-all-link">
 				<?php esc_html_e( 'View All', 'screen-time' ); ?>
 			</a>
 		</div> <!-- /cast-crew-view-all-container-desktop -->
@@ -55,7 +54,7 @@ if ( ! empty( $args['crew'] ) && ! empty( $args['crew'][0] ) ) :
 	</div> <!-- /cast-crew-list-container -->
 
 	<div class="view-all-wrapper-mobile"> <!-- cast-crew-view-all-container-mobile -->
-		<a href="<?php echo esc_url( $args['link'] ); ?>" class="primary-text-primary-font st-sm-cast-crew-view-all-link">
+		<a href="<?php echo esc_url( $args['link'] ); ?>" class="primary-text-primary-font sm-cast-crew-view-all-link">
 			<?php esc_html_e( 'View All', 'screen-time' ); ?>
 		</a>
 	</div> <!-- /cast-crew-view-all-container-mobile -->

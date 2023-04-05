@@ -10,48 +10,48 @@
 }
 
 /* Cast & Crew Section Starts */
-.st-ap-cast-crew-container {
+.ap-cast-crew-wrapper {
 	display: flex;
 	flex-direction: column;
 	gap: 40px;
 }
 
-.st-ap-cast-crew-heading-container {
+.ap-cast-crew-heading-wrapper {
 	border-left: 4px solid var(--border-color);
 	padding-left: 12px;
 }
 
-.st-ap-cast-crew-heading-text {
+.ap-cast-crew-heading-wrapper p {
 	font-weight: 700;
 	font-size: 32px;
 	line-height: 40px;
 }
 
-.st-ap-cast-crew-list-container {
+.ap-cast-crew-list-wrapper {
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 16px;
 }
 
-.st-ap-cast-crew-list-mobile {
+.ap-cast-crew-list-mobile {
 	display: flex;
 	flex-direction: column;
 	background: #2a2a2a;
 }
 
-.st-ap-cast-crew-poster-container {
+.ap-cast-crew-poster-wrapper {
 	width: 72px;
 	height: 105px;
 }
 
-.st-ap-cast-crew-poster-container > img {
+.ap-cast-crew-poster-wrapper > img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	object-position: top;
 }
 
-.st-ap-cast-crew-details-container {
+.ap-cast-crew-details-wrapper {
 	width: calc(100% - 72px);
 	padding-left: 12px;
 	padding-top: 12px;
@@ -61,7 +61,7 @@
 	gap: 16px;
 }
 
-.st-ap-cast-crew-name-text {
+.ap-cast-crew-name {
 	display: flex;
 	flex-direction: column;
 	font-weight: 700;
@@ -69,33 +69,33 @@
 	line-height: 24px;
 }
 
-.st-ap-cast-crew-character-name-text {
+.ap-cast-crew-character-name-text {
 	font-size: 14px;
 	line-height: 24px;
 }
 
-.st-ap-cast-crew-birth-date-text {
+.ap-cast-crew-birth-date {
 	font-weight: 400;
 	font-size: 10px;
 	line-height: 16px;
 }
 
-.st-ap-cast-crew-excerpt-text {
+.ap-cast-crew-excerpt {
 	display: none;
 }
 
-.st-ap-cast-crew-learn-more-text {
+.ap-cast-crew-learn-more {
 	display: none;
 }
 
-.st-ap-cast-crew-excerpt-text-mobile {
+.ap-cast-crew-excerpt-mobile {
 	padding: 12px 12px 10.5px 12px;
 	font-weight: 400;
 	font-size: 12px;
 	line-height: 18px;
 }
 
-.st-ap-cast-crew-learn-more-text-mobile {
+.ap-cast-crew-learn-more-mobile {
 	padding: 0 12px 10.5px 12px;
 	color: var(--link-color);
 	font-weight: 400;
@@ -107,18 +107,18 @@
 	gap: 5px;
 }
 
-.st-ap-cast-crew-learn-more-text-mobile::after {
+.ap-cast-crew-learn-more-mobile::after {
 	content: url(../images/ic_arrow_red.svg);
 	font-size: 14px;
 	line-height: 0;
 	display: inline-block;
 }
 
-.st-ap-cast-crew-load-more-container {
+.ap-cast-crew-load-more-wrapper {
 	display: none;
 }
 
-.st-ap-cast-crew-list-item {
+.ap-cast-crew-item {
 	display: flex;
 	flex-direction: row;
 }
@@ -132,38 +132,38 @@
 	}
 
 	/* Cast & Crew Section Starts */
-	.st-ap-cast-crew-container {
+	.ap-cast-crew-wrapper {
 		gap: 80px;
 	}
 
-	.st-ap-cast-crew-heading-text {
+	.ap-cast-crew-heading-wrapper p {
 		font-size: 64px;
 		line-height: 72px;
 	}
 
-	.st-ap-cast-crew-list-container {
+	.ap-cast-crew-list-wrapper {
 		grid-template-columns: repeat(2, 1fr);
 		gap: 32px;
 	}
 
-	.st-ap-cast-crew-list-mobile {
+	.ap-cast-crew-list-mobile {
 		display: flex;
 		flex-direction: row;
 		height: 100%;
 	}
 
-	.st-ap-cast-crew-poster-container {
+	.ap-cast-crew-poster-wrapper {
 		width: 153px;
 		height: 100%;
 	}
 
-	.st-ap-cast-crew-details-container {
+	.ap-cast-crew-details-wrapper {
 		width: calc(100% - 153px);
 		padding: 32px 24px;
 		gap: 8px;
 	}
 
-	.st-ap-cast-crew-name-text {
+	.ap-cast-crew-name {
 		display: flex;
 		flex-wrap: wrap;
 		flex-direction: row;
@@ -171,28 +171,28 @@
 		line-height: 40px;
 	}
 
-	.st-ap-cast-crew-character-name-text {
+	.ap-cast-crew-character-name-text {
 		font-size: 24px;
 		line-height: 40px;
 	}
 
-	.st-ap-cast-crew-character-name-text::before {
+	.ap-cast-crew-character-name-text::before {
 		content: "\00a0";
 	}
 
-	.st-ap-cast-crew-birth-date-text {
+	.ap-cast-crew-birth-date {
 		font-size: 14px;
 		line-height: 24px;
 	}
 
-	.st-ap-cast-crew-excerpt-text {
+	.ap-cast-crew-excerpt {
 		display: block;
 		font-weight: 400;
 		font-size: 14px;
 		line-height: 24px;
 	}
 
-	.st-ap-cast-crew-learn-more-text {
+	.ap-cast-crew-learn-more {
 		color: var(--link-color);
 		font-weight: 400;
 		font-size: 14px;
@@ -203,37 +203,37 @@
 		gap: 5px;
 	}
 
-	.st-ap-cast-crew-learn-more-text::after {
+	.ap-cast-crew-learn-more::after {
 		content: url(../images/ic_arrow_red.svg);
 		font-size: 14px;
 		line-height: 0;
 		display: inline-block;
 	}
 
-	.st-ap-cast-crew-excerpt-text-mobile {
+	.ap-cast-crew-excerpt-mobile {
 		display: none;
 	}
 
-	.st-ap-cast-crew-learn-more-text-mobile {
+	.ap-cast-crew-learn-more-mobile {
 		display: none;
 	}
 
 
-	.st-ap-cast-crew-load-more-container {
+	.ap-cast-crew-load-more-wrapper {
 		display: flex;
 		justify-content: center;
 		flex-direction: row;
 		cursor: pointer;
 	}
 
-	.st-ap-cast-crew-load-more-text {
+	.ap-cast-crew-load-more {
 		align-items: center;
 		padding: 16px 40px;
 		border: 1px solid #fff;
 		border-radius: 99px;
 	}
 
-	.st-ap-cast-crew-load-more-text:hover {
+	.ap-cast-crew-load-more:hover {
 		background-color: var(--border-color);
 		border: 1px solid var(--border-color);
 	}

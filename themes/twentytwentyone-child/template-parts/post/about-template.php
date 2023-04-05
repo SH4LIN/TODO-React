@@ -7,15 +7,14 @@
  */
 
 if (
-	! isset( $args['id'] ) ||
-	! isset( $args['about'] ) ||
 	! isset( $args['quick_links'] ) ||
 	! isset( $args['desktop_heading'] ) ||
 	! isset( $args['mobile_heading'] )
 ) {
 	return;
 }
-if ( ! empty( $args['about'] ) ) :
+
+if ( ! empty( get_the_content() ) ) :
 	?>
 	<section class="about-quick-links-section" id="about"> <!-- about-quick-links-container -->
 		<div class="about-wrapper"> <!-- about-container -->
@@ -31,7 +30,7 @@ if ( ! empty( $args['about'] ) ) :
 
 			<div class="about-content-container"> <!-- about-content-container -->
 				<span class="primary-text-primary-font about-text"> <!-- about-text -->
-					<?php echo wp_kses_post( $args['about'] ); ?>
+					<?php the_content(); ?>
 				</span> <!-- /about-text -->
 			</div> <!-- /about-content-container -->
 		</div> <!-- /about-container -->
@@ -46,20 +45,31 @@ if ( ! empty( $args['about'] ) ) :
 					</p> <!-- /quick-links-heading-text -->
 				</div> <!-- /quick-links-heading-container -->
 
-				<div class="quick-links-list-container"> <!-- quick-links-list-container -->
-					<ul class="quick-links-list"> <!-- quick-links -->
-						<?php
-						foreach ( $args['quick_links'] as $quick_link ) :
-							?>
-							<li class="quick-link-item"> <!-- quick-link -->
-								<a class="primary-text-primary-font" href="<?php echo esc_url( $quick_link['url'] ); ?>">
-									<?php echo esc_html( $quick_link['title'] ); ?>
-								</a>
-							</li> <!-- /quick-link -->
-						<?php endforeach; ?>
-					</ul> <!-- /quick-links -->
-				</div> <!-- /quick-links-list-container -->
+				<?php
+				echo wp_kses(
+					$args['quick_links'],
+					array(
+						'nav' => array(
+							'class' => array(),
+							'id'    => array(),
+						),
+						'ul'  => array(
+							'class' => array(),
+							'id'    => array(),
+						),
+						'li'  => array(
+							'class' => array(),
+							'id'    => array(),
+						),
+						'a'   => array(
+							'class' => array(),
+							'id'    => array(),
+							'href'  => array(),
+						),
+					)
+				);
+				?>
 			</div> <!-- /quick-links-container -->
-		</section> <!-- /about-quick-links-container -->
-	<?php endif; ?>
+		<?php endif; ?>
+	</section> <!-- /about-quick-links-container -->
 <?php endif; ?>

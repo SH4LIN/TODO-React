@@ -7,7 +7,6 @@
  */
 
 if (
-	! isset( $args['id'] ) ||
 	! isset( $args['videos'] ) ||
 	! isset( $args['heading'] )
 ) {
@@ -30,9 +29,10 @@ if ( ! empty( $args['videos'] ) ) :
 						<div class="video-item-wrapper">
 							<div class="video-item">
 								<video src="<?php echo esc_url( wp_get_attachment_url( $trailer_clip ) ); ?>" data-src="<?php echo esc_url( wp_get_attachment_url( $trailer_clip ) ); ?>"></video>
-							</div>
-							<div class= "video-play-button" data-src="<?php echo esc_url( wp_get_attachment_url( $trailer_clip ) ); ?>">
-								<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_play.svg' ); ?>" />
+
+								<div class= "video-play-button" data-src="<?php echo esc_url( wp_get_attachment_url( $trailer_clip ) ); ?>">
+									<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_play.svg' ); ?>" />
+								</div>
 							</div>
 						</div>
 						<?php
