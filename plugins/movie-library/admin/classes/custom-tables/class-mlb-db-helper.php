@@ -87,9 +87,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_tables\MLB_DB_Helper' ) ) :
 		 */
 		public function add_hooks(): void {
 			add_action( 'plugins_loaded', array( $this, 'register_custom_tables' ) );
-			add_action( 'get_meta_sql', array( $this, 'change_meta_query_array' ) );
-			add_action( 'posts_join', array( $this, 'change_meta_query' ) );
-			add_action( 'posts_orderby', array( $this, 'change_meta_query' ) );
+			add_filter( 'get_meta_sql', array( $this, 'change_meta_query_array' ) );
+			add_filter( 'posts_join', array( $this, 'modify_meta_query' ) );
+			add_filter( 'posts_orderby', array( $this, 'modify_meta_query' ) );
 		}
 
 		/**
@@ -114,13 +114,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_tables\MLB_DB_Helper' ) ) :
 		 *
 		 * @return string
 		 */
-		public function change_meta_query( $sql ) {
+		public function modify_meta_query( $sql ) {
 
-			if ( 'rt-person' === get_post_type() ) {
+			if ( RT_Person::SLUG === get_post_type() ) {
 				$sql = str_replace( 'wp_postmeta.post_id', 'wp_moviemeta.movie_id', $sql );
 				$sql = str_replace( 'wp_postmeta', 'wp_moviemeta', $sql );
 				$sql = str_replace( 'wp_postmeta.meta_value', 'wp_moviemeta.meta_value', $sql );
-			} elseif ( 'rt-movie' === get_post_type() ) {
+			} elseif ( RT_Movie::SLUG === get_post_type() ) {
 				$sql = str_replace( 'wp_postmeta.post_id', 'wp_personmeta.person_id', $sql );
 				$sql = str_replace( 'wp_postmeta', 'wp_personmeta', $sql );
 				$sql = str_replace( 'wp_postmeta.meta_value', 'wp_personmeta.meta_value', $sql );
@@ -146,8 +146,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_tables\MLB_DB_Helper' ) ) :
 		 * @return array
 		 */
 		public function change_meta_query_array( $sql ) {
-			$sql['join']  = $this->change_meta_query( $sql['join'] );
-			$sql['where'] = $this->change_meta_query( $sql['where'] );
+			$sql['join']  = $this->modify_meta_query( $sql['join'] );
+			$sql['where'] = $this->modify_meta_query( $sql['where'] );
 
 			return $sql;
 		}

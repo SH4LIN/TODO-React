@@ -137,13 +137,21 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 
 			$debut_movie = get_posts( $args_debut_movie );
 
-			$debut_movie_name = $debut_movie[0]->post_title;
-			$debut_movie_date = get_person_meta( $debut_movie[0]->ID, RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, true );
-			if ( ! empty( $debut_movie_date ) ) {
-				$debut_movie_year = DateTime::createFromFormat( 'Y-m-d', $debut_movie_date )->format( 'Y' );
+			if ( ! empty( $debut_movie ) ) {
+				$debut_movie_name = $debut_movie[0]->post_title;
+				$debut_movie_date =
+					get_person_meta(
+						$debut_movie[0]->ID,
+						RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG,
+						true
+					);
+				if ( ! empty( $debut_movie_date ) ) {
+					$debut_movie_year = DateTime::createFromFormat( 'Y-m-d', $debut_movie_date )->format( 'Y' );
 
-				$debut_movie_name_year              = sprintf( '%1$s (%2$s)', $debut_movie_name, $debut_movie_year );
-				$hero_data['debut_movie_name_year'] = $debut_movie_name_year;
+					$debut_movie_name_year              =
+						sprintf( '%1$s (%2$s)', $debut_movie_name, $debut_movie_year );
+					$hero_data['debut_movie_name_year'] = $debut_movie_name_year;
+				}
 			}
 
 			$args_upcoming_movies = array(
@@ -171,9 +179,10 @@ if ( ! class_exists( 'Single_RT_Person_Data' ) ) :
 				),
 			);
 
-			$upcoming_movies_array = get_posts( $args_upcoming_movies );
+			$upcoming_movies_array = new WP_Query( $args_upcoming_movies );
 			$upcoming_movies       = '';
-			if ( count( $upcoming_movies_array ) > 0 ) {
+
+			if ( ! empty( $upcoming_movies_array ) ) {
 				foreach ( $upcoming_movies_array as $upcoming_movie ) {
 					$upcoming_movie_date = get_person_meta( $upcoming_movie->ID, RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, true );
 					if ( ! empty( $upcoming_movie_date ) ) {
