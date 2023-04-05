@@ -117,7 +117,7 @@ if ( ! empty( $actors ) ) {
 
 								<?php if ( has_excerpt( $person['id'] ) ) : ?>
 									<div class="primary-text-primary-font ap-cast-crew-excerpt">
-										<?php get_the_excerpt( $person['id'] ); ?>
+										<?php echo esc_html( get_the_excerpt( $person['id'] ) ); ?>
 									</div>
 								<?php endif; ?>
 
@@ -132,7 +132,7 @@ if ( ! empty( $actors ) ) {
 
 						<?php if ( has_excerpt( $person['id'] ) ) : ?>
 							<div class="primary-text-primary-font ap-cast-crew-excerpt-mobile">
-								<?php get_the_excerpt( $person['id'] ); ?>
+								<?php echo esc_html( get_the_excerpt( $person['id'] ) ); ?>
 							</div>
 						<?php endif; ?>
 
