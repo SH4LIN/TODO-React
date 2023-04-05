@@ -32,7 +32,33 @@ if ( ! class_exists( 'MovieLib\admin\classes\Asset' ) ) {
 		 */
 		protected function init(): void {
 
+			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_all_admin_scripts' ) );
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_all_frontend_scripts' ) );
+
+		}
+
+		/**
+		 * This function is callback function for the enqueuing admin scripts & styles.
+		 *
+		 * @return void
+		 */
+		public function enqueue_all_admin_scripts(): void {
+
 			$this->register_scripts();
+			$this->enqueue_admin_css();
+			$this->enqueue_image_video_upload_script();
+			$this->enqueue_custom_label_character_script();
+			$this->enqueue_validation_script();
+
+		}
+
+		/**
+		 * This function is callback function for the enqueuing frontend scripts & styles.
+		 *
+		 * @return void
+		 */
+		public function enqueue_all_frontend_scripts(): void {
+			$this->enqueue_frontend_scripts();
 
 		}
 
@@ -101,7 +127,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Asset' ) ) {
 		 *
 		 * @return void
 		 */
-		public function enqueue_admin_css(): void {
+		private function enqueue_admin_css(): void {
 
 			wp_enqueue_style( 'movie-library-admin', MLB_PLUGIN_URL . 'admin/css/movie-library-admin.css', array(), filemtime( MLB_PLUGIN_DIR . 'admin/css/movie-library-admin.css' ) );
 
@@ -112,7 +138,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Asset' ) ) {
 		 *
 		 * @return void
 		 */
-		public function enqueue_image_video_upload_script(): void {
+		private function enqueue_image_video_upload_script(): void {
 
 			wp_enqueue_script( 'movie-library-image-video-upload' );
 			wp_set_script_translations( 'movie-library-image-video-upload', 'movie-library', MLB_PLUGIN_DIR . 'languages' );
@@ -125,7 +151,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Asset' ) ) {
 		 *
 		 * @return void
 		 */
-		public function enqueue_custom_label_character_script(): void {
+		private function enqueue_custom_label_character_script(): void {
 
 			if ( get_post_type() === RT_Movie::SLUG ) {
 
@@ -144,7 +170,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Asset' ) ) {
 		 *
 		 * @return void
 		 */
-		public function enqueue_validation_script(): void {
+		private function enqueue_validation_script(): void {
 
 			$post_type = get_post_type();
 
@@ -167,7 +193,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Asset' ) ) {
 		 *
 		 * @return void
 		 */
-		public function enqueue_frontend_scripts(): void {
+		private function enqueue_frontend_scripts(): void {
 
 			wp_enqueue_style( 'movie-library-frontend', MLB_PLUGIN_URL . 'public/css/movie-library-frontend.css', array(), filemtime( MLB_PLUGIN_DIR . 'public/css/movie-library-frontend.css' ) );
 			wp_enqueue_script( 'movie-library-frontend', MLB_PLUGIN_URL . 'public/js/movie-library-frontend.js', array(), filemtime( MLB_PLUGIN_DIR . 'public/js/movie-library-frontend.js' ), true );

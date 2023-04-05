@@ -36,7 +36,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Production_Company
 		 */
 		protected function init(): void {
 
-			$this->register();
+			add_action( 'init', array( $this, 'register' ) );
 
 		}
 
@@ -90,7 +90,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Production_Company
 					'query_var'          => true,
 					'public'             => true,
 					'publicly_queryable' => true,
-					'rewrite'            => false,
 				),
 			);
 

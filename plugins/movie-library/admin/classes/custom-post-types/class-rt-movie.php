@@ -35,7 +35,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 		 */
 		protected function init(): void {
 
-			$this->register();
+			add_action( 'init', array( $this, 'register' ) );
 
 		}
 
@@ -76,11 +76,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 				'show_ui'            => true,
 				'show_in_menu'       => true,
 				'query_var'          => true,
-				'rewrite'            => false,
 				'capability_type'    => 'post',
-				'has_archive'        => 'movies',
-				'hierarchical'       => false,
-				'menu_position'      => null,
+				'has_archive'        => true,
 				'menu_icon'          => 'dashicons-format-video',
 				'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
 				'show_in_rest'       => true,

@@ -37,6 +37,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 		const VIDEOS_SLUG = 'rt-media-meta-videos';
 
 		/**
+		 * RT_MEDIA_META_VIDEOS_SLUG
+		 */
+		const BANNER_IMAGES_SLUG = 'rt-media-meta-banner-images';
+
+
+		/**
 		 * RT_Media_Meta_Box init method.
 		 *
 		 * @return void
@@ -64,6 +70,15 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 			);
 
 			add_meta_box(
+				self::BANNER_IMAGES_SLUG,
+				__( 'Movie Banners', 'movie-library' ),
+				array( $this, 'rt_media_meta_banner_images' ),
+				array( RT_Movie::SLUG, RT_Person::SLUG ),
+				'side',
+				'high'
+			);
+
+			add_meta_box(
 				self::VIDEOS_SLUG,
 				__( 'Videos', 'movie-library' ),
 				array( $this, 'rt_media_meta_videos' ),
@@ -82,12 +97,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 		 */
 		public function rt_media_meta_images( WP_Post $post ): void {
 
-			$rt_media_meta_images_key = array(
-				'images' => 'rt-media-meta-images',
-			);
-
 			$rt_media_meta_images_data_attachment_ids =
-				get_post_meta( $post->ID, $rt_media_meta_images_key['images'] );
+				get_post_meta( $post->ID, self::IMAGES_SLUG );
 
 			wp_nonce_field( 'rt_media_meta_nonce', 'rt_media_meta_nonce' );
 
@@ -167,6 +178,95 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 		}
 
 		/**
+		 * This function is used to create the meta box for the movie banner images.
+		 *
+		 * @param WP_Post $post The post object.
+		 *
+		 * @return void
+		 */
+		public function rt_media_meta_banner_images( WP_Post $post ): void {
+
+			$rt_media_meta_banner_images_data_attachment_ids =
+				get_post_meta( $post->ID, self::BANNER_IMAGES_SLUG );
+
+			wp_nonce_field( 'rt_media_meta_nonce', 'rt_media_meta_nonce' );
+
+			?>
+
+			<div class = "rt-media-meta-fields rt-media-meta-banner-images">
+
+				<?php
+				if ( isset( $rt_media_meta_banner_images_data_attachment_ids ) && ! empty( $rt_media_meta_banner_images_data_attachment_ids[0] ) ) {
+
+					?>
+
+					<input name = "rt-media-meta-uploaded-banner-images"
+						value = "<?php echo esc_attr( wp_json_encode( $rt_media_meta_banner_images_data_attachment_ids[0] ) ); ?>"
+						hidden = "hidden">
+
+					<h3 class = "rt-media-meta-heading rt-media-meta-banner-images-heading rt-media-meta-uploaded-banner-images-heading">
+						<?php esc_html_e( 'Uploaded Movie Banners', 'movie-library' ); ?>
+					</h3>
+
+					<?php
+				}
+				?>
+
+				<div class = "rt-media-meta-container rt-media-meta-banner-images-container rt-media-meta-uploaded-banner-images-container">
+
+					<?php
+
+					if ( isset( $rt_media_meta_banner_images_data_attachment_ids ) && ! empty( $rt_media_meta_banner_images_data_attachment_ids[0] ) ) {
+
+						foreach ( $rt_media_meta_banner_images_data_attachment_ids[0] as $rt_media_meta_banner_image_attachment_id ) {
+
+							$image_url = wp_get_attachment_image_url( $rt_media_meta_banner_image_attachment_id );
+
+							if ( ! $image_url ) {
+								continue;
+							}
+
+							?>
+
+							<div class = "rt-media-meta rt-media-meta-banner-image rt-media-meta-uploaded-banner-image">
+								<img src = "<?php echo esc_url( $image_url ); ?>" alt = "">
+
+								<span class = "rt-media-meta-remove rt-media-meta-banner-image-remove rt-media-meta-uploaded-banner-image-remove"
+									data-id = "<?php echo esc_attr( $rt_media_meta_banner_image_attachment_id ); ?>">
+										X
+								</span>
+							</div>
+
+							<?php
+						}
+
+						?>
+
+						<?php
+
+					}
+
+					?>
+
+				</div>
+
+			</div>
+
+			<div class = "rt-media-meta-container rt-media-meta-banner-images-container rt-media-meta-selected-banner-images-container"
+				id = "rt-media-meta-selected-banner-images-container">
+			</div>
+
+			<input name = "rt-media-meta-selected-banner-images" hidden = "hidden">
+
+			<button class = "rt-media-meta-add rt-media-meta-banner-images-add"
+					type = "button">
+				<?php esc_html_e( 'Add Movie Banners', 'movie-library' ); ?>
+			</button>
+
+			<?php
+		}
+
+		/**
 		 * This function will add the meta box for videos in rt-movie and rt-person post type.
 		 * It will also add the functionality to add and remove videos.
 		 * It will also save the videos in the database.
@@ -178,12 +278,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 		 */
 		public function rt_media_meta_videos( WP_Post $post ): void {
 
-			$rt_media_meta_videos_key = array(
-				'images' => 'rt-media-meta-videos',
-			);
-
 			$rt_media_meta_videos_data_attachment_ids =
-				get_post_meta( $post->ID, $rt_media_meta_videos_key['images'] );
+				get_post_meta( $post->ID, self::VIDEOS_SLUG );
 
 			wp_nonce_field( 'rt_media_meta_nonce', 'rt_media_meta_nonce' );
 
@@ -261,7 +357,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 
 		/**
 		 * This function is used to save the rt-movie-meta-images meta field in the database.
-		 * This function will have two array one for selected videos and another for uploaded images.
 		 * If the selected images array is not empty then it will update the meta field in the database.
 		 * If the uploaded images array is not empty then it will update the meta field in the database.
 		 * If both the arrays are empty then it will delete the meta field from the database.
@@ -333,11 +428,94 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 			}
 			if ( empty( $rt_media_meta_images ) ) {
 
-				delete_post_meta( $post_id, 'rt-media-meta-images' );
+				delete_post_meta( $post_id, self::IMAGES_SLUG );
 
 			} else {
 
-				update_post_meta( $post_id, 'rt-media-meta-images', $rt_media_meta_images );
+				update_post_meta( $post_id, self::IMAGES_SLUG, $rt_media_meta_images );
+
+			}
+
+		}
+
+		/**
+		 * This function is used to save the rt-movie-meta-banner-images meta field in the database.
+		 * If the selected images array is not empty then it will update the meta field in the database.
+		 * If the uploaded images array is not empty then it will update the meta field in the database.
+		 * If both the arrays are empty then it will delete the meta field from the database.
+		 *
+		 * @param int $post_id Post ID.
+		 *
+		 * @return void
+		 */
+		public function save_rt_movie_meta_banner_images( int $post_id ): void {
+
+			// Check if our nonce is set.
+			if ( ! isset( $_POST['rt_media_meta_nonce'] ) ) {
+				return;
+			}
+
+			// Sanitize nonce.
+			$rt_movie_meta_nonce = sanitize_text_field( wp_unslash( $_POST['rt_media_meta_nonce'] ) );
+
+			// Verify that the nonce is valid.
+			if ( ! wp_verify_nonce( $rt_movie_meta_nonce, 'rt_media_meta_nonce' ) ) {
+				return;
+			}
+
+			/** OK, it's safe for us to save the data now. */
+
+			$rt_movie_meta_selected_banner_images = array();
+			$rt_movie_meta_uploaded_banner_images = array();
+
+			// Checking if rt-movie-meta-images is available in $_POST.
+			if ( isset( $_POST['rt-media-meta-selected-banner-images'] ) && ! empty( $_POST['rt-media-meta-selected-banner-images'] ) ) {
+
+				// Sanitize user input.
+				$rt_movie_meta_sanitized_selected_banner_images = sanitize_text_field( wp_unslash( $_POST['rt-media-meta-selected-banner-images'] ) );
+
+				$rt_movie_meta_selected_banner_images = json_decode( $rt_movie_meta_sanitized_selected_banner_images, false );
+
+			}
+
+			if ( isset( $_POST['rt-media-meta-uploaded-banner-images'] ) && ! empty( $_POST['rt-media-meta-uploaded-banner-images'] ) ) {
+
+				// Sanitize user input.
+				$rt_movie_meta_sanitized_uploaded_banner_images = sanitize_text_field( wp_unslash( $_POST['rt-media-meta-uploaded-banner-images'] ) );
+
+				$rt_movie_meta_uploaded_banner_images = json_decode( $rt_movie_meta_sanitized_uploaded_banner_images, false );
+
+			}
+
+			if ( ! is_array( $rt_movie_meta_selected_banner_images ) ) {
+
+				$rt_movie_meta_selected_banner_images = array();
+
+			}
+
+			if ( ! is_array( $rt_movie_meta_uploaded_banner_images ) ) {
+
+				$rt_movie_meta_uploaded_banner_images = array();
+
+			}
+
+			$rt_media_meta_banner_images = array_unique( array_merge( $rt_movie_meta_selected_banner_images, $rt_movie_meta_uploaded_banner_images ) );
+
+			foreach ( $rt_media_meta_banner_images as $key => $value ) {
+
+				if ( ! wp_get_attachment_image_url( $value ) ) {
+
+					unset( $rt_media_meta_banner_images[ $key ] );
+
+				}
+			}
+			if ( empty( $rt_media_meta_banner_images ) ) {
+
+				delete_post_meta( $post_id, self::BANNER_IMAGES_SLUG );
+
+			} else {
+
+				update_post_meta( $post_id, self::BANNER_IMAGES_SLUG, $rt_media_meta_banner_images );
 
 			}
 
@@ -345,7 +523,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 
 		/**
 		 * This function is used to save the rt-movie-meta-videos meta field in the database.
-		 * This function will have two array one for selected videos and another for uploaded videos.
 		 * If the selected videos array is not empty then it will update the meta field in the database.
 		 * If the uploaded videos array is not empty then it will update the meta field in the database.
 		 * If both the arrays are empty then it will delete the meta field from the database.
@@ -417,11 +594,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 
 			if ( empty( $rt_media_meta_videos ) ) {
 
-				delete_post_meta( $post_id, 'rt-media-meta-videos' );
+				delete_post_meta( $post_id, self::VIDEOS_SLUG );
 
 			} else {
 
-				update_post_meta( $post_id, 'rt-media-meta-videos', $rt_media_meta_videos );
+				update_post_meta( $post_id, self::VIDEOS_SLUG, $rt_media_meta_videos );
 
 			}
 		}
