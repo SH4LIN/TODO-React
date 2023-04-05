@@ -23,13 +23,13 @@ if ( has_post_thumbnail() ) {
 $poster_title_data['poster'] = $poster_url;
 
 $poster_title_data['rating'] = '';
-$rating                      = get_post_meta( get_the_ID(), RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG, true );
+$rating                      = get_movie_meta( get_the_ID(), RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG, true );
 if ( ! empty( $rating ) ) {
 	$poster_title_data['rating'] = $rating . '/10';
 }
 
 $poster_title_data['release_year'] = '';
-$release_year                      = get_post_meta( get_the_ID(), RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, true );
+$release_year                      = get_movie_meta( get_the_ID(), RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, true );
 if ( ! empty( $release_year ) ) {
 	$date                              = DateTime::createFromFormat( 'Y-m-d', $release_year );
 	$poster_title_data['release_year'] = $date->format( 'Y' );
@@ -39,7 +39,7 @@ $poster_title_data['content_rating'] = 'PG-13';
 
 $poster_title_data['runtime'] = '';
 
-$minutes = get_post_meta( get_the_ID(), RT_Movie_Meta_Box::MOVIE_META_BASIC_RUNTIME_SLUG, true );
+$minutes = get_movie_meta( get_the_ID(), RT_Movie_Meta_Box::MOVIE_META_BASIC_RUNTIME_SLUG, true );
 if ( ! empty( $minutes ) ) {
 	$poster_title_data['runtime'] = intdiv( $minutes, 60 ) . __( 'H ', 'screen-time' ) . ( $minutes % 60 ) . __( 'M', 'screen-time' );
 }
@@ -51,12 +51,12 @@ if ( ! empty( $genres ) ) {
 }
 
 $poster_title_data['directors'] = '';
-$directors                      = get_post_meta( get_the_ID(), 'rt-movie-meta-crew-director' );
+$directors                      = get_movie_meta( get_the_ID(), 'rt-movie-meta-crew-director' );
 if ( ! empty( $directors ) ) {
 	$poster_title_data['directors'] = $directors;
 }
 
-$trailer_clips = get_post_meta( get_the_ID(), RT_Media_Meta_Box::VIDEOS_SLUG, true );
+$trailer_clips = get_movie_meta( get_the_ID(), RT_Media_Meta_Box::VIDEOS_SLUG, true );
 
 $poster_title_data['trailer'] = '';
 if ( ! empty( $trailer_clips ) ) {
@@ -84,7 +84,7 @@ $crew_data = array();
 
 $crew_data['link'] = get_post_type_archive_link( RT_Person::SLUG ) . '?movie_id=' . get_the_ID();
 
-$crew              = get_post_meta( get_the_ID(), 'rt-movie-meta-crew-actor' );
+$crew              = get_movie_meta( get_the_ID(), 'rt-movie-meta-crew-actor' );
 $crew_data['crew'] = '';
 if ( ! empty( $crew ) ) {
 	$crew_data['crew'] = $crew;
@@ -92,7 +92,7 @@ if ( ! empty( $crew ) ) {
 
 $snapshots_data = array();
 
-$snapshots                   = get_post_meta( get_the_ID(), RT_Media_Meta_Box::IMAGES_SLUG );
+$snapshots                   = get_movie_meta( get_the_ID(), RT_Media_Meta_Box::IMAGES_SLUG );
 $snapshots_data['snapshots'] = '';
 if ( ! empty( $snapshots ) ) {
 	$snapshots_data['snapshots'] = $snapshots;
@@ -102,7 +102,7 @@ $snapshots_data['heading'] = __( 'Snapshots', 'screen-time' );
 
 $videos_data = array();
 
-$trailer_clips = get_post_meta( get_the_ID(), RT_Media_Meta_Box::VIDEOS_SLUG );
+$trailer_clips = get_movie_meta( get_the_ID(), RT_Media_Meta_Box::VIDEOS_SLUG );
 
 $videos_data['videos'] = '';
 if ( ! empty( $trailer_clips ) && ! empty( $trailer_clips[0] ) ) {

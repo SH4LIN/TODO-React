@@ -32,7 +32,7 @@ $movie = $args['movie'];
 				</a>
 
 				<?php
-				$minutes = get_post_meta( $movie->ID, RT_Movie_Meta_Box::MOVIE_META_BASIC_RUNTIME_SLUG, true );
+				$minutes = get_movie_meta( $movie->ID, RT_Movie_Meta_Box::MOVIE_META_BASIC_RUNTIME_SLUG, true );
 				if ( ! empty( $minutes ) ) {
 					$runtime = intdiv( $minutes, 60 ) . __( ' hr ', 'screen-time' ) . ( $minutes % 60 ) . __( ' min', 'screen-time' );
 					?>
@@ -61,7 +61,7 @@ $movie = $args['movie'];
 				</div> <!-- /genres-container -->
 
 				<?php
-				$release_year = get_post_meta( $movie->ID, RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, true );
+				$release_year = get_movie_meta( $movie->ID, RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, true );
 				if ( ! empty( $release_year ) ) {
 					$date         = DateTime::createFromFormat( 'Y-m-d', $release_year );
 					$release_year = $date->format( 'Y' );

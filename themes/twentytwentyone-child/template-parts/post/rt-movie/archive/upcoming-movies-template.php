@@ -61,7 +61,7 @@ $movies = $args['movies'];
 
 						<div class="upcoming-movie-item-stats-wrapper"> <!-- upcoming-movies-list-item-content-stats-container -->
 							<?php
-							$release_year = get_post_meta( $movie->ID, RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, true );
+							$release_year = get_movie_meta( $movie->ID, RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, true );
 							if ( ! empty( $release_year ) ) {
 								$formatted_date = gmdate( 'jS M Y', strtotime( $release_year ) );
 								?>
