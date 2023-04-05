@@ -36,6 +36,7 @@ $display_menu = $args['menu'];
 		'a'   => array(
 			'class' => array(),
 			'id'    => array(),
+			'href'  => array(),
 		),
 	)
 ); ?>

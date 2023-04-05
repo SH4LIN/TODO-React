@@ -2,8 +2,13 @@
  * This file contains the stylesheet for the snapshots template
  */
 
+
 .snapshots-wrapper {
 	padding: 0 24px;
+}
+
+.sp-wrapper .snapshots-wrapper {
+	padding: 0;
 }
 
 .snapshots-heading-wrapper {

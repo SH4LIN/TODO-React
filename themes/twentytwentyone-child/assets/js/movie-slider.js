@@ -6,12 +6,7 @@
 		const slides = document.querySelectorAll('.slide');
 		const sliderDots = document.querySelectorAll('.slider-dots');
 		const timeout = 5000;
-		if (
-			sliderDots !== null &&
-			sliderDots.length > 0 &&
-			slides !== null &&
-			slides.length > 0
-		) {
+		if (sliderDots?.length > 0 && slides?.length > 0) {
 			let index = 0;
 			setInterval(function () {
 				slides[index].style.display = 'none';
