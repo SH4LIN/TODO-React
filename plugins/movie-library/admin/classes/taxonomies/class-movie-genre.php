@@ -78,12 +78,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\taxonomies\Movie_Genre' ) ) {
 					'query_var'          => true,
 					'public'             => true,
 					'publicly_queryable' => true,
-					'capabilities'       => array(
-						'manage_terms' => 'manage_genres',
-						'edit_terms'   => 'edit_genres',
-						'delete_terms' => 'delete_genres',
-						'assign_terms' => 'assign_genres',
-					),
 				),
 			);
 
