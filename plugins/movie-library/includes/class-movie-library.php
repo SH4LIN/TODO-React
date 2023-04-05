@@ -144,7 +144,6 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 			Movie_Shortcode::instance();
 			Person_Shortcode::instance();
 
-			Dashboard_Widget::instance();
 		}
 
 		/**
