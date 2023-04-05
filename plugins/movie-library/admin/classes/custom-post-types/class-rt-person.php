@@ -106,7 +106,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Person' ) ) {
 			$args['with_front'] = false;
 
 			$career_slug = Person_Career::SLUG;
-			$wp_rewrite->add_permastruct( self::SLUG,
+			$wp_rewrite->add_permastruct(
+				self::SLUG,
 				"/person/%$career_slug%/%rt-person%-%post_id%",
 				$args
 			);
@@ -122,7 +123,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Person' ) ) {
 		 */
 		public function change_permalink( $post_link, $post ) {
 
-			if ( self::SLUG !== $post->post_type  ) {
+			if ( self::SLUG !== $post->post_type ) {
 				return $post_link;
 			}
 
@@ -140,7 +141,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Person' ) ) {
 			}
 
 			$career_slug = Person_Career::SLUG;
-			$post_link = str_replace( "%$career_slug%", $term, $post_link );
+			$post_link   = str_replace( "%$career_slug%", $term, $post_link );
 
 			$post_link = str_replace( '%post_id%', $post->ID, $post_link );
 

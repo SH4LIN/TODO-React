@@ -106,7 +106,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 			$args['with_front'] = false;
 
 			$genre_slug = Movie_Genre::SLUG;
-			$wp_rewrite->add_permastruct( self::SLUG,
+			$wp_rewrite->add_permastruct(
+				self::SLUG,
 				"/movie/%${genre_slug}%/%rt-movie%-%post_id%",
 				$args
 			);
@@ -122,7 +123,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 		 */
 		public function change_permalink( $post_link, $post ) {
 
-			if ( self::SLUG !== $post->post_type  ) {
+			if ( self::SLUG !== $post->post_type ) {
 				return $post_link;
 			}
 
@@ -140,7 +141,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 			}
 
 			$genre_slug = Movie_Genre::SLUG;
-			$post_link = str_replace( "%${genre_slug}%", $term, $post_link );
+			$post_link  = str_replace( "%${genre_slug}%", $term, $post_link );
 
 			$post_link = str_replace( '%post_id%', $post->ID, $post_link );
 
