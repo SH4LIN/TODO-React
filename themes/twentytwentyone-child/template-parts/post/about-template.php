@@ -64,6 +64,7 @@ if ( ! empty( get_the_content() ) ) :
 						'a'   => array(
 							'class' => array(),
 							'id'    => array(),
+							'href'  => array(),
 						),
 					)
 				);

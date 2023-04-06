@@ -66,6 +66,7 @@
 
 .personal-details-wrapper {
 	padding-top: 31px;
+	align-self: center;
 }
 
 .occupation-details-wrapper {
@@ -183,6 +184,11 @@
 	height: fit-content;
 	line-height: 0;
 	width: auto;
+}
+
+.social-item img {
+	width: 20px;
+	height: 20px;
 }
 
 /* Popular Movies Section Starts */

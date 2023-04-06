@@ -5,6 +5,7 @@
 	window.addEventListener('DOMContentLoaded', function () {
 		expandMenu();
 		languageSwitcher();
+		openMenu();
 	});
 })();
 
@@ -56,5 +57,50 @@ function expandMenu() {
 		hamburgerMenuIcon?.classList.toggle('hidden');
 
 		closeMenuIcon?.classList.toggle('hidden');
+	});
+}
+
+/**
+ * This function is used to open and close the individual menus in the header menu in mobile view.
+ */
+function openMenu() {
+	const exploreBtn = document.getElementById('explore-btn');
+	let exploreOpen = true;
+	const exploreMenu = document.querySelector(
+		'.primary-menu-expanded-explore-menu'
+	);
+
+	exploreBtn?.addEventListener('click', function () {
+		if (exploreMenu !== null) {
+			if (exploreOpen) {
+				exploreMenu.style.display = 'none';
+				exploreBtn.style.transform = 'rotate(0deg)';
+				exploreOpen = false;
+			} else {
+				exploreMenu.style.display = 'block';
+				exploreBtn.style.transform = 'rotate(180deg)';
+				exploreOpen = true;
+			}
+		}
+	});
+
+	const settingsBtn = document.getElementById('settings-btn');
+	let settingsOpen = true;
+	const settingsMenu = document.querySelector(
+		'.primary-menu-expanded-settings-menu'
+	);
+
+	settingsBtn?.addEventListener('click', function () {
+		if (settingsMenu !== null) {
+			if (settingsOpen) {
+				settingsMenu.style.display = 'none';
+				settingsBtn.style.transform = 'rotate(0deg)';
+				settingsOpen = false;
+			} else {
+				settingsMenu.style.display = 'block';
+				settingsBtn.style.transform = 'rotate(180deg)';
+				settingsOpen = true;
+			}
+		}
 	});
 }

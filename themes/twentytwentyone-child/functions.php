@@ -124,6 +124,7 @@ if ( ! function_exists( 'twenty_twenty_one_child_scripts' ) ) :
 		}
 
 		wp_enqueue_script( 'site-header', get_stylesheet_directory_uri() . '/assets/js/site-header.js', array(), filemtime( get_stylesheet_directory() . '/assets/js/site-header.js' ), true );
+		wp_enqueue_script( 'search', get_stylesheet_directory_uri() . '/assets/js/search.js', array(), filemtime( get_stylesheet_directory() . '/assets/js/search.js' ), true );
 
 		wp_dequeue_style( 'twenty-twenty-one-style' );
 

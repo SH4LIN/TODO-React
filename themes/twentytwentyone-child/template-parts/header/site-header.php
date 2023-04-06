@@ -7,6 +7,24 @@
  */
 
 ?>
+<form class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>" method="get">
+	<div class="search-wrapper">
+		<label for="search-input" class="screen-reader-text">
+			<?php esc_html_e( 'Search', 'screen-time' ); ?>
+		</label>
+		<input
+			type="search"
+			id="search-input"
+			class="search-field"
+			placeholder="<?php esc_attr_e( 'Search', 'screen-time' ); ?>"
+			value="<?php echo get_search_query(); ?>"
+			name="s"
+		/>
+		<button type="submit" class="search-submit">
+			<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/ic_search.svg' ); ?>">
+		</button>
+	</div>
+</form>
 
 <header id="masthead" class= "header-wrapper"> <!-- header -->
 	<div class="header-navigation-container"> <!-- header-navigation-container -->

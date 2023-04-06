@@ -24,7 +24,7 @@ $about_data['mobile_heading']  = __( 'About', 'screen-time' );
 
 $about_data['quick_links'] = wp_nav_menu(
 	array(
-		'menu'            => 'single-person',
+		'theme_location'  => 'single-person',
 		'menu_class'      => 'quick-links-list',
 		'container'       => 'nav',
 		'container_class' => 'quick-links-list-container',
