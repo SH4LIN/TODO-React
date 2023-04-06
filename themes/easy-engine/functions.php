@@ -113,16 +113,9 @@ if ( ! function_exists( 'ee_get_breadcrumbs' ) ) :
 				if ( is_single() ) {
 					?>
 					<?php
-					$cat           = get_the_category()[0];
-					$cat_parent_id = $cat->parent;
-					if ( 0 !== $cat_parent_id ) {
-						// translators: 1: %s is the delimiter, 2: %s is the category name.
-						echo esc_html( sprintf( '%1$s%2$s', $delimiter, get_category( $cat_parent_id )->name ) );
-					} else {
-						// translators: 1. %s is the delimiter, 2. %s is the category name.
-						echo esc_html( sprintf( '%1$s%2$s', $delimiter, $cat->name ) );
-					}
-
+					$cat = get_the_category()[0];
+					// translators: 1. %s is the delimiter, 2. %s is the category name.
+					echo esc_html( sprintf( '%1$s%2$s', $delimiter, $cat->name ) );
 					?>
 
 					<span class="current">
