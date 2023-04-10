@@ -105,19 +105,20 @@ if ( ! function_exists( 'ee_get_breadcrumbs' ) ) :
 			</a>
 			<?php
 			if ( is_home() ) {
+				echo esc_html( $delimiter );
 				// translators: %s is the delimiter.
-				echo esc_html( sprintf( __( '%sBlog', 'easy-engine' ), $delimiter ) );
+				echo esc_html( get_the_title( get_option( 'page_for_posts', true ) ) );
 			}
 
 			if ( is_category() || is_single() || is_tag() ) {
 				if ( is_single() ) {
+					echo esc_html( $delimiter );
 					?>
-					<?php
-					$cat = get_the_category()[0];
-					// translators: 1. %s is the delimiter, 2. %s is the category name.
-					echo esc_html( sprintf( '%1$s%2$s', $delimiter, $cat->name ) );
-					?>
-
+					<a href="<?php echo esc_url( get_post_type_archive_link( 'post' ) ); ?>">
+						<?php
+						echo esc_html( get_the_title( get_option( 'page_for_posts', true ) ) );
+						?>
+					</a>
 					<span class="current">
 						<?php
 						echo esc_html( $delimiter );
