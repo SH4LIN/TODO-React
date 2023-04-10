@@ -106,7 +106,6 @@ if ( ! function_exists( 'ee_get_breadcrumbs' ) ) :
 			<?php
 			if ( is_home() ) {
 				echo esc_html( $delimiter );
-				// translators: %s is the delimiter.
 				echo esc_html( get_the_title( get_option( 'page_for_posts', true ) ) );
 			}
 
@@ -155,7 +154,7 @@ if ( ! function_exists( 'ee_get_breadcrumbs' ) ) :
 					the_title();
 					?>
 				</span>
-							<?php
+				<?php
 			} elseif ( is_search() ) {
 				?>
 				<span class="current">
