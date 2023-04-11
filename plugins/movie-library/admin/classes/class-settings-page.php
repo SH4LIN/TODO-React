@@ -546,6 +546,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\Settings_Page' ) ) {
 							update_option( $this->api_key_option_name, $key_data );
 						}
 					}
+				} else {
+					update_option( $this->api_key_option_name, $key_data );
 				}
 
 				$class   = 'notice notice-success is-dismissible';
