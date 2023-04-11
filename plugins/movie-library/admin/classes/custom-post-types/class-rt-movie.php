@@ -137,8 +137,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 
 			$genre_slug = Movie_Genre::SLUG;
 			$post_link  = str_replace( "%$genre_slug%", $term, $post_link );
-
-			$post_link = str_replace( '%post_id%', $post->ID, $post_link );
+			$post_link  = str_replace( '%post_id%', $post->ID, $post_link );
 
 			return $post_link;
 		}
