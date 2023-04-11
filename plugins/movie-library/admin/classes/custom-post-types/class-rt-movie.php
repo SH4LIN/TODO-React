@@ -129,11 +129,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 
 			$terms = get_the_terms( $post->ID, Movie_Genre::SLUG );
 
-			$terms = wp_list_sort(
-				$terms,
-				'term_id',
-			);
-
 			if ( ! is_wp_error( $terms ) && ! empty( $terms ) && is_object( $terms[0] ) ) {
 				$term = $terms[0]->slug;
 			} else {
@@ -141,7 +136,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 			}
 
 			$genre_slug = Movie_Genre::SLUG;
-			$post_link  = str_replace( "%${genre_slug}%", $term, $post_link );
+			$post_link  = str_replace( "%$genre_slug%", $term, $post_link );
 
 			$post_link = str_replace( '%post_id%', $post->ID, $post_link );
 

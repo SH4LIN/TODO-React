@@ -129,11 +129,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Person' ) ) {
 
 			$terms = get_the_terms( $post->ID, Person_Career::SLUG );
 
-			$terms = wp_list_sort(
-				$terms,
-				'term_id',
-			);
-
 			if ( ! is_wp_error( $terms ) && ! empty( $terms ) && is_object( $terms[0] ) ) {
 				$term = $terms[0]->slug;
 			} else {
