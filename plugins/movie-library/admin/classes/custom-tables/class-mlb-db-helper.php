@@ -87,9 +87,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_tables\MLB_DB_Helper' ) ) :
 		 */
 		public function add_hooks(): void {
 			add_action( 'plugins_loaded', array( $this, 'register_custom_tables' ) );
-			add_filter( 'get_meta_sql', array( $this, 'change_meta_query_array' ) );
-			add_filter( 'posts_join', array( $this, 'modify_meta_query' ) );
-			add_filter( 'posts_orderby', array( $this, 'modify_meta_query' ) );
+			add_filter( 'posts_request', array( $this, 'modify_meta_query' ) );
 		}
 
 		/**
@@ -131,23 +129,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_tables\MLB_DB_Helper' ) ) :
 				$sql = str_replace( $wpdb->postmeta, 'wp_moviemeta', $sql );
 				$sql = str_replace( $wpdb->postmeta . '.meta_value', 'wp_moviemeta.meta_value', $sql );
 			}
-
-			return $sql;
-		}
-
-		/**
-		 * Wrapper function for the change_meta_query() method
-		 *
-		 * Get_meta_sql hook passes the array of SQL query.
-		 * So this method is used to change the array by calling the change_meta_query() method.
-		 *
-		 * @param array $sql SQL query.
-		 *
-		 * @return array
-		 */
-		public function change_meta_query_array( $sql ) {
-			$sql['join']  = $this->modify_meta_query( $sql['join'] );
-			$sql['where'] = $this->modify_meta_query( $sql['where'] );
 
 			return $sql;
 		}
