@@ -102,11 +102,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\widgets\Movies_Widget' ) ) {
 		 */
 		private function fetch_recent_movies(): array {
 			$recent_movies_args = array(
-				'post_type'      => RT_Movie::SLUG,
-				'posts_per_page' => 6,
-				'meta_key'       => RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
-				'orderby'        => 'date',
-				'order'          => 'DESC',
+				'post_type'       => RT_Movie::SLUG,
+				'posts_per_page'  => 6,
+				'meta_key'        => RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+				'supress_filters' => 'false',
+				'orderby'         => 'date',
+				'order'           => 'DESC',
 			);
 
 			$movies = get_posts( $recent_movies_args );
