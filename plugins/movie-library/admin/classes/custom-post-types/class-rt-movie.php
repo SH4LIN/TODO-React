@@ -108,7 +108,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Movie' ) ) {
 			$genre_slug = Movie_Genre::SLUG;
 			$wp_rewrite->add_permastruct(
 				self::SLUG,
-				"/movie/%${genre_slug}%/%rt-movie%-%post_id%",
+				"/movie/%$genre_slug%/%rt-movie%-%post_id%",
 				$args
 			);
 		}
