@@ -1,3 +1,8 @@
+/**
+ * This CSS File is used to style the admin area of the plugin.
+ */
+
+/* Custom Meta-box Section CSS */
 .rt-movie-meta-basic-field {
 	display: block;
 	width: 100%;
@@ -95,6 +100,7 @@
 	object-fit: cover;
 }
 
+/* Admin dashboard widget CSS for recent-movies, top-rated-movies, and upcoming-movies */
 .rt-dashboard-widget__recent-movies ul,
 .rt-dashboard-widget__top-rated-movies ul,
 .rt-dashboard-widget__upcoming-movies ul {
@@ -112,6 +118,7 @@
 	flex-direction: column;
 }
 
+/* Movie edit,view buttons */
 .rt-dashboard-widget__recent-movies ul li .widget-action-buttons,
 .rt-dashboard-widget__top-rated-movies ul li .widget-action-buttons,
 .rt-dashboard-widget__upcoming-movies ul li .widget-action-buttons {
@@ -122,6 +129,7 @@
 	gap: 12px;
 }
 
+/* Movie Card title */
 .rt-dashboard-widget__recent-movies ul li p,
 .rt-dashboard-widget__top-rated-movies ul li p,
 .rt-dashboard-widget__upcoming-movies ul li p {
@@ -137,6 +145,7 @@
 	font-size: 16px;
 }
 
+/* Movie Card Wrapper includes overlay and image */
 .rt-dashboard-widget__recent-movies ul li .poster-wrapper,
 .rt-dashboard-widget__top-rated-movies ul li .poster-wrapper,
 .rt-dashboard-widget__upcoming-movies ul li .poster-wrapper {
@@ -163,4 +172,9 @@
 	aspect-ratio: 4/6;
 	object-fit: cover;
 	border-radius: 10px;
+}
+
+/* Settings Page Error */
+.error {
+	color: #f00;
 }

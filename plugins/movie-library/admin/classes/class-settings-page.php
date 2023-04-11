@@ -90,6 +90,20 @@ if ( ! class_exists( 'MovieLib\admin\classes\Settings_Page' ) ) {
 		private string $checkbox_option_name;
 
 		/**
+		 * Variable API Base URL input-box option name.
+		 *
+		 * @var string $api_base_url_option_name This variable will be used to store the API Base URL option name.
+		 */
+		private string $api_base_url_option_name;
+
+		/**
+		 * Variable API Key input-box option name.
+		 *
+		 * @var string $api_key_option_name This variable will be used to store the API Key option name.
+		 */
+		private string $api_key_option_name;
+
+		/**
 		 * Variable form submission callback.
 		 *
 		 * @var array $form_submission_callback This variable will be used to store the form submission callback.
@@ -111,11 +125,25 @@ if ( ! class_exists( 'MovieLib\admin\classes\Settings_Page' ) ) {
 		private string $remove_plugin_data_section_id;
 
 		/**
+		 * Variable API data section id.
+		 *
+		 * @var string $api_data_section_id This variable will be used to store the API data section id.
+		 */
+		private string $api_data_section_id;
+
+		/**
 		 * Variable remove plugin data section title.
 		 *
 		 * @var string $remove_plugin_data_section_title This variable will be used to store the remove plugin data section title.
 		 */
 		private string $remove_plugin_data_section_title;
+
+		/**
+		 * Variable API data section title.
+		 *
+		 * @var string $api_section_title This variable will be used to store the API data section title.
+		 */
+		private string $api_section_title;
 
 		/**
 		 * Variable remove plugin data section callback.
@@ -125,6 +153,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\Settings_Page' ) ) {
 		private array $remove_plugin_data_section_callback;
 
 		/**
+		 * Variable API data section callback.
+		 *
+		 * @var array $api_data_section_callback This variable will be used to store the API data section callback.
+		 */
+		private array $api_data_section_callback;
+
+		/**
 		 * Variable remove plugin data field callback.
 		 *
 		 * @var array $remove_plugin_data_field_callback This variable will be used to store the remove plugin data field callback.
@@ -132,11 +167,53 @@ if ( ! class_exists( 'MovieLib\admin\classes\Settings_Page' ) ) {
 		private array $remove_plugin_data_field_callback;
 
 		/**
+		 * Variable API Base URL data field callback.
+		 *
+		 * @var array $api_base_url_field_callback This variable will be used to store the API Base URL data field callback.
+		 */
+		private array $api_base_url_field_callback;
+
+		/**
+		 * Variable API Key data field callback.
+		 *
+		 * @var array $api_key_field_callback This variable will be used to store the API Key data field callback.
+		 */
+		private array $api_key_field_callback;
+
+		/**
 		 * Variable remove plugin data field title.
 		 *
 		 * @var string $remove_plugin_data_field_title This variable will be used to store the remove plugin data field title.
 		 */
 		private string $remove_plugin_data_field_title;
+
+		/**
+		 * Variable API Base URL field title.
+		 *
+		 * @var string $api_base_url_field_title This variable will be used to store the API Base URL field title.
+		 */
+		private string $api_base_url_field_title;
+
+		/**
+		 * Variable API Key field title.
+		 *
+		 * @var string $api_key_field_title This variable will be used to store the API Key field title.
+		 */
+		private string $api_key_field_title;
+
+		/**
+		 * Variable API Base URL Error.
+		 *
+		 * @var string $base_url_error This variable will be used to display the API Base URL Error.
+		 */
+		private string $base_url_error;
+
+		/**
+		 * Variable API Key Error.
+		 *
+		 * @var string $key_error This variable will be used to display the API Key Error.
+		 */
+		private string $key_error;
 
 		/**
 		 * Constructor of the class.
@@ -156,11 +233,24 @@ if ( ! class_exists( 'MovieLib\admin\classes\Settings_Page' ) ) {
 			$this->checkbox_option_name                 = 'remove_plugin_data_check_box';
 			$this->form_submission_callback             = array( $this, 'remove_plugin_data_settings_submit' );
 			$this->admin_init_callback                  = array( $this, 'movie_library_settings' );
-			$this->remove_plugin_data_section_id        = 'remove_plugin_data_section';
-			$this->remove_plugin_data_section_title     = __( 'Remove Data', 'movie-library' );
-			$this->remove_plugin_data_section_callback  = array( $this, 'remove_plugin_data_section_callback' );
-			$this->remove_plugin_data_field_callback    = array( $this, 'remove_plugin_data_field_callback' );
-			$this->remove_plugin_data_field_title       = __( 'Remove Plugin Data', 'movie-library' );
+
+			$this->remove_plugin_data_section_id       = 'remove_plugin_data_section';
+			$this->remove_plugin_data_section_title    = __( 'Remove Data', 'movie-library' );
+			$this->remove_plugin_data_section_callback = array( $this, 'remove_plugin_data_section_callback' );
+			$this->remove_plugin_data_field_callback   = array( $this, 'remove_plugin_data_field_callback' );
+			$this->remove_plugin_data_field_title      = __( 'Remove Plugin Data', 'movie-library' );
+
+			$this->api_data_section_id       = 'api_section';
+			$this->api_section_title         = __( 'API Settings', 'movie-library' );
+			$this->api_data_section_callback = array( $this, 'api_data_section_callback' );
+			$this->api_base_url_field_title  = __( 'API Base URL', 'movie-library' );
+			$this->api_key_field_title       = __( 'API Key', 'movie-library' );
+
+			$this->api_base_url_option_name = 'api_base_url_input_box';
+			$this->api_key_option_name      = 'api_key_input_box';
+
+			$this->api_base_url_field_callback = array( $this, 'api_base_url_field_callback' );
+			$this->api_key_field_callback      = array( $this, 'api_key_field_callback' );
 		}
 
 		/**
@@ -220,6 +310,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\Settings_Page' ) ) {
 		 */
 		public function movie_library_settings(): void {
 			register_setting( $this->option_group, $this->checkbox_option_name );
+			register_setting( $this->option_group, $this->api_base_url_option_name );
+			register_setting( $this->option_group, $this->api_key_option_name );
 			add_settings_section(
 				$this->remove_plugin_data_section_id,
 				$this->remove_plugin_data_section_title,
@@ -233,6 +325,87 @@ if ( ! class_exists( 'MovieLib\admin\classes\Settings_Page' ) ) {
 				$this->menu_slug,
 				$this->remove_plugin_data_section_id,
 			);
+
+			add_settings_section(
+				$this->api_data_section_id,
+				$this->api_section_title,
+				$this->api_data_section_callback,
+				$this->menu_slug
+			);
+			add_settings_field(
+				$this->api_base_url_option_name,
+				$this->api_base_url_field_title,
+				$this->api_base_url_field_callback,
+				$this->menu_slug,
+				$this->api_data_section_id,
+			);
+			add_settings_field(
+				$this->api_key_option_name,
+				$this->api_key_field_title,
+				$this->api_key_field_callback,
+				$this->menu_slug,
+				$this->api_data_section_id,
+			);
+		}
+
+		/**
+		 * This function is callback function for the API Base URL field in the settings page.
+		 *
+		 * @return void
+		 */
+		public function api_base_url_field_callback() {
+			$data = get_option( $this->api_base_url_option_name );
+
+			?>
+
+			<label for="<?php echo esc_attr( $this->api_base_url_option_name ); ?>">
+
+				<input type="<?php echo esc_attr( 'url' ); ?>"
+					name="<?php echo esc_attr( $this->api_base_url_option_name ); ?>"
+					id="<?php echo esc_attr( $this->api_base_url_option_name ); ?>"
+					value="<?php echo esc_attr( $data ); ?>" />
+
+			</label>
+
+			<div class="base_url_error">
+
+				<?php if ( ! empty( $this->base_url_error ) ) : ?>
+					<p class="error"><?php echo esc_html( $this->base_url_error ); ?></p>
+				<?php endif; ?>
+
+			</div>
+
+			<?php
+		}
+
+		/**
+		 * This function is callback function for the API Key field in the settings page.
+		 *
+		 * @return void
+		 */
+		public function api_key_field_callback() {
+			$data = get_option( $this->api_key_option_name );
+
+			?>
+
+			<label for="<?php echo esc_attr( $this->api_key_option_name ); ?>">
+
+				<input type="<?php echo esc_attr( 'text' ); ?>"
+					name="<?php echo esc_attr( $this->api_key_option_name ); ?>"
+					id="<?php echo esc_attr( $this->api_key_option_name ); ?>"
+					value="<?php echo esc_attr( $data ); ?>" />
+
+			</label>
+
+			<div class="key_error">
+
+				<?php if ( ! empty( $this->key_error ) ) : ?>
+					<p class="error"><?php echo esc_html( $this->key_error ); ?></p>
+				<?php endif; ?>
+
+			</div>
+
+			<?php
 		}
 
 		/**
@@ -245,6 +418,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\Settings_Page' ) ) {
 			<p><?php esc_html_e( 'Check the checkbox to remove all the data from the database when you uninstall the plugin.', 'movie-library' ); ?></p>
 			<?php
 		}
+
+		/**
+		 * This function will be used to create the section.
+		 *
+		 * @return void
+		 */
+		public function api_data_section_callback(): void {}
 
 		/**
 		 * This function will be used to create the field.
@@ -328,6 +508,45 @@ if ( ! class_exists( 'MovieLib\admin\classes\Settings_Page' ) ) {
 				}
 
 				update_option( $this->checkbox_option_name, $checkbox_data );
+
+				$base_url_data = '';
+				if ( isset( $_POST[ $this->api_base_url_option_name ] ) ) {
+					$base_url_data = esc_url_raw( wp_unslash( $_POST[ $this->api_base_url_option_name ] ) );
+				}
+
+				if ( ! empty( $base_url_data ) ) {
+					$base_url_data = wp_http_validate_url( $base_url_data );
+
+					if ( false === $base_url_data ) {
+						$this->base_url_error = __( 'Please enter a valid URL.', 'movie-library' );
+						return;
+					} else {
+						$this->base_url_error = '';
+					}
+				}
+				update_option( $this->api_base_url_option_name, $base_url_data );
+
+				$key_data = '';
+				if ( isset( $_POST[ $this->api_key_option_name ] ) ) {
+					$key_data = sanitize_text_field( wp_unslash( $_POST[ $this->api_key_option_name ] ) );
+				}
+
+				if ( ! empty( $base_url_data ) ) {
+					if ( empty( $key_data ) ) {
+						$this->key_error = __( 'Please Provide API Key', 'movie-library' );
+						return;
+					} else {
+						$api_url  = $base_url_data . $key_data;
+						$response = wp_remote_get( $api_url );
+						if ( is_wp_error( $response ) ) {
+							$this->key_error = __( 'Please Provide Valid API Key', 'movie-library' );
+							return;
+						} else {
+							$this->key_error = '';
+							update_option( $this->api_key_option_name, $key_data );
+						}
+					}
+				}
 
 				$class   = 'notice notice-success is-dismissible';
 				$message = __( 'Settings saved.', 'movie-library' );

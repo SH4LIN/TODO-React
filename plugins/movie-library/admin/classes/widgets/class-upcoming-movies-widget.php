@@ -39,11 +39,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\widgets\Upcoming_Movies_Widget' ) )
 		const RT_DASHBOARD_UPCOMING_MOVIES_SLUG = 'rt-dashboard-upcoming-movies';
 
 		/**
-		 * RT_DASHBOARD_UPCOMING_MOVIES_REST_API_URL
-		 */
-		const RT_DASHBOARD_UPCOMING_MOVIES_REST_API_URL = 'https://imdb-api.com/en/API/ComingSoon/';
-
-		/**
 		 * Dashboard_Widget init method.
 		 *
 		 * @return void
@@ -98,10 +93,14 @@ if ( ! class_exists( 'MovieLib\admin\classes\widgets\Upcoming_Movies_Widget' ) )
 			$local_response = get_transient( self::RT_DASHBOARD_UPCOMING_MOVIES_SLUG );
 			if ( false === $local_response ) {
 
-				$local_response = wp_remote_get( esc_url( self::RT_DASHBOARD_UPCOMING_MOVIES_REST_API_URL . IMDB_API_KEY ) );
+				$api_url = get_option( 'api_base_url_input_box' );
+				$api_key = get_option( 'api_key_input_box' );
+				if ( $api_url && $api_key ) {
+					$local_response = wp_remote_get( esc_url( $api_url . $api_key ) );
 
-				if ( ! is_wp_error( $local_response ) && wp_remote_retrieve_response_code( $local_response ) === 200 ) {
-					set_transient( self::RT_DASHBOARD_UPCOMING_MOVIES_SLUG, $local_response, 4 * HOUR_IN_SECONDS );
+					if ( ! is_wp_error( $local_response ) && wp_remote_retrieve_response_code( $local_response ) === 200 ) {
+						set_transient( self::RT_DASHBOARD_UPCOMING_MOVIES_SLUG, $local_response, 4 * HOUR_IN_SECONDS );
+					}
 				}
 			}
 
