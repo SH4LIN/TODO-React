@@ -48,23 +48,23 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_commands\MLB_Export_Command'
 		public function __invoke( $args, $assoc_args ) {
 			$post_type = $args[0];
 
-			if ( 'rt-movie' === $post_type ) {
-				$movie_export = $this->export_rt_movie();
+			if ( RT_Movie::SLUG === $post_type ) {
+				$movie_export = $this->export_custom_posts( $post_type );
 				if ( ! $movie_export ) {
 					WP_CLI::error( 'Error while exporting rt-movie post type.' );
 				} else {
 					WP_CLI::success( 'rt-movie post type exported successfully.' );
 				}
-			} elseif ( 'rt-person' === $post_type ) {
-				$person_export = $this->export_rt_person();
+			} elseif ( RT_Person::SLUG === $post_type ) {
+				$person_export = $this->export_custom_posts( $post_type );
 				if ( ! $person_export ) {
 					WP_CLI::error( 'Error while exporting rt-person post type.' );
 				} else {
 					WP_CLI::success( 'rt-person post type exported successfully.' );
 				}
 			} else {
-				$movie_export  = $this->export_rt_movie();
-				$person_export = $this->export_rt_person();
+				$movie_export  = $this->export_custom_posts( RT_Movie::SLUG );
+				$person_export = $this->export_custom_posts( RT_Person::SLUG );
 
 				if ( ! $movie_export ) {
 					WP_CLI::error( 'Error while exporting rt-movie post type.' );
@@ -83,99 +83,51 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_commands\MLB_Export_Command'
 		/**
 		 * Exports rt-movie post type in csv file.
 		 *
+		 * @param string $type Post type to export.
 		 * @return bool
 		 */
-		private function export_rt_movie() {
-			$movie_posts = get_posts(
+		private function export_custom_posts( $type ) {
+			$custom_posts = get_posts(
 				array(
-					'post_type'      => RT_Movie::SLUG,
+					'post_type'      => $type,
 					'posts_per_page' => -1,
 				)
 			);
 
-			$movie_posts = array_map(
-				function( $movie_post ) {
-					$movie_post->post_meta = wp_json_encode( get_movie_meta( $movie_post->ID ) );
-					return $movie_post;
+			$custom_posts = array_map(
+				function( $custom_post ) {
+					$custom_post->post_meta = wp_json_encode( get_movie_meta( $custom_post->ID ) );
+					return $custom_post;
 				},
-				$movie_posts
+				$custom_posts
 			);
 
-			$taxonomies = get_object_taxonomies( RT_Movie::SLUG );
+			$taxonomies = get_object_taxonomies( $type );
 
-			$movie_posts = array_map(
-				function( $movie_post ) use ( $taxonomies ) {
+			$custom_posts = array_map(
+				function( $custom_post ) use ( $taxonomies ) {
 					foreach ( $taxonomies as $taxonomy ) {
-						$movie_post->$taxonomy = implode( ',', wp_list_pluck( get_the_terms( $movie_post->ID, $taxonomy ), 'name' ) );
+						$custom_post->$taxonomy = wp_json_encode( get_the_terms( $custom_post->ID, $taxonomy ) );
 					}
-					return $movie_post;
+					return $custom_post;
 				},
-				$movie_posts
+				$custom_posts
 			);
 
 			// Get the properties of first object.
-
-			$csv_header = array_keys( get_object_vars( $movie_posts[0] ) );
+			$csv_header = array_keys( get_object_vars( $custom_posts[0] ) );
 
 			// Write to csv file.
-			$fp = fopen( 'rt-movie.csv', 'w' );
+			$fp = fopen( "$type.csv", 'w' );
 			fputcsv( $fp, $csv_header );
-			foreach ( $movie_posts as $movie_post ) {
-				if ( false === fputcsv( $fp, get_object_vars( $movie_post ) ) ) {
+			foreach ( $custom_posts as $custom_post ) {
+				if ( false === fputcsv( $fp, get_object_vars( $custom_post ) ) ) {
 					unlink( 'rt-movie.csv' );
 					return false;
 				}
 			}
 			fclose( $fp );
 
-			return true;
-		}
-
-		/**
-		 * Exports rt-person post type in csv file.
-		 *
-		 * @return bool
-		 */
-		private function export_rt_person() {
-			$person_posts = get_posts(
-				array(
-					'post_type'      => RT_Person::SLUG,
-					'posts_per_page' => -1,
-				)
-			);
-
-			$person_posts = array_map(
-				function( $person_post ) {
-					$person_post->post_meta = wp_json_encode( get_person_meta( $person_post->ID ) );
-					return $person_post;
-				},
-				$person_posts
-			);
-
-			$taxonomies = get_object_taxonomies( RT_Person::SLUG );
-
-			$person_posts = array_map(
-				function( $person_post ) use ( $taxonomies ) {
-					foreach ( $taxonomies as $taxonomy ) {
-						$person_post->$taxonomy = implode( ',', wp_list_pluck( get_the_terms( $person_post->ID, $taxonomy ), 'name' ) );
-					}
-					return $person_post;
-				},
-				$person_posts
-			);
-
-			$csv_header = array_keys( get_object_vars( $person_posts[0] ) );
-
-			// Write to csv file.
-			$fp         = fopen( 'rt-person.csv', 'w' );
-			fputcsv( $fp, $csv_header );
-			foreach ( $person_posts as $person_post ) {
-				if ( false === fputcsv( $fp, get_object_vars( $person_post ) ) ) {
-					unlink( 'rt-person.csv' );
-					return false;
-				}
-			}
-			fclose( $fp );
 			return true;
 		}
 	}
