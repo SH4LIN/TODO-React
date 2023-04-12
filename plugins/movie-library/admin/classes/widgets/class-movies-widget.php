@@ -90,6 +90,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\widgets\Movies_Widget' ) ) {
 						<?php
 					}
 					?>
+					<!-- View All Movies Link -->
+					<a href="<?php echo esc_url( get_post_type_archive_link( RT_Movie::SLUG ) ); ?>" class="rt-dashboard-widget__view-all-movies">
+						<?php esc_html_e( 'View All Movies', 'movie-library' ); ?>
+					</a>
 				</div>
 			</div>
 			<?php
@@ -102,12 +106,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\widgets\Movies_Widget' ) ) {
 		 */
 		private function fetch_recent_movies(): array {
 			$recent_movies_args = array(
-				'post_type'       => RT_Movie::SLUG,
-				'posts_per_page'  => 6,
-				'meta_key'        => RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
-				'supress_filters' => 'false',
-				'orderby'         => 'date',
-				'order'           => 'DESC',
+				'post_type'      => RT_Movie::SLUG,
+				'posts_per_page' => 6,
+				'meta_key'       => RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+				'meta_value'     => gmdate( 'Y-m-d' ), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+				'meta_compare'   => '<=',
+				'orderby'        => 'meta_value',
+				'order'          => 'DESC',
 			);
 
 			$movies = get_posts( $recent_movies_args );
@@ -125,7 +130,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\widgets\Movies_Widget' ) ) {
 				'post_type'      => RT_Movie::SLUG,
 				'posts_per_page' => 6,
 				'meta_key'       => RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
-				'orderby'        => 'meta_value',
+				'meta_value'     => gmdate( 'Y-m-d' ), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+				'meta_compare'   => '<=',
+				'orderby'        => 'meta_value_num',
 				'order'          => 'DESC',
 			);
 
