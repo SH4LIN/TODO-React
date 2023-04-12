@@ -5,10 +5,17 @@
  * @package MovieLib\admin\classes\custom_commands
  */
 
-
 /**
  * This is a security measure to prevent direct access to the file.
  */
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * If WP_CLI is not defined then return.
+ */
+if ( ! defined( 'WP_CLI' ) ) {
+	return;
+}
 
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\custom_post_types\RT_Person;
