@@ -127,6 +127,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_commands\MLB_Export_Command'
 			$csv_header = array_keys( get_object_vars( $custom_posts[0] ) );
 
 			$creds = request_filesystem_credentials( admin_url(), '', false, false );
+
 			if ( false === $creds ) {
 				return false;
 			}
