@@ -12,12 +12,6 @@
 
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\custom_post_types\RT_Person;
-use MovieLib\admin\classes\taxonomies\Movie_Genre;
-use MovieLib\admin\classes\taxonomies\Movie_Label;
-use MovieLib\admin\classes\taxonomies\Movie_Language;
-use MovieLib\admin\classes\taxonomies\Movie_Production_Company;
-use MovieLib\admin\classes\taxonomies\Movie_Tag;
-use MovieLib\admin\classes\taxonomies\Person_Career;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -122,7 +116,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_commands\MLB_Export_Command'
 			fputcsv( $fp, $csv_header );
 			foreach ( $custom_posts as $custom_post ) {
 				if ( false === fputcsv( $fp, get_object_vars( $custom_post ) ) ) {
-					unlink( 'rt-movie.csv' );
+					unlink( "$type.csv" );
 					return false;
 				}
 			}
