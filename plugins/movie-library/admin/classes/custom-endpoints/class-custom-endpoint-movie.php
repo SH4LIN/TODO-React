@@ -68,7 +68,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 
 			register_rest_route(
 				'movielib/v1',
-				'/movies/(?P<id>\d+)',
+				'/movie/(?P<id>\d+)',
 				array(
 					'methods'             => 'GET, PUT, DELETE',
 					'callback'            => array( $this, 'movie_by_id' ),
@@ -120,7 +120,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 		}
 
 		/**
-		 * This function is used to create a new post.
+		 * This function is used to create a new movie.
 		 *
 		 * @param \WP_REST_Request $request Request object.
 		 * @return \WP_REST_Response|\WP_Error
@@ -239,7 +239,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 				if ( isset( $movie_data['data']['post_title'] ) && empty( $movie_data['data']['post_title'] ) ) {
 					return new \WP_Error(
 						'400',
-						__( "Sorry, title can't be empty.", 'movie-library' ),
+						__( "Sorry, movie title can't be empty.", 'movie-library' ),
 						array(
 							'status' => 400,
 						)
@@ -408,7 +408,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 			$orderby          = $request->get_param( 'orderby' ) ?? 'date';
 			$can_read_private = current_user_can( 'read_private_posts' );
 
-			if ( null === $request->get_param( 'ids' ) ) {
+			if ( null !== $request->get_param( 'ids' ) ) {
 				$ids    = explode( ',', $request->get_param( 'ids' ) );
 				$movies = get_posts(
 					array(

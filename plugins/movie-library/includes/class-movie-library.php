@@ -17,6 +17,7 @@ defined( 'ABSPATH' ) || exit;
 
 use MovieLib\admin\classes\Asset;
 use MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Movie;
+use MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Person;
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\custom_post_types\RT_Person;
 use MovieLib\admin\classes\custom_tables\MLB_DB_Helper;
@@ -76,6 +77,7 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 			Movie_Library_Activation::instance();
 			Movie_Library_Deactivation::instance();
 			Custom_Endpoint_Movie::instance();
+			Custom_Endpoint_Person::instance();
 			MLB_DB_Helper::instance()->add_hooks();
 
 			$movie_library_save_post     = Movie_Library_Save_Post::instance();
