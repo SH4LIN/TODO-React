@@ -7,6 +7,7 @@
 
 namespace MovieLib\admin\classes\custom_endpoints;
 
+use DateTime;
 use MovieLib\admin\classes\custom_post_types\RT_Person;
 use MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box;
@@ -319,9 +320,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 				$date_str    = $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG ];
 				$date_format = 'Y-m-d';
 
-				$date = wp_date( $date_format, strtotime( $date_str ) );
+				$date = DateTime::createFromFormat( $date_format, $date_str );
 
-				if ( ! $date ) {
+				if ( false === $date ) {
 					return new WP_Error(
 						'400',
 						__( 'Birth date should be in 1967-12-22 (Y-m-d) format.', 'movie-library' ),
@@ -347,9 +348,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 				$date_str    = $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_START_YEAR_SLUG ];
 				$date_format = 'Y-m-d';
 
-				$date = wp_date( $date_format, strtotime( $date_str ) );
+				$date = DateTime::createFromFormat( $date_format, $date_str );
 
-				if ( ! $date ) {
+				if ( false === $date ) {
 					return new WP_Error(
 						'400',
 						__( 'Career start date should be in 1967-12-22 (Y-m-d) format.', 'movie-library' ),
