@@ -57,33 +57,33 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_commands\MLB_Export_Command'
 
 			if ( RT_Movie::SLUG === $post_type ) {
 				$movie_export = $this->export_custom_posts( $post_type );
-				if ( ! $movie_export ) {
+				if ( false === $movie_export ) {
 					WP_CLI::error( 'Error while exporting rt-movie post type.' );
 				} else {
-					WP_CLI::success( 'rt-movie post type exported successfully.' );
+					WP_CLI::success( "rt-movie post type exported to $movie_export successfully." );
 				}
 			} elseif ( RT_Person::SLUG === $post_type ) {
 				$person_export = $this->export_custom_posts( $post_type );
-				if ( ! $person_export ) {
+				if ( false === $person_export ) {
 					WP_CLI::error( 'Error while exporting rt-person post type.' );
 				} else {
-					WP_CLI::success( 'rt-person post type exported successfully.' );
+					WP_CLI::success( "rt-person post type exported to $person_export successfully." );
 				}
 			} else {
 				$movie_export = $this->export_custom_posts( RT_Movie::SLUG );
 
-				if ( ! $movie_export ) {
+				if ( false === $movie_export ) {
 					WP_CLI::error( 'Error while exporting rt-movie post type.' );
 				} else {
-					WP_CLI::success( 'rt-movie post type exported successfully.' );
+					WP_CLI::success( "rt-movie post type exported to $movie_export successfully." );
 				}
 
 				$person_export = $this->export_custom_posts( RT_Person::SLUG );
 
-				if ( ! $person_export ) {
+				if ( false === $person_export ) {
 					WP_CLI::error( 'Error while exporting rt-person post type.' );
 				} else {
-					WP_CLI::success( 'rt-person post type exported successfully.' );
+					WP_CLI::success( "rt-person post type exported to $person_export successfully." );
 				}
 			}
 		}
@@ -152,10 +152,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_commands\MLB_Export_Command'
 			}
 
 			$progress->tick();
-			$wp_filesystem->put_contents( "$type.csv", $csv, FS_CHMOD_FILE );
+			$wp_filesystem->put_contents( wp_upload_dir()['path'] . "/$type.csv", $csv, FS_CHMOD_FILE );
 			$progress->finish();
 
-			return true;
+			// Get the absolute path of file.
+			$absolute_path = wp_upload_dir()['path'] . "/$type.csv";
+
+			return $absolute_path;
 		}
 
 		/**
