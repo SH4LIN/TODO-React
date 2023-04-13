@@ -8,8 +8,11 @@
 namespace MovieLib\admin\classes\custom_endpoints;
 
 use MovieLib\admin\classes\custom_post_types\RT_Person;
+use MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box;
+use MovieLib\admin\classes\taxonomies\Person_Career;
 use MovieLib\includes\Singleton;
 use stdClass;
+use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;
@@ -49,6 +52,24 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_persons' ),
 					'permission_callback' => array( $this, 'get_persons_permissions_check' ),
+					'args'                => array(
+						'per_page' => array(
+							'default'           => 10,
+							'sanitize_callback' => 'absint',
+						),
+						'page'     => array(
+							'default'           => 1,
+							'sanitize_callback' => 'absint',
+						),
+						'order'    => array(
+							'default'           => 'DESC',
+							'sanitize_callback' => 'sanitize_text_field',
+						),
+						'orderby'  => array(
+							'default'           => 'date',
+							'sanitize_callback' => 'sanitize_text_field',
+						),
+					),
 				),
 			);
 
@@ -60,6 +81,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 					'callback'            => array( $this, 'create_update_person' ),
 					'permission_callback' => array( $this, 'create_person_permission_check' ),
 					'validate_callback'   => array( $this, 'create_person_validate' ),
+					'sanitize_callback'   => array( $this, 'create_person_sanitize' ),
 				),
 			);
 
@@ -71,6 +93,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 					'callback'            => array( $this, 'person_by_id' ),
 					'permission_callback' => array( $this, 'person_by_id_permissions_check' ),
 					'validate_callback'   => array( $this, 'person_by_id_validate' ),
+					'sanitize_callback'   => function ( $request ) {
+						if ( 'PUT' === $request->get_method() ) {
+							return $this->create_person_sanitize( $request );
+						}
+						return $request;
+					},
 				),
 			);
 		}
@@ -83,7 +111,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 		 */
 		public function create_person_permission_check( WP_REST_Request $request ) {
 			if ( ! current_user_can( 'edit_posts' ) ) {
-				return new \WP_Error(
+				return new WP_Error(
 					'401',
 					__( 'Sorry, you are not allowed to create person.', 'movie-library' ),
 					array(
@@ -95,22 +123,215 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 		}
 
 		/**
+		 * This function is used to sanitize data to create person.
+		 *
+		 * @param \WP_REST_Request $request Request object.
+		 * @return \WP_REST_Request
+		 */
+		public function create_person_sanitize( WP_REST_Request $request ) {
+			$movie = $request->get_params();
+
+			$movie_meta = $movie['movie_meta'];
+			foreach ( $movie_meta as $key => $value ) {
+				$key                = sanitize_key( $key );
+				$movie_meta[ $key ] = sanitize_text_field( $value );
+			}
+
+			$movie_tax = $movie['taxonomies'];
+			foreach ( $movie_tax as $key => $value ) {
+				$key               = sanitize_key( $key );
+				$movie_tax[ $key ] = sanitize_term( $value, $key );
+			}
+
+			$request->set_param( 'movie_meta', $movie_meta );
+			$request->set_param( 'taxonomies', $movie_tax );
+
+			return $request;
+		}
+
+		/**
 		 * This function is used to validate data to create person.
 		 *
 		 * @param \WP_REST_Request $request Request object.
+		 *
 		 * @return bool|\WP_Error
 		 */
 		public function create_person_validate( WP_REST_Request $request ) {
 			$person = $request->get_params();
 
 			if ( empty( $person['data'] ) || empty( $person['data']['post_title'] ) ) {
-				return new \WP_Error(
+				return new WP_Error(
 					'400',
 					__( 'Person Name is required.', 'movie-library' ),
 					array(
 						'status' => 400,
 					)
 				);
+			}
+
+			$person_meta = $person['person_meta'];
+
+			if ( isset( $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG ] ) && ! empty( $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG ] ) ) {
+				$date_str    = $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG ];
+				$date_format = 'Y-m-d';
+
+				$date = wp_date( $date_format, strtotime( $date_str ) );
+
+				if ( ! $date ) {
+					return new WP_Error(
+						'400',
+						__( 'Birth date should be in valid format.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+			}
+
+			if ( isset( $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_START_YEAR_SLUG ] ) && ! empty( $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_START_YEAR_SLUG ] ) ) {
+				$date_str    = $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_START_YEAR_SLUG ];
+				$date_format = 'Y-m-d';
+
+				$date = wp_date( $date_format, strtotime( $date_str ) );
+
+				if ( ! $date ) {
+					return new WP_Error(
+						'400',
+						__( 'Career start date should be in valid format.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+			}
+
+			if ( isset( $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_TWITTER_SLUG ] ) && ! empty( RT_Person_Meta_Box::PERSON_META_SOCIAL_TWITTER_SLUG ) ) {
+				// Validate twitter url.
+				$twitter_url = $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_TWITTER_SLUG ];
+				if ( ! filter_var( $twitter_url, FILTER_VALIDATE_URL ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Twitter URL should be in valid format.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+			}
+
+			if ( isset( $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_FACEBOOK_SLUG ] ) && ! empty( RT_Person_Meta_Box::PERSON_META_SOCIAL_FACEBOOK_SLUG ) ) {
+				// Validate twitter url.
+				$facebook_url = $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_FACEBOOK_SLUG ];
+				if ( ! filter_var( $facebook_url, FILTER_VALIDATE_URL ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Facebook URL should be in valid format.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+			}
+
+			if ( isset( $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_INSTAGRAM_SLUG ] ) && ! empty( RT_Person_Meta_Box::PERSON_META_SOCIAL_INSTAGRAM_SLUG ) ) {
+				// Validate twitter url.
+				$instagram_url = $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_INSTAGRAM_SLUG ];
+				if ( ! filter_var( $instagram_url, FILTER_VALIDATE_URL ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Instagram URL should be in valid format.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+			}
+
+			if ( isset( $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_WEB_SLUG ] ) && ! empty( RT_Person_Meta_Box::PERSON_META_SOCIAL_WEB_SLUG ) ) {
+				// Validate twitter url.
+				$web_url = $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_WEB_SLUG ];
+				if ( ! filter_var( $web_url, FILTER_VALIDATE_URL ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Web URL should be in valid format.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+			}
+
+			if ( isset( $person_meta['rt-media-meta-images'] ) && ! empty( $person_meta['rt-media-meta-images'] ) ) {
+				if ( ! is_array( $person_meta['rt-media-meta-images'] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Images should be an array.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+				$images = $person_meta['rt-media-meta-images'];
+				foreach ( $images as $image ) {
+					if ( ! is_numeric( $image ) ) {
+						return new WP_Error(
+							'400',
+							__( 'Image ID should be numeric.', 'movie-library' ),
+							array(
+								'status' => 400,
+							)
+						);
+					}
+				}
+			}
+
+			if ( isset( $person_meta['rt-media-meta-videos'] ) && ! empty( $person_meta['rt-media-meta-videos'] ) ) {
+				if ( ! is_array( $person_meta['rt-media-meta-videos'] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Videos should be an array.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+				$videos = $person_meta['rt-media-meta-videos'];
+				foreach ( $videos as $video ) {
+					if ( ! is_numeric( $video ) ) {
+						return new WP_Error(
+							'400',
+							__( 'Video ID should be numeric.', 'movie-library' ),
+							array(
+								'status' => 400,
+							)
+						);
+					}
+				}
+			}
+
+			$person_taxonomy = $person['taxonomies'];
+			if ( isset( $person_taxonomy[ Person_Career::SLUG ] ) && ! empty( $person_taxonomy[ Person_Career::SLUG ] ) ) {
+				if ( ! is_array( $person_taxonomy[ Person_Career::SLUG ] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Career should be an array.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+				$careers = $person_taxonomy[ Person_Career::SLUG ];
+				foreach ( $careers as $career ) {
+					if ( ! is_numeric( $career ) ) {
+						return new WP_Error(
+							'400',
+							__( 'Career ID should be numeric.', 'movie-library' ),
+							array(
+								'status' => 400,
+							)
+						);
+					}
+				}
 			}
 
 			return true;
@@ -147,7 +368,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 			}
 
 			if ( is_wp_error( $person_id ) || 0 === $person_id ) {
-				return new \WP_Error(
+				return new WP_Error(
 					'500',
 					__( 'Something went wrong.', 'movie-library' ),
 					array( 'status' => 500 ),
@@ -196,22 +417,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 
 			$id = $request['id'];
 
-			if ( 'PUT' === $method ) {
-				$person_data = $request->get_params();
-				if ( isset( $person_data['data']['post_title'] ) && empty( $person_data['data']['post_title'] ) ) {
-					return new \WP_Error(
-						'400',
-						__( "Sorry, Person name can't be empty.", 'movie-library' ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-			}
-
 			$person = get_post( $id );
-			if ( ! $person ) {
-				return new \WP_Error(
+			if ( ! $person || RT_Person::SLUG !== $person->post_type ) {
+				return new WP_Error(
 					'404',
 					__( 'Sorry, Person not found.', 'movie-library' ),
 					array(
@@ -219,6 +427,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 					)
 				);
 			}
+
+			if ( 'PUT' === $method ) {
+				return $this->create_person_validate( $request );
+			}
+
 			return true;
 		}
 
@@ -233,7 +446,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 			$id     = $request['id'];
 			if ( 'DELETE' === $method ) {
 				if ( ! current_user_can( 'delete_post', $id ) ) {
-					return new \WP_Error(
+					return new WP_Error(
 						'401',
 						__( 'Sorry, you are not allowed to delete person.', 'movie-library' ),
 						array(
@@ -243,7 +456,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 				}
 			} elseif ( 'PUT' === $method ) {
 				if ( ! current_user_can( 'edit_post', $id ) ) {
-					return new \WP_Error(
+					return new WP_Error(
 						'401',
 						__( 'Sorry, you are not allowed to update person.', 'movie-library' ),
 						array(
@@ -253,7 +466,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 				}
 			} else {
 				if ( ! current_user_can( 'read' ) ) {
-					return new \WP_Error(
+					return new WP_Error(
 						'401',
 						__( 'Sorry, you are not allowed to view person.', 'movie-library' ),
 						array(
@@ -329,7 +542,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 			$deleted = wp_delete_post( $person_id, true );
 
 			if ( ! $deleted ) {
-				return new \WP_Error(
+				return new WP_Error(
 					'500',
 					__( 'Something went wrong.', 'movie-library' ),
 					array( 'status' => 500 ),
@@ -346,7 +559,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 		 */
 		public function get_persons_permissions_check() {
 			if ( ! current_user_can( 'read' ) ) {
-				return new \WP_Error(
+				return new WP_Error(
 					'401',
 					__( 'Sorry, you cannot view the persons.', 'movie-library' ),
 					array( 'status' => rest_authorization_required_code() ),
@@ -364,10 +577,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 		 */
 		public function get_persons( WP_REST_Request $request ): WP_REST_Response {
 
-			$posts_per_page   = $request->get_param( 'posts_per_page' ) ?? 10;
-			$page             = $request->get_param( 'page' ) ?? 1;
-			$order            = $request->get_param( 'order' ) ?? 'DESC';
-			$orderby          = $request->get_param( 'orderby' ) ?? 'date';
+			$posts_per_page   = $request->get_param( 'per_page' );
+			$page             = $request->get_param( 'page' );
+			$order            = $request->get_param( 'order' );
+			$orderby          = $request->get_param( 'orderby' );
 			$can_read_private = current_user_can( 'read_private_posts' );
 
 			if ( null !== $request->get_param( 'ids' ) ) {
