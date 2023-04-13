@@ -13,6 +13,7 @@ use MovieLib\admin\classes\taxonomies\Movie_Person;
 use MovieLib\admin\classes\taxonomies\Person_Career;
 use MovieLib\includes\Singleton;
 use stdClass;
+use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;
@@ -52,6 +53,24 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_movies' ),
 					'permission_callback' => array( $this, 'get_movies_permissions_check' ),
+					'args'                => array(
+						'per_page' => array(
+							'default'           => 10,
+							'sanitize_callback' => 'absint',
+						),
+						'page'     => array(
+							'default'           => 1,
+							'sanitize_callback' => 'absint',
+						),
+						'order'    => array(
+							'default'           => 'DESC',
+							'sanitize_callback' => 'sanitize_text_field',
+						),
+						'orderby'  => array(
+							'default'           => 'date',
+							'sanitize_callback' => 'sanitize_text_field',
+						),
+					),
 				),
 			);
 
@@ -63,6 +82,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 					'callback'            => array( $this, 'create_update_movie' ),
 					'permission_callback' => array( $this, 'create_movie_permission_check' ),
 					'validate_callback'   => array( $this, 'create_movie_validate' ),
+					'sanitize_callback'   => array( $this, 'create_movie_sanitize' ),
 				),
 			);
 
@@ -74,6 +94,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 					'callback'            => array( $this, 'movie_by_id' ),
 					'permission_callback' => array( $this, 'movie_by_id_permissions_check' ),
 					'validate_callback'   => array( $this, 'movie_by_id_validate' ),
+					'sanitize_callback'   => function ( $request ) {
+						if ( 'PUT' === $request->get_method() ) {
+							return $this->create_movie_sanitize( $request );
+						} return $request;
+					},
 				),
 			);
 		}
@@ -86,7 +111,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 		 */
 		public function create_movie_permission_check( WP_REST_Request $request ) {
 			if ( ! current_user_can( 'edit_posts' ) ) {
-				return new \WP_Error(
+				return new WP_Error(
 					'401',
 					__( 'Sorry, you are not allowed to create movie.', 'movie-library' ),
 					array(
@@ -107,7 +132,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 			$movie = $request->get_params();
 
 			if ( empty( $movie['data'] ) || empty( $movie['data']['post_title'] ) ) {
-				return new \WP_Error(
+				return new WP_Error(
 					'400',
 					__( 'Movie Title is required.', 'movie-library' ),
 					array(
@@ -116,7 +141,265 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 				);
 			}
 
+			$movie_meta = $movie['movie_meta'];
+			if ( isset( $movie_meta['rt-movie-meta-basic-rating'] ) && ! empty( $movie_meta['rt-movie-meta-basic-rating'] ) ) {
+				if ( ! is_numeric( $movie_meta['rt-movie-meta-basic-rating'] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Rating should be numeric.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				} else {
+					if ( $movie_meta['rt-movie-meta-basic-rating'] < 0 || $movie_meta['rt-movie-meta-basic-rating'] > 10 ) {
+						return new WP_Error(
+							'400',
+							__( 'Rating should be between 0 and 10.', 'movie-library' ),
+							array(
+								'status' => 400,
+							)
+						);
+					}
+				}
+			}
+
+			if ( isset( $movie_meta['rt-movie-meta-basic-runtime'] ) && ! empty( $movie_meta['rt-movie-meta-basic-runtime'] ) ) {
+				if ( ! is_numeric( $movie_meta['rt-movie-meta-basic-runtime'] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Runtime should be numeric.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				} else {
+					if ( $movie_meta['rt-movie-meta-basic-runtime'] < 0 || $movie_meta['rt-movie-meta-basic-runtime'] > 1000 ) {
+						return new WP_Error(
+							'400',
+							__( 'Runtime should be between 0 and 1000.', 'movie-library' ),
+							array(
+								'status' => 400,
+							)
+						);
+					}
+				}
+			}
+
+			if ( isset( $movie_meta['rt-movie-meta-basic-release-date'] ) && ! empty( $movie_meta['rt-movie-meta-basic-release-date'] ) ) {
+				$date_str    = $movie_meta['rt-movie-meta-basic-release-date'];
+				$date_format = 'Y-m-d';
+
+				$date = wp_date( $date_format, strtotime( $date_str ) );
+
+				if ( ! $date ) {
+					return new WP_Error(
+						'400',
+						__( 'Release Date should be in valid format.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+			}
+
+			if ( isset( $movie_meta['rt-media-meta-images'] ) && ! empty( $movie_meta['rt-media-meta-images'] ) ) {
+				if ( ! is_array( $movie_meta['rt-media-meta-images'] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Images should be an array.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+				$images = $movie_meta['rt-media-meta-images'];
+				foreach ( $images as $image ) {
+					if ( ! is_numeric( $image ) ) {
+						return new WP_Error(
+							'400',
+							__( 'Image ID should be numeric.', 'movie-library' ),
+							array(
+								'status' => 400,
+							)
+						);
+					}
+				}
+			}
+
+			if ( isset( $movie_meta['rt-media-meta-videos'] ) && ! empty( $movie_meta['rt-media-meta-videos'] ) ) {
+				if ( ! is_array( $movie_meta['rt-media-meta-videos'] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Videos should be an array.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+				$videos = $movie_meta['rt-media-meta-videos'];
+				foreach ( $videos as $video ) {
+					if ( ! is_numeric( $video ) ) {
+						return new WP_Error(
+							'400',
+							__( 'Video ID should be numeric.', 'movie-library' ),
+							array(
+								'status' => 400,
+							)
+						);
+					}
+				}
+			}
+
+			$movie_taxonomy = $movie['taxonomies'];
+			if ( isset( $movie_taxonomy['rt-movie-genre'] ) && ! empty( $movie_taxonomy['rt-movie-genre'] ) ) {
+				if ( ! is_array( $movie_taxonomy['rt-movie-genre'] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Genre should be an array.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+				$genres = $movie_taxonomy['rt-movie-genre'];
+				foreach ( $genres as $genre ) {
+					if ( ! is_numeric( $genre ) ) {
+						return new WP_Error(
+							'400',
+							__( 'Genre ID should be numeric.', 'movie-library' ),
+							array(
+								'status' => 400,
+							)
+						);
+					}
+				}
+			}
+
+			if ( isset( $movie_taxonomy['rt-movie-label'] ) && ! empty( $movie_taxonomy['rt-movie-label'] ) ) {
+				if ( ! is_array( $movie_taxonomy['rt-movie-label'] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Label should be an array.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+				$labels = $movie_taxonomy['rt-movie-label'];
+				foreach ( $labels as $label ) {
+					if ( ! is_numeric( $label ) ) {
+						return new WP_Error(
+							'400',
+							__( 'Label ID should be numeric.', 'movie-library' ),
+							array(
+								'status' => 400,
+							)
+						);
+					}
+				}
+			}
+
+			if ( isset( $movie_taxonomy['rt-movie-language'] ) && ! empty( $movie_taxonomy['rt-movie-language'] ) ) {
+				if ( ! is_array( $movie_taxonomy['rt-movie-language'] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Language should be an array.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+				$languages = $movie_taxonomy['rt-movie-language'];
+				foreach ( $languages as $language ) {
+					if ( ! is_numeric( $language ) ) {
+						return new WP_Error(
+							'400',
+							__( 'Language ID should be numeric.', 'movie-library' ),
+							array(
+								'status' => 400,
+							)
+						);
+					}
+				}
+			}
+
+			if ( isset( $movie_taxonomy['rt-movie-production-company'] ) && ! empty( $movie_taxonomy['rt-movie-production-company'] ) ) {
+				if ( ! is_array( $movie_taxonomy['rt-movie-production-company'] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Production Company should be an array.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+				$production_companies = $movie_taxonomy['rt-movie-production-company'];
+				foreach ( $production_companies as $production_company ) {
+					if ( ! is_numeric( $production_company ) ) {
+						return new WP_Error(
+							'400',
+							__( 'Production Company ID should be numeric.', 'movie-library' ),
+							array(
+								'status' => 400,
+							)
+						);
+					}
+				}
+			}
+
+			if ( isset( $movie_taxonomy['rt-movie-tag'] ) && ! empty( $movie_taxonomy['rt-movie-tag'] ) ) {
+				if ( ! is_array( $movie_taxonomy['rt-movie-tag'] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Tag should be an array.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+				$tags = $movie_taxonomy['rt-movie-tag'];
+				foreach ( $tags as $tag ) {
+					if ( ! is_numeric( $tag ) ) {
+						return new WP_Error(
+							'400',
+							__( 'Tag ID should be numeric.', 'movie-library' ),
+							array(
+								'status' => 400,
+							)
+						);
+					}
+				}
+			}
+
 			return true;
+		}
+
+		/**
+		 * This function is used to sanitize the meta data and taxonomies.
+		 *
+		 * @param \WP_REST_Request $request Request object.
+		 * @return \WP_REST_Request
+		 */
+		public function create_movie_sanitize( WP_REST_Request $request ): WP_REST_Request {
+			$movie = $request->get_params();
+
+			$movie_meta = $movie['movie_meta'];
+			foreach ( $movie_meta as $key => $value ) {
+				$key                = sanitize_key( $key );
+				$movie_meta[ $key ] = sanitize_text_field( $value );
+			}
+
+			$movie_tax = $movie['taxonomies'];
+			foreach ( $movie_tax as $key => $value ) {
+				$key               = sanitize_key( $key );
+				$movie_tax[ $key ] = sanitize_term( $value, $key );
+			}
+
+			$request->set_param( 'movie_meta', $movie_meta );
+			$request->set_param( 'taxonomies', $movie_tax );
+
+			return $request;
 		}
 
 		/**
@@ -126,7 +409,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 		 * @return \WP_REST_Response|\WP_Error
 		 */
 		public function create_update_movie( WP_REST_Request $request ) {
-			$movie_details = $request->get_params();
+			$movie_details = $request->get_json_params();
 
 			$movie = $movie_details['data'];
 
@@ -150,7 +433,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 			}
 
 			if ( is_wp_error( $movie_id ) || 0 === $movie_id ) {
-				return new \WP_Error(
+				return new WP_Error(
 					'500',
 					__( 'Something went wrong.', 'movie-library' ),
 					array( 'status' => 500 ),
@@ -209,6 +492,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 					array(
 						'status'  => 'success',
 						'message' => __( 'Movie updated successfully.', 'movie-library' ),
+						'data'    => array(
+							'movie_id' => $movie_id,
+						),
 					),
 					200
 				);
@@ -217,6 +503,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 					array(
 						'status'  => 'success',
 						'message' => __( 'Movie created successfully.', 'movie-library' ),
+						'data'    => array(
+							'movie_id' => $movie_id,
+						),
 					),
 					200
 				);
@@ -230,26 +519,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 		 * @return bool|\WP_Error
 		 */
 		public function movie_by_id_validate( WP_REST_Request $request ) {
-			$method = $request->get_method();
 
 			$id = $request['id'];
 
-			if ( 'PUT' === $method ) {
-				$movie_data = $request->get_params();
-				if ( isset( $movie_data['data']['post_title'] ) && empty( $movie_data['data']['post_title'] ) ) {
-					return new \WP_Error(
-						'400',
-						__( "Sorry, movie title can't be empty.", 'movie-library' ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-			}
-
 			$movie = get_post( $id );
-			if ( ! $movie ) {
-				return new \WP_Error(
+			if ( ! $movie || RT_Movie::SLUG !== $movie->post_type ) {
+				return new WP_Error(
 					'404',
 					__( 'Sorry, movie not found.', 'movie-library' ),
 					array(
@@ -257,6 +532,22 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 					)
 				);
 			}
+
+			if ( 'PUT' === $request->get_method() ) {
+				$movie_data = $request->get_params();
+				if ( isset( $movie_data['data']['post_title'] ) && empty( $movie_data['data']['post_title'] ) ) {
+					return new WP_Error(
+						'400',
+						__( "Sorry, movie title can't be empty.", 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+
+				return $this->create_movie_validate( $request );
+			}
+
 			return true;
 		}
 
@@ -267,11 +558,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 		 * @return bool|\WP_Error
 		 */
 		public function movie_by_id_permissions_check( WP_REST_Request $request ) {
-			$method = $request->get_method();
-			$id     = $request['id'];
-			if ( 'DELETE' === $method ) {
+			$id = $request['id'];
+			if ( 'DELETE' === $request->get_method() ) {
 				if ( ! current_user_can( 'delete_post', $id ) ) {
-					return new \WP_Error(
+					return new WP_Error(
 						'401',
 						__( 'Sorry, you are not allowed to delete movie.', 'movie-library' ),
 						array(
@@ -279,9 +569,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 						)
 					);
 				}
-			} elseif ( 'PUT' === $method ) {
+			} elseif ( 'PUT' === $request->get_method() ) {
 				if ( ! current_user_can( 'edit_post', $id ) ) {
-					return new \WP_Error(
+					return new WP_Error(
 						'401',
 						__( 'Sorry, you are not allowed to update movie.', 'movie-library' ),
 						array(
@@ -291,7 +581,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 				}
 			} else {
 				if ( ! current_user_can( 'read' ) ) {
-					return new \WP_Error(
+					return new WP_Error(
 						'401',
 						__( 'Sorry, you are not allowed to view movie.', 'movie-library' ),
 						array(
@@ -313,10 +603,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 		 * @return \WP_Error|\WP_REST_Response
 		 */
 		public function movie_by_id( WP_REST_Request $request ) {
-			$method = $request->get_method();
-			if ( 'DELETE' === $method ) {
+			if ( 'DELETE' === $request->get_method() ) {
 				return $this->delete_movie( $request );
-			} elseif ( 'PUT' === $method ) {
+			} elseif ( 'PUT' === $request->get_method() ) {
 				return $this->create_update_movie( $request );
 			} else {
 				return $this->get_movie_by_id( $request );
@@ -349,7 +638,14 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 				}
 			}
 
-			return new WP_REST_Response( $movie, 200 );
+			return new WP_REST_Response(
+				array(
+					'status'  => 'success',
+					'message' => 'Movie fetched successfully.',
+					'data'    => $movie,
+				),
+				200
+			);
 		}
 
 		/**
@@ -360,21 +656,31 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 		 * @return \WP_REST_Response|\WP_Error
 		 */
 		public function delete_movie( WP_REST_Request $request ) {
-			$movie_id = $request['id'];
+			$movie_id     = $request['id'];
+			$force_delete = sanitize_text_field( $request->get_param( 'force' ) ?? false );
 
-			$movie = get_post( $movie_id );
-
-			$deleted = wp_delete_post( $movie_id, true );
+			$deleted = wp_delete_post( $movie_id, $force_delete );
 
 			if ( ! $deleted ) {
-				return new \WP_Error(
+				return new WP_Error(
 					'500',
 					__( 'Something went wrong.', 'movie-library' ),
 					array( 'status' => 500 ),
 				);
 			}
 
-			return new WP_REST_Response( $movie, 200 );
+			$movie_meta = get_movie_meta( $movie_id );
+			foreach ( $movie_meta as $meta_key => $meta_value ) {
+				delete_movie_meta( $movie_id, $meta_key );
+			}
+
+			return new WP_REST_Response(
+				array(
+					'message' => __( 'Movie deleted successfully.', 'movie-library' ),
+					'data'    => $deleted,
+				),
+				200
+			);
 		}
 
 		/**
@@ -384,7 +690,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 		 */
 		public function get_movies_permissions_check() {
 			if ( ! current_user_can( 'read' ) ) {
-				return new \WP_Error(
+				return new WP_Error(
 					'401',
 					__( 'Sorry, you cannot view the movies.', 'movie-library' ),
 					array( 'status' => rest_authorization_required_code() ),
@@ -402,21 +708,22 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 		 */
 		public function get_movies( WP_REST_Request $request ): WP_REST_Response {
 
-			$posts_per_page   = $request->get_param( 'posts_per_page' ) ?? 10;
-			$page             = $request->get_param( 'page' ) ?? 1;
-			$order            = $request->get_param( 'order' ) ?? 'DESC';
-			$orderby          = $request->get_param( 'orderby' ) ?? 'date';
+			$posts_per_page   = $request->get_param( 'per_page' );
+			$page             = $request->get_param( 'page' );
+			$order            = $request->get_param( 'order' );
+			$orderby          = $request->get_param( 'orderby' );
 			$can_read_private = current_user_can( 'read_private_posts' );
 
-			if ( null !== $request->get_param( 'ids' ) ) {
-				$ids    = explode( ',', $request->get_param( 'ids' ) );
+			$ids = sanitize_text_field( $request->get_param( 'ids' ) );
+			if ( null !== $ids ) {
+				$ids    = explode( ',', $ids );
 				$movies = get_posts(
 					array(
 						'post_type'   => RT_Movie::SLUG,
 						'order'       => $order,
 						'orderby'     => $orderby,
-						'post_status' => $can_read_private ? array( 'publish', 'private' ) : 'publish',
 						'post__in'    => $ids,
+						'post_status' => $can_read_private ? array( 'publish', 'private' ) : 'publish',
 					),
 				);
 			} else {
@@ -454,10 +761,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 
 			$response = new stdClass();
 
-			$response->page  = $page;
-			$response->posts = count( $movies );
-			$response->total = wp_count_posts( RT_Movie::SLUG )->publish;
-			$response->data  = $movies;
+			$response->status  = 'success';
+			$response->message = 'Movies fetched successfully.';
+			$response->page    = $page;
+			$response->posts   = count( $movies );
+			$response->total   = wp_count_posts( RT_Movie::SLUG )->publish;
+			$response->data    = $movies;
 
 			return rest_ensure_response( (array) $response );
 		}
