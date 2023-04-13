@@ -58,32 +58,36 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_commands\MLB_Export_Command'
 			if ( RT_Movie::SLUG === $post_type ) {
 				$movie_export = $this->export_custom_posts( $post_type );
 				if ( false === $movie_export ) {
-					WP_CLI::error( 'Error while exporting rt-movie post type.' );
+					WP_CLI::error( __( 'Error while exporting rt-movie post type.', 'movie-library' ) );
 				} else {
-					WP_CLI::success( "rt-movie post type exported to $movie_export successfully." );
+					// translators: %s is the path of the exported file.
+					WP_CLI::success( sprintf( __( 'rt-movie post type exported to %s successfully.', 'movie-library' ), $movie_export ) );
 				}
 			} elseif ( RT_Person::SLUG === $post_type ) {
 				$person_export = $this->export_custom_posts( $post_type );
 				if ( false === $person_export ) {
-					WP_CLI::error( 'Error while exporting rt-person post type.' );
+					WP_CLI::error( __( 'Error while exporting rt-person post type.', 'movie-library' ) );
 				} else {
-					WP_CLI::success( "rt-person post type exported to $person_export successfully." );
+					// translators: %s is the path of the exported file.
+					WP_CLI::success( sprintf( __( 'rt-person post type exported to %s successfully.', 'movie-library' ), $person_export ) );
 				}
 			} else {
 				$movie_export = $this->export_custom_posts( RT_Movie::SLUG );
 
 				if ( false === $movie_export ) {
-					WP_CLI::error( 'Error while exporting rt-movie post type.' );
+					WP_CLI::error( __( 'Error while exporting rt-movie post type.', 'movie-library' ) );
 				} else {
-					WP_CLI::success( "rt-movie post type exported to $movie_export successfully." );
+					// translators: %s is the path of the exported file.
+					WP_CLI::success( sprintf( __( 'rt-movie post type exported to %s successfully.', 'movie-library' ), $movie_export ) );
 				}
 
 				$person_export = $this->export_custom_posts( RT_Person::SLUG );
 
 				if ( false === $person_export ) {
-					WP_CLI::error( 'Error while exporting rt-person post type.' );
+					WP_CLI::error( __( 'Error while exporting rt-person post type.', 'movie-library' ) );
 				} else {
-					WP_CLI::success( "rt-person post type exported to $person_export successfully." );
+					// translators: %s is the path of the exported file.
+					WP_CLI::success( sprintf( __( 'rt-person post type exported to %s successfully.', 'movie-library' ), $person_export ) );
 				}
 			}
 		}
@@ -126,15 +130,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_commands\MLB_Export_Command'
 			// Get the properties of first object.
 			$csv_header = array_keys( get_object_vars( $custom_posts[0] ) );
 
-			$creds = request_filesystem_credentials( admin_url(), '', false, false );
-
-			if ( false === $creds ) {
-				return false;
+			if ( ! WP_Filesystem() ) {
+				return WP_CLI::error( __( "Sorry, You don't have permission to create/access files.", 'movie-library' ) );
 			}
 
-			if ( ! WP_Filesystem( $creds ) ) {
-				return false;
-			}
 			global $wp_filesystem;
 
 			$csv    = '';
