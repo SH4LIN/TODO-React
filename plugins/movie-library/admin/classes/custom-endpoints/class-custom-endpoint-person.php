@@ -698,7 +698,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 		 *
 		 * @return \WP_REST_Response|\WP_Error
 		 */
-		public function delete_person( WP_REST_Request $request ): WP_Error|WP_REST_Response {
+		public function delete_person( WP_REST_Request $request ) {
 			$person_id    = $request['id'];
 			$force_delete = sanitize_text_field( $request->get_param( 'force' ) ?? false );
 
