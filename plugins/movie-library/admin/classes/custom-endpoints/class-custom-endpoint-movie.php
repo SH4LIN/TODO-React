@@ -132,7 +132,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 			);
 
 			$ids = sanitize_text_field( $request->get_param( 'ids' ) );
-			if ( null !== $ids ) {
+			if ( ! empty( $ids ) ) {
 				$ids        = explode( ',', $ids );
 				$movie_args = array_merge(
 					$movie_args,
@@ -253,7 +253,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 
 			$shadow_terms = array();
 			// Save meta.
-			foreach ( $movie_details['movie_meta'] as $key => $value ) {
+			foreach ( $movie_details['meta'] as $key => $value ) {
 				if ( in_array( $key, $movie_career_terms, true ) ) {
 
 					$value_in_int = array();
@@ -339,7 +339,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 				);
 			}
 
-			$movie_meta = $movie['movie_meta'];
+			$movie_meta = $movie['meta'];
 			if ( isset( $movie_meta[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG ] ) &&
 				! empty( $movie_meta[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG ] )
 			) {
@@ -436,6 +436,30 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 				}
 			}
 
+			if ( isset( $movie_meta[ RT_Media_Meta_Box::BANNER_IMAGES_SLUG ] ) && ! empty( $movie_meta[ RT_Media_Meta_Box::BANNER_IMAGES_SLUG ] ) ) {
+				if ( ! is_array( $movie_meta[ RT_Media_Meta_Box::BANNER_IMAGES_SLUG ] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Banner Images should be an array.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+				$banner_images = $movie_meta[ RT_Media_Meta_Box::BANNER_IMAGES_SLUG ];
+				foreach ( $banner_images as $banner_image ) {
+					if ( ! is_numeric( $banner_image ) ) {
+						return new WP_Error(
+							'400',
+							__( 'Banner Image ID should be numeric.', 'movie-library' ),
+							array(
+								'status' => 400,
+							)
+						);
+					}
+				}
+			}
+
 			if ( isset( $movie_meta[ RT_Media_Meta_Box::VIDEOS_SLUG ] ) && ! empty( $movie_meta[ RT_Media_Meta_Box::VIDEOS_SLUG ] ) ) {
 				if ( ! is_array( $movie_meta[ RT_Media_Meta_Box::VIDEOS_SLUG ] ) ) {
 					return new WP_Error(
@@ -499,7 +523,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 		public function create_movie_sanitize( WP_REST_Request $request ): WP_REST_Request {
 			$movie = $request->get_params();
 
-			$movie_meta = $movie['movie_meta'];
+			$movie_meta = $movie['meta'];
 			foreach ( $movie_meta as $key => $value ) {
 				$key                = sanitize_key( $key );
 				$movie_meta[ $key ] = sanitize_text_field( $value );
@@ -511,7 +535,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 				$movie_tax[ $key ] = sanitize_term( $value, $key );
 			}
 
-			$request->set_param( 'movie_meta', $movie_meta );
+			$request->set_param( 'meta', $movie_meta );
 			$request->set_param( 'taxonomies', $movie_tax );
 
 			return $request;

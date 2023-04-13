@@ -126,8 +126,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 				'post_status' => $can_read_private ? array( 'publish', 'private' ) : 'publish',
 			);
 
-			if ( null !== $request->get_param( 'ids' ) ) {
-				$ids         = explode( ',', $request->get_param( 'ids' ) );
+			$ids = sanitize_text_field( $request->get_param( 'ids' ) );
+			if ( ! empty( $ids ) ) {
+				$ids         = explode( ',', $ids );
 				$person_args = array_merge(
 					$person_args,
 					array(
@@ -168,10 +169,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 
 			$response = new stdClass();
 
-			$response->page  = $page;
-			$response->posts = count( $persons );
-			$response->total = wp_count_posts( RT_Person::SLUG )->publish;
-			$response->data  = $persons;
+			$response->status  = __( 'success', 'movie-library' );
+			$response->message = __( 'Persons fetched successfully.', 'movie-library' );
+			$response->page    = $page;
+			$response->posts   = count( $persons );
+			$response->total   = wp_count_posts( RT_Person::SLUG )->publish;
+			$response->data    = $persons;
 
 			return rest_ensure_response( (array) $response );
 		}
@@ -233,7 +236,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 			$person['ID'] = $person_id;
 
 			// Save meta.
-			foreach ( $person_details['person_meta'] as $key => $value ) {
+			foreach ( $person_details['meta'] as $key => $value ) {
 				update_person_meta( $person_id, $key, $value );
 			}
 
@@ -299,11 +302,20 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 				);
 			}
 
-			$person_meta = $person['person_meta'];
+			$person_meta = $person['meta'];
 
 			if ( isset( $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG ] ) &&
 				! empty( $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG ] )
 			) {
+				if ( ! is_string( $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG ] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Birth date should be in string format.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
 				$date_str    = $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG ];
 				$date_format = 'Y-m-d';
 
@@ -312,7 +324,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 				if ( ! $date ) {
 					return new WP_Error(
 						'400',
-						__( 'Birth date should be in valid format.', 'movie-library' ),
+						__( 'Birth date should be in 1967-12-22 (Y-m-d) format.', 'movie-library' ),
 						array(
 							'status' => 400,
 						)
@@ -323,6 +335,15 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 			if ( isset( $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_START_YEAR_SLUG ] ) &&
 				! empty( $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_START_YEAR_SLUG ] )
 			) {
+				if ( ! is_string( $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_START_YEAR_SLUG ] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Career start year should be in string format.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
 				$date_str    = $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_START_YEAR_SLUG ];
 				$date_format = 'Y-m-d';
 
@@ -331,7 +352,35 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 				if ( ! $date ) {
 					return new WP_Error(
 						'400',
-						__( 'Career start date should be in valid format.', 'movie-library' ),
+						__( 'Career start date should be in 1967-12-22 (Y-m-d) format.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+			}
+
+			if ( isset( $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_PLACE_SLUG ] ) &&
+				! empty( $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_PLACE_SLUG ] )
+			) {
+				if ( ! is_string( $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_PLACE_SLUG ] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Birth place should be in string format.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+			}
+
+			if ( isset( $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_FULL_NAME_SLUG ] ) &&
+				! empty( $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_FULL_NAME_SLUG ] )
+			) {
+				if ( ! is_string( $person_meta[ RT_Person_Meta_Box::PERSON_META_BASIC_FULL_NAME_SLUG ] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Full Name should be in string format.', 'movie-library' ),
 						array(
 							'status' => 400,
 						)
@@ -342,6 +391,15 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 			if ( isset( $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_TWITTER_SLUG ] ) &&
 				! empty( RT_Person_Meta_Box::PERSON_META_SOCIAL_TWITTER_SLUG )
 			) {
+				if ( ! is_string( $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_TWITTER_SLUG ] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Twitter URL should be in string format.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
 				$twitter_url = $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_TWITTER_SLUG ];
 				if ( ! filter_var( $twitter_url, FILTER_VALIDATE_URL ) ) {
 					return new WP_Error(
@@ -357,6 +415,15 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 			if ( isset( $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_FACEBOOK_SLUG ] ) &&
 				! empty( RT_Person_Meta_Box::PERSON_META_SOCIAL_FACEBOOK_SLUG )
 			) {
+				if ( ! is_string( $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_FACEBOOK_SLUG ] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Facebook URL should be in string format.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
 				$facebook_url = $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_FACEBOOK_SLUG ];
 				if ( ! filter_var( $facebook_url, FILTER_VALIDATE_URL ) ) {
 					return new WP_Error(
@@ -372,6 +439,15 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 			if ( isset( $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_INSTAGRAM_SLUG ] ) &&
 				! empty( RT_Person_Meta_Box::PERSON_META_SOCIAL_INSTAGRAM_SLUG )
 			) {
+				if ( ! is_string( $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_INSTAGRAM_SLUG ] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Instagram URL should be in string format.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
 				$instagram_url = $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_INSTAGRAM_SLUG ];
 				if ( ! filter_var( $instagram_url, FILTER_VALIDATE_URL ) ) {
 					return new WP_Error(
@@ -387,6 +463,15 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 			if ( isset( $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_WEB_SLUG ] ) &&
 				! empty( RT_Person_Meta_Box::PERSON_META_SOCIAL_WEB_SLUG )
 			) {
+				if ( ! is_string( $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_WEB_SLUG ] ) ) {
+					return new WP_Error(
+						'400',
+						__( 'Web URL should be in string format.', 'movie-library' ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
 				// Validate twitter url.
 				$web_url = $person_meta[ RT_Person_Meta_Box::PERSON_META_SOCIAL_WEB_SLUG ];
 				if ( ! filter_var( $web_url, FILTER_VALIDATE_URL ) ) {
@@ -491,7 +576,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 		public function create_person_sanitize( WP_REST_Request $request ) {
 			$person = $request->get_params();
 
-			$person_meta = $person['person_meta'];
+			$person_meta = $person['meta'];
 			foreach ( $person_meta as $key => $value ) {
 				$key = sanitize_key( $key );
 				if ( RT_Person_Meta_Box::PERSON_META_SOCIAL_INSTAGRAM_SLUG === $key ||
@@ -511,7 +596,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 				$person_tax[ $key ] = sanitize_term( $value, $key );
 			}
 
-			$request->set_param( 'person_meta', $person_meta );
+			$request->set_param( 'meta', $person_meta );
 			$request->set_param( 'taxonomies', $person_tax );
 
 			return $request;
