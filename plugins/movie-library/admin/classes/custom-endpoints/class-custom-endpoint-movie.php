@@ -76,6 +76,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 							'default'           => 'date',
 							'sanitize_callback' => 'sanitize_text_field',
 						),
+						'ids'      => array(
+							'sanitize_callback' => 'sanitize_text_field',
+						),
 					),
 				),
 			);
@@ -131,7 +134,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 				'post_status' => $can_read_private ? array( 'publish', 'private' ) : 'publish',
 			);
 
-			$ids = sanitize_text_field( $request->get_param( 'ids' ) );
+			$ids = $request->get_param( 'ids' );
 			if ( ! empty( $ids ) ) {
 				$ids        = explode( ',', $ids );
 				$movie_args = array_merge(
