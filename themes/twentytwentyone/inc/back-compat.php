@@ -1,6 +1,6 @@
 <?php
 /**
- * Back compat functionality
+ * Back compat settings
  *
  * Prevents the theme from running on WordPress versions prior to 5.3,
  * since this theme is not meant to be backward compatible beyond that and

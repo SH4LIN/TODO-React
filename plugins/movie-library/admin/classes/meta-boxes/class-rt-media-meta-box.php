@@ -97,13 +97,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 		 */
 		public function rt_media_meta_images( WP_Post $post ): void {
 
-			if ( RT_Movie::SLUG === get_post_type( $post ) ) {
-				$rt_media_meta_images_data_attachment_ids =
-					get_movie_meta( $post->ID, self::IMAGES_SLUG );
-			} elseif ( RT_Person::SLUG === get_post_type( $post ) ) {
-				$rt_media_meta_images_data_attachment_ids =
-					get_person_meta( $post->ID, self::IMAGES_SLUG );
-			}
+			$rt_media_meta_images_data_attachment_ids =
+				get_post_meta( $post->ID, self::IMAGES_SLUG );
 
 			wp_nonce_field( 'rt_media_meta_nonce', 'rt_media_meta_nonce' );
 
@@ -191,13 +186,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 		 */
 		public function rt_media_meta_banner_images( WP_Post $post ): void {
 
-			if ( RT_Movie::SLUG === get_post_type( $post ) ) {
-				$rt_media_meta_banner_images_data_attachment_ids =
-					get_movie_meta( $post->ID, self::BANNER_IMAGES_SLUG );
-			} elseif ( RT_Person::SLUG === get_post_type( $post ) ) {
-				$rt_media_meta_banner_images_data_attachment_ids =
-					get_person_meta( $post->ID, self::BANNER_IMAGES_SLUG );
-			}
+			$rt_media_meta_banner_images_data_attachment_ids =
+				get_post_meta( $post->ID, self::BANNER_IMAGES_SLUG );
 
 			wp_nonce_field( 'rt_media_meta_nonce', 'rt_media_meta_nonce' );
 
@@ -278,9 +268,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 
 		/**
 		 * This function will add the meta box for videos in rt-movie and rt-person post type.
-		 * It will also add the functionality to add and remove videos.
+		 * It will also add the settings to add and remove videos.
 		 * It will also save the videos in the database.
-		 * It will also add the functionality to add videos from the media library.
+		 * It will also add the settings to add videos from the media library.
 		 *
 		 * @param WP_Post $post The post object.
 		 *
@@ -288,13 +278,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 		 */
 		public function rt_media_meta_videos( WP_Post $post ): void {
 
-			if ( RT_Movie::SLUG === get_post_type( $post ) ) {
-				$rt_media_meta_videos_data_attachment_ids =
-					get_movie_meta( $post->ID, self::VIDEOS_SLUG );
-			} elseif ( RT_Person::SLUG === get_post_type( $post ) ) {
-				$rt_media_meta_videos_data_attachment_ids =
-					get_person_meta( $post->ID, self::VIDEOS_SLUG );
-			}
+			$rt_media_meta_videos_data_attachment_ids =
+				get_post_meta( $post->ID, self::VIDEOS_SLUG );
 
 			wp_nonce_field( 'rt_media_meta_nonce', 'rt_media_meta_nonce' );
 
@@ -376,12 +361,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 		 * If the uploaded images array is not empty then it will update the meta field in the database.
 		 * If both the arrays are empty then it will delete the meta field from the database.
 		 *
-		 * @param int    $post_id   Post ID.
-		 * @param string $post_type Post type.
+		 * @param int $post_id Post ID.
 		 *
 		 * @return void
 		 */
-		public function save_rt_movie_meta_images( int $post_id, string $post_type ): void {
+		public function save_rt_movie_meta_images( int $post_id ): void {
 
 			// Check if our nonce is set.
 			if ( ! isset( $_POST['rt_media_meta_nonce'] ) ) {
@@ -444,18 +428,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 			}
 			if ( empty( $rt_media_meta_images ) ) {
 
-				if ( RT_Movie::SLUG === $post_type ) {
-					delete_movie_meta( $post_id, self::IMAGES_SLUG );
-				} elseif ( RT_Person::SLUG === $post_type ) {
-					delete_person_meta( $post_id, self::IMAGES_SLUG );
-				}
+				delete_post_meta( $post_id, self::IMAGES_SLUG );
+
 			} else {
 
-				if ( RT_Movie::SLUG === $post_type ) {
-					update_movie_meta( $post_id, self::IMAGES_SLUG, $rt_media_meta_images );
-				} elseif ( RT_Person::SLUG === $post_type ) {
-					update_person_meta( $post_id, self::IMAGES_SLUG, $rt_media_meta_images );
-				}
+				update_post_meta( $post_id, self::IMAGES_SLUG, $rt_media_meta_images );
+
 			}
 
 		}
@@ -466,12 +444,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 		 * If the uploaded images array is not empty then it will update the meta field in the database.
 		 * If both the arrays are empty then it will delete the meta field from the database.
 		 *
-		 * @param int    $post_id Post ID.
-		 * @param string $post_type Post type.
+		 * @param int $post_id Post ID.
 		 *
 		 * @return void
 		 */
-		public function save_rt_movie_meta_banner_images( int $post_id, string $post_type ): void {
+		public function save_rt_movie_meta_banner_images( int $post_id ): void {
 
 			// Check if our nonce is set.
 			if ( ! isset( $_POST['rt_media_meta_nonce'] ) ) {
@@ -534,18 +511,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 			}
 			if ( empty( $rt_media_meta_banner_images ) ) {
 
-				if ( RT_Movie::SLUG === $post_type ) {
-					delete_movie_meta( $post_id, self::BANNER_IMAGES_SLUG );
-				} elseif ( RT_Person::SLUG === $post_type ) {
-					delete_person_meta( $post_id, self::BANNER_IMAGES_SLUG );
-				}
+				delete_post_meta( $post_id, self::BANNER_IMAGES_SLUG );
+
 			} else {
 
-				if ( RT_Movie::SLUG === $post_type ) {
-					update_movie_meta( $post_id, self::BANNER_IMAGES_SLUG, $rt_media_meta_banner_images );
-				} elseif ( RT_Person::SLUG === $post_type ) {
-					update_person_meta( $post_id, self::BANNER_IMAGES_SLUG, $rt_media_meta_banner_images );
-				}
+				update_post_meta( $post_id, self::BANNER_IMAGES_SLUG, $rt_media_meta_banner_images );
+
 			}
 
 		}
@@ -556,12 +527,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 		 * If the uploaded videos array is not empty then it will update the meta field in the database.
 		 * If both the arrays are empty then it will delete the meta field from the database.
 		 *
-		 * @param int    $post_id The post id.
-		 * @param string $post_type Post type.
+		 * @param int $post_id The post id.
 		 *
 		 * @return void
 		 */
-		public function save_rt_movie_meta_videos( int $post_id, string $post_type ): void {
+		public function save_rt_movie_meta_videos( int $post_id ): void {
 
 			// Check if our nonce is set.
 			if ( ! isset( $_POST['rt_media_meta_nonce'] ) ) {
@@ -623,17 +593,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 			}
 
 			if ( empty( $rt_media_meta_videos ) ) {
-				if ( RT_Movie::SLUG === $post_type ) {
-					delete_movie_meta( $post_id, self::VIDEOS_SLUG );
-				} elseif ( RT_Person::SLUG === $post_type ) {
-					delete_person_meta( $post_id, self::VIDEOS_SLUG );
-				}
+
+				delete_post_meta( $post_id, self::VIDEOS_SLUG );
+
 			} else {
-				if ( RT_Movie::SLUG === $post_type ) {
-					update_movie_meta( $post_id, self::VIDEOS_SLUG, $rt_media_meta_videos );
-				} elseif ( RT_Person::SLUG === $post_type ) {
-					update_person_meta( $post_id, self::VIDEOS_SLUG, $rt_media_meta_videos );
-				}
+
+				update_post_meta( $post_id, self::VIDEOS_SLUG, $rt_media_meta_videos );
+
 			}
 		}
 

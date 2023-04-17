@@ -117,15 +117,11 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 |-- admin
 |   |-- classes
 |   |   |-- class-asset.php
-|   |   |-- class-movie-library-activation.php
-|   |   |-- class-movie-library-deactivation.php
 |   |   |-- class-movie-library-save-post.php
 |   |   |-- class-settings-page.php
 |   |   |-- custom-post-types
 |   |   |   |-- class-rt-movie.php
 |   |   |   `-- class-rt-person.php
-|   |   |-- custom-tables
-|   |   |   `-- class-mlb-db-helper.php
 |   |   |-- meta-boxes
 |   |   |   |-- class-rt-media-meta-box.php
 |   |   |   |-- class-rt-movie-meta-box.php
@@ -152,8 +148,7 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 |-- includes
 |   |-- class-autoloader.php
 |   |-- class-movie-library.php
-|   |-- class-singleton.php
-|   `-- mlb-metadata.php
+|   `-- class-singleton.php
 |-- index.php
 |-- languages
 |   `-- movie-library.pot
@@ -165,7 +160,7 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 |       `-- movie-library-frontend.js
 `-- uninstall.php
 
-15 directories, 37 files
+14 directories, 37 files
 ```
 
 ## Screenshots
@@ -202,8 +197,40 @@ Custom Tables created:
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Screenshots
+# Movie Library Advance Plugin - Rewrite Rules
+
+The Rewrite Rukes feature is used to Change the permalink of the single post as below.
+
+Movie post type URL structure
+
+http://your-site.test/movie/%genre-taxonomy%/%postname%-%post_id%/
+
+Example, http://your-site.test/movie/action/movie-post-slug-postID/
+
+Person post type URL structure
+
+http://your-site.test/person/%career-taxonomy%/%postname%-%post_id%/
+
+Example, http://your-site.test/person/director/person-post-slug-postID/
 ​
 ![image](https://user-images.githubusercontent.com/56588503/230007471-ec8291f6-c95f-417c-9dc1-fbacf3f2efd8.png)
+
+**You can directly see the Rewrite rules below URL**
+
+[Movie Library Advance Plugin - Rewrite Rules](https://feature-rewrite-rules.shalin-shah.tr.rt.gw)
+[Avengers Endgame Movie URL](https://feature-rewrite-rules.shalin-shah.tr.rt.gw/movie/adventure/avengers-endgame-220/)
+
+## Overview
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. **class-rt-movie.php, class-rt-person.php**
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     CPT files are updated with hooks and filters that will be used to update the permalink structure of the post type
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Screenshots
+​
+![image](https://user-images.githubusercontent.com/56588503/230009491-24cad64a-3da6-464f-8935-ef007c6f0ddd.png)
+![image](https://user-images.githubusercontent.com/56588503/230009593-47e6e18f-63df-41ad-a930-54ef6722cffa.png)
 
 ## Built with
 -   **PHP**
