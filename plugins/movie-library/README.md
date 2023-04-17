@@ -164,7 +164,7 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 |       `-- movie-library-frontend.js
 `-- uninstall.php
 
-15 directories, 36 files
+14 directories, 37 files
 ```
 
 ## Screenshots
@@ -175,10 +175,41 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 <img width="1470" alt="Screenshot 2023-03-06 at 11 25 33 AM" src="https://user-images.githubusercontent.com/56588503/223030181-637cc3b0-9e2e-4a66-98e7-5ec9e9cc41e1.png">
 <img width="1470" alt="Screenshot 2023-03-06 at 11 25 37 AM" src="https://user-images.githubusercontent.com/56588503/223030191-1677209e-c48a-4b96-98e0-23011eaaa434.png">
 
+
+# Movie Library Advance Plugin - Rewrite Rules
+
+The Rewrite Rukes feature is used to Change the permalink of the single post as below.
+
+Movie post type URL structure
+
+http://your-site.test/movie/%genre-taxonomy%/%postname%-%post_id%/
+
+Example, http://your-site.test/movie/action/movie-post-slug-postID/
+
+Person post type URL structure
+
+http://your-site.test/person/%career-taxonomy%/%postname%-%post_id%/
+
+Example, http://your-site.test/person/director/person-post-slug-postID/
+
+**You can directly see the Rewrite rules below URL**
+
+[Movie Library Advance Plugin - Rewrite Rules](https://feature-rewrite-rules.shalin-shah.tr.rt.gw)
+[Avengers Endgame Movie URL](https://feature-rewrite-rules.shalin-shah.tr.rt.gw/movie/adventure/avengers-endgame-220/)
+
+1. **class-rt-movie.php, class-rt-person.php**
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     CPT files are updated with hooks and filters that will be used to update the permalink structure of the post type
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Screenshots
+
+![image](https://user-images.githubusercontent.com/56588503/230009491-24cad64a-3da6-464f-8935-ef007c6f0ddd.png)
+![image](https://user-images.githubusercontent.com/56588503/230009593-47e6e18f-63df-41ad-a930-54ef6722cffa.png)
+
 # Movie Library Advance Plugin - Custom Roles
 
 The Custom Roles feature is used to allow only the admin and movie manager to access the movie CPT and person CPT
-​
+
 **You can directly see the Custom Roles from below URL**
 
 [Movie Library Advance Plugin - Custom Roles](https://feature-custom-roles.shalin-shah.tr.rt.gw/wp-admin/)
@@ -199,10 +230,9 @@ The Custom Roles feature is used to allow only the admin and movie manager to ac
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-## Screenshots
-​
 ![image](https://user-images.githubusercontent.com/56588503/230005089-43f6df4d-4f15-49a4-b4c7-0a04b653f072.png)
 ![image](https://user-images.githubusercontent.com/56588503/230005288-7f98e159-236e-4c7c-9708-b35f1d3b3969.png)
+
 
 ## Built with
 -   **PHP**

@@ -59,6 +59,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Activation' ) ) :
 			flush_rewrite_rules();
 
 			Movie_Manager_Role_Capabilities::instance()->add_movie_manager_role();
+
 		}
 	}
 endif;
