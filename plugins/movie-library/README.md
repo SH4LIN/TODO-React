@@ -1,18 +1,18 @@
 # Movie Library Plugin
 
-​
+
 The movie Library plugin can be used to create a movie library like IMDB where new movies released are published with ratings.
-​
+
 ## Run Locally
-​
+
 **Clone the project by running the following**
-​
+
 ```bash
   git clone https://github.com/rtCamp/trainee-shalin-shah.git
 ```
-​
+
 **Navigate to the trainee-shalin-shah directory by executing**
-​
+
 ```bash
   cd php-shalin-shah
 ```
@@ -117,6 +117,8 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 |-- admin
 |   |-- classes
 |   |   |-- class-asset.php
+|   |   |-- class-movie-library-activation.php
+|   |   |-- class-movie-library-deactivation.php
 |   |   |-- class-movie-library-save-post.php
 |   |   |-- class-settings-page.php
 |   |   |-- custom-post-types
@@ -167,22 +169,18 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 |       `-- movie-library-frontend.js
 `-- uninstall.php
 
+
 16 directories, 38 files
 ```
-## Built with
-​
--   **PHP**
--   **HTML/CSS/Javascript**
--   **Docker**
--   **wp-i18n**
-    ​
+
 ## Screenshots
-​
+
 <img width="1470" alt="Screenshot 2023-03-06 at 11 24 32 AM" src="https://user-images.githubusercontent.com/56588503/223030141-41281663-f1f9-46e5-9957-dbf56133742f.png">
 <img width="1470" alt="Screenshot 2023-03-06 at 11 25 01 AM" src="https://user-images.githubusercontent.com/56588503/223030169-2797abfc-1bfe-4fa8-b362-4cf8eca9f5de.png">
 <img width="1470" alt="Screenshot 2023-03-06 at 11 25 21 AM" src="https://user-images.githubusercontent.com/56588503/223030176-6f53df25-691c-4d51-911d-54d5c4019cfb.png">
 <img width="1470" alt="Screenshot 2023-03-06 at 11 25 33 AM" src="https://user-images.githubusercontent.com/56588503/223030181-637cc3b0-9e2e-4a66-98e7-5ec9e9cc41e1.png">
 <img width="1470" alt="Screenshot 2023-03-06 at 11 25 37 AM" src="https://user-images.githubusercontent.com/56588503/223030191-1677209e-c48a-4b96-98e0-23011eaaa434.png">
+
 
 # Movie Library Advance Plugin - Dashboard Widget
 
@@ -220,7 +218,48 @@ The Dashboard Widget feature is used to display the top-rated movies upcoming mo
 ![image](https://user-images.githubusercontent.com/56588503/230004242-62c9f8d7-821e-4479-9fba-ddea2b63ce08.png)
 ![image](https://user-images.githubusercontent.com/56588503/230004295-453d71e5-ee53-46fd-8688-130e75de728a.png)
 
+# Movie Library Advance Plugin - Rewrite Rules
+
+The Rewrite Rukes feature is used to Change the permalink of the single post as below.
+
+Movie post type URL structure
+
+http://your-site.test/movie/%genre-taxonomy%/%postname%-%post_id%/
+
+Example, http://your-site.test/movie/action/movie-post-slug-postID/
+
+Person post type URL structure
+
+http://your-site.test/person/%career-taxonomy%/%postname%-%post_id%/
+
+Example, http://your-site.test/person/director/person-post-slug-postID/
+​
+**You can directly see the Rewrite rules below URL**
+
+[Movie Library Advance Plugin - Rewrite Rules](https://feature-rewrite-rules.shalin-shah.tr.rt.gw)
+[Avengers Endgame Movie URL](https://feature-rewrite-rules.shalin-shah.tr.rt.gw/movie/adventure/avengers-endgame-220/)
+
+## Overview
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. **class-rt-movie.php, class-rt-person.php**
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     CPT files are updated with hooks and filters that will be used to update the permalink structure of the post type
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Screenshots
+​
+![image](https://user-images.githubusercontent.com/56588503/230009491-24cad64a-3da6-464f-8935-ef007c6f0ddd.png)
+![image](https://user-images.githubusercontent.com/56588503/230009593-47e6e18f-63df-41ad-a930-54ef6722cffa.png)
+
+## Built with
+-   **PHP**
+-   **HTML/CSS/Javascript**
+-   **Docker**
+-   **wp-i18n**
+
+
 ## Authors
 -   [rtCamp](https://github.com/rtCamp)
 ## Feedback
+
 Please feel free to discuss anything about rt Movie Plugin to shalin.shah@rtcamp.com

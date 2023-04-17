@@ -1,2 +1,4 @@
 themes/twentytwentyone/
 **/*.js
+themes/easy-engine/assets/css/*.css
+themes/easy-engine/assets/css/*.css.map

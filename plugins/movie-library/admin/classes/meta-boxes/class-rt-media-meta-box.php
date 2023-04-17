@@ -268,9 +268,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 
 		/**
 		 * This function will add the meta box for videos in rt-movie and rt-person post type.
-		 * It will also add the functionality to add and remove videos.
+		 * It will also add the settings to add and remove videos.
 		 * It will also save the videos in the database.
-		 * It will also add the functionality to add videos from the media library.
+		 * It will also add the settings to add videos from the media library.
 		 *
 		 * @param WP_Post $post The post object.
 		 *

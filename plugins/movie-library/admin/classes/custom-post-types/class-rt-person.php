@@ -7,6 +7,7 @@
 
 namespace MovieLib\admin\classes\custom_post_types;
 
+use MovieLib\admin\classes\taxonomies\Person_Career;
 use MovieLib\includes\Singleton;
 
 /**
@@ -36,6 +37,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Person' ) ) {
 		protected function init():void {
 
 			add_action( 'init', array( $this, 'register' ) );
+			add_action( 'init', array( $this, 'change_permalink_structure' ), 11 );
+			add_filter( 'post_type_link', array( $this, 'change_permalink' ), 10, 2 );
 
 		}
 
@@ -81,11 +84,63 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_post_types\RT_Person' ) ) {
 				'menu_icon'          => 'dashicons-businessman',
 				'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
 				'show_in_rest'       => true,
-
 			);
 
 			register_post_type( self::SLUG, $args ); // phpcs:ignore WordPress.NamingConventions.ValidPostTypeSlug.NotStringLiteral
+		}
 
+		/**
+		 * This function is used to change the permalink structure of rt-person post type.
+		 *
+		 * @return void
+		 */
+		public function change_permalink_structure() {
+			global $wp_rewrite;
+
+			$args = $wp_rewrite->extra_permastructs[ self::SLUG ];
+
+			remove_permastruct( self::SLUG );
+
+			unset( $args['struct'] );
+
+			$args['with_front'] = false;
+
+			$career_slug = Person_Career::SLUG;
+			$wp_rewrite->add_permastruct(
+				self::SLUG,
+				"/person/%$career_slug%/%rt-person%-%post_id%",
+				$args
+			);
+		}
+
+		/**
+		 * This function is used to change the permalink of rt-person post type.
+		 *
+		 * @param string $post_link The post's permalink.
+		 * @param object $post      The post in question.
+		 *
+		 * @return string
+		 */
+		public function change_permalink( $post_link, $post ) {
+
+			if ( self::SLUG !== $post->post_type ) {
+				return $post_link;
+			}
+
+			$terms = get_the_terms( $post->ID, Person_Career::SLUG );
+
+			if ( ! is_wp_error( $terms ) && ! empty( $terms ) && is_object( $terms[0] ) ) {
+				$term = $terms[0]->slug;
+			} else {
+				$term = 'uncategorized';
+			}
+
+			$career_slug = Person_Career::SLUG;
+			$post_link   = str_replace( "%$career_slug%", $term, $post_link );
+
+			$post_link = str_replace( '%post_id%', $post->ID, $post_link );
+
+			return $post_link;
 		}
 	}
 }
