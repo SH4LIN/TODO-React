@@ -197,6 +197,9 @@ Custom Tables created:
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Screenshots
+
+![image](https://user-images.githubusercontent.com/56588503/230007471-ec8291f6-c95f-417c-9dc1-fbacf3f2efd8.png)
+
 # Movie Library Advance Plugin - Rewrite Rules
 
 The Rewrite Rukes feature is used to Change the permalink of the single post as below.
@@ -212,8 +215,6 @@ Person post type URL structure
 http://your-site.test/person/%career-taxonomy%/%postname%-%post_id%/
 
 Example, http://your-site.test/person/director/person-post-slug-postID/
-​
-![image](https://user-images.githubusercontent.com/56588503/230007471-ec8291f6-c95f-417c-9dc1-fbacf3f2efd8.png)
 
 **You can directly see the Rewrite rules below URL**
 
@@ -228,7 +229,7 @@ Example, http://your-site.test/person/director/person-post-slug-postID/
      CPT files are updated with hooks and filters that will be used to update the permalink structure of the post type
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Screenshots
-​
+
 ![image](https://user-images.githubusercontent.com/56588503/230009491-24cad64a-3da6-464f-8935-ef007c6f0ddd.png)
 ![image](https://user-images.githubusercontent.com/56588503/230009593-47e6e18f-63df-41ad-a930-54ef6722cffa.png)
 
