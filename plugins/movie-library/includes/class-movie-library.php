@@ -21,6 +21,8 @@ use MovieLib\admin\classes\custom_post_types\RT_Person;
 use MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box;
+use MovieLib\admin\classes\Movie_Library_Activation;
+use MovieLib\admin\classes\Movie_Library_Deactivation;
 use MovieLib\admin\classes\Settings_Page;
 use MovieLib\admin\classes\Movie_Library_Save_Post;
 use MovieLib\admin\classes\shortcodes\Movie_Shortcode;
@@ -56,7 +58,6 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 
 			$this->register_custom_post_types();
 			$this->register_custom_taxonomies();
-			flush_rewrite_rules();
 			$this->register_hooks();
 			$this->add_custom_meta_boxes();
 			$this->setup_environment();
@@ -70,6 +71,9 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		 * @return void
 		 */
 		private function register_hooks(): void {
+			Movie_Library_Activation::instance();
+			Movie_Library_Deactivation::instance();
+
 			$movie_library_save_post     = Movie_Library_Save_Post::instance();
 			$movie_library_settings_page = Settings_Page::instance();
 
