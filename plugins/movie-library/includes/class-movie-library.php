@@ -35,6 +35,8 @@ use MovieLib\admin\classes\taxonomies\Movie_Person;
 use MovieLib\admin\classes\taxonomies\Movie_Production_Company;
 use MovieLib\admin\classes\taxonomies\Movie_Tag;
 use MovieLib\admin\classes\taxonomies\Person_Career;
+use MovieLib\admin\classes\widgets\Movies_Widget;
+use MovieLib\admin\classes\widgets\Upcoming_Movies_Widget;
 use WP_Post;
 
 if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
@@ -143,6 +145,8 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 			Movie_Shortcode::instance();
 			Person_Shortcode::instance();
 
+			Movies_Widget::instance();
+			Upcoming_Movies_Widget::instance();
 		}
 
 		/**

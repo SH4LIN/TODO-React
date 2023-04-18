@@ -9,6 +9,7 @@ namespace MovieLib\admin\classes;
 
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\custom_post_types\RT_Person;
+use MovieLib\admin\classes\roles_capabilities\Movie_Manager_Role_Capabilities;
 use MovieLib\admin\classes\taxonomies\Movie_Genre;
 use MovieLib\admin\classes\taxonomies\Movie_Label;
 use MovieLib\admin\classes\taxonomies\Movie_Language;
@@ -57,6 +58,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Activation' ) ) :
 			Movie_Tag::instance()->register();
 			Person_Career::instance()->register();
 			flush_rewrite_rules();
+
+			Movie_Manager_Role_Capabilities::instance()->add_movie_manager_role();
 
 			// Creating custom tables.
 			$this->create_tables();
