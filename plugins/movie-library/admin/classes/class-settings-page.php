@@ -225,7 +225,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\Settings_Page' ) ) {
 			$this->parent_slug                          = 'options-general.php';
 			$this->page_title                           = __( 'Movie Library Settings', 'movie-library' );
 			$this->menu_title                           = __( 'Movie Library Settings', 'movie-library' );
-			$this->capability                           = 'manage_options';
+			$this->capability                           = 'mlb_movie_settings';
 			$this->menu_slug                            = 'movie-library-settings';
 			$this->movie_library_settings_page_callback = array( $this, 'movie_library_settings_page' );
 			$this->option_group                         = 'movie-library-settings-group';

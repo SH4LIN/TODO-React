@@ -128,26 +128,19 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 |   |   |   |-- class-rt-media-meta-box.php
 |   |   |   |-- class-rt-movie-meta-box.php
 |   |   |   `-- class-rt-person-meta-box.php
-|   |   |-- partials
-|   |   |   `-- dashboard-movie-card.php
 |   |   |-- shortcodes
 |   |   |   |-- class-movie-shortcode.php
 |   |   |   `-- class-person-shortcode.php
-|   |   |-- taxonomies
-|   |   |   |-- class-movie-genre.php
-|   |   |   |-- class-movie-label.php
-|   |   |   |-- class-movie-language.php
-|   |   |   |-- class-movie-person.php
-|   |   |   |-- class-movie-production-company.php
-|   |   |   |-- class-movie-tag.php
-|   |   |   `-- class-person-career.php
-|   |   `-- widgets
-|   |       |-- class-movies-widget.php
-|   |       `-- class-upcoming-movies-widget.php
+|   |   `-- taxonomies
+|   |       |-- class-movie-genre.php
+|   |       |-- class-movie-label.php
+|   |       |-- class-movie-language.php
+|   |       |-- class-movie-person.php
+|   |       |-- class-movie-production-company.php
+|   |       |-- class-movie-tag.php
+|   |       `-- class-person-career.php
 |   |-- css
 |   |   `-- movie-library-admin.css
-|   |-- images
-|   |   `-- placeholder.webp
 |   `-- js
 |       |-- movie-library-character.js
 |       |-- movie-library-custom-label.js
@@ -233,7 +226,7 @@ Person post type URL structure
 http://your-site.test/person/%career-taxonomy%/%postname%-%post_id%/
 
 Example, http://your-site.test/person/director/person-post-slug-postID/
-​
+
 **You can directly see the Rewrite rules below URL**
 
 [Movie Library Advance Plugin - Rewrite Rules](https://feature-rewrite-rules.shalin-shah.tr.rt.gw)
@@ -247,9 +240,37 @@ Example, http://your-site.test/person/director/person-post-slug-postID/
      CPT files are updated with hooks and filters that will be used to update the permalink structure of the post type
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Screenshots
-​
+
 ![image](https://user-images.githubusercontent.com/56588503/230009491-24cad64a-3da6-464f-8935-ef007c6f0ddd.png)
 ![image](https://user-images.githubusercontent.com/56588503/230009593-47e6e18f-63df-41ad-a930-54ef6722cffa.png)
+
+# Movie Library Advance Plugin - Custom Roles
+
+The Custom Roles feature is used to allow only the admin and movie manager to access the movie CPT and person CPT
+
+**You can directly see the Custom Roles from below URL**
+
+[Movie Library Advance Plugin - Custom Roles](https://feature-custom-roles.shalin-shah.tr.rt.gw/wp-admin/)
+
+## Overview
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. **class-movie-manager-role-capabilities.php**
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      This file will create movie-manager role on plugin activation and add all the required capabilities to access the movies and person.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2. **CPT and taxonomies are updated to have custom capability**
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+       1. rt-movie has capability type of movie
+       2. rt-person has capability type of array(person, people).
+       3. Taxonomy capabilities added like manage_{taxonomy}, edit_{taxonomy} , delete_{taxonomy} , assign_{taxonomy} 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+![image](https://user-images.githubusercontent.com/56588503/230005089-43f6df4d-4f15-49a4-b4c7-0a04b653f072.png)
+![image](https://user-images.githubusercontent.com/56588503/230005288-7f98e159-236e-4c7c-9708-b35f1d3b3969.png)
+
 
 ## Built with
 -   **PHP**
