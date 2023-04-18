@@ -162,8 +162,7 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 |       `-- movie-library-frontend.js
 `-- uninstall.php
 
-
-16 directories, 38 files
+14 directories, 37 files
 ```
 
 ## Screenshots
@@ -210,6 +209,35 @@ The Dashboard Widget feature is used to display the top-rated movies upcoming mo
 ![image](https://user-images.githubusercontent.com/56588503/230004203-c0cdd50b-e29e-452b-8b7c-49d37f54917e.png)
 ![image](https://user-images.githubusercontent.com/56588503/230004242-62c9f8d7-821e-4479-9fba-ddea2b63ce08.png)
 ![image](https://user-images.githubusercontent.com/56588503/230004295-453d71e5-ee53-46fd-8688-130e75de728a.png)
+
+# Movie Library Advance Plugin - Custom Database
+
+The Custom Database feature is used to create custom meta tables to store the CPT metadata.
+
+Custom Tables created:
+1. wp_moviemeta
+2. wp_personmeta
+   ​
+   **You can directly see the Custom Database from below URL**
+
+[Movie Library Advance Plugin - Custom Database](https://feature-custom-database.shalin-shah.tr.rt.gw/wp-admin/)
+
+## Overview
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. **mlb-metadata.php**
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     This file provides the wrapper functions that accommodate fetching, updating, adding, and deleting data from the wp_postmeta table and wp_moviemeta and wp_personmeta table.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3. **class-mlb-db-helper.php**
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+       This file is used to create table on hook activation and change the table using the filter in meta query.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Screenshots
+
+![image](https://user-images.githubusercontent.com/56588503/230007471-ec8291f6-c95f-417c-9dc1-fbacf3f2efd8.png)
 
 # Movie Library Advance Plugin - Rewrite Rules
 

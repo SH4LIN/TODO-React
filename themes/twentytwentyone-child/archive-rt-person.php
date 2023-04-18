@@ -28,7 +28,7 @@ if ( false === $movie_id ) {
 	$person_query = new WP_Query( $person_args );
 	$actors       = $person_query->posts;
 } else {
-	$actors = get_post_meta( $movie_id, 'rt-movie-meta-crew-actor' );
+	$actors = get_movie_meta( $movie_id, 'rt-movie-meta-crew-actor' );
 	if ( ! empty( $actors ) ) {
 		$actors = $actors[0];
 	}
@@ -68,7 +68,7 @@ if ( ! empty( $actors ) ) {
 			$person['name'] = get_the_title( $person['id'] );
 		}
 
-		$birth_date_str       = get_post_meta( $person['id'], RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG, true );
+		$birth_date_str       = get_person_meta( $person['id'], RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG, true );
 		$person['birth_date'] = '';
 
 		if ( ! empty( $birth_date_str ) ) {
@@ -115,9 +115,9 @@ if ( ! empty( $actors ) ) {
 									</div>
 								<?php endif; ?>
 
-								<?php if ( has_excerpt() ) : ?>
+								<?php if ( has_excerpt( $person['id'] ) ) : ?>
 									<div class="primary-text-primary-font ap-cast-crew-excerpt">
-										<?php the_excerpt(); ?>
+										<?php echo esc_html( get_the_excerpt( $person['id'] ) ); ?>
 									</div>
 								<?php endif; ?>
 
@@ -130,9 +130,9 @@ if ( ! empty( $actors ) ) {
 							</div>
 						</div>
 
-						<?php if ( has_excerpt() ) : ?>
+						<?php if ( has_excerpt( $person['id'] ) ) : ?>
 							<div class="primary-text-primary-font ap-cast-crew-excerpt-mobile">
-								<?php the_excerpt(); ?>
+								<?php echo esc_html( get_the_excerpt( $person['id'] ) ); ?>
 							</div>
 						<?php endif; ?>
 
