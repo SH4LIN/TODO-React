@@ -30,7 +30,7 @@ foreach ( $movies as $movie ) {
 
 	$movie_detail['release_year'] = null;
 
-	$release_date_str = get_post_meta( $movie->ID, RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, true );
+	$release_date_str = get_movie_meta( $movie->ID, RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, true );
 
 	if ( ! empty( $release_date_str ) ) {
 		$release_year = DateTime::createFromFormat( 'Y-m-d', $release_date_str )->format( 'Y' );
@@ -42,7 +42,7 @@ foreach ( $movies as $movie ) {
 
 	$movie_detail['runtime'] = null;
 
-	$minutes = get_post_meta( $movie->ID, RT_Movie_Meta_Box::MOVIE_META_BASIC_RUNTIME_SLUG, true );
+	$minutes = get_movie_meta( $movie->ID, RT_Movie_Meta_Box::MOVIE_META_BASIC_RUNTIME_SLUG, true );
 	if ( ! empty( $minutes ) ) {
 		$hours             = floor( $minutes / 60 );
 		$remaining_minutes = $minutes % 60;
@@ -63,7 +63,7 @@ foreach ( $movies as $movie ) {
 
 	$movie_detail['banner'] = get_stylesheet_directory_uri() . '/assets/images/placeholder-banner.png';
 
-	$banner_image = get_post_meta( $movie->ID, RT_Media_Meta_Box::BANNER_IMAGES_SLUG, true );
+	$banner_image = get_movie_meta( $movie->ID, RT_Media_Meta_Box::BANNER_IMAGES_SLUG, true );
 
 	if ( ! empty( $banner_image ) ) {
 		$banner_image_url = wp_get_attachment_image_url( $banner_image[0], 'full' );

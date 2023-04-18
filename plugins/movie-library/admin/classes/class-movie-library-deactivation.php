@@ -7,7 +7,6 @@
 
 namespace MovieLib\admin\classes;
 
-use MovieLib\admin\classes\roles_capabilities\Movie_Manager_Role_Capabilities;
 use MovieLib\includes\Singleton;
 
 /**

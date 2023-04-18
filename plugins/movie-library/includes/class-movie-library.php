@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit;
 use MovieLib\admin\classes\Asset;
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\custom_post_types\RT_Person;
+use MovieLib\admin\classes\custom_tables\MLB_DB_Helper;
 use MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box;
@@ -75,6 +76,7 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 		private function register_hooks(): void {
 			Movie_Library_Activation::instance();
 			Movie_Library_Deactivation::instance();
+			MLB_DB_Helper::instance()->add_hooks();
 
 			$movie_library_save_post     = Movie_Library_Save_Post::instance();
 			$movie_library_settings_page = Settings_Page::instance();

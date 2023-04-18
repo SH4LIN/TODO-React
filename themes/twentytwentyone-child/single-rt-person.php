@@ -57,7 +57,7 @@ $query          = new WP_Query(
 $popular_movies = $query->posts;
 
 $snapshots_data['snapshots'] = '';
-$snapshots                   = get_post_meta( get_the_ID(), RT_Media_Meta_Box::IMAGES_SLUG );
+$snapshots                   = get_person_meta( get_the_ID(), RT_Media_Meta_Box::IMAGES_SLUG );
 if ( ! empty( $snapshots ) ) {
 	$snapshots_data['snapshots'] = $snapshots;
 }
@@ -65,7 +65,7 @@ if ( ! empty( $snapshots ) ) {
 $snapshots_data['heading'] = __( 'Snapshots', 'screen-time' );
 
 $videos_data['videos'] = '';
-$videos                = get_post_meta( get_the_ID(), RT_Media_Meta_Box::VIDEOS_SLUG );
+$videos                = get_person_meta( get_the_ID(), RT_Media_Meta_Box::VIDEOS_SLUG );
 if ( ! empty( $videos ) && ! empty( $videos[0] ) ) {
 	$videos_data['videos'] = $videos[0];
 }

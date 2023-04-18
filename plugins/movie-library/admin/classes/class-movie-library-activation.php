@@ -16,6 +16,7 @@ use MovieLib\admin\classes\taxonomies\Movie_Language;
 use MovieLib\admin\classes\taxonomies\Movie_Production_Company;
 use MovieLib\admin\classes\taxonomies\Movie_Tag;
 use MovieLib\admin\classes\taxonomies\Person_Career;
+use MovieLib\admin\classes\custom_tables\MLB_DB_Helper;
 use MovieLib\includes\Singleton;
 
 /**
@@ -60,6 +61,17 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Activation' ) ) :
 
 			Movie_Manager_Role_Capabilities::instance()->add_movie_manager_role();
 
+			// Creating custom tables.
+			$this->create_tables();
+		}
+
+		/**
+		 * This file is used to create the custom tables for the movie library plugin.
+		 *
+		 * @return void
+		 */
+		private function create_tables() {
+			MLB_DB_Helper::instance()->create_tables();
 		}
 	}
 endif;
