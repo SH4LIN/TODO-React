@@ -1,18 +1,18 @@
 # Movie Library Plugin
 
-​
+
 The movie Library plugin can be used to create a movie library like IMDB where new movies released are published with ratings.
-​
+
 ## Run Locally
-​
+
 **Clone the project by running the following**
-​
+
 ```bash
   git clone https://github.com/rtCamp/trainee-shalin-shah.git
 ```
-​
+
 **Navigate to the trainee-shalin-shah directory by executing**
-​
+
 ```bash
   cd php-shalin-shah
 ```
@@ -128,8 +128,6 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 |   |   |   |-- class-rt-media-meta-box.php
 |   |   |   |-- class-rt-movie-meta-box.php
 |   |   |   `-- class-rt-person-meta-box.php
-|   |   |-- roles-capabilities
-|   |   |   `-- class-movie-manager-role-capabilities.php
 |   |   |-- shortcodes
 |   |   |   |-- class-movie-shortcode.php
 |   |   |   `-- class-person-shortcode.php
@@ -164,17 +162,54 @@ The movie Library plugin can be used to create a movie library like IMDB where n
 |       `-- movie-library-frontend.js
 `-- uninstall.php
 
-14 directories, 37 files
+
+16 directories, 38 files
 ```
 
 ## Screenshots
-​
+
 <img width="1470" alt="Screenshot 2023-03-06 at 11 24 32 AM" src="https://user-images.githubusercontent.com/56588503/223030141-41281663-f1f9-46e5-9957-dbf56133742f.png">
 <img width="1470" alt="Screenshot 2023-03-06 at 11 25 01 AM" src="https://user-images.githubusercontent.com/56588503/223030169-2797abfc-1bfe-4fa8-b362-4cf8eca9f5de.png">
 <img width="1470" alt="Screenshot 2023-03-06 at 11 25 21 AM" src="https://user-images.githubusercontent.com/56588503/223030176-6f53df25-691c-4d51-911d-54d5c4019cfb.png">
 <img width="1470" alt="Screenshot 2023-03-06 at 11 25 33 AM" src="https://user-images.githubusercontent.com/56588503/223030181-637cc3b0-9e2e-4a66-98e7-5ec9e9cc41e1.png">
 <img width="1470" alt="Screenshot 2023-03-06 at 11 25 37 AM" src="https://user-images.githubusercontent.com/56588503/223030191-1677209e-c48a-4b96-98e0-23011eaaa434.png">
 
+
+# Movie Library Advance Plugin - Dashboard Widget
+
+The Dashboard Widget feature is used to display the top-rated movies upcoming movies and recent movies.
+
+- Recent movies and Top-rated movies are displayed from the Plugin DB.
+- Upcoming movies are displayed from the IMDB API.
+  ​
+  **You can directly see the Dashboard Widget from below URL**
+
+[Movie Library Advance Plugin - Dashboard Widget](https://feature-dashboard-widget.shalin-shah.tr.rt.gw/wp-admin/)
+
+## Overview
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. **dashboard-movie-card.php**
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+       - Partial is created to display the movie card.
+       - It contains the code for.
+       1. Movie Poster.
+       2. Movie Title.
+       3. Edit and View buttons according to the user's capabilities.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2. **class-upcoming-movies-widget.php, class-movies-widget.php**
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+       These files fetch the Movie details either from the Plugin DB or IMDB API and 
+       display it accordingly using the dashboard-movie-card partial.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Screenshots
+​
+![image](https://user-images.githubusercontent.com/56588503/230004203-c0cdd50b-e29e-452b-8b7c-49d37f54917e.png)
+![image](https://user-images.githubusercontent.com/56588503/230004242-62c9f8d7-821e-4479-9fba-ddea2b63ce08.png)
+![image](https://user-images.githubusercontent.com/56588503/230004295-453d71e5-ee53-46fd-8688-130e75de728a.png)
 
 # Movie Library Advance Plugin - Rewrite Rules
 
@@ -197,6 +232,9 @@ Example, http://your-site.test/person/director/person-post-slug-postID/
 [Movie Library Advance Plugin - Rewrite Rules](https://feature-rewrite-rules.shalin-shah.tr.rt.gw)
 [Avengers Endgame Movie URL](https://feature-rewrite-rules.shalin-shah.tr.rt.gw/movie/adventure/avengers-endgame-220/)
 
+## Overview
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 1. **class-rt-movie.php, class-rt-person.php**
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
      CPT files are updated with hooks and filters that will be used to update the permalink structure of the post type
@@ -239,6 +277,7 @@ The Custom Roles feature is used to allow only the admin and movie manager to ac
 -   **HTML/CSS/Javascript**
 -   **Docker**
 -   **wp-i18n**
+
 
 ## Authors
 -   [rtCamp](https://github.com/rtCamp)
