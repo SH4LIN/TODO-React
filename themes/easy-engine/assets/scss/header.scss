@@ -1,0 +1,276 @@
+/**
+ * This file contains the styles for the header.
+ * @package EasyEngine
+ */
+@import "variables";
+
+.site-header {
+	background-color: $background-color;
+	padding-top: 10px;
+	width: 100%;
+	position: relative;
+}
+
+.header-inner {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+	padding: 5px 20px;
+
+	@media (min-width: 1025px) {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 0 20px;
+	}
+
+	&__branding {
+		width: 182px;
+		height: auto;
+
+		.custom-logo-link img {
+			display: block;
+			width: 100%;
+			height: auto;
+			object-fit: cover;
+		}
+	}
+
+	&__navigation {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		gap: 30px;
+
+		@media (max-width: 1024px) {
+			gap: 0;
+		}
+
+		.menu-action {
+			padding: 12px 30px;
+
+			> button {
+				font-size: 1em;
+			}
+
+			.menu-toggle {
+				background: none;
+				border: 0;
+				-webkit-box-shadow: none;
+				box-shadow: none;
+				outline: none;
+			}
+		}
+	}
+}
+
+
+.primary-menu-inner {
+	display: flex;
+	align-items: center;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+
+	a {
+		color: $primary-font-color;
+		font-size: 20px;
+		line-height: 32px;
+		display: flex;
+		white-space: normal;
+		align-items: center;
+
+		&:hover {
+			color: $link-color;
+		}
+	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+	}
+
+
+	.menu-item {
+		padding: 15px;
+		position: relative;
+	}
+
+	.menu-item-has-children {
+
+		> a::after {
+			margin-left: 8px;
+			height: 8px;
+			width: 8px;
+			display: inline-block;
+			background: url(../svgs/down-arrow.svg) no-repeat;
+			content: "";
+			vertical-align: center;
+		}
+	}
+
+	.sub-menu {
+		display: none;
+		list-style: none;
+
+		.menu-item {
+			padding: 7px 15px;
+			overflow-wrap: break-word;
+			position: relative;
+
+			&:not(:last-child) {
+				border-bottom: 1px solid $border-color;
+			}
+		}
+
+		.menu-item-has-children {
+			display: flex;
+
+			.sub-menu {
+				left: 40px;
+				top: 30px;
+				z-index: 999;
+				box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+			}
+
+			> a::after {
+				margin-left: 8px;
+				height: 8px;
+				width: 8px;
+				display: inline-block;
+				background: url(../svgs/down-arrow.svg) no-repeat;
+				transform: rotate(270deg);
+				content: "";
+				vertical-align: center;
+			}
+		}
+	}
+
+	.menu-item-has-children:hover {
+
+		> .sub-menu {
+			position: absolute;
+			display: block;
+			margin-top: 7px;
+			width: 220px;
+			border: 1px solid $border-color;
+			background-color: $background-color;
+			list-style: none;
+		}
+	}
+}
+
+.expanded-menu-wrapper {
+	width: 0;
+	overflow: hidden;
+	right: 0;
+	transition: width 0.2s ease-in-out;
+	border-top: 1px solid $border-color;
+	position: absolute;
+	background-color: $background-color;
+	z-index: 10;
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	/* stylelint-disable no-descending-specificity */
+	li {
+
+		a {
+			display: block;
+			color: $primary-font-color;
+			font-size: 16px;
+			padding: 10px 30px;
+			border: 1px;
+			border-bottom: 1px solid $border-color;
+
+			&:hover {
+				color: $link-color;
+			}
+		}
+	}
+
+	.expanded-menu-inner {
+
+		.sub-menu {
+
+			a {
+				padding-left: 45px;
+			}
+		}
+	}
+	/* stylelint-enable no-descending-specificity */
+
+}
+
+
+#search {
+	cursor: pointer;
+}
+
+#search-close {
+	cursor: pointer;
+	font-size: 1em;
+}
+
+.search-container {
+	position: relative;
+}
+
+.search-form {
+	position: absolute;
+	right: 0;
+	width: 0;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out;
+	overflow: hidden;
+	top: 43px;
+	z-index: 11;
+
+	.search-input {
+		display: flex;
+		border: 1px solid $border-color;
+		border-radius: 4px;
+		padding: 12px 8px;
+		gap: 8px;
+		max-width: 260px;
+
+		.search-submit {
+			cursor: pointer;
+		}
+
+		input {
+			padding: 0;
+			border: 0;
+			transition: width 0.3s ease-in-out;
+			color: $primary-font-color;
+			font-size: 14px;
+			font-weight: 400;
+			font-family: $font-family;
+			background-color: transparent;
+			flex: 0 1 180px;
+
+			&:focus {
+				outline: none;
+			}
+		}
+	}
+}
+
+.mobile-visible {
+	display: unset;
+
+	@media (min-width: 1025px) {
+		display: none;
+	}
+}
+
+.desktop-visible {
+	display: none;
+
+	@media (min-width: 1025px) {
+		display: unset;
+	}
+}
