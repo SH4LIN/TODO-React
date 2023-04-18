@@ -193,7 +193,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\shortcodes\Movie_Shortcode' ) ) {
 
 					}
 
-					$movie_runtime_meta = get_post_meta( $movie_id, 'rt-movie-meta-basic-runtime', true );
+					$movie_runtime_meta = get_movie_meta( $movie_id, 'rt-movie-meta-basic-runtime', true );
 
 					if ( ! empty( $movie_runtime_meta ) ) {
 
@@ -201,7 +201,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\shortcodes\Movie_Shortcode' ) ) {
 
 					}
 
-					$movie_crew_director = get_post_meta( $movie_id, 'rt-movie-meta-crew-director' );
+					$movie_crew_director = get_movie_meta( $movie_id, 'rt-movie-meta-crew-director' );
 
 					if ( ! empty( $movie_crew_director ) && ! empty( $movie_crew_director[0] ) ) {
 
@@ -224,7 +224,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\shortcodes\Movie_Shortcode' ) ) {
 						}
 					}
 
-					$movie_crew_actor = get_post_meta( $movie_id, 'rt-movie-meta-crew-actor' );
+					$movie_crew_actor = get_movie_meta( $movie_id, 'rt-movie-meta-crew-actor' );
 
 					if ( ! empty( $movie_crew_actor ) && ! empty( $movie_crew_actor[0] ) ) {
 

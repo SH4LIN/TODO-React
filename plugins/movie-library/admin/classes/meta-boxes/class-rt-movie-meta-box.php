@@ -101,7 +101,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 		public function rt_movie_meta_basic( WP_Post $post ): void {
 
 			// This will get the movie basic meta-data.
-			$rt_movie_meta_basic_data = get_post_meta( $post->ID );
+			$rt_movie_meta_basic_data = get_movie_meta( $post->ID );
 
 			// This will add the nonce field for the movie basic meta-data.
 			wp_nonce_field( 'rt_movie_meta_nonce', 'rt_movie_meta_nonce' );
@@ -205,7 +205,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 			foreach ( $rt_career_terms as $rt_career_term ) {
 
 				$key                                     = 'rt-movie-meta-crew-' . $rt_career_term->slug;
-				$rt_movie_meta_crew_data[ $key ]         = get_post_meta( $post->ID, $key );
+				$rt_movie_meta_crew_data[ $key ]         = get_movie_meta( $post->ID, $key );
 				$rt_people_data[ $rt_career_term->name ] = $this->get_person_data( $rt_career_term );
 
 			}
@@ -368,9 +368,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 			/** OK, it's safe for us to save the data now. */
 
 			$rt_media_meta_box = RT_Media_Meta_Box::instance();
-			$rt_media_meta_box->save_rt_movie_meta_images( $post_id );
-			$rt_media_meta_box->save_rt_movie_meta_banner_images( $post_id );
-			$rt_media_meta_box->save_rt_movie_meta_videos( $post_id );
+			$rt_media_meta_box->save_rt_movie_meta_images( $post_id, RT_Movie::SLUG );
+			$rt_media_meta_box->save_rt_movie_meta_banner_images( $post_id, RT_Movie::SLUG );
+			$rt_media_meta_box->save_rt_movie_meta_videos( $post_id, RT_Movie::SLUG );
 
 			// Get all the rt-person-career terms.
 			$rt_career_terms = get_terms(
@@ -464,7 +464,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 				} else {
 
 					// If the meta key is not available in $_POST then it will delete the post meta.
-					update_post_meta( $post_id, $meta_key, array() );
+					update_movie_meta( $post_id, $meta_key, array() );
 
 				}
 			}
@@ -506,7 +506,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 				}
 
 				// Update the meta field in the database.
-				update_post_meta( $post_id, self::MOVIE_META_BASIC_RATING_SLUG, $rt_movie_meta_basic_rating );
+				update_movie_meta( $post_id, self::MOVIE_META_BASIC_RATING_SLUG, $rt_movie_meta_basic_rating );
 
 			}
 
@@ -525,7 +525,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 
 				if ( $rt_movie_meta_basic_runtime > 0 && $rt_movie_meta_basic_runtime <= 1000 ) {
 
-					update_post_meta( $post_id, self::MOVIE_META_BASIC_RUNTIME_SLUG, $rt_movie_meta_basic_runtime );
+					update_movie_meta( $post_id, self::MOVIE_META_BASIC_RUNTIME_SLUG, $rt_movie_meta_basic_runtime );
 
 				}
 			}
@@ -537,7 +537,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 				$rt_movie_meta_basic_release_date = sanitize_text_field( wp_unslash( $_POST[ self::MOVIE_META_BASIC_RELEASE_DATE_SLUG ] ) );
 
 				// Update the meta field in the database.
-				update_post_meta( $post_id, self::MOVIE_META_BASIC_RELEASE_DATE_SLUG, $rt_movie_meta_basic_release_date );
+				update_movie_meta( $post_id, self::MOVIE_META_BASIC_RELEASE_DATE_SLUG, $rt_movie_meta_basic_release_date );
 
 			}
 		}
@@ -622,7 +622,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box' ) ) {
 		 */
 		private function set_object_terms( int $post_id, $terms, string $key ): void {
 
-			update_post_meta( $post_id, $key, $terms );
+			update_movie_meta( $post_id, $key, $terms );
 
 		}
 
