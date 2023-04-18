@@ -1,0 +1,136 @@
+/**
+ * This file will be used by blog.css
+ * This file contains the styles for the individual blog post.
+ * @package EasyEngine
+ */
+@import "variables";
+
+.post-wrapper {
+	display: grid;
+	grid-template-columns: 1fr;
+	margin: 24px 0;
+
+	@media (min-width: 768px) {
+		grid-template-columns: 15% auto;
+		gap: 20px;
+	}
+}
+
+.post-date {
+	padding: 0.5em 1.2em 0.5em 0;
+
+	a {
+		color: $date-color;
+		font-size: 0.8em;
+		font-weight: 400;
+	}
+}
+
+.post-data {
+	padding-bottom: 2rem;
+	border-bottom: 1px solid $border-color;
+
+	* {
+		max-width: 100%;
+
+		@media (min-width: 768px) {
+			max-width: 1100px;
+		}
+	}
+
+	.post-meta {
+		display: flex;
+		flex-direction: column;
+
+		@media (min-width: 768px) {
+			gap: 4px;
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+
+		a {
+			color: $meta-color;
+			font-weight: 400;
+
+			&:hover {
+				color: $link-color;
+				text-decoration: underline;
+			}
+		}
+
+		span {
+			color: $meta-color;
+			font-weight: 400;
+		}
+
+		div {
+			font-size: 0.9em;
+			font-weight: 600;
+			color: $meta-color;
+		}
+	}
+
+	.post-title {
+
+		font-size: 1.65em;
+		margin-bottom: 0.625em;
+
+		.post-title-link {
+			white-space: break-spaces;
+			word-wrap: break-word;
+			word-break: break-all;
+			width: 100%;
+			display: block;
+			font-family: $font-family;
+			line-height: 1.5;
+			font-weight: 300;
+			color: $primary-font-color;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+.pagination {
+	text-align: center;
+
+	.page-numbers {
+		display: inline-block;
+		margin: 0 2px;
+		font-size: 14px;
+		font-family: $font-family;
+		border-radius: 50%;
+		min-height: 40px;
+		min-width: 40px;
+		font-weight: 400;
+		line-height: 40px;
+		transition: 0.3s;
+
+		&:hover {
+			background-color: $pre-background-color;
+			color: $primary-font-color;
+			padding: 0;
+			border-radius: 50%;
+		}
+
+		&.current {
+			background-color: $button-color;
+			border-color: $button-color;
+			font-weight: 700;
+			color: #fff;
+		}
+	}
+
+	.next,
+	.prev {
+		border-radius: 0;
+
+		&:hover {
+			background-color: unset;
+			border-color: unset;
+			color: $link-color;
+		}
+	}
+}

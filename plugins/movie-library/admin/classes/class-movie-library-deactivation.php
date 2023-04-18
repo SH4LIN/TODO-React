@@ -8,6 +8,7 @@
 namespace MovieLib\admin\classes;
 
 use MovieLib\includes\Singleton;
+use MovieLib\admin\classes\roles_capabilities\Movie_Manager_Role_Capabilities;
 
 /**
  * This is a security measure to prevent direct access to the file.
@@ -37,7 +38,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Deactivation' ) ) {
 		 *
 		 * @return void
 		 */
-		public function deactivate(): void {}
-
+		public function deactivate(): void {
+			Movie_Manager_Role_Capabilities::instance()->remove_movie_manager_role();
+		}
 	}
 }

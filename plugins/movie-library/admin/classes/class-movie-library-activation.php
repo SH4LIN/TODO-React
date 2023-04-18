@@ -7,6 +7,15 @@
 
 namespace MovieLib\admin\classes;
 
+use MovieLib\admin\classes\custom_post_types\RT_Movie;
+use MovieLib\admin\classes\custom_post_types\RT_Person;
+use MovieLib\admin\classes\roles_capabilities\Movie_Manager_Role_Capabilities;
+use MovieLib\admin\classes\taxonomies\Movie_Genre;
+use MovieLib\admin\classes\taxonomies\Movie_Label;
+use MovieLib\admin\classes\taxonomies\Movie_Language;
+use MovieLib\admin\classes\taxonomies\Movie_Production_Company;
+use MovieLib\admin\classes\taxonomies\Movie_Tag;
+use MovieLib\admin\classes\taxonomies\Person_Career;
 use MovieLib\admin\classes\custom_tables\MLB_DB_Helper;
 use MovieLib\includes\Singleton;
 
@@ -40,7 +49,17 @@ if ( ! class_exists( 'MovieLib\admin\classes\Movie_Library_Activation' ) ) :
 		 * @return void
 		 */
 		public function activate(): void {
+			RT_Movie::instance()->register();
+			RT_Person::instance()->register();
+			Movie_Genre::instance()->register();
+			Movie_Language::instance()->register();
+			Movie_Label::instance()->register();
+			Movie_Production_Company::instance()->register();
+			Movie_Tag::instance()->register();
+			Person_Career::instance()->register();
 			flush_rewrite_rules();
+
+			Movie_Manager_Role_Capabilities::instance()->add_movie_manager_role();
 
 			// Creating custom tables.
 			$this->create_tables();

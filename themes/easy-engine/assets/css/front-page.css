@@ -1,0 +1,152 @@
+/**
+ * This file is used to display the front page.
+ * @package EasyEngine
+ */
+.front-page-wrapper {
+  padding: 20px 20px 0 20px;
+}
+@media (min-width: 1025px) {
+  .front-page-wrapper {
+    padding: 0 20px;
+  }
+}
+.front-page-wrapper .content-wrapper {
+  max-width: 100%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+@media (min-width: 1025px) {
+  .front-page-wrapper .content-wrapper {
+    max-width: 1100px;
+    margin: 1.5em auto;
+  }
+}
+@media (min-width: 768px) {
+  .front-page-wrapper .content-wrapper pre {
+    max-width: 740px;
+    margin: 0 auto;
+  }
+}
+.front-page-wrapper .content-wrapper h2 {
+  font-size: 1.5em;
+  color: #415058;
+  font-weight: 300;
+  line-height: 1.4;
+  margin-top: 1.5em;
+  margin-bottom: 24px;
+}
+@media (min-width: 768px) {
+  .front-page-wrapper .content-wrapper h2 {
+    font-size: 2em;
+    margin-bottom: 48px;
+  }
+}
+.front-page-wrapper .content-wrapper h3 {
+  font-size: 1.375em;
+  margin: 0 0 0.8em 0;
+  font-weight: 300;
+  line-height: 1.4;
+}
+@media (min-width: 768px) {
+  .front-page-wrapper .content-wrapper h3 {
+    margin: 0.8em 0;
+    font-size: 1.5em;
+  }
+}
+.front-page-wrapper .content-wrapper h4 {
+  font-size: 1.25em;
+  margin: 0.8em 0;
+  font-weight: 300;
+  line-height: 1.4;
+}
+@media (min-width: 768px) {
+  .front-page-wrapper .content-wrapper h4 {
+    margin-top: 1.5em;
+    font-size: 1.33em;
+  }
+}
+.front-page-wrapper .content-wrapper .wp-block-columns {
+  display: grid;
+  grid-gap: 16px;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+@media (min-width: 768px) {
+  .front-page-wrapper .content-wrapper .wp-block-columns {
+    margin: 1.5em auto;
+  }
+}
+.front-page-wrapper .content-wrapper .wp-block-column {
+  padding: 0 10px;
+}
+.front-page-wrapper .content-wrapper .wp-block-column:not(:first-child) {
+  margin-left: 0;
+}
+@media (min-width: 768px) {
+  .front-page-wrapper .content-wrapper .wp-block-column:not(:first-child) {
+    margin-left: 2em;
+  }
+}
+.front-page-wrapper .content-wrapper .has-4-columns {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+@media (min-width: 768px) {
+  .front-page-wrapper .content-wrapper .has-4-columns {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.front-page-wrapper .content-wrapper .has-3-columns {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+@media (min-width: 768px) {
+  .front-page-wrapper .content-wrapper .has-3-columns {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.front-page-wrapper .content-wrapper .has-2-columns {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+@media (min-width: 768px) {
+  .front-page-wrapper .content-wrapper .has-2-columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.front-page-wrapper .content-wrapper .wp-block-embed {
+  word-break: break-word;
+}
+.front-page-wrapper .content-wrapper .wp-block-embed figcaption {
+  font-size: 1em;
+}
+@media (min-width: 768px) {
+  .front-page-wrapper .content-wrapper .wp-block-embed figcaption {
+    font-size: 1.125em;
+  }
+}
+.front-page-wrapper .content-wrapper p {
+  margin: 0 0 1em;
+}
+.front-page-wrapper .get-started-btn {
+  margin: 20px 0 30px 0;
+  text-align: center;
+}
+@media (min-width: 1025px) {
+  .front-page-wrapper .get-started-btn {
+    margin: 27px;
+  }
+}
+.front-page-wrapper .get-started-btn a {
+  display: inline-block;
+  background-color: #3278bd;
+  border: 2px solid #3278bd;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #fff;
+}
+.front-page-wrapper .get-started-btn a:hover {
+  background-color: #fff;
+  color: #3278bd;
+}
+
+/*# sourceMappingURL=front-page.css.map */
