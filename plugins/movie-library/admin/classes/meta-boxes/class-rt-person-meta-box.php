@@ -122,7 +122,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 		public function rt_person_meta_basic( WP_Post $post ): void {
 
 			// This will be used to get the person meta basic data.
-			$rt_person_meta_basic_data = get_post_meta( $post->ID );
+			$rt_person_meta_basic_data = get_person_meta( $post->ID );
 
 			// This will create the array of the person meta basic keys.
 
@@ -225,7 +225,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 		 */
 		public function rt_person_meta_social( WP_Post $post ): void {
 
-			$rt_person_meta_social_data = get_post_meta( $post->ID );
+			$rt_person_meta_social_data = get_person_meta( $post->ID );
 
 			wp_nonce_field( 'rt_person_meta_nonce', 'rt_person_meta_nonce' );
 
@@ -354,16 +354,16 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 			/** OK, it's safe for us to save the data now. */
 
 			$rt_media_meta_box = RT_Media_Meta_Box::instance();
-			$rt_media_meta_box->save_rt_movie_meta_images( $post_id );
-			$rt_media_meta_box->save_rt_movie_meta_banner_images( $post_id );
-			$rt_media_meta_box->save_rt_movie_meta_videos( $post_id );
+			$rt_media_meta_box->save_rt_movie_meta_images( $post_id, RT_Person::SLUG );
+			$rt_media_meta_box->save_rt_movie_meta_banner_images( $post_id, RT_Person::SLUG );
+			$rt_media_meta_box->save_rt_movie_meta_videos( $post_id, RT_Person::SLUG );
 
 			// Check if self::PERSON_META_BASIC_BIRTH_DATE_SLUG is set. If it is set then sanitize the data and save it.
 			if ( isset( $_POST[ self::PERSON_META_BASIC_BIRTH_DATE_SLUG ] ) ) {
 
 				$rt_person_meta_basic_birth_date = sanitize_text_field( wp_unslash( $_POST[ self::PERSON_META_BASIC_BIRTH_DATE_SLUG ] ) );
 
-				update_post_meta( $post_id, self::PERSON_META_BASIC_BIRTH_DATE_SLUG, $rt_person_meta_basic_birth_date );
+				update_person_meta( $post_id, self::PERSON_META_BASIC_BIRTH_DATE_SLUG, $rt_person_meta_basic_birth_date );
 
 			}
 
@@ -374,7 +374,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 
 				if ( ! is_numeric( $rt_person_meta_basic_birth_place ) ) {
 
-					update_post_meta( $post_id, self::PERSON_META_BASIC_BIRTH_PLACE_SLUG, $rt_person_meta_basic_birth_place );
+					update_person_meta( $post_id, self::PERSON_META_BASIC_BIRTH_PLACE_SLUG, $rt_person_meta_basic_birth_place );
 
 				}
 			}
@@ -385,7 +385,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 
 				if ( ! is_numeric( $rt_person_meta_basic_full_name ) ) {
 
-					update_post_meta( $post_id, self::PERSON_META_BASIC_FULL_NAME_SLUG, $rt_person_meta_basic_full_name );
+					update_person_meta( $post_id, self::PERSON_META_BASIC_FULL_NAME_SLUG, $rt_person_meta_basic_full_name );
 
 				}
 			}
@@ -396,7 +396,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 
 				if ( ! is_numeric( $rt_person_meta_basic_full_name ) ) {
 
-					update_post_meta( $post_id, self::PERSON_META_BASIC_START_YEAR_SLUG, $rt_person_meta_basic_full_name );
+					update_person_meta( $post_id, self::PERSON_META_BASIC_START_YEAR_SLUG, $rt_person_meta_basic_full_name );
 
 				}
 			}
@@ -408,11 +408,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 
 				if ( filter_var( $rt_person_meta_social_twitter, FILTER_VALIDATE_URL ) ) {
 
-					update_post_meta( $post_id, self::PERSON_META_SOCIAL_TWITTER_SLUG, $rt_person_meta_social_twitter );
+					update_person_meta( $post_id, self::PERSON_META_SOCIAL_TWITTER_SLUG, $rt_person_meta_social_twitter );
 
 				} else {
 
-					update_post_meta( $post_id, self::PERSON_META_SOCIAL_TWITTER_SLUG, '' );
+					update_person_meta( $post_id, self::PERSON_META_SOCIAL_TWITTER_SLUG, '' );
 
 				}
 			}
@@ -424,11 +424,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 
 				if ( filter_var( $rt_person_meta_social_facebook, FILTER_VALIDATE_URL ) ) {
 
-					update_post_meta( $post_id, self::PERSON_META_SOCIAL_FACEBOOK_SLUG, $rt_person_meta_social_facebook );
+					update_person_meta( $post_id, self::PERSON_META_SOCIAL_FACEBOOK_SLUG, $rt_person_meta_social_facebook );
 
 				} else {
 
-					update_post_meta( $post_id, self::PERSON_META_SOCIAL_FACEBOOK_SLUG, '' );
+					update_person_meta( $post_id, self::PERSON_META_SOCIAL_FACEBOOK_SLUG, '' );
 
 				}
 			}
@@ -440,11 +440,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 
 				if ( filter_var( $rt_person_meta_social_instagram, FILTER_VALIDATE_URL ) ) {
 
-					update_post_meta( $post_id, self::PERSON_META_SOCIAL_INSTAGRAM_SLUG, $rt_person_meta_social_instagram );
+					update_person_meta( $post_id, self::PERSON_META_SOCIAL_INSTAGRAM_SLUG, $rt_person_meta_social_instagram );
 
 				} else {
 
-					update_post_meta( $post_id, self::PERSON_META_SOCIAL_INSTAGRAM_SLUG, '' );
+					update_person_meta( $post_id, self::PERSON_META_SOCIAL_INSTAGRAM_SLUG, '' );
 
 				}
 			}
@@ -456,11 +456,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box' ) ) 
 
 				if ( filter_var( $rt_person_meta_social_web, FILTER_VALIDATE_URL ) ) {
 
-					update_post_meta( $post_id, self::PERSON_META_SOCIAL_WEB_SLUG, $rt_person_meta_social_web );
+					update_person_meta( $post_id, self::PERSON_META_SOCIAL_WEB_SLUG, $rt_person_meta_social_web );
 
 				} else {
 
-					update_post_meta( $post_id, self::PERSON_META_SOCIAL_WEB_SLUG, '' );
+					update_person_meta( $post_id, self::PERSON_META_SOCIAL_WEB_SLUG, '' );
 
 				}
 			}

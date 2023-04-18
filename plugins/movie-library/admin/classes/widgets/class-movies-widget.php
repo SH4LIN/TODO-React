@@ -110,13 +110,14 @@ if ( ! class_exists( 'MovieLib\admin\classes\widgets\Movies_Widget' ) ) {
 		 */
 		private function fetch_recent_movies(): array {
 			$recent_movies_args = array(
-				'post_type'      => RT_Movie::SLUG,
-				'posts_per_page' => 6,
-				'meta_key'       => RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
-				'meta_value'     => gmdate( 'Y-m-d' ), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
-				'meta_compare'   => '<=',
-				'orderby'        => 'meta_value',
-				'order'          => 'DESC',
+				'post_type'        => RT_Movie::SLUG,
+				'posts_per_page'   => 6,
+				'meta_key'         => RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+				'meta_value'       => gmdate( 'Y-m-d' ), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+				'meta_compare'     => '<=',
+				'orderby'          => 'meta_value',
+				'order'            => 'DESC',
+				'suppress_filters' => false,
 			);
 
 			$movies = get_posts( $recent_movies_args );
@@ -131,12 +132,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\widgets\Movies_Widget' ) ) {
 		 */
 		private function fetch_top_rated_movies(): array {
 			$top_rated_movies_args = array(
-				'post_type'      => RT_Movie::SLUG,
-				'posts_per_page' => 6,
-				'meta_key'       => RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
-				'orderby'        => 'meta_value_num',
-				'order'          => 'DESC',
-				'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+				'post_type'        => RT_Movie::SLUG,
+				'posts_per_page'   => 6,
+				'meta_key'         => RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+				'orderby'          => 'meta_value_num',
+				'order'            => 'DESC',
+				'suppress_filters' => false,
+				'meta_query'       => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 					array(
 						'key'     => RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG,
 						'value'   => gmdate( 'Y-m-d' ),
