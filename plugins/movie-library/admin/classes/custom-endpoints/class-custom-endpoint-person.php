@@ -57,21 +57,32 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 					'args'                => array(
 						'per_page' => array(
 							'default'           => 10,
-							'sanitize_callback' => 'absint',
+							'sanitize_callback' => 'sanitize_text_field',
+							'validate_callback' => function( $value ) {
+								return is_numeric( $value );
+							},
 						),
 						'page'     => array(
 							'default'           => 1,
-							'sanitize_callback' => 'absint',
+							'sanitize_callback' => 'sanitize_text_field',
+							'validate_callback' => function( $value ) {
+								return is_numeric( $value );
+							},
 						),
 						'order'    => array(
 							'default'           => 'DESC',
 							'sanitize_callback' => 'sanitize_text_field',
+							'validate_callback' => function( $value ) {
+								return in_array( $value, array( 'ASC', 'DESC' ), true );
+							},
 						),
 						'orderby'  => array(
 							'default'           => 'date',
+							// Only Sanitizing the value.
 							'sanitize_callback' => 'sanitize_text_field',
 						),
 						'ids'      => array(
+							// Only Sanitizing the value.
 							'sanitize_callback' => 'sanitize_text_field',
 						),
 					),
