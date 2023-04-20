@@ -171,6 +171,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 			// Get Movies meta.
 			foreach ( $movies as $movie ) {
 				$movie->post_meta = get_movie_meta( $movie->ID );
+				if ( ! empty( $movie->post_meta ) ) {
+					foreach ( $movie->post_meta as $key => $value ) {
+						if ( ! empty( $value[0] ) ) {
+							$movie->post_meta[ $key ] = maybe_unserialize( $value[0] );
+						}
+					}
+				}
 			}
 
 			$taxonomies = get_object_taxonomies( RT_Movie::SLUG, 'object' );
@@ -698,6 +705,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 
 			// Get Movies meta.
 			$movie->post_meta = get_movie_meta( $movie->ID );
+			if ( ! empty( $movie->post_meta ) ) {
+				foreach ( $movie->post_meta as $key => $value ) {
+					if ( ! empty( $value[0] ) ) {
+						$movie->post_meta[ $key ] = maybe_unserialize( $value[0] );
+					}
+				}
+			}
 
 			$taxonomies = get_object_taxonomies( RT_Movie::SLUG, 'object' );
 

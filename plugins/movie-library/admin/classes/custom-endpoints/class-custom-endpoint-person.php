@@ -162,9 +162,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 
 			$persons = get_posts( $person_args );
 
-			// Get Person meta.
 			foreach ( $persons as $person ) {
 				$person->post_meta = get_person_meta( $person->ID );
+				foreach ( $person->post_meta as $key => $value ) {
+					if ( ! empty( $value[0] ) ) {
+						$person->post_meta[ $key ] = maybe_unserialize( $value[0] );
+					}
+				}
 			}
 
 			$taxonomies = get_object_taxonomies( RT_Person::SLUG, 'object' );
@@ -757,6 +761,13 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 
 			// Get person meta.
 			$person->post_meta = get_person_meta( $person->ID );
+			if ( ! empty( $person->post_meta ) ) {
+				foreach ( $person->post_meta as $key => $value ) {
+					if ( ! empty( $value[0] ) ) {
+						$person->post_meta[ $key ] = maybe_unserialize( $value[0] );
+					}
+				}
+			}
 
 			$taxonomies = get_object_taxonomies( RT_Person::SLUG, 'object' );
 
