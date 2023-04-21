@@ -55,7 +55,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_commands\MLB_Export_Command'
 		 */
 		public function __invoke( $args, $assoc_args ) {
 			if ( ! empty( $args ) ) {
-				$post_type = $args[0];
+				$post_type = sanitize_text_field( $args[0] );
 			} else {
 				$post_type = '';
 			}
