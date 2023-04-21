@@ -101,8 +101,34 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 					'methods'             => WP_REST_Server::CREATABLE,
 					'callback'            => array( $this, 'create_update_movie' ),
 					'permission_callback' => array( $this, 'create_movie_permission_check' ),
-					'validate_callback'   => array( $this, 'create_movie_validate' ),
-					'sanitize_callback'   => array( $this, 'create_movie_sanitize' ),
+					'args'                => array(
+						'data'       => array(
+							'required'          => true,
+							'type'              => 'object',
+							'validate_callback' => function( $object ) {
+								if ( empty( $object['post_title'] ) ) {
+									return new WP_Error(
+										'400',
+										__( 'Person Name is required.', 'movie-library' ),
+										array(
+											'status' => 400,
+										)
+									);
+								}
+								return true;
+							},
+						),
+						'meta'       => array(
+							'type'              => 'object',
+							'validate_callback' => array( $this, 'create_movie_meta_validate' ),
+							'sanitize_callback' => array( $this, 'create_movie_meta_sanitize' ),
+						),
+						'taxonomies' => array(
+							'type'              => 'object',
+							'validate_callback' => array( $this, 'create_movie_taxonomies_validate' ),
+							'sanitize_callback' => array( $this, 'create_movie_taxonomies_sanitize' ),
+						),
+					),
 				),
 			);
 
@@ -113,12 +139,25 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 					'methods'             => 'GET, PUT, DELETE',
 					'callback'            => array( $this, 'movie_by_id' ),
 					'permission_callback' => array( $this, 'movie_by_id_permissions_check' ),
-					'validate_callback'   => array( $this, 'movie_by_id_validate' ),
-					'sanitize_callback'   => function ( $request ) {
-						if ( 'PUT' === $request->get_method() ) {
-							return $this->create_movie_sanitize( $request );
-						} return $request;
-					},
+					'args'                => array(
+						'id'         => array(
+							'required'          => true,
+							'type'              => 'integer',
+							'validate_callback' => function( $value ) {
+								return is_numeric( $value );
+							},
+						),
+						'meta'       => array(
+							'type'              => 'object',
+							'validate_callback' => array( $this, 'create_movie_meta_validate' ),
+							'sanitize_callback' => array( $this, 'create_movie_meta_sanitize' ),
+						),
+						'taxonomies' => array(
+							'type'              => 'object',
+							'validate_callback' => array( $this, 'create_movie_taxonomies_validate' ),
+							'sanitize_callback' => array( $this, 'create_movie_taxonomies_sanitize' ),
+						),
+					),
 				),
 			);
 		}
@@ -132,10 +171,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 		 */
 		public function get_movies( WP_REST_Request $request ): WP_REST_Response {
 
-			$posts_per_page   = $request->get_param( 'per_page' );
-			$page             = $request->get_param( 'page' );
-			$order            = $request->get_param( 'order' );
-			$orderby          = $request->get_param( 'orderby' );
+			$posts_per_page = $request->get_param( 'per_page' );
+			$page           = $request->get_param( 'page' );
+			$order          = $request->get_param( 'order' );
+			$orderby        = $request->get_param( 'orderby' );
+			$ids            = $request->get_param( 'ids' );
+
 			$can_read_private = current_user_can( 'read_private_posts' );
 
 			$movie_args = array(
@@ -145,7 +186,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 				'post_status' => $can_read_private ? array( 'publish', 'private' ) : 'publish',
 			);
 
-			$ids = $request->get_param( 'ids' );
 			if ( ! empty( $ids ) ) {
 				if ( ! is_array( $ids ) ) {
 					$ids = explode( ',', $ids );
@@ -346,27 +386,14 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 		/**
 		 * This function is used to validate data to create movie.
 		 *
-		 * @param \WP_REST_Request $request Request object.
+		 * @param array $object Request array.
 		 * @return bool|\WP_Error
 		 */
-		public function create_movie_validate( WP_REST_Request $request ) {
-			$movie = $request->get_params();
-
-			if ( empty( $movie['data'] ) || empty( $movie['data']['post_title'] ) ) {
-				return new WP_Error(
-					'400',
-					__( 'Movie Title is required.', 'movie-library' ),
-					array(
-						'status' => 400,
-					)
-				);
-			}
-
-			$movie_meta = $movie['meta'];
-			if ( isset( $movie_meta[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG ] ) &&
-				! empty( $movie_meta[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG ] )
+		public function create_movie_meta_validate( $object ) {
+			if ( isset( $object[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG ] ) &&
+				! empty( $object[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG ] )
 			) {
-				if ( ! is_numeric( $movie_meta[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG ] ) ) {
+				if ( ! is_numeric( $object[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG ] ) ) {
 					return new WP_Error(
 						'400',
 						__( 'Rating should be numeric.', 'movie-library' ),
@@ -375,8 +402,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 						)
 					);
 				} else {
-					if ( $movie_meta[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG ] < 0 ||
-						$movie_meta[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG ] > 10
+					if ( $object[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG ] < 0 ||
+						$object[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG ] > 10
 					) {
 						return new WP_Error(
 							'400',
@@ -389,10 +416,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 				}
 			}
 
-			if ( isset( $movie_meta[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RUNTIME_SLUG ] ) &&
-				! empty( $movie_meta[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RUNTIME_SLUG ] )
+			if ( isset( $object[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RUNTIME_SLUG ] ) &&
+				! empty( $object[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RUNTIME_SLUG ] )
 			) {
-				if ( ! is_numeric( $movie_meta[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RUNTIME_SLUG ] ) ) {
+				if ( ! is_numeric( $object[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RUNTIME_SLUG ] ) ) {
 					return new WP_Error(
 						'400',
 						__( 'Runtime should be numeric.', 'movie-library' ),
@@ -401,8 +428,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 						)
 					);
 				} else {
-					if ( $movie_meta[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RUNTIME_SLUG ] < 0 ||
-						$movie_meta[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RUNTIME_SLUG ] > 1000
+					if ( $object[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RUNTIME_SLUG ] < 0 ||
+						$object[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RUNTIME_SLUG ] > 1000
 					) {
 						return new WP_Error(
 							'400',
@@ -416,10 +443,10 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 			}
 
 			if (
-				isset( $movie_meta[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG ] ) &&
-				! empty( $movie_meta[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG ] )
+				isset( $object[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG ] ) &&
+				! empty( $object[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG ] )
 			) {
-				$date_str    = $movie_meta[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG ];
+				$date_str    = $object[ RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG ];
 				$date_format = 'Y-m-d';
 
 				$date = wp_date( $date_format, strtotime( $date_str ) );
@@ -435,8 +462,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 				}
 			}
 
-			if ( isset( $movie_meta[ RT_Media_Meta_Box::IMAGES_SLUG ] ) && ! empty( $movie_meta[ RT_Media_Meta_Box::IMAGES_SLUG ] ) ) {
-				if ( ! is_array( $movie_meta[ RT_Media_Meta_Box::IMAGES_SLUG ] ) ) {
+			if ( isset( $object[ RT_Media_Meta_Box::IMAGES_SLUG ] ) && ! empty( $object[ RT_Media_Meta_Box::IMAGES_SLUG ] ) ) {
+				if ( ! is_array( $object[ RT_Media_Meta_Box::IMAGES_SLUG ] ) ) {
 					return new WP_Error(
 						'400',
 						__( 'Images should be an array.', 'movie-library' ),
@@ -445,7 +472,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 						)
 					);
 				}
-				$images = $movie_meta[ RT_Media_Meta_Box::IMAGES_SLUG ];
+				$images = $object[ RT_Media_Meta_Box::IMAGES_SLUG ];
 				foreach ( $images as $image ) {
 					if ( ! is_numeric( $image ) ) {
 						return new WP_Error(
@@ -459,8 +486,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 				}
 			}
 
-			if ( isset( $movie_meta[ RT_Media_Meta_Box::BANNER_IMAGES_SLUG ] ) && ! empty( $movie_meta[ RT_Media_Meta_Box::BANNER_IMAGES_SLUG ] ) ) {
-				if ( ! is_array( $movie_meta[ RT_Media_Meta_Box::BANNER_IMAGES_SLUG ] ) ) {
+			if ( isset( $object[ RT_Media_Meta_Box::BANNER_IMAGES_SLUG ] ) && ! empty( $object[ RT_Media_Meta_Box::BANNER_IMAGES_SLUG ] ) ) {
+				if ( ! is_array( $object[ RT_Media_Meta_Box::BANNER_IMAGES_SLUG ] ) ) {
 					return new WP_Error(
 						'400',
 						__( 'Banner Images should be an array.', 'movie-library' ),
@@ -469,7 +496,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 						)
 					);
 				}
-				$banner_images = $movie_meta[ RT_Media_Meta_Box::BANNER_IMAGES_SLUG ];
+				$banner_images = $object[ RT_Media_Meta_Box::BANNER_IMAGES_SLUG ];
 				foreach ( $banner_images as $banner_image ) {
 					if ( ! is_numeric( $banner_image ) ) {
 						return new WP_Error(
@@ -483,8 +510,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 				}
 			}
 
-			if ( isset( $movie_meta[ RT_Media_Meta_Box::VIDEOS_SLUG ] ) && ! empty( $movie_meta[ RT_Media_Meta_Box::VIDEOS_SLUG ] ) ) {
-				if ( ! is_array( $movie_meta[ RT_Media_Meta_Box::VIDEOS_SLUG ] ) ) {
+			if ( isset( $object[ RT_Media_Meta_Box::VIDEOS_SLUG ] ) && ! empty( $object[ RT_Media_Meta_Box::VIDEOS_SLUG ] ) ) {
+				if ( ! is_array( $object[ RT_Media_Meta_Box::VIDEOS_SLUG ] ) ) {
 					return new WP_Error(
 						'400',
 						__( 'Videos should be an array.', 'movie-library' ),
@@ -493,7 +520,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 						)
 					);
 				}
-				$videos = $movie_meta[ RT_Media_Meta_Box::VIDEOS_SLUG ];
+				$videos = $object[ RT_Media_Meta_Box::VIDEOS_SLUG ];
 				foreach ( $videos as $video ) {
 					if ( ! is_numeric( $video ) ) {
 						return new WP_Error(
@@ -507,31 +534,57 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 				}
 			}
 
-			$movie_taxonomy = $movie['taxonomies'];
+			return true;
+		}
 
-			$genre_result = $this->validate_taxonomy( $movie_taxonomy, Movie_Genre::SLUG, __( 'Genre', 'movie-library' ) );
-			if ( is_wp_error( $genre_result ) ) {
-				return $genre_result;
-			}
+		/**
+		 * This function is used to validate taxonomies to create movie.
+		 *
+		 * @param array $object Request object.
+		 * @return bool|\WP_Error
+		 */
+		public function create_movie_taxonomies_validate( $object ) {
+			foreach ( $object as $key => &$values ) {
+				if ( ! taxonomy_exists( $key ) ) {
+					return new WP_Error(
+						'400',
+						// translators: %s is the taxonomy name.
+						sprintf( __( '%s is not a valid taxonomy.', 'movie-library' ), $key ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+				if ( ! is_array( $values ) ) {
+					return new WP_Error(
+						'400',
+						// translators: %s is the taxonomy name.
+						sprintf( __( '%s should be an array.', 'movie-library' ), $key ),
+						array(
+							'status' => 400,
+						)
+					);
+				}
+				foreach ( $values as &$value ) {
 
-			$label_result = $this->validate_taxonomy( $movie_taxonomy, Movie_Label::SLUG, __( 'Label', 'movie-library' ) );
-			if ( is_wp_error( $label_result ) ) {
-				return $label_result;
-			}
-
-			$language_result = $this->validate_taxonomy( $movie_taxonomy, Movie_Language::SLUG, __( 'Language', 'movie-library' ) );
-			if ( is_wp_error( $language_result ) ) {
-				return $language_result;
-			}
-
-			$result = $this->validate_taxonomy( $movie_taxonomy, Movie_Production_Company::SLUG, __( 'Production Company', 'movie-library' ) );
-			if ( is_wp_error( $result ) ) {
-				return $result;
-			}
-
-			$tag_result = $this->validate_taxonomy( $movie_taxonomy, Movie_Tag::SLUG, __( 'Tag', 'movie-library' ) );
-			if ( is_wp_error( $tag_result ) ) {
-				return $tag_result;
+					$terms_exists = term_exists( $value, $key );
+					if ( ! term_exists( $value, $key ) ) {
+						return new WP_Error(
+							'400',
+							// translators: %1$s is the term name and %2$s is the taxonomy name.
+							sprintf( __( '%1$s term does not exist in %2$s', 'movie-library' ), $value, $key ),
+							array(
+								'status' => 400,
+							)
+						);
+					} else {
+						if ( is_array( $terms_exists ) ) {
+							$value = (int) $terms_exists['term_id'];
+						} else {
+							$value = (int) $terms_exists;
+						}
+					}
+				}
 			}
 
 			return true;
@@ -540,28 +593,34 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 		/**
 		 * This function is used to sanitize the meta data and taxonomies.
 		 *
-		 * @param \WP_REST_Request $request Request object.
-		 * @return \WP_REST_Request
+		 * @param array $object Request array.
+		 * @return array
 		 */
-		public function create_movie_sanitize( WP_REST_Request $request ): WP_REST_Request {
-			$movie = $request->get_params();
+		public function create_movie_meta_sanitize( $object ) {
 
-			$movie_meta = $movie['meta'];
-			foreach ( $movie_meta as $key => $value ) {
-				$key                = sanitize_key( $key );
-				$movie_meta[ $key ] = sanitize_text_field( $value );
+			foreach ( $object as $key => $value ) {
+				$key            = sanitize_key( $key );
+				$object[ $key ] = sanitize_text_field( $value );
 			}
 
-			$movie_tax = $movie['taxonomies'];
+			return $object;
+		}
+
+		/**
+		 * This function is used to sanitize the taxonomies.
+		 *
+		 * @param array $object Request array.
+		 *
+		 * @return array
+		 */
+		public function create_movie_taxonomies_sanitize( $object ) {
+			$movie_tax = $object['taxonomies'];
 			foreach ( $movie_tax as $key => $value ) {
 				$key               = sanitize_key( $key );
 				$movie_tax[ $key ] = sanitize_term( $value, $key );
 			}
 
-			$request->set_param( 'meta', $movie_meta );
-			$request->set_param( 'taxonomies', $movie_tax );
-
-			return $request;
+			return $object;
 		}
 
 		/**
@@ -620,34 +679,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 						)
 					);
 				}
-			}
-
-			return true;
-		}
-
-		/**
-		 * This function is used to validate the request that was sent using the movie_by_id endpoint.
-		 *
-		 * @param \WP_REST_Request $request Request object.
-		 * @return bool|\WP_Error
-		 */
-		public function movie_by_id_validate( WP_REST_Request $request ) {
-
-			$id = $request['id'];
-
-			$movie = get_post( $id );
-			if ( ! $movie || RT_Movie::SLUG !== $movie->post_type ) {
-				return new WP_Error(
-					'404',
-					__( 'Sorry, movie not found.', 'movie-library' ),
-					array(
-						'status' => 404,
-					)
-				);
-			}
-
-			if ( 'PUT' === $request->get_method() ) {
-				return $this->create_movie_validate( $request );
 			}
 
 			return true;
@@ -730,44 +761,6 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 				),
 				200
 			);
-		}
-
-		/**
-		 * This function is used to validate taxonomies.
-		 *
-		 * @param array  $movie_taxonomy Movie taxonomies.
-		 * @param string $slug Taxonomy slug.
-		 * @param string $name Taxonomy name.
-		 *
-		 * @return true|\WP_Error
-		 */
-		private function validate_taxonomy( $movie_taxonomy, $slug, $name ) {
-			if ( isset( $movie_taxonomy[ $slug ] ) && ! empty( $movie_taxonomy[ $slug ] ) ) {
-				if ( ! is_array( $movie_taxonomy[ $slug ] ) ) {
-					return new WP_Error(
-						'400',
-						// translators: %s is the taxonomy name.
-						sprintf( __( '%s should be an array.', 'movie-library' ), $name ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-				$taxonomy_terms = $movie_taxonomy[ $slug ];
-				foreach ( $taxonomy_terms as $taxonomy_term ) {
-					if ( ! is_numeric( $taxonomy_term ) ) {
-						return new WP_Error(
-							'400',
-							// translators: %s is the taxonomy name.
-							sprintf( __( '%s ID should be numeric.', 'movie-library' ), $name ),
-							array(
-								'status' => 400,
-							)
-						);
-					}
-				}
-			}
-			return true;
 		}
 	}
 }
