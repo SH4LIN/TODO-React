@@ -149,6 +149,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_commands\MLB_Export_Command'
 					if ( $meta ) {
 						foreach ( $meta as $value ) {
 							if ( ! empty( $value ) ) {
+								// Converting it into json format. So it can be easily converted into .csv.
 								$custom_post->$meta_key = wp_json_encode( maybe_unserialize( $value ) );
 							} else {
 								$custom_post->$meta_key = ' ';
@@ -165,6 +166,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_commands\MLB_Export_Command'
 			$custom_posts = array_map(
 				function( $custom_post ) use ( $taxonomies ) {
 					foreach ( $taxonomies as $taxonomy ) {
+						// Converting it into json format. So it can be easily converted into .csv.
 						$custom_post->$taxonomy = wp_json_encode( get_the_terms( $custom_post->ID, $taxonomy ) );
 					}
 					return $custom_post;
