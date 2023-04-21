@@ -20,6 +20,11 @@ if ( ! defined( 'WP_CLI' ) ) {
 use MovieLib\admin\classes\custom_post_types\RT_Movie;
 use MovieLib\admin\classes\custom_post_types\RT_Person;
 
+use MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box;
+use MovieLib\admin\classes\meta_boxes\RT_Movie_Meta_Box;
+
+use MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box;
+
 use function WP_CLI\Utils\make_progress_bar;
 
 defined( 'ABSPATH' ) || exit;
@@ -55,7 +60,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_commands\MLB_Export_Command'
 				$post_type = '';
 			}
 
-			if ( RT_Movie::SLUG === $post_type ) {
+			if ( RT_Movie::SLUG === $post_type ) { // If Post type is rt-movie. Then this will be executed.
 				$movie_export = $this->export_custom_posts( $post_type );
 				if ( false === $movie_export ) {
 					WP_CLI::error( __( 'Error while exporting rt-movie post type.', 'movie-library' ) );
@@ -63,7 +68,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_commands\MLB_Export_Command'
 					// translators: %s is the path of the exported file.
 					WP_CLI::success( sprintf( __( 'rt-movie post type exported to %s successfully.', 'movie-library' ), $movie_export ) );
 				}
-			} elseif ( RT_Person::SLUG === $post_type ) {
+			} elseif ( RT_Person::SLUG === $post_type ) { // If Post type is rt-person. Then this will be executed.
 				$person_export = $this->export_custom_posts( $post_type );
 				if ( false === $person_export ) {
 					WP_CLI::error( __( 'Error while exporting rt-person post type.', 'movie-library' ) );
@@ -71,7 +76,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_commands\MLB_Export_Command'
 					// translators: %s is the path of the exported file.
 					WP_CLI::success( sprintf( __( 'rt-person post type exported to %s successfully.', 'movie-library' ), $person_export ) );
 				}
-			} else {
+			} else { // If Post type is not passed then it will export both rt-movie and rt-person post types.
 				$movie_export = $this->export_custom_posts( RT_Movie::SLUG );
 
 				if ( false === $movie_export ) {
@@ -107,13 +112,53 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_commands\MLB_Export_Command'
 				)
 			);
 
-			$custom_posts = array_map(
-				function( $custom_post ) {
-					$custom_post->post_meta = wp_json_encode( get_movie_meta( $custom_post->ID ) );
-					return $custom_post;
-				},
-				$custom_posts
-			);
+			// Creating array of meta keys to be exported.
+			if ( RT_Movie::SLUG === $type ) {
+				$meta_keys = array(
+					RT_Movie_Meta_Box::MOVIE_META_BASIC_RUNTIME_SLUG,
+					RT_Movie_Meta_Box::MOVIE_META_BASIC_RELEASE_DATE_SLUG,
+					RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG,
+					RT_Movie_Meta_Box::MOVIE_META_CREW_SLUG . '-director',
+					RT_Movie_Meta_Box::MOVIE_META_CREW_SLUG . '-actor',
+					RT_Movie_Meta_Box::MOVIE_META_CREW_SLUG . '-producer',
+					RT_Movie_Meta_Box::MOVIE_META_CREW_SLUG . '-writer',
+					RT_Media_Meta_Box::IMAGES_SLUG,
+					RT_Media_Meta_Box::VIDEOS_SLUG,
+					RT_Media_Meta_Box::BANNER_IMAGES_SLUG,
+				);
+			} else {
+				$meta_keys = array(
+					RT_Person_Meta_Box::PERSON_META_BASIC_FULL_NAME_SLUG,
+					RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG,
+					RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_PLACE_SLUG,
+					RT_Person_Meta_Box::PERSON_META_SOCIAL_WEB_SLUG,
+					RT_Person_Meta_Box::PERSON_META_SOCIAL_FACEBOOK_SLUG,
+					RT_Person_Meta_Box::PERSON_META_SOCIAL_TWITTER_SLUG,
+					RT_Person_Meta_Box::PERSON_META_SOCIAL_INSTAGRAM_SLUG,
+					RT_Person_Meta_Box::PERSON_META_SOCIAL_INSTAGRAM_SLUG,
+				);
+			}
+
+			foreach ( $custom_posts as $custom_post ) {
+				foreach ( $meta_keys as $meta_key ) {
+					if ( RT_Movie::SLUG === $type ) {
+						$meta = get_movie_meta( $custom_post->ID, $meta_key );
+					} else {
+						$meta = get_person_meta( $custom_post->ID, $meta_key );
+					}
+					if ( $meta ) {
+						foreach ( $meta as $value ) {
+							if ( ! empty( $value ) ) {
+								$custom_post->$meta_key = wp_json_encode( maybe_unserialize( $value ) );
+							} else {
+								$custom_post->$meta_key = ' ';
+							}
+						}
+					} else {
+						$custom_post->$meta_key = ' ';
+					}
+				}
+			}
 
 			$taxonomies = get_object_taxonomies( $type );
 
@@ -146,6 +191,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_commands\MLB_Export_Command'
 			$progress->tick();
 			$csv .= $this->get_data_in_csv( $csv_header );
 			foreach ( $custom_posts as $custom_post ) {
+				// Converting the data in csv format.
 				$csv .= $this->get_data_in_csv( get_object_vars( $custom_post ) );
 				$progress->tick();
 			}
@@ -154,10 +200,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_commands\MLB_Export_Command'
 			$wp_filesystem->put_contents( wp_upload_dir()['path'] . "/$type.csv", $csv, FS_CHMOD_FILE );
 			$progress->finish();
 
-			// Get the absolute path of file.
-			$absolute_path = wp_upload_dir()['path'] . "/$type.csv";
+			// Display the absolute path of file.
 
-			return $absolute_path;
+			return wp_upload_dir()['path'] . "/$type.csv";
 		}
 
 		/**
