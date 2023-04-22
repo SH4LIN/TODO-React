@@ -78,7 +78,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 				self::BANNER_IMAGES_SLUG,
 				__( 'Movie Banners', 'movie-library' ),
 				array( $this, 'rt_media_meta_banner_images' ),
-				array( RT_Movie::SLUG, RT_Person::SLUG ),
+				array( RT_Movie::SLUG ),
 				'side',
 				'high'
 			);

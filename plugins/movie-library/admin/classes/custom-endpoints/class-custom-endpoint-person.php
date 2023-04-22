@@ -7,14 +7,11 @@
 
 namespace MovieLib\admin\classes\custom_endpoints;
 
-use DateTime;
 use MovieLib\admin\classes\custom_post_types\RT_Person;
 use MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box;
 use MovieLib\admin\classes\meta_boxes\RT_Person_Meta_Box;
-use MovieLib\admin\classes\taxonomies\Person_Career;
 use MovieLib\includes\Singleton;
 use stdClass;
-use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;
@@ -31,6 +28,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 	 */
 	class Custom_Endpoint_Person {
 		use Singleton;
+		use Custom_Endpoint_Utils;
 
 		/**
 		 * Custom_Endpoint_Person init method.
@@ -54,38 +52,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_persons' ),
 					'permission_callback' => array( $this, 'get_persons_permissions_check' ),
-					'args'                => array(
-						'per_page' => array(
-							'default'           => 10,
-							'sanitize_callback' => 'sanitize_text_field',
-							'validate_callback' => function( $value ) {
-								return is_numeric( $value );
-							},
-						),
-						'page'     => array(
-							'default'           => 1,
-							'sanitize_callback' => 'sanitize_text_field',
-							'validate_callback' => function( $value ) {
-								return is_numeric( $value );
-							},
-						),
-						'order'    => array(
-							'default'           => 'DESC',
-							'sanitize_callback' => 'sanitize_text_field',
-							'validate_callback' => function( $value ) {
-								return in_array( $value, array( 'ASC', 'DESC' ), true );
-							},
-						),
-						'orderby'  => array(
-							'default'           => 'date',
-							// Only Sanitizing the value.
-							'sanitize_callback' => 'sanitize_text_field',
-						),
-						'ids'      => array(
-							// Only Sanitizing the value.
-							'sanitize_callback' => 'sanitize_text_field',
-						),
-					),
+					'args'                => $this->get_posts_request_schema(),
 				),
 			);
 
@@ -98,31 +65,17 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 					'permission_callback' => array( $this, 'create_person_permission_check' ),
 					'args'                => array(
 						'data'       => array(
-							'required'          => true,
-							'type'              => 'object',
-							'validate_callback' => function( $object ) {
-								if ( empty( $object['post_title'] ) ) {
-									return new WP_Error(
-										'400',
-										__( 'Person Name is required.', 'movie-library' ),
-										array(
-											'status' => 400,
-										)
-									);
-								}
-								return true;
-							},
+							'required'   => true,
+							'type'       => 'object',
+							'properties' => array(
+								'post_title' => array(
+									'type'     => 'string',
+									'required' => true,
+								),
+							),
 						),
-						'meta'       => array(
-							'type'              => 'object',
-							'validate_callback' => array( $this, 'create_person_meta_validate' ),
-							'sanitize_callback' => array( $this, 'create_person_meta_sanitize' ),
-						),
-						'taxonomies' => array(
-							'type'              => 'object',
-							'validate_callback' => array( $this, 'create_person_taxonomies_validate' ),
-							'sanitize_callback' => array( $this, 'create_person_taxonomies_sanitize' ),
-						),
+						'meta'       => $this->create_person_meta_schema(),
+						'taxonomies' => $this->get_post_taxonomy_schema(),
 					),
 				),
 			);
@@ -142,16 +95,8 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 								return is_numeric( $value );
 							},
 						),
-						'meta'       => array(
-							'type'              => 'object',
-							'validate_callback' => array( $this, 'create_person_meta_validate' ),
-							'sanitize_callback' => array( $this, 'create_person_meta_sanitize' ),
-						),
-						'taxonomies' => array(
-							'type'              => 'object',
-							'validate_callback' => array( $this, 'create_person_taxonomies_validate' ),
-							'sanitize_callback' => array( $this, 'create_person_taxonomies_sanitize' ),
-						),
+						'meta'       => $this->create_person_meta_schema(),
+						'taxonomies' => $this->get_post_taxonomy_schema(),
 					),
 				),
 			);
@@ -244,10 +189,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 		 */
 		public function get_persons_permissions_check() {
 			if ( ! current_user_can( 'read' ) ) {
-				return new WP_Error(
-					'401',
+				return $this->get_error_response(
 					__( 'Sorry, you cannot view the persons.', 'movie-library' ),
-					array( 'status' => rest_authorization_required_code() ),
+					rest_authorization_required_code()
 				);
 			}
 			return true;
@@ -284,10 +228,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 			}
 
 			if ( is_wp_error( $person_id ) || 0 === $person_id ) {
-				return new WP_Error(
-					'500',
+				return $this->get_error_response(
 					__( 'Something went wrong.', 'movie-library' ),
-					array( 'status' => 500 ),
+					500
 				);
 			}
 
@@ -329,357 +272,12 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 		 */
 		public function create_person_permission_check( WP_REST_Request $request ) {
 			if ( ! current_user_can( 'edit_posts' ) ) {
-				return new WP_Error(
-					'401',
+				return $this->get_error_response(
 					__( 'Sorry, you are not allowed to create person.', 'movie-library' ),
-					array(
-						'status' => 401,
-					)
+					rest_authorization_required_code()
 				);
 			}
 			return true;
-		}
-
-		/**
-		 * This function is used to validate meta-data to create person.
-		 *
-		 * @param \object $object Request object.
-		 *
-		 * @return bool|\WP_Error
-		 */
-		public function create_person_meta_validate( $object ) {
-			if ( isset( $object[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG ] ) &&
-				! empty( $object[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG ] )
-			) {
-				if ( ! is_string( $object[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG ] ) ) {
-					return new WP_Error(
-						'400',
-						__( 'Birth date should be in string format.', 'movie-library' ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-				$date_str    = $object[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG ];
-				$date_format = 'Y-m-d';
-
-				$date = DateTime::createFromFormat( $date_format, $date_str );
-
-				if ( false === $date ) {
-					return new WP_Error(
-						'400',
-						__( 'Birth date should be in 1967-12-22 (Y-m-d) format.', 'movie-library' ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-			}
-
-			if ( isset( $object[ RT_Person_Meta_Box::PERSON_META_BASIC_START_YEAR_SLUG ] ) &&
-				! empty( $object[ RT_Person_Meta_Box::PERSON_META_BASIC_START_YEAR_SLUG ] )
-			) {
-				if ( ! is_string( $object[ RT_Person_Meta_Box::PERSON_META_BASIC_START_YEAR_SLUG ] ) ) {
-					return new WP_Error(
-						'400',
-						__( 'Career start year should be in string format.', 'movie-library' ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-				$date_str    = $object[ RT_Person_Meta_Box::PERSON_META_BASIC_START_YEAR_SLUG ];
-				$date_format = 'Y-m-d';
-
-				$date = DateTime::createFromFormat( $date_format, $date_str );
-
-				if ( false === $date ) {
-					return new WP_Error(
-						'400',
-						__( 'Career start date should be in 1967-12-22 (Y-m-d) format.', 'movie-library' ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-			}
-
-			if ( isset( $object[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_PLACE_SLUG ] ) &&
-				! empty( $object[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_PLACE_SLUG ] )
-			) {
-				if ( ! is_string( $object[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_PLACE_SLUG ] ) ) {
-					return new WP_Error(
-						'400',
-						__( 'Birth place should be in string format.', 'movie-library' ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-			}
-
-			if ( isset( $object[ RT_Person_Meta_Box::PERSON_META_BASIC_FULL_NAME_SLUG ] ) &&
-				! empty( $object[ RT_Person_Meta_Box::PERSON_META_BASIC_FULL_NAME_SLUG ] )
-			) {
-				if ( ! is_string( $object[ RT_Person_Meta_Box::PERSON_META_BASIC_FULL_NAME_SLUG ] ) ) {
-					return new WP_Error(
-						'400',
-						__( 'Full Name should be in string format.', 'movie-library' ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-			}
-
-			if ( isset( $object[ RT_Person_Meta_Box::PERSON_META_SOCIAL_TWITTER_SLUG ] ) &&
-				! empty( RT_Person_Meta_Box::PERSON_META_SOCIAL_TWITTER_SLUG )
-			) {
-				if ( ! is_string( $object[ RT_Person_Meta_Box::PERSON_META_SOCIAL_TWITTER_SLUG ] ) ) {
-					return new WP_Error(
-						'400',
-						__( 'Twitter URL should be in string format.', 'movie-library' ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-				$twitter_url = $object[ RT_Person_Meta_Box::PERSON_META_SOCIAL_TWITTER_SLUG ];
-				if ( ! filter_var( $twitter_url, FILTER_VALIDATE_URL ) ) {
-					return new WP_Error(
-						'400',
-						__( 'Twitter URL should be in valid format.', 'movie-library' ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-			}
-
-			if ( isset( $object[ RT_Person_Meta_Box::PERSON_META_SOCIAL_FACEBOOK_SLUG ] ) &&
-				! empty( RT_Person_Meta_Box::PERSON_META_SOCIAL_FACEBOOK_SLUG )
-			) {
-				if ( ! is_string( $object[ RT_Person_Meta_Box::PERSON_META_SOCIAL_FACEBOOK_SLUG ] ) ) {
-					return new WP_Error(
-						'400',
-						__( 'Facebook URL should be in string format.', 'movie-library' ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-				$facebook_url = $object[ RT_Person_Meta_Box::PERSON_META_SOCIAL_FACEBOOK_SLUG ];
-				if ( ! filter_var( $facebook_url, FILTER_VALIDATE_URL ) ) {
-					return new WP_Error(
-						'400',
-						__( 'Facebook URL should be in valid format.', 'movie-library' ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-			}
-
-			if ( isset( $object[ RT_Person_Meta_Box::PERSON_META_SOCIAL_INSTAGRAM_SLUG ] ) &&
-				! empty( RT_Person_Meta_Box::PERSON_META_SOCIAL_INSTAGRAM_SLUG )
-			) {
-				if ( ! is_string( $object[ RT_Person_Meta_Box::PERSON_META_SOCIAL_INSTAGRAM_SLUG ] ) ) {
-					return new WP_Error(
-						'400',
-						__( 'Instagram URL should be in string format.', 'movie-library' ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-				$instagram_url = $object[ RT_Person_Meta_Box::PERSON_META_SOCIAL_INSTAGRAM_SLUG ];
-				if ( ! filter_var( $instagram_url, FILTER_VALIDATE_URL ) ) {
-					return new WP_Error(
-						'400',
-						__( 'Instagram URL should be in valid format.', 'movie-library' ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-			}
-
-			if ( isset( $object[ RT_Person_Meta_Box::PERSON_META_SOCIAL_WEB_SLUG ] ) &&
-				! empty( RT_Person_Meta_Box::PERSON_META_SOCIAL_WEB_SLUG )
-			) {
-				if ( ! is_string( $object[ RT_Person_Meta_Box::PERSON_META_SOCIAL_WEB_SLUG ] ) ) {
-					return new WP_Error(
-						'400',
-						__( 'Web URL should be in string format.', 'movie-library' ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-				// Validate twitter url.
-				$web_url = $object[ RT_Person_Meta_Box::PERSON_META_SOCIAL_WEB_SLUG ];
-				if ( ! filter_var( $web_url, FILTER_VALIDATE_URL ) ) {
-					return new WP_Error(
-						'400',
-						__( 'Web URL should be in valid format.', 'movie-library' ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-			}
-
-			if ( isset( $object[ RT_Media_Meta_Box::IMAGES_SLUG ] ) &&
-				! empty( $object[ RT_Media_Meta_Box::IMAGES_SLUG ] )
-			) {
-				if ( ! is_array( $object[ RT_Media_Meta_Box::IMAGES_SLUG ] ) ) {
-					return new WP_Error(
-						'400',
-						__( 'Images should be an array.', 'movie-library' ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-				$images = $object[ RT_Media_Meta_Box::IMAGES_SLUG ];
-				foreach ( $images as $image ) {
-					if ( ! is_numeric( $image ) ) {
-						return new WP_Error(
-							'400',
-							__( 'Image ID should be numeric.', 'movie-library' ),
-							array(
-								'status' => 400,
-							)
-						);
-					}
-				}
-			}
-
-			if ( isset( $object[ RT_Media_Meta_Box::VIDEOS_SLUG ] ) &&
-				! empty( $object[ RT_Media_Meta_Box::VIDEOS_SLUG ] )
-			) {
-				if ( ! is_array( $object[ RT_Media_Meta_Box::VIDEOS_SLUG ] ) ) {
-					return new WP_Error(
-						'400',
-						__( 'Videos should be an array.', 'movie-library' ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-				$videos = $object[ RT_Media_Meta_Box::VIDEOS_SLUG ];
-				foreach ( $videos as $video ) {
-					if ( ! is_numeric( $video ) ) {
-						return new WP_Error(
-							'400',
-							__( 'Video ID should be numeric.', 'movie-library' ),
-							array(
-								'status' => 400,
-							)
-						);
-					}
-				}
-			}
-
-			return true;
-		}
-
-		/**
-		 * This function is used to validate taxonomies to create person.
-		 *
-		 * @param object $object Object to validate.
-		 *
-		 * @return true|\WP_Error
-		 */
-		public function create_person_taxonomies_validate( $object ) {
-			foreach ( $object as $key => $values ) {
-				if ( ! taxonomy_exists( $key ) ) {
-					return new WP_Error(
-						'400',
-						// translators: %s is the taxonomy name.
-						sprintf( __( '%s is not a valid taxonomy.', 'movie-library' ), $key ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-				if ( ! is_array( $values ) ) {
-					return new WP_Error(
-						'400',
-						// translators: %s is the taxonomy name.
-						sprintf( __( '%s should be an array.', 'movie-library' ), $key ),
-						array(
-							'status' => 400,
-						)
-					);
-				}
-				foreach ( $values as $value ) {
-					if ( ! is_numeric( $value ) ) {
-						return new WP_Error(
-							'400',
-							// translators: %s is the taxonomy name.
-							sprintf( __( '%s should be numeric.', 'movie-library' ), $key ),
-							array(
-								'status' => 400,
-							)
-						);
-					}
-
-					if ( ! term_exists( $value, $key ) ) {
-						return new WP_Error(
-							'400',
-							// translators: %1$s is the term name and %2$s is the taxonomy name.
-							sprintf( __( '%1$s term does not exist in %2$s', 'movie-library' ), $value, $key ),
-							array(
-								'status' => 400,
-							)
-						);
-					}
-				}
-			}
-
-			return true;
-		}
-
-		/**
-		 * This function is used to sanitize meta data to create person.
-		 *
-		 * @param object $object Request object.
-		 *
-		 * @return object
-		 */
-		public function create_person_meta_sanitize( $object ) {
-			foreach ( $object as $key => $value ) {
-				$key = sanitize_key( $key );
-				if ( RT_Person_Meta_Box::PERSON_META_SOCIAL_INSTAGRAM_SLUG === $key ||
-					RT_Person_Meta_Box::PERSON_META_SOCIAL_FACEBOOK_SLUG === $key ||
-					RT_Person_Meta_Box::PERSON_META_SOCIAL_TWITTER_SLUG === $key ||
-					RT_Person_Meta_Box::PERSON_META_SOCIAL_WEB_SLUG === $key
-				) {
-					$object[ $key ] = esc_url_raw( $value );
-				} else {
-					$object[ $key ] = sanitize_text_field( $value );
-				}
-			}
-
-			return $object;
-		}
-
-		/**
-		 * This function is used to sanitize taxonomies to create person.
-		 *
-		 * @param \object $object Request object.
-		 *
-		 * @return object
-		 */
-		public function create_person_taxonomies_sanitize( $object ) {
-
-			foreach ( $object as $key => $value ) {
-				$key                = sanitize_key( $key );
-				$person_tax[ $key ] = sanitize_term( $value, $key );
-			}
-
-			return $object;
 		}
 
 		/**
@@ -710,32 +308,23 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 			$id = $request['id'];
 			if ( 'DELETE' === $request->get_method() ) {
 				if ( ! current_user_can( 'delete_post', $id ) ) {
-					return new WP_Error(
-						'401',
+					return $this->get_error_response(
 						__( 'Sorry, you are not allowed to delete person.', 'movie-library' ),
-						array(
-							'status' => 401,
-						)
+						rest_authorization_required_code()
 					);
 				}
 			} elseif ( 'PUT' === $request->get_method() ) {
 				if ( ! current_user_can( 'edit_post', $id ) ) {
-					return new WP_Error(
-						'401',
+					return $this->get_error_response(
 						__( 'Sorry, you are not allowed to update person.', 'movie-library' ),
-						array(
-							'status' => 401,
-						)
+						rest_authorization_required_code()
 					);
 				}
 			} else {
 				if ( ! current_user_can( 'read' ) ) {
-					return new WP_Error(
-						'401',
+					return $this->get_error_response(
 						__( 'Sorry, you are not allowed to view person.', 'movie-library' ),
-						array(
-							'status' => 401,
-						)
+						rest_authorization_required_code()
 					);
 				}
 			}
@@ -757,10 +346,9 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 			$deleted = wp_delete_post( $person_id, $force_delete );
 
 			if ( ! $deleted ) {
-				return new WP_Error(
-					'500',
+				return $this->get_error_response(
 					__( 'Something went wrong.', 'movie-library' ),
-					array( 'status' => 500 ),
+					500
 				);
 			}
 
@@ -820,6 +408,78 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Pe
 				),
 				200
 			);
+		}
+
+		/**
+		 * This function specifies the schema for the movie meta.
+		 *
+		 * @return array
+		 */
+		public function create_person_meta_schema(): array {
+			return array(
+				'type'              => 'object',
+				'sanitize_callback' => array( $this, 'mlb_sanitize' ),
+				'validate_callback' => array( $this, 'create_person_meta_validate' ),
+				'properties'        => array(
+					RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG => array(
+						'type' => 'string',
+					),
+					RT_Person_Meta_Box::PERSON_META_BASIC_START_YEAR_SLUG => array(
+						'type' => 'string',
+					),
+					RT_Person_Meta_Box::PERSON_META_BASIC_FULL_NAME_SLUG => array(
+						'type' => 'string',
+					),
+					RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_PLACE_SLUG => array(
+						'type' => 'string',
+					),
+				),
+				'patternProperties' => array(
+					'^' . RT_Person_Meta_Box::PERSON_META_SOCIAL_WEB_SLUG . '-[a-z-A-Z]+$' => array(
+						'type'   => 'string',
+						'format' => 'uri',
+					),
+					'^' . RT_Media_Meta_Box::SLUG . '-[a-z-A-Z]+$' => array(
+						'type'        => 'array',
+						'uniqueItems' => true,
+						'items'       => array(
+							'type' => 'integer',
+						),
+					),
+				),
+			);
+		}
+
+		/**
+		 * This function is used to sanitize the meta data and taxonomies.
+		 *
+		 * @param array            $value   Value to sanitize.
+		 * @param \WP_REST_Request $request Request object.
+		 * @param string           $param   Parameter name.
+		 *
+		 * @return true|\WP_Error
+		 */
+		public function create_person_meta_validate( $value, $request, $param ) {
+			$result = rest_validate_value_from_schema( $value, $this->create_person_meta_schema(), $param );
+			if ( is_wp_error( $result ) ) {
+				return $result;
+			}
+
+			if ( false === $this->validate_date( $value[ RT_Person_Meta_Box::PERSON_META_BASIC_START_YEAR_SLUG ] ) ) {
+				return $this->get_error_response(
+					__( 'Career start date should be in 1967-12-22 (Y-m-d) format.', 'movie-library' ),
+					400
+				);
+			}
+
+			if ( false === $this->validate_date( $value[ RT_Person_Meta_Box::PERSON_META_BASIC_BIRTH_DATE_SLUG ] ) ) {
+				return $this->get_error_response(
+					__( 'Career start date should be in 1967-12-22 (Y-m-d) format.', 'movie-library' ),
+					400
+				);
+			}
+
+			return true;
 		}
 	}
 }
