@@ -143,6 +143,20 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_commands\MLB_Export_Command'
 				foreach ( $meta_keys as $meta_key ) {
 					if ( RT_Movie::SLUG === $type ) {
 						$meta = get_movie_meta( $custom_post->ID, $meta_key );
+						if ( str_starts_with( $meta_key, RT_Movie_Meta_Box::MOVIE_META_CREW_SLUG ) ) {
+							$meta = array_map(
+								function( $person ) {
+									foreach ( $person as &$value ) {
+										$custom_post = get_post( $value['person_id'] );
+										if ( $custom_post ) {
+											$value['person_slug'] = $custom_post->post_name;
+										}
+									}
+									return $person;
+								},
+								$meta
+							);
+						}
 					} else {
 						$meta = get_person_meta( $custom_post->ID, $meta_key );
 					}
