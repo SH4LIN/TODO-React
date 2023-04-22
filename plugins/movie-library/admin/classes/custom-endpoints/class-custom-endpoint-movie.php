@@ -136,23 +136,23 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 				'per_page' => array(
 					'default'           => 10,
 					'type'              => 'integer',
-					'sanitize_callback' => array( $this, 'create_movie_sanitize' ),
-					'validate_callback' => function ( $param, $request, $key ) {
-						return rest_validate_value_from_schema( $param, $this->get_movies_request_schema(), $key );
+					'sanitize_callback' => array( $this, 'movie_sanitize' ),
+					'validate_callback' => function( $value ) {
+						return is_numeric( $value );
 					},
 				),
 				'page'     => array(
 					'default'           => 1,
 					'type'              => 'integer',
-					'sanitize_callback' => array( $this, 'create_movie_sanitize' ),
-					'validate_callback' => function ( $param, $request, $key ) {
-						return rest_validate_value_from_schema( $param, $this->get_movies_request_schema(), $key );
+					'sanitize_callback' => array( $this, 'movie_sanitize' ),
+					'validate_callback' => function( $value ) {
+						return is_numeric( $value );
 					},
 				),
 				'order'    => array(
 					'default'           => 'DESC',
 					'type'              => 'string',
-					'sanitize_callback' => array( $this, 'create_movie_sanitize' ),
+					'sanitize_callback' => array( $this, 'movie_sanitize' ),
 					'validate_callback' => function( $value ) {
 						return in_array( $value, array( 'ASC', 'DESC' ), true );
 					},
@@ -161,18 +161,18 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 					'default'           => 'date',
 					'type'              => 'string',
 					// Only Sanitizing the value.
-					'sanitize_callback' => array( $this, 'create_movie_sanitize' ),
-					'validate_callback' => function ( $param, $request, $key ) {
-						return rest_validate_value_from_schema( $param, $this->get_movies_request_schema(), $key );
+					'sanitize_callback' => array( $this, 'movie_sanitize' ),
+					'validate_callback' => function( $value ) {
+						return is_string( $value );
 					},
 				),
 				'ids'      => array(
 					'type'  => 'array',
 					'items' => array(
 						'type'              => 'integer',
-						'sanitize_callback' => array( $this, 'create_movie_sanitize' ),
-						'validate_callback' => function ( $param, $request, $key ) {
-							return rest_validate_value_from_schema( $param, $this->get_movies_request_schema(), $key );
+						'sanitize_callback' => array( $this, 'movie_sanitize' ),
+						'validate_callback' => function( $value ) {
+							return is_numeric( $value );
 						},
 					),
 
@@ -600,7 +600,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 		public function get_movie_meta_schema(): array {
 			return array(
 				'type'              => 'object',
-				'sanitize_callback' => array( $this, 'create_movie_sanitize' ),
+				'sanitize_callback' => array( $this, 'movie_sanitize' ),
 				'validate_callback' => array( $this, 'create_movie_meta_validate' ),
 				'properties'        => array(
 					RT_Movie_Meta_Box::MOVIE_META_BASIC_RATING_SLUG => array(
@@ -656,7 +656,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 			return array(
 				'type'              => 'object',
 				'validate_callback' => array( $this, 'create_movie_taxonomies_validate' ),
-				'sanitize_callback' => array( $this, 'create_movie_sanitize' ),
+				'sanitize_callback' => array( $this, 'movie_sanitize' ),
 				'patternProperties' => array(
 					'^.*$' => array(
 						'type'  => 'array',
@@ -677,7 +677,7 @@ if ( ! class_exists( 'MovieLib\admin\classes\custom_endpoints\Custom_Endpoint_Mo
 		 *
 		 * @return array|string
 		 */
-		public function create_movie_sanitize( $value, $request, $param ) {
+		public function movie_sanitize( $value, $request, $param ) {
 			return $this->mlb_sanitize_text_field_recursive( $value );
 		}
 
