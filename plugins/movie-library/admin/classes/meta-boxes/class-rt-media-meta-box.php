@@ -27,6 +27,11 @@ if ( ! class_exists( 'MovieLib\admin\classes\meta_boxes\RT_Media_Meta_Box' ) ) {
 		use Singleton;
 
 		/**
+		 * RT_MEDIA_META_SLUG
+		 */
+		const SLUG = 'rt-media-meta';
+
+		/**
 		 * RT_MEDIA_META_IMAGES_SLUG
 		 */
 		const IMAGES_SLUG = 'rt-media-meta-images';
