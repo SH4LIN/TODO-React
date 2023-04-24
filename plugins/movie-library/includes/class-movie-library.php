@@ -91,6 +91,8 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 				)
 			);
 
+			add_action( 'admin_init', array( $this, 'get_credentials' ) );
+
 			add_filter( 'enter_title_here', array( $this, 'change_title_text' ), 10, 2 );
 			add_filter( 'write_your_story', array( $this, 'change_post_content_text' ), 10, 2 );
 		}
@@ -171,6 +173,21 @@ if ( ! class_exists( 'MovieLib\includes\Movie_Library' ) ) {
 			RT_Person_Meta_Box::instance();
 			RT_Media_Meta_Box::instance();
 
+		}
+
+		/**
+		 * This function is used to get the credentials for WP_FileSystem.
+		 */
+		public function get_credentials(): void {
+			$creds = request_filesystem_credentials( admin_url(), '', false, false );
+
+			if ( false === $creds ) {
+				return;
+			}
+
+			if ( ! WP_Filesystem( $creds ) ) {
+				request_filesystem_credentials( admin_url(), '', true, false );
+			}
 		}
 
 		/**
