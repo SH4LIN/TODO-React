@@ -7,6 +7,7 @@ This is a simple TODO app built using ReactJS.
 - [Installation](#installation)
 - [Overview](#overview)
 - [Usage](#usage)
+- [Screenshots](#screenshots)
 
 ## Installation
 
@@ -51,5 +52,9 @@ This is a simple TODO app built using ReactJS.
 6. If the task is in the completed tasks list, click on it to mark it as incomplete. (Delete or Edit Buttons won't be visible if it is in Completed tasks list)
 7. Click on the clear all button to delete all the tasks.
 8. You can search for a task by typing in the search field.
+
+## Screenshots
+
+![steady-cheesecake-592aa7 netlify app_](https://user-images.githubusercontent.com/56588503/234565254-06e31bbc-d852-4b59-97a0-d52f47857033.png)
 
 
