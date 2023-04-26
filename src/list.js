@@ -29,9 +29,6 @@ function List ({listName, list, checkTask, deleteTask, editTask}) {
 						if (item.done) {
 							itemClass += " done";
 						}
-						const check = <FontAwesomeIcon className="check-button" icon={faCheck} onClick={(e) => {
-							checkTask(item.id)
-						}}/>
 						const edit = <FontAwesomeIcon className="edit-button" icon={faPenToSquare} onClick={() => {
 							editTask(item.id, item.value)
 						}}/>
@@ -40,10 +37,11 @@ function List ({listName, list, checkTask, deleteTask, editTask}) {
 						}}/>
 						return (
 							<div className={itemClass} key={item.id}>
-								{
-									// Displaying check button only if task is not completed.
-									item.done ?  null : check
-								}
+
+								<input type="checkbox" checked={item.done} onChange={()=> {
+									checkTask(item.id)
+								}}/>
+
 								<div className="task-name">
 									{item.value}
 								</div>

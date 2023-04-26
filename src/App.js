@@ -132,7 +132,7 @@ function ToDo() {
                 </div>
                 <div className="ToDo-error">{error}</div>
                 {/*Displaying Completed List*/}
-                <List listName="Completed Tasks" list={completedTasks} />
+                <List listName="Completed Tasks" list={completedTasks} checkTask={checkTask} />
             </div>
         </div>
     );
