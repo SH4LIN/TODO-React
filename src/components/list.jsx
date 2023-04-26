@@ -1,3 +1,7 @@
+/**
+ * This file is used to create the TODO List for the Task list and Completed list.
+ */
+
 import './list.css'
 import {faPenToSquare, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -10,10 +14,11 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
  * @param checkTask
  * @param deleteTask
  * @param editTask
+ * @param clearAll
  * @returns {JSX.Element|null}
  * @constructor
  */
-function List ({listName, list, checkTask, deleteTask, editTask}) {
+function List ({listName, list, checkTask, deleteTask, editTask, clearAll=null}) {
 	// Returning if list is empty.
 	if(list.length === 0) {
 		return null;
@@ -22,6 +27,10 @@ function List ({listName, list, checkTask, deleteTask, editTask}) {
 		<div className="ToDo-list-container">
 			<h1 className="ToDo-heading">{listName}</h1>
 			<div className="ToDo-list">
+				{clearAll !== null ? <div className="ToDo-clear-all-container">
+					{clearAll}
+				</div> : null}
+
 				{
 					list.map((item, index) => {
 						let itemClass = "ToDo-item";

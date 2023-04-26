@@ -33,3 +33,14 @@
     justify-content: center;
     min-height: 500px;
 }
+
+.ToDo-clear-all {
+    background-color: #1f1a1a;
+    color: #fff;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+}

@@ -30,7 +30,6 @@ This is a simple TODO app built using ReactJS.
     - Delete a task
     - Edit a task
     - Filter tasks
-    - Sort tasks
     - Clear all tasks
     - Uncomplete a task
 
@@ -51,7 +50,6 @@ This is a simple TODO app built using ReactJS.
 5. When task is marked as complete it will move into the completed tasks list.
 6. If the task is in the completed tasks list, click on it to mark it as incomplete. (Delete or Edit Buttons won't be visible if it is in Completed tasks list)
 7. Click on the clear all button to delete all the tasks.
-8. Click on the filter buttons to filter the tasks.
-9. Click on the sort button to sort the tasks.
+8. You can search for a task by typing in the search field.
 
 
