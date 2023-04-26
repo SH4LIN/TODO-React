@@ -4,7 +4,9 @@ import './index.css';
 import ToDo from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Creating a root for the app.
 const root = ReactDOM.createRoot(document.getElementById('root'));
+// Rendering the ToDo Component.
 root.render(
   <React.StrictMode>
     <ToDo />

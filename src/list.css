@@ -1,3 +1,8 @@
+/**
+ * This file contains the CSS for the TODO LIST Component.
+ */
+
+/* TODO List Component CSS */
 .ToDo-list-container {
 	width: 100%;
 	margin: 1em;
@@ -99,6 +104,7 @@ input[type="checkbox"] {
 	border-radius: 5px;
 	display: grid;
 	place-content: center;
+	cursor: pointer;
 }
 
 input[type="checkbox"]::before {
