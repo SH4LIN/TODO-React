@@ -19,7 +19,13 @@ function UserInput ({placeholder, error, inputRef, buttonOnClick, isUpdate,isSea
     return (
         <div className="ToDo-list-container">
             <div className={"ToDo-input-container"}>
-                <input placeholder={placeholder} type="text" onChange={isSearch?onSearchChange:null} className={"ToDo-input" + (!isSearch && error !== null ? " ToDo-input-error" : "")} ref={inputRef}/>
+                <input
+                    placeholder={placeholder}
+                    type="text"
+                    onChange={isSearch?onSearchChange:null}
+                    className={"ToDo-input" + (!isSearch && error !== null ? " ToDo-input-error" : "")}
+                    ref={inputRef}
+                />
 
                 {!isSearch ?<Button message={isUpdate ? "UPDATE" : "ADD"} onClick={buttonOnClick}/> : null}
             </div>
