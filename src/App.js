@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from 'react'
 import './App.css';
-import List from './list'
+import List from './components/list'
+import UserInput from "./components/user-input";
 
 /**
  * This function is used to create a TODO App.
@@ -126,11 +127,7 @@ function ToDo() {
             <div className="ToDo">
                 {/*Displaying the TODO List.*/}
                 <List listName="Tasks" list={remainingTasks} checkTask={checkTask} deleteTask={deleteTask} editTask={editTask} />
-                <div className={"ToDo-input-container"}>
-                    <input type="text" className={"ToDo-input" + (error !== null ? " ToDo-input-error" : "")} ref={todoInput}/>
-                    <button className="ToDo-add" onClick={addTask}>{ isUpdate ? "UPDATE" : "ADD" }</button>
-                </div>
-                <div className="ToDo-error">{error}</div>
+                <UserInput todoInput={todoInput} addTask={addTask} error={error} isUpdate={isUpdate} />
                 {/*Displaying Completed List*/}
                 <List listName="Completed Tasks" list={completedTasks} checkTask={checkTask} />
             </div>
