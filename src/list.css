@@ -1,0 +1,78 @@
+.ToDo-list {
+	min-height: 200px;
+	max-height: 500px;
+	width: 100%;
+	overflow-y: auto;
+	margin: 1em;
+	display: flex;
+	flex-direction: column;
+	padding: 1em;
+
+}
+
+
+.ToDo-item {
+	display: grid;
+	align-items: center;
+	grid-template-columns: 10% 60% 10% 10%;
+	margin: 1em 0;
+	padding: 2em;
+	gap: 1.5em;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	border: 2px solid #1f1a1a;
+}
+
+.done {
+	background-color: #14d31c;
+	border: 2px solid #14d31c;
+	box-shadow: 0 0 10px #14d31c;
+}
+
+.task-name {
+	font-size: 1.2em;
+	font-weight: 600;
+	word-break: break-all;
+}
+
+.edit-button{
+	font-size: 24px;
+	cursor: pointer;
+	padding: 14px;
+	color: #000;
+}
+
+.edit-button:hover {
+	border-radius: 50%;
+	background-color: #4caf50;
+	color: #fff;
+}
+
+.delete-button {
+	font-size: 24px;
+	cursor: pointer;
+	padding: 14px;
+	color: #000;
+}
+
+.delete-button:hover {
+	border-radius: 50%;
+	background-color: #f44336;
+	color: #fff;
+}
+
+.square {
+	width: 20px;
+	height: 20px;
+	border-radius: 5px;
+	border: 2px solid #1f1a1a;
+	cursor: pointer;
+}
+
+.check-button {
+	font-size: 24px;
+	cursor: pointer;
+	padding: 14px;
+	color: #000;
+}

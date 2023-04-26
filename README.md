@@ -1,29 +1,70 @@
-# Movie Library Assignment
+# Getting Started with Create React App
 
-## Environments
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-| Environment | Branch  | URL                 | Hostname            |
-|-------------|---------|---------------------|---------------------|
-| Development | develop | https://example.com | develop.example.com |
+## Available Scripts
 
-## Development Workflow
+In the project directory, you can run:
 
-Refer [DEVELOPMENT.md](DEVELOPMENT.md).
+### `npm start`
 
-### Skeleton Guide
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-Please read the skeleton repo guide to understand the structure of repo: [SKELETON-GUIDE.md](./SKELETON-GUIDE.md)
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-### Code Review Checklist
+### `npm test`
 
-- Make sure [Coding Standards and Best Practices](https://learn.rtcamp.com/courses/wordpress-development-basics/l/coding-standards-and-best-practices/) followed.
-- There should not be any PHPCS feedback comment on PR by rtBot.
-- Make sure sanitization and escaping followed and applied correctly. For example, `esc_html()` should not be used to escape HTML tag attributes.
-- Make sure plugin and theme I18N ready. For example, all the static strings displayed to user should be transtable using `__()` or other similar functions and correct text-domain used.
-- Make sure PHP namespace and autoloading implemented.
-- Make sure OOP concept followed.
-- Make sure inline documentation added.
-- Make sure PR title and description is descriptive.
-- Give feedback on logical reasoning, suggest better/optimum solution and approaches.
-- Do not give feedback on plugin & theme files/folder architecture.
-- Try to avoid personal preferences/like/dislike in code review. For example, if there is better way to achieve something and current way is also fine then in those cases, you can give suggestions instead of feedback.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
