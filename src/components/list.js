@@ -1,5 +1,5 @@
 import './list.css'
-import {faCheck, faPenToSquare, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faPenToSquare, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 /**
