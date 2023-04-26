@@ -14,6 +14,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
  * @constructor
  */
 function List ({listName, list, checkTask, deleteTask, editTask}) {
+	// Returning if list is empty.
 	if(list.length === 0) {
 		return null;
 	}
@@ -24,6 +25,7 @@ function List ({listName, list, checkTask, deleteTask, editTask}) {
 				{
 					list.map((item, index) => {
 						let itemClass = "ToDo-item";
+						// Adding done class if task is completed.
 						if (item.done) {
 							itemClass += " done";
 						}
@@ -39,15 +41,18 @@ function List ({listName, list, checkTask, deleteTask, editTask}) {
 						return (
 							<div className={itemClass} key={item.id}>
 								{
+									// Displaying check button only if task is not completed.
 									item.done ?  null : check
 								}
 								<div className="task-name">
 									{item.value}
 								</div>
 								{
+									// Displaying edit button only if task is not completed.
 									item.done ?  null : edit
 								}
 								{
+									// Displaying delete button only if task is not completed.
 									item.done ?  null : deleteItem
 								}
 							</div>

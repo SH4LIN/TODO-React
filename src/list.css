@@ -36,16 +36,24 @@
 }
 
 .done {
-	background-color: #14d31c;
-	border: 2px solid #14d31c;
+	background-color: #1f1a1a;
+	border: 2px solid #1f1a1a;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	color: #fff;
 }
 
 .task-name {
 	font-size: 1em;
 	font-weight: 600;
-	word-break: break-all;
+	overflow-x: auto;
+	-ms-overflow-style: none;  /* Internet Explorer 10+ */
+	scrollbar-width: none;  /* Firefox */
 	flex: 1;
+	white-space: nowrap;
+}
+
+.task-name::-webkit-scrollbar {
+	display: none;
 }
 
 .edit-button{
