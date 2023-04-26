@@ -77,7 +77,7 @@ function ToDo() {
 
     return (
         <div className="ToDo">
-            <h1 className="ToDo-heading">TODO LIST</h1>
+            <h1 className="ToDo-heading">{"TODO LIST"}</h1>
             <input type="text" value={inputValue} className="ToDo-input" onChange={inputChange}/>
             <button className="ToDo-add" onClick={addTask}>{ isUpdate ? "UPDATE" : "ADD" }</button>
             <List list={toDoList} checkTask={checkTask} deleteTask={deleteTask} editTask={editTask} />
