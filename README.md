@@ -7,8 +7,6 @@ This is a simple TODO app built using ReactJS.
 - [Installation](#installation)
 - [Overview](#overview)
 - [Usage](#usage)
-- [License](#license)
-- [Author](#author)
 
 ## Installation
 
