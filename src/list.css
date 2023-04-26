@@ -1,23 +1,34 @@
-.ToDo-list {
-	min-height: 200px;
-	max-height: 500px;
+.ToDo-list-container {
 	width: 100%;
-	overflow-y: auto;
 	margin: 1em;
-	display: flex;
-	flex-direction: column;
-	padding: 1em;
-
 }
 
+.ToDo-heading {
+	font-size: 2em;
+	font-weight: 600;
+	color: #333;
+	text-align: center;
+}
+
+.ToDo-list {
+	max-height: 300px;
+	overflow-y: auto;
+	-ms-overflow-style: none;  /* Internet Explorer 10+ */
+	scrollbar-width: none;  /* Firefox */
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.ToDo-list::-webkit-scrollbar {
+	display: none;
+}
 
 .ToDo-item {
-	display: grid;
+	display: flex;
 	align-items: center;
-	grid-template-columns: 10% 60% 10% 10%;
 	margin: 1em 0;
-	padding: 2em;
-	gap: 1.5em;
+	padding: 2em 1em;
 	background-color: #fff;
 	border-radius: 10px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -27,17 +38,18 @@
 .done {
 	background-color: #14d31c;
 	border: 2px solid #14d31c;
-	box-shadow: 0 0 10px #14d31c;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .task-name {
-	font-size: 1.2em;
+	font-size: 1em;
 	font-weight: 600;
 	word-break: break-all;
+	flex: 1;
 }
 
 .edit-button{
-	font-size: 24px;
+	font-size: 18px;
 	cursor: pointer;
 	padding: 14px;
 	color: #000;
@@ -50,7 +62,7 @@
 }
 
 .delete-button {
-	font-size: 24px;
+	font-size: 18px;
 	cursor: pointer;
 	padding: 14px;
 	color: #000;
@@ -62,17 +74,10 @@
 	color: #fff;
 }
 
-.square {
-	width: 20px;
-	height: 20px;
-	border-radius: 5px;
-	border: 2px solid #1f1a1a;
-	cursor: pointer;
-}
-
 .check-button {
-	font-size: 24px;
+	width: 18px;
+	font-size: 18px;
 	cursor: pointer;
-	padding: 14px;
 	color: #000;
+	padding: 12px;
 }

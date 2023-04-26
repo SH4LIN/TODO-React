@@ -1,86 +1,108 @@
-import {useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import './App.css';
 import List from './list'
 
+/**
+ * This function is used to create a TODO App.
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function ToDo() {
-    const storedItems = JSON.parse(localStorage.getItem('toDoList'));
-    const [inputValue, setInputValue] = useState('');
-    const [toDoList, setToDoList] = useState(storedItems || []);
+    const [toDoList, setToDoList] = useState(()=> {
+        const storedItems = JSON.parse(localStorage.getItem('toDoList'));
+        if (storedItems) {
+            return storedItems;
+        }
+        return [];
+    });
     const [isUpdate, setIsUpdate] = useState(false);
     const [updateId, setUpdateId] = useState(0);
+    const [error, setError] = useState(null);
+    const todoInput = useRef(null);
+
+    useEffect(() => {
+        localStorage.setItem('toDoList', JSON.stringify(toDoList));
+    } , [toDoList]);
+
+    useEffect(() => {
+        todoInput.current.focus();
+    }, [isUpdate]);
 
     const addTask = () => {
+        const inputValue = todoInput.current.value;
+        if (inputValue === '') {
+            setError("Please enter a task")
+            return;
+        } else {
+            setError(null);
+        }
         if(isUpdate) {
-            setToDoList( list => {
-                const newList = list.map(item => {
-                    if (item.id === updateId) {
+            const newList = toDoList.map(item => {
+                if (item.id === updateId) {
+                    console.log(item.value, inputValue)
+                    if (item.value === inputValue) {
+                        setError("Please enter new value")
+                    } else {
+                        setError(null);
                         item.value = inputValue;
                     }
-                    return item;
-                })
-                localStorage.setItem('toDoList', JSON.stringify(newList));
-                setIsUpdate(false);
-                setUpdateId(0);
-                setInputValue('');
-                return newList;
-            })
-        } else {
-            setToDoList(list => {
-                    if (inputValue === '') {
-                        return list;
-                    }
-                    const nextId = list.length + 1;
-                    const newList = [
-                        ...list,
-                        {id: nextId, value: inputValue, isDone: false}
-                    ]
-                    localStorage.setItem('toDoList', JSON.stringify(newList));
-                    setInputValue('');
-                    return newList;
                 }
+                return item;
+            })
+            setToDoList( newList )
+            setIsUpdate(false);
+            setUpdateId(0);
+        } else {
+            setToDoList(list => [
+                    {
+                        id: Math.max(...list.map(item => item.id), 0) + 1,
+                        value: inputValue,
+                        done: false
+                    },
+                    ...list,
+                ]
             )
         }
+        todoInput.current.value = '';
     }
 
     const checkTask = (id) => {
-        setToDoList( list => {
-            const newList = list.map(item => {
+        setToDoList(
+            toDoList.map(item => {
                 if (item.id === id) {
-                    item.isDone = !item.isDone;
+                    item.done = !item.done;
                 }
-                console.log(item);
                 return item;
             })
-
-            localStorage.setItem('toDoList', JSON.stringify(newList));
-            return newList;
-        })
+        )
     }
 
     const deleteTask = (id) => {
-        setToDoList( list => {
-            const newList = list.filter(item => item.id !== id);
-            localStorage.setItem('toDoList', JSON.stringify(newList));
-            return newList;
-        })
+        setToDoList( list =>  list.filter(item => item.id !== id))
     }
 
     const editTask = (id, value) => {
-        setInputValue(value);
+        todoInput.current.value = value;
         setUpdateId(id);
         setIsUpdate(true);
     }
 
-    const inputChange = (e) => {
-        setInputValue(e.target.value);
-    }
+    const remainingTasks = toDoList.filter(item => !item.done);
+    const completedTasks = toDoList.filter(item => item.done);
 
     return (
-        <div className="ToDo">
-            <h1 className="ToDo-heading">{"TODO LIST"}</h1>
-            <input type="text" value={inputValue} className="ToDo-input" onChange={inputChange}/>
-            <button className="ToDo-add" onClick={addTask}>{ isUpdate ? "UPDATE" : "ADD" }</button>
-            <List list={toDoList} checkTask={checkTask} deleteTask={deleteTask} editTask={editTask} />
+        <div className="ToDo-container">
+            <h1 className="ToDo-app-heading">{"ToDo App"}</h1>
+            <div className="ToDo">
+                <List listName="Tasks" list={remainingTasks} checkTask={checkTask} deleteTask={deleteTask} editTask={editTask} />
+                <div className={"ToDo-input-container"}>
+                    <input type="text" className={"ToDo-input" + (error !== null ? " ToDo-input-error" : "")} ref={todoInput}/>
+                    <button className="ToDo-add" onClick={addTask}>{ isUpdate ? "UPDATE" : "ADD" }</button>
+                </div>
+                <div className="ToDo-error">{error}</div>
+                <List listName="Completed Tasks" list={completedTasks} />
+            </div>
         </div>
     );
 }
