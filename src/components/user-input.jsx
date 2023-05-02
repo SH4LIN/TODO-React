@@ -11,25 +11,38 @@ import Button from "./button";
  * @param error
  * @param todoInput
  * @param buttonOnClick
- * @param isUpdate
+ * @param value
  * @returns {JSX.Element}
  * @constructor
  */
-function UserInput ({placeholder, error, inputRef, buttonOnClick, isUpdate,isSearch= false,onSearchChange}) {
+function UserInput ({
+                        placeholder,
+                        error,
+                        inputRef,
+                        buttonOnClick,
+                        value = '',
+                        isSearch= false,
+                        onSearchChange,
+                        showButton = true}
+) {
     return (
-        <div className="ToDo-list-container">
-            <div className={"ToDo-input-container"}>
+        <div className="input-wrapper">
+            <div className="input-inner">
                 <input
                     placeholder={placeholder}
-                    type="text"
+                    type={isSearch?"search":"text"}
+                    onClick={(e) => {
+                        e.stopPropagation()
+                    }}
+                    defaultValue={value}
                     onChange={isSearch?onSearchChange:null}
-                    className={"ToDo-input" + (!isSearch && error !== null ? " ToDo-input-error" : "")}
+                    className={"ToDo-input" + (showButton && error !== null ? " ToDo-input-error" : "")}
                     ref={inputRef}
                 />
 
-                {!isSearch ?<Button message={isUpdate ? "UPDATE" : "ADD"} onClick={buttonOnClick}/> : null}
+                {showButton ?<Button message="ADD" onClick={buttonOnClick}/> : null}
             </div>
-            {!isSearch?<div className="ToDo-error">{error}</div> : null}
+            {showButton?<div className="ToDo-error">{error}</div> : null}
         </div>
     );
 }

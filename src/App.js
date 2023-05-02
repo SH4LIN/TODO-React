@@ -58,37 +58,37 @@ function ToDo() {
         } else {
             setError(null);
         }
-        // Updating the task if the task is to be updated.
-        if(isUpdate) {
-            const newList = toDoList.map(item => {
-                if (item.id === updateId) {
-                    console.log(item.value, inputValue)
-                    if (item.value === inputValue) {
-                        setError("Please enter new value!")
-                    } else {
-                        setError(null);
-                        // Updating the task.
-                        item.value = inputValue;
-                    }
-                }
-                return item;
-            })
-            setToDoList( newList )
-            setIsUpdate(false);
-            setUpdateId(0);
-        } else {
-            // Adding the task to the TODO List.
-            setToDoList([
-                    {
-                        id: Math.max(...toDoList.map(item => item.id), 0) + 1,
-                        value: inputValue,
-                        done: false
-                    },
-                    ...toDoList,
-                ]
-            )
-        }
+        // Adding the task to the TODO List.
+        setToDoList([
+            {
+                id: Math.max(...toDoList.map(item => item.id), 0) + 1,
+                value: inputValue,
+                done: false
+            },
+                ...toDoList,
+            ]
+        )
         taskInputRef.current.value = '';
+    }
+
+    /**
+     * This function is used to update a task.
+     *
+     * @param inputValue
+     * @param updateId
+     */
+    const updateTask = (updateId,inputValue) => {
+        const newList = toDoList.map(item => {
+            if (item.id === updateId) {
+                setError(null);
+                // Updating the task.
+                item.value = inputValue;
+            }
+            return item;
+        })
+        setToDoList( newList )
+        setIsUpdate(false);
+        setUpdateId(0);
     }
 
     /**
@@ -97,6 +97,7 @@ function ToDo() {
      * @param id
      */
     const checkTask = (id) => {
+        //console.log(id)
         setToDoList(
             toDoList.map(item => {
                 if (item.id === id) {
@@ -123,7 +124,6 @@ function ToDo() {
      * @param value
      */
     const editTask = (id, value) => {
-        taskInputRef.current.value = value;
         setUpdateId(id);
         setIsUpdate(true);
     }
@@ -159,31 +159,50 @@ function ToDo() {
     return (
         <div className="ToDo-container">
             <h1 className="ToDo-app-heading">{"ToDo App"}</h1>
-            <UserInput placeholder="Search" inputRef={searchInputRef} isSearch={true} onSearchChange={onSearchChange} />
+            <UserInput
+                placeholder="Search"
+                inputRef={searchInputRef}
+                isSearch={true}
+                onSearchChange={onSearchChange}
+                showButton={false}
+            />
             {isSearching?<List listName="Search Results"
                                list={searchResults}
                                checkTask={checkTask}
                                deleteTask={deleteTask}
                                editTask={editTask}
+                               noResultMessage="No search results!"
             />:null}
             <div className="ToDo">
+                <UserInput placeholder="Enter Task" inputRef={taskInputRef} buttonOnClick={addTask} error={error} />
                 {/*Displaying the TODO List.*/}
-                <List
-                    listName="Tasks"
-                    list={remainingTasks}
-                    checkTask={checkTask}
-                    deleteTask={deleteTask}
-                    editTask={editTask}
-                    clearAll={<Button onClick={clearAllToDoTask} message="Clear all TODO tasks"/>}
-                />
-                <UserInput placeholder="Enter Task" inputRef={taskInputRef} buttonOnClick={addTask} error={error} isUpdate={isUpdate} />
-                {/*Displaying Completed List*/}
-                <List
-                    listName="Completed Tasks"
-                    list={completedTasks}
-                    checkTask={checkTask}
-                    clearAll={<Button onClick={clearAllCompletedTask} message="Clear all completed tasks"/>}
-                />
+                <div className="list-container">
+                    <div className="task-container done-task-container">
+                        <List
+                            listName="Remaining Tasks"
+                            list={remainingTasks}
+                            checkTask={checkTask}
+                            deleteTask={deleteTask}
+                            editTask={editTask}
+                            updateTask={updateTask}
+                            isUpdate={isUpdate}
+                            updateId={updateId}
+                            noResultMessage="No remaining tasks!"
+                            clearAll={<Button onClick={clearAllToDoTask} message="Clear all TODO tasks"/>}
+                        />
+                    </div>
+                    {/*Displaying Completed List*/}
+                    <div className="task-container remaining-task-container">
+                        <List
+                            listName="Completed Tasks"
+                            list={completedTasks}
+                            checkTask={checkTask}
+                            noResultMessage="No completed tasks!"
+                            clearAll={<Button onClick={clearAllCompletedTask} message="Clear all completed tasks"/>}
+                        />
+                    </div>
+                </div>
+
             </div>
         </div>
     );

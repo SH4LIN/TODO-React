@@ -4,7 +4,7 @@
 
 /* TODO Component CSS */
 .ToDo-app-heading {
-    font-size: 3em;
+    font-size: 2em;
     font-weight: 600;
     color: #333;
     text-align: center;
@@ -14,10 +14,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 600px;
+    margin: 1em 2em;
     gap: 1em;
-    margin: 1em auto;
-    justify-content: center;
 }
 
 .ToDo {
@@ -25,13 +23,11 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin: 24px;
-    padding: 1em;
+    padding: 0.5em;
     gap: 1em;
     border-radius: 10px;
     border: 2px solid #1f1a1a;
-    justify-content: center;
-    min-height: 500px;
+    height: 600px;
 }
 
 .ToDo-clear-all {
@@ -43,4 +39,21 @@
     font-size: 1em;
     font-weight: 600;
     cursor: pointer;
+}
+
+.list-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    justify-content: space-evenly;
+    gap: 1em;
+}
+
+.task-container {
+    width: 49%;
+    height: fit-content;
+    border-radius: 10px;
+    border: 2px solid #1f1a1a;
 }
